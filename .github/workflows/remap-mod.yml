@@ -15,7 +15,7 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: '8.10.2'
+          gradle-version: '8.12.1'
       - name: remap jar intermediary -> mojmap (1.21.1)
         run: |
           exec > >(tee -a /tmp/all.log) 2>&1
@@ -37,7 +37,7 @@ jobs:
           }
           S
           gradle --no-daemon build -x test || gradle --no-daemon classes || true
-          find ~/.gradle /tmp/rm -path '*remapped_mods*' -name '*.jar' | tee /tmp/found.txt
+          find ~/.gradle /tmp/rm -path '*remapped_mods*' -name '*.jar' | tee /tmp/found.txt; test -s /tmp/found.txt
       - name: decompile
         run: |
           exec > >(tee -a /tmp/all.log) 2>&1
