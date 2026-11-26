@@ -36,14 +36,14 @@ public class PantallaCodigo extends Screen {
    }
 
    public static void abrir(int modo, BlockPos pos) {
-      Minecraft.getInstance().setScreen(new PantallaCodigo(modo, pos));
+      Minecraft.getInstance().setScreenAndShow(new PantallaCodigo(modo, pos));
    }
 
    public static void respuesta(boolean ok) {
       Minecraft mc = Minecraft.getInstance();
       if (mc.screen instanceof PantallaCodigo p) {
          if (ok) {
-            mc.setScreen(null);
+            mc.setScreenAndShow(null);
          } else {
             p.codigo.setLength(0);
             p.aviso = "Código incorrecto";
@@ -190,7 +190,7 @@ public class PantallaCodigo extends Screen {
       RenderSystem.enableBlend();
       g.blit(FONDO, x0, y0, 194, 229, 0.0F, 0.0F, 776, 916, 776, 916);
       String texto = this.ver ? this.codigo.toString() : "*".repeat(this.codigo.length());
-      g.drawString(this.font, texto, x0 + 48, y0 + 38, -11141291, false);
+      g.text(this.font, texto, x0 + 48, y0 + 38, -11141291, false);
 
       for (int f = 0; f < 3; f++) {
          for (int c = 0; c < 3; c++) {
@@ -219,7 +219,7 @@ public class PantallaCodigo extends Screen {
       int y = this.teclaY(f);
       this.resalte(g, mx, my, x, y, 30, 30);
       int tx = x + 15 - this.font.width(t) / 2;
-      g.drawString(this.font, t, tx + 1, y + 15 - 3, -12829116, false);
+      g.text(this.font, t, tx + 1, y + 15 - 3, -12829116, false);
       g.drawString(this.font, t, tx, y + 15 - 4, -2959909, false);
    }
 

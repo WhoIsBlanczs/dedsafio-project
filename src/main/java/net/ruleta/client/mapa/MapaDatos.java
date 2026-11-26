@@ -199,7 +199,7 @@ public final class MapaDatos {
 
       for (int y = y0; y < y0 + h && y < atlas.getHeight(); y++) {
          for (int x = x0; x < x0 + w && x < atlas.getWidth(); x++) {
-            int abgr = atlas.getPixelRGBA(x, y);
+            int abgr = atlas.getPixel(x, y);
             if ((abgr >>> 24 & 0xFF) >= 16) {
                r += abgr & 0xFF;
                g += abgr >> 8 & 0xFF;
@@ -266,7 +266,7 @@ public final class MapaDatos {
    private static MapaDatos.Trozo convertir(Minecraft mc, LevelChunk ch, int cx, int cz) {
       ClientLevel nivel = mc.level;
       MapaDatos.Trozo t = new MapaDatos.Trozo();
-      int suelo = nivel.getMinBuildHeight();
+      int suelo = nivel.getMinY();
       MutableBlockPos pos = new MutableBlockPos();
       BlockState[] estados = new BlockState[256];
 

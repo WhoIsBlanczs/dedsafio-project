@@ -83,7 +83,7 @@ public class PantallaPedestal extends UiPantalla {
    }
 
    private void elegirItem(Consumer<String> alElegir) {
-      Minecraft.getInstance().setScreen(new PantallaSelectorItem(this, alElegir));
+      Minecraft.getInstance().setScreenAndShow(new PantallaSelectorItem(this, alElegir));
    }
 
    private void guardar() {

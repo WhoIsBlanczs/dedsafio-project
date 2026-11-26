@@ -38,7 +38,7 @@ public class PantallaAjustes extends UiPantalla {
 
    public PantallaAjustes(Screen padre) {
       super("Ajustes", padre);
-      this.puedeEditar = Minecraft.getInstance().player != null && Minecraft.getInstance().player.hasPermissions(2);
+      this.puedeEditar = Minecraft.getInstance().player != null && Minecraft.getInstance().player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
       this.secciones.addAll(Ajustes.categorias());
       this.seleccion = Math.max(0, this.secciones.indexOf(ultimaSeccion));
       this.indicador.fijar(this.seleccion);

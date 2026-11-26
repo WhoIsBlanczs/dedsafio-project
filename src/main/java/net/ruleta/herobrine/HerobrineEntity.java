@@ -298,7 +298,7 @@ public class HerobrineEntity extends Monster {
    private boolean teletransportar(double x, double y, double z) {
       MutableBlockPos pos = new MutableBlockPos(x, y, z);
 
-      while (pos.getY() > this.level().getMinBuildHeight() && !this.level().getBlockState(pos).blocksMotion()) {
+      while (pos.getY() > this.level().getMinY() && !this.level().getBlockState(pos).blocksMotion()) {
          pos.move(0, -1, 0);
       }
 

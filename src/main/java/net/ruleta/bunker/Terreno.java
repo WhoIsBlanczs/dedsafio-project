@@ -21,7 +21,7 @@ final class Terreno {
    }
 
    private static int sueloDe(ServerLevel nivel, int x, int z, int desde, MutableBlockPos p) {
-      int min = nivel.getMinBuildHeight();
+      int min = nivel.getMinY();
 
       for (int y = Math.min(desde, nivel.getHeight(Types.MOTION_BLOCKING_NO_LEAVES, x, z) - 1); y > min; y--) {
          p.set(x, y, z);

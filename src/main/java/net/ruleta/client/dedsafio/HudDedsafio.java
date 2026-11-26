@@ -234,7 +234,7 @@ public final class HudDedsafio {
          int w = g.guiWidth();
          int h = g.guiHeight();
          g.fill(0, 0, w, h, -16777216);
-         g.drawCenteredString(mc.font, Component.translatable("multiplayer.downloadingTerrain"), w / 2, h / 2 - 50, 16777215);
+         g.centeredText(mc.font, Component.translatable("multiplayer.downloadingTerrain"), w / 2, h / 2 - 50, 16777215);
       }
    }
 

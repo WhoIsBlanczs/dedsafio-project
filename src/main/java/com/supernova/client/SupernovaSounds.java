@@ -124,7 +124,7 @@ public class SupernovaSounds {
    }
 
    private static void particulas(Minecraft mc, SupernovaState s, float now) {
-      RandomSource r = mc.level.random;
+      RandomSource r = mc.level.getRandom();
       Vec3 c = s.center();
       float R = s.starRadius(now) * s.breath(now);
       float act = s.activation(now);

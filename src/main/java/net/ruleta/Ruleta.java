@@ -102,7 +102,7 @@ public class Ruleta {
 
    public static void lanzar(ServerPlayer jugador, LanzarPayload m) {
       if (jugador != null && m != null) {
-         if (!jugador.hasPermissions(2)) {
+         if (!jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
             jugador.sendSystemMessage(Component.literal("Solo los operadores pueden lanzar la ruleta."));
          } else {
             MinecraftServer server = jugador.getServer();
@@ -379,7 +379,7 @@ public class Ruleta {
    }
 
    static void desactivarCambio(ServerPlayer jugador, String id) {
-      if (jugador != null && jugador.getServer() != null && jugador.hasPermissions(2)) {
+      if (jugador != null && jugador.getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          MinecraftServer server = jugador.getServer();
          Ruleta.DificultadDatos d = cambios(server);
          if (d.activo(id)) {

@@ -34,8 +34,8 @@ public final class CajeroServidor {
       if (jugador != null) {
          BlockPos pos = m.pos();
          if (!(jugador.distanceToSqr(Vec3.atCenterOf(pos)) > 100.0)
-            && jugador.serverLevel().isLoaded(pos)
-            && jugador.serverLevel().getBlockState(pos).getBlock() instanceof CajeroBloque) {
+            && jugador.level().isLoaded(pos)
+            && jugador.level().getBlockState(pos).getBlock() instanceof CajeroBloque) {
             int[] cant = new int[]{Mth.clamp(m.rojas(), 0, 99), Mth.clamp(m.verdes(), 0, 99), Mth.clamp(m.azules(), 0, 99)};
             long valor = 0L;
 

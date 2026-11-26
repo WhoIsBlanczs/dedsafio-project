@@ -147,13 +147,13 @@ public final class MapaPlaya {
                               new Object[]{n, n > 1200, datos != null, j.blockPosition()}
                            );
                         j.removeEffect(MobEffects.BLINDNESS);
-                        j.displayClientMessage(Component.empty(), true);
+                        j.sendOverlayMessage(Component.empty());
                      } else {
                         j.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false));
                         j.setDeltaMovement(Vec3.ZERO);
                         j.hurtMarked = true;
                         j.fallDistance = 0.0F;
-                        j.displayClientMessage(Component.literal("Cargando la playa..."), true);
+                        j.sendOverlayMessage(Component.literal("Cargando la playa..."));
                      }
                   }
                }

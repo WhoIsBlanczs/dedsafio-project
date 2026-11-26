@@ -46,7 +46,7 @@ public final class NuclearExplosion {
       double z = creeper.getZ();
       level.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 12.0F, 0.5F);
       level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, x, y, z, 8, 6.0, 2.0, 6.0, 0.0);
-      DamageSource source = new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE_TYPE), creeper, creeper);
+      DamageSource source = new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE_TYPE), creeper, creeper);
       double radius = Ajustes.entero("nuclear.radio");
       AABB box = new AABB(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
       double maxSq = radius * radius;
@@ -61,7 +61,7 @@ public final class NuclearExplosion {
          }
       }
 
-      if (level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+      if (level.getGameRules().get(GameRules.MOB_GRIEFING)) {
          queueCrater(level, BlockPos.containing(x, y, z));
       }
    }
@@ -75,7 +75,7 @@ public final class NuclearExplosion {
    }
 
    private static void queueCrater(ServerLevel level, BlockPos center) {
-      RandomSource random = level.random;
+      RandomSource random = level.getRandom();
       int r = 7;
       int inner = (r - 2) * (r - 2);
       int outer = r * r;

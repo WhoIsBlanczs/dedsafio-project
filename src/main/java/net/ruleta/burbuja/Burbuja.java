@@ -129,7 +129,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
             return InteractionResult.PASS;
          }
 
-         boolean puede = jugador.getUUID().equals(this.propietario) || jugador.hasPermissions(2);
+         boolean puede = jugador.getUUID().equals(this.propietario) || jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
          if (!puede) {
             return InteractionResult.PASS;
          }

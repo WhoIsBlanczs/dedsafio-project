@@ -121,7 +121,7 @@ public abstract class UiPantalla extends Screen {
    }
 
    public void onClose() {
-      Minecraft.getInstance().setScreen(this.padre);
+      Minecraft.getInstance().setScreenAndShow(this.padre);
    }
 
    public boolean isPauseScreen() {

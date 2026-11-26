@@ -113,7 +113,7 @@ public class TragamonedasBE extends BlockEntity {
       for (int r = 0; r < 3; r++) {
          int idx = 0;
          if (total > 0) {
-            int tirada = level.random.nextInt(total);
+            int tirada = level.getRandom().nextInt(total);
 
             for (int i = 0; i < simbolos.size(); i++) {
                tirada -= Math.max(0, simbolos.get(i).peso);
@@ -132,7 +132,7 @@ public class TragamonedasBE extends BlockEntity {
             candidatas.add(f);
          }
 
-         this.resultado[r] = candidatas.get(level.random.nextInt(candidatas.size()));
+         this.resultado[r] = candidatas.get(level.getRandom().nextInt(candidatas.size()));
       }
 
       this.duracion = (int[])DURACION.clone();
@@ -214,7 +214,7 @@ public class TragamonedasBE extends BlockEntity {
       Item item = rl == null ? null : (Item)BuiltInRegistries.ITEM.getOptional(rl).orElse(null);
       if (item != null) {
          int max = Math.max(r.cantidad, r.maximo);
-         int n = r.cantidad + (max > r.cantidad ? level.random.nextInt(max - r.cantidad + 1) : 0);
+         int n = r.cantidad + (max > r.cantidad ? level.getRandom().nextInt(max - r.cantidad + 1) : 0);
          if (item == Items.ENCHANTED_BOOK) {
             for (int i = 0; i < n; i++) {
                ItemStack libro = libroAlAzar(level, r);
@@ -235,16 +235,16 @@ public class TragamonedasBE extends BlockEntity {
    }
 
    private static ItemStack libroAlAzar(ServerLevel level, ConfigTragamonedas.Recompensa r) {
-      Registry<Enchantment> reg = level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+      Registry<Enchantment> reg = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
       if (r.encantamientos != null && !r.encantamientos.isEmpty()) {
          List<ConfigTragamonedas.Encantamiento> lista = new ArrayList<>(r.encantamientos);
 
          while (!lista.isEmpty()) {
-            ConfigTragamonedas.Encantamiento e = lista.remove(level.random.nextInt(lista.size()));
+            ConfigTragamonedas.Encantamiento e = lista.remove(level.getRandom().nextInt(lista.size()));
             Identifier id = Identifier.tryParse(e.id);
             Optional<Reference<Enchantment>> h = id == null ? Optional.empty() : reg.getHolder(ResourceKey.create(Registries.ENCHANTMENT, id));
             if (h.isPresent()) {
-               int nivel = e.nivelMin + (e.nivelMax > e.nivelMin ? level.random.nextInt(e.nivelMax - e.nivelMin + 1) : 0);
+               int nivel = e.nivelMin + (e.nivelMax > e.nivelMin ? level.getRandom().nextInt(e.nivelMax - e.nivelMin + 1) : 0);
                return EnchantedBookItem.createForEnchantment(new EnchantmentInstance((Holder)h.get(), nivel));
             }
          }
@@ -262,7 +262,7 @@ public class TragamonedasBE extends BlockEntity {
          }
 
          Reference<Enchantment> e = todos.get(level.random.nextInt(todos.size()));
-         int nivel = 1 + level.random.nextInt(Math.max(1, ((Enchantment)e.value()).getMaxLevel()));
+         int nivel = 1 + level.getRandom().nextInt(Math.max(1, ((Enchantment)e.value()).getMaxLevel()));
          return EnchantedBookItem.createForEnchantment(new EnchantmentInstance(e, nivel));
       }
    }

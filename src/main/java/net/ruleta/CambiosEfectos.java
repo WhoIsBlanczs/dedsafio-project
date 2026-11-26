@@ -340,7 +340,7 @@ public final class CambiosEfectos {
    }
 
    private static void ponerTelarana(Level nivel, BlockPos pos) {
-      if (nivel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+      if (nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
          BlockState actual = nivel.getBlockState(pos);
          if ((actual.isAir() || actual.canBeReplaced()) && actual.getFluidState().isEmpty()) {
             nivel.setBlockAndUpdate(pos, Blocks.COBWEB.defaultBlockState());
@@ -448,7 +448,7 @@ public final class CambiosEfectos {
          e.setCanceled(true);
          e.setCancellationResult(InteractionResult.FAIL);
          if (e.getEntity() instanceof ServerPlayer jugador) {
-            jugador.displayClientMessage(Component.literal("Reviil ordeñó a las vacas: ya no se puede sacar leche."), true);
+            jugador.sendOverlayMessage(Component.literal("Reviil ordeñó a las vacas: ya no se puede sacar leche."));
             jugador.inventoryMenu.sendAllDataToRemote();
          }
       }
@@ -619,10 +619,10 @@ public final class CambiosEfectos {
       int radio = 32;
 
       for (ServerPlayer jugador : server.getPlayerList().getPlayers()) {
-         ServerLevel nivel = jugador.serverLevel();
+         ServerLevel nivel = jugador.level();
          BlockPos c = jugador.blockPosition();
-         int y0 = Math.max(nivel.getMinBuildHeight(), c.getY() - 32);
-         int y1 = Math.min(nivel.getMaxBuildHeight() - 1, c.getY() + 32);
+         int y0 = Math.max(nivel.getMinY(), c.getY() - 32);
+         int y1 = Math.min(nivel.getMaxY() - 1, c.getY() + 32);
          MutableBlockPos p = new MutableBlockPos();
          MutableBlockPos q = new MutableBlockPos();
 
@@ -655,9 +655,9 @@ public final class CambiosEfectos {
 
    private static void aparicionesEnElProfundo(ServerPlayer jugador) {
       if (jugador.tickCount % INTERVALO_PROFUNDO() == 0 && !jugador.isSpectator()) {
-         ServerLevel nivel = jugador.serverLevel();
+         ServerLevel nivel = jugador.level();
          if (nivel.getDifficulty() != Difficulty.PEACEFUL
-            && nivel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
+            && nivel.getGameRules().get(GameRules.SPAWN_MOBS)
             && nivel.getBiome(jugador.blockPosition()).is(Biomes.DEEP_DARK)) {
             RandomSource azar = nivel.getRandom();
             if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("bombas-warden")) {
@@ -685,7 +685,7 @@ public final class CambiosEfectos {
                   return;
                }
 
-               warden.moveTo(suelo.getX() + 0.5, suelo.getY(), suelo.getZ() + 0.5, azar.nextFloat() * 360.0F, 0.0F);
+               warden.snapTo(suelo.getX() + 0.5, suelo.getY(), suelo.getZ() + 0.5, azar.nextFloat() * 360.0F, 0.0F);
                warden.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(suelo), EntitySpawnReason.TRIGGERED, null);
                nivel.addFreshEntityWithPassengers(warden);
                return;
@@ -724,7 +724,7 @@ public final class CambiosEfectos {
                      return;
                   }
 
-                  bomba.moveTo(x, y, z, azar.nextFloat() * 360.0F, 0.0F);
+                  bomba.snapTo(x, y, z, azar.nextFloat() * 360.0F, 0.0F);
                   bomba.addTag("ruleta_bomba_warden");
                   bomba.setBoundOrigin(pos);
                   bomba.setTarget(jugador);
@@ -819,7 +819,7 @@ public final class CambiosEfectos {
                nucleeper.getMoveControl().setWantedPosition(objetivo.getX(), objetivo.getY(), objetivo.getZ(), 1.0);
             }
 
-            if (nucleeper.tickCount % 5 == 0 && nivel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            if (nucleeper.tickCount % 5 == 0 && nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
                abrirCamino(nivel, nucleeper, objetivo);
             }
          }
@@ -878,8 +878,8 @@ public final class CambiosEfectos {
 
    private static void aparicionesTerrestres(ServerPlayer jugador) {
       if (jugador.tickCount % INTERVALO_PROFUNDO() == 0 && !jugador.isSpectator()) {
-         ServerLevel nivel = jugador.serverLevel();
-         if (nivel.getDifficulty() != Difficulty.PEACEFUL && nivel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)) {
+         ServerLevel nivel = jugador.level();
+         if (nivel.getDifficulty() != Difficulty.PEACEFUL && nivel.getGameRules().get(GameRules.SPAWN_MOBS)) {
             RandomSource azar = nivel.getRandom();
             AABB zona = jugador.getBoundingBox().inflate(48.0);
             if (nivel.dimension() == Level.NETHER) {
@@ -981,7 +981,7 @@ public final class CambiosEfectos {
                         return null;
                      }
 
-                     criatura.moveTo(x + 0.5, y, z + 0.5, azar.nextFloat() * 360.0F, 0.0F);
+                     criatura.snapTo(x + 0.5, y, z + 0.5, azar.nextFloat() * 360.0F, 0.0F);
                      criatura.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
                      nivel.addFreshEntityWithPassengers(criatura);
                      return criatura;
@@ -997,10 +997,10 @@ public final class CambiosEfectos {
 
    private static void aparicionesEnElNether(ServerPlayer jugador) {
       if (jugador.tickCount % INTERVALO_PROFUNDO() == 0 && !jugador.isSpectator()) {
-         ServerLevel nivel = jugador.serverLevel();
+         ServerLevel nivel = jugador.level();
          if (nivel.dimension() == Level.NETHER
             && nivel.getDifficulty() != Difficulty.PEACEFUL
-            && nivel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING)
+            && nivel.getGameRules().get(GameRules.SPAWN_MOBS)
             && Ruleta.cambioActivo("blazes-nether")) {
             RandomSource azar = nivel.getRandom();
             if (!(azar.nextFloat() >= 0.3F) && nivel.getEntitiesOfClass(Blaze.class, jugador.getBoundingBox().inflate(48.0)).size() < MAX_BLAZES()) {
@@ -1017,7 +1017,7 @@ public final class CambiosEfectos {
                         return;
                      }
 
-                     blaze.moveTo(x, y, z, azar.nextFloat() * 360.0F, 0.0F);
+                     blaze.snapTo(x, y, z, azar.nextFloat() * 360.0F, 0.0F);
                      blaze.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
                      nivel.addFreshEntityWithPassengers(blaze);
                      return;
@@ -1030,7 +1030,7 @@ public final class CambiosEfectos {
 
    private static void misOjos(ServerPlayer jugador) {
       if (jugador.tickCount % 5 == 0 && jugador.isAlive() && !jugador.isCreative() && !jugador.isSpectator() && Ruleta.cambioActivo("mis-ojos")) {
-         ServerLevel nivel = jugador.serverLevel();
+         ServerLevel nivel = jugador.level();
          if (nivel.dimension() == Level.OVERWORLD && !nivel.isRaining() && !jugador.hasEffect(MobEffects.BLINDNESS)) {
             float angulo = nivel.getTimeOfDay(1.0F) * (float) (Math.PI * 2);
             Vec3 sol = new Vec3(-Mth.sin(angulo), Mth.cos(angulo), 0.0);
@@ -1051,13 +1051,13 @@ public final class CambiosEfectos {
    static void perlaAterrizo(ServerPlayer jugador, double x, double y, double z) {
       if (Ruleta.cambioActivo("perla-creeper-nuclear") && !(jugador.getRandom().nextFloat() >= PROB_PERLA_NUCLEEPER())) {
          EntityType<?> tipo = tipoNucleeper();
-         ServerLevel nivel = jugador.serverLevel();
+         ServerLevel nivel = jugador.level();
          if (tipo != null && nivel.getDifficulty() != Difficulty.PEACEFUL && tipo.create(nivel) instanceof Mob nucleeper) {
             double[][] desvios = new double[][]{{2.0, 0.0}, {-2.0, 0.0}, {0.0, 2.0}, {0.0, -2.0}, {0.0, 0.0}};
 
             for (double[] d : desvios) {
                if (nivel.noCollision(tipo.getSpawnAABB(x + d[0], y, z + d[1]))) {
-                  nucleeper.moveTo(x + d[0], y, z + d[1], nivel.getRandom().nextFloat() * 360.0F, 0.0F);
+                  nucleeper.snapTo(x + d[0], y, z + d[1], nivel.getRandom().nextFloat() * 360.0F, 0.0F);
                   nucleeper.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(BlockPos.containing(x, y, z)), EntitySpawnReason.EVENT, null);
                   nucleeper.setTarget(jugador);
                   nivel.addFreshEntityWithPassengers(nucleeper);
@@ -1087,7 +1087,7 @@ public final class CambiosEfectos {
                zombie.getMoveControl().setWantedPosition(objetivo.getX(), objetivo.getY(), objetivo.getZ(), 1.0);
             }
 
-            if (nivel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+            if (nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
                double dx = objetivo.getX() - zombie.getX();
                double dz = objetivo.getZ() - zombie.getZ();
                double dy = objetivo.getY() - zombie.getY();

@@ -26,7 +26,7 @@ public abstract class CarvedPumpkinBlockMixin {
       if (!nivel.isClientSide() && Ruleta.cambioActivo("sin-golems")) {
          if (this.method_9729().find(nivel, pos) != null || this.method_9730().find(nivel, pos) != null) {
             if (nivel.getNearestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 8.0, false) instanceof ServerPlayer jugador) {
-               jugador.displayClientMessage(Component.literal("Reviil lanzó una maldición: las calabazas ya no dan vida a los golems."), true);
+               jugador.sendOverlayMessage(Component.literal("Reviil lanzó una maldición: las calabazas ya no dan vida a los golems."));
             }
 
             ci.cancel();

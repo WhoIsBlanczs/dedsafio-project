@@ -13,7 +13,7 @@ public final class PantallasCliente {
             mc.setScreen(new PantallaAjustes(null));
             break;
          case "bunker_borrar":
-            mc.setScreen(new PantallaBunkerBorrar(null, datos));
+            mc.setScreenAndShow(new PantallaBunkerBorrar(null, datos));
             break;
          case "bunker_borrar_act":
             if (mc.screen instanceof PantallaBunkerBorrar p) {

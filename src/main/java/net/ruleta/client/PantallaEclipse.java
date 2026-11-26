@@ -81,7 +81,7 @@ public class PantallaEclipse extends UiPantalla {
                18,
                "Editar",
                UiBoton.Estilo.NORMAL,
-               () -> Minecraft.getInstance().setScreen(new PantallaMensajeEclipse(this, n, this.mensajes[n], t -> this.mensajes[n] = t))
+               () -> Minecraft.getInstance().setScreenAndShow(new PantallaMensajeEclipse(this, n, this.mensajes[n], t -> this.mensajes[n] = t))
             )
          );
          yE += (i < 3 ? 62 : 90) + 8;

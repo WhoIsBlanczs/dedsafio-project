@@ -112,7 +112,7 @@ public class SupernovaEntity extends Entity {
    private void tell(ServerLevel sl, Component msg) {
       for (ServerPlayer p : sl.players()) {
          if (p.distanceToSqr(this) < 9000000.0) {
-            p.displayClientMessage(msg, true);
+            p.sendOverlayMessage(msg);
          }
       }
    }
@@ -173,11 +173,11 @@ public class SupernovaEntity extends Entity {
    }
 
    private DamageSource lethalSource(ServerLevel sl) {
-      return new DamageSource(sl.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this);
+      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this);
    }
 
    private DamageSource shockSource(ServerLevel sl) {
-      return new DamageSource(sl.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this) {
+      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this) {
          public String getMsgId() {
             return "supernova.onda";
          }

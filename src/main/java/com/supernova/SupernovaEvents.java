@@ -39,7 +39,7 @@ public class SupernovaEvents {
    }
 
    private static void sendAll(ServerPlayer p) {
-      for (SupernovaEntity n : p.serverLevel().getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), x -> true)) {
+      for (SupernovaEntity n : p.level().getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), x -> true)) {
          SupernovaNet.sendTo(p, n);
       }
    }

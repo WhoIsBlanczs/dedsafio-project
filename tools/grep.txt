@@ -1,24 +1,19 @@
- hurtMarked| setHurtMarked|markHurt|hasImpulse
-invulnerableTime|InvulnerableTime
- serverLevel\(|ServerLevel level\(\)
-Entity.* getServer\(|MinecraftServer getServer\(
-PayloadTypeRegistry.*(playS2C|playC2S|clientboundPlay|serverboundPlay)
-boolean hasPermission|isAdmin|permissions\(\)
-displayClientMessage|sendOverlayMessage|sendSystemMessage
-ClientCommand(Manager|s) 
- hideGui
-getDayTime|getOverworldClockTime|getGameTime
-registryOrThrow|lookupOrThrow
-getSharedSpawnPos|getRespawnData|getRespawn
-getStructureManager
- getTags\(\)
-blocksMotion|isSolid\(\)
-isDetonating
-getArmorSlots|getEquipment
-hasShiftDown|isShiftKeyDown
- renderItem\(
- setScreen\(|void setScreen
-getPixelRGBA|getPixel\(
-sidedSuccess
- drawString\(| text\(
-class .*MobGriefing|MOB_GRIEFING|NATURAL_REGENERATION|SPAWN_MOBS|ADVANCE_TIME
+ hurtMarked| needsSync|velocityChanged|markHurt
+ hideGui|hideGui\(
+static.*hasShiftDown|static.*hasControlDown|static.*hasAltDown
+blocksMotion|isSolid\(
+isDetonating|explode.*Detonat
+ getStructureManager|StructureTemplateManager getStructureManager
+Permissions;|static final .*Permission .*COMMANDS_|static final .*Permission .*(ADMIN|MODERATOR|GAMEMASTER|OWNER)
+NATURAL_HEALTH|NATURAL_REGEN|RESPECT_DROP|DAYLIGHT|WEATHER_CYCLE|ADVANCE_WEATHER
+ getList\(|getListOrEmpty|getCompoundOrEmpty|getIntOr|getUUID|hasUUID|putUUID|readUUID
+class .*PayloadTypeRegistry|static .*PayloadTypeRegistry.* (playS2C|playC2S|clientbound|serverbound|configurationS2C)
+ClientPlayNetworking|ServerPlayNetworking.*(registerGlobalReceiver|send)\(
+ getRespawnData|record RespawnData|RespawnData.*pos\(
+SavedData(Type)?[ ($].*(Codec|Factory|constructor)|computeIfAbsent|DimensionDataStorage.*(computeIfAbsent|get)\(
+EnumProperty|DirectionProperty|static .* create\(String, Class
+class .*(EnderMan|Enderman)$|public .*class .*monster.*[Ee]nder
+StringArgumentType|ClientCommandManager|ClientCommandRegistrationCallback|ClientCommands
+ItemStack.* (getTag|getOrCreateTag|getHoverName|getDisplayName)|CustomData
+ItemInteractionResult|InteractionResultHolder|InteractionResult\$.*success|static .*InteractionResult.* (SUCCESS|FAIL|PASS|CONSUME)
+FabricItemGroup|CreativeModeTab\$Builder .*(title|icon|displayItems)|Registries.CREATIVE

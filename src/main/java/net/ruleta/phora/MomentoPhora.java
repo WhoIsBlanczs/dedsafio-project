@@ -94,7 +94,7 @@ public final class MomentoPhora {
                ServerPlayer p = jugadores.get(server.overworld().random.nextInt(jugadores.size()));
                RandomSource r = p.getRandom();
                siguiente = tick + minEspera() + r.nextInt(Math.max(1, maxEspera() - minEspera()));
-               ServerLevel nivel = p.serverLevel();
+               ServerLevel nivel = p.level();
                int alcance = Math.max(64, server.getPlayerList().getSimulationDistance() * 16 - 20);
                RECIENTES.removeIf(qx -> tick - (long)qx[3] > 3600L);
 

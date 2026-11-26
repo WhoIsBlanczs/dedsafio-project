@@ -223,7 +223,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
       Direction frente = ctx.getHorizontalDirection().getOpposite();
       BlockPos o = ctx.getClickedPos();
       Level level = ctx.getLevel();
-      if (o.getY() + 11 > level.getMaxBuildHeight()) {
+      if (o.getY() + 11 > level.getMaxY()) {
          return null;
       }
 
@@ -297,7 +297,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
 
    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
       boolean todos = !this.grande && Ajustes.bool("bunker.puerta_todos");
-      if (!todos && !player.isCreative() && !player.hasPermissions(2)) {
+      if (!todos && !player.isCreative() && !player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          return InteractionResult.PASS;
       }
 

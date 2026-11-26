@@ -46,10 +46,10 @@ public final class MobsNuevos {
       if (!e.isCanceled() && e.getPlayer() != null && !e.getPlayer().isCreative() && e.getLevel() instanceof ServerLevel nivel) {
          if (esHierba(e.getState())
             && Ruleta.cambioActivoPublico("mob-creeper-pasto")
-            && !(nivel.random.nextFloat() >= Ajustes.entero("mobs.prob_pasto") / 100.0F)) {
+            && !(nivel.getRandom().nextFloat() >= Ajustes.entero("mobs.prob_pasto") / 100.0F)) {
             CreeperCespedEntity c = (CreeperCespedEntity)Creeperes.CESPED.get().create(nivel);
             if (c != null) {
-               c.moveTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.random.nextFloat() * 360.0F, 0.0F);
+               c.moveTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
                c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(e.getPos()), EntitySpawnReason.EVENT, null);
                nivel.addFreshEntity(c);
             }
@@ -67,7 +67,7 @@ public final class MobsNuevos {
                CreeperRojoEntity rojo = (CreeperRojoEntity)CreeperRojo.TIPO.get().create(nivel);
                if (rojo != null) {
                   e.setSpawnCancelled(true);
-                  rojo.moveTo(e.getX(), e.getY(), e.getZ(), e.getEntity().getYRot(), 0.0F);
+                  rojo.snapTo(e.getX(), e.getY(), e.getZ(), e.getEntity().getYRot(), 0.0F);
                   rojo.finalizeSpawn(e.getLevel(), e.getDifficulty(), razon, null);
                   e.getLevel().addFreshEntity(rojo);
                }

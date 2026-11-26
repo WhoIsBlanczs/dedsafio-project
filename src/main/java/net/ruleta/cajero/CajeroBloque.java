@@ -81,7 +81,7 @@ public class CajeroBloque extends Block {
    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
       BlockPos pos = ctx.getClickedPos();
       Level nivel = ctx.getLevel();
-      if (pos.getY() > nivel.getMaxBuildHeight() - 2) {
+      if (pos.getY() > nivel.getMaxY() - 2) {
          return null;
       } else {
          return !nivel.getBlockState(pos.above()).canBeReplaced(ctx)

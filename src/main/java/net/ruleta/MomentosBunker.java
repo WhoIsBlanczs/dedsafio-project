@@ -240,7 +240,7 @@ public final class MomentosBunker {
             ServerPlayer p = jugadores.get(rnd.nextInt(jugadores.size()));
             base = p.position();
          } else {
-            base = Vec3.atCenterOf(mundo.getSharedSpawnPos());
+            base = Vec3.atCenterOf(mundo.getRespawnData().pos());
          }
 
          double ang = rnd.nextDouble() * Math.PI * 2.0;
@@ -267,9 +267,9 @@ public final class MomentosBunker {
 
    private static int superficie(ServerLevel mundo, int x, int z) {
       mundo.getChunk(x >> 4, z >> 4);
-      MutableBlockPos p = new MutableBlockPos(x, mundo.getMaxBuildHeight() - 1, z);
+      MutableBlockPos p = new MutableBlockPos(x, mundo.getMaxY() - 1, z);
 
-      while (p.getY() > mundo.getMinBuildHeight()) {
+      while (p.getY() > mundo.getMinY()) {
          BlockState s = mundo.getBlockState(p);
          if (!s.isAir() && s.blocksMotion() && !s.is(BlockTags.LEAVES)) {
             return p.getY() + 1;
@@ -318,7 +318,7 @@ public final class MomentosBunker {
 
                for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
                   if (p.isAlive() && !p.isCreative() && !p.isSpectator() && !dentro(p)) {
-                     p.invulnerableTime = 0;
+                     p.setInvulnerableTime(0);
                      if ("bunker_rayo".equals(activo)) {
                         p.hurt(Ruleta.fuenteLetal(p, "ruleta.rayo", " murió por el Rayo mortal de Reviil"), dano);
                         if (Ajustes.bool("rayo.activo") && p.getRandom().nextInt(100) < Ajustes.entero("rayo.prob")) {
@@ -359,18 +359,18 @@ public final class MomentosBunker {
    }
 
    private static boolean dentro(ServerPlayer p) {
-      return Bunkers.interiorDe(p.serverLevel(), p.blockPosition()) != null
-         || Bunkers.interiorDe(p.serverLevel(), BlockPos.containing(p.getEyePosition())) != null;
+      return Bunkers.interiorDe(p.level(), p.blockPosition()) != null
+         || Bunkers.interiorDe(p.level(), BlockPos.containing(p.getEyePosition())) != null;
    }
 
    private static void rayo(ServerPlayer p) {
-      ServerLevel nivel = p.serverLevel();
+      ServerLevel nivel = p.level();
       LightningBolt r = (LightningBolt)EntityType.LIGHTNING_BOLT.create(nivel);
       if (r != null) {
          double x = p.getX() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");
          double z = p.getZ() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");
          int y = nivel.getHeight(Types.MOTION_BLOCKING, (int)Math.floor(x), (int)Math.floor(z));
-         r.moveTo(x, y, z);
+         r.snapTo(x, y, z);
          r.setVisualOnly(true);
          nivel.addFreshEntity(r);
       }
@@ -438,7 +438,7 @@ public final class MomentosBunker {
       if (tick % 40L == 0L && Ajustes.bool("bunker.expulsar")) {
          for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
             if (p.isAlive() && !p.isCreative() && !p.isSpectator()) {
-               Bunkers.Bunker b = Bunkers.interiorDe(p.serverLevel(), p.blockPosition());
+               Bunkers.Bunker b = Bunkers.interiorDe(p.level(), p.blockPosition());
                if (b != null) {
                   Bunkers.sacar(p, b);
                }
@@ -522,7 +522,7 @@ public final class MomentosBunker {
       if (netherFuera && e.getDimension() == Level.NETHER) {
          e.setCanceled(true);
          if (e.getEntity() instanceof ServerPlayer p) {
-            p.displayClientMessage(Component.literal("El Nether ha sido desactivado."), true);
+            p.sendOverlayMessage(Component.literal("El Nether ha sido desactivado."));
          }
       }
    }

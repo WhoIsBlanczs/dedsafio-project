@@ -199,7 +199,7 @@ public class LanzadorFormulario extends Screen {
                this.anchoR,
                20,
                this.textoPara(),
-               () -> Minecraft.getInstance().setScreen(new JugadoresPantalla(this, true, nombre -> this.para = nombre))
+               () -> Minecraft.getInstance().setScreenAndShow(new JugadoresPantalla(this, true, nombre -> this.para = nombre))
             ),
             "Elige un jugador: solo él verá esta ruleta y su mensaje"
          )
@@ -237,7 +237,7 @@ public class LanzadorFormulario extends Screen {
             this.botonMomentos = (LanzadorFormulario.BotonMC)this.addRenderableWidget(
                conAyuda(
                   new LanzadorFormulario.BotonMC(
-                     this.xR, this.yTemporizador, mitad, 20, this.textoMomentos(), () -> Minecraft.getInstance().setScreen(new MomentosPantalla(this))
+                     this.xR, this.yTemporizador, mitad, 20, this.textoMomentos(), () -> Minecraft.getInstance().setScreenAndShow(new MomentosPantalla(this))
                   ),
                   "Activa o desactiva los Momentos Reviil (se pueden tener varios a la vez)"
                )
@@ -308,7 +308,7 @@ public class LanzadorFormulario extends Screen {
          this.botonCambios = (LanzadorFormulario.BotonMC)this.addRenderableWidget(
             conAyuda(
                new LanzadorFormulario.BotonMC(
-                  this.xR, y + 11, this.anchoR, 20, this.textoCambios(), () -> Minecraft.getInstance().setScreen(new CambiosPantalla(this))
+                  this.xR, y + 11, this.anchoR, 20, this.textoCambios(), () -> Minecraft.getInstance().setScreenAndShow(new CambiosPantalla(this))
                ),
                "Elige el cambio de dificultad (permanente) que se lanza con esta ruleta. Solo se puede elegir uno"
             )

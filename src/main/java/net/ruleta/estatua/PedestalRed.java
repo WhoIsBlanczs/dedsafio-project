@@ -17,13 +17,13 @@ public final class PedestalRed {
    }
 
    private static void enviar(ServerPlayer jugador) {
-      if (jugador.hasPermissions(2)) {
+      if (jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          ServerPlayNetworking.send(jugador, new PedestalDatosPayload(ConfigPedestal.get().aJsonCompacto()));
       }
    }
 
    private static void guardar(ServerPlayer jugador, String json) {
-      if (jugador.hasPermissions(2)) {
+      if (jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          ConfigPedestal c = ConfigPedestal.desdeJson(json);
          if (c != null) {
             ConfigPedestal.guardar(c);

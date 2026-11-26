@@ -17,13 +17,13 @@ public final class CasinoRed {
    }
 
    private static void enviar(ServerPlayer jugador) {
-      if (jugador.hasPermissions(2)) {
+      if (jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          ServerPlayNetworking.send(jugador, new CasinoDatosPayload(ConfigTragamonedas.get().aJsonCompacto()));
       }
    }
 
    private static void guardar(ServerPlayer jugador, String json) {
-      if (jugador.hasPermissions(2)) {
+      if (jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          ConfigTragamonedas c = ConfigTragamonedas.desdeJson(json);
          if (c != null) {
             ConfigTragamonedas.guardar(c);

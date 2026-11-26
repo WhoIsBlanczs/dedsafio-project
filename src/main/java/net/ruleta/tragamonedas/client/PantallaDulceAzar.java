@@ -46,7 +46,7 @@ public class PantallaDulceAzar extends UiPantalla {
          .ayuda("Elige un jugador (o todos) para el viaje y la visibilidad");
       ((UiBoton)this.addRenderableWidget(new UiBoton(izq, y + 48, ancho / 2 - 4, 34, "Ir a Dulce Azar", UiBoton.Estilo.PRIMARIO, () -> {
          this.mandar(0);
-         Minecraft.getInstance().setScreen(null);
+         Minecraft.getInstance().setScreenAndShow(null);
       }))).ayuda("Lleva a la playa al jugador elegido (o a todos)");
       ((UiBoton)this.addRenderableWidget(new UiBoton(izq + ancho / 2 + 4, y + 48, ancho / 2 - 4, 34, "Volver", UiBoton.Estilo.NORMAL, () -> this.mandar(1))))
          .ayuda("Los devuelve a donde estaban antes de entrar");

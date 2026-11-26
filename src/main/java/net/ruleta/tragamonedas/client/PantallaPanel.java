@@ -26,7 +26,7 @@ public class PantallaPanel extends UiPantalla {
       );
       this.addRenderableWidget(
          new UiBoton(
-               this.px + 20 + 170 + 14, y, 170, 56, "Dulce azar", UiBoton.Estilo.PRIMARIO, () -> Minecraft.getInstance().setScreen(new PantallaDulceAzar(this))
+               this.px + 20 + 170 + 14, y, 170, 56, "Dulce azar", UiBoton.Estilo.PRIMARIO, () -> Minecraft.getInstance().setScreenAndShow(new PantallaDulceAzar(this))
             )
             .ayuda("Dimensión DEDsafío: ir, volver, olas y escena")
       );

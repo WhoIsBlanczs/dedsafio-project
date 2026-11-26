@@ -51,7 +51,7 @@ public class ItemBurbuja extends Item {
       }
 
       if (!nivel.noCollision(b, b.getBoundingBox())) {
-         jugador.displayClientMessage(Component.literal("No cabe la burbuja aquí"), true);
+         jugador.sendOverlayMessage(Component.literal("No cabe la burbuja aquí"));
          return InteractionResult.FAIL;
       } else {
          Burbujas.quitarDe(jugador.getServer(), jugador.getUUID());

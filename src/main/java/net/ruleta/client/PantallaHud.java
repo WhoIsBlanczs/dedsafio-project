@@ -91,7 +91,7 @@ public class PantallaHud extends UiPantalla {
 
    @Override
    public void onClose() {
-      Minecraft.getInstance().setScreen(null);
+      Minecraft.getInstance().setScreenAndShow(null);
    }
 
    public static final class Comando {

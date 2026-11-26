@@ -176,11 +176,11 @@ public class PantallaAzul extends Screen {
                }
 
                if (!(mc.screen instanceof PantallaAzul)) {
-                  mc.setScreen(new PantallaAzul());
+                  mc.setScreenAndShow(new PantallaAzul());
                }
             } else {
                if (mc.screen instanceof PantallaAzul) {
-                  mc.setScreen(null);
+                  mc.setScreenAndShow(null);
                }
 
                if (silenciado) {

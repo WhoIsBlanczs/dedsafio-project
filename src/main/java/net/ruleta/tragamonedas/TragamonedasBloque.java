@@ -74,7 +74,7 @@ public class TragamonedasBloque extends BaseEntityBlock {
    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
       BlockPos pos = ctx.getClickedPos();
       Level nivel = ctx.getLevel();
-      if (pos.getY() > nivel.getMaxBuildHeight() - 3) {
+      if (pos.getY() > nivel.getMaxY() - 3) {
          return null;
       }
 

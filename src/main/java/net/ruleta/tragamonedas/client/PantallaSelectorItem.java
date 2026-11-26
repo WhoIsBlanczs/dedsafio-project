@@ -165,7 +165,7 @@ public class PantallaSelectorItem extends UiPantalla {
    }
 
    private void elegir(String id) {
-      this.minecraft.setScreen(this.padre);
+      this.minecraft.setScreenAndShow(this.padre);
       this.alElegir.accept(id);
    }
 

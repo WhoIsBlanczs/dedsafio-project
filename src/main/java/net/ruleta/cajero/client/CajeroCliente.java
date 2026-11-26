@@ -50,7 +50,7 @@ public final class CajeroCliente {
 
    public static void abrir(BlockPos pos, long nuevoSaldo) {
       saldo = Math.max(0L, nuevoSaldo);
-      Minecraft.getInstance().setScreen(new PantallaCajero(pos));
+      Minecraft.getInstance().setScreenAndShow(new PantallaCajero(pos));
    }
 
    public static void respuesta(boolean ok, String clave) {

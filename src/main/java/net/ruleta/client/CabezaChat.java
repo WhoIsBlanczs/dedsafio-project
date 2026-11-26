@@ -92,8 +92,8 @@ public final class CabezaChat {
 
                for (int j = 0; j < 8; j++) {
                   for (int i = 0; i < 8; i++) {
-                     int base = img.getPixelRGBA((int)((8 + i + 0.5) * u), (int)((8 + j + 0.5) * v));
-                     int sombrero = img.getPixelRGBA((int)((40 + i + 0.5) * u), (int)((8 + j + 0.5) * v));
+                     int base = img.getPixel((int)((8 + i + 0.5) * u), (int)((8 + j + 0.5) * v));
+                     int sombrero = img.getPixel((int)((40 + i + 0.5) * u), (int)((8 + j + 0.5) * v));
                      int p = sombrero >>> 24 >= 128 ? sombrero : base;
                      r[j * 8 + i] = (p & 0xFF) << 16 | (p >> 8 & 0xFF) << 8 | p >> 16 & 0xFF;
                   }

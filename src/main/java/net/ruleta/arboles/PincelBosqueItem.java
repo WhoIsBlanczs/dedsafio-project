@@ -49,7 +49,7 @@ public class PincelBosqueItem extends Item {
       int i = (elegido.getOrDefault(p.getUUID(), 1) + 1) % MODOS.length;
       elegido.put(p.getUUID(), i);
       PincelBosqueItem.Modo m = MODOS[i];
-      p.displayClientMessage(Component.literal("Pincel de bosque: " + m.nombre() + ", radio " + m.radio() + " (agáchate + clic para cambiar)"), true);
+      p.sendOverlayMessage(Component.literal("Pincel de bosque: " + m.nombre() + ", radio " + m.radio() + " (agáchate + clic para cambiar)"));
    }
 
    public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
@@ -79,13 +79,13 @@ public class PincelBosqueItem extends Item {
          return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide());
       } else if (!(ctx.getLevel() instanceof ServerLevel nivel)) {
          return InteractionResult.SUCCESS;
-      } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.hasPermissions(2)) {
+      } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          int n = plantar(nivel, ctx.getClickedPos(), modo(jugador));
          jugador.getCooldowns().addCooldown(this, 10);
-         jugador.displayClientMessage(Component.literal("Árboles plantados: " + n), true);
+         jugador.sendOverlayMessage(Component.literal("Árboles plantados: " + n));
          return InteractionResult.CONSUME;
       } else {
-         jugador.displayClientMessage(Component.literal("El pincel de bosque es solo para creativo u OP."), true);
+         jugador.sendOverlayMessage(Component.literal("El pincel de bosque es solo para creativo u OP."));
          return InteractionResult.FAIL;
       }
    }

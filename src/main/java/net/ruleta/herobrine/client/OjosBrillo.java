@@ -49,7 +49,7 @@ public final class OjosBrillo {
 
                for (int y = 8; y <= 15; y++) {
                   for (int x = x0; x <= x1; x++) {
-                     if ((img.getPixelRGBA(x, y) >>> 24 & 0xFF) > 16) {
+                     if ((img.getPixel(x, y) >>> 24 & 0xFF) > 16) {
                         minX = Math.min(minX, x);
                         maxX = Math.max(maxX, x);
                         minY = Math.min(minY, y);

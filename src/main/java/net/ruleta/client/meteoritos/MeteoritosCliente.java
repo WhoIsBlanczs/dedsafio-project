@@ -252,7 +252,7 @@ public final class MeteoritosCliente {
                   }
 
                   rr = Math.max(0.4F, m.tamano());
-                  RandomSource r = mc.level.random;
+                  RandomSource r = mc.level.getRandom();
                   if (r.nextInt(2) == 0) {
                      double f = r.nextDouble();
                      HUMOS.add(

@@ -42,8 +42,8 @@ public final class SupernovaRomper {
          while (it.hasNext() && bloques > 0 && columnas > 0) {
             SupernovaRomper.Trabajo t = it.next();
             ServerLevel nivel = t.nivel;
-            int arriba = nivel.getMaxBuildHeight() - 1;
-            int abajo = nivel.getMinBuildHeight();
+            int arriba = nivel.getMaxY() - 1;
+            int abajo = nivel.getMinY();
             MutableBlockPos pos = new MutableBlockPos();
 
             while (!t.terminado() && t.dist[t.siguiente] <= t.limite && bloques > 0 && columnas > 0) {

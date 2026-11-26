@@ -114,7 +114,7 @@ public final class ComandoAgujero {
          return 0;
       } else {
          activo = true;
-         horaInicio = fuente.getServer().overworld().getDayTime();
+         horaInicio = fuente.getServer().overworld().getOverworldClockTime();
          desdeHora = relojHora;
          cortadoEn = -1L;
          enviarATodos(fuente.getServer());
@@ -134,7 +134,7 @@ public final class ComandoAgujero {
       quitarAgujeros(fuente.getServer());
       if (horaInicio >= 0L) {
          cortadoEn = relojHora;
-         horaCortada = fuente.getServer().overworld().getDayTime();
+         horaCortada = fuente.getServer().overworld().getOverworldClockTime();
       }
 
       enviarATodos(fuente.getServer());
@@ -178,7 +178,7 @@ public final class ComandoAgujero {
          return 0;
       } else {
          agujero.fijarRadio(radio);
-         agujero.moveTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);
+         agujero.snapTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);
          mundo.addFreshEntity(agujero);
          VIVOS.add(agujero.getUUID());
          AgujeroPayload.Agujero dato = new AgujeroPayload.Agujero(
@@ -197,14 +197,14 @@ public final class ComandoAgujero {
    public static void cielo(MinecraftServer server, boolean poner) {
       if (poner && !activo) {
          activo = true;
-         horaInicio = server.overworld().getDayTime();
+         horaInicio = server.overworld().getOverworldClockTime();
          desdeHora = relojHora;
          cortadoEn = -1L;
       } else if (!poner && activo) {
          activo = false;
          if (horaInicio >= 0L) {
             cortadoEn = relojHora;
-            horaCortada = server.overworld().getDayTime();
+            horaCortada = server.overworld().getOverworldClockTime();
          }
       }
 
@@ -215,7 +215,7 @@ public final class ComandoAgujero {
       AgujeroNegroEntity agujero = (AgujeroNegroEntity)AgujeroNegro.TIPO.get().create(mundo);
       if (agujero != null) {
          agujero.fijarRadio(radio);
-         agujero.moveTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);
+         agujero.snapTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);
          mundo.addFreshEntity(agujero);
          VIVOS.add(agujero.getUUID());
          AGUJEROS.add(new AgujeroPayload.Agujero(donde, agujero.radio() > 0.0 ? (float)agujero.radio() : radio, mundo.dimension().location().toString()));
@@ -302,7 +302,7 @@ public final class ComandoAgujero {
    private static void hora(MinecraftServer server) {
       if (horaInicio >= 0L) {
          ServerLevel mundo = server.overworld();
-         boolean ciclo = mundo.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT);
+         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
          boolean termina = false;
          long hora;
          if (cortadoEn >= 0L) {

@@ -70,7 +70,7 @@ public final class TotemEvents {
                   }
 
                   player.awardStat(Stats.ITEM_USED.get(shown.getItem()));
-                  player.serverLevel().sendParticles(ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 30, 0.5, 0.6, 0.5, 0.4);
+                  player.level().sendParticles(ParticleTypes.TOTEM_OF_UNDYING, player.getX(), player.getY() + 1.0, player.getZ(), 30, 0.5, 0.6, 0.5, 0.4);
                   player.level().playSound(null, player.blockPosition(), SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
                   Red.enviar(player, new TotemActivatePacket(shown));
                   Ruleta.avisarTotem(player, event.getSource(), Component.literal(kind.displayName));

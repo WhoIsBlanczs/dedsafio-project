@@ -31,7 +31,7 @@ public abstract class LuzMixin {
             for (int bloque = 0; bloque < 16; bloque++) {
                float f = EfectosEclipse.factorLuz(nivel, cielo, bloque, oscuroCielo);
                if (!(f >= 1.0F)) {
-                  int c = this.field_4133.getPixelRGBA(bloque, cielo);
+                  int c = this.field_4133.getPixel(bloque, cielo);
                   int r = Math.round((c & 0xFF) * f);
                   int g = Math.round((c >> 8 & 0xFF) * f);
                   int b = Math.round((c >> 16 & 0xFF) * f);

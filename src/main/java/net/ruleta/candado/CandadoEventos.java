@@ -95,10 +95,10 @@ public final class CandadoEventos {
          if (Candados.estaBloqueado(nivel, pos)) {
             DatosCandados.Candado c = Candados.obtener(nivel, pos);
             Player p = e.getPlayer();
-            boolean permitido = p.getUUID().equals(c.propietario) || p.hasPermissions(2);
+            boolean permitido = p.getUUID().equals(c.propietario) || p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
             if (!permitido) {
                e.setCanceled(true);
-               p.displayClientMessage(Component.literal("Tiene un candado: solo su propietario puede romperlo."), true);
+               p.sendOverlayMessage(Component.literal("Tiene un candado: solo su propietario puede romperlo."));
             } else {
                Candados.quitar(nivel, pos);
             }

@@ -11,7 +11,7 @@ public final class PanelDulceAzar {
    }
 
    public static void recibir(ServerPlayer origen, DulceAzarAccionPayload m) {
-      if (origen != null && origen.hasPermissions(2)) {
+      if (origen != null && origen.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          MinecraftServer servidor = origen.getServer();
          if (servidor != null) {
             List<ServerPlayer> elegidos = null;

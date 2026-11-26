@@ -74,7 +74,7 @@ public final class AvisoPop {
                g.pose().pushPose();
                g.pose().translate(cx, cy, 0.0F);
                g.pose().scale(escala, escala, 1.0F);
-               g.drawString(f, texto, -f.width(texto) / 2, -9 / 2, a << 24 | 16777215, true);
+               g.text(f, texto, -f.width(texto) / 2, -9 / 2, a << 24 | 16777215, true);
                g.pose().popPose();
             }
          }

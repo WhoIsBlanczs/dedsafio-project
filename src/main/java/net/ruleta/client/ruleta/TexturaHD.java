@@ -96,7 +96,7 @@ final class TexturaHD extends AbstractTexture {
 
             for (int dy = 0; dy < 2; dy++) {
                for (int dx = 0; dx < 2; dx++) {
-                  int c = src.getPixelRGBA(Math.min(src.getWidth() - 1, 2 * x + dx), Math.min(src.getHeight() - 1, 2 * y + dy));
+                  int c = src.getPixel(Math.min(src.getWidth() - 1, 2 * x + dx), Math.min(src.getHeight() - 1, 2 * y + dy));
                   int a = c >>> 24;
                   sa += a;
                   sr += (long)(c & 0xFF) * a;

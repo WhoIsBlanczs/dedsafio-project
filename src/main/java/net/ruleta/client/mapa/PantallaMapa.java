@@ -410,7 +410,7 @@ public class PantallaMapa extends Screen {
          }
       }
 
-      g.drawString(this.font, t, lx, ly, 16777215, false);
+      g.text(this.font, t, lx, ly, 16777215, false);
    }
 
    private static void linea(BufferBuilder b, Matrix4f m, float x1, float y1, float x2, float y2, float grosor, float tono) {

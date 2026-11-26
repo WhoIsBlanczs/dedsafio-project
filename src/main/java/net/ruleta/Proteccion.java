@@ -25,6 +25,6 @@ public final class Proteccion {
    }
 
    public static boolean puede(Player jugador) {
-      return jugador != null && jugador.isCreative() && jugador.hasPermissions(2);
+      return jugador != null && jugador.isCreative() && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
    }
 }

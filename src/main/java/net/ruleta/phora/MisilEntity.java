@@ -68,7 +68,7 @@ public class MisilEntity extends Entity {
       Vec3 desde = objetivo.add(Math.cos(az) * lado, alto, Math.sin(az) * lado);
       double velocidad = 3.8 + r.nextDouble() * 1.0;
       Vec3 v = objetivo.subtract(desde).normalize().scale(velocidad);
-      m.moveTo(desde.x, desde.y, desde.z, 0.0F, 0.0F);
+      m.snapTo(desde.x, desde.y, desde.z, 0.0F, 0.0F);
       m.setDeltaMovement(v);
       m.tamano = tamanoAlAzar(r);
       nivel.addFreshEntity(m);
@@ -100,7 +100,7 @@ public class MisilEntity extends Entity {
       Vec3 sig = p.add(v);
       Level nivel = this.level();
       if (!nivel.isClientSide()) {
-         if (this.edad > Ajustes.entero("misil.vida") * 20 || p.y < nivel.getMinBuildHeight() - 16) {
+         if (this.edad > Ajustes.entero("misil.vida") * 20 || p.y < nivel.getMinY() - 16) {
             this.discard();
             return;
          }
@@ -186,11 +186,11 @@ public class MisilEntity extends Entity {
             e.igniteForSeconds(Math.round(4.0F + 6.0F * k));
             if (e instanceof ServerPlayer p) {
                if (!p.isCreative() && !Ruleta.totemGastadoAhora(p)) {
-                  p.invulnerableTime = 0;
+                  p.setInvulnerableTime(0);
                   p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.misil", " fue aplastado por un misil de los Phora"), Ajustes.decimal("misil.dano") * 2.0F * k);
                }
             } else {
-               e.invulnerableTime = 0;
+               e.setInvulnerableTime(0);
                e.hurt(nivel.damageSources().explosion(this, null), Ajustes.decimal("misil.dano") * 2.0F * k);
             }
          }

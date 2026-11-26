@@ -33,7 +33,7 @@ public class PaloRegreso extends Item {
             return InteractionResult.SUCCESS;
          }
 
-         humo(jugador.serverLevel(), jugador.position());
+         humo(jugador.level(), jugador.position());
          regresar(jugador);
          quien.getCooldowns().addCooldown(this, 10);
          return InteractionResult.CONSUME;
@@ -52,7 +52,7 @@ public class PaloRegreso extends Item {
             despues(p, "Has vuelto a tu zona de respawn.");
          } else {
             ServerLevel mundo = server.overworld();
-            BlockPos spawn = mundo.getSharedSpawnPos();
+            BlockPos spawn = mundo.getRespawnData().pos();
             int y = mundo.getHeight(Types.MOTION_BLOCKING_NO_LEAVES, spawn.getX(), spawn.getZ());
             p.teleportTo(mundo, spawn.getX() + 0.5, y, spawn.getZ() + 0.5, mundo.getSharedSpawnAngle(), 0.0F);
             despues(p, "No tienes zona de respawn.");
@@ -62,8 +62,8 @@ public class PaloRegreso extends Item {
 
    private static void despues(ServerPlayer p, String texto) {
       p.fallDistance = 0.0F;
-      p.displayClientMessage(Component.literal(texto).withStyle(ChatFormatting.WHITE), true);
-      ServerLevel nivel = p.serverLevel();
+      p.sendOverlayMessage(Component.literal(texto).withStyle(ChatFormatting.WHITE));
+      ServerLevel nivel = p.level();
       nivel.playSound(null, p.getX(), p.getY(), p.getZ(), Objetos.SONIDO_REGRESO.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
    }
 

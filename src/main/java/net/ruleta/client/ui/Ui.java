@@ -118,7 +118,7 @@ public final class Ui {
    public static void textoN(GuiGraphicsExtractor g, Font f, String s, int x, int y, int rgb, float a) {
       int col = c(oscuro(rgb), a);
       if (col >>> 24 >= 8 && !s.isEmpty()) {
-         g.drawString(f, tb(s), x, y, col, false);
+         g.text(f, tb(s), x, y, col, false);
       }
    }
 
@@ -228,7 +228,7 @@ public final class Ui {
          for (int dy = -1; dy <= prof + 1; dy++) {
             boolean borde = dx < 1 || dy < 1 || dx > prof || dy > prof;
             if (borde) {
-               g.drawString(f, tb(s), Math.round(dx * u), Math.round(dy * u), c(contorno, 0.95F), false);
+               g.text(f, tb(s), Math.round(dx * u), Math.round(dy * u), c(contorno, 0.95F), false);
             }
          }
       }

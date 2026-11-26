@@ -126,7 +126,7 @@ public class PantallaPremio extends UiPantalla {
          this.empezar(x, y);
          this.boton(g, f, 0, 4, 220, 26, "+ Agregar recompensa", mx, my, 4906624, false, b -> {
             PantallaPremio pp = PantallaPremio.this;
-            Minecraft.getInstance().setScreen(new PantallaSelectorItem(pp, id -> {
+            Minecraft.getInstance().setScreenAndShow(new PantallaSelectorItem(pp, id -> {
                if (pp.premio.recompensas.size() < 6) {
                   pp.premio.recompensas.add(new ConfigTragamonedas.Recompensa(id, 1));
                   pp.cambio();
@@ -292,7 +292,7 @@ public class PantallaPremio extends UiPantalla {
                my,
                16762967,
                !r.encantamientos.isEmpty(),
-               b -> Minecraft.getInstance().setScreen(new PantallaEncantamientos(pp, r, pp.alCambiar))
+               b -> Minecraft.getInstance().setScreenAndShow(new PantallaEncantamientos(pp, r, pp.alCambiar))
             );
          }
 

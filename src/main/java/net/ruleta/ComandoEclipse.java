@@ -67,7 +67,7 @@ public final class ComandoEclipse {
    private static int empezar(MinecraftServer server, int segundos, CommandSourceStack fuente) {
       if (!MomentoReviil.enMarcha() && !MomentoPhora.enMarcha()) {
          ServerLevel mundo = server.overworld();
-         long base = horaInicio >= 0L ? horaNormal() : mundo.getDayTime();
+         long base = horaInicio >= 0L ? horaNormal() : mundo.getOverworldClockTime();
          desde = tick;
          totalidad = segundos;
          cortadoEn = -1L;
@@ -91,7 +91,7 @@ public final class ComandoEclipse {
 
    public static void empezarMomento(MinecraftServer server, int segundosTotalidad) {
       ServerLevel mundo = server.overworld();
-      long base = horaInicio >= 0L ? horaNormal() : mundo.getDayTime();
+      long base = horaInicio >= 0L ? horaNormal() : mundo.getOverworldClockTime();
       desde = tick;
       totalidad = segundosTotalidad;
       cortadoEn = -1L;
@@ -118,7 +118,7 @@ public final class ComandoEclipse {
       Red.enviarATodos(server, mensaje(-1, 0));
       if (horaInicio >= 0L) {
          cortadoEn = tick;
-         horaCortada = server.overworld().getDayTime();
+         horaCortada = server.overworld().getOverworldClockTime();
       }
    }
 
@@ -139,7 +139,7 @@ public final class ComandoEclipse {
    private static void hora(MinecraftServer server) {
       if (horaInicio >= 0L) {
          ServerLevel mundo = server.overworld();
-         boolean ciclo = mundo.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT);
+         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
          boolean termina = false;
          long hora;
          if (cortadoEn >= 0L) {

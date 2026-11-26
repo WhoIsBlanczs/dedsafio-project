@@ -29,7 +29,7 @@ public final class Luces {
    }
 
    static void alumbrar(ServerPlayer p, float intensidad) {
-      ServerLevel nivel = p.serverLevel();
+      ServerLevel nivel = p.level();
       float yaw = p.getYRot() * (float) (Math.PI / 180.0);
       Vec3 frente = new Vec3(-Math.sin(yaw), 0.0, Math.cos(yaw));
       Vec3 ojos = p.getEyePosition();

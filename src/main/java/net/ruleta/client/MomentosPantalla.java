@@ -147,7 +147,7 @@ public class MomentosPantalla extends UiPantalla {
                      RedCliente.enviar(new MomentoPayload(m.id(), false, 0));
                   } else if (!bloqueado(m)) {
                      if ("eclipse".equals(m.id())) {
-                        Minecraft.getInstance().setScreen(new PantallaEclipse(this));
+                        Minecraft.getInstance().setScreenAndShow(new PantallaEclipse(this));
                      } else if (m.temporizador()) {
                         Minecraft.getInstance().setScreen(new MomentosPantalla.Temporizador(this, m));
                      } else {
@@ -395,7 +395,7 @@ public class MomentosPantalla extends UiPantalla {
 
       @Override
       public void onClose() {
-         Minecraft.getInstance().setScreen(this.padreM);
+         Minecraft.getInstance().setScreenAndShow(this.padreM);
       }
    }
 }

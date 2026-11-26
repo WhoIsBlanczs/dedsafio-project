@@ -47,12 +47,12 @@ public class LanzadorRuleta extends Screen {
    public static void tecla(Minecraft mc) {
       while (ABRIR.consumeClick()) {
          if (mc.player != null && mc.screen == null) {
-            if (!mc.player.hasPermissions(2)) {
-               mc.player.displayClientMessage(Component.literal("El lanzador de la ruleta es sólo para operadores."), true);
+            if (!mc.player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+               mc.player.sendOverlayMessage(Component.literal("El lanzador de la ruleta es sólo para operadores."));
             } else if (!servidorConMod()) {
-               mc.player.displayClientMessage(Component.literal("Este servidor no tiene el mod de la ruleta."), true);
+               mc.player.sendOverlayMessage(Component.literal("Este servidor no tiene el mod de la ruleta."));
             } else {
-               mc.setScreen(new LanzadorRuleta());
+               mc.setScreenAndShow(new LanzadorRuleta());
             }
          }
       }
@@ -75,7 +75,7 @@ public class LanzadorRuleta extends Screen {
             .ayuda("Daños, tiempos, rayos, distancias... todo lo configurable")
       );
       this.addRenderableWidget(
-         new UiBoton(x0 + bw + 8, yb, bw, 22, "Cambios activos", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreen(new PantallaCambiosActivos()))
+         new UiBoton(x0 + bw + 8, yb, bw, 22, "Cambios activos", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreenAndShow(new PantallaCambiosActivos()))
             .ayuda("Los cambios de dificultad que hay ahora en el mundo")
       );
       this.addRenderableWidget(
@@ -181,7 +181,7 @@ public class LanzadorRuleta extends Screen {
          int i = this.elegir(mx, my);
          if (boton == 0 && i >= 0) {
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI((SoundEvent)SoundEvents.UI_BUTTON_CLICK.value(), 1.0F));
-            Minecraft.getInstance().setScreen(new LanzadorFormulario(RuletaColor.byIndex(i)));
+            Minecraft.getInstance().setScreenAndShow(new LanzadorFormulario(RuletaColor.byIndex(i)));
             return true;
          } else {
             return false;

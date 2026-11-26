@@ -93,7 +93,7 @@ public final class MomentoMeteoritos {
             RandomSource r = p.getRandom();
             siguiente = tick + 200L + r.nextInt(240);
             int cuantos = 1;
-            ServerLevel nivel = p.serverLevel();
+            ServerLevel nivel = p.level();
             int alcance = Math.max(64, server.getPlayerList().getSimulationDistance() * 16 - 20);
             RECIENTES.removeIf(qx -> tick - (long)qx[3] > 2400L);
             boolean colocado = false;
@@ -204,7 +204,7 @@ public final class MomentoMeteoritos {
                   .then(Commands.literal("meteorito").executes(ctx -> {
                      ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
                      Vec3 objetivo = MeteoritoEntity.dondeMira(p);
-                     MeteoritoEntity.lanzar(p.serverLevel(), objetivo, p.getRandom(), p.position());
+                     MeteoritoEntity.lanzar(p.level(), objetivo, p.getRandom(), p.position());
                      ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Cae un meteorito donde miras."), false);
                      return 1;
                   })))

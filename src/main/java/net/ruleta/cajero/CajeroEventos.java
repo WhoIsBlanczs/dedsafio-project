@@ -29,7 +29,7 @@ public final class CajeroEventos {
    @SubscribeEvent
    public static void alRomper(BlockEvent.BreakEvent e) {
       if (protegido(e.getState())) {
-         boolean permitido = e.getPlayer() instanceof ServerPlayer sp && sp.isCreative() && sp.hasPermissions(2);
+         boolean permitido = e.getPlayer() instanceof ServerPlayer sp && sp.isCreative() && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
          if (!permitido) {
             e.setCanceled(true);
          }

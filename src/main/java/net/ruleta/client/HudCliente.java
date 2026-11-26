@@ -87,7 +87,7 @@ public final class HudCliente {
             }
             break;
          case "abrir_cambios":
-            Minecraft.getInstance().setScreen(new PantallaCambiosActivos());
+            Minecraft.getInstance().setScreenAndShow(new PantallaCambiosActivos());
             break;
          case "eclipse":
             EclipseCliente.recibir(p.valor(), p.titulo().getString());

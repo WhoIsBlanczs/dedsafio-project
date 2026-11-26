@@ -37,7 +37,7 @@ public class PantallaEncantamientos extends UiPantalla {
       this.alCambiar = alCambiar;
       ClientLevel nivel = Minecraft.getInstance().level;
       if (nivel != null) {
-         Registry<Enchantment> reg = nivel.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+         Registry<Enchantment> reg = nivel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
 
          for (Identifier k : reg.keySet()) {
             Enchantment e = (Enchantment)reg.get(k);

@@ -248,7 +248,7 @@ public class PantallaCajero extends Screen {
       g.pose().pushPose();
       g.pose().translate(cx - w * sc / 2.0F, cy - 4.0F * sc, 0.0F);
       g.pose().scale(sc, sc, 1.0F);
-      g.drawString(this.font, s, 0, 0, color, true);
+      g.text(this.font, s, 0, 0, color, true);
       g.pose().popPose();
    }
 

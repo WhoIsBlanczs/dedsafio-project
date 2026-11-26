@@ -130,7 +130,7 @@ public final class LinternaCliente {
          g.pose().pushPose();
          g.pose().translate(cx, cy, 0.0F);
          g.pose().scale(0.75F, 0.75F, 1.0F);
-         g.drawString(mc.font, n, -mc.font.width(n) / 2, -4, 16777215, false);
+         g.text(mc.font, n, -mc.font.width(n) / 2, -4, 16777215, false);
          g.pose().popPose();
       }
    }

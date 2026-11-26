@@ -198,7 +198,7 @@ public class BombaWarden extends Vex {
 
          for (ServerPlayer p : nivel.getEntitiesOfClass(ServerPlayer.class, new AABB(x - 5.0, y - 5.0, z - 5.0, x + 5.0, y + 5.0, z + 5.0))) {
             if (p.isAlive() && !p.isCreative() && !p.isSpectator() && !(p.distanceToSqr(x, y, z) > 25.0)) {
-               p.invulnerableTime = 0;
+               p.setInvulnerableTime(0);
                p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.bomba_warden", " fue volado por una Bomba Warden"), dano);
             }
          }
@@ -214,7 +214,7 @@ public class BombaWarden extends Vex {
    }
 
    private void destruirEsfera(ServerLevel nivel, BlockPos centro, int radio) {
-      if (radio > 0 && nivel.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+      if (radio > 0 && nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
          MutableBlockPos m = new MutableBlockPos();
          double limite = radio * radio + radio * 0.5;
 

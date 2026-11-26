@@ -576,7 +576,7 @@ public final class Bunkers {
    }
 
    public static void accion(@Nullable ServerPlayer p, String accion, String clave) {
-      if (p != null && p.getServer() != null && p.hasPermissions(2)) {
+      if (p != null && p.getServer() != null && p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          MinecraftServer server = p.getServer();
          if ("abrir".equals(accion)) {
             abrirBorrar(p);
@@ -721,7 +721,7 @@ public final class Bunkers {
          z = b.ez() + 99 + 3.5;
       }
 
-      ServerLevel nivel = p.serverLevel();
+      ServerLevel nivel = p.level();
       MutableBlockPos q = new MutableBlockPos(x, b.ey(), z);
 
       for (int i = 0; i < 64 && (!nivel.getBlockState(q).isAir() || !nivel.getBlockState(q.above()).isAir()); i++) {
@@ -729,7 +729,7 @@ public final class Bunkers {
       }
 
       p.teleportTo(nivel, x, q.getY(), z, p.getYRot(), p.getXRot());
-      p.displayClientMessage(Component.literal("El bunker se ha cerrado."), true);
+      p.sendOverlayMessage(Component.literal("El bunker se ha cerrado."));
    }
 
    public static boolean enCaja(Level nivel, BlockPos p) {
@@ -782,7 +782,7 @@ public final class Bunkers {
 
    private static void avisar(Player p) {
       if (p instanceof ServerPlayer sp) {
-         long t = sp.serverLevel().getGameTime();
+         long t = sp.level().getGameTime();
          Long ult = AVISOS.get(sp.getUUID());
          if (ult == null || t - ult >= 8L) {
             AVISOS.put(sp.getUUID(), t);
@@ -866,8 +866,8 @@ public final class Bunkers {
 
    public static void alTick(ServerPlayer p) {
       if (p.tickCount % 10 == 0) {
-         boolean dentro = interiorDe(p.serverLevel(), p.blockPosition()) != null
-            || interiorDe(p.serverLevel(), BlockPos.containing(p.getEyePosition())) != null;
+         boolean dentro = interiorDe(p.level(), p.blockPosition()) != null
+            || interiorDe(p.level(), BlockPos.containing(p.getEyePosition())) != null;
          boolean tiene = p.hasEffect(Efectos.ZONA_SEGURA.get());
          if (dentro && !tiene) {
             p.addEffect(new MobEffectInstance(Efectos.ZONA_SEGURA.get(), -1, 0, false, false, true));

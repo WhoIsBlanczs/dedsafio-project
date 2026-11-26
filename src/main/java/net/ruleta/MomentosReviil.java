@@ -60,7 +60,7 @@ public final class MomentosReviil {
 
    static void recibir(ServerPlayer jugador, MomentoPayload m) {
       if (jugador != null && m != null && jugador.getServer() != null) {
-         if (!jugador.hasPermissions(2)) {
+         if (!jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
             jugador.sendSystemMessage(Component.literal("Solo los operadores pueden cambiar los Momentos Reviil."));
          } else {
             Momentos.Momento momento = Momentos.porId(m.id());
@@ -360,7 +360,7 @@ public final class MomentosReviil {
       boolean abajo = gasListo("gas_abajo") || gasListo("creepers_negativas");
       double y = p.getY();
       if (arriba && y < Ajustes.entero("gas.capa_arriba") || abajo && y >= Ajustes.entero("gas.capa_abajo")) {
-         p.invulnerableTime = 0;
+         p.setInvulnerableTime(0);
          p.hurt(Ruleta.fuenteLetal(p, "ruleta.gas", " murió por el Gas Tóxico de Reviil"), Ajustes.decimal("dano.gas") * 2.0F);
       }
    }
@@ -375,11 +375,11 @@ public final class MomentosReviil {
          }
       }
 
-      ServerLevel nivel = p.serverLevel();
+      ServerLevel nivel = p.level();
       if (hay && nivel.getDifficulty() != Difficulty.PEACEFUL && p.getRandom().nextInt(Math.max(1, Ajustes.entero("creepers.cada"))) == 0) {
          Creeper c = (Creeper)EntityType.CREEPER.create(nivel);
          if (c != null) {
-            c.moveTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0.0F);
+            c.snapTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0.0F);
             c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(p.blockPosition()), EntitySpawnReason.EVENT, null);
             CompoundTag t = new CompoundTag();
             c.addAdditionalSaveData(t);
@@ -392,7 +392,7 @@ public final class MomentosReviil {
    }
 
    private static void luna(MinecraftServer server, ServerPlayer p) {
-      ServerLevel nivel = p.serverLevel();
+      ServerLevel nivel = p.level();
       if (nivel.dimension() == Level.OVERWORLD && !p.hasEffect(MobEffects.BLINDNESS)) {
          float angulo = nivel.getTimeOfDay(1.0F) * (float) (Math.PI * 2);
          Vec3 luna = new Vec3(Mth.sin(angulo), -Mth.cos(angulo), 0.0);

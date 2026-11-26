@@ -141,7 +141,7 @@ public final class BurbujaCliente {
             boolean dentro = mc.player != null && mc.player.getVehicle() instanceof Burbuja;
             if (dentro && !BurbujaCliente.estabaDentro) {
                mc.player
-                  .displayClientMessage(Component.translatable("ruleta.burbuja.bajar", new Object[]{mc.options.keyShift.getTranslatedKeyMessage()}), true);
+                  .sendOverlayMessage(Component.translatable("ruleta.burbuja.bajar", new Object[]{mc.options.keyShift.getTranslatedKeyMessage()}));
             }
 
             BurbujaCliente.estabaDentro = dentro;

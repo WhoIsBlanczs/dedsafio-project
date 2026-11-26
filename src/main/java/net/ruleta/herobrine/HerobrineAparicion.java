@@ -23,7 +23,7 @@ public final class HerobrineAparicion {
          if (server != null && Ruleta.cambioActivoPublico("herobrine")) {
             for (ServerPlayer p : server.getPlayerList().getPlayers()) {
                if (p.isAlive() && !p.isSpectator() && !p.isCreative()) {
-                  ServerLevel nivel = p.serverLevel();
+                  ServerLevel nivel = p.level();
                   if (nivel.getDifficulty() != Difficulty.PEACEFUL
                      && p.getRandom().nextInt(100) < Ajustes.entero("herobrine.aparicion_prob")
                      && nivel.getEntitiesOfClass(HerobrineEntity.class, new AABB(p.blockPosition()).inflate(96.0)).isEmpty()) {
@@ -48,7 +48,7 @@ public final class HerobrineAparicion {
                return false;
             }
 
-            h.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, p.getRandom().nextFloat() * 360.0F, 0.0F);
+            h.snapTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, p.getRandom().nextFloat() * 360.0F, 0.0F);
             if (nivel.noCollision(h)) {
                h.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.EVENT, null);
                nivel.addFreshEntity(h);

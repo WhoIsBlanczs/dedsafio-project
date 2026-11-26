@@ -184,7 +184,7 @@ public final class ComandoDedsafio {
       } else {
          ServerLevel mundo = servidor.overworld();
          BlockPos cama = p.getRespawnPosition();
-         BlockPos pos = cama != null && p.getRespawnDimension() == Level.OVERWORLD ? cama : mundo.getSharedSpawnPos();
+         BlockPos pos = cama != null && p.getRespawnDimension() == Level.OVERWORLD ? cama : mundo.getRespawnData().pos();
          p.teleportTo(mundo, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5, p.getYRot(), p.getXRot());
       }
    }

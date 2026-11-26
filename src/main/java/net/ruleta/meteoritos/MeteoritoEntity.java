@@ -119,7 +119,7 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
       Vec3 sig = p.add(v);
       Level nivel = this.level();
       if (!nivel.isClientSide()) {
-         if (this.edad > Math.max(Ajustes.entero("meteorito.vida") * 20, 1200) || p.y < nivel.getMinBuildHeight() - 16) {
+         if (this.edad > Math.max(Ajustes.entero("meteorito.vida") * 20, 1200) || p.y < nivel.getMinY() - 16) {
             this.discard();
             return;
          }
@@ -205,11 +205,11 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
             e.igniteForSeconds(Math.round(4.0F + 6.0F * k));
             if (e instanceof ServerPlayer p) {
                if (!p.isCreative() && !Ruleta.totemGastadoAhora(p)) {
-                  p.invulnerableTime = 0;
+                  p.setInvulnerableTime(0);
                   p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.meteorito", " fue alcanzado por un meteorito"), Ajustes.decimal("meteorito.dano") * 2.0F * k);
                }
             } else {
-               e.invulnerableTime = 0;
+               e.setInvulnerableTime(0);
                e.hurt(nivel.damageSources().explosion(this, null), Ajustes.decimal("meteorito.dano") * 2.0F * k);
             }
          }

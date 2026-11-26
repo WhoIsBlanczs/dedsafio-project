@@ -76,7 +76,7 @@ public class AgujeroNegroEntity extends Entity {
          if (d < this.dentro()) {
             v = v.scale(0.6).add(dir.scale(0.08));
             if (this.tickCount % (20 * Math.max(1, Ajustes.entero("agujeros.intervalo"))) == 0) {
-               jugador.invulnerableTime = 0;
+               jugador.setInvulnerableTime(0);
                jugador.hurt(
                   Ruleta.fuenteLetalPublica(jugador, "ruleta.agujero", " fue absorbido por un Agujero Negro de Reviil"),
                   Ajustes.decimal("agujeros.dano") * 2.0F

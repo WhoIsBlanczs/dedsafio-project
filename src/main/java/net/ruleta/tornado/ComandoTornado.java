@@ -168,7 +168,7 @@ public final class ComandoTornado {
 
          for (int intento = 0; intento < Math.max(1, faltan) * 60 && puestosNuevos < faltan; intento++) {
             ServerPlayer base = jugadores.get(mundo.random.nextInt(jugadores.size()));
-            double ang = mundo.random.nextDouble() * Math.PI * 2.0;
+            double ang = mundo.getRandom().nextDouble() * Math.PI * 2.0;
             double d = 20.0 + mundo.random.nextDouble() * alcance;
             double x = base.getX() + Math.cos(ang) * d;
             double z = base.getZ() + Math.sin(ang) * d;
@@ -190,7 +190,7 @@ public final class ComandoTornado {
                         z,
                         radio,
                         alto,
-                        mundo.random.nextDouble() * Math.PI * 2.0,
+                        mundo.getRandom().nextDouble() * Math.PI * 2.0,
                         0,
                         mundo.random.nextDouble() * 1000.0
                      )
@@ -236,7 +236,7 @@ public final class ComandoTornado {
          sitio.z,
          radio,
          alto,
-         mundo.random.nextDouble() * Math.PI * 2.0,
+         mundo.getRandom().nextDouble() * Math.PI * 2.0,
          vida,
          mundo.random.nextDouble() * 1000.0
       );
@@ -293,7 +293,7 @@ public final class ComandoTornado {
 
    private static void mover(ServerLevel mundo, ComandoTornado.Tornado t) {
       double v = Ajustes.decimal("tornado.velocidad") / 20.0;
-      t.rumbo = t.rumbo + (Math.sin(t.edad * 0.004 + t.semilla) * 0.003 + (mundo.random.nextDouble() - 0.5) * 0.003);
+      t.rumbo = t.rumbo + (Math.sin(t.edad * 0.004 + t.semilla) * 0.003 + (mundo.getRandom().nextDouble() - 0.5) * 0.003);
       double nx = t.x + Math.cos(t.rumbo) * v;
       double nz = t.z + Math.sin(t.rumbo) * v;
       BlockPos p = BlockPos.containing(nx, t.y, nz);
@@ -323,7 +323,7 @@ public final class ComandoTornado {
          }
       }
 
-      return min == Double.MAX_VALUE ? mundo.getMinBuildHeight() : min;
+      return min == Double.MAX_VALUE ? mundo.getMinY() : min;
    }
 
    private static void efectos(ServerLevel mundo, ComandoTornado.Tornado t) {
@@ -436,10 +436,10 @@ public final class ComandoTornado {
                if (c.tragaTicks >= 14) {
                   it.remove();
                   if (e instanceof ServerPlayer p) {
-                     p.invulnerableTime = 0;
+                     p.setInvulnerableTime(0);
                      p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.tornado", " fue tragado por el Tornado"), 1000.0F);
                   } else if (e instanceof LivingEntity viva) {
-                     viva.invulnerableTime = 0;
+                     viva.setInvulnerableTime(0);
                      viva.hurt(mundo.damageSources().generic(), 1000.0F);
                   }
 
@@ -464,7 +464,7 @@ public final class ComandoTornado {
             e.hurtMarked = true;
             e.fallDistance = 0.0F;
             if (e instanceof LivingEntity viva && !c.traga && danoGiro > 0.0F && c.ticks % 10 == 0) {
-               viva.invulnerableTime = 0;
+               viva.setInvulnerableTime(0);
                if (viva instanceof ServerPlayer jugador) {
                   jugador.hurt(Ruleta.fuenteLetalPublica(jugador, "ruleta.tornado", " murió por el Tornado"), danoGiro);
                } else {

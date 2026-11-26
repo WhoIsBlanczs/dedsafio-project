@@ -17,7 +17,7 @@ public final class EstatuaNutriaEventos {
    @SubscribeEvent
    public static void alRomper(BlockEvent.BreakEvent e) {
       if (e.getState().getBlock() instanceof EstatuaNutriaBloque) {
-         boolean permitido = e.getPlayer() instanceof ServerPlayer sp && sp.isCreative() && sp.hasPermissions(2);
+         boolean permitido = e.getPlayer() instanceof ServerPlayer sp && sp.isCreative() && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER);
          if (!permitido) {
             e.setCanceled(true);
          }

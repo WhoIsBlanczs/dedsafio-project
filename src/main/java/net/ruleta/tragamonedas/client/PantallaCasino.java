@@ -135,7 +135,7 @@ public class PantallaCasino extends UiPantalla {
    }
 
    private void editarPremio(ConfigTragamonedas.Premio p) {
-      Minecraft.getInstance().setScreen(new PantallaPremio(this, this.cfg, p, () -> this.sucio = true));
+      Minecraft.getInstance().setScreenAndShow(new PantallaPremio(this, this.cfg, p, () -> this.sucio = true));
    }
 
    private void aviso(String m) {

@@ -31,7 +31,7 @@ public final class LluviaRoja {
 
             for (int y = 0; y < img.getHeight(); y++) {
                for (int x = 0; x < img.getWidth(); x++) {
-                  int abgr = img.getPixelRGBA(x, y);
+                  int abgr = img.getPixel(x, y);
                   int a = abgr >>> 24;
                   int lum = ((abgr & 0xFF) + (abgr >> 8 & 0xFF) + (abgr >> 16 & 0xFF)) / 3;
                   int r = Math.min(255, 110 + lum / 2);

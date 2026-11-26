@@ -58,7 +58,7 @@ public final class TemporizadorHud {
                PoseStack m = ctx.pose();
                m.pushPose();
                m.translate(0.0F, 0.0F, 2951.0F);
-               ctx.drawCenteredString(tr, txt, ctx.guiWidth() / 2, 6, alfa << 24 | (quedan <= 10 ? 16733525 : 16777215));
+               ctx.centeredText(tr, txt, ctx.guiWidth() / 2, 6, alfa << 24 | (quedan <= 10 ? 16733525 : 16777215));
                m.popPose();
             }
          }

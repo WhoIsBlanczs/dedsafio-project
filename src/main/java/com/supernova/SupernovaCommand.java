@@ -249,7 +249,7 @@ public class SupernovaCommand {
          return 0;
       }
 
-      n.moveTo(pos.x, pos.y, pos.z, 0.0F, 0.0F);
+      n.snapTo(pos.x, pos.y, pos.z, 0.0F, 0.0F);
       if (v.tam != null) {
          n.setMaxRadius(v.tam);
       }

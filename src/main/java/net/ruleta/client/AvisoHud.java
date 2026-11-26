@@ -115,7 +115,7 @@ public final class AvisoHud {
                m.scale(escala, escala, 1.0F);
 
                for (FormattedCharSequence linea : lineas) {
-                  ctx.drawString(tr, linea, 0, 0, color);
+                  ctx.text(tr, linea, 0, 0, color);
                   m.translate(0.0F, 11.5F, 0.0F);
                }
 
@@ -142,7 +142,7 @@ public final class AvisoHud {
       LocalPlayer p = Minecraft.getInstance().player;
       if (p != null && OpcionesCliente.coordenadas) {
          String txt = String.format(Locale.ROOT, "X: %.2f, Y: %.2f, Z: %.2f", p.getX(), p.getY(), p.getZ());
-         ctx.drawString(tr, txt, 10, 10, alfa << 24 | 16777215, true);
+         ctx.text(tr, txt, 10, 10, alfa << 24 | 16777215, true);
       }
    }
 
@@ -163,7 +163,7 @@ public final class AvisoHud {
          return Optional.empty();
       }, Style.EMPTY);
       if (base[0] < 0) {
-         ctx.drawString(tr, t, x, y, alfa << 24 | 16777215);
+         ctx.text(tr, t, x, y, alfa << 24 | 16777215);
       } else {
          int claro = Mensajes.claro(base[0]);
          int oscuro = mezcla(claro, 0, 0.3F);
