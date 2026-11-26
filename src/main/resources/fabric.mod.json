@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "ruleta",
+  "version": "${version}",
+  "name": "Ruleta",
+  "description": "La ruleta de Hombrosafío: giro sincronizado, anuncios, cambios de dificultad y panel de ajustes.",
+  "authors": ["WhoIsBlanczs"],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["ar.hombrosafio.ruleta.RuletaMod"],
+    "client": ["ar.hombrosafio.ruleta.client.RuletaClient"]
+  },
+  "mixins": [
+    "ruleta.mixins.json",
+    { "config": "ruleta.client.mixins.json", "environment": "client" }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

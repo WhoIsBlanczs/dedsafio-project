@@ -1,0 +1,4 @@
+{
+  "roulette.spin": { "sounds": [ { "name": "ruleta:ruleta", "stream": false } ] },
+  "roulette.nutria": { "sounds": [ { "name": "ruleta:nutria", "stream": false } ] }
+}
