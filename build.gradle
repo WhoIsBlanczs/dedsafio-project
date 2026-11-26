@@ -1,0 +1,13 @@
+plugins {
+	id 'fabric-loom' version '1.11-SNAPSHOT'
+}
+repositories {
+	mavenCentral()
+}
+dependencies {
+	minecraft "com.mojang:minecraft:1.21.1"
+	mappings loom.officialMojangMappings()
+	modImplementation "net.fabricmc:fabric-loader:0.16.14"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:0.116.7+1.21.1"
+	modImplementation files('libs/ded.jar')
+}
