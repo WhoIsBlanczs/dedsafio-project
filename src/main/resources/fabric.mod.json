@@ -4,8 +4,8 @@
   "version": "${version}",
   "name": "Ruleta",
   "description": "La ruleta de Hombrosafío: giro sincronizado, anuncios, cambios de dificultad y panel de ajustes.",
-  "authors": ["WhoIsBlanczs"],
-  "license": "MIT",
+  "authors": ["WhoIsBlanczs", "DarkPlayer y colaboradores (DEDsafio 4 Ruleta Fan Project)"],
+  "license": "CC-BY-NC-SA-4.0",
   "environment": "*",
   "entrypoints": {
     "main": ["ar.hombrosafio.ruleta.RuletaMod"],

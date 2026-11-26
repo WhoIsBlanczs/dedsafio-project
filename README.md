@@ -15,3 +15,6 @@ Java 25: `./gradlew build` → `build/libs/`. También se compila en GitHub Acti
 
 ## Alcance
 No incluye el contenido propio de Hombrosafío (Momentos Revil, bunkers, casino…). Las pantallas de selector/ajustes/panel están reconstruidas a partir de un video de referencia.
+
+## Créditos y licencia
+Basado en *DEDsafio 4 Ruleta Fan Project* (DarkPlayer y colaboradores, Serie DEDsafio 4 · Eufonia Studios), portado a Minecraft 26.3. Licencia CC BY-NC-SA 4.0: sin fines de lucro, con atribución y misma licencia.
