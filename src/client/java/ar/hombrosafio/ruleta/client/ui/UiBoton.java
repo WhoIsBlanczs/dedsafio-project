@@ -59,7 +59,7 @@ public class UiBoton extends AbstractButton {
       this.marcado = m;
    }
 
-   public void onPress() {
+   public void onPress(net.minecraft.client.input.InputWithModifiers input) {
       this.pulso.fijar(1.0F);
       this.alPulsar.run();
    }

@@ -145,10 +145,8 @@ public class PantallaSelectorItem extends UiPantalla {
    @Override
    protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) {
       if (this.hoverId != null) {
-         List<Component> t = new ArrayList<>();
-         t.add(this.hoverPila.getHoverName());
-         t.add(Component.literal(this.hoverId).withStyle(ChatFormatting.GRAY));
-         g.renderTooltip(this.font, t, Optional.empty(), mx, my);
+         Component t = Component.empty().append(this.hoverPila.getHoverName()).append(Component.literal("\n" + this.hoverId).withStyle(ChatFormatting.GRAY));
+         g.setTooltipForNextFrame(this.font, t, mx, my);
       }
    }
 
@@ -192,7 +190,7 @@ public class PantallaSelectorItem extends UiPantalla {
                && my >= PantallaSelectorItem.this.lista.y
                && my < PantallaSelectorItem.this.lista.y + PantallaSelectorItem.this.lista.h;
             Ui.cajaBorde(g, cx, y, 34, 34, 4, Ui.c(h ? 2369846 : 1711656), Ui.c(h ? 7113983 : 3028037));
-            g.renderItem(e.pila(), cx + 9, y + 9);
+            g.item(e.pila(), cx + 9, y + 9);
             if (h) {
                PantallaSelectorItem.this.hoverId = e.id();
                PantallaSelectorItem.this.hoverPila = e.pila();

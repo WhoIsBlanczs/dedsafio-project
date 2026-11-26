@@ -37,18 +37,14 @@ public class UiCampo extends EditBox {
    }
 
    public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev, boolean dbl) {
-      double mx = ev.x();
-      double my = ev.y();
-      int boton = ev.button();
-      if (this.active && this.visible && Ui.dentro(mx, my, this.ox, this.oy, this.ow, this.oh)) {
-         double cx = Math.max((double)this.getX(), Math.min((double)(this.getX() + this.getWidth() - 1), mx));
-         return super.mouseClicked(cx, this.getY() + 1, boton);
-      } else {
-         return super.mouseClicked(ev, dbl);
+      if (this.active && this.visible && Ui.dentro(ev.x(), ev.y(), this.ox, this.oy, this.ow, this.oh)) {
+         this.setFocused(true);
+         return true;
       }
+      return super.mouseClicked(ev, dbl);
    }
 
-   public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
+   public void extractWidgetRenderState(GuiGraphicsExtractor g, int mx, int my, float pt) {
       float f = this.foco.hacia(this.isFocused() ? 1.0F : 0.0F, 14.0F);
       boolean rojo = this.malo.getAsBoolean() && !this.getValue().isEmpty();
       int borde = rojo ? 16735340 : Ui.mezcla(3028037, 7113983, f);
@@ -57,6 +53,6 @@ public class UiCampo extends EditBox {
          Ui.caja(g, this.ox + 4, this.oy + this.oh - 2, Math.round((this.ow - 8) * f), 1, 0, Ui.c(rojo ? 16735340 : 7113983));
       }
 
-      super.renderWidget(g, mx, my, pt);
+      super.extractWidgetRenderState(g, mx, my, pt);
    }
 }

@@ -1,6 +1,5 @@
 package ar.hombrosafio.ruleta.client.ui;
 
-import net.minecraft.Util;
 
 public final class Suave {
    public float v;
@@ -14,7 +13,7 @@ public final class Suave {
    }
 
    public float hacia(float objetivo, float velocidad) {
-      long ahora = Util.getMillis();
+      long ahora = System.currentTimeMillis();
       float dt = this.ultimo < 0L ? 0.016F : Math.min(0.1F, (float)(ahora - this.ultimo) / 1000.0F);
       this.ultimo = ahora;
       this.v = this.v + (objetivo - this.v) * (1.0F - (float)Math.exp(-velocidad * dt));

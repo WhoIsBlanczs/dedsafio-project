@@ -31,7 +31,7 @@ public class UiInterruptor extends AbstractWidget {
          .play(SimpleSoundInstance.forUI((SoundEvent)SoundEvents.UI_BUTTON_CLICK.value(), this.leer.getAsBoolean() ? 1.5F : 1.0F, 0.5F));
    }
 
-   protected void extractContents(GuiGraphicsExtractor g, int mx, int my, float pt) {
+   protected void extractWidgetRenderState(GuiGraphicsExtractor g, int mx, int my, float pt) {
       boolean on = this.leer.getAsBoolean();
       if (this.primera) {
          this.pos.fijar(on ? 1.0F : 0.0F);

@@ -2,7 +2,6 @@ package ar.hombrosafio.ruleta.client.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.Util;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
@@ -16,14 +15,14 @@ public final class UiLista {
    private final Suave scroll = new Suave();
    private float objetivo;
    private UiFila arrastrando;
-   private long desde = Util.getMillis();
+   private long desde = System.currentTimeMillis();
 
    public void poner(List<UiFila> nuevas, boolean animar) {
       this.filas.clear();
       this.filas.addAll(nuevas);
       this.objetivo = Math.min(this.objetivo, this.maximo());
       if (animar) {
-         this.desde = Util.getMillis();
+         this.desde = System.currentTimeMillis();
       }
    }
 
@@ -52,7 +51,7 @@ public final class UiLista {
 
    public void dibujar(GuiGraphicsExtractor g, Font f, int mx, int my) {
       float sc = this.scroll.hacia(this.objetivo, 16.0F);
-      long ahora = Util.getMillis() - this.desde;
+      long ahora = System.currentTimeMillis() - this.desde;
       float guardado = Ui.alfa;
       g.enableScissor(this.x, this.y, this.x + this.w, this.y + this.h);
       int yy = this.y - Math.round(sc);
@@ -94,10 +93,7 @@ public final class UiLista {
       }
    }
 
-   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev, boolean dbl) {
-      double mx = ev.x();
-      double my = ev.y();
-      int boton = ev.button();
+   public boolean mouseClicked(double mx, double my, int boton) {
       if (!this.dentro(mx, my)) {
          return false;
       } else {

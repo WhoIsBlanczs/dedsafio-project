@@ -1,6 +1,5 @@
 package ar.hombrosafio.ruleta.client.ui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.Font;
@@ -218,10 +217,10 @@ public final class Ui {
    public static void titulo3D(GuiGraphicsExtractor g, Font f, String s, int x, int y, float escala, int cara, int caraClara, int lado, int contorno) {
       int prof = Math.max(2, Math.round(escala * 1.6F));
       float alto = 9.0F * escala;
-      PoseStack pose = g.pose();
-      pose.pushPose();
-      pose.translate(x, y, 0.0F);
-      pose.scale(escala, escala, 1.0F);
+      var pose = g.pose();
+      pose.pushMatrix();
+      pose.translate((float) x, (float) y);
+      pose.scale(escala, escala);
       float u = 1.0F / escala;
 
       for (int dx = -1; dx <= prof + 1; dx++) {
@@ -238,18 +237,18 @@ public final class Ui {
          g.text(f, tb(s), Math.round(d * u), Math.round(d * u), c(col), false);
       }
 
-      pose.popPose();
+      pose.popMatrix();
 
       for (int pasada = 0; pasada < 2; pasada++) {
          int y0 = pasada == 0 ? y - 2 : y + Math.round(alto * 0.42F);
          int y1 = pasada == 0 ? y + Math.round(alto * 0.42F) : y + Math.round(alto) + 4;
          g.enableScissor(x - 4, y0, x + Math.round(anchoN(f, s) * escala) + 8, y1);
-         PoseStack p = g.pose();
-         p.pushPose();
-         p.translate(x, y, 0.0F);
-         p.scale(escala, escala, 1.0F);
+         var p = g.pose();
+         p.pushMatrix();
+         p.translate((float) x, (float) y);
+         p.scale(escala, escala);
          g.text(f, tb(s), 0, 0, c(pasada == 0 ? caraClara : cara), false);
-         p.popPose();
+         p.popMatrix();
          g.disableScissor();
       }
    }

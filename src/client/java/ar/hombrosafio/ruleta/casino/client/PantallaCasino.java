@@ -351,7 +351,7 @@ public class PantallaCasino extends UiPantalla {
                int k = 0;
 
                for (String id : p.items) {
-                  g.renderItem(PantallaCasino.pila(id), x + rx + ancho + 20 + k * 18, y + yc + 7);
+                  g.item(PantallaCasino.pila(id), x + rx + ancho + 20 + k * 18, y + yc + 7);
                   k++;
                }
 
@@ -365,7 +365,7 @@ public class PantallaCasino extends UiPantalla {
                if ("*".equals(c)) {
                   Ui.textoCentro(g, f, "*", cx + 15, y + yc + 11, 16762967, 1.0F, true);
                } else {
-                  g.renderItem(PantallaCasino.pila(c), cx + 7, y + yc + 7);
+                  g.item(PantallaCasino.pila(c), cx + 7, y + yc + 7);
                }
             }
 
@@ -386,7 +386,7 @@ public class PantallaCasino extends UiPantalla {
 
             int ancho = 22 + Ui.ancho(f, cant) + 8;
             Ui.cajaBorde(g, x + rx, y + yc, ancho, 30, 4, Ui.c(1119259), Ui.c(4906624, 0.6F));
-            g.renderItem(PantallaCasino.pila(r.item), x + rx + 4, y + yc + 7);
+            g.item(PantallaCasino.pila(r.item), x + rx + 4, y + yc + 7);
             Ui.texto(g, f, cant, x + rx + 24, y + yc + 11, 15330549, 1.0F);
             rx += ancho + 4;
          }
@@ -429,7 +429,7 @@ public class PantallaCasino extends UiPantalla {
       public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          ConfigTragamonedas.Simbolo s = this.s();
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
-         g.renderItem(PantallaCasino.pila(s.item), x + 12, y + 12);
+         g.item(PantallaCasino.pila(s.item), x + 12, y + 12);
          Ui.textoN(g, f, Ui.recortar(f, PantallaCasino.nombre(s.item), 220), x + 38, y + 9, 15330549, 1.0F);
          Ui.texto(g, f, Ui.recortar(f, s.item, 220), x + 38, y + 21, 9344683, 1.0F);
          double p = PantallaCasino.prob(PantallaCasino.this.cfg, s.item);
@@ -451,7 +451,7 @@ public class PantallaCasino extends UiPantalla {
       @Override
       public boolean clic(double mx, double my, int boton, int x, int y, int w) {
          int yb = y + 9;
-         int paso = Screen.hasShiftDown() ? 10 : 1;
+         int paso = net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1;
          PantallaCasino p = PantallaCasino.this;
          if (Ui.dentro(mx, my, this.xMenos(x, w), yb, 22, 22)) {
             this.s().peso = Mth.clamp(this.s().peso - paso, 1, 1000);

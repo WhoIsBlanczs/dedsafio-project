@@ -37,14 +37,12 @@ public class PantallaEncantamientos extends UiPantalla {
       this.alCambiar = alCambiar;
       ClientLevel nivel = Minecraft.getInstance().level;
       if (nivel != null) {
-         Registry<Enchantment> reg = nivel.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+         var reg = nivel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
 
-         for (Identifier k : reg.keySet()) {
-            Enchantment e = (Enchantment)reg.get(k);
-            if (e != null) {
-               this.todos.add(new PantallaEncantamientos.Info(k.toString(), e.description().getString(), e.getMaxLevel()));
-            }
-         }
+         reg.listElements().forEach(h -> {
+            Enchantment e = h.value();
+            this.todos.add(new PantallaEncantamientos.Info(h.key().identifier().toString(), e.description().getString(), e.getMaxLevel()));
+         });
       }
 
       this.todos.sort(Comparator.comparing(PantallaEncantamientos.Info::nombre, String.CASE_INSENSITIVE_ORDER));
