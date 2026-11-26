@@ -2,7 +2,7 @@ package net.ruleta.nuclear;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,7 +30,7 @@ import net.ruleta.nuclear.item.TotemItem;
 import net.ruleta.nuclear.network.TotemActivatePacket;
 
 public final class TotemEvents {
-   private static final ResourceLocation GOLEM_MODIFIER_ID = Reg.id("ruleta", "totem_golem");
+   private static final Identifier GOLEM_MODIFIER_ID = Reg.id("ruleta", "totem_golem");
    public static final double GOLEM_BONUS_HEALTH = 4.0;
    private static final String EON_HASTA = "ruleta_eon_inmune_hasta";
    private static final long EON_TICKS = 60L;

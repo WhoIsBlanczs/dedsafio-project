@@ -14,7 +14,7 @@ public class RedHeartItem extends Item {
    }
 
    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-      if (!level.isClientSide && entity instanceof ServerPlayer player) {
+      if (!level.isClientSide() && entity instanceof ServerPlayer player) {
          HeartEvents.addHeart(player);
       }
 

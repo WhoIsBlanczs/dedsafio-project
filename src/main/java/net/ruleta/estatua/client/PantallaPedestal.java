@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -127,7 +127,7 @@ public class PantallaPedestal extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.lista.dibujar(g, f, mx, my);
       if (this.lista.tamano() == 0) {
@@ -176,7 +176,7 @@ public class PantallaPedestal extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          PantallaPedestal pp = PantallaPedestal.this;
          ConfigPedestal.Trato t = pp.cfg.tratos.get(this.i);

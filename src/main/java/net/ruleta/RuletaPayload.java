@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record RuletaPayload(int result, float startAngle, int spins, float offset, String who, boolean mini) implements CustomPacketPayload {
-   public static final Type<RuletaPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "ruleta"));
+   public static final Type<RuletaPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "ruleta"));
    public static final StreamCodec<FriendlyByteBuf, RuletaPayload> CODEC = StreamCodec.ofMember(RuletaPayload::encode, RuletaPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

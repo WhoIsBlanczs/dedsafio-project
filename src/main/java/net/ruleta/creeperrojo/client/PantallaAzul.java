@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -28,11 +28,11 @@ import net.ruleta.creeperrojo.CreeperRojoEntity;
 public class PantallaAzul extends Screen {
    private static final int AZUL = -16746281;
    private static final int BLANCO = -1;
-   private static final ResourceLocation FUENTE = ResourceLocation.fromNamespaceAndPath("ruleta", "bsod");
-   private static final ResourceLocation FUENTE_CARA = ResourceLocation.fromNamespaceAndPath("ruleta", "bsod_cara");
+   private static final Identifier FUENTE = Identifier.fromNamespaceAndPath("ruleta", "bsod");
+   private static final Identifier FUENTE_CARA = Identifier.fromNamespaceAndPath("ruleta", "bsod_cara");
    private static final float TAM_FUENTE = 11.0F;
    private static final float TAM_FUENTE_CARA = 40.0F;
-   private static final ResourceLocation QR = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/gui/bsod_qr.png");
+   private static final Identifier QR = Identifier.fromNamespaceAndPath("ruleta", "textures/gui/bsod_qr.png");
    private static final int LADO_QR = 31;
 
    public PantallaAzul() {
@@ -65,7 +65,7 @@ public class PantallaAzul extends Screen {
       return true;
    }
 
-   public void render(GuiGraphics g, int mx, int my, float parcial) {
+   public void render(GuiGraphicsExtractor g, int mx, int my, float parcial) {
       int w = this.width;
       int h = this.height;
       g.fill(0, 0, w, h, -16746281);
@@ -86,7 +86,7 @@ public class PantallaAzul extends Screen {
       this.texto(g, FUENTE, 11.0F, "Código de detención: CRITICAL_PROCESS_DIED", xSoporte, 0.68F * u, tam);
    }
 
-   private void texto(GuiGraphics g, ResourceLocation fuente, float tamFuente, String linea, float x, float y, float alto) {
+   private void texto(GuiGraphicsExtractor g, Identifier fuente, float tamFuente, String linea, float x, float y, float alto) {
       float escala = alto / tamFuente;
       g.pose().pushPose();
       g.pose().translate(x, y, 0.0F);
@@ -97,7 +97,7 @@ public class PantallaAzul extends Screen {
 
    public static final class Control {
       private static final SoundEvent PANTALLAZO = SoundEvent.createVariableRangeEvent(
-         ResourceLocation.fromNamespaceAndPath("ruleta", "creeper_rojo.pantallazo")
+         Identifier.fromNamespaceAndPath("ruleta", "creeper_rojo.pantallazo")
       );
       private static boolean silenciado;
       private static int sinExplosion;

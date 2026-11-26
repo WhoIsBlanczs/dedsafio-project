@@ -2,7 +2,7 @@ package net.ruleta.creeperes;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,7 +50,7 @@ public final class MobsNuevos {
             CreeperCespedEntity c = (CreeperCespedEntity)Creeperes.CESPED.get().create(nivel);
             if (c != null) {
                c.moveTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.random.nextFloat() * 360.0F, 0.0F);
-               c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(e.getPos()), MobSpawnType.EVENT, null);
+               c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(e.getPos()), EntitySpawnReason.EVENT, null);
                nivel.addFreshEntity(c);
             }
          }
@@ -60,8 +60,8 @@ public final class MobsNuevos {
    @SubscribeEvent
    public static void alAparecer(MobSpawnEvent.FinalizeSpawn e) {
       if (e.getEntity().getType() == EntityType.CREEPER && !e.isSpawnCancelled()) {
-         MobSpawnType razon = e.getSpawnType();
-         if (razon == MobSpawnType.NATURAL || razon == MobSpawnType.CHUNK_GENERATION) {
+         EntitySpawnReason razon = e.getSpawnType();
+         if (razon == EntitySpawnReason.NATURAL || razon == EntitySpawnReason.CHUNK_GENERATION) {
             if (Ruleta.cambioActivoPublico("mob-creeper-rojo") && !(e.getEntity().getRandom().nextFloat() >= Ajustes.entero("mobs.prob_rojo") / 100.0F)) {
                ServerLevel nivel = e.getLevel().getLevel();
                CreeperRojoEntity rojo = (CreeperRojoEntity)CreeperRojo.TIPO.get().create(nivel);

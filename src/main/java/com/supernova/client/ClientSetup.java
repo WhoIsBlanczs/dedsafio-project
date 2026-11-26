@@ -6,7 +6,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallbac
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.NoopRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ClientSetup {
    private static ShaderInstance sphere;
@@ -27,9 +27,9 @@ public class ClientSetup {
 
    public static void registrar() {
       CoreShaderRegistrationCallback.EVENT.register((CoreShaderRegistrationCallback)ctx -> {
-         ctx.register(ResourceLocation.fromNamespaceAndPath("supernova", "supernova"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> sphere = s);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("supernova", "supernova_add"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> additive = s);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("supernova", "supernova_mul"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> multiply = s);
+         ctx.register(Identifier.fromNamespaceAndPath("supernova", "supernova"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> sphere = s);
+         ctx.register(Identifier.fromNamespaceAndPath("supernova", "supernova_add"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> additive = s);
+         ctx.register(Identifier.fromNamespaceAndPath("supernova", "supernova_mul"), DefaultVertexFormat.POSITION_TEX_COLOR, s -> multiply = s);
       });
       EntityRendererRegistry.register(SupernovaMod.SUPERNOVA.get(), NoopRenderer::new);
    }

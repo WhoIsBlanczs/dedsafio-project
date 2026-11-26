@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -94,7 +94,7 @@ public class PantallaBunkers extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       this.ui.dibujar(g, this.font, mx, my);
       Ui.texto(
          g,
@@ -134,7 +134,7 @@ public class PantallaBunkers extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          float h = this.hover.hacia(hover ? 1.0F : 0.0F, 14.0F);
          boolean elegido = PantallaBunkers.this.actual.equals(this.clave());
          float s = this.sel.hacia(elegido ? 1.0F : 0.0F, 14.0F);

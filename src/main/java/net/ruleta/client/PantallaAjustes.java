@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Locale;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -131,7 +131,7 @@ public class PantallaAjustes extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       boolean buscando = !this.buscar.getValue().trim().isEmpty();
       float y0 = this.indicador.hacia(this.seleccion, 16.0F);
@@ -251,7 +251,7 @@ public class PantallaAjustes extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          boolean ed = PantallaAjustes.this.puedeEditar;
          float h = this.hover.hacia(hover ? 1.0F : 0.0F, 14.0F);
          double actual = Ajustes.valor(this.d.id());

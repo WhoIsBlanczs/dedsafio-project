@@ -2,7 +2,7 @@ package net.ruleta.client.ui;
 
 import java.util.function.BooleanSupplier;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.network.chat.Component;
 
@@ -45,7 +45,7 @@ public class UiCampo extends EditBox {
       }
    }
 
-   public void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+   public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
       float f = this.foco.hacia(this.isFocused() ? 1.0F : 0.0F, 14.0F);
       boolean rojo = this.malo.getAsBoolean() && !this.getValue().isEmpty();
       int borde = rojo ? 16735340 : Ui.mezcla(3028037, 7113983, f);

@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
@@ -110,7 +110,7 @@ public final class LinternaCliente {
       if (p != null && p.isUsingItem() && p.getUseItem().is(Objetos.LINTERNA.get())) {
          float usados = p.getTicksUsingItem() + e.getPartialTick();
          float k = Mth.clamp(usados / Linterna.ticksPrender(), 0.0F, 1.0F);
-         GuiGraphics g = e.getGuiGraphics();
+         GuiGraphicsExtractor g = e.getGuiGraphics();
          float cx = g.guiWidth() / 2.0F;
          float cy = g.guiHeight() - 62.0F;
          Matrix4f m = g.pose().last().pose();

@@ -55,11 +55,11 @@ public class PincelBosqueItem extends Item {
    public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
       ItemStack pila = jugador.getItemInHand(mano);
       if (jugador.isShiftKeyDown()) {
-         if (!nivel.isClientSide) {
+         if (!nivel.isClientSide()) {
             cambiar(jugador);
          }
 
-         return InteractionResultHolder.sidedSuccess(pila, nivel.isClientSide);
+         return InteractionResultHolder.sidedSuccess(pila, nivel.isClientSide());
       } else {
          return InteractionResultHolder.pass(pila);
       }
@@ -72,11 +72,11 @@ public class PincelBosqueItem extends Item {
       }
 
       if (jugador.isShiftKeyDown()) {
-         if (!ctx.getLevel().isClientSide) {
+         if (!ctx.getLevel().isClientSide()) {
             cambiar(jugador);
          }
 
-         return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide);
+         return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide());
       } else if (!(ctx.getLevel() instanceof ServerLevel nivel)) {
          return InteractionResult.SUCCESS;
       } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.hasPermissions(2)) {

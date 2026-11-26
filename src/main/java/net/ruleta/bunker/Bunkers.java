@@ -31,7 +31,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.ClickEvent.Action;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -79,7 +79,7 @@ public final class Bunkers {
    public static final int SY = 34;
    public static final int SZ = 99;
    public static final String NOMBRE_DEFECTO = "Bunker de Eón";
-   private static final ResourceLocation ESTRUCTURA = ResourceLocation.fromNamespaceAndPath("ruleta", "bunker");
+   private static final Identifier ESTRUCTURA = Identifier.fromNamespaceAndPath("ruleta", "bunker");
    private static final Map<UUID, Bunkers.Pendiente> PENDIENTES = new HashMap<>();
    private static BitSet interior;
    private static BitSet ocupado;
@@ -239,7 +239,7 @@ public final class Bunkers {
 
    @Nullable
    public static ServerLevel nivel(MinecraftServer server, Bunkers.Bunker b) {
-      return server.getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(b.dimension())));
+      return server.getLevel(ResourceKey.create(Registries.DIMENSION, Identifier.parse(b.dimension())));
    }
 
    @Nullable

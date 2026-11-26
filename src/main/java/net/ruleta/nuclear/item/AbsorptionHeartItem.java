@@ -17,7 +17,7 @@ public class AbsorptionHeartItem extends Item {
    }
 
    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
          entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 6000, 4));
       }
 

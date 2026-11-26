@@ -10,12 +10,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 
 public final class AnimacionMuerte {
    private static final Logger LOG = LoggerFactory.getLogger("ruleta");
-   private static final ResourceLocation SONIDO = ResourceLocation.fromNamespaceAndPath("ruleta", "muerte_animacion.sonido");
+   private static final Identifier SONIDO = Identifier.fromNamespaceAndPath("ruleta", "muerte_animacion.sonido");
    private static final int ROJO = 16722474;
    private static boolean cargada;
    private static boolean lista;
@@ -74,7 +74,7 @@ public final class AnimacionMuerte {
          cargada = true;
          Optional<Resource> r = Minecraft.getInstance()
             .getResourceManager()
-            .getResource(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/muerte_animacion/escena.json"));
+            .getResource(Identifier.fromNamespaceAndPath("ruleta", "textures/muerte_animacion/escena.json"));
          if (r.isEmpty()) {
             LOG.warn("Falta textures/muerte_animacion/escena.json");
          } else {
@@ -210,7 +210,7 @@ public final class AnimacionMuerte {
       return x - Mth.floor(x);
    }
 
-   public static void dibujar(GuiGraphics ctx) {
+   public static void dibujar(GuiGraphicsExtractor ctx) {
       if (inicio >= 0L) {
          float t = (float)(System.nanoTime() - inicio) / 1.0E9F;
          if (t >= fin) {

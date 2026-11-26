@@ -9,12 +9,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 public final class EscenaDedsafio {
-   private static final ResourceLocation ESCENA = ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio/escena.json");
-   private static final ResourceLocation LETRA = ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio/letra.txt");
+   private static final Identifier ESCENA = Identifier.fromNamespaceAndPath("ruleta", "dedsafio/escena.json");
+   private static final Identifier LETRA = Identifier.fromNamespaceAndPath("ruleta", "dedsafio/letra.txt");
    private static boolean corriendo;
    private static long inicio;
    private static double inicioVideo = 139.0;

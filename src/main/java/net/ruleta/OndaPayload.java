@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record OndaPayload(double x, double y, double z, float radio) implements CustomPacketPayload {
-   public static final Type<OndaPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "onda"));
+   public static final Type<OndaPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "onda"));
    public static final StreamCodec<FriendlyByteBuf, OndaPayload> CODEC = StreamCodec.ofMember(OndaPayload::encode, OndaPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

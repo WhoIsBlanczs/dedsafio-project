@@ -1,9 +1,9 @@
 package net.ruleta.client;
 
-import net.minecraft.Util;
+import Nonenet.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.player.Player;
 import net.ruleta.client.ui.Ui;
 
@@ -25,7 +25,7 @@ public final class MensajeZona {
       hasta = ahora + Math.max(300, milisegundos);
    }
 
-   public static void dibujar(GuiGraphics g, int ancho, int alto) {
+   public static void dibujar(GuiGraphicsExtractor g, int ancho, int alto) {
       long ahora = Util.getMillis();
       if (!texto.isEmpty() && ahora < hasta) {
          Minecraft mc = Minecraft.getInstance();

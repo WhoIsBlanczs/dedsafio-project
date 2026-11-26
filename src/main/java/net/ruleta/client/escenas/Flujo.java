@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +22,7 @@ public final class Flujo {
       return t;
    });
    private final String carpeta;
-   private final ResourceLocation id;
+   private final Identifier id;
    public final int ancho;
    public final int alto;
    private DynamicTexture textura;
@@ -32,12 +32,12 @@ public final class Flujo {
 
    public Flujo(String nombre, String carpeta, int ancho, int alto) {
       this.carpeta = carpeta;
-      this.id = ResourceLocation.fromNamespaceAndPath("ruleta", "dinamica/" + nombre);
+      this.id = Identifier.fromNamespaceAndPath("ruleta", "dinamica/" + nombre);
       this.ancho = ancho;
       this.alto = alto;
    }
 
-   public ResourceLocation id() {
+   public Identifier id() {
       return this.id;
    }
 
@@ -91,11 +91,11 @@ public final class Flujo {
 
    private void pedir(int n) {
       this.pedido = n;
-      ResourceLocation ruta = ResourceLocation.fromNamespaceAndPath("ruleta", String.format("%s/%03d.png", this.carpeta, n));
+      Identifier ruta = Identifier.fromNamespaceAndPath("ruleta", String.format("%s/%03d.png", this.carpeta, n));
       this.lectura = CompletableFuture.supplyAsync(() -> leer(ruta), LECTOR);
    }
 
-   private static NativeImage leer(ResourceLocation ruta) {
+   private static NativeImage leer(Identifier ruta) {
       Optional<Resource> r = Minecraft.getInstance().getResourceManager().getResource(ruta);
       if (r.isEmpty()) {
          return null;

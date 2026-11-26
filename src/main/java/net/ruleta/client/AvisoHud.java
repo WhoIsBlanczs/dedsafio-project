@@ -10,7 +10,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -86,7 +86,7 @@ public final class AvisoHud {
       }
    }
 
-   static void render(GuiGraphics ctx, Font tr) {
+   static void render(GuiGraphicsExtractor ctx, Font tr) {
       if (titulo != null && !saliendo && System.nanoTime() - puesto > 10000000000L) {
          saliendo = true;
       }
@@ -134,11 +134,11 @@ public final class AvisoHud {
       }
    }
 
-   static void coordenadas(GuiGraphics ctx, Font tr) {
+   static void coordenadas(GuiGraphicsExtractor ctx, Font tr) {
       coordenadas(ctx, tr, 255);
    }
 
-   private static void coordenadas(GuiGraphics ctx, Font tr, int alfa) {
+   private static void coordenadas(GuiGraphicsExtractor ctx, Font tr, int alfa) {
       LocalPlayer p = Minecraft.getInstance().player;
       if (p != null && OpcionesCliente.coordenadas) {
          String txt = String.format(Locale.ROOT, "X: %.2f, Y: %.2f, Z: %.2f", p.getX(), p.getY(), p.getZ());
@@ -146,7 +146,7 @@ public final class AvisoHud {
       }
    }
 
-   private static void tituloMetalico(GuiGraphics ctx, Font tr, Component t, int x, int y, int alfa) {
+   private static void tituloMetalico(GuiGraphicsExtractor ctx, Font tr, Component t, int x, int y, int alfa) {
       int[] base = new int[]{-1};
       List<Object[]> trozos = new ArrayList<>();
       t.visit((estilox, textox) -> {

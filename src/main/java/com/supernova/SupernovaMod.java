@@ -2,7 +2,7 @@ package com.supernova;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
@@ -28,11 +28,11 @@ public class SupernovaMod {
    public static final Reg<SoundEvent> SND_WAVE = sound("wave");
    public static final Reg<SoundEvent> SND_MUSIC = sound("music");
    public static final ResourceKey<DamageType> SUPERNOVA_DAMAGE = ResourceKey.create(
-      Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("supernova", "supernova")
+      Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath("supernova", "supernova")
    );
 
    private static Reg<SoundEvent> sound(String name) {
-      return Reg.sonido("supernova", name, () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("supernova", name)));
+      return Reg.sonido("supernova", name, () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("supernova", name)));
    }
 
    public static void init() {

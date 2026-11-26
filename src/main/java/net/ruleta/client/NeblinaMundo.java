@@ -1,7 +1,7 @@
 package net.ruleta.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.FogRenderer.FogMode;
+import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.util.Mth;
 import net.ruleta.client.compat.EventPriority;
 import net.ruleta.client.compat.RenderGuiEvent;

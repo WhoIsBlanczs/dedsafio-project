@@ -2,7 +2,7 @@ package net.ruleta.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class TemporizadorHud {
    static final int Y = 6;
@@ -38,7 +38,7 @@ public final class TemporizadorHud {
       return saliendo;
    }
 
-   static void render(GuiGraphics ctx, Font tr) {
+   static void render(GuiGraphicsExtractor ctx, Font tr) {
       if (finNanos >= 0L) {
          if (!saliendo && System.nanoTime() >= finNanos) {
             saliendo = true;

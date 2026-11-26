@@ -3,7 +3,7 @@ package net.ruleta.client;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
@@ -96,7 +96,7 @@ public final class EfectosCliente {
       }
    }
 
-   public static void tinte(GuiGraphics ctx, float parcial) {
+   public static void tinte(GuiGraphicsExtractor ctx, float parcial) {
       long ahora = System.nanoTime();
       boolean efecto = fuerza(Efectos.RULETA_ROJA.get(), parcial) > 0.0F;
       if (tinteDesde < 0L) {

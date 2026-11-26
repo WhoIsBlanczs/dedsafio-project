@@ -4,7 +4,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record DulceAzarAccionPayload(int accion, String jugador, float a, float b, float c) implements CustomPacketPayload {
    public static final int IR = 0;
@@ -17,7 +17,7 @@ public record DulceAzarAccionPayload(int accion, String jugador, float a, float 
    public static final int OCULTAR_TODOS = 7;
    public static final int HACER_VISIBLE = 8;
    public static final int DANO_FUERA = 9;
-   public static final Type<DulceAzarAccionPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "dulceazar_accion"));
+   public static final Type<DulceAzarAccionPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "dulceazar_accion"));
    public static final StreamCodec<RegistryFriendlyByteBuf, DulceAzarAccionPayload> CODEC = StreamCodec.ofMember(
       DulceAzarAccionPayload::encode, DulceAzarAccionPayload::decode
    );

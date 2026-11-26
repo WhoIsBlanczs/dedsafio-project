@@ -7,10 +7,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record AjustesPayload(Map<String, Double> valores) implements CustomPacketPayload {
-   public static final Type<AjustesPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "ajustes"));
+   public static final Type<AjustesPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "ajustes"));
    public static final StreamCodec<FriendlyByteBuf, AjustesPayload> CODEC = StreamCodec.ofMember(AjustesPayload::encode, AjustesPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

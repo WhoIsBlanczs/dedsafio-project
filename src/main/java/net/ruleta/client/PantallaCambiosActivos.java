@@ -2,7 +2,7 @@ package net.ruleta.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.ruleta.Cambios;
 import net.ruleta.DesactivarPayload;
 import net.ruleta.client.ui.Ui;
@@ -94,7 +94,7 @@ public class PantallaCambiosActivos extends PantallaTarjetas {
    }
 
    @Override
-   protected void encima(GuiGraphics g, int mx, int my, float pt) {
+   protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) {
       if (this.cartas().isEmpty()) {
          Ui.textoCentro(g, this.font, "No hay cambios de dificultad activos.", this.px + this.pw / 2, this.py + this.ph / 2 - 4, 9344683, 1.0F, false);
       }

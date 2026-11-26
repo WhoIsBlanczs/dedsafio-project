@@ -5,10 +5,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record CodigoAbrirPayload(int modo, BlockPos pos) implements CustomPacketPayload {
-   public static final Type<CodigoAbrirPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "codigo_abrir"));
+   public static final Type<CodigoAbrirPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "codigo_abrir"));
    public static final StreamCodec<FriendlyByteBuf, CodigoAbrirPayload> CODEC = StreamCodec.ofMember(CodigoAbrirPayload::encode, CodigoAbrirPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

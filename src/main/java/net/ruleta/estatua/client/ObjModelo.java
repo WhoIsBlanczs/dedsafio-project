@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Map.Entry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.slf4j.Logger;
@@ -49,7 +49,7 @@ public final class ObjModelo {
       return cache;
    }
 
-   private static List<String> lineas(ResourceManager gestor, ResourceLocation id) throws Exception {
+   private static List<String> lineas(ResourceManager gestor, Identifier id) throws Exception {
       Optional<Resource> recurso = gestor.getResource(id);
       if (recurso.isEmpty()) {
          throw new IllegalStateException("Falta " + id);
@@ -68,7 +68,7 @@ public final class ObjModelo {
    }
 
    private static ObjModelo cargar(ResourceManager gestor) throws Exception {
-      ResourceLocation rutaObj = ResourceLocation.fromNamespaceAndPath("ruleta", "models/estatua_nutria/nutria_pedestal.obj");
+      Identifier rutaObj = Identifier.fromNamespaceAndPath("ruleta", "models/estatua_nutria/nutria_pedestal.obj");
       List<float[]> pos = new ArrayList<>();
       List<float[]> uv = new ArrayList<>();
       List<float[]> nor = new ArrayList<>();
@@ -82,7 +82,7 @@ public final class ObjModelo {
             switch (p[0]) {
                case "mtllib":
                   int corte = "models/estatua_nutria/nutria_pedestal.obj".lastIndexOf(47);
-                  ResourceLocation rutaMtl = ResourceLocation.fromNamespaceAndPath(
+                  Identifier rutaMtl = Identifier.fromNamespaceAndPath(
                      "ruleta", "models/estatua_nutria/nutria_pedestal.obj".substring(0, corte + 1) + p[1]
                   );
                   leerMtl(gestor, rutaMtl, texturaDeMaterial);
@@ -134,14 +134,14 @@ public final class ObjModelo {
                k += 32;
             }
 
-            grupos.add(new ObjModelo.Grupo(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/estatua_nutria/" + archivo), datos));
+            grupos.add(new ObjModelo.Grupo(Identifier.fromNamespaceAndPath("ruleta", "textures/block/estatua_nutria/" + archivo), datos));
          }
       }
 
       return new ObjModelo(grupos);
    }
 
-   private static void leerMtl(ResourceManager gestor, ResourceLocation ruta, Map<String, String> texturas) throws Exception {
+   private static void leerMtl(ResourceManager gestor, Identifier ruta, Map<String, String> texturas) throws Exception {
       String material = null;
 
       for (String l : lineas(gestor, ruta)) {
@@ -226,6 +226,6 @@ public final class ObjModelo {
       return largo < 1.0E-6F ? new float[]{0.0F, 1.0F, 0.0F} : new float[]{x / largo, y / largo, z / largo};
    }
 
-   public record Grupo(ResourceLocation textura, float[] datos) {
+   public record Grupo(Identifier textura, float[] datos) {
    }
 }

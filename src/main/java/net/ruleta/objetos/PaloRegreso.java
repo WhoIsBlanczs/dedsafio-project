@@ -19,7 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 
 public class PaloRegreso extends Item {
@@ -29,7 +29,7 @@ public class PaloRegreso extends Item {
 
    public InteractionResult interactLivingEntity(ItemStack palo, Player quien, LivingEntity objetivo, InteractionHand mano) {
       if (objetivo instanceof ServerPlayer jugador) {
-         if (quien.level().isClientSide) {
+         if (quien.level().isClientSide()) {
             return InteractionResult.SUCCESS;
          }
 
@@ -45,7 +45,7 @@ public class PaloRegreso extends Item {
    public static void regresar(ServerPlayer p) {
       MinecraftServer server = p.getServer();
       if (server != null) {
-         DimensionTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, DimensionTransition.DO_NOTHING);
+         TeleportTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, TeleportTransition.DO_NOTHING);
          if (!sitio.missingRespawnBlock()) {
             Vec3 v = sitio.pos();
             p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, sitio.yRot(), 0.0F);

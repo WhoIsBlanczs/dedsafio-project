@@ -12,7 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.NoopRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
 import net.ruleta.Ajustes;
 import net.ruleta.AjustesPayload;
@@ -84,21 +84,21 @@ public final class RuletaClient implements ClientModInitializer {
 
    private static void registrarShaders() {
       CoreShaderRegistrationCallback.EVENT.register((CoreShaderRegistrationCallback)ctx -> {
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "ruleta_hd"), DefaultVertexFormat.POSITION_TEX_COLOR, RuletaHud::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "cielo_reviil"), DefaultVertexFormat.POSITION, CieloReviil::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_cielo"), DefaultVertexFormat.POSITION, DedsafioCielo::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "linterna_haz"), DefaultVertexFormat.POSITION, LinternaCliente::shaderHaz);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "linterna_negro"), DefaultVertexFormat.POSITION, LinternaCliente::shaderNegro);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "nutria_arco"), DefaultVertexFormat.POSITION_TEX, MomentoNutria::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "agujero_cielo"), DefaultVertexFormat.POSITION, AgujeroCliente::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "agujero_objeto"), DefaultVertexFormat.POSITION_TEX, AgujeroCliente::shaderObjeto);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "agujero_bake"), DefaultVertexFormat.POSITION, CieloBake::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "eclipse"), DefaultVertexFormat.POSITION, EclipseCliente::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "phora_cielo"), DefaultVertexFormat.POSITION, PhoraCliente::shaderCielo);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "tormenta_cielo"), DefaultVertexFormat.POSITION, TornadoCliente::shaderCielo);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "tornado_embudo"), DefaultVertexFormat.POSITION_TEX_COLOR, TornadoCliente::shaderEmbudo);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "phora"), DefaultVertexFormat.POSITION_TEX_COLOR, PhoraCliente::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "meteoritos"), DefaultVertexFormat.POSITION_TEX_COLOR, MeteoritosCliente::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "ruleta_hd"), DefaultVertexFormat.POSITION_TEX_COLOR, RuletaHud::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "cielo_reviil"), DefaultVertexFormat.POSITION, CieloReviil::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_cielo"), DefaultVertexFormat.POSITION, DedsafioCielo::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "linterna_haz"), DefaultVertexFormat.POSITION, LinternaCliente::shaderHaz);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "linterna_negro"), DefaultVertexFormat.POSITION, LinternaCliente::shaderNegro);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "nutria_arco"), DefaultVertexFormat.POSITION_TEX, MomentoNutria::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_cielo"), DefaultVertexFormat.POSITION, AgujeroCliente::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_objeto"), DefaultVertexFormat.POSITION_TEX, AgujeroCliente::shaderObjeto);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_bake"), DefaultVertexFormat.POSITION, CieloBake::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "eclipse"), DefaultVertexFormat.POSITION, EclipseCliente::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "phora_cielo"), DefaultVertexFormat.POSITION, PhoraCliente::shaderCielo);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "tormenta_cielo"), DefaultVertexFormat.POSITION, TornadoCliente::shaderCielo);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "tornado_embudo"), DefaultVertexFormat.POSITION_TEX_COLOR, TornadoCliente::shaderEmbudo);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "phora"), DefaultVertexFormat.POSITION_TEX_COLOR, PhoraCliente::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "meteoritos"), DefaultVertexFormat.POSITION_TEX_COLOR, MeteoritosCliente::shader);
       });
    }
 

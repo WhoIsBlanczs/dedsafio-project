@@ -4,7 +4,7 @@ import com.mojang.blaze3d.shaders.FogShape;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.material.FogType;
 import net.ruleta.Efectos;
@@ -15,7 +15,7 @@ import net.ruleta.client.compat.ViewportEvent;
 import net.ruleta.client.escenas.MomentoNutria;
 
 public final class MisOjos {
-   private static final ResourceLocation FILTRO = ResourceLocation.fromNamespaceAndPath("ruleta", "shaders/post/daltonismo.json");
+   private static final Identifier FILTRO = Identifier.fromNamespaceAndPath("ruleta", "shaders/post/daltonismo.json");
    private static final float VISTA_MIOPE = 12.0F;
    private static final Fundido niebla = new Fundido(1.0F, 3.0F);
    private static float nieblaK;

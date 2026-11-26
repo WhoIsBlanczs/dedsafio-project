@@ -78,7 +78,7 @@ public final class Enganches {
             return Bus.post(normal) ? resultado(normal) : InteractionResult.PASS;
          });
          UseBlockCallback.EVENT.register((UseBlockCallback)(jugador, nivel, mano, golpe) -> {
-            if (!nivel.isClientSide) {
+            if (!nivel.isClientSide()) {
                ItemBloqueado.limpiar();
             }
 
@@ -91,7 +91,7 @@ public final class Enganches {
                return resultado(ev);
             }
 
-            if (ev.getUseItem() == Evento.Result.DENY && !nivel.isClientSide) {
+            if (ev.getUseItem() == Evento.Result.DENY && !nivel.isClientSide()) {
                ItemBloqueado.marcar(jugador.getUUID());
             }
 

@@ -3,18 +3,18 @@ package net.ruleta.client;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 
 public final class EfectosHud {
-   private static final ResourceLocation FONDO = ResourceLocation.withDefaultNamespace("hud/effect_background");
-   private static final ResourceLocation FONDO_AMBIENTE = ResourceLocation.withDefaultNamespace("hud/effect_background_ambient");
+   private static final Identifier FONDO = Identifier.withDefaultNamespace("hud/effect_background");
+   private static final Identifier FONDO_AMBIENTE = Identifier.withDefaultNamespace("hud/effect_background_ambient");
    private static final int CELDA = 24;
    private static final int SEPARACION = 1;
    private static final int MARGEN = 2;
@@ -22,7 +22,7 @@ public final class EfectosHud {
    private EfectosHud() {
    }
 
-   public static void dibujar(GuiGraphics g) {
+   public static void dibujar(GuiGraphicsExtractor g) {
       Minecraft mc = Minecraft.getInstance();
       LocalPlayer jugador = mc.player;
       if (jugador != null && !jugador.getActiveEffects().isEmpty()) {

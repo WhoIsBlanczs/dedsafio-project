@@ -1,6 +1,6 @@
 package net.ruleta.client.ui;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class UiBarra {
    public double v;
@@ -29,7 +29,7 @@ public final class UiBarra {
       return Math.round(r * 1000.0) / 1000.0;
    }
 
-   public void dibujar(GuiGraphics g, int x, int y, int w, int mx, int my, boolean activo, int acento) {
+   public void dibujar(GuiGraphicsExtractor g, int x, int y, int w, int mx, int my, boolean activo, int acento) {
       if (this.primera) {
          this.visible.fijar((float)this.fraccion());
          this.primera = false;

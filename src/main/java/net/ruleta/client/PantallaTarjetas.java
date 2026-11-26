@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -58,7 +58,7 @@ abstract class PantallaTarjetas extends UiPantalla {
       return 0;
    }
 
-   protected void encabezado(GuiGraphics g) {
+   protected void encabezado(GuiGraphicsExtractor g) {
    }
 
    protected void zona(int altoPie) {
@@ -139,7 +139,7 @@ abstract class PantallaTarjetas extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       this.alDibujar();
       this.armar();
       this.encabezado(g);
@@ -163,7 +163,7 @@ abstract class PantallaTarjetas extends UiPantalla {
       }
    }
 
-   private void dibujar(GuiGraphics g, PantallaTarjetas.Hueco h, int y, int mx, int my) {
+   private void dibujar(GuiGraphicsExtractor g, PantallaTarjetas.Hueco h, int y, int mx, int my) {
       PantallaTarjetas.Carta c = h.carta();
       PantallaTarjetas.Estado e = this.estado(c);
       int x = h.x();

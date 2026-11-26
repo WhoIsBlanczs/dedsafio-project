@@ -1,7 +1,7 @@
 package net.ruleta.tragamonedas.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.ruleta.client.JugadoresPantalla;
 import net.ruleta.client.dedsafio.PanelEnvio;
@@ -63,7 +63,7 @@ public class PantallaDulceAzar extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       int y = this.yContenido() + 14;
       int izq = this.px + 20;
       Ui.texto(g, this.font, "VIAJE", izq, y, 9344683, 1.0F);

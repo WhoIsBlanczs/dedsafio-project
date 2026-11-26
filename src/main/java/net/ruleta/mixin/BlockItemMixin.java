@@ -24,7 +24,7 @@ public abstract class BlockItemMixin {
    )
    private void ruleta$antesDePoner(BlockPlaceContext contexto, CallbackInfoReturnable<InteractionResult> cir) {
       Player jugador = contexto.getPlayer();
-      if (jugador != null && !contexto.getLevel().isClientSide && Bus.hayOyentes(BlockEvent.EntityPlaceEvent.class)) {
+      if (jugador != null && !contexto.getLevel().isClientSide() && Bus.hayOyentes(BlockEvent.EntityPlaceEvent.class)) {
          BlockItem yo = (BlockItem)this;
          BlockEvent.EntityPlaceEvent ev = new BlockEvent.EntityPlaceEvent(
             contexto.getLevel(), contexto.getClickedPos(), yo.getBlock().defaultBlockState(), jugador

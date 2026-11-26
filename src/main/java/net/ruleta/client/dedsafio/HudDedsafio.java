@@ -9,7 +9,7 @@ import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
@@ -175,7 +175,7 @@ public final class HudDedsafio {
       return vs[vs.length - 1];
    }
 
-   public static void dibujar(GuiGraphics g) {
+   public static void dibujar(GuiGraphicsExtractor g) {
       Minecraft mc = Minecraft.getInstance();
       int w = g.guiWidth();
       int h = g.guiHeight();
@@ -183,7 +183,7 @@ public final class HudDedsafio {
       ojo(g, mc, w, h);
    }
 
-   private static void ojo(GuiGraphics g, Minecraft mc, int w, int h) {
+   private static void ojo(GuiGraphicsExtractor g, Minecraft mc, int w, int h) {
       long ahora = System.nanoTime();
       if (estado == 1) {
          float t = (float)(ahora - t0) / 1.0E9F;
@@ -228,7 +228,7 @@ public final class HudDedsafio {
       }
    }
 
-   public static void pantallaCarga(GuiGraphics g) {
+   public static void pantallaCarga(GuiGraphicsExtractor g) {
       if (estado == 2 || estado == 3) {
          Minecraft mc = Minecraft.getInstance();
          int w = g.guiWidth();
@@ -238,7 +238,7 @@ public final class HudDedsafio {
       }
    }
 
-   private static void mascara(GuiGraphics g, int w, int h, float aper, float blanco) {
+   private static void mascara(GuiGraphicsExtractor g, int w, int h, float aper, float blanco) {
       g.flush();
       if (aper >= 0.999F) {
          if (blanco > 0.01F) {
@@ -300,7 +300,7 @@ public final class HudDedsafio {
       }
    }
 
-   private static void subtitulos(GuiGraphics g, Minecraft mc, int w, int h) {
+   private static void subtitulos(GuiGraphicsExtractor g, Minecraft mc, int w, int h) {
       String texto = EscenaDedsafio.subtitulo();
       if (texto != null) {
          int maxAncho = Math.max(120, (int)(w * 0.36F));

@@ -2,9 +2,9 @@ package net.ruleta.client.ui;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.Util;
+import Nonenet.minecraft.util.Util;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class UiLista {
    private final List<UiFila> filas = new ArrayList<>();
@@ -50,7 +50,7 @@ public final class UiLista {
       return Math.max(0, this.total() - this.h);
    }
 
-   public void dibujar(GuiGraphics g, Font f, int mx, int my) {
+   public void dibujar(GuiGraphicsExtractor g, Font f, int mx, int my) {
       float sc = this.scroll.hacia(this.objetivo, 16.0F);
       long ahora = Util.getMillis() - this.desde;
       float guardado = Ui.alfa;

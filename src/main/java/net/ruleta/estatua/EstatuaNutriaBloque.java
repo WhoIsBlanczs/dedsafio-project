@@ -82,7 +82,7 @@ public class EstatuaNutriaBloque extends BaseEntityBlock {
    }
 
    protected InteractionResult useWithoutItem(BlockState estado, Level nivel, BlockPos pos, Player jugador, BlockHitResult golpe) {
-      if (nivel.isClientSide) {
+      if (nivel.isClientSide()) {
          return InteractionResult.SUCCESS;
       }
 
@@ -107,7 +107,7 @@ public class EstatuaNutriaBloque extends BaseEntityBlock {
    }
 
    public BlockState playerWillDestroy(Level nivel, BlockPos pos, BlockState estado, Player jugador) {
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          BlockPos base = pos.below(((ParteCajero)estado.getValue(PARTE)).altura());
 
          for (int i = 0; i < 2; i++) {

@@ -2,7 +2,7 @@ package net.ruleta.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.ruleta.Cambios;
 import net.ruleta.client.ui.Ui;
 import net.ruleta.client.ui.UiBoton;
@@ -57,7 +57,7 @@ public class CambiosPantalla extends PantallaTarjetas {
    }
 
    @Override
-   protected void encabezado(GuiGraphics g) {
+   protected void encabezado(GuiGraphicsExtractor g) {
       String t = this.rotulo;
       float escala = Math.min(2.6F, (float)(this.pw - 80) / Math.max(1, Ui.anchoN(this.font, t)));
       int w = Math.round(Ui.anchoN(this.font, t) * escala);
@@ -124,7 +124,7 @@ public class CambiosPantalla extends PantallaTarjetas {
    }
 
    @Override
-   protected void encima(GuiGraphics g, int mx, int my, float pt) {
+   protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Ui.textoCentro(
          g,
          this.font,

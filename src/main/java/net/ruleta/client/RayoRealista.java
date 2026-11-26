@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LightningBolt;
@@ -22,8 +22,8 @@ public final class RayoRealista extends EntityRenderer<LightningBolt> {
       super(ctx);
    }
 
-   public ResourceLocation getTextureLocation(LightningBolt e) {
-      return ResourceLocation.parse("textures/entity/lightning.png");
+   public Identifier getTextureLocation(LightningBolt e) {
+      return Identifier.parse("textures/entity/lightning.png");
    }
 
    public void render(LightningBolt e, float yaw, float pt, PoseStack pose, MultiBufferSource buffers, int luz) {

@@ -1,7 +1,7 @@
 package net.ruleta.objetos;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -15,7 +15,7 @@ public final class Objetos {
    public static final Reg<Item> DILITIO = Reg.item("ruleta", "dilitio", () -> new Item(new Properties()));
    public static final Reg<Item> PIEDRA_DILITIO = Reg.item("ruleta", "piedra_dilitio", () -> new Item(new Properties()));
    public static final Reg<SoundEvent> SONIDO_REGRESO = Reg.sonido(
-      "ruleta", "palo.regreso", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "palo.regreso"))
+      "ruleta", "palo.regreso", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "palo.regreso"))
    );
 
    private Objetos() {

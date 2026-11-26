@@ -1,6 +1,6 @@
 package net.ruleta.puerta;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -18,12 +18,12 @@ public final class PuertaBunker {
    public static final Reg<SoundEvent> SONIDO_ABRIR = Reg.sonido(
       "ruleta_puerta",
       "puerta_bunker.abrir",
-      () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta_puerta", "puerta_bunker.abrir"))
+      () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta_puerta", "puerta_bunker.abrir"))
    );
    public static final Reg<SoundEvent> SONIDO_CERRAR = Reg.sonido(
       "ruleta_puerta",
       "puerta_bunker.cerrar",
-      () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta_puerta", "puerta_bunker.cerrar"))
+      () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta_puerta", "puerta_bunker.cerrar"))
    );
    public static final Reg<Block> BLOQUE = Reg.block(
       "ruleta",

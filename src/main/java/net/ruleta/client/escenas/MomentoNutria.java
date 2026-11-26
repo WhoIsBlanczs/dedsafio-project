@@ -15,13 +15,13 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
 
 public final class MomentoNutria {
    private static final Logger LOG = LoggerFactory.getLogger("ruleta");
-   private static final ResourceLocation SONIDO = ResourceLocation.fromNamespaceAndPath("ruleta", "momento_nutria.musica");
+   private static final Identifier SONIDO = Identifier.fromNamespaceAndPath("ruleta", "momento_nutria.musica");
    private static boolean cargada;
    private static float[] tiempos;
    private static int[] cuadros;
@@ -50,7 +50,7 @@ public final class MomentoNutria {
    private static final int VIDEO_ALTO = 360;
    private static Flujo lado;
    private static float[][] estrellas;
-   private static final ResourceLocation ESTRELLA = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/momento_nutria/estrella.png");
+   private static final Identifier ESTRELLA = Identifier.fromNamespaceAndPath("ruleta", "textures/momento_nutria/estrella.png");
    private static final float TAM_ESTRELLA = 2.6F;
    private static long inicio = -1L;
    private static SoundInstance sonando;
@@ -59,7 +59,7 @@ public final class MomentoNutria {
    private static float b;
    private static int ultimoColor = -1;
    private static long cambio;
-   private static final FiltroPantalla FILTRO = new FiltroPantalla(ResourceLocation.fromNamespaceAndPath("ruleta", "shaders/post/momento_nutria.json"));
+   private static final FiltroPantalla FILTRO = new FiltroPantalla(Identifier.fromNamespaceAndPath("ruleta", "shaders/post/momento_nutria.json"));
    private static final float ARCO_HASTA = 17.49797F;
    private static final float VUELTAS_POR_SEGUNDO = 6.1F;
    private static ShaderInstance shaderArco;
@@ -76,7 +76,7 @@ public final class MomentoNutria {
          cargada = true;
          Optional<Resource> res = Minecraft.getInstance()
             .getResourceManager()
-            .getResource(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/momento_nutria/escena.json"));
+            .getResource(Identifier.fromNamespaceAndPath("ruleta", "textures/momento_nutria/escena.json"));
          if (res.isEmpty()) {
             LOG.warn("Falta textures/momento_nutria/escena.json");
          } else {
@@ -114,7 +114,7 @@ public final class MomentoNutria {
    private static void cargarEstrellas() {
       Optional<Resource> res = Minecraft.getInstance()
          .getResourceManager()
-         .getResource(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/momento_nutria/estrellas.json"));
+         .getResource(Identifier.fromNamespaceAndPath("ruleta", "textures/momento_nutria/estrellas.json"));
       if (!res.isEmpty()) {
          try (InputStreamReader in = new InputStreamReader(res.get().open(), StandardCharsets.UTF_8)) {
             JsonObject j = JsonParser.parseReader(in).getAsJsonObject();
@@ -193,7 +193,7 @@ public final class MomentoNutria {
       return lo;
    }
 
-   public static void dibujar(GuiGraphics ctx) {
+   public static void dibujar(GuiGraphicsExtractor ctx) {
       if (inicio >= 0L) {
          long ahora = System.nanoTime();
          float t = (float)(ahora - inicio) / 1.0E9F;
@@ -215,7 +215,7 @@ public final class MomentoNutria {
       }
    }
 
-   private static void pintar(GuiGraphics ctx, float t, int n) {
+   private static void pintar(GuiGraphicsExtractor ctx, float t, int n) {
       int w = ctx.guiWidth();
       int h = ctx.guiHeight();
       if (n >= 0 && cuadros[n] >= 0) {
@@ -278,7 +278,7 @@ public final class MomentoNutria {
       RenderSystem.disableBlend();
    }
 
-   private static void estrellas(GuiGraphics ctx, int f, float x0, float y0, float escala, float t) {
+   private static void estrellas(GuiGraphicsExtractor ctx, int f, float x0, float y0, float escala, float t) {
       if (estrellas != null && f >= 0 && f < estrellas.length && estrellas[f] != null && estrellas[f].length != 0) {
          float[] e = estrellas[f];
          RenderSystem.enableBlend();

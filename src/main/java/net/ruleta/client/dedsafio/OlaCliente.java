@@ -1,6 +1,6 @@
 package net.ruleta.client.dedsafio;
 
-import com.mojang.blaze3d.shaders.Uniform;
+import Nonecom.mojang.renderpearl.backend.opengl.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import net.minecraft.client.Minecraft;

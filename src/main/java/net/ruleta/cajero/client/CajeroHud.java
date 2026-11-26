@@ -4,7 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.ruleta.client.compat.ClientPlayerNetworkEvent;
 import net.ruleta.client.compat.RenderGuiEvent;
 import net.ruleta.client.compat.SubscribeEvent;
@@ -24,7 +24,7 @@ public final class CajeroHud {
    public static void dibujar(RenderGuiEvent.Post e) {
       Minecraft mc = Minecraft.getInstance();
       if (mc.player != null && !mc.options.hideGui) {
-         GuiGraphics g = e.getGuiGraphics();
+         GuiGraphicsExtractor g = e.getGuiGraphics();
          Font f = mc.font;
          long[] p = CajeroCliente.partes(CajeroCliente.saldo);
          boolean[] ver = new boolean[]{p[0] > 0L, p[1] > 0L, p[2] > 0L};
@@ -61,7 +61,7 @@ public final class CajeroHud {
       }
    }
 
-   private static void caja(GuiGraphics g, int x, int y, int w, int h) {
+   private static void caja(GuiGraphicsExtractor g, int x, int y, int w, int h) {
       g.fill(x + 1, y, x + w - 1, y + h, -16777216);
       g.fill(x, y + 1, x + w, y + h - 1, -16777216);
       g.fill(x + 2, y + 1, x + w - 2, y + h - 1, -7697782);

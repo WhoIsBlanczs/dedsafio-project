@@ -4,7 +4,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record EscenaPayload(int tipo, float transcurrido, float a, float b, float c, float d, float e, float y, float r) implements CustomPacketPayload {
    public static final int PARAR = 0;
@@ -16,7 +16,7 @@ public record EscenaPayload(int tipo, float transcurrido, float a, float b, floa
    public static final int OCULTAR = 6;
    public static final int LIMPIAR_VISIBLES = 7;
    public static final int VISIBLE = 8;
-   public static final Type<EscenaPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_escena"));
+   public static final Type<EscenaPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_escena"));
    public static final StreamCodec<RegistryFriendlyByteBuf, EscenaPayload> CODEC = StreamCodec.ofMember(EscenaPayload::encode, EscenaPayload::decode);
 
    public EscenaPayload(int tipo, float transcurrido) {

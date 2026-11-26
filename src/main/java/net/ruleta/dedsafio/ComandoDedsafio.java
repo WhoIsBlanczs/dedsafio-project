@@ -23,7 +23,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.LevelResource;
 
 public final class ComandoDedsafio {
-   public static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio"));
+   public static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, Identifier.fromNamespaceAndPath("ruleta", "dedsafio"));
    private static final double X = 37.5;
    private static final double Y = -2.0;
    private static final double Z = -17.5;
@@ -204,7 +204,7 @@ public final class ComandoDedsafio {
                   previos.put(
                      UUID.fromString(t[0]),
                      new ComandoDedsafio.Previo(
-                        ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(t[1])),
+                        ResourceKey.create(Registries.DIMENSION, Identifier.parse(t[1])),
                         Double.parseDouble(t[2]),
                         Double.parseDouble(t[3]),
                         Double.parseDouble(t[4]),

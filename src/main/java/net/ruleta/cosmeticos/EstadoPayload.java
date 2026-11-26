@@ -5,10 +5,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record EstadoPayload(UUID id, String aura) implements CustomPacketPayload {
-   public static final Type<EstadoPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "estado"));
+   public static final Type<EstadoPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "estado"));
    public static final StreamCodec<FriendlyByteBuf, EstadoPayload> CODEC = StreamCodec.ofMember(EstadoPayload::encode, EstadoPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

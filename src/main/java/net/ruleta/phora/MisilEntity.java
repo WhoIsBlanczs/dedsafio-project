@@ -99,7 +99,7 @@ public class MisilEntity extends Entity {
       Vec3 p = this.position();
       Vec3 sig = p.add(v);
       Level nivel = this.level();
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          if (this.edad > Ajustes.entero("misil.vida") * 20 || p.y < nivel.getMinBuildHeight() - 16) {
             this.discard();
             return;

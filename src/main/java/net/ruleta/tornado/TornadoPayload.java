@@ -6,11 +6,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 public record TornadoPayload(boolean cielo, List<TornadoPayload.Torn> tornados, int[] atrapados) implements CustomPacketPayload {
-   public static final Type<TornadoPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "tornado"));
+   public static final Type<TornadoPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "tornado"));
    public static final StreamCodec<FriendlyByteBuf, TornadoPayload> CODEC = StreamCodec.ofMember(TornadoPayload::encode, TornadoPayload::decode);
 
    public TornadoPayload(boolean cielo, List<TornadoPayload.Torn> tornados) {

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PistonBaseBlockMixin {
    @Inject(method = "moveBlocks", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$antesDeMover(Level nivel, BlockPos pos, Direction direccion, boolean extiende, CallbackInfoReturnable<Boolean> cir) {
-      if (!nivel.isClientSide && Bus.hayOyentes(PistonEvent.Pre.class) && Bus.post(new PistonEvent.Pre(nivel, pos, direccion, extiende))) {
+      if (!nivel.isClientSide() && Bus.hayOyentes(PistonEvent.Pre.class) && Bus.post(new PistonEvent.Pre(nivel, pos, direccion, extiende))) {
          cir.setReturnValue(false);
       }
    }

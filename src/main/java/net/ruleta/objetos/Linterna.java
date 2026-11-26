@@ -19,7 +19,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.component.CustomData;
@@ -82,7 +82,7 @@ public class Linterna extends Item {
             return InteractionResultHolder.fail(linterna);
          }
 
-         if (!nivel.isClientSide) {
+         if (!nivel.isClientSide()) {
             poner(linterna, cargaMax(), prendida(linterna));
             if (!jugador.getAbilities().instabuild) {
                otra.shrink(1);
@@ -93,7 +93,7 @@ public class Linterna extends Item {
             );
          }
 
-         return InteractionResultHolder.sidedSuccess(linterna, nivel.isClientSide);
+         return InteractionResultHolder.sidedSuccess(linterna, nivel.isClientSide());
       } else {
          if (prendida(linterna)) {
             jugador.startUsingItem(mano);
@@ -112,7 +112,7 @@ public class Linterna extends Item {
    public void onUseTick(Level nivel, LivingEntity quien, ItemStack linterna, int quedan) {
       int usados = this.getUseDuration(linterna, quien) - quedan;
       if (usados >= ticksPrender()) {
-         if (!nivel.isClientSide) {
+         if (!nivel.isClientSide()) {
             boolean prender = !prendida(linterna);
             poner(linterna, carga(linterna), prender);
             nivel.playSound(null, quien.getX(), quien.getY(), quien.getZ(), SoundEvents.LEVER_CLICK, SoundSource.PLAYERS, 0.6F, prender ? 1.3F : 0.8F);
@@ -126,12 +126,12 @@ public class Linterna extends Item {
       return 72000;
    }
 
-   public UseAnim getUseAnimation(ItemStack s) {
-      return UseAnim.NONE;
+   public ItemUseAnimation getUseAnimation(ItemStack s) {
+      return ItemUseAnimation.NONE;
    }
 
    public void inventoryTick(ItemStack s, Level nivel, Entity quien, int hueco, boolean elegida) {
-      if (!nivel.isClientSide && prendida(s)) {
+      if (!nivel.isClientSide() && prendida(s)) {
          if (nivel.getGameTime() % (Math.max(1, Ajustes.entero("linterna.consumo")) * 20L) == 0L) {
             int c = carga(s) - 1;
             poner(s, c, c > 0);

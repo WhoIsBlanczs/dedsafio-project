@@ -10,14 +10,14 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.client.compat.ClientChatReceivedEvent;
 import net.ruleta.client.compat.SubscribeEvent;
 
 public final class ChatRojo {
    private static Component esperado;
    private static long hasta;
-   private static final Style ICONO = Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("ruleta", "icono"));
+   private static final Style ICONO = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", "icono"));
    private static final int MENTA = 4971418;
 
    private ChatRojo() {

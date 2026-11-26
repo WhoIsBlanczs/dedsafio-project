@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.ruleta.client.ui.Suave;
 import net.ruleta.client.ui.Ui;
 import net.ruleta.client.ui.UiBoton;
@@ -76,7 +76,7 @@ public class PantallaHud extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       for (int i = 0; i < this.opciones.size(); i++) {
          PantallaHud.Opcion o = this.opciones.get(i);
          int y = this.py + 54 + i * 50;

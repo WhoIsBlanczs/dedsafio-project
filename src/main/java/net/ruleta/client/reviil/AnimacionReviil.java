@@ -8,8 +8,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.sounds.SoundEvent;
 import net.ruleta.client.escenas.Flujo;
@@ -20,7 +20,7 @@ public final class AnimacionReviil {
    private static final Logger LOG = LoggerFactory.getLogger("ruleta");
    public static final float DURACION = 15.2F;
    public static final float RETRASO = 0.6F;
-   private static final SoundEvent SONIDO = SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "momento_reviil.animacion"));
+   private static final SoundEvent SONIDO = SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "momento_reviil.animacion"));
    private static boolean cargada;
    private static float[] tiempos;
    private static int[] cuadros;
@@ -62,7 +62,7 @@ public final class AnimacionReviil {
          cargada = true;
          Optional<Resource> r = Minecraft.getInstance()
             .getResourceManager()
-            .getResource(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/momento_reviil/escena.json"));
+            .getResource(Identifier.fromNamespaceAndPath("ruleta", "textures/momento_reviil/escena.json"));
          if (r.isEmpty()) {
             LOG.warn("Falta textures/momento_reviil/escena.json");
          } else {
@@ -223,7 +223,7 @@ public final class AnimacionReviil {
       }
    }
 
-   public static void dibujar(GuiGraphics ctx) {
+   public static void dibujar(GuiGraphicsExtractor ctx) {
       if (temaEn >= 0L && System.nanoTime() >= temaEn) {
          temaEn = -1L;
          if (temaEsCielo) {
@@ -296,7 +296,7 @@ public final class AnimacionReviil {
       }
    }
 
-   private static void celdas(GuiGraphics ctx, int[] tramos, int color, float cx, float cy, float k) {
+   private static void celdas(GuiGraphicsExtractor ctx, int[] tramos, int color, float cx, float cy, float k) {
       for (int i = 0; i + 2 < tramos.length; i += 3) {
          float fy = cy + (tramos[i] - refY) * k;
          float fx0 = cx + (tramos[i + 1] - refX) * k;

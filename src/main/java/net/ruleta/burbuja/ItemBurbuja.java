@@ -25,7 +25,7 @@ public class ItemBurbuja extends Item {
          return InteractionResult.PASS;
       }
 
-      if (nivel.isClientSide) {
+      if (nivel.isClientSide()) {
          return InteractionResult.SUCCESS;
       }
 

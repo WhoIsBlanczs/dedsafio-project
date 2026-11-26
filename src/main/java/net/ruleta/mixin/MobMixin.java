@@ -2,7 +2,7 @@ package net.ruleta.mixin;
 
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.ruleta.compat.Bus;
@@ -30,12 +30,12 @@ public abstract class MobMixin implements MobCancelable {
    }
 
    @Inject(
-      method = "finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
+      method = "finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
       at = @At("HEAD"),
       require = 0
    )
    private void ruleta$preparar(
-      ServerLevelAccessor nivel, DifficultyInstance dificultad, MobSpawnType tipo, SpawnGroupData datos, CallbackInfoReturnable<SpawnGroupData> cir
+      ServerLevelAccessor nivel, DifficultyInstance dificultad, EntitySpawnReason tipo, SpawnGroupData datos, CallbackInfoReturnable<SpawnGroupData> cir
    ) {
       if (Bus.hayOyentes(MobSpawnEvent.FinalizeSpawn.class)) {
          Mob yo = (Mob)this;

@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.PlayerInfo;
@@ -79,7 +79,7 @@ public class JugadoresPantalla extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       this.lista.dibujar(g, this.font, mx, my);
       if (this.lista.tamano() == 0) {
          Ui.textoCentro(g, this.font, "Nadie coincide", this.px + this.pw / 2, this.py + 110, 9344683, 1.0F, false);
@@ -110,7 +110,7 @@ public class JugadoresPantalla extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          float h = this.hover.hacia(hover ? 1.0F : 0.0F, 14.0F);
          Ui.cajaBorde(g, x, y, w, this.alto, 7, Ui.c(Ui.mezcla(1711656, 2369846, h * 0.7F)), Ui.c(Ui.mezcla(3028037, 7113983, h * 0.6F)));
          boolean todos = this.nombre.isEmpty();

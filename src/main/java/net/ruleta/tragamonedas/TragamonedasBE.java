@@ -18,7 +18,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -210,7 +210,7 @@ public class TragamonedasBE extends BlockEntity {
    }
 
    private static void darRecompensa(ServerLevel level, ConfigTragamonedas.Recompensa r, Vec3 salida, Direction f) {
-      ResourceLocation rl = ResourceLocation.tryParse(r.item);
+      Identifier rl = Identifier.tryParse(r.item);
       Item item = rl == null ? null : (Item)BuiltInRegistries.ITEM.getOptional(rl).orElse(null);
       if (item != null) {
          int max = Math.max(r.cantidad, r.maximo);
@@ -241,7 +241,7 @@ public class TragamonedasBE extends BlockEntity {
 
          while (!lista.isEmpty()) {
             ConfigTragamonedas.Encantamiento e = lista.remove(level.random.nextInt(lista.size()));
-            ResourceLocation id = ResourceLocation.tryParse(e.id);
+            Identifier id = Identifier.tryParse(e.id);
             Optional<Reference<Enchantment>> h = id == null ? Optional.empty() : reg.getHolder(ResourceKey.create(Registries.ENCHANTMENT, id));
             if (h.isPresent()) {
                int nivel = e.nivelMin + (e.nivelMax > e.nivelMin ? level.random.nextInt(e.nivelMax - e.nivelMin + 1) : 0);
@@ -253,7 +253,7 @@ public class TragamonedasBE extends BlockEntity {
       } else {
          List<Reference<Enchantment>> todos = new ArrayList<>();
 
-         for (ResourceLocation k : reg.keySet()) {
+         for (Identifier k : reg.keySet()) {
             reg.getHolder(ResourceKey.create(Registries.ENCHANTMENT, k)).ifPresent(todos::add);
          }
 
@@ -343,7 +343,7 @@ public class TragamonedasBE extends BlockEntity {
          this.pilas = new ItemStack[8];
 
          for (int i = 0; i < 8; i++) {
-            Item item = BuiltInRegistries.ITEM.getOptional(ResourceLocation.parse(this.caras[i])).orElse(Items.BARRIER);
+            Item item = BuiltInRegistries.ITEM.getOptional(Identifier.parse(this.caras[i])).orElse(Items.BARRIER);
             this.pilas[i] = new ItemStack(item);
          }
       }

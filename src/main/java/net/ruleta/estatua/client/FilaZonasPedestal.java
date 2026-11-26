@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.IntConsumer;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.item.ItemStack;
 import net.ruleta.client.ui.Ui;
@@ -25,7 +25,7 @@ abstract class FilaZonasPedestal extends UiFila {
       this.zonas.add(new FilaZonasPedestal.Zona(rx, ry, w, h, accion));
    }
 
-   protected final void boton(GuiGraphics g, Font f, int rx, int ry, int w, int h, String texto, int mx, int my, int color, boolean marcado, IntConsumer accion) {
+   protected final void boton(GuiGraphicsExtractor g, Font f, int rx, int ry, int w, int h, String texto, int mx, int my, int color, boolean marcado, IntConsumer accion) {
       boolean hov = Ui.dentro(mx, my, this.ox + rx, this.oy + ry, w, h);
       int borde = marcado ? color : (hov ? color : 3028037);
       int relleno = marcado ? Ui.mezcla(1711656, color, 0.3F) : (hov ? 2369846 : 1119259);
@@ -34,7 +34,7 @@ abstract class FilaZonasPedestal extends UiFila {
       this.zona(rx, ry, w, h, accion);
    }
 
-   protected final void cuadroItem(GuiGraphics g, int rx, int ry, int w, int h, ItemStack pila, int mx, int my, int color, IntConsumer accion) {
+   protected final void cuadroItem(GuiGraphicsExtractor g, int rx, int ry, int w, int h, ItemStack pila, int mx, int my, int color, IntConsumer accion) {
       boolean hov = Ui.dentro(mx, my, this.ox + rx, this.oy + ry, w, h);
       Ui.cajaBorde(g, this.ox + rx, this.oy + ry, w, h, 4, Ui.c(hov ? 2369846 : 1119259), Ui.c(hov ? color : 3028037));
       if (!pila.isEmpty()) {
@@ -46,11 +46,11 @@ abstract class FilaZonasPedestal extends UiFila {
       }
    }
 
-   protected final void texto(GuiGraphics g, Font f, String s, int rx, int ry, int color) {
+   protected final void texto(GuiGraphicsExtractor g, Font f, String s, int rx, int ry, int color) {
       Ui.texto(g, f, s, this.ox + rx, this.oy + ry, color, 1.0F);
    }
 
-   protected final void paso(GuiGraphics g, Font f, int rx, int ry, String valor, int mx, int my, IntConsumer cambio) {
+   protected final void paso(GuiGraphicsExtractor g, Font f, int rx, int ry, String valor, int mx, int my, IntConsumer cambio) {
       this.boton(g, f, rx, ry, 20, 18, "−", mx, my, 7113983, false, b -> cambio.accept(-pasoActual()));
       Ui.textoCentro(g, f, valor, this.ox + rx + 20 + 4 + 22, this.oy + ry + 5, 15330549, 1.0F, false);
       this.boton(g, f, rx + 20 + 4 + 44 + 4, ry, 20, 18, "+", mx, my, 7113983, false, b -> cambio.accept(pasoActual()));

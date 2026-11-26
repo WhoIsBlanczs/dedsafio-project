@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Con
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -25,9 +25,9 @@ import net.ruleta.tragamonedas.TragamonedasBloque;
 import org.joml.Vector3f;
 
 public class TragamonedasRenderer implements BlockEntityRenderer<TragamonedasBE> {
-   private static final ResourceLocation TEX_TAMBOR = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/drum.png");
-   private static final ResourceLocation TEX_BRAZO = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/lever_arm.png");
-   private static final ResourceLocation TEX_BOLA = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/red.png");
+   private static final Identifier TEX_TAMBOR = Identifier.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/drum.png");
+   private static final Identifier TEX_BRAZO = Identifier.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/lever_arm.png");
+   private static final Identifier TEX_BOLA = Identifier.fromNamespaceAndPath("ruleta", "textures/block/tragamonedas/red.png");
    private static final float[] RODILLO_X = new float[]{-6.7F, 0.0F, 6.7F};
    private static final float RODILLO_Y = 25.2F;
    private static final float RODILLO_Z = -1.0F;

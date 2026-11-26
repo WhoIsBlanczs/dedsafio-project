@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.ruleta.Ajustes;
@@ -28,7 +28,7 @@ public class MomentosPantalla extends UiPantalla {
    private static final int ESPACIO = 10;
    private static final int COLUMNAS = 3;
    private static final int ENCABEZADO = 86;
-   private static final ResourceLocation CARA = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/gui/reviil_momentos.png");
+   private static final Identifier CARA = Identifier.fromNamespaceAndPath("ruleta", "textures/gui/reviil_momentos.png");
    private final List<MomentosPantalla.Tarjeta> tarjetas = new ArrayList<>();
    private final Map<String, Suave[]> anim = new HashMap<>();
    private int cardX;
@@ -168,7 +168,7 @@ public class MomentosPantalla extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       float sc = this.scroll.hacia(this.objetivo, 16.0F);
       this.encabezado(g);
       g.enableScissor(this.cardX - 4, this.top, this.cardX + this.cardW + 4, this.bottom);
@@ -190,7 +190,7 @@ public class MomentosPantalla extends UiPantalla {
       }
    }
 
-   private void encabezado(GuiGraphics g) {
+   private void encabezado(GuiGraphicsExtractor g) {
       int y0 = this.py + 46;
       int ih = 78;
       int iw = 84;
@@ -204,7 +204,7 @@ public class MomentosPantalla extends UiPantalla {
       Ui.titulo3D(g, this.font, t, xt, y0 + (ih - Math.round(9.0F * escala)) / 2 - 2, escala, 14687774, 16741480, 7211016, 2359296);
    }
 
-   private void dibujar(GuiGraphics g, MomentosPantalla.Tarjeta t, int y, int mx, int my) {
+   private void dibujar(GuiGraphicsExtractor g, MomentosPantalla.Tarjeta t, int y, int mx, int my) {
       Momentos.Momento m = t.momento();
       boolean activo = MomentosCliente.activado(m.id());
       boolean bloq = bloqueado(m);
@@ -366,7 +366,7 @@ public class MomentosPantalla extends UiPantalla {
       }
 
       @Override
-      protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+      protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
          this.aceptar.active = this.valido();
          if (this.botonBunkers != null) {
             this.botonBunkers.setTexto(Ui.recortar(this.font, PantallaBunkers.texto(this.bunkerElegido), this.pw - 48 - 10));

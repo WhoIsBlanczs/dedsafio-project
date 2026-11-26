@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Locale;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.ruleta.client.ui.Ui;
@@ -39,7 +39,7 @@ public class PantallaEncantamientos extends UiPantalla {
       if (nivel != null) {
          Registry<Enchantment> reg = nivel.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
 
-         for (ResourceLocation k : reg.keySet()) {
+         for (Identifier k : reg.keySet()) {
             Enchantment e = (Enchantment)reg.get(k);
             if (e != null) {
                this.todos.add(new PantallaEncantamientos.Info(k.toString(), e.description().getString(), e.getMaxLevel()));
@@ -109,7 +109,7 @@ public class PantallaEncantamientos extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.lista.dibujar(g, f, mx, my);
       int yPie = this.py + this.ph - 36;
@@ -146,7 +146,7 @@ public class PantallaEncantamientos extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          PantallaEncantamientos pe = PantallaEncantamientos.this;
          ConfigTragamonedas.Encantamiento e = pe.buscar(this.info.id());

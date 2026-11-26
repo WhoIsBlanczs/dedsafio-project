@@ -17,13 +17,13 @@ import java.util.function.Supplier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.FogRenderer.FogMode;
+import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -71,7 +71,7 @@ public final class TornadoCliente {
    private static float tiempoCapa;
 
    private static SoundEvent sonido(String id) {
-      return SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", id));
+      return SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", id));
    }
 
    private TornadoCliente() {

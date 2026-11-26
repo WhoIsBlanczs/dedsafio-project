@@ -7,12 +7,12 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -23,11 +23,11 @@ import net.ruleta.cajero.CajeroServidor;
 
 @Environment(EnvType.CLIENT)
 public class PantallaCajero extends Screen {
-   private static final ResourceLocation MARCO = CajeroCliente.tex("marco");
-   private static final ResourceLocation BOTON = CajeroCliente.tex("boton");
-   private static final ResourceLocation FICHAS = CajeroCliente.tex("fichas");
-   private static final ResourceLocation FLECHA_ARRIBA = CajeroCliente.tex("flecha_arriba");
-   private static final ResourceLocation FLECHA_ABAJO = CajeroCliente.tex("flecha_abajo");
+   private static final Identifier MARCO = CajeroCliente.tex("marco");
+   private static final Identifier BOTON = CajeroCliente.tex("boton");
+   private static final Identifier FICHAS = CajeroCliente.tex("fichas");
+   private static final Identifier FLECHA_ARRIBA = CajeroCliente.tex("flecha_arriba");
+   private static final Identifier FLECHA_ABAJO = CajeroCliente.tex("flecha_abajo");
    private static final int W = 176;
    private static final int H = 176;
    private static final int BTN_W = 61;
@@ -198,10 +198,10 @@ public class PantallaCajero extends Screen {
       }
    }
 
-   public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float parcial) {
+   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcial) {
    }
 
-   public void render(GuiGraphics g, int mx, int my, float pt) {
+   public void render(GuiGraphicsExtractor g, int mx, int my, float pt) {
       g.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       this.medir();
       double lx = this.localX(mx);
@@ -242,7 +242,7 @@ public class PantallaCajero extends Screen {
       g.pose().popPose();
    }
 
-   private void texto(GuiGraphics g, String s, float cx, float cy, int color, float maxW, float escMax) {
+   private void texto(GuiGraphicsExtractor g, String s, float cx, float cy, int color, float maxW, float escMax) {
       float w = this.font.width(s);
       float sc = Math.min(escMax, maxW / Math.max(1.0F, w));
       g.pose().pushPose();
@@ -252,13 +252,13 @@ public class PantallaCajero extends Screen {
       g.pose().popPose();
    }
 
-   private void boton(GuiGraphics g, int x, int y, String texto, double lx, double ly) {
+   private void boton(GuiGraphicsExtractor g, int x, int y, String texto, double lx, double ly) {
       boolean hover = dentro(lx, ly, x, y, 61, 16);
       g.blit(BOTON, x, y, 0.0F, hover ? 16.0F : 0.0F, 61, 16, 61, 32);
       this.texto(g, texto, x + 30.5F, y + 8.0F + 0.5F, hover ? -96 : -1, 50.0F, 0.8F);
    }
 
-   private void dibujarSaldo(GuiGraphics g) {
+   private void dibujarSaldo(GuiGraphicsExtractor g) {
       long[] p = CajeroCliente.partes(CajeroCliente.saldo);
       boolean[] ver = new boolean[]{p[0] > 0L, p[1] > 0L, p[2] > 0L};
       if (!ver[0] && !ver[1] && !ver[2]) {
@@ -292,7 +292,7 @@ public class PantallaCajero extends Screen {
       }
    }
 
-   private void textoIzq(GuiGraphics g, String s, float x, float cy, int color, float sc) {
+   private void textoIzq(GuiGraphicsExtractor g, String s, float x, float cy, int color, float sc) {
       g.pose().pushPose();
       g.pose().translate(x, cy - 4.0F * sc, 0.0F);
       g.pose().scale(sc, sc, 1.0F);
@@ -300,7 +300,7 @@ public class PantallaCajero extends Screen {
       g.pose().popPose();
    }
 
-   private void columna(GuiGraphics g, int i, double lx, double ly) {
+   private void columna(GuiGraphicsExtractor g, int i, double lx, double ly) {
       int cx = COLX[i];
       boolean puedeSubir = this.cant[i] < this.max(i);
       boolean puedeBajar = this.cant[i] > 0;
@@ -310,7 +310,7 @@ public class PantallaCajero extends Screen {
       this.textoIzq(g, Integer.toString(this.cant[i]), cx + 3.0F, 77.0F, -1, 1.0F);
    }
 
-   private void flecha(GuiGraphics g, ResourceLocation tex, int x, int y, boolean activa, double lx, double ly) {
+   private void flecha(GuiGraphicsExtractor g, Identifier tex, int x, int y, boolean activa, double lx, double ly) {
       boolean hover = activa && dentro(lx, ly, x, y, 12, 10);
       float a = !activa ? 0.3F : (hover ? 1.0F : 0.85F);
       RenderSystem.enableBlend();

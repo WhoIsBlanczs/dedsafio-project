@@ -244,7 +244,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
    }
 
    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity quien, ItemStack stack) {
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
          Direction frente = (Direction)state.getValue(FACING);
 
          for (int dx = 0; dx < 8; dx++) {
@@ -263,7 +263,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
    }
 
    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
-      if (!level.isClientSide && !player.isCreative()) {
+      if (!level.isClientSide() && !player.isCreative()) {
          Block.popResource(level, pos, new ItemStack(this.grande ? (ItemLike)PuertaBunker.ITEM_GRANDE.get() : (ItemLike)PuertaBunker.ITEM.get()));
       }
 
@@ -271,7 +271,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
    }
 
    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) {
-      if (!state.is(newState.getBlock()) && !desmontando && !level.isClientSide) {
+      if (!state.is(newState.getBlock()) && !desmontando && !level.isClientSide()) {
          desmontando = true;
 
          try {
@@ -301,7 +301,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
          return InteractionResult.PASS;
       }
 
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
          BlockPos o = origen(pos, state);
          boolean abrir = !(Boolean)state.getValue(OPEN);
          this.poner(level, o, (Direction)state.getValue(FACING), abrir);
@@ -312,11 +312,11 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
          }
       }
 
-      return InteractionResult.sidedSuccess(level.isClientSide);
+      return InteractionResult.sidedSuccess(level.isClientSide());
    }
 
    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block bloque, BlockPos desde, boolean moviendo) {
-      if (!level.isClientSide && !desmontando) {
+      if (!level.isClientSide() && !desmontando) {
          BlockPos o = origen(pos, state);
          Direction frente = (Direction)state.getValue(FACING);
          if (level.getBlockEntity(o) instanceof PuertaBunkerBE be) {
@@ -416,6 +416,6 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
 
    @Nullable
    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-      return level.isClientSide ? createTickerHelper(type, PuertaBunker.BE.get(), PuertaBunkerBE::tickCliente) : null;
+      return level.isClientSide() ? createTickerHelper(type, PuertaBunker.BE.get(), PuertaBunkerBE::tickCliente) : null;
    }
 }

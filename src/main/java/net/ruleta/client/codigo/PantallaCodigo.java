@@ -2,18 +2,18 @@ package net.ruleta.client.codigo;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.ruleta.candado.CodigoEnviarPayload;
 import net.ruleta.client.RedCliente;
 
 public class PantallaCodigo extends Screen {
-   private static final ResourceLocation FONDO = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/gui/codigo.png");
+   private static final Identifier FONDO = Identifier.fromNamespaceAndPath("ruleta", "textures/gui/codigo.png");
    private static final int W = 194;
    private static final int H = 229;
    private static final float ESCALA_MAX = 1.55F;
@@ -176,10 +176,10 @@ public class PantallaCodigo extends Screen {
       return super.mouseClicked(mxReal, myReal, boton);
    }
 
-   public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float parcialFondo) {
+   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
-   public void render(GuiGraphics g, int mxReal, int myReal, float parcial) {
+   public void render(GuiGraphicsExtractor g, int mxReal, int myReal, float parcial) {
       g.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       int mx = (int)Math.floor(mxReal / this.escala());
       int my = (int)Math.floor(myReal / this.escala());
@@ -214,7 +214,7 @@ public class PantallaCodigo extends Screen {
       super.render(g, mxReal, myReal, parcial);
    }
 
-   private void numeroTecla(GuiGraphics g, int mx, int my, int c, int f, String t) {
+   private void numeroTecla(GuiGraphicsExtractor g, int mx, int my, int c, int f, String t) {
       int x = this.teclaX(c);
       int y = this.teclaY(f);
       this.resalte(g, mx, my, x, y, 30, 30);
@@ -223,7 +223,7 @@ public class PantallaCodigo extends Screen {
       g.drawString(this.font, t, tx, y + 15 - 4, -2959909, false);
    }
 
-   private void marco(GuiGraphics g, int mx, int my, int x, int y) {
+   private void marco(GuiGraphicsExtractor g, int mx, int my, int x, int y) {
       if (dentro(mx, my, x, y, 30, 30) && this.libre()) {
          int c = -2035998;
          g.fill(x, y, x + 31, y + 1, c);
@@ -233,7 +233,7 @@ public class PantallaCodigo extends Screen {
       }
    }
 
-   private void resalte(GuiGraphics g, int mx, int my, int x, int y, int w, int h) {
+   private void resalte(GuiGraphicsExtractor g, int mx, int my, int x, int y, int w, int h) {
       if (dentro(mx, my, x, y, w, h) && this.libre()) {
          g.fill(x, y, x + w, y + h, 687865855);
       }

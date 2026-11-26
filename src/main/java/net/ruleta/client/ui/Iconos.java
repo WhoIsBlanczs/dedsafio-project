@@ -1,6 +1,6 @@
 package net.ruleta.client.ui;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public final class Iconos {
    public static final String[] CERRAR = new String[]{"#.....#", ".#...#.", "..#.#..", "...#...", "..#.#..", ".#...#.", "#.....#"};
@@ -29,7 +29,7 @@ public final class Iconos {
       return icono.length;
    }
 
-   public static void dibujar(GuiGraphics g, String[] icono, int x, int y, int rgb, float alfa) {
+   public static void dibujar(GuiGraphicsExtractor g, String[] icono, int x, int y, int rgb, float alfa) {
       int col = Ui.c(rgb, alfa);
       if (col >>> 24 != 0) {
          for (int j = 0; j < icono.length; j++) {

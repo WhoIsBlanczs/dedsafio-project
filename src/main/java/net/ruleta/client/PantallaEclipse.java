@@ -2,7 +2,7 @@ package net.ruleta.client;
 
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.ruleta.Ajustes;
@@ -149,7 +149,7 @@ public class PantallaEclipse extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       this.aceptar.active = this.valido();
       this.botonBunkers.setTexto(Ui.recortar(this.font, PantallaBunkers.texto(this.bunker), 180));
       int x = this.px + 16;

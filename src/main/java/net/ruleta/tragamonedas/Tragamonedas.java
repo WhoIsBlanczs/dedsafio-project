@@ -2,7 +2,7 @@ package net.ruleta.tragamonedas;
 
 import java.util.List;
 import net.minecraft.ChatFormatting;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -40,10 +40,10 @@ public final class Tragamonedas {
       "ruleta", "tragamonedas", () -> Builder.of(TragamonedasBE::new, new Block[]{BLOQUE.get()}).build(null)
    );
    public static final Reg<SoundEvent> SONIDO_PALANCA = Reg.sonido(
-      "ruleta", "tragamonedas.palanca", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "tragamonedas.palanca"))
+      "ruleta", "tragamonedas.palanca", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "tragamonedas.palanca"))
    );
    public static final Reg<SoundEvent> SONIDO_GIRO = Reg.sonido(
-      "ruleta", "tragamonedas.giro", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "tragamonedas.giro"))
+      "ruleta", "tragamonedas.giro", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "tragamonedas.giro"))
    );
 
    private Tragamonedas() {

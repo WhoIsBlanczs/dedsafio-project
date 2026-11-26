@@ -31,7 +31,7 @@ public final class CandadoEventos {
    @SubscribeEvent
    public static void alPulsar(PlayerInteractEvent.RightClickBlock e) {
       Level nivel = e.getLevel();
-      if (nivel.isClientSide) {
+      if (nivel.isClientSide()) {
          if (e.getHand() == InteractionHand.MAIN_HAND && nivel.getBlockState(e.getPos()).is(Candados.PUERTA.get())) {
             Player yo = e.getEntity();
             boolean algoEnMano = !yo.getMainHandItem().isEmpty() || !yo.getOffhandItem().isEmpty();
@@ -90,7 +90,7 @@ public final class CandadoEventos {
 
    @SubscribeEvent
    public static void alRomper(BlockEvent.BreakEvent e) {
-      if (e.getLevel() instanceof Level nivel && !nivel.isClientSide) {
+      if (e.getLevel() instanceof Level nivel && !nivel.isClientSide()) {
          BlockPos pos = e.getPos();
          if (Candados.estaBloqueado(nivel, pos)) {
             DatosCandados.Candado c = Candados.obtener(nivel, pos);
@@ -109,7 +109,7 @@ public final class CandadoEventos {
    @SubscribeEvent
    public static void alExplotar(ExplosionEvent.Detonate e) {
       Level nivel = e.getLevel();
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          for (BlockPos p : e.getAffectedBlocks()) {
             if (Candados.estaBloqueado(nivel, p)) {
                Candados.quitar(nivel, p);
@@ -120,7 +120,7 @@ public final class CandadoEventos {
 
    @SubscribeEvent
    public static void alMoverPiston(PistonEvent.Pre e) {
-      if (e.getLevel() instanceof Level nivel && !nivel.isClientSide) {
+      if (e.getLevel() instanceof Level nivel && !nivel.isClientSide()) {
          PistonStructureResolver r = e.getStructureHelper();
          if (r != null && r.resolve()) {
             for (BlockPos p : r.getToPush()) {

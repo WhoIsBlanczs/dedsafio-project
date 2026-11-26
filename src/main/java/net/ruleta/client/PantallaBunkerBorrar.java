@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.sounds.SoundEvent;
@@ -91,7 +91,7 @@ public class PantallaBunkerBorrar extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.subtitulo(
          this.datos.isEmpty()
@@ -159,7 +159,7 @@ public class PantallaBunkerBorrar extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          float h = this.hover.hacia(hover ? 1.0F : 0.0F, 14.0F);
          boolean demoliendo = this.d.porcentaje() >= 0;
          boolean pide = PantallaBunkerBorrar.this.confirmando.contains(this.d.clave());
@@ -257,7 +257,7 @@ public class PantallaBunkerBorrar extends UiPantalla {
          this.peligro = peligro;
       }
 
-      void dibujar(GuiGraphics g, Font f, int x, int y, int w, int h, int mx, int my, float a) {
+      void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int h, int mx, int my, float a) {
          float hv = this.hover.hacia(Ui.dentro(mx, my, x, y, w, h) ? 1.0F : 0.0F, 16.0F);
          int base = this.peligro ? Ui.mezcla(16735340, 1711656, 0.8F) : 2369846;
          int alto = this.peligro ? 16735340 : Ui.mezcla(2369846, 7113983, 0.5F);

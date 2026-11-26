@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fStack;
 
@@ -16,8 +16,8 @@ final class Vtx {
    private Vtx() {
    }
 
-   static ResourceLocation rl(String espacio, String ruta) {
-      return ResourceLocation.fromNamespaceAndPath(espacio, ruta);
+   static Identifier rl(String espacio, String ruta) {
+      return Identifier.fromNamespaceAndPath(espacio, ruta);
    }
 
    static BufferBuilder quads() {

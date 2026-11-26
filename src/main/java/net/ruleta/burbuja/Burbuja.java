@@ -21,7 +21,7 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.Entity.MoveFunction;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 import net.ruleta.compat.ExplosionInmune;
 
@@ -119,7 +119,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
       return false;
    }
 
-   public Entity changeDimension(DimensionTransition destino) {
+   public Entity changeDimension(TeleportTransition destino) {
       return null;
    }
 
@@ -134,18 +134,18 @@ public class Burbuja extends Entity implements ExplosionInmune {
             return InteractionResult.PASS;
          }
 
-         if (!this.level().isClientSide) {
+         if (!this.level().isClientSide()) {
             this.ejectPassengers();
             this.discard();
          }
 
-         return InteractionResult.sidedSuccess(this.level().isClientSide);
+         return InteractionResult.sidedSuccess(this.level().isClientSide());
       } else if (this.getPassengers().size() < 2 && !jugador.isPassenger()) {
-         if (!this.level().isClientSide) {
+         if (!this.level().isClientSide()) {
             jugador.startRiding(this);
          }
 
-         return InteractionResult.sidedSuccess(this.level().isClientSide);
+         return InteractionResult.sidedSuccess(this.level().isClientSide());
       } else {
          return InteractionResult.PASS;
       }
@@ -192,7 +192,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
 
    public void tick() {
       super.tick();
-      if (this.level().isClientSide) {
+      if (this.level().isClientSide()) {
          if (this.isControlledByLocalInstance()) {
             this.pasos = 0;
             this.lx = this.getX();

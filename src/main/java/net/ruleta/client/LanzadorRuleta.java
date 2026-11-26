@@ -4,10 +4,10 @@ import com.mojang.blaze3d.platform.InputConstants.Type;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import java.util.Arrays;
-import net.minecraft.Util;
+import Nonenet.minecraft.util.Util;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -98,10 +98,10 @@ public class LanzadorRuleta extends Screen {
       Ui.alfa = 1.0F;
    }
 
-   public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float parcialFondo) {
+   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
-   private void fondoRuleta(GuiGraphics g) {
+   private void fondoRuleta(GuiGraphicsExtractor g) {
       float a = this.aparece.v;
       g.fillGradient(0, 0, this.width, this.height, Ui.c(329484, 0.45F * a), Ui.c(329484, 0.7F * a));
    }
@@ -126,7 +126,7 @@ public class LanzadorRuleta extends Screen {
       }
    }
 
-   public void render(GuiGraphics ctx, int mx, int my, float pt) {
+   public void render(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
       float aparicion = this.aparece.hacia(1.0F, 11.0F);
       this.fondoRuleta(ctx);
       this.calcular();

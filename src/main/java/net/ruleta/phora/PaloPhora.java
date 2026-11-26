@@ -29,7 +29,7 @@ public class PaloPhora extends Item {
 
    public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
       ItemStack palo = jugador.getItemInHand(mano);
-      if (!nivel.isClientSide && nivel instanceof ServerLevel sl) {
+      if (!nivel.isClientSide() && nivel instanceof ServerLevel sl) {
          Vec3 ojos = jugador.getEyePosition();
          Vec3 fin = ojos.add(jugador.getViewVector(1.0F).scale(160.0));
          BlockHitResult hit = nivel.clip(new ClipContext(ojos, fin, Block.OUTLINE, Fluid.ANY, jugador));
@@ -38,7 +38,7 @@ public class PaloPhora extends Item {
          jugador.getCooldowns().addCooldown(this, 20);
       }
 
-      return InteractionResultHolder.sidedSuccess(palo, nivel.isClientSide);
+      return InteractionResultHolder.sidedSuccess(palo, nivel.isClientSide());
    }
 
    public boolean isFoil(ItemStack s) {

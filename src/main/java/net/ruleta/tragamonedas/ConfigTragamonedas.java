@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.Ruleta;
 
 public final class ConfigTragamonedas {
@@ -104,7 +104,7 @@ public final class ConfigTragamonedas {
    }
 
    public static boolean itemExiste(String id) {
-      ResourceLocation rl = id == null ? null : ResourceLocation.tryParse(id);
+      Identifier rl = id == null ? null : Identifier.tryParse(id);
       return rl != null && BuiltInRegistries.ITEM.containsKey(rl);
    }
 
@@ -160,7 +160,7 @@ public final class ConfigTragamonedas {
                         List<ConfigTragamonedas.Encantamiento> enc = new ArrayList<>();
                         if (r.esLibro() && r.encantamientos != null) {
                            for (ConfigTragamonedas.Encantamiento e : r.encantamientos) {
-                              if (e != null && e.id != null && ResourceLocation.tryParse(e.id) != null && enc.size() < 80) {
+                              if (e != null && e.id != null && Identifier.tryParse(e.id) != null && enc.size() < 80) {
                                  e.nivelMin = Math.max(1, Math.min(255, e.nivelMin));
                                  e.nivelMax = Math.max(e.nivelMin, Math.min(255, e.nivelMax));
                                  enc.add(e);

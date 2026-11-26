@@ -3,8 +3,8 @@ package net.ruleta.mixin;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.ThrownEnderpearl;
-import net.minecraft.world.level.portal.DimensionTransition;
+import Nonenet.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.ruleta.compat.Bus;
 import net.ruleta.compat.EntityTeleportEvent;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,12 +23,12 @@ public abstract class ThrownEnderpearlMixin {
       method = "onHit",
       at = @At(
          value = "INVOKE",
-         target = "Lnet/minecraft/world/entity/Entity;changeDimension(Lnet/minecraft/world/level/portal/DimensionTransition;)Lnet/minecraft/world/entity/Entity;",
+         target = "Lnet/minecraft/world/entity/Entity;changeDimension(Lnet/minecraft/world/level/portal/TeleportTransition;)Lnet/minecraft/world/entity/Entity;",
          ordinal = 0
       ),
       require = 0
    )
-   private Entity ruleta$teletransportar(Entity dueno, DimensionTransition destino) {
+   private Entity ruleta$teletransportar(Entity dueno, TeleportTransition destino) {
       this.ruleta$dano = 5.0F;
       this.ruleta$anulada = false;
       ThrownEnderpearl yo = (ThrownEnderpearl)this;

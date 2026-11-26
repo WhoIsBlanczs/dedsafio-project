@@ -1,6 +1,6 @@
 package net.ruleta.nuclear;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -12,7 +12,7 @@ import net.ruleta.Reg;
 
 public final class HeartEvents {
    private static final String KEY = "nuclearcreeper_extra_hearts";
-   private static final ResourceLocation MODIFIER_ID = Reg.id("ruleta", "corazon_rojo");
+   private static final Identifier MODIFIER_ID = Reg.id("ruleta", "corazon_rojo");
 
    private HeartEvents() {
    }

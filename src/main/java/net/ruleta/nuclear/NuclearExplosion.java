@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,7 +19,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameRules;
+import Nonenet.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -33,7 +33,7 @@ public final class NuclearExplosion {
    public static final int CRATER_RADIUS = 7;
    private static final int BLOCKS_PER_TICK = 2500;
    private static final ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(
-      Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("nuclearcreeper", "nuclear_explosion")
+      Registries.DAMAGE_TYPE, Identifier.fromNamespaceAndPath("nuclearcreeper", "nuclear_explosion")
    );
    private static final List<NuclearExplosion.Crater> CRATERS = new ArrayList<>();
 

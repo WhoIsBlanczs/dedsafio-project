@@ -15,7 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,31 +38,31 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.Cow;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.SnowGolem;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
+import Nonenet.minecraft.world.entity.animal.cow.Cow;
+import Nonenet.minecraft.world.entity.animal.golem.IronGolem;
+import Nonenet.minecraft.world.entity.animal.golem.SnowGolem;
+import Nonenet.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.Bogged;
-import net.minecraft.world.entity.monster.CaveSpider;
+import Nonenet.minecraft.world.entity.monster.skeleton.Bogged;
+import Nonenet.minecraft.world.entity.monster.spider.CaveSpider;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Spider;
-import net.minecraft.world.entity.monster.Stray;
+import Nonenet.minecraft.world.entity.monster.spider.Spider;
+import Nonenet.minecraft.world.entity.monster.skeleton.Stray;
 import net.minecraft.world.entity.monster.Vex;
-import net.minecraft.world.entity.monster.WitherSkeleton;
-import net.minecraft.world.entity.monster.Zombie;
+import Nonenet.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+import Nonenet.minecraft.world.entity.monster.zombie.Zombie;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -71,7 +71,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.GameRules;
+import Nonenet.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ClipContext.Fluid;
 import net.minecraft.world.level.GameRules.BooleanValue;
@@ -114,7 +114,7 @@ public final class CambiosEfectos {
    private static final float DANO_PLACA = 1.0E12F;
    private static final float DANO_PUERTA = 1.0E12F;
    static final String TAG_INTELIGENTE = "ruleta_zombie_inteligente";
-   private static final ResourceLocation UUID_VELOCIDAD_INTELIGENTE = Reg.id("ruleta", "zombie_inteligente");
+   private static final Identifier UUID_VELOCIDAD_INTELIGENTE = Reg.id("ruleta", "zombie_inteligente");
    private static final Map<UUID, Integer> AIRE = new HashMap<>();
    private static boolean nucleeperResuelto;
    static final String TAG_TREPADOR = "ruleta_zombie_trepador";
@@ -549,7 +549,7 @@ public final class CambiosEfectos {
    private static boolean esPuertaDeMano(BlockState estado) {
       Block bloque = estado.getBlock();
       if (bloque instanceof DoorBlock && bloque != Blocks.IRON_DOOR) {
-         ResourceLocation clave = BuiltInRegistries.BLOCK.getKey(bloque);
+         Identifier clave = BuiltInRegistries.BLOCK.getKey(bloque);
          return clave == null || !"securitycraft".equals(clave.getNamespace());
       } else {
          return false;
@@ -686,7 +686,7 @@ public final class CambiosEfectos {
                }
 
                warden.moveTo(suelo.getX() + 0.5, suelo.getY(), suelo.getZ() + 0.5, azar.nextFloat() * 360.0F, 0.0F);
-               warden.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(suelo), MobSpawnType.TRIGGERED, null);
+               warden.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(suelo), EntitySpawnReason.TRIGGERED, null);
                nivel.addFreshEntityWithPassengers(warden);
                return;
             }
@@ -982,7 +982,7 @@ public final class CambiosEfectos {
                      }
 
                      criatura.moveTo(x + 0.5, y, z + 0.5, azar.nextFloat() * 360.0F, 0.0F);
-                     criatura.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null);
+                     criatura.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
                      nivel.addFreshEntityWithPassengers(criatura);
                      return criatura;
                   }
@@ -1018,7 +1018,7 @@ public final class CambiosEfectos {
                      }
 
                      blaze.moveTo(x, y, z, azar.nextFloat() * 360.0F, 0.0F);
-                     blaze.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), MobSpawnType.NATURAL, null);
+                     blaze.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.NATURAL, null);
                      nivel.addFreshEntityWithPassengers(blaze);
                      return;
                   }
@@ -1058,7 +1058,7 @@ public final class CambiosEfectos {
             for (double[] d : desvios) {
                if (nivel.noCollision(tipo.getSpawnAABB(x + d[0], y, z + d[1]))) {
                   nucleeper.moveTo(x + d[0], y, z + d[1], nivel.getRandom().nextFloat() * 360.0F, 0.0F);
-                  nucleeper.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(BlockPos.containing(x, y, z)), MobSpawnType.EVENT, null);
+                  nucleeper.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(BlockPos.containing(x, y, z)), EntitySpawnReason.EVENT, null);
                   nucleeper.setTarget(jugador);
                   nivel.addFreshEntityWithPassengers(nucleeper);
                   return;

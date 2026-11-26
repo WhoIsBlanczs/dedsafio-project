@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 
@@ -48,7 +48,7 @@ public final class Ui {
       return 1.0F - (1.0F - t) * (1.0F - t) * (1.0F - t);
    }
 
-   public static void caja(GuiGraphics g, int x, int y, int w, int h, int r, int argb) {
+   public static void caja(GuiGraphicsExtractor g, int x, int y, int w, int h, int r, int argb) {
       if (w > 0 && h > 0 && argb >>> 24 != 0) {
          r = Math.max(0, Math.min(r, Math.min(w, h) / 2));
          if (r == 0) {
@@ -66,18 +66,18 @@ public final class Ui {
       }
    }
 
-   public static void cajaBorde(GuiGraphics g, int x, int y, int w, int h, int r, int relleno, int borde) {
+   public static void cajaBorde(GuiGraphicsExtractor g, int x, int y, int w, int h, int r, int relleno, int borde) {
       caja(g, x, y, w, h, r, borde);
       caja(g, x + 1, y + 1, w - 2, h - 2, Math.max(0, r - 1), relleno);
    }
 
-   public static void sombra(GuiGraphics g, int x, int y, int w, int h, int r, float fuerza) {
+   public static void sombra(GuiGraphicsExtractor g, int x, int y, int w, int h, int r, float fuerza) {
       for (int i = 5; i >= 1; i--) {
          caja(g, x - i, y - i + 3, w + i * 2, h + i * 2, r + i, c(0, fuerza * 0.07F));
       }
    }
 
-   public static void linea(GuiGraphics g, int x, int y, int w, int argb) {
+   public static void linea(GuiGraphicsExtractor g, int x, int y, int w, int argb) {
       g.fill(x, y, x + w, y + 1, argb);
    }
 
@@ -97,7 +97,7 @@ public final class Ui {
       return f.width(tb(s));
    }
 
-   public static void texto(GuiGraphics g, Font f, String s, int x, int y, int rgb, float a) {
+   public static void texto(GuiGraphicsExtractor g, Font f, String s, int x, int y, int rgb, float a) {
       int col = c(rgb, a);
       if (col >>> 24 >= 8 && !s.isEmpty()) {
          g.drawString(f, t(s), x, y, col, false);
@@ -115,14 +115,14 @@ public final class Ui {
       return r << 16 | gr << 8 | b;
    }
 
-   public static void textoN(GuiGraphics g, Font f, String s, int x, int y, int rgb, float a) {
+   public static void textoN(GuiGraphicsExtractor g, Font f, String s, int x, int y, int rgb, float a) {
       int col = c(oscuro(rgb), a);
       if (col >>> 24 >= 8 && !s.isEmpty()) {
          g.drawString(f, tb(s), x, y, col, false);
       }
    }
 
-   public static void textoCentro(GuiGraphics g, Font f, String s, int cx, int y, int rgb, float a, boolean negrita) {
+   public static void textoCentro(GuiGraphicsExtractor g, Font f, String s, int cx, int y, int rgb, float a, boolean negrita) {
       int w = negrita ? anchoN(f, s) : ancho(f, s);
       if (negrita) {
          textoN(g, f, s, cx - w / 2, y, rgb, a);
@@ -131,7 +131,7 @@ public final class Ui {
       }
    }
 
-   public static void textoDerecha(GuiGraphics g, Font f, String s, int xDerecha, int y, int rgb, float a) {
+   public static void textoDerecha(GuiGraphicsExtractor g, Font f, String s, int xDerecha, int y, int rgb, float a) {
       texto(g, f, s, xDerecha - ancho(f, s), y, rgb, a);
    }
 
@@ -215,7 +215,7 @@ public final class Ui {
       return r + "…";
    }
 
-   public static void titulo3D(GuiGraphics g, Font f, String s, int x, int y, float escala, int cara, int caraClara, int lado, int contorno) {
+   public static void titulo3D(GuiGraphicsExtractor g, Font f, String s, int x, int y, float escala, int cara, int caraClara, int lado, int contorno) {
       int prof = Math.max(2, Math.round(escala * 1.6F));
       float alto = 9.0F * escala;
       PoseStack pose = g.pose();

@@ -6,14 +6,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.ruleta.Ruleta;
 import net.ruleta.client.compat.ClientPlayerNetworkEvent;
 import net.ruleta.client.compat.SubscribeEvent;
 
 public final class LluviaRoja {
-   private static final ResourceLocation LLUVIA = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/environment/rain.png");
+   private static final Identifier LLUVIA = Identifier.fromNamespaceAndPath("minecraft", "textures/environment/rain.png");
    private static boolean puesta;
 
    private LluviaRoja() {

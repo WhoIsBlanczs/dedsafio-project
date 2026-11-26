@@ -1,7 +1,7 @@
 package net.ruleta.tragamonedas.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.ruleta.client.RedCliente;
 import net.ruleta.client.ui.Ui;
@@ -38,7 +38,7 @@ public class PantallaPanel extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Ui.texto(g, this.font, "Más opciones próximamente…", this.px + 20, this.py + this.ph - 30, 9344683, 1.0F);
    }
 }

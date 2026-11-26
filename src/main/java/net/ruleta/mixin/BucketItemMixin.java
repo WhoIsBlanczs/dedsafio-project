@@ -31,7 +31,7 @@ public abstract class BucketItemMixin extends Item {
 
    @Inject(method = "use", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$usarCubo(Level nivel, Player jugador, InteractionHand mano, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-      if (!nivel.isClientSide && Bus.hayOyentes(FillBucketEvent.class)) {
+      if (!nivel.isClientSide() && Bus.hayOyentes(FillBucketEvent.class)) {
          ItemStack cubo = jugador.getItemInHand(mano);
          net.minecraft.world.level.ClipContext.Fluid modo = this.field_7905 == Fluids.EMPTY
             ? net.minecraft.world.level.ClipContext.Fluid.SOURCE_ONLY

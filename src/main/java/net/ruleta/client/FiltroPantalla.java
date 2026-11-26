@@ -7,21 +7,21 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.PostPass;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public final class FiltroPantalla {
    private static final Logger LOG = LoggerFactory.getLogger("ruleta");
    private static Field campoPasadas;
-   private final ResourceLocation ruta;
+   private final Identifier ruta;
    private PostChain cadena;
    private List<PostPass> pasadas;
    private int ancho;
    private int alto;
    private boolean fallo;
 
-   public FiltroPantalla(ResourceLocation ruta) {
+   public FiltroPantalla(Identifier ruta) {
       this.ruta = ruta;
    }
 

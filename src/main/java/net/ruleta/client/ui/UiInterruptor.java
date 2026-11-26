@@ -3,7 +3,7 @@ package net.ruleta.client.ui;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -31,7 +31,7 @@ public class UiInterruptor extends AbstractWidget {
          .play(SimpleSoundInstance.forUI((SoundEvent)SoundEvents.UI_BUTTON_CLICK.value(), this.leer.getAsBoolean() ? 1.5F : 1.0F, 0.5F));
    }
 
-   protected void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+   protected void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
       boolean on = this.leer.getAsBoolean();
       if (this.primera) {
          this.pos.fijar(on ? 1.0F : 0.0F);

@@ -2,7 +2,7 @@ package net.ruleta.client.ui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -68,7 +68,7 @@ public class UiBoton extends AbstractButton {
       sm.play(SimpleSoundInstance.forUI((SoundEvent)SoundEvents.UI_BUTTON_CLICK.value(), 1.25F, 0.55F));
    }
 
-   protected void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+   protected void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = Minecraft.getInstance().font;
       float h = this.hover.hacia(this.isHoveredOrFocused() && this.active ? 1.0F : 0.0F, 16.0F);
       float p = this.pulso.hacia(0.0F, 7.0F);

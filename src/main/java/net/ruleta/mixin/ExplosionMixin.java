@@ -45,7 +45,7 @@ public abstract class ExplosionMixin implements ExplosionCentro {
 
    @Inject(method = "explode", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$inicio(CallbackInfo ci) {
-      if (!this.field_9187.isClientSide && Bus.hayOyentes(ExplosionEvent.Start.class) && Bus.post(new ExplosionEvent.Start(this.field_9187, (Explosion)this))) {
+      if (!this.field_9187.isClientSide() && Bus.hayOyentes(ExplosionEvent.Start.class) && Bus.post(new ExplosionEvent.Start(this.field_9187, (Explosion)this))) {
          this.ruleta$cancelada = true;
          ci.cancel();
       }
@@ -71,7 +71,7 @@ public abstract class ExplosionMixin implements ExplosionCentro {
    private List<Entity> ruleta$detonar(Level nivel, @Nullable Entity origen, AABB zona) {
       List<Entity> entidades = nivel.getEntities(origen, zona);
       entidades.removeIf(e -> e instanceof ExplosionInmune);
-      if (!nivel.isClientSide && Bus.hayOyentes(ExplosionEvent.Detonate.class)) {
+      if (!nivel.isClientSide() && Bus.hayOyentes(ExplosionEvent.Detonate.class)) {
          Bus.post(new ExplosionEvent.Detonate(nivel, (Explosion)this, entidades));
       }
 

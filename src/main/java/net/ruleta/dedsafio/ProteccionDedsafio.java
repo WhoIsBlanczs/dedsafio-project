@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.Before;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +26,7 @@ import net.ruleta.compat.ExplosionEvent;
 import net.ruleta.compat.SubscribeEvent;
 
 public final class ProteccionDedsafio {
-   private static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio"));
+   private static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, Identifier.fromNamespaceAndPath("ruleta", "dedsafio"));
 
    private ProteccionDedsafio() {
    }

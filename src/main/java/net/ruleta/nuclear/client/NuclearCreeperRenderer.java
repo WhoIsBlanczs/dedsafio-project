@@ -3,12 +3,12 @@ package net.ruleta.nuclear.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.ruleta.nuclear.entity.NuclearCreeperEntity;
 
 public class NuclearCreeperRenderer extends MobRenderer<NuclearCreeperEntity, NuclearCreeperModel<NuclearCreeperEntity>> {
-   private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("nuclearcreeper", "textures/entity/nuclear_creeper.png");
+   private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath("nuclearcreeper", "textures/entity/nuclear_creeper.png");
    private static final float BASE_SCALE = 0.85F;
 
    public NuclearCreeperRenderer(Context context) {
@@ -31,7 +31,7 @@ public class NuclearCreeperRenderer extends MobRenderer<NuclearCreeperEntity, Nu
       return (int)(swell * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(swell, 0.5F, 1.0F);
    }
 
-   public ResourceLocation getTextureLocation(NuclearCreeperEntity entity) {
+   public Identifier getTextureLocation(NuclearCreeperEntity entity) {
       return TEXTURE;
    }
 }

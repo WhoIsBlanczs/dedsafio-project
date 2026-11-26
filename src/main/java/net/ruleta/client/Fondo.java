@@ -1,7 +1,7 @@
 package net.ruleta.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.mixin.GameRendererInvoker;
 
 public final class Fondo {
@@ -15,7 +15,7 @@ public final class Fondo {
 
       try {
          if (mc.gameRenderer.currentEffect() == null) {
-            ((GameRendererInvoker)mc.gameRenderer).ruleta$cargarEfecto(ResourceLocation.parse("shaders/post/blur.json"));
+            ((GameRendererInvoker)mc.gameRenderer).ruleta$cargarEfecto(Identifier.parse("shaders/post/blur.json"));
             puesto = true;
          }
       } catch (Exception ignorado) {

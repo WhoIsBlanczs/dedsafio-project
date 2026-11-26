@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.ruleta.mobs.BombaWarden;
@@ -21,8 +21,8 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
-   private static final ResourceLocation WARDEN = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden.png");
-   private static final ResourceLocation BRILLO = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden_bioluminescent_layer.png");
+   private static final Identifier WARDEN = Identifier.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden.png");
+   private static final Identifier BRILLO = Identifier.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden_bioluminescent_layer.png");
    private static final float TEX = 128.0F;
    private static int alfa = 255;
 
@@ -31,7 +31,7 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
       this.shadowRadius = 0.25F;
    }
 
-   public ResourceLocation getTextureLocation(BombaWarden e) {
+   public Identifier getTextureLocation(BombaWarden e) {
       return WARDEN;
    }
 

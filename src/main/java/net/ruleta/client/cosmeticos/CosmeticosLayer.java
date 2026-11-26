@@ -4,14 +4,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
-import net.minecraft.client.model.PlayerModel;
+import Nonenet.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
    private static final float HALF_PI = (float) (Math.PI / 2);
@@ -23,8 +23,8 @@ public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerMod
    };
    private static final int COLUMNAS = 12;
 
-   private static ResourceLocation tex(String n) {
-      return ResourceLocation.fromNamespaceAndPath("ruleta", "textures/entity/cosmeticos/" + n + ".png");
+   private static Identifier tex(String n) {
+      return Identifier.fromNamespaceAndPath("ruleta", "textures/entity/cosmeticos/" + n + ".png");
    }
 
    public CosmeticosLayer(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> padre) {
@@ -86,7 +86,7 @@ public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerMod
    }
 
    private void bandera(PoseStack pila, MultiBufferSource buf, int luz, String pais, float t, float movimiento) {
-      ResourceLocation tex = tex("bandera_" + pais);
+      Identifier tex = tex("bandera_" + pais);
       VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(tex));
       float mov = 0.0F;
 

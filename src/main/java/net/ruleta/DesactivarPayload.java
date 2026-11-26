@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record DesactivarPayload(String id) implements CustomPacketPayload {
-   public static final Type<DesactivarPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "desactivar"));
+   public static final Type<DesactivarPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "desactivar"));
    public static final StreamCodec<FriendlyByteBuf, DesactivarPayload> CODEC = StreamCodec.ofMember(DesactivarPayload::encode, DesactivarPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

@@ -8,7 +8,7 @@ import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents.AfterInit;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents.AfterRender;
 import net.minecraft.client.gui.screens.ReceivingLevelScreen;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.dedsafio.EscenaPayload;
 
 public final class DedsafioCliente {
@@ -17,11 +17,11 @@ public final class DedsafioCliente {
 
    public static void registrar() {
       CoreShaderRegistrationCallback.EVENT.register((CoreShaderRegistrationCallback)ctx -> {
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_rayos"), DefaultVertexFormat.POSITION_TEX, RayosDedsafio::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_agua"), DefaultVertexFormat.POSITION, AguaDedsafio::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_espuma"), DefaultVertexFormat.POSITION_TEX, EspumaDedsafio::shader);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_ola"), DefaultVertexFormat.POSITION_TEX, OlaCliente::shaderOla);
-         ctx.register(ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio_olavista"), DefaultVertexFormat.POSITION_TEX, OlaCliente::shaderVista);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_rayos"), DefaultVertexFormat.POSITION_TEX, RayosDedsafio::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_agua"), DefaultVertexFormat.POSITION, AguaDedsafio::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_espuma"), DefaultVertexFormat.POSITION_TEX, EspumaDedsafio::shader);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_ola"), DefaultVertexFormat.POSITION_TEX, OlaCliente::shaderOla);
+         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_olavista"), DefaultVertexFormat.POSITION_TEX, OlaCliente::shaderVista);
       });
       ScreenEvents.AFTER_INIT.register((AfterInit)(cliente, pantalla, ancho, alto) -> {
          if (pantalla instanceof ReceivingLevelScreen) {

@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -19,10 +19,10 @@ import net.ruleta.puerta.PuertaBunkerBE;
 import net.ruleta.puerta.PuertaBunkerBloque;
 
 public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE> {
-   private static final ResourceLocation TEX_IZQ = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_hoja_izq.png");
-   private static final ResourceLocation TEX_DER = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_hoja_der.png");
-   private static final ResourceLocation TEX_BORDE = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_borde.png");
-   private static final ResourceLocation TEX_MANIJA = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_manija.png");
+   private static final Identifier TEX_IZQ = Identifier.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_hoja_izq.png");
+   private static final Identifier TEX_DER = Identifier.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_hoja_der.png");
+   private static final Identifier TEX_BORDE = Identifier.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_borde.png");
+   private static final Identifier TEX_MANIJA = Identifier.fromNamespaceAndPath("ruleta", "textures/block/puerta_bunker_manija.png");
    private static final int ANCHO = 8;
    private static final int ALTO = 11;
    private static final float ZF = 1.0F;
@@ -106,8 +106,8 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
    private static void hoja(
       MultiBufferSource buf,
       PoseStack ps,
-      ResourceLocation texFrente,
-      ResourceLocation texDorso,
+      Identifier texFrente,
+      Identifier texDorso,
       float xa,
       float xb,
       boolean derecha,

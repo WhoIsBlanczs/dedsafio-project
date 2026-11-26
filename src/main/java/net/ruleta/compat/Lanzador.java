@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.portal.DimensionTransition;
+import net.minecraft.world.level.portal.TeleportTransition;
 import org.jetbrains.annotations.Nullable;
 
 public final class Lanzador {
@@ -15,7 +15,7 @@ public final class Lanzador {
    }
 
    private static boolean cliente(Entity e) {
-      return e.level().isClientSide;
+      return e.level().isClientSide();
    }
 
    public static boolean muerte(LivingEntity e, DamageSource fuente) {
@@ -83,7 +83,7 @@ public final class Lanzador {
       }
    }
 
-   public static boolean viaje(Entity e, DimensionTransition destino) {
+   public static boolean viaje(Entity e, TeleportTransition destino) {
       return !cliente(e) && destino != null && destino.newLevel() != e.level() && Bus.hayOyentes(EntityTravelToDimensionEvent.class)
          ? Bus.post(new EntityTravelToDimensionEvent(e, destino.newLevel().dimension()))
          : false;

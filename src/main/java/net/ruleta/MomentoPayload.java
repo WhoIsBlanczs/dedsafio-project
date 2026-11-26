@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record MomentoPayload(String id, boolean activar, int segundos, int segundos2, String extra) implements CustomPacketPayload {
-   public static final Type<MomentoPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "momento"));
+   public static final Type<MomentoPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "momento"));
    public static final StreamCodec<FriendlyByteBuf, MomentoPayload> CODEC = StreamCodec.ofMember(MomentoPayload::encode, MomentoPayload::decode);
 
    public MomentoPayload(String id, boolean activar, int segundos) {

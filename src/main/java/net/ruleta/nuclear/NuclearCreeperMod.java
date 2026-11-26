@@ -1,7 +1,7 @@
 package net.ruleta.nuclear;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -59,7 +59,7 @@ public class NuclearCreeperMod {
       "nuclearcreeper", "golem_totem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.GOLEM)
    );
    public static final Reg<SoundEvent> RADIATION_LOOP = Reg.sonido(
-      "nuclearcreeper", "radiation_loop", () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("nuclearcreeper", "radiation_loop"))
+      "nuclearcreeper", "radiation_loop", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("nuclearcreeper", "radiation_loop"))
    );
 
    public static void init() {

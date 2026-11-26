@@ -6,21 +6,21 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import java.io.IOException;
 import java.io.InputStream;
 import net.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 final class TexturaHD extends AbstractTexture {
    private static final int NIVELES = 5;
-   private final ResourceLocation archivo;
+   private final Identifier archivo;
    private int ancho;
    private int alto;
    private NativeImage[] listas;
 
-   TexturaHD(ResourceLocation archivo) {
+   TexturaHD(Identifier archivo) {
       this(archivo, null);
    }
 
-   TexturaHD(ResourceLocation archivo, NativeImage[] listas) {
+   TexturaHD(Identifier archivo, NativeImage[] listas) {
       this.archivo = archivo;
       this.listas = listas;
    }

@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record AbrirPantallaPayload(String pantalla, String datos) implements CustomPacketPayload {
-   public static final Type<AbrirPantallaPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "abrir_pantalla"));
+   public static final Type<AbrirPantallaPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "abrir_pantalla"));
    public static final StreamCodec<FriendlyByteBuf, AbrirPantallaPayload> CODEC = StreamCodec.ofMember(
       AbrirPantallaPayload::encode, AbrirPantallaPayload::decode
    );

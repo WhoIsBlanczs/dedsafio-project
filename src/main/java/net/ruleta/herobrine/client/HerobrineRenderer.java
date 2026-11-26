@@ -2,7 +2,7 @@ package net.ruleta.herobrine.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.PlayerModel;
+import Nonenet.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -11,14 +11,14 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.herobrine.HerobrineEntity;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 public class HerobrineRenderer extends HumanoidMobRenderer<HerobrineEntity, PlayerModel<HerobrineEntity>> {
-   private static final ResourceLocation PIEL = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/entity/player/wide/steve.png");
-   public static final ResourceLocation OJOS = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/entity/herobrine_ojos.png");
+   private static final Identifier PIEL = Identifier.fromNamespaceAndPath("minecraft", "textures/entity/player/wide/steve.png");
+   public static final Identifier OJOS = Identifier.fromNamespaceAndPath("ruleta", "textures/entity/herobrine_ojos.png");
    private static final float ESCALA = 0.9F;
 
    public HerobrineRenderer(Context ctx) {
@@ -30,7 +30,7 @@ public class HerobrineRenderer extends HumanoidMobRenderer<HerobrineEntity, Play
       pose.scale(0.9F, 0.9F, 0.9F);
    }
 
-   public ResourceLocation getTextureLocation(HerobrineEntity e) {
+   public Identifier getTextureLocation(HerobrineEntity e) {
       return PIEL;
    }
 

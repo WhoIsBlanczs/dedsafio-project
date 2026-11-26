@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -23,7 +23,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.ruleta.burbuja.Burbuja;
 
 public class BurbujaRenderer extends EntityRenderer<Burbuja> {
-   private static final ResourceLocation BLANCO = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/entity/cosmeticos/blanco.png");
+   private static final Identifier BLANCO = Identifier.fromNamespaceAndPath("ruleta", "textures/entity/cosmeticos/blanco.png");
    private static final int LAT = 14;
    private static final int LON = 26;
    private static final float HUNDIDO_MAX = 0.34F;
@@ -33,7 +33,7 @@ public class BurbujaRenderer extends EntityRenderer<Burbuja> {
       this.shadowRadius = 0.0F;
    }
 
-   public ResourceLocation getTextureLocation(Burbuja e) {
+   public Identifier getTextureLocation(Burbuja e) {
       return BLANCO;
    }
 

@@ -26,7 +26,7 @@ import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
@@ -37,7 +37,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameRules;
+import Nonenet.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.GameRules.BooleanValue;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.saveddata.SavedData;
@@ -487,7 +487,7 @@ public class Ruleta {
          Long previo = ULTIMO_AVISO_TOTEM.put(p.getUUID(), ahora);
          if (previo == null || ahora - previo > 1L) {
             Component mensaje = Component.empty()
-               .append(Component.literal("\ue000").setStyle(Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("ruleta", "totem"))))
+               .append(Component.literal("\ue000").setStyle(Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", "totem"))))
                .append(Component.literal(" "))
                .append(p.getName().copy())
                .append(Component.literal(" consumió "))
@@ -738,7 +738,7 @@ public class Ruleta {
 
                for (Entry<Item, Integer> en : antes.entrySet()) {
                   if (en.getValue() > ahora.getOrDefault(en.getKey(), 0)) {
-                     ResourceLocation id = BuiltInRegistries.ITEM.getKey(en.getKey());
+                     Identifier id = BuiltInRegistries.ITEM.getKey(en.getKey());
                      if (gastado == null || id != null && id.getPath().contains("totem")) {
                         gastado = en.getKey();
                      }

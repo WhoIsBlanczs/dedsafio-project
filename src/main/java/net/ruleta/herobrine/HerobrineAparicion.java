@@ -5,7 +5,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraft.world.phys.AABB;
 import net.ruleta.Ajustes;
@@ -50,7 +50,7 @@ public final class HerobrineAparicion {
 
             h.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, p.getRandom().nextFloat() * 360.0F, 0.0F);
             if (nivel.noCollision(h)) {
-               h.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null);
+               h.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(pos), EntitySpawnReason.EVENT, null);
                nivel.addFreshEntity(h);
                return true;
             }

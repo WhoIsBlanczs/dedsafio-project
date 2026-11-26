@@ -118,7 +118,7 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
       Vec3 p = this.position();
       Vec3 sig = p.add(v);
       Level nivel = this.level();
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          if (this.edad > Math.max(Ajustes.entero("meteorito.vida") * 20, 1200) || p.y < nivel.getMinBuildHeight() - 16) {
             this.discard();
             return;

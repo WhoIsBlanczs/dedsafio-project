@@ -3,7 +3,7 @@ package net.ruleta.client.ruleta;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
-import com.mojang.blaze3d.shaders.Uniform;
+import Nonecom.mojang.renderpearl.backend.opengl.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.BufferUploader;
@@ -22,13 +22,13 @@ import java.util.concurrent.Executors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.joml.Matrix4f;
 
 public final class Pintor {
    private static ShaderInstance shader;
-   private static final Map<String, ResourceLocation> TEXTURAS = new HashMap<>();
+   private static final Map<String, Identifier> TEXTURAS = new HashMap<>();
    private static final Map<String, NativeImage[]> LISTAS = new ConcurrentHashMap<>();
    private static final ConcurrentLinkedQueue<String> POR_SUBIR = new ConcurrentLinkedQueue<>();
    private static boolean precargando;
@@ -40,14 +40,14 @@ public final class Pintor {
       shader = s;
    }
 
-   static ResourceLocation textura(String nombre) {
+   static Identifier textura(String nombre) {
       return TEXTURAS.computeIfAbsent(
          nombre,
          n -> {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath("ruleta", "hd/" + n);
+            Identifier id = Identifier.fromNamespaceAndPath("ruleta", "hd/" + n);
             Minecraft.getInstance()
                .getTextureManager()
-               .register(id, new TexturaHD(ResourceLocation.fromNamespaceAndPath("ruleta", "textures/ruleta/" + n + ".png"), LISTAS.remove(n)));
+               .register(id, new TexturaHD(Identifier.fromNamespaceAndPath("ruleta", "textures/ruleta/" + n + ".png"), LISTAS.remove(n)));
             return id;
          }
       );
@@ -57,9 +57,9 @@ public final class Pintor {
       if (!precargando) {
          precargando = true;
          ResourceManager rm = Minecraft.getInstance().getResourceManager();
-         List<ResourceLocation> archivos = new ArrayList<>();
+         List<Identifier> archivos = new ArrayList<>();
 
-         for (ResourceLocation rl : rm.listResources("textures/ruleta", r -> r.getNamespace().equals("ruleta") && r.getPath().endsWith(".png")).keySet()) {
+         for (Identifier rl : rm.listResources("textures/ruleta", r -> r.getNamespace().equals("ruleta") && r.getPath().endsWith(".png")).keySet()) {
             archivos.add(rl);
          }
 
@@ -70,7 +70,7 @@ public final class Pintor {
             return t;
          });
 
-         for (ResourceLocation rl : archivos) {
+         for (Identifier rl : archivos) {
             String n = rl.getPath().substring("textures/ruleta/".length(), rl.getPath().length() - ".png".length());
             if (!TEXTURAS.containsKey(n)) {
                hilos.execute(() -> {

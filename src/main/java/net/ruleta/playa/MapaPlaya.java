@@ -22,7 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -299,7 +299,7 @@ public final class MapaPlaya {
    }
 
    private static boolean cargar(MinecraftServer servidor) {
-      ResourceLocation id = ResourceLocation.fromNamespaceAndPath("ruleta", "structures/playa_dulceazar.nbt");
+      Identifier id = Identifier.fromNamespaceAndPath("ruleta", "structures/playa_dulceazar.nbt");
 
       try (
          InputStream bruto = ((Resource)servidor.getResourceManager().getResource(id).orElseThrow()).open();
@@ -412,7 +412,7 @@ public final class MapaPlaya {
          }
       }
 
-      Block bloque = (Block)BuiltInRegistries.BLOCK.get(ResourceLocation.parse(nombre));
+      Block bloque = (Block)BuiltInRegistries.BLOCK.get(Identifier.parse(nombre));
       BlockState e = bloque.defaultBlockState();
 
       for (Entry<String, String> par : props.entrySet()) {

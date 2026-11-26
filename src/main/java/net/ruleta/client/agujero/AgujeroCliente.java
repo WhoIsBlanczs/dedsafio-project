@@ -2,7 +2,7 @@ package net.ruleta.client.agujero;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.platform.GlStateManager;
+import Nonecom.mojang.renderpearl.backend.opengl.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -19,7 +19,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.NoopRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FogType;
@@ -38,7 +38,7 @@ import org.joml.Matrix4fStack;
 import org.joml.Vector3f;
 
 public final class AgujeroCliente {
-   private static final ResourceLocation TINTE = ResourceLocation.fromNamespaceAndPath("ruleta", "shaders/post/agujero_tinte.json");
+   private static final Identifier TINTE = Identifier.fromNamespaceAndPath("ruleta", "shaders/post/agujero_tinte.json");
    private static final FiltroPantalla FILTRO = new FiltroPantalla(TINTE);
    private static final float FUNDIDO = 2.0F;
    private static ShaderInstance shader;

@@ -51,7 +51,7 @@ public abstract class DoorBlockMixin extends Block {
       if (estado != null && estado.hasProperty(BlockStateProperties.WATERLOGGED)) {
          Level nivel = contexto.getLevel();
          BlockPos pos = contexto.getClickedPos();
-         boolean agua = !nivel.isClientSide
+         boolean agua = !nivel.isClientSide()
             && Ruleta.cambioActivoPublico("respirar-bajo-agua")
             && nivel.getFluidState(pos).is(FluidTags.WATER)
             && nivel.getFluidState(pos.above()).is(FluidTags.WATER)

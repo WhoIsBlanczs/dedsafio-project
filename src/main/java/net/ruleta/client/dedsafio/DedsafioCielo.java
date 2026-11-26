@@ -1,11 +1,11 @@
 package net.ruleta.client.dedsafio;
 
-import com.mojang.blaze3d.shaders.Uniform;
+import Nonecom.mojang.renderpearl.backend.opengl.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexBuffer;
+import Nonecom.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
 import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import net.minecraft.client.Minecraft;
@@ -14,16 +14,16 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fStack;
 
 public final class DedsafioCielo {
-   public static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath("ruleta", "dedsafio"));
-   public static final ResourceLocation FIGURAS = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/dedsafio/figuras.png");
-   public static final ResourceLocation NUBES = ResourceLocation.fromNamespaceAndPath("ruleta", "textures/dedsafio/nubes.png");
+   public static final ResourceKey<Level> DIMENSION = ResourceKey.create(Registries.DIMENSION, Identifier.fromNamespaceAndPath("ruleta", "dedsafio"));
+   public static final Identifier FIGURAS = Identifier.fromNamespaceAndPath("ruleta", "textures/dedsafio/figuras.png");
+   public static final Identifier NUBES = Identifier.fromNamespaceAndPath("ruleta", "textures/dedsafio/nubes.png");
    public static final float[] HORIZONTE = new float[]{0.98F, 0.72F, 0.64F};
    public static final double NIVEL_AGUA = -2.2;
    public static final float FORMA = 9.0F;

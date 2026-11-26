@@ -6,7 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -35,7 +35,7 @@ public class SupernovaNet {
    }
 
    public static class SyncMessage implements CustomPacketPayload {
-      public static final Type<SupernovaNet.SyncMessage> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("supernova", "sync"));
+      public static final Type<SupernovaNet.SyncMessage> TYPE = new Type(Identifier.fromNamespaceAndPath("supernova", "sync"));
       public static final StreamCodec<FriendlyByteBuf, SupernovaNet.SyncMessage> CODEC = StreamCodec.ofMember(
          SupernovaNet.SyncMessage::encode, SupernovaNet.SyncMessage::decode
       );

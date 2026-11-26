@@ -8,11 +8,11 @@ import java.util.TreeSet;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -48,7 +48,7 @@ public class PantallaSelectorItem extends UiPantalla {
 
       for (Item item : BuiltInRegistries.ITEM) {
          if (item != Items.AIR) {
-            ResourceLocation rl = BuiltInRegistries.ITEM.getKey(item);
+            Identifier rl = BuiltInRegistries.ITEM.getKey(item);
             if (soloEstos == null || soloEstos.contains(rl.toString())) {
                ItemStack pila = new ItemStack(item);
                String nombre = pila.getHoverName().getString();
@@ -131,7 +131,7 @@ public class PantallaSelectorItem extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.hoverId = null;
       this.lista.dibujar(g, f, mx, my);
@@ -143,7 +143,7 @@ public class PantallaSelectorItem extends UiPantalla {
    }
 
    @Override
-   protected void encima(GuiGraphics g, int mx, int my, float pt) {
+   protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) {
       if (this.hoverId != null) {
          List<Component> t = new ArrayList<>();
          t.add(this.hoverPila.getHoverName());
@@ -178,7 +178,7 @@ public class PantallaSelectorItem extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          for (int k = 0; k < this.items.size(); k++) {
             PantallaSelectorItem.ItemEntrada e = this.items.get(k);
             int cx = x + k * 36;

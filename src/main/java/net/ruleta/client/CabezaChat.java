@@ -12,12 +12,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import org.lwjgl.opengl.GL11;
 
 public final class CabezaChat {
-   private static final ResourceLocation FUENTE = ResourceLocation.fromNamespaceAndPath("ruleta", "cabeza");
-   private static final Map<ResourceLocation, int[]> CACHE = new HashMap<>();
+   private static final Identifier FUENTE = Identifier.fromNamespaceAndPath("ruleta", "cabeza");
+   private static final Map<Identifier, int[]> CACHE = new HashMap<>();
 
    private CabezaChat() {
    }
@@ -70,7 +70,7 @@ public final class CabezaChat {
       }
    }
 
-   private static int[] caraDe(ResourceLocation skin) {
+   private static int[] caraDe(Identifier skin) {
       int[] guardada = CACHE.get(skin);
       if (guardada != null) {
          return guardada;

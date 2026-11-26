@@ -4,7 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.vehicle.MinecartTNT;
+import Nonenet.minecraft.world.entity.vehicle.minecart.MinecartTNT;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.Vec3;
 import net.ruleta.compat.ExplosionCentro;

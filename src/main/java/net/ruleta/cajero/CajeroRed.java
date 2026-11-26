@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public final class CajeroRed {
    private CajeroRed() {
@@ -22,7 +22,7 @@ public final class CajeroRed {
    }
 
    public record AbrirPayload(BlockPos pos, long saldo) implements CustomPacketPayload {
-      public static final Type<CajeroRed.AbrirPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "cajero_abrir"));
+      public static final Type<CajeroRed.AbrirPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "cajero_abrir"));
       public static final StreamCodec<FriendlyByteBuf, CajeroRed.AbrirPayload> CODEC = StreamCodec.ofMember(
          CajeroRed.AbrirPayload::encode, CajeroRed.AbrirPayload::decode
       );
@@ -42,7 +42,7 @@ public final class CajeroRed {
    }
 
    public record AccionPayload(BlockPos pos, boolean ingresar, int rojas, int verdes, int azules) implements CustomPacketPayload {
-      public static final Type<CajeroRed.AccionPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "cajero_accion"));
+      public static final Type<CajeroRed.AccionPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "cajero_accion"));
       public static final StreamCodec<FriendlyByteBuf, CajeroRed.AccionPayload> CODEC = StreamCodec.ofMember(
          CajeroRed.AccionPayload::encode, CajeroRed.AccionPayload::decode
       );
@@ -65,7 +65,7 @@ public final class CajeroRed {
    }
 
    public record RespuestaPayload(boolean ok, String clave) implements CustomPacketPayload {
-      public static final Type<CajeroRed.RespuestaPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "cajero_respuesta"));
+      public static final Type<CajeroRed.RespuestaPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "cajero_respuesta"));
       public static final StreamCodec<FriendlyByteBuf, CajeroRed.RespuestaPayload> CODEC = StreamCodec.ofMember(
          CajeroRed.RespuestaPayload::encode, CajeroRed.RespuestaPayload::decode
       );
@@ -85,7 +85,7 @@ public final class CajeroRed {
    }
 
    public record SaldoPayload(long saldo) implements CustomPacketPayload {
-      public static final Type<CajeroRed.SaldoPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "cajero_saldo"));
+      public static final Type<CajeroRed.SaldoPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "cajero_saldo"));
       public static final StreamCodec<FriendlyByteBuf, CajeroRed.SaldoPayload> CODEC = StreamCodec.ofMember(
          CajeroRed.SaldoPayload::encode, CajeroRed.SaldoPayload::decode
       );

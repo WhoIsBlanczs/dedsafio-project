@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record BunkerAccionPayload(String accion, String clave) implements CustomPacketPayload {
-   public static final Type<BunkerAccionPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "bunker_accion"));
+   public static final Type<BunkerAccionPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "bunker_accion"));
    public static final StreamCodec<FriendlyByteBuf, BunkerAccionPayload> CODEC = StreamCodec.ofMember(BunkerAccionPayload::encode, BunkerAccionPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

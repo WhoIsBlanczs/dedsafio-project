@@ -6,10 +6,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
-import net.minecraft.Util;
+import Nonenet.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.MultiLineEditBox;
@@ -632,7 +632,7 @@ public class LanzadorFormulario extends Screen {
       return l.isEmpty() ? "solo la ruleta" : "con " + String.join(" + ", l);
    }
 
-   private void dibujarPanel(GuiGraphics g) {
+   private void dibujarPanel(GuiGraphicsExtractor g) {
       int m = Math.round((1.0F - Ui.ease(this.aparece.v)) * 8.0F);
       int x = this.xPanel + m;
       int y = this.yPanel + m;
@@ -646,11 +646,11 @@ public class LanzadorFormulario extends Screen {
       Ui.caja(g, sep, this.yTop, 1, this.yAbajo - this.yTop, 0, Ui.c(3028037, 0.8F));
    }
 
-   static void caja(GuiGraphics g, int x, int y, int w, int h, int cara, int borde) {
+   static void caja(GuiGraphicsExtractor g, int x, int y, int w, int h, int cara, int borde) {
       Ui.cajaBorde(g, x, y, w, h, 4, cara, borde);
    }
 
-   public void render(GuiGraphics ctx, int mx, int my, float pt) {
+   public void render(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
       float aparicion = this.aparece.hacia(1.0F, 11.0F);
       Ui.alfa = aparicion;
       this.fondoFormulario(ctx);
@@ -799,10 +799,10 @@ public class LanzadorFormulario extends Screen {
       Ui.alfa = 1.0F;
    }
 
-   public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float parcialFondo) {
+   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
-   private void fondoFormulario(GuiGraphics g) {
+   private void fondoFormulario(GuiGraphicsExtractor g) {
       float a = this.aparece.v;
       g.fillGradient(0, 0, this.width, this.height, Ui.c(329484, 0.55F * a), Ui.c(329484, 0.78F * a));
    }
@@ -838,7 +838,7 @@ public class LanzadorFormulario extends Screen {
          this.activo = v;
       }
 
-      public void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
          int x = this.getX();
          int y = this.getY();
          int w = this.width;
@@ -878,7 +878,7 @@ public class LanzadorFormulario extends Screen {
          this.alPulsar.run();
       }
 
-      public void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
          int x = this.getX();
          int y = this.getY();
          int w = this.width;
@@ -958,7 +958,7 @@ public class LanzadorFormulario extends Screen {
          this.alPulsar.run();
       }
 
-      public void renderWidget(GuiGraphics g, int mx, int my, float pt) {
+      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
          float hv = this.hover.hacia(this.isHoveredOrFocused() ? 1.0F : 0.0F, 16.0F);
          Ui.cajaBorde(
             g, this.getX(), this.getY(), this.width, this.height, 4, Ui.c(Ui.mezcla(1711656, 2369846, hv)), Ui.c(Ui.mezcla(3028037, 7113983, hv * 0.8F))

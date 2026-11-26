@@ -15,11 +15,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.DimensionSpecialEffects.SkyType;
-import net.minecraft.client.renderer.FogRenderer.FogMode;
+import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -191,7 +191,7 @@ public final class EclipseCliente {
    }
 
    private static SoundEvent sonido(String id) {
-      return SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", id));
+      return SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", id));
    }
 
    private static void tocar(SoundEvent evento, float volumen) {

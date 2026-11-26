@@ -5,16 +5,16 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.ruleta.cajero.CajeroRed;
 import net.ruleta.client.compat.Bus;
 
 @Environment(EnvType.CLIENT)
 public final class CajeroCliente {
    public static volatile long saldo = 0L;
-   public static final ResourceLocation FICHA_ROJA = tex("ficha_rojo");
-   public static final ResourceLocation FICHA_VERDE = tex("ficha_verde");
-   public static final ResourceLocation FICHA_AZUL = tex("ficha_azul");
+   public static final Identifier FICHA_ROJA = tex("ficha_rojo");
+   public static final Identifier FICHA_VERDE = tex("ficha_verde");
+   public static final Identifier FICHA_AZUL = tex("ficha_azul");
    public static final int FICHA_W = 12;
    public static final int FICHA_H = 13;
    public static final long[] VALOR = new long[]{10000L, 100L, 1L};
@@ -29,11 +29,11 @@ public final class CajeroCliente {
       Bus.registrar(CajeroHud.class);
    }
 
-   public static ResourceLocation tex(String nombre) {
-      return ResourceLocation.fromNamespaceAndPath("ruleta", "textures/gui/cajero/" + nombre + ".png");
+   public static Identifier tex(String nombre) {
+      return Identifier.fromNamespaceAndPath("ruleta", "textures/gui/cajero/" + nombre + ".png");
    }
 
-   public static ResourceLocation icono(int i) {
+   public static Identifier icono(int i) {
       return i == 0 ? FICHA_ROJA : (i == 1 ? FICHA_VERDE : FICHA_AZUL);
    }
 

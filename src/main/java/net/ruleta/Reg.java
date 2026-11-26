@@ -5,7 +5,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
@@ -28,8 +28,8 @@ public final class Reg<T> implements Supplier<T> {
       return this.valor;
    }
 
-   public static ResourceLocation id(String espacio, String nombre) {
-      return ResourceLocation.fromNamespaceAndPath(espacio, nombre);
+   public static Identifier id(String espacio, String nombre) {
+      return Identifier.fromNamespaceAndPath(espacio, nombre);
    }
 
    public static <T extends Item> Reg<T> item(String espacio, String nombre, Supplier<T> fabrica) {

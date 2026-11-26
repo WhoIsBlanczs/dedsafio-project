@@ -3,7 +3,7 @@ package net.ruleta;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 
@@ -19,7 +19,7 @@ public final class Proteccion {
 
    public static boolean protegido(Block bloque) {
       return CACHE.computeIfAbsent(bloque, b -> {
-         ResourceLocation clave = BuiltInRegistries.BLOCK.getKey(b);
+         Identifier clave = BuiltInRegistries.BLOCK.getKey(b);
          return "ruleta".equals(clave.getNamespace()) && NOMBRES.contains(clave.getPath());
       });
    }

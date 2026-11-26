@@ -2,7 +2,7 @@ package net.ruleta.compat;
 
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.ServerLevelAccessor;
 
 public final class MobSpawnEvent {
@@ -13,9 +13,9 @@ public final class MobSpawnEvent {
       private final Mob mob;
       private final ServerLevelAccessor nivel;
       private final DifficultyInstance dificultad;
-      private final MobSpawnType tipo;
+      private final EntitySpawnReason tipo;
 
-      public FinalizeSpawn(Mob mob, ServerLevelAccessor nivel, DifficultyInstance dificultad, MobSpawnType tipo) {
+      public FinalizeSpawn(Mob mob, ServerLevelAccessor nivel, DifficultyInstance dificultad, EntitySpawnReason tipo) {
          this.mob = mob;
          this.nivel = nivel;
          this.dificultad = dificultad;
@@ -46,7 +46,7 @@ public final class MobSpawnEvent {
          return this.dificultad;
       }
 
-      public MobSpawnType getSpawnType() {
+      public EntitySpawnReason getSpawnType() {
          return this.tipo;
       }
 

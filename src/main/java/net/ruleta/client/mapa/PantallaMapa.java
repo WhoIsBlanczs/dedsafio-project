@@ -14,13 +14,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
@@ -92,7 +92,7 @@ public class PantallaMapa extends Screen {
       }
 
       DynamicTexture tex = new DynamicTexture(128, 128, true);
-      ResourceLocation id = this.minecraft.getTextureManager().register("ruleta_mapa", tex);
+      Identifier id = this.minecraft.getTextureManager().register("ruleta_mapa", tex);
       PantallaMapa.Loseta l = new PantallaMapa.Loseta(tex, id);
       NativeImage img = tex.getPixels();
       if (img != null) {
@@ -158,10 +158,10 @@ public class PantallaMapa extends Screen {
       super.removed();
    }
 
-   public void renderBackground(GuiGraphics g, int ratonX, int ratonY, float parcial) {
+   public void renderBackground(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
    }
 
-   public void render(GuiGraphics g, int ratonX, int ratonY, float parcial) {
+   public void render(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
       g.fill(0, 0, this.width, this.height, -16777216);
       float cx = this.width / 2.0F;
       float cy = this.height / 2.0F;
@@ -178,7 +178,7 @@ public class PantallaMapa extends Screen {
       super.render(g, ratonX, ratonY, parcial);
    }
 
-   private void losetas(GuiGraphics g, float cx, float cy) {
+   private void losetas(GuiGraphicsExtractor g, float cx, float cy) {
       double bx0 = this.centroX - cx / zoom;
       double bx1 = this.centroX + cx / zoom;
       double bz0 = this.centroZ - cy / zoom;
@@ -236,7 +236,7 @@ public class PantallaMapa extends Screen {
       }
    }
 
-   private void texturas(GuiGraphics g, float cx, float cy) {
+   private void texturas(GuiGraphicsExtractor g, float cx, float cy) {
       int bx0 = Mth.floor(this.centroX - cx / zoom);
       int bx1 = Mth.ceil(this.centroX + cx / zoom);
       int bz0 = Mth.floor(this.centroZ - cy / zoom);
@@ -285,7 +285,7 @@ public class PantallaMapa extends Screen {
       BufferUploader.drawWithShader(b.buildOrThrow());
    }
 
-   private void vineta(GuiGraphics g) {
+   private void vineta(GuiGraphicsExtractor g) {
       int w = this.width;
       int h = this.height;
       int borde = Math.max(24, Math.min(w, h) / 7);
@@ -306,7 +306,7 @@ public class PantallaMapa extends Screen {
       g.fill(w - 1, 0, w, h, 1996488704);
    }
 
-   private void bunkers(GuiGraphics g, float cx, float cy) {
+   private void bunkers(GuiGraphicsExtractor g, float cx, float cy) {
       for (Bunkers.Bunker b : BunkerMarcador.deAqui()) {
          float sx = cx + (float)((b.mx() - this.centroX) * zoom);
          float sy = cy + (float)((b.mz() - this.centroZ) * zoom);
@@ -314,7 +314,7 @@ public class PantallaMapa extends Screen {
       }
    }
 
-   private void otrosJugadores(GuiGraphics g, float parcial, float cx, float cy) {
+   private void otrosJugadores(GuiGraphicsExtractor g, float parcial, float cx, float cy) {
       if (this.minecraft != null && this.minecraft.level != null) {
          for (Player otro : this.minecraft.level.players()) {
             if (otro != this.minecraft.player && !otro.isSpectator()) {
@@ -329,7 +329,7 @@ public class PantallaMapa extends Screen {
       }
    }
 
-   private void jugador(GuiGraphics g, float parcial, float cx, float cy) {
+   private void jugador(GuiGraphicsExtractor g, float parcial, float cx, float cy) {
       Player p = this.minecraft == null ? null : this.minecraft.player;
       if (p != null) {
          double px = Mth.lerp(parcial, p.xo, p.getX());
@@ -370,7 +370,7 @@ public class PantallaMapa extends Screen {
       b.addVertex(m, p[0], p[1], 0.0F).setColor(r, v, a, 1.0F);
    }
 
-   private void brujula(GuiGraphics g) {
+   private void brujula(GuiGraphicsExtractor g) {
       float cx = this.width - 34.0F;
       float cy = 30.0F;
       float largo = 20.0F;
@@ -397,7 +397,7 @@ public class PantallaMapa extends Screen {
       this.letra(g, "E", ix + d, iy);
    }
 
-   private void letra(GuiGraphics g, String t, int x, int y) {
+   private void letra(GuiGraphicsExtractor g, String t, int x, int y) {
       int w = this.font.width(t);
       int lx = x - w / 2;
       int ly = y - 4;
@@ -457,10 +457,10 @@ public class PantallaMapa extends Screen {
 
    private static final class Loseta {
       final DynamicTexture textura;
-      final ResourceLocation id;
+      final Identifier id;
       boolean vista;
 
-      Loseta(DynamicTexture t, ResourceLocation id) {
+      Loseta(DynamicTexture t, Identifier id) {
          this.textura = t;
          this.id = id;
       }

@@ -7,10 +7,10 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -161,7 +161,7 @@ public class PantallaCasino extends UiPantalla {
    }
 
    private static ItemStack pila(String id) {
-      ResourceLocation rl = ResourceLocation.tryParse(id);
+      Identifier rl = Identifier.tryParse(id);
       Item item = rl == null ? null : (Item)BuiltInRegistries.ITEM.getOptional(rl).orElse(null);
       return item == null ? ItemStack.EMPTY : new ItemStack(item);
    }
@@ -230,7 +230,7 @@ public class PantallaCasino extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.lista.dibujar(g, f, mx, my);
       if (this.lista.tamano() == 0) {
@@ -282,7 +282,7 @@ public class PantallaCasino extends UiPantalla {
       return this.lista.mouseScrolled(mx, my, dx, dy) || super.mouseScrolled(mx, my, dx, dy);
    }
 
-   private static void cuadro(GuiGraphics g, int x, int y, int w, int h, boolean hover, int color) {
+   private static void cuadro(GuiGraphicsExtractor g, int x, int y, int w, int h, boolean hover, int color) {
       Ui.cajaBorde(g, x, y, w, h, 4, Ui.c(hover ? 2369846 : 1119259), Ui.c(hover ? color : 3028037));
    }
 
@@ -292,7 +292,7 @@ public class PantallaCasino extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          PantallaCasino pc = PantallaCasino.this;
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
@@ -325,7 +325,7 @@ public class PantallaCasino extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          PantallaCasino pc = PantallaCasino.this;
          ConfigTragamonedas.Premio p = this.p();
@@ -420,7 +420,7 @@ public class PantallaCasino extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          ConfigTragamonedas.Simbolo s = this.s();
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
          g.renderItem(PantallaCasino.pila(s.item), x + 12, y + 12);

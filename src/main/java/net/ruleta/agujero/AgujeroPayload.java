@@ -6,11 +6,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 public record AgujeroPayload(boolean activo, List<AgujeroPayload.Agujero> agujeros) implements CustomPacketPayload {
-   public static final Type<AgujeroPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "agujero"));
+   public static final Type<AgujeroPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "agujero"));
    public static final StreamCodec<FriendlyByteBuf, AgujeroPayload> CODEC = StreamCodec.ofMember(AgujeroPayload::encode, AgujeroPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

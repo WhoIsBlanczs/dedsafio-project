@@ -71,7 +71,7 @@ public final class Candados {
    }
 
    public static boolean estaBloqueado(Level nivel, BlockPos pos) {
-      if (nivel != null && !nivel.isClientSide) {
+      if (nivel != null && !nivel.isClientSide()) {
          BlockState e = nivel.getBlockState(pos);
          return !esCofre(e) && !esPuerta(e) ? false : obtener(nivel, pos) != null;
       } else {

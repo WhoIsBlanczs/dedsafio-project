@@ -6,10 +6,10 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record ReviilPayload(String pieza, int valor, Component titulo, Component aviso) implements CustomPacketPayload {
-   public static final Type<ReviilPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "reviil"));
+   public static final Type<ReviilPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "reviil"));
    public static final StreamCodec<RegistryFriendlyByteBuf, ReviilPayload> CODEC = StreamCodec.ofMember(ReviilPayload::encode, ReviilPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

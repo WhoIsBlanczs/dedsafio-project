@@ -1,6 +1,6 @@
 package net.ruleta.client.mapa;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import Nonecom.mojang.renderpearl.backend.opengl.GlStateManager;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.block.model.BakedQuad;
+import Nonenet.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -23,7 +23,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -55,7 +55,7 @@ public final class MapaDatos {
    private static int ticks;
    private static int sinUsarAtlas;
    private static DynamicTexture fotoAtlas;
-   private static ResourceLocation fotoId;
+   private static Identifier fotoId;
    private static int fotoDe = -2;
    private static final int SIN_DATO = Integer.MIN_VALUE;
 
@@ -214,7 +214,7 @@ public final class MapaDatos {
       return rgb;
    }
 
-   static ResourceLocation atlasEstatico(Minecraft mc) {
+   static Identifier atlasEstatico(Minecraft mc) {
       if (fotoId != null && fotoDe == atlasId) {
          return fotoId;
       }
@@ -307,7 +307,7 @@ public final class MapaDatos {
                   TextureAtlasSprite[] sprites = ext == null ? null : ext.getFluidSprites(nivel, pos, fl);
                   sp = sprites != null && sprites[0] != null
                      ? sprites[0]
-                     : (TextureAtlasSprite)mc.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(ResourceLocation.withDefaultNamespace("block/water_still"));
+                     : (TextureAtlasSprite)mc.getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(Identifier.withDefaultNamespace("block/water_still"));
                   tinte = ext == null ? 16777215 : ext.getFluidColor(nivel, pos, fl) & 16777215;
                   int hondo = 0;
 

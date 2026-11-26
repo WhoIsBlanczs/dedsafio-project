@@ -2,7 +2,7 @@ package net.ruleta.client;
 
 import java.util.List;
 import java.util.function.Consumer;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.ruleta.Momentos;
@@ -56,7 +56,7 @@ public class PantallaMensajeEclipse extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       int x = this.px + 20;
       int w = this.pw - 40;
       String titulo = Momentos.ECLIPSE_TITULOS[this.indice].replace("Momento ReviiL — ", "");

@@ -3,10 +3,10 @@ package com.supernova.client;
 import com.supernova.SupernovaState;
 import java.util.HashMap;
 import java.util.Map;
-import net.minecraft.Util;
+import Nonenet.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.util.Mth;
 
 public final class AvisoPop {
@@ -27,7 +27,7 @@ public final class AvisoPop {
       return 1.0F + c3 * u * u * u + c1 * u * u;
    }
 
-   public static void dibujar(GuiGraphics g, int ancho, int alto) {
+   public static void dibujar(GuiGraphicsExtractor g, int ancho, int alto) {
       Minecraft mc = Minecraft.getInstance();
       if (mc.level != null && mc.player != null) {
          float now = (float)mc.level.getGameTime();

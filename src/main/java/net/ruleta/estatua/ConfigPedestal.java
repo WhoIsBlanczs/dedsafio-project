@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.ruleta.Ruleta;
 import net.ruleta.tragamonedas.ConfigTragamonedas;
@@ -55,7 +55,7 @@ public final class ConfigPedestal {
    }
 
    public static Item item(String id) {
-      ResourceLocation rl = id == null ? null : ResourceLocation.tryParse(id);
+      Identifier rl = id == null ? null : Identifier.tryParse(id);
       return rl == null ? null : (Item)BuiltInRegistries.ITEM.getOptional(rl).orElse(null);
    }
 

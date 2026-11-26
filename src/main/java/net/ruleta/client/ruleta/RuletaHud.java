@@ -6,11 +6,11 @@ import com.mojang.math.Axis;
 import java.util.EnumMap;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.ruleta.Ruleta;
@@ -20,7 +20,7 @@ import net.ruleta.client.OpcionesCliente;
 import org.joml.Matrix4f;
 
 public final class RuletaHud {
-   private static final SoundEvent SONIDO = SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "ruleta"));
+   private static final SoundEvent SONIDO = SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "ruleta"));
    private static final String[] COLORES = new String[]{"rojo", "rosa", "morado", "azul", "cian", "verde", "amarillo", "naranja"};
    private static final float CX0 = -86.0F;
    private static final float CY0 = -216.0F;
@@ -35,7 +35,7 @@ public final class RuletaHud {
    private static final float GEMA_Y = -8.125F;
    private static Tirada actual;
    private static SoundInstance sonido;
-   private static final Map<RuletaColor, ResourceLocation> ICONOS = new EnumMap<>(RuletaColor.class);
+   private static final Map<RuletaColor, Identifier> ICONOS = new EnumMap<>(RuletaColor.class);
 
    private RuletaHud() {
    }
@@ -104,13 +104,13 @@ public final class RuletaHud {
       }
    }
 
-   public static void dibujar(GuiGraphics ctx) {
+   public static void dibujar(GuiGraphicsExtractor ctx) {
       if (girando()) {
          dibujar(ctx, actual);
       }
    }
 
-   static void dibujar(GuiGraphics ctx, Tirada tr) {
+   static void dibujar(GuiGraphicsExtractor ctx, Tirada tr) {
       int sw = ctx.guiWidth();
       int sh = ctx.guiHeight();
       float px;
@@ -305,8 +305,8 @@ public final class RuletaHud {
       return 0.86F + 0.14F * Mth.sin(t * 2.6F + i * 0.8F);
    }
 
-   public static void icono(GuiGraphics ctx, int x, int y, int lado, RuletaColor color) {
-      ResourceLocation id = ICONOS.computeIfAbsent(color, c -> ResourceLocation.fromNamespaceAndPath("ruleta", "textures/gui/icono_ruleta_" + c.id + ".png"));
+   public static void icono(GuiGraphicsExtractor ctx, int x, int y, int lado, RuletaColor color) {
+      Identifier id = ICONOS.computeIfAbsent(color, c -> Identifier.fromNamespaceAndPath("ruleta", "textures/gui/icono_ruleta_" + c.id + ".png"));
       RenderSystem.enableBlend();
       ctx.blit(id, x, y, lado, lado, 0.0F, 0.0F, 256, 256, 256, 256);
       RenderSystem.disableBlend();

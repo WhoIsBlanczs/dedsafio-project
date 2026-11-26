@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -65,7 +65,7 @@ public class TragamonedasBloque extends BaseEntityBlock {
 
    @Nullable
    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level nivel, BlockState estado, BlockEntityType<T> tipo) {
-      return !nivel.isClientSide && estado.getValue(PARTE) == ParteTragamonedas.MIDDLE
+      return !nivel.isClientSide() && estado.getValue(PARTE) == ParteTragamonedas.MIDDLE
          ? createTickerHelper(tipo, Tragamonedas.BE.get(), TragamonedasBE::tickServidor)
          : null;
    }
@@ -97,13 +97,13 @@ public class TragamonedasBloque extends BaseEntityBlock {
       ItemStack pila, BlockState estado, Level nivel, BlockPos pos, Player jugador, InteractionHand mano, BlockHitResult golpe
    ) {
       ConfigTragamonedas cfg = ConfigTragamonedas.get();
-      ResourceLocation id = ResourceLocation.tryParse(cfg.pago_item);
+      Identifier id = Identifier.tryParse(cfg.pago_item);
       Item pago = id == null ? Tragamonedas.DEDITA.get() : BuiltInRegistries.ITEM.getOptional(id).orElse(Tragamonedas.DEDITA.get());
       if (!pila.is(pago)) {
          return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
       }
 
-      if (nivel.isClientSide) {
+      if (nivel.isClientSide()) {
          return ItemInteractionResult.SUCCESS;
       }
 
@@ -139,7 +139,7 @@ public class TragamonedasBloque extends BaseEntityBlock {
    }
 
    public BlockState playerWillDestroy(Level nivel, BlockPos pos, BlockState estado, Player jugador) {
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          BlockPos base = pos.below(((ParteTragamonedas)estado.getValue(PARTE)).altura());
          if (!jugador.isCreative() && estado.getValue(PARTE) != ParteTragamonedas.LOWER) {
             dropResources((BlockState)estado.setValue(PARTE, ParteTragamonedas.LOWER), nivel, base, null, jugador, jugador.getMainHandItem());

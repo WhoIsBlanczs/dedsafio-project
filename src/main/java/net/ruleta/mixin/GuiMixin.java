@@ -3,7 +3,7 @@ package net.ruleta.mixin;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.ruleta.client.MisOjos;
 import net.ruleta.client.compat.Bus;
 import net.ruleta.client.compat.RenderGuiEvent;
@@ -21,7 +21,7 @@ public abstract class GuiMixin {
    private Minecraft field_2035;
 
    @Inject(method = "render", at = @At("HEAD"), require = 0)
-   private void ruleta$antesDelHud(GuiGraphics grafico, DeltaTracker tiempo, CallbackInfo ci) {
+   private void ruleta$antesDelHud(GuiGraphicsExtractor grafico, DeltaTracker tiempo, CallbackInfo ci) {
       if (!this.field_2035.options.hideGui) {
          Bus.post(new RenderGuiEvent.Pre(grafico, tiempo.getGameTimeDeltaPartialTick(false)));
       }

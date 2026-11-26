@@ -2,9 +2,9 @@ package net.ruleta.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.ruleta.ReviilPayload;
 import net.ruleta.client.eclipse.EclipseCliente;
@@ -17,7 +17,7 @@ import net.ruleta.client.reviil.CieloReviil;
 import net.ruleta.client.ruleta.RuletaHud;
 
 public final class HudCliente {
-   private static final SoundEvent CAMPANITA = SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", "notificacion_mensaje"));
+   private static final SoundEvent CAMPANITA = SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", "notificacion_mensaje"));
 
    private HudCliente() {
    }
@@ -140,7 +140,7 @@ public final class HudCliente {
       return RuletaHud.girando();
    }
 
-   public static void render(GuiGraphics ctx) {
+   public static void render(GuiGraphicsExtractor ctx) {
       Font tr = Minecraft.getInstance().font;
       if (Minecraft.getInstance().player != null && !Minecraft.getInstance().options.hideGui) {
          AvisoHud.coordenadas(ctx, tr);

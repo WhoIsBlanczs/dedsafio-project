@@ -3,7 +3,7 @@ package net.ruleta.client.dedsafio;
 import java.util.HashSet;
 import java.util.Set;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.ruleta.dedsafio.EscenaPayload;
@@ -29,7 +29,7 @@ public final class OcultarCliente {
       if (todos && e instanceof Player) {
          Minecraft mc = Minecraft.getInstance();
          if (mc.level != null && mc.player != null && e != mc.player) {
-            ResourceLocation d = mc.level.dimension().location();
+            Identifier d = mc.level.dimension().location();
             return d.getNamespace().equals("ruleta") && d.getPath().equals("dedsafio") && !visibles.contains(e.getId());
          } else {
             return false;

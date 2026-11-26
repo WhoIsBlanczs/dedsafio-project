@@ -4,10 +4,10 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public record CasinoDatosPayload(String json) implements CustomPacketPayload {
-   public static final Type<CasinoDatosPayload> TYPE = new Type(ResourceLocation.fromNamespaceAndPath("ruleta", "casino_datos"));
+   public static final Type<CasinoDatosPayload> TYPE = new Type(Identifier.fromNamespaceAndPath("ruleta", "casino_datos"));
    public static final StreamCodec<FriendlyByteBuf, CasinoDatosPayload> CODEC = StreamCodec.ofMember(CasinoDatosPayload::encode, CasinoDatosPayload::decode);
 
    public Type<? extends CustomPacketPayload> type() {

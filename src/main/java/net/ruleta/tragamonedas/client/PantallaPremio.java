@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -74,7 +74,7 @@ public class PantallaPremio extends UiPantalla {
    }
 
    static ItemStack pila(String id) {
-      ResourceLocation rl = ResourceLocation.tryParse(id);
+      Identifier rl = Identifier.tryParse(id);
       Item item = rl == null ? null : (Item)BuiltInRegistries.ITEM.getOptional(rl).orElse(null);
       return item == null ? ItemStack.EMPTY : new ItemStack(item);
    }
@@ -95,7 +95,7 @@ public class PantallaPremio extends UiPantalla {
    }
 
    @Override
-   protected void contenido(GuiGraphics g, int mx, int my, float pt) {
+   protected void contenido(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = this.font;
       this.lista.dibujar(g, f, mx, my);
       int yPie = this.py + this.ph - 36;
@@ -122,7 +122,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          this.boton(g, f, 0, 4, 220, 26, "+ Agregar recompensa", mx, my, 4906624, false, b -> {
             PantallaPremio pp = PantallaPremio.this;
@@ -144,7 +144,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
          ConfigTragamonedas.Premio p = PantallaPremio.this.premio;
@@ -184,7 +184,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
          ConfigTragamonedas.Premio p = PantallaPremio.this.premio;
@@ -228,7 +228,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
          ConfigTragamonedas.Premio p = PantallaPremio.this.premio;
@@ -268,7 +268,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          PantallaPremio pp = PantallaPremio.this;
          ConfigTragamonedas.Recompensa r = this.r();
@@ -367,7 +367,7 @@ public class PantallaPremio extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphics g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
          this.empezar(x, y);
          Ui.cajaBorde(g, x, y, w, this.alto, 6, Ui.c(1711656, 0.95F), Ui.c(3028037));
          this.texto(g, f, "1) ¿Cuándo se gana este premio? Elige cómo tienen que salir los rodillos:", 12, 8, 15330549);

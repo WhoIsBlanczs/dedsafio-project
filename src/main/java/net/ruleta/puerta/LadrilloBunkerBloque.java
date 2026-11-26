@@ -38,7 +38,7 @@ public class LadrilloBunkerBloque extends Block {
    }
 
    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState anterior, boolean moviendo) {
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
          BlockState correcto = this.conPosicion(state, pos);
          if (correcto != state) {
             level.setBlock(pos, correcto, 2);

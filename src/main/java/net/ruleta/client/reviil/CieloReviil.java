@@ -1,11 +1,11 @@
 package net.ruleta.client.reviil;
 
-import com.mojang.blaze3d.shaders.Uniform;
+import Nonecom.mojang.renderpearl.backend.opengl.Uniform;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexBuffer;
+import Nonecom.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
 import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import com.supernova.client.ScreenEffectHandler;
@@ -16,7 +16,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
@@ -92,7 +92,7 @@ public final class CieloReviil {
    }
 
    private static SoundEvent sonido(String id) {
-      return SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath("ruleta", id));
+      return SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("ruleta", id));
    }
 
    public static void cabezazo() {

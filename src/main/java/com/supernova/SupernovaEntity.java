@@ -21,8 +21,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import Nonenet.minecraft.world.entity.animal.equine.AbstractHorse;
+import Nonenet.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -49,7 +49,7 @@ public class SupernovaEntity extends Entity {
    public SupernovaEntity(EntityType<?> type, Level level) {
       super(type, level);
       this.noPhysics = true;
-      if (!level.isClientSide) {
+      if (!level.isClientSide()) {
          this.entityData.set(BORN, (int)level.getGameTime());
          this.entityData.set(MAX_RADIUS, SupernovaAjustes.limitarTamano(SupernovaAjustes.tamano()));
          this.entityData.set(HOLD, SupernovaAjustes.limitarTicks(SupernovaAjustes.tiempoTicks));
@@ -99,7 +99,7 @@ public class SupernovaEntity extends Entity {
    }
 
    public boolean detonate() {
-      if (!this.level().isClientSide && !this.isDetonating()) {
+      if (!this.level().isClientSide() && !this.isDetonating()) {
          ServerLevel sl = (ServerLevel)this.level();
          this.entityData.set(DETONATED, (int)sl.getGameTime());
          SupernovaNet.broadcast(this, false);
@@ -123,7 +123,7 @@ public class SupernovaEntity extends Entity {
 
    public void tick() {
       super.tick();
-      if (!this.level().isClientSide) {
+      if (!this.level().isClientSide()) {
          ServerLevel sl = (ServerLevel)this.level();
          if (this.isDetonating()) {
             int c = (int)(sl.getGameTime() - ((Integer)this.entityData.get(DETONATED)).intValue());

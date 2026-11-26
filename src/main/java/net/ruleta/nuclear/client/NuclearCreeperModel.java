@@ -11,14 +11,14 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.monster.Creeper;
 
 public class NuclearCreeperModel<T extends Entity> extends EntityModel<T> {
    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-      ResourceLocation.fromNamespaceAndPath("nuclearcreeper", "nuclear_creeper"), "main"
+      Identifier.fromNamespaceAndPath("nuclearcreeper", "nuclear_creeper"), "main"
    );
    private static final float SWELL_LEAN_BACK = 0.32F;
    private final ModelPart root;

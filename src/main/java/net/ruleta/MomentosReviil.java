@@ -18,10 +18,10 @@ import net.minecraft.world.Difficulty;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.GameRules;
+import Nonenet.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ClipContext.Block;
 import net.minecraft.world.level.ClipContext.Fluid;
@@ -380,7 +380,7 @@ public final class MomentosReviil {
          Creeper c = (Creeper)EntityType.CREEPER.create(nivel);
          if (c != null) {
             c.moveTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0.0F);
-            c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(p.blockPosition()), MobSpawnType.EVENT, null);
+            c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(p.blockPosition()), EntitySpawnReason.EVENT, null);
             CompoundTag t = new CompoundTag();
             c.addAdditionalSaveData(t);
             t.putBoolean("powered", true);

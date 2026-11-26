@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HopperBlockEntityMixin {
    @Inject(method = "pushItemsTick", at = @At("HEAD"), cancellable = true, require = 0)
    private static void ruleta$conCandado(Level nivel, BlockPos pos, BlockState estado, HopperBlockEntity tolva, CallbackInfo ci) {
-      if (!nivel.isClientSide) {
+      if (!nivel.isClientSide()) {
          if (Candados.estaBloqueado(nivel, pos.above()) || Candados.estaBloqueado(nivel, pos.relative((Direction)estado.getValue(HopperBlock.FACING)))) {
             ci.cancel();
          }

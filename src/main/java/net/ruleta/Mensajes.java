@@ -13,7 +13,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -315,7 +315,7 @@ public final class Mensajes {
 
    public static Component vistaMomento(boolean reviil, String titulo, String texto, String jugador) {
       Style t = Style.EMPTY
-         .withFont(ResourceLocation.fromNamespaceAndPath("ruleta", reviil ? "rotulo" : "rotulo_nutria"))
+         .withFont(Identifier.fromNamespaceAndPath("ruleta", reviil ? "rotulo" : "rotulo_nutria"))
          .withColor(reviil ? 11013656 : 11540590);
       Style cuerpo = Style.EMPTY.applyFormat(reviil ? ChatFormatting.RED : ChatFormatting.LIGHT_PURPLE);
       RuletaColor c = reviil ? RuletaColor.ROJO : RuletaColor.ROSA;
@@ -337,7 +337,7 @@ public final class Mensajes {
    static Component anuncio(RuletaColor c, String tituloPropio, String txt, String quien) {
       String encabezado = tituloPropio != null && !tituloPropio.isBlank() ? tituloPropio : ENCABEZADO.get(c);
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
       MutableComponent t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))
@@ -346,7 +346,7 @@ public final class Mensajes {
       return t.append(Component.literal("\n\n")).append(poner(txt, cuerpo, cuerpo.withBold(true), c, quien));
    }
 
-   public static int baseDeFuente(ResourceLocation f) {
+   public static int baseDeFuente(Identifier f) {
       if (f != null && "ruleta".equals(f.getNamespace())) {
          String p = f.getPath();
          if (!p.startsWith("rotulo") && !p.startsWith("titulo")) {
@@ -420,7 +420,7 @@ public final class Mensajes {
    static Component[] aviso(RuletaColor c, String tituloPropio, String txt, String quien) {
       String encabezado = tituloPropio != null && !tituloPropio.isBlank() ? tituloPropio : ENCABEZADO.get(c);
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
       Component t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))
@@ -431,7 +431,7 @@ public final class Mensajes {
 
    static Component mensaje(RuletaColor c, Mensajes.Config cfg, String quien) {
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(ResourceLocation.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
       MutableComponent t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))

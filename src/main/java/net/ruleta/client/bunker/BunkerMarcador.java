@@ -13,7 +13,7 @@ import java.util.List;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.Font.DisplayMode;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
@@ -150,7 +150,7 @@ public final class BunkerMarcador {
       RenderSystem.disableBlend();
    }
 
-   public static void dibujarPin(GuiGraphics g, float x, float y, Bunkers.Bunker b) {
+   public static void dibujarPin(GuiGraphicsExtractor g, float x, float y, Bunkers.Bunker b) {
       g.pose().pushPose();
       g.pose().translate(x, y, 0.0F);
       Matrix4f m = g.pose().last().pose();
