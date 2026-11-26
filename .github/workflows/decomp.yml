@@ -26,7 +26,7 @@ jobs:
           echo "jar=$J"
           curl -sL -o vf.jar https://github.com/Vineflower/vineflower/releases/download/1.11.1/vineflower-1.11.1.jar
           mkdir out && java -jar vf.jar -log=ERROR "$J" out
-          cd out && unzip -qo *.jar 2>/dev/null; rm -f *.jar; ls | head
+          cd out; (ls *.jar >/dev/null 2>&1 && unzip -qo *.jar && rm -f *.jar) || true; ls | head
       - name: Publicar fuentes
         run: |
           cd out
