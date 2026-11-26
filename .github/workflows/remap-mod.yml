@@ -53,19 +53,23 @@ jobs:
           exec > >(tee -a /tmp/all.log) 2>&1
           cd "$GITHUB_WORKSPACE"
           git config user.name github-actions; git config user.email actions@github.com
-          git checkout -q --orphan mojmap-src
-          git rm -rq --cached . ; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          git symbolic-ref HEAD refs/heads/mojmap-src; rm -f .git/index
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           mkdir -p src/main/java src/main/resources
+          ls -la /tmp/dec
           unzip -q /tmp/dec/*.jar -d src/main/java
-          (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' -print0 | cpio -0pdm "$GITHUB_WORKSPACE/src/main/resources")
-          git add -A && git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
+          (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/resources/" \;)
+          git add -A
+          git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
           git push -f origin mojmap-src
       - name: publish log
         if: always()
         run: |
           cd "$GITHUB_WORKSPACE"
           git config user.name github-actions; git config user.email actions@github.com
-          git checkout -q --orphan mojmap-log 2>/dev/null || true
-          git rm -rq --cached . 2>/dev/null; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          git symbolic-ref HEAD refs/heads/mojmap-log; rm -f .git/index
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           tail -c 200000 /tmp/all.log > log.txt
-          git add log.txt && git commit -q -m log && git push -f origin mojmap-log
+          git add log.txt
+          git commit -q -m log
+          git push -f origin mojmap-log
