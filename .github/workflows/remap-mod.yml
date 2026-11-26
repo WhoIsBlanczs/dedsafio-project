@@ -18,6 +18,7 @@ jobs:
           gradle-version: '8.10.2'
       - name: remap jar intermediary -> mojmap (1.21.1)
         run: |
+          exec > >(tee -a /tmp/all.log) 2>&1
           mkdir -p /tmp/rm/libs && cd /tmp/rm
           cp "$GITHUB_WORKSPACE"/jar/DEDsafio4RuletaFanProjectFabric-1_3_0.jar libs/mod.jar
           cat > settings.gradle <<'S'
@@ -39,21 +40,32 @@ jobs:
           find ~/.gradle /tmp/rm -path '*remapped_mods*' -name '*.jar' | tee /tmp/found.txt
       - name: decompile
         run: |
+          exec > >(tee -a /tmp/all.log) 2>&1
           cd /tmp
           V=$(curl -s https://repo1.maven.org/maven2/org/vineflower/vineflower/maven-metadata.xml | grep -oP '(?<=<release>)[^<]+')
           curl -sL -o vf.jar https://repo1.maven.org/maven2/org/vineflower/vineflower/$V/vineflower-$V.jar
           J=$(grep -i 'mod' /tmp/found.txt | grep -vi 'fabric-api\|fabric-loader\|fabric_api' | head -1); echo "jar: $J"
           mkdir -p dec && java -Xmx6g -jar vf.jar -dgs=1 -log=WARN "$J" dec/
-          mkdir -p jarx && cd jarx && unzip -q "$J" && cd ..
-          echo "$J" > /tmp/jarpath.txt
-      - name: commit result to branch mojmap-src
+          mkdir -p jarx && cd jarx && unzip -q "$J"
+          ls /tmp/dec
+      - name: publish remapped sources to branch mojmap-src
         run: |
-          cd /tmp && rm -rf out && mkdir out && cd out
-          git init -q -b mojmap-src
-          mkdir -p src/main/java src/main/resources
-          unzip -q /tmp/dec/*.jar -d src/main/java 2>/dev/null || cp -r /tmp/dec/* src/main/java/ || true
-          cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' | while read f; do mkdir -p "/tmp/out/src/main/resources/$(dirname "$f")"; cp "$f" "/tmp/out/src/main/resources/$f"; done
-          cd /tmp/out
+          exec > >(tee -a /tmp/all.log) 2>&1
+          cd "$GITHUB_WORKSPACE"
           git config user.name github-actions; git config user.email actions@github.com
+          git checkout -q --orphan mojmap-src
+          git rm -rq --cached . ; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          mkdir -p src/main/java src/main/resources
+          unzip -q /tmp/dec/*.jar -d src/main/java
+          (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' -print0 | cpio -0pdm "$GITHUB_WORKSPACE/src/main/resources")
           git add -A && git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" mojmap-src
+          git push -f origin mojmap-src
+      - name: publish log
+        if: always()
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git config user.name github-actions; git config user.email actions@github.com
+          git checkout -q --orphan mojmap-log 2>/dev/null || true
+          git rm -rq --cached . 2>/dev/null; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          tail -c 200000 /tmp/all.log > log.txt
+          git add log.txt && git commit -q -m log && git push -f origin mojmap-log
