@@ -57,7 +57,7 @@ jobs:
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           mkdir -p src/main/java src/main/resources
           ls -la /tmp/dec
-          unzip -q /tmp/dec/*.jar -d src/main/java
+          (cd /tmp/dec && find . -name '*.java' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/java/" \;)
           (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/resources/" \;)
           git add -A
           git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
