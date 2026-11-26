@@ -21,9 +21,6 @@ public final class RuletaClient implements ClientModInitializer {
 		}));
 		ClientPlayNetworking.registerGlobalReceiver(ActiveChangesPayload.TYPE, (payload, context) -> context.client().execute(() -> {
 			ClientState.activeChanges = new java.util.ArrayList<>(payload.ids());
-			if (context.client().screen instanceof ActiveChangesScreen screen) {
-				screen.refresh();
-			}
 		}));
 		ClientPlayNetworking.registerGlobalReceiver(OpenScreenPayload.TYPE, (payload, context) -> context.client().execute(() -> {
 			Minecraft mc = context.client();
