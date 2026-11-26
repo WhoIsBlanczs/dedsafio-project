@@ -14,6 +14,7 @@ public final class RuletaClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		RouletteHud.register();
+		ar.hombrosafio.ruleta.casino.client.CasinoCliente.registrar();
 
 		ClientPlayNetworking.registerGlobalReceiver(SettingsSyncPayload.TYPE, (payload, context) -> context.client().execute(() -> {
 			ClientState.canEdit = payload.canEdit();
@@ -27,7 +28,7 @@ public final class RuletaClient implements ClientModInitializer {
 			Screen screen = switch (payload.screen()) {
 				case "ajustes" -> new SettingsScreen(null);
 				case "cambios" -> new ActiveChangesScreen(null);
-				case "panel" -> new PanelScreen(null);
+				case "panel" -> new ar.hombrosafio.ruleta.casino.client.PantallaPanel(null);
 				default -> new PickerScreen();
 			};
 			mc.gui.setScreen(screen);
