@@ -33,6 +33,11 @@ jobs:
           echo "mc=$MC" >> /tmp/pub/status.txt
           FA=$(find ~/.gradle .gradle -name 'fabric-*.jar' 2>/dev/null | grep -v sources | tr '\n' ':')
           { for j in "$MC" $(echo $FA | tr ':' ' '); do unzip -Z1 "$j" 2>/dev/null | grep '\.class$' | grep -v 'package-info' | sed 's/\.class$//' ; done; } | sort -u > /tmp/pub/classes.txt
+          if [ -s tools/grep.txt ]; then
+            unzip -Z1 $(echo $MC | cut -d: -f1) | grep '\.class$' | grep -v 'package-info' | sed 's/\.class$//;s|/|.|g' > /tmp/cl.txt
+            javap -public -cp "$MC:$FA" $(cat /tmp/cl.txt | tr '\n' ' ') 2>/dev/null | awk '/^(public|abstract|final|class|interface|enum).*[{]$/ && !/\(/ {cls=$0} {print cls " ## " $0}' > /tmp/allsigs.txt
+            while read -r pat; do case "$pat" in ''|\#*) continue;; esac; echo "=== $pat"; grep -E -- "## .*($pat)" /tmp/allsigs.txt | grep -v '^ ##' | sed 's/ ## /  ::  /' | head -40; done < tools/grep.txt | head -c 900000 > /tmp/pub/grep.txt
+          fi
           if [ -s tools/queries.txt ]; then javap -public -cp "$MC:$FA" $(grep -v '^#' tools/queries.txt | tr '\n' ' ') > /tmp/pub/sigs.txt 2>&1 || true; fi
           git config user.name github-actions; git config user.email actions@github.com
           git symbolic-ref HEAD refs/heads/port-result; rm -f .git/index

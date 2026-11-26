@@ -1,0 +1,24 @@
+ hurtMarked| setHurtMarked|markHurt|hasImpulse
+invulnerableTime|InvulnerableTime
+ serverLevel\(|ServerLevel level\(\)
+Entity.* getServer\(|MinecraftServer getServer\(
+PayloadTypeRegistry.*(playS2C|playC2S|clientboundPlay|serverboundPlay)
+boolean hasPermission|isAdmin|permissions\(\)
+displayClientMessage|sendOverlayMessage|sendSystemMessage
+ClientCommand(Manager|s) 
+ hideGui
+getDayTime|getOverworldClockTime|getGameTime
+registryOrThrow|lookupOrThrow
+getSharedSpawnPos|getRespawnData|getRespawn
+getStructureManager
+ getTags\(\)
+blocksMotion|isSolid\(\)
+isDetonating
+getArmorSlots|getEquipment
+hasShiftDown|isShiftKeyDown
+ renderItem\(
+ setScreen\(|void setScreen
+getPixelRGBA|getPixel\(
+sidedSuccess
+ drawString\(| text\(
+class .*MobGriefing|MOB_GRIEFING|NATURAL_REGENERATION|SPAWN_MOBS|ADVANCE_TIME
