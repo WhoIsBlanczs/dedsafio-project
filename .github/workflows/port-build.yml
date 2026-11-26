@@ -21,6 +21,7 @@ jobs:
           echo $? > /tmp/build.rc
           exit 0
       - name: publish log and jar
+        shell: bash {0}
         run: |
           cd "$GITHUB_WORKSPACE"
           mkdir -p /tmp/pub
