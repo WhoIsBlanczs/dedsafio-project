@@ -1,0 +1,11 @@
+{
+  "cancion_i": { "sounds": [ { "name": "ruletadedsafio:cancion_i", "stream": true, "attenuation_distance": 64 } ] },
+  "cancion_d": { "sounds": [ { "name": "ruletadedsafio:cancion_d", "stream": true, "attenuation_distance": 64 } ] },
+  "canto_i":   { "sounds": [ { "name": "ruletadedsafio:canto_i", "stream": true, "attenuation_distance": 64 } ] },
+  "canto_d":   { "sounds": [ { "name": "ruletadedsafio:canto_d", "stream": true, "attenuation_distance": 64 } ] },
+  "ola_lejos": { "sounds": [ { "name": "ruletadedsafio:ola_lejos", "stream": true, "attenuation_distance": 64 } ] },
+  "ola_dentro": { "sounds": [ { "name": "ruletadedsafio:ola_dentro", "stream": true } ] },
+  "ola_golpe":  { "sounds": [ { "name": "ruletadedsafio:ola_golpe" } ] },
+  "olas":    { "sounds": [ { "name": "ruletadedsafio:olas", "stream": true } ] },
+  "viento":  { "sounds": [ { "name": "ruletadedsafio:viento", "stream": true } ] }
+}
