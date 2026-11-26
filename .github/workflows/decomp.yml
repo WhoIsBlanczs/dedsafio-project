@@ -1,5 +1,7 @@
 name: decomp
-on: workflow_dispatch
+on:
+  push:
+    branches: [decomp]
 permissions:
   contents: write
 jobs:
