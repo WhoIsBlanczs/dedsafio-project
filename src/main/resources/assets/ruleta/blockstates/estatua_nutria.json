@@ -1,0 +1,28 @@
+{
+ "variants": {
+  "facing=north,part=lower": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=north,part=upper": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=east,part=lower": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=east,part=upper": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=south,part=lower": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=south,part=upper": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=west,part=lower": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  },
+  "facing=west,part=upper": {
+   "model": "ruleta:block/estatua_nutria_vacio"
+  }
+ }
+}

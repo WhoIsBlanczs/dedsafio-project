@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PDP",
+    "DND",
+    "PDP"
+  ],
+  "key": {
+    "P": {
+      "item": "ruleta:piedra_dilitio"
+    },
+    "D": {
+      "item": "ruleta:dilitio"
+    },
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "id": "ruleta:bateria"
+  }
+}

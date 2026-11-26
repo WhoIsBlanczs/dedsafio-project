@@ -1,0 +1,47 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.ruleta.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "BlockStateBaseMixin",
+    "ChestBlockMixin",
+    "DoorBlockMixin",
+    "HopperBlockEntityMixin",
+    "ServerGamePacketListenerImplMixin",
+    "LivingEntityMixin",
+    "PlayerMixin",
+    "ServerPlayerMixin",
+    "EntityMixin",
+    "PersistentEntitySectionManagerMixin",
+    "MobMixin",
+    "ExplosionMixin",
+    "ThrownEnderpearlMixin",
+    "PistonBaseBlockMixin",
+    "BlockItemMixin",
+    "BucketItemMixin",
+    "LiquidBlockMixin",
+    "ItemStackMixin",
+    "CarvedPumpkinBlockMixin"
+  ],
+  "client": [
+    "ChestRendererMixin",
+    "JugadorOcultoMixin",
+    "KeyboardInputMixin",
+    "CamaraEventosMixin",
+    "NieblaMixin",
+    "SonidoMixin",
+    "GuiMixin",
+    "EfectosHudMixin",
+    "EntidadRenderMixin",
+    "ChatMixin",
+    "LuzMixin",
+    "NivelRenderMixin",
+    "MinecraftMixin",
+    "AguaDedsafioMixin",
+    "GameRendererInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

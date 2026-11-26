@@ -1,0 +1,21 @@
+#version 150
+
+// Código generado por Claude (Anthropic). Meteoritos: posición, color y textura (la posición también es la dirección en el cielo).
+
+in vec3 Position;
+in vec4 Color;
+in vec2 UV0;
+
+uniform mat4 ModelViewMat;
+uniform mat4 ProjMat;
+
+out vec4 vColor;
+out vec2 vUV;
+out vec3 vPos;
+
+void main() {
+    gl_Position = ProjMat * ModelViewMat * vec4(Position, 1.0);
+    vColor = Color;
+    vUV = UV0;
+    vPos = Position;
+}

@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruleta:block/estrella_mar"
+   },
+   {
+    "model": "ruleta:block/estrella_mar",
+    "y": 90
+   },
+   {
+    "model": "ruleta:block/estrella_mar",
+    "y": 180
+   },
+   {
+    "model": "ruleta:block/estrella_mar",
+    "y": 270
+   }
+  ]
+ }
+}

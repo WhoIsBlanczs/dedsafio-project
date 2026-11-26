@@ -1,0 +1,22 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "srcalpha",
+        "dstrgb": "1-srcalpha"
+    },
+    "vertex": "ruleta:tormenta_cielo",
+    "fragment": "ruleta:tormenta_cielo",
+    "attributes": [ "Position" ],
+    "samplers": [],
+    "uniforms": [
+        { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "Tiempo", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Nivel", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "CamPos", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
+        { "name": "Losa", "type": "float", "count": 2, "values": [ 300.0, 170.0 ] },
+        { "name": "Torn", "type": "float", "count": 4, "values": [ 0.0, 0.0, 50.0, 0.0 ] },
+        { "name": "Rayo", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Niebla", "type": "float", "count": 3, "values": [ 0.31, 0.39, 0.48 ] }
+    ]
+}

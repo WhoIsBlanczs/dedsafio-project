@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruleta:block/caracola"
+   },
+   {
+    "model": "ruleta:block/caracola",
+    "y": 90
+   },
+   {
+    "model": "ruleta:block/caracola",
+    "y": 180
+   },
+   {
+    "model": "ruleta:block/caracola",
+    "y": 270
+   }
+  ]
+ }
+}

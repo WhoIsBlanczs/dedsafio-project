@@ -12,12 +12,9 @@ repositories {
 }
 
 loom {
-	splitEnvironmentSourceSets()
-
 	mods {
-		"modid" {
+		"ruleta" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
 		}
 	}
 }
@@ -42,6 +39,12 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 25
+	it.options.encoding = 'UTF-8'
+	it.options.compilerArgs += ['-Xmaxerrs', '20000', '-Xmaxwarns', '0']
+}
+
+base {
+	archivesName = 'DEDsafio4RuletaFanProjectFabric'
 }
 
 java {

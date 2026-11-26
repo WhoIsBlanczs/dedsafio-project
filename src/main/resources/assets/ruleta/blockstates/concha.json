@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruleta:block/concha"
+   },
+   {
+    "model": "ruleta:block/concha",
+    "y": 90
+   },
+   {
+    "model": "ruleta:block/concha",
+    "y": 180
+   },
+   {
+    "model": "ruleta:block/concha",
+    "y": 270
+   }
+  ]
+ }
+}
