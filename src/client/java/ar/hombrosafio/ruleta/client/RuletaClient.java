@@ -15,6 +15,7 @@ public final class RuletaClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		RouletteHud.register();
 		ar.hombrosafio.ruleta.casino.client.CasinoCliente.registrar();
+		ar.hombrosafio.ruleta.casino.client.TragamonedasCliente.registrar();
 
 		ClientPlayNetworking.registerGlobalReceiver(SettingsSyncPayload.TYPE, (payload, context) -> context.client().execute(() -> {
 			ClientState.canEdit = payload.canEdit();
