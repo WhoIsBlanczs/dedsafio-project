@@ -331,10 +331,10 @@ public class PantallaAjustes extends UiPantalla {
                   return false;
                }
             } else if (Ui.dentro(mx, my, cx, y2, 16, 16)) {
-               this.enviar(actual - this.d.paso() * (Screen.hasShiftDown() ? 5 : 1));
+               this.enviar(actual - this.d.paso() * (net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 5 : 1));
                return true;
             } else if (Ui.dentro(mx, my, cx + 160, y2, 16, 16)) {
-               this.enviar(actual + this.d.paso() * (Screen.hasShiftDown() ? 5 : 1));
+               this.enviar(actual + this.d.paso() * (net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 5 : 1));
                return true;
             } else if (this.barra.sobre(mx, my, cx + 24, y2 + 5, 128)) {
                this.barra.arrastrando = true;

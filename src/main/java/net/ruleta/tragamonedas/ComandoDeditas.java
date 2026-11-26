@@ -42,7 +42,7 @@ public final class ComandoDeditas {
       dispatcher.register(
          (LiteralArgumentBuilder)Commands.literal("ruleta")
             .then(
-               ((LiteralArgumentBuilder)Commands.literal("deditas").requires(s -> s.hasPermission(2)))
+               ((LiteralArgumentBuilder)Commands.literal("deditas").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .then(
                      Commands.argument("jugador", EntityArgument.player())
                         .then(
@@ -69,7 +69,7 @@ public final class ComandoDeditas {
          long nuevo = saldo + cantidad * unidad;
          if (nuevo > 9000000000000L) {
             ((CommandSourceStack)ctx.getSource())
-               .sendFailure(Component.literal("El saldo de " + jugador.getGameProfile().getName() + " llegaría al tope permitido."));
+               .sendFailure(Component.literal("El saldo de " + jugador.getGameProfile().name() + " llegaría al tope permitido."));
             return 0;
          } else {
             datos.poner(jugador.getUUID(), nuevo);

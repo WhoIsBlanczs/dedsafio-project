@@ -91,7 +91,7 @@ public class PantallaCasino extends UiPantalla {
    }
 
    private void elegirItem(Consumer<String> alElegir) {
-      Minecraft.getInstance().setScreen(new PantallaSelectorItem(this, alElegir));
+      Minecraft.getInstance().setScreenAndShow(new PantallaSelectorItem(this, alElegir));
    }
 
    private void guardar() {
@@ -445,7 +445,7 @@ public class PantallaCasino extends UiPantalla {
       @Override
       public boolean clic(double mx, double my, int boton, int x, int y, int w) {
          int yb = y + 9;
-         int paso = Screen.hasShiftDown() ? 10 : 1;
+         int paso = net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1;
          PantallaCasino p = PantallaCasino.this;
          if (Ui.dentro(mx, my, this.xMenos(x, w), yb, 22, 22)) {
             this.s().peso = Mth.clamp(this.s().peso - paso, 1, 1000);

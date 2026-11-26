@@ -105,7 +105,7 @@ public final class OlaCliente {
 
    public static void tick() {
       Minecraft mc = Minecraft.getInstance();
-      if (mc.level == null || !DedsafioCielo.enDimension() && !mc.level.dimension().location().toString().equals(dimAct)) {
+      if (mc.level == null || !DedsafioCielo.enDimension() && !mc.level.dimension().identifier().toString().equals(dimAct)) {
          if (activa || dentro) {
             limpiar();
          }

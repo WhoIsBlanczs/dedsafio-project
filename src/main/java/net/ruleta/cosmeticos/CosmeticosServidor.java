@@ -34,7 +34,7 @@ public final class CosmeticosServidor {
       CompoundTag viejo = Persistente.de(original);
       CompoundTag nuevo = Persistente.de(renacido);
       if (viejo.contains("ruleta_aura")) {
-         nuevo.putString("ruleta_aura", viejo.getString("ruleta_aura"));
+         nuevo.putString("ruleta_aura", viejo.getStringOr("ruleta_aura", ""));
       }
    }
 
@@ -72,7 +72,7 @@ public final class CosmeticosServidor {
       dispatcher.register(
          (LiteralArgumentBuilder)Commands.literal("ruleta")
             .then(
-               ((LiteralArgumentBuilder)Commands.literal("aura").requires(s -> s.hasPermission(2)))
+               ((LiteralArgumentBuilder)Commands.literal("aura").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .then(
                      Commands.argument("jugador", EntityArgument.player())
                         .then(
@@ -111,7 +111,7 @@ public final class CosmeticosServidor {
                                     } else {
                                        Cosmeticos.ponerAura(j, pedido);
                                        ((CommandSourceStack)ctx.getSource())
-                                          .sendSuccess(() -> Component.literal("Aura de " + pedido + " para " + j.getGameProfile().getName()), true);
+                                          .sendSuccess(() -> Component.literal("Aura de " + pedido + " para " + j.getGameProfile().name()), true);
                                        return 1;
                                     }
                                  }

@@ -57,7 +57,7 @@ abstract class FilaZonasPedestal extends UiFila {
    }
 
    private static int pasoActual() {
-      return Screen.hasShiftDown() ? 10 : 1;
+      return net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1;
    }
 
    @Override

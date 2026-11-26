@@ -81,7 +81,7 @@ public final class TotemEvents {
    }
 
    private static boolean eonInmune(ServerPlayer p) {
-      return Persistente.de(p).getLong("ruleta_eon_inmune_hasta") >= p.level().getGameTime();
+      return Persistente.de(p).getLongOr("ruleta_eon_inmune_hasta", 0L) >= p.level().getGameTime();
    }
 
    @SubscribeEvent(priority = EventPriority.LOWEST)

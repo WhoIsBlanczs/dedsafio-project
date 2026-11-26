@@ -148,7 +148,7 @@ public class MomentosPantalla extends UiPantalla {
                      if ("eclipse".equals(m.id())) {
                         Minecraft.getInstance().setScreenAndShow(new PantallaEclipse(this));
                      } else if (m.temporizador()) {
-                        Minecraft.getInstance().setScreen(new MomentosPantalla.Temporizador(this, m));
+                        Minecraft.getInstance().setScreenAndShow(new MomentosPantalla.Temporizador(this, m));
                      } else {
                         RedCliente.enviar(new MomentoPayload(m.id(), true, 0));
                      }
@@ -319,7 +319,7 @@ public class MomentosPantalla extends UiPantalla {
                   26,
                   PantallaBunkers.texto(this.bunkerElegido),
                   UiBoton.Estilo.NORMAL,
-                  () -> Minecraft.getInstance().setScreen(new PantallaBunkers(this, this.bunkerElegido, k -> this.bunkerElegido = k))
+                  () -> Minecraft.getInstance().setScreenAndShow(new PantallaBunkers(this, this.bunkerElegido, k -> this.bunkerElegido = k))
                )
             );
          }

@@ -231,7 +231,7 @@ public class SupernovaEntity extends Entity {
          dir = dir.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 1.0, 0.0) : dir.multiply(1.0, 0.0, 1.0).normalize();
          double k = 3.5 - 2.0 * t;
          e.push(dir.x * k, 0.9, dir.z * k);
-         e.hurtMarked = true;
+         e.needsSync = true;
       }
    }
 
@@ -251,7 +251,7 @@ public class SupernovaEntity extends Entity {
          Vec3 dir = e.position().subtract(center);
          dir = dir.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 1.0, 0.0) : dir.normalize();
          e.push(dir.x * 3.0, 1.0, dir.z * 3.0);
-         e.hurtMarked = true;
+         e.needsSync = true;
       }
    }
 
@@ -281,11 +281,11 @@ public class SupernovaEntity extends Entity {
 
    protected void readAdditionalSaveData(CompoundTag tag) {
       if (tag.contains("MaxRadius")) {
-         this.setMaxRadius(tag.getFloat("MaxRadius"));
+         this.setMaxRadius(tag.getFloatOr("MaxRadius", 0.0F));
       }
 
       if (tag.contains("HoldTicks")) {
-         this.setHoldTicks(tag.getInt("HoldTicks"));
+         this.setHoldTicks(tag.getIntOr("HoldTicks", 0));
       }
    }
 

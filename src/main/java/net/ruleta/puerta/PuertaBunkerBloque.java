@@ -27,7 +27,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -43,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 public class PuertaBunkerBloque extends BaseEntityBlock {
    public static final int ANCHO = 8;
    public static final int ALTO = 11;
-   public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+   public static final EnumProperty<net.minecraft.core.Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
    public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
    public static final IntegerProperty DX = IntegerProperty.create("dx", 0, 7);
    public static final IntegerProperty DY = IntegerProperty.create("dy", 0, 10);

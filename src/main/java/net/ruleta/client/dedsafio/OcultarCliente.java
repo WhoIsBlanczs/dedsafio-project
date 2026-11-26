@@ -29,7 +29,7 @@ public final class OcultarCliente {
       if (todos && e instanceof Player) {
          Minecraft mc = Minecraft.getInstance();
          if (mc.level != null && mc.player != null && e != mc.player) {
-            Identifier d = mc.level.dimension().location();
+            Identifier d = mc.level.dimension().identifier();
             return d.getNamespace().equals("ruleta") && d.getPath().equals("dedsafio") && !visibles.contains(e.getId());
          } else {
             return false;

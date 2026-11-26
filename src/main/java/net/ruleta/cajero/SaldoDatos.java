@@ -40,13 +40,13 @@ public class SaldoDatos extends SavedData {
 
    public static SaldoDatos cargar(CompoundTag tag, Provider registros) {
       SaldoDatos d = new SaldoDatos();
-      ListTag lista = tag.getList("saldos", 10);
+      ListTag lista = tag.getListOrEmpty("saldos");
 
       for (int i = 0; i < lista.size(); i++) {
          CompoundTag c = lista.getCompound(i);
 
          try {
-            d.saldos.put(UUID.fromString(c.getString("id")), c.getLong("saldo"));
+            d.saldos.put(UUID.fromString(c.getStringOr("id", "")), c.getLongOr("saldo", 0L));
          } catch (IllegalArgumentException var7) {
          }
       }

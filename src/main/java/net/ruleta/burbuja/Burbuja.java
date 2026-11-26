@@ -240,18 +240,18 @@ public class Burbuja extends Entity implements ExplosionInmune {
    }
 
    protected void readAdditionalSaveData(CompoundTag nbt) {
-      if (nbt.hasUUID("Propietario")) {
-         this.propietario = nbt.getUUID("Propietario");
+      if (nbt.contains("Propietario")) {
+         this.propietario = nbt.read("Propietario", net.minecraft.core.UUIDUtil.CODEC).orElse(null);
       }
 
       if (nbt.contains("Diametro")) {
-         this.setDiametro(nbt.getFloat("Diametro"));
+         this.setDiametro(nbt.getFloatOr("Diametro", 0.0F));
       }
    }
 
    protected void addAdditionalSaveData(CompoundTag nbt) {
       if (this.propietario != null) {
-         nbt.putUUID("Propietario", this.propietario);
+         nbt.store("Propietario", net.minecraft.core.UUIDUtil.CODEC, this.propietario);
       }
 
       nbt.putFloat("Diametro", this.getDiametro());

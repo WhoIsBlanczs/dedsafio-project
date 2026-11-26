@@ -2,7 +2,7 @@ package net.ruleta.client.reviil;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.network.chat.Component;
@@ -16,10 +16,10 @@ public final class ComandoCieloReviil {
       ClientCommandRegistrationCallback.EVENT
          .register(
             (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
-               (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommandManager.literal("cieloreviil")
+               (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommands.literal("cieloreviil")
                         .executes(c -> poner(c, !OpcionesCliente.reviilCielo)))
-                     .then(ClientCommandManager.literal("on").executes(c -> poner(c, true))))
-                  .then(ClientCommandManager.literal("off").executes(c -> poner(c, false)))
+                     .then(ClientCommands.literal("on").executes(c -> poner(c, true))))
+                  .then(ClientCommands.literal("off").executes(c -> poner(c, false)))
             )
          );
    }

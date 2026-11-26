@@ -9,9 +9,9 @@ public final class PedestalRed {
    }
 
    public static void registrar() {
-      PayloadTypeRegistry.playC2S().register(PedestalPedirPayload.TYPE, PedestalPedirPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(PedestalGuardarPayload.TYPE, PedestalGuardarPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(PedestalDatosPayload.TYPE, PedestalDatosPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(PedestalPedirPayload.TYPE, PedestalPedirPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(PedestalGuardarPayload.TYPE, PedestalGuardarPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(PedestalDatosPayload.TYPE, PedestalDatosPayload.CODEC);
       ServerPlayNetworking.registerGlobalReceiver(PedestalPedirPayload.TYPE, (m, ctx) -> enviar(ctx.player()));
       ServerPlayNetworking.registerGlobalReceiver(PedestalGuardarPayload.TYPE, (m, ctx) -> guardar(ctx.player(), m.json()));
    }

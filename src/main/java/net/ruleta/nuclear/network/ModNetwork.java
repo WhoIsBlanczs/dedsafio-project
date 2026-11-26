@@ -7,6 +7,6 @@ public final class ModNetwork {
    }
 
    public static void register() {
-      PayloadTypeRegistry.playS2C().register(TotemActivatePacket.TYPE, TotemActivatePacket.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(TotemActivatePacket.TYPE, TotemActivatePacket.CODEC);
    }
 }

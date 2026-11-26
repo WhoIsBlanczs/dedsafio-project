@@ -52,7 +52,7 @@ public final class CajeroHud {
          for (int i = 0; i < 3; i++) {
             if (ver[i]) {
                String t = Long.toString(p[i]);
-               g.drawString(f, t, cx, y + 5, -1, true);
+               g.text(f, t, cx, y + 5, -1, true);
                cx += f.width(t) + 3;
                g.blit(CajeroCliente.icono(i), cx, y + 2, 0.0F, 0.0F, 12, 13, 12, 13);
                cx += 18;

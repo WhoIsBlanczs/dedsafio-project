@@ -151,7 +151,7 @@ public final class MomentoMeteoritos {
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
                               "meteoritos"
                            )
-                           .requires(s -> s.hasPermission(2)))
+                           .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                         .then(
                            Commands.literal("cielo")
                               .executes(

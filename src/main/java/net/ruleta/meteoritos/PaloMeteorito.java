@@ -5,7 +5,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +20,7 @@ public class PaloMeteorito extends Item {
       super(p);
    }
 
-   public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
+   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) {
       ItemStack palo = jugador.getItemInHand(mano);
       if (!nivel.isClientSide() && nivel instanceof ServerLevel sl) {
          Vec3 objetivo = MeteoritoEntity.dondeMira(jugador);
@@ -28,7 +28,7 @@ public class PaloMeteorito extends Item {
          jugador.getCooldowns().addCooldown(this, 20);
       }
 
-      return InteractionResultHolder.sidedSuccess(palo, nivel.isClientSide());
+      return InteractionResult.SUCCESS;
    }
 
    public boolean isFoil(ItemStack s) {

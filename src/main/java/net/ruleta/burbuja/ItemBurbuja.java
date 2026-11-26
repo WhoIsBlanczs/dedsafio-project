@@ -54,7 +54,7 @@ public class ItemBurbuja extends Item {
          jugador.sendOverlayMessage(Component.literal("No cabe la burbuja aquí"));
          return InteractionResult.FAIL;
       } else {
-         Burbujas.quitarDe(jugador.getServer(), jugador.getUUID());
+         Burbujas.quitarDe(jugador.level().getServer(), jugador.getUUID());
          nivel.addFreshEntity(b);
          nivel.playSound(null, b.getX(), b.getY(), b.getZ(), SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.PLAYERS, 1.0F, 1.4F);
          jugador.getCooldowns().addCooldown(this, 10);

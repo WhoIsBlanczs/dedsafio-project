@@ -16,7 +16,7 @@ public class SupernovaNet {
    public static void init() {
       if (!registered) {
          registered = true;
-         PayloadTypeRegistry.playS2C().register(SupernovaNet.SyncMessage.TYPE, SupernovaNet.SyncMessage.CODEC);
+         PayloadTypeRegistry.clientboundPlay().register(SupernovaNet.SyncMessage.TYPE, SupernovaNet.SyncMessage.CODEC);
       }
    }
 
@@ -70,7 +70,7 @@ public class SupernovaNet {
       static SupernovaNet.SyncMessage of(SupernovaEntity e, boolean remove) {
          return new SupernovaNet.SyncMessage(
             e.getId(),
-            e.level().dimension().location().toString(),
+            e.level().dimension().identifier().toString(),
             e.getX(),
             e.getY(),
             e.getZ(),

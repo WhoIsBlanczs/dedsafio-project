@@ -32,7 +32,7 @@ public class SupernovaGhosts {
          return out;
       }
 
-      String dim = mc.level.dimension().location().toString();
+      String dim = mc.level.dimension().identifier().toString();
 
       for (SupernovaState s : MAP.values()) {
          if (s.expired(now)) {

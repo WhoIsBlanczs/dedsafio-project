@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TragamonedasBloque extends BaseEntityBlock {
    public static final MapCodec<TragamonedasBloque> CODEC = simpleCodec(TragamonedasBloque::new);
-   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+   public static final EnumProperty<net.minecraft.core.Direction> FACING = HorizontalDirectionalBlock.FACING;
    public static final EnumProperty<ParteTragamonedas> PARTE = EnumProperty.create("part", ParteTragamonedas.class);
 
    public TragamonedasBloque(Properties propiedades) {
@@ -93,22 +93,22 @@ public class TragamonedasBloque extends BaseEntityBlock {
       nivel.setBlock(pos.above(2), (BlockState)estado.setValue(PARTE, ParteTragamonedas.UPPER), 3);
    }
 
-   protected ItemInteractionResult useItemOn(
+   protected InteractionResult useItemOn(
       ItemStack pila, BlockState estado, Level nivel, BlockPos pos, Player jugador, InteractionHand mano, BlockHitResult golpe
    ) {
       ConfigTragamonedas cfg = ConfigTragamonedas.get();
       Identifier id = Identifier.tryParse(cfg.pago_item);
       Item pago = id == null ? Tragamonedas.DEDITA.get() : BuiltInRegistries.ITEM.getOptional(id).orElse(Tragamonedas.DEDITA.get());
       if (!pila.is(pago)) {
-         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+         return InteractionResult.TRY_WITH_EMPTY_HAND;
       }
 
       if (nivel.isClientSide()) {
-         return ItemInteractionResult.SUCCESS;
+         return InteractionResult.SUCCESS;
       }
 
       if (pila.getCount() < cfg.pago_cantidad && !jugador.getAbilities().instabuild) {
-         return ItemInteractionResult.CONSUME;
+         return InteractionResult.CONSUME;
       }
 
       BlockPos medio = pos.below(((ParteTragamonedas)estado.getValue(PARTE)).altura()).above(1);
@@ -117,9 +117,9 @@ public class TragamonedasBloque extends BaseEntityBlock {
             pila.shrink(cfg.pago_cantidad);
          }
 
-         return ItemInteractionResult.SUCCESS;
+         return InteractionResult.SUCCESS;
       } else {
-         return ItemInteractionResult.CONSUME;
+         return InteractionResult.CONSUME;
       }
    }
 

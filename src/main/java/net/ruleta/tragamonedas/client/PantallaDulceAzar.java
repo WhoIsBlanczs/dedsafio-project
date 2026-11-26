@@ -40,7 +40,7 @@ public class PantallaDulceAzar extends UiPantalla {
                26,
                this.textoObjetivo(),
                UiBoton.Estilo.NORMAL,
-               () -> Minecraft.getInstance().setScreen(new JugadoresPantalla(this, true, nombre -> this.objetivo = nombre))
+               () -> Minecraft.getInstance().setScreenAndShow(new JugadoresPantalla(this, true, nombre -> this.objetivo = nombre))
             )
          ))
          .ayuda("Elige un jugador (o todos) para el viaje y la visibilidad");

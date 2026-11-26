@@ -9,9 +9,9 @@ public final class CasinoRed {
    }
 
    public static void registrar() {
-      PayloadTypeRegistry.playC2S().register(CasinoPedirPayload.TYPE, CasinoPedirPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(CasinoGuardarPayload.TYPE, CasinoGuardarPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CasinoDatosPayload.TYPE, CasinoDatosPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(CasinoPedirPayload.TYPE, CasinoPedirPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(CasinoGuardarPayload.TYPE, CasinoGuardarPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CasinoDatosPayload.TYPE, CasinoDatosPayload.CODEC);
       ServerPlayNetworking.registerGlobalReceiver(CasinoPedirPayload.TYPE, (m, ctx) -> enviar(ctx.player()));
       ServerPlayNetworking.registerGlobalReceiver(CasinoGuardarPayload.TYPE, (m, ctx) -> guardar(ctx.player(), m.json()));
    }

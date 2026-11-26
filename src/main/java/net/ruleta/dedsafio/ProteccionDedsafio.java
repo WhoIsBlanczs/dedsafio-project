@@ -9,7 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoneMealItem;
@@ -73,7 +73,7 @@ public final class ProteccionDedsafio {
          );
       UseItemCallback.EVENT.register((UseItemCallback)(jugador, nivel, mano) -> {
          ItemStack s = jugador.getItemInHand(mano);
-         return aqui(nivel) && bloqueado(jugador, s) ? InteractionResultHolder.fail(s) : InteractionResultHolder.pass(s);
+         return aqui(nivel) && bloqueado(jugador, s) ? InteractionResult.FAIL : InteractionResult.PASS;
       });
    }
 }

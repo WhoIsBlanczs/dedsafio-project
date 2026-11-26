@@ -54,7 +54,7 @@ public final class ComandoTornado {
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("tornado")
-                     .requires(s -> s.hasPermission(2)))
+                     .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .then(Commands.literal("cielo").executes(ctx -> ponerCielo((CommandSourceStack)ctx.getSource()))))
                .then(Commands.literal("stop").executes(ctx -> parar((CommandSourceStack)ctx.getSource()))))
             .then(
@@ -167,7 +167,7 @@ public final class ComandoTornado {
          int puestosNuevos = 0;
 
          for (int intento = 0; intento < Math.max(1, faltan) * 60 && puestosNuevos < faltan; intento++) {
-            ServerPlayer base = jugadores.get(mundo.random.nextInt(jugadores.size()));
+            ServerPlayer base = jugadores.get(mundo.getRandom().nextInt(jugadores.size()));
             double ang = mundo.getRandom().nextDouble() * Math.PI * 2.0;
             double d = 20.0 + mundo.random.nextDouble() * alcance;
             double x = base.getX() + Math.cos(ang) * d;
@@ -192,7 +192,7 @@ public final class ComandoTornado {
                         alto,
                         mundo.getRandom().nextDouble() * Math.PI * 2.0,
                         0,
-                        mundo.random.nextDouble() * 1000.0
+                        mundo.getRandom().nextDouble() * 1000.0
                      )
                   );
                   puestos.add(new double[]{x, z});
@@ -358,7 +358,7 @@ public final class ComandoTornado {
                   }
 
                   en.setDeltaMovement(nx, m.y, nz);
-                  en.hurtMarked = true;
+                  en.needsSync = true;
                   if (golpe && d < nucleo && en instanceof LivingEntity viva && dano > 0.0F) {
                      if (viva instanceof ServerPlayer jugador) {
                         jugador.hurt(Ruleta.fuenteLetalPublica(jugador, "ruleta.tornado", " murió por el Tornado"), dano);
@@ -461,7 +461,7 @@ public final class ComandoTornado {
             }
 
             e.setDeltaMovement(vel.x, vel.y + 0.08, vel.z);
-            e.hurtMarked = true;
+            e.needsSync = true;
             e.fallDistance = 0.0F;
             if (e instanceof LivingEntity viva && !c.traga && danoGiro > 0.0F && c.ticks % 10 == 0) {
                viva.setInvulnerableTime(0);
@@ -487,7 +487,7 @@ public final class ComandoTornado {
          e.setDeltaMovement(e.getDeltaMovement().scale(0.3));
       }
 
-      e.hurtMarked = true;
+      e.needsSync = true;
    }
 
    private static TornadoPayload estado() {

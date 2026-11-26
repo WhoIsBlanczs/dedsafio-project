@@ -23,7 +23,7 @@ public final class PedestalCliente {
          if (mc.screen instanceof PantallaPedestal pantalla) {
             pantalla.alRecibir(c);
          } else {
-            mc.setScreen(new PantallaPedestal(mc.screen, c));
+            mc.setScreenAndShow(new PantallaPedestal(mc.screen, c));
          }
       }
    }

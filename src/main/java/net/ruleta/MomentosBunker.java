@@ -116,7 +116,7 @@ public final class MomentosBunker {
 
    @Nullable
    static String preparar(ServerPlayer admin, Iterable<String> elegidos) {
-      eclipseQuien = admin.getGameProfile().getName();
+      eclipseQuien = admin.getGameProfile().name();
       String quien = null;
 
       for (String id : elegidos) {
@@ -355,7 +355,7 @@ public final class MomentosBunker {
          i = puertaFinal;
       }
 
-      return b != null && i >= 0 && nivel.dimension().location().toString().equals(b.dimension()) && Bunkers.puerta(b, i).equals(origen);
+      return b != null && i >= 0 && nivel.dimension().identifier().toString().equals(b.dimension()) && Bunkers.puerta(b, i).equals(origen);
    }
 
    private static boolean dentro(ServerPlayer p) {

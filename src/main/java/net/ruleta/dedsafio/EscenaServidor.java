@@ -24,8 +24,8 @@ public final class EscenaServidor {
    }
 
    public static void registrar() {
-      PayloadTypeRegistry.playS2C().register(EscenaPayload.TYPE, EscenaPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(DulceAzarAccionPayload.TYPE, DulceAzarAccionPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(EscenaPayload.TYPE, EscenaPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(DulceAzarAccionPayload.TYPE, DulceAzarAccionPayload.CODEC);
       ServerPlayNetworking.registerGlobalReceiver(DulceAzarAccionPayload.TYPE, (m, ctx) -> PanelDulceAzar.recibir(ctx.player(), m));
       ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((AfterPlayerChange)(jugador, origen, destino) -> alEntrar(jugador));
       ServerPlayConnectionEvents.JOIN.register((Join)(manejador, emisor, servidor) -> alEntrar(manejador.getPlayer()));
@@ -102,7 +102,7 @@ public final class EscenaServidor {
 
    private static void alEntrar(ServerPlayer jugador) {
       if (enDimension(jugador) && jugador.getServer() != null) {
-         OlaServidor.alEntrar(jugador.getServer(), jugador);
+         OlaServidor.alEntrar(jugador.level().getServer(), jugador);
       }
 
       if (corriendo() && enDimension(jugador)) {

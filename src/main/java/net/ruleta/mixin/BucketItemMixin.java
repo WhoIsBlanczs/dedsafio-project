@@ -1,7 +1,7 @@
 package net.ruleta.mixin;
 
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -30,7 +30,7 @@ public abstract class BucketItemMixin extends Item {
    }
 
    @Inject(method = "use", at = @At("HEAD"), cancellable = true, require = 0)
-   private void ruleta$usarCubo(Level nivel, Player jugador, InteractionHand mano, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+   private void ruleta$usarCubo(Level nivel, Player jugador, InteractionHand mano, CallbackInfoReturnable<InteractionResult> cir) {
       if (!nivel.isClientSide() && Bus.hayOyentes(FillBucketEvent.class)) {
          ItemStack cubo = jugador.getItemInHand(mano);
          net.minecraft.world.level.ClipContext.Fluid modo = this.field_7905 == Fluids.EMPTY
@@ -38,7 +38,7 @@ public abstract class BucketItemMixin extends Item {
             : net.minecraft.world.level.ClipContext.Fluid.NONE;
          FillBucketEvent ev = new FillBucketEvent(jugador, cubo, nivel, getPlayerPOVHitResult(nivel, jugador, modo));
          if (Bus.post(ev)) {
-            cir.setReturnValue(InteractionResultHolder.fail(cubo));
+            cir.setReturnValue(InteractionResult.FAIL);
          }
       }
    }

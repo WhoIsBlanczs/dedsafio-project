@@ -18,7 +18,7 @@ public final class HeartEvents {
    }
 
    public static int getHearts(Player player) {
-      return Persistente.de(player).getInt("nuclearcreeper_extra_hearts");
+      return Persistente.de(player).getIntOr("nuclearcreeper_extra_hearts", 0);
    }
 
    public static void addHeart(ServerPlayer player) {
@@ -43,7 +43,7 @@ public final class HeartEvents {
    }
 
    public static void onClone(ServerPlayer original, ServerPlayer renacido, boolean murio) {
-      int hearts = Persistente.de(original).getInt("nuclearcreeper_extra_hearts");
+      int hearts = Persistente.de(original).getIntOr("nuclearcreeper_extra_hearts", 0);
       Persistente.de(renacido).putInt("nuclearcreeper_extra_hearts", hearts);
       apply(renacido);
    }

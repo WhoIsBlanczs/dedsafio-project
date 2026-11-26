@@ -186,7 +186,7 @@ public class PantallaCodigo extends Screen {
       this.resalte(g, mx, my, x, y, 30, 30);
       int tx = x + 15 - this.font.width(t) / 2;
       g.text(this.font, t, tx + 1, y + 15 - 3, -12829116, false);
-      g.drawString(this.font, t, tx, y + 15 - 4, -2959909, false);
+      g.text(this.font, t, tx, y + 15 - 4, -2959909, false);
    }
 
    private void marco(GuiGraphicsExtractor g, int mx, int my, int x, int y) {

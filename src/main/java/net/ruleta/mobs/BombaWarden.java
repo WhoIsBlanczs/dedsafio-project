@@ -151,7 +151,7 @@ public class BombaWarden extends Vex {
          }
 
          this.setDeltaMovement(this.getDeltaMovement().lerp(deseada, alerta ? 0.3 : 0.12));
-         this.hurtMarked = true;
+         this.needsSync = true;
          if (this.tickCount % (alerta ? 5 : 11) == 0) {
             nivel.playSound(
                null, this.getX(), this.getY(), this.getZ(), SoundEvents.BAT_TAKEOFF, SoundSource.HOSTILE, alerta ? 0.5F : 0.25F, alerta ? 0.7F : 0.5F

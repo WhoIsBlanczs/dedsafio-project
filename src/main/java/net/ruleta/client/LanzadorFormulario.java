@@ -335,7 +335,7 @@ public class LanzadorFormulario extends Screen {
                mitad,
                20,
                this.textoObjetivo(),
-               () -> Minecraft.getInstance().setScreen(new JugadoresPantalla(this, false, nombre -> this.objetivo = nombre))
+               () -> Minecraft.getInstance().setScreenAndShow(new JugadoresPantalla(this, false, nombre -> this.objetivo = nombre))
             )
          );
          this.tiempoBan = new UiCampo(this.font, this.xR + mitad + 6, yFila2, this.anchoR - mitad - 6, 20, Component.literal("Duración ban"));
@@ -389,7 +389,7 @@ public class LanzadorFormulario extends Screen {
       this.lanzar.verde = true;
       this.addRenderableWidget(
          new LanzadorFormulario.BotonVolver(
-            this.xPanel + this.anchoPanel - 30, this.yPanel + 9, 20, 20, () -> Minecraft.getInstance().setScreen(new LanzadorRuleta())
+            this.xPanel + this.anchoPanel - 30, this.yPanel + 9, 20, 20, () -> Minecraft.getInstance().setScreenAndShow(new LanzadorRuleta())
          )
       );
       this.refrescar();

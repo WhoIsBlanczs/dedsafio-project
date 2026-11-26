@@ -151,7 +151,7 @@ public final class MapaPlaya {
                      } else {
                         j.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false));
                         j.setDeltaMovement(Vec3.ZERO);
-                        j.hurtMarked = true;
+                        j.needsSync = true;
                         j.fallDistance = 0.0F;
                         j.sendOverlayMessage(Component.literal("Cargando la playa..."));
                      }

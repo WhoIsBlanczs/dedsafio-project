@@ -24,7 +24,7 @@ public final class ComandoReviil {
 
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       LiteralCommandNode<CommandSourceStack> raiz = dispatcher.register(
-         (LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("reviil").requires(s -> s.hasPermission(2)))
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("reviil").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
             .executes(
                ctx -> {
                   ((CommandSourceStack)ctx.getSource())
@@ -63,10 +63,10 @@ public final class ComandoReviil {
 
    private static CommandNode<CommandSourceStack> pieza(String nombre, LiteralCommandNode<CommandSourceStack> siguiente) {
       return nombre.equals("mensaje")
-         ? ((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("mensaje").requires(s -> s.hasPermission(2)))
+         ? ((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("mensaje").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                .then(((RequiredArgumentBuilder)Commands.argument("texto", StringArgumentType.string()).executes(ComandoReviil::ejecutar)).redirect(siguiente)))
             .build()
-         : ((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(nombre).requires(s -> s.hasPermission(2)))
+         : ((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(nombre).requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .executes(ComandoReviil::ejecutar))
                .redirect(siguiente))
             .build();

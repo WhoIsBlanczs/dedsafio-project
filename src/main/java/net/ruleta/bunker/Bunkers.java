@@ -105,7 +105,7 @@ public final class Bunkers {
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
                               "bunker"
                            )
-                           .requires(s -> s.hasPermission(2)))
+                           .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                         .then(
                            ((LiteralArgumentBuilder)Commands.literal("set").executes(ctx -> set(ctx, "Bunker de Eón")))
                               .then(
@@ -155,7 +155,7 @@ public final class Bunkers {
       if (!nombre.isEmpty() && nombre.length() <= 32) {
          BlockPos pie = p.blockPosition();
          BlockPos esquina = pie.offset(-48, 0, -49);
-         String malo = motivoCerca(p.getServer(), p.level().dimension().location().toString(), esquina);
+         String malo = motivoCerca(p.level().getServer(), p.level().dimension().location().toString(), esquina);
          if (malo != null) {
             ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
             return 0;
@@ -244,7 +244,7 @@ public final class Bunkers {
 
    @Nullable
    public static Bunkers.Bunker elegirOConstruir(ServerPlayer admin) {
-      MinecraftServer server = admin.getServer();
+      MinecraftServer server = admin.level().getServer();
       List<Bunkers.Bunker> l = datos(server).lista;
       if (!l.isEmpty()) {
          return l.get(admin.getRandom().nextInt(l.size()));
@@ -267,7 +267,7 @@ public final class Bunkers {
    @Nullable
    static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
       if (!nivel.getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
-         if (motivoCerca(nivel.getServer(), nivel.dimension().location().toString(), esquina) != null) {
+         if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
             return null;
          }
 
@@ -442,9 +442,9 @@ public final class Bunkers {
       Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
       if (t.isPresent()) {
          CompoundTag nbt = t.get().save(new CompoundTag());
-         ListTag paleta = nbt.getList("palette", 10);
-         if (paleta.isEmpty() && nbt.contains("palettes", 9)) {
-            ListTag ps = nbt.getList("palettes", 9);
+         ListTag paleta = nbt.getListOrEmpty("palette");
+         if (paleta.isEmpty() && nbt.contains("palettes")) {
+            ListTag ps = nbt.getListOrEmpty("palettes");
             if (!ps.isEmpty()) {
                paleta = ps.getList(0);
             }
@@ -453,18 +453,18 @@ public final class Bunkers {
          BitSet aire = new BitSet();
 
          for (int k = 0; k < paleta.size(); k++) {
-            String n = paleta.getCompound(k).getString("Name");
+            String n = paleta.getCompound(k).getStringOr("Name", "");
             if (n.equals("minecraft:air") || n.equals("minecraft:cave_air") || n.equals("minecraft:void_air") || n.equals("minecraft:structure_void")) {
                aire.set(k);
             }
          }
 
-         ListTag bloques = nbt.getList("blocks", 10);
+         ListTag bloques = nbt.getListOrEmpty("blocks");
 
          for (int k = 0; k < bloques.size(); k++) {
             CompoundTag c = bloques.getCompound(k);
-            if (!aire.get(c.getInt("state"))) {
-               ListTag pos = c.getList("pos", 3);
+            if (!aire.get(c.getIntOr("state", 0))) {
+               ListTag pos = c.getListOrEmpty("pos");
                if (pos.size() == 3) {
                   marcar(r, new BlockPos(pos.getInt(0), pos.getInt(1), pos.getInt(2)));
                }
@@ -539,7 +539,7 @@ public final class Bunkers {
       StringBuilder sb = new StringBuilder();
       String dimP = p.level().dimension().location().toString();
 
-      for (Bunkers.Bunker b : datos(p.getServer()).lista) {
+      for (Bunkers.Bunker b : datos(p.level().getServer()).lista) {
          sb.append(linea(b, dimP, p, -1));
       }
 
@@ -577,7 +577,7 @@ public final class Bunkers {
 
    public static void accion(@Nullable ServerPlayer p, String accion, String clave) {
       if (p != null && p.getServer() != null && p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-         MinecraftServer server = p.getServer();
+         MinecraftServer server = p.level().getServer();
          if ("abrir".equals(accion)) {
             abrirBorrar(p);
          } else if ("borrar".equals(accion)) {
@@ -734,7 +734,7 @@ public final class Bunkers {
 
    public static boolean enCaja(Level nivel, BlockPos p) {
       if (nivel instanceof ServerLevel sl) {
-         String dim = sl.dimension().location().toString();
+         String dim = sl.dimension().identifier().toString();
 
          for (Bunkers.Bunker b : datos(sl.getServer()).lista) {
             if (b.dimension().equals(dim) && b.contiene(p)) {
@@ -896,7 +896,7 @@ public final class Bunkers {
    }
 
    public static void alEntrar(ServerPlayer p) {
-      if (p.getServer() != null) {
+      if (p.level().getServer() != null) {
          Red.enviar(p, marcadores());
          Red.enviar(p, todos(p.getServer()));
       }
@@ -950,14 +950,14 @@ public final class Bunkers {
 
       static Bunkers.Datos cargar(CompoundTag tag, Provider registros) {
          Bunkers.Datos d = new Bunkers.Datos();
-         ListTag l = tag.getList("bunkers", 10);
+         ListTag l = tag.getListOrEmpty("bunkers");
 
          for (int k = 0; k < l.size(); k++) {
             CompoundTag c = l.getCompound(k);
             if (c.contains("ex")) {
-               d.lista.add(new Bunkers.Bunker(c.getString("nombre"), c.getString("dim"), c.getInt("ex"), c.getInt("ey"), c.getInt("ez")));
+               d.lista.add(new Bunkers.Bunker(c.getStringOr("nombre", ""), c.getStringOr("dim", ""), c.getIntOr("ex", 0), c.getIntOr("ey", 0), c.getIntOr("ez", 0)));
             } else {
-               d.lista.add(new Bunkers.Bunker(c.getString("nombre"), c.getString("dim"), c.getInt("x") - 48, c.getInt("y") - 34 - 1, c.getInt("z") - 49));
+               d.lista.add(new Bunkers.Bunker(c.getStringOr("nombre", ""), c.getStringOr("dim", ""), c.getIntOr("x", 0) - 48, c.getIntOr("y", 0) - 34 - 1, c.getIntOr("z", 0) - 49));
             }
          }
 

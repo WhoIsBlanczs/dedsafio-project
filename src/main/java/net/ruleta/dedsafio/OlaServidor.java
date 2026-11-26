@@ -146,7 +146,7 @@ public final class OlaServidor {
                if (t.ticks <= 110) {
                   p.setNoGravity(true);
                   p.setDeltaMovement(new Vec3(0.0, t.vuelve ? 0.0 : 0.06, -0.04));
-                  p.hurtMarked = true;
+                  p.needsSync = true;
                   p.fallDistance = 0.0F;
                   p.setAirSupply(p.getMaxAirSupply());
                } else if (!t.vuelve) {

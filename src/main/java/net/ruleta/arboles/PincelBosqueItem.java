@@ -13,7 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -52,16 +52,16 @@ public class PincelBosqueItem extends Item {
       p.sendOverlayMessage(Component.literal("Pincel de bosque: " + m.nombre() + ", radio " + m.radio() + " (agáchate + clic para cambiar)"));
    }
 
-   public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
+   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) {
       ItemStack pila = jugador.getItemInHand(mano);
       if (jugador.isShiftKeyDown()) {
          if (!nivel.isClientSide()) {
             cambiar(jugador);
          }
 
-         return InteractionResultHolder.sidedSuccess(pila, nivel.isClientSide());
+         return InteractionResult.SUCCESS;
       } else {
-         return InteractionResultHolder.pass(pila);
+         return InteractionResult.PASS;
       }
    }
 

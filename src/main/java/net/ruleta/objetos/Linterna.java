@@ -12,7 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -51,11 +51,11 @@ public class Linterna extends Item {
 
    public static int carga(ItemStack s) {
       CompoundTag t = datos(s);
-      return !t.contains("Carga") ? cargaMax() : t.getInt("Carga");
+      return !t.contains("Carga") ? cargaMax() : t.getIntOr("Carga", 0);
    }
 
    public static boolean prendida(ItemStack s) {
-      return datos(s).getBoolean("Prendida") && carga(s) > 0;
+      return datos(s).getBooleanOr("Prendida", false) && carga(s) > 0;
    }
 
    public static float intensidad(ItemStack s) {
@@ -74,12 +74,12 @@ public class Linterna extends Item {
       });
    }
 
-   public InteractionResultHolder<ItemStack> use(Level nivel, Player jugador, InteractionHand mano) {
+   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) {
       ItemStack linterna = jugador.getItemInHand(mano);
       ItemStack otra = jugador.getItemInHand(mano == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
       if (mano == InteractionHand.MAIN_HAND && otra.is(Objetos.BATERIA.get())) {
          if (carga(linterna) >= cargaMax()) {
-            return InteractionResultHolder.fail(linterna);
+            return InteractionResult.FAIL;
          }
 
          if (!nivel.isClientSide()) {
@@ -93,19 +93,19 @@ public class Linterna extends Item {
             );
          }
 
-         return InteractionResultHolder.sidedSuccess(linterna, nivel.isClientSide());
+         return InteractionResult.SUCCESS;
       } else {
          if (prendida(linterna)) {
             jugador.startUsingItem(mano);
-            return InteractionResultHolder.consume(linterna);
+            return InteractionResult.CONSUME;
          }
 
          if (carga(linterna) <= 0) {
-            return InteractionResultHolder.fail(linterna);
+            return InteractionResult.FAIL;
          }
 
          jugador.startUsingItem(mano);
-         return InteractionResultHolder.consume(linterna);
+         return InteractionResult.CONSUME;
       }
    }
 

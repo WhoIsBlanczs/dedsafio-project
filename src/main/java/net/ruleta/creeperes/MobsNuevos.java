@@ -49,7 +49,7 @@ public final class MobsNuevos {
             && !(nivel.getRandom().nextFloat() >= Ajustes.entero("mobs.prob_pasto") / 100.0F)) {
             CreeperCespedEntity c = (CreeperCespedEntity)Creeperes.CESPED.get().create(nivel);
             if (c != null) {
-               c.moveTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
+               c.snapTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
                c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(e.getPos()), EntitySpawnReason.EVENT, null);
                nivel.addFreshEntity(c);
             }

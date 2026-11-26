@@ -14,7 +14,7 @@ public final class Muertes {
    public static void alMorir(LivingDeathEvent e) {
       if (!e.isCanceled() && e.getEntity() instanceof ServerPlayer p && p.getServer() != null) {
          Component mensaje = p.getCombatTracker().getDeathMessage();
-         Red.enviarATodos(p.getServer(), new ReviilPayload("muerte", 1, mensaje, Component.empty()));
+         Red.enviarATodos(p.level().getServer(), new ReviilPayload("muerte", 1, mensaje, Component.empty()));
       }
    }
 }

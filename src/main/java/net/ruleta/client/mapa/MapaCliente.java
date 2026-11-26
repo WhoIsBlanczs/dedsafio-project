@@ -19,12 +19,12 @@ public final class MapaCliente {
          Minecraft mc = Minecraft.getInstance();
          boolean prohibido = mc.level != null && DedsafioCielo.enDimension();
          if (prohibido && mc.screen instanceof PantallaMapa) {
-            mc.setScreen(null);
+            mc.setScreenAndShow(null);
          }
 
          while (TECLA.consumeClick()) {
             if (!prohibido && mc.level != null && mc.player != null && mc.screen == null) {
-               mc.setScreen(new PantallaMapa());
+               mc.setScreenAndShow(new PantallaMapa());
             }
          }
       }

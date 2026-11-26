@@ -96,7 +96,7 @@ public class PantallaEclipse extends UiPantalla {
             24,
             PantallaBunkers.texto(this.bunker),
             UiBoton.Estilo.NORMAL,
-            () -> Minecraft.getInstance().setScreen(new PantallaBunkers(this, this.bunker, k -> this.bunker = k))
+            () -> Minecraft.getInstance().setScreenAndShow(new PantallaBunkers(this, this.bunker, k -> this.bunker = k))
          )
       );
       this.cajas[3] = this.caja(3, colX, y + 54, 92);

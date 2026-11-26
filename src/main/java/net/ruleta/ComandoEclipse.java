@@ -39,7 +39,7 @@ public final class ComandoEclipse {
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("eclipse")
-                     .requires(s -> s.hasPermission(2)))
+                     .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .executes(
                      ctx -> empezar(((CommandSourceStack)ctx.getSource()).getServer(), Ajustes.entero("eclipse.totalidad"), (CommandSourceStack)ctx.getSource())
                   ))

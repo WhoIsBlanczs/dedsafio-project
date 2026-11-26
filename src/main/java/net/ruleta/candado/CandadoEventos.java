@@ -143,7 +143,7 @@ public final class CandadoEventos {
    public static void alRegistrarComandos(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
          (LiteralArgumentBuilder)Commands.literal("ruleta")
-            .then(((LiteralArgumentBuilder)Commands.literal("candado").requires(s -> s.hasPermission(2))).executes(ctx -> {
+            .then(((LiteralArgumentBuilder)Commands.literal("candado").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER))).executes(ctx -> {
                ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
                HitResult h = p.pick(8.0, 1.0F, false);
                if (h instanceof BlockHitResult b && h.getType() == Type.BLOCK) {

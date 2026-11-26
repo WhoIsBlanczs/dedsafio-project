@@ -40,7 +40,7 @@ public class JugadoresPantalla extends UiPantalla {
          out.addAll(Minecraft.getInstance().getConnection().getOnlinePlayers());
       }
 
-      out.sort((a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getProfile().getName(), b.getProfile().getName()));
+      out.sort((a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getProfile().name(), b.getProfile().getName()));
       return out;
    }
 
@@ -69,7 +69,7 @@ public class JugadoresPantalla extends UiPantalla {
       }
 
       for (PlayerInfo i : this.jugadores()) {
-         String n = i.getProfile().getName();
+         String n = i.getProfile().name();
          if (q.isEmpty() || n.toLowerCase(Locale.ROOT).contains(q)) {
             filas.add(new JugadoresPantalla.Fila(n, i));
          }

@@ -249,7 +249,7 @@ public class Ruleta {
 
                                  if (Sanciones.protegido(server, obj)) {
                                     jugador.sendSystemMessage(
-                                       Component.literal("No se puede sancionar a " + obj.getGameProfile().getName() + ": es operador de nivel 3 o 4.")
+                                       Component.literal("No se puede sancionar a " + obj.getGameProfile().name() + ": es operador de nivel 3 o 4.")
                                     );
                                     return;
                                  }
@@ -305,7 +305,7 @@ public class Ruleta {
                               boolean conAnimacion = !phora && esRoja && (m.animacion() || reviil && !paraUno && MomentosReviil.hayArmados());
                               boolean sinRuleta = m.sinRuleta() && (color == RuletaColor.NARANJA || color == RuletaColor.AMARILLO);
                               if (!sinRuleta) {
-                                 girar(server, color, jugador.getGameProfile().getName(), mini, destino);
+                                 girar(server, color, jugador.getGameProfile().name(), mini, destino);
                               }
 
                               Mensajes.programar(
@@ -355,16 +355,16 @@ public class Ruleta {
 
    public static void alRegistrarComandos(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
-         (LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("totem").requires(s -> s.hasPermission(2)))
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("totem").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
             .then(
                ((LiteralArgumentBuilder)Commands.literal("mensaje")
                      .then(Commands.literal("on").executes(c -> mensajeTotem((CommandSourceStack)c.getSource(), true))))
                   .then(Commands.literal("off").executes(c -> mensajeTotem((CommandSourceStack)c.getSource(), false)))
             )
       );
-      dispatcher.register((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("cambios").requires(s -> s.hasPermission(2))).executes(c -> {
+      dispatcher.register((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("cambios").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER))).executes(c -> {
          ServerPlayer p = ((CommandSourceStack)c.getSource()).getPlayerOrException();
-         Red.enviar(p, new CambiosPayload(cambios(p.getServer()).csv()));
+         Red.enviar(p, new CambiosPayload(cambios(p.level().getServer()).csv()));
          Red.enviar(p, new ReviilPayload("abrir_cambios", 1, Component.empty(), Component.empty()));
          return 1;
       }));
@@ -380,13 +380,13 @@ public class Ruleta {
 
    static void desactivarCambio(ServerPlayer jugador, String id) {
       if (jugador != null && jugador.getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-         MinecraftServer server = jugador.getServer();
+         MinecraftServer server = jugador.level().getServer();
          Ruleta.DificultadDatos d = cambios(server);
          if (d.activo(id)) {
             d.desactivar(id);
             d.setDirty();
             if ("sin-regeneracion".equals(id)) {
-               ((BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION)).set(true, server);
+               ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(true, server);
             }
 
             Red.enviarATodos(server, new CambiosPayload(d.csv()));
@@ -482,7 +482,7 @@ public class Ruleta {
    }
 
    public static void avisarTotem(ServerPlayer p, DamageSource fuente, Component nombreTotem) {
-      if (p.getServer() != null && !cambios(p.getServer()).sinMensajeTotem) {
+      if (p.level().getServer() != null && !cambios(p.getServer()).sinMensajeTotem) {
          long ahora = p.level().getGameTime();
          Long previo = ULTIMO_AVISO_TOTEM.put(p.getUUID(), ahora);
          if (previo == null || ahora - previo > 1L) {
@@ -578,10 +578,10 @@ public class Ruleta {
 
       static Ruleta.DificultadDatos cargar(CompoundTag tag, Provider registros) {
          Ruleta.DificultadDatos d = new Ruleta.DificultadDatos();
-         d.perla = tag.getBoolean("activo");
-         d.magma = tag.getBoolean("magma");
-         d.sinMensajeTotem = tag.getBoolean("sin_mensaje_totem");
-         ListTag lista = tag.getList("cambios", 8);
+         d.perla = tag.getBooleanOr("activo", false);
+         d.magma = tag.getBooleanOr("magma", false);
+         d.sinMensajeTotem = tag.getBooleanOr("sin_mensaje_totem", false);
+         ListTag lista = tag.getListOrEmpty("cambios");
 
          for (int i = 0; i < lista.size(); i++) {
             d.otros.add(lista.getString(i));
@@ -800,7 +800,7 @@ public class Ruleta {
       }
 
       public static void alEntrar(ServerPlayer p) {
-         if (p.getServer() != null) {
+         if (p.level().getServer() != null) {
             Red.enviar(p, new CambiosPayload(Ruleta.cambios(p.getServer()).csv()));
             MomentoReviil.alEntrar(p);
             Pantalla.alEntrar(p);

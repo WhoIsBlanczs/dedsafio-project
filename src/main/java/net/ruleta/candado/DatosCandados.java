@@ -48,21 +48,21 @@ public final class DatosCandados extends SavedData {
 
    public static DatosCandados cargar(CompoundTag tag, Provider registros) {
       DatosCandados d = new DatosCandados();
-      ListTag lista = tag.getList("Candados", 10);
+      ListTag lista = tag.getListOrEmpty("Candados");
 
       for (int i = 0; i < lista.size(); i++) {
          CompoundTag t = lista.getCompound(i);
          DatosCandados.Candado c = new DatosCandados.Candado();
-         c.propietario = t.hasUUID("Dueno") ? t.getUUID("Dueno") : null;
-         c.nombre = t.getString("Nombre");
-         c.codigo = t.getString("Codigo");
-         ListTag ab = t.getList("Abiertos", 11);
+         c.propietario = t.contains("Dueno") ? t.read("Dueno", net.minecraft.core.UUIDUtil.CODEC).orElse(null) : null;
+         c.nombre = t.getStringOr("Nombre", "");
+         c.codigo = t.getStringOr("Codigo", "");
+         ListTag ab = t.getListOrEmpty("Abiertos");
 
          for (int j = 0; j < ab.size(); j++) {
             c.abiertos.add(NbtUtils.loadUUID(ab.get(j)));
          }
 
-         d.mapa.put(t.getLong("Pos"), c);
+         d.mapa.put(t.getLongOr("Pos", 0L), c);
       }
 
       return d;
@@ -76,7 +76,7 @@ public final class DatosCandados extends SavedData {
          t.putLong("Pos", en.getKey());
          DatosCandados.Candado c = en.getValue();
          if (c.propietario != null) {
-            t.putUUID("Dueno", c.propietario);
+            t.store("Dueno", net.minecraft.core.UUIDUtil.CODEC, c.propietario);
          }
 
          t.putString("Nombre", c.nombre);

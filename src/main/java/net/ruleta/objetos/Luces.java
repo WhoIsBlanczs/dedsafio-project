@@ -66,7 +66,7 @@ public final class Luces {
 
          if (antes != null) {
             List<Object[]> viejas = (List<Object[]>)antes[1];
-            ServerLevel nivelViejo = p.getServer().getLevel((ResourceKey)antes[0]);
+            ServerLevel nivelViejo = p.level().getServer().getLevel((ResourceKey)antes[0]);
 
             for (Object[] v : viejas) {
                BlockPos pos = (BlockPos)v[0];
@@ -132,7 +132,7 @@ public final class Luces {
    }
 
    public static void alSalir(ServerPlayer p) {
-      quitar(p.getServer(), p.getUUID());
+      quitar(p.level().getServer(), p.getUUID());
    }
 
    public static void alCambiarDimension(ServerPlayer p) {

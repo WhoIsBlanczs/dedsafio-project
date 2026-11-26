@@ -23,7 +23,7 @@ import net.ruleta.Tiempo;
 public class SupernovaCommand {
    public static void onRegister(CommandDispatcher<CommandSourceStack> dispatcher) {
       LiteralArgumentBuilder<CommandSourceStack> raiz = (LiteralArgumentBuilder<CommandSourceStack>)Commands.literal("supernova")
-         .requires(src -> src.hasPermission(2));
+         .requires(src -> src.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER));
       raiz.then(
          ((LiteralArgumentBuilder)Commands.literal("romper")
                .then(

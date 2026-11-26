@@ -14,10 +14,10 @@ public final class CajeroRed {
    }
 
    public static void registrar() {
-      PayloadTypeRegistry.playS2C().register(CajeroRed.AbrirPayload.TYPE, CajeroRed.AbrirPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CajeroRed.SaldoPayload.TYPE, CajeroRed.SaldoPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CajeroRed.RespuestaPayload.TYPE, CajeroRed.RespuestaPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(CajeroRed.AccionPayload.TYPE, CajeroRed.AccionPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CajeroRed.AbrirPayload.TYPE, CajeroRed.AbrirPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CajeroRed.SaldoPayload.TYPE, CajeroRed.SaldoPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CajeroRed.RespuestaPayload.TYPE, CajeroRed.RespuestaPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(CajeroRed.AccionPayload.TYPE, CajeroRed.AccionPayload.CODEC);
       ServerPlayNetworking.registerGlobalReceiver(CajeroRed.AccionPayload.TYPE, (m, ctx) -> CajeroServidor.accion(ctx.player(), m));
    }
 

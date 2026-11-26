@@ -59,7 +59,7 @@ public final class MomentosReviil {
    }
 
    static void recibir(ServerPlayer jugador, MomentoPayload m) {
-      if (jugador != null && m != null && jugador.getServer() != null) {
+      if (jugador != null && m != null && jugador.level().getServer() != null) {
          if (!jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
             jugador.sendSystemMessage(Component.literal("Solo los operadores pueden cambiar los Momentos Reviil."));
          } else {
@@ -333,7 +333,7 @@ public final class MomentosReviil {
          }
 
          if ("sin_regeneracion".equals(id)) {
-            BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION);
+            BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION);
             if (regeneracionAntes == null) {
                regeneracionAntes = regla.get();
             }
@@ -345,7 +345,7 @@ public final class MomentosReviil {
 
    private static void devolverRegeneracion(MinecraftServer server) {
       if (regeneracionAntes != null && server != null) {
-         ((BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION)).set(regeneracionAntes, server);
+         ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(regeneracionAntes, server);
          regeneracionAntes = null;
       }
    }
@@ -403,7 +403,7 @@ public final class MomentosReviil {
                p.hurt(Ruleta.fuenteLetal(p, "ruleta.luna", " miró la Luna maldita de Reviil"), Float.MAX_VALUE);
                desactivar(server, "luna");
                sincronizar(server);
-               lunaQuien = p.getGameProfile().getName();
+               lunaQuien = p.getGameProfile().name();
                lunaEn = tick + 280L;
             }
          }

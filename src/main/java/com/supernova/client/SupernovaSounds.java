@@ -192,7 +192,7 @@ public class SupernovaSounds {
             && mc.level != null
             && mc.player != null
             && !(s.charge((float)mc.level.getGameTime()) > 0.0F)
-            && s.dim.equals(mc.level.dimension().location().toString())) {
+            && s.dim.equals(mc.level.dimension().identifier().toString())) {
             double d = mc.player.getEyePosition().distanceTo(s.center());
             float close = (float)Math.max(0.0, 1.0 - d / (s.maxRadius * 3.0));
             float target = 0.12F * SupernovaSounds.near(s, d) + 0.6F * close * close;

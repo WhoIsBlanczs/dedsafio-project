@@ -272,7 +272,7 @@ public final class HudDedsafio {
          int y = y0;
 
          for (FormattedCharSequence l : lineas) {
-            g.drawString(mc.font, l, (w - mc.font.width(l)) / 2, y, aTexto << 24 | 16777215, true);
+            g.text(mc.font, l, (w - mc.font.width(l)) / 2, y, aTexto << 24 | 16777215, true);
             y += 10;
          }
       }

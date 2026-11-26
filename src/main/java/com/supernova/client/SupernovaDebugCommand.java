@@ -3,7 +3,7 @@ package com.supernova.client;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.network.chat.Component;
@@ -14,23 +14,23 @@ public class SupernovaDebugCommand {
       ClientCommandRegistrationCallback.EVENT
          .register(
             (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
-               (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommandManager.literal(
+               (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommands.literal(
                                     "supernovadebug"
                                  )
                                  .executes(c -> status(c)))
-                              .then(ClientCommandManager.literal("flip").executes(c -> toggle(c, "flip"))))
-                           .then(ClientCommandManager.literal("nocull").executes(c -> toggle(c, "nocull"))))
-                        .then(ClientCommandManager.literal("nodepth").executes(c -> toggle(c, "nodepth"))))
-                     .then(ClientCommandManager.literal("magenta").executes(c -> toggle(c, "magenta"))))
-                  .then(ClientCommandManager.literal("nochain").executes(c -> toggle(c, "nochain")))
+                              .then(ClientCommands.literal("flip").executes(c -> toggle(c, "flip"))))
+                           .then(ClientCommands.literal("nocull").executes(c -> toggle(c, "nocull"))))
+                        .then(ClientCommands.literal("nodepth").executes(c -> toggle(c, "nodepth"))))
+                     .then(ClientCommands.literal("magenta").executes(c -> toggle(c, "magenta"))))
+                  .then(ClientCommands.literal("nochain").executes(c -> toggle(c, "nochain")))
             )
          );
       ClientCommandRegistrationCallback.EVENT
          .register(
             (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
-               (LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommandManager.literal("supernovanubes").executes(c -> nubes(c, -1)))
+               (LiteralArgumentBuilder)((LiteralArgumentBuilder)ClientCommands.literal("supernovanubes").executes(c -> nubes(c, -1)))
                   .then(
-                     ClientCommandManager.argument("calidad", IntegerArgumentType.integer(0, 3))
+                     ClientCommands.argument("calidad", IntegerArgumentType.integer(0, 3))
                         .executes(c -> nubes(c, IntegerArgumentType.getInteger(c, "calidad")))
                   )
             )

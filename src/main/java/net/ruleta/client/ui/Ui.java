@@ -100,7 +100,7 @@ public final class Ui {
    public static void texto(GuiGraphicsExtractor g, Font f, String s, int x, int y, int rgb, float a) {
       int col = c(rgb, a);
       if (col >>> 24 >= 8 && !s.isEmpty()) {
-         g.drawString(f, t(s), x, y, col, false);
+         g.text(f, t(s), x, y, col, false);
       }
    }
 
@@ -235,7 +235,7 @@ public final class Ui {
 
       for (int d = prof; d >= 1; d--) {
          int col = mezcla(lado, contorno, (float)d / (prof + 1) * 0.6F);
-         g.drawString(f, tb(s), Math.round(d * u), Math.round(d * u), c(col), false);
+         g.text(f, tb(s), Math.round(d * u), Math.round(d * u), c(col), false);
       }
 
       pose.popPose();
@@ -248,7 +248,7 @@ public final class Ui {
          p.pushPose();
          p.translate(x, y, 0.0F);
          p.scale(escala, escala, 1.0F);
-         g.drawString(f, tb(s), 0, 0, c(pasada == 0 ? caraClara : cara), false);
+         g.text(f, tb(s), 0, 0, c(pasada == 0 ? caraClara : cara), false);
          p.popPose();
          g.disableScissor();
       }

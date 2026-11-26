@@ -143,7 +143,7 @@ public final class MomentoPhora {
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("phora")
-                     .requires(s -> s.hasPermission(2)))
+                     .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .then(
                      Commands.literal("lluvia")
                         .executes(

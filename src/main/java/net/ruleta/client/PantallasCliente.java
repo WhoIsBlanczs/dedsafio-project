@@ -10,7 +10,7 @@ public final class PantallasCliente {
       Minecraft mc = Minecraft.getInstance();
       switch (nombre) {
          case "ajustes":
-            mc.setScreen(new PantallaAjustes(null));
+            mc.setScreenAndShow(new PantallaAjustes(null));
             break;
          case "bunker_borrar":
             mc.setScreenAndShow(new PantallaBunkerBorrar(null, datos));

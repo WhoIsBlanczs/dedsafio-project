@@ -23,7 +23,7 @@ public final class CasinoCliente {
          if (mc.screen instanceof PantallaCasino pantalla) {
             pantalla.alRecibir(c);
          } else {
-            mc.setScreen(new PantallaCasino(mc.screen, c));
+            mc.setScreenAndShow(new PantallaCasino(mc.screen, c));
          }
       }
    }

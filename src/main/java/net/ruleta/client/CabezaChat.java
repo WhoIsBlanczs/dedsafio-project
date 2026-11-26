@@ -39,7 +39,7 @@ public final class CabezaChat {
          int mejor = 0;
 
          for (PlayerInfo pi : con.getOnlinePlayers()) {
-            String n = pi.getProfile().getName();
+            String n = pi.getProfile().name();
             if (texto.contains(n) && n.length() > mejor) {
                info = pi;
                mejor = n.length();

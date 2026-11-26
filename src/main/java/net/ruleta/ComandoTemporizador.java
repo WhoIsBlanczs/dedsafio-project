@@ -13,7 +13,7 @@ public final class ComandoTemporizador {
 
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
-         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("temporizador").requires(s -> s.hasPermission(2)))
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("temporizador").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                .then(Commands.literal("detener").executes(ctx -> {
                   if (Mensajes.detenerTemporizador(((CommandSourceStack)ctx.getSource()).getServer())) {
                      ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Temporizador detenido."), true);

@@ -170,7 +170,7 @@ public final class CambiosEfectos {
 
    static void alActivar(MinecraftServer server, String id) {
       if ("sin-regeneracion".equals(id)) {
-         ((BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION)).set(false, server);
+         ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(false, server);
       }
 
       if ("respirar-bajo-agua".equals(id)) {
@@ -504,7 +504,7 @@ public final class CambiosEfectos {
    private static void sinRegeneracion(ServerPlayer jugador) {
       MinecraftServer server = jugador.getServer();
       if (server != null && jugador.tickCount % 100 == 0 && Ruleta.cambioActivo("sin-regeneracion")) {
-         BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION);
+         BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION);
          if (regla.get()) {
             regla.set(false, server);
          }

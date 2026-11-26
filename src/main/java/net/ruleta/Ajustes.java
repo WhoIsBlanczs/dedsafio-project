@@ -185,7 +185,7 @@ public final class Ajustes {
    static void recibir(ServerPlayer jugador, AjustePayload m) {
       if (jugador != null && m != null && jugador.getServer() != null) {
          if (jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-            MinecraftServer server = jugador.getServer();
+            MinecraftServer server = jugador.level().getServer();
             if (m.reiniciar()) {
                restablecer(m.id().isEmpty() ? null : m.id());
             } else if (!poner(m.id(), m.valor())) {

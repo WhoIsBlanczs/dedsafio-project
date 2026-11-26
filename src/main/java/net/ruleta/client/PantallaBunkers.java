@@ -48,7 +48,7 @@ public class PantallaBunkers extends UiPantalla {
       Minecraft mc = Minecraft.getInstance();
       if (mc.player != null && mc.level != null) {
          double d = Math.sqrt(mc.player.distanceToSqr(b.mx(), mc.player.getY(), b.mz()));
-         return b.dimension().equals(mc.level.dimension().location().toString()) ? d : Double.MAX_VALUE;
+         return b.dimension().equals(mc.level.dimension().identifier().toString()) ? d : Double.MAX_VALUE;
       } else {
          return 0.0;
       }

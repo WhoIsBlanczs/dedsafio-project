@@ -354,13 +354,13 @@ public class HerobrineEntity extends Monster {
    public void addAdditionalSaveData(CompoundTag tag) {
       super.addAdditionalSaveData(tag);
       if (this.objetivo != null) {
-         tag.putUUID("Objetivo", this.objetivo);
+         tag.store("Objetivo", net.minecraft.core.UUIDUtil.CODEC, this.objetivo);
       }
    }
 
    public void readAdditionalSaveData(CompoundTag tag) {
       super.readAdditionalSaveData(tag);
-      this.objetivo = tag.hasUUID("Objetivo") ? tag.getUUID("Objetivo") : null;
+      this.objetivo = tag.contains("Objetivo") ? tag.read("Objetivo", net.minecraft.core.UUIDUtil.CODEC).orElse(null) : null;
    }
 
    public int getMaxHeadYRot() {

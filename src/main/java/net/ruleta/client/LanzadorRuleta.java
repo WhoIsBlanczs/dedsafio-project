@@ -82,7 +82,7 @@ public class LanzadorRuleta extends Screen {
             .ayuda("Ver los bunkers y demolerlos")
       );
       this.addRenderableWidget(
-         new UiBoton(x0 + (bw + 8) * 3, yb, bw, 22, "Panel", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreen(new PantallaPanel(this)))
+         new UiBoton(x0 + (bw + 8) * 3, yb, bw, 22, "Panel", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreenAndShow(new PantallaPanel(this)))
             .ayuda("Opciones para configurar el casino y lo que vaya añadiendo el mod")
       );
       this.addRenderableWidget(new UiBoton(x0 + (bw + 8) * 4, yb, bw, 22, "Detener ruleta", UiBoton.Estilo.PELIGRO, () -> {

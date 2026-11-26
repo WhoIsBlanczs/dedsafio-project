@@ -28,25 +28,25 @@ public final class Red {
    }
 
    public static void registrar() {
-      PayloadTypeRegistry.playS2C().register(RuletaPayload.TYPE, RuletaPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(ReviilPayload.TYPE, ReviilPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CambiosPayload.TYPE, CambiosPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(AgujeroPayload.TYPE, AgujeroPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(OndaPayload.TYPE, OndaPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(BunkerPayload.TYPE, BunkerPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(AjustesPayload.TYPE, AjustesPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(AbrirPantallaPayload.TYPE, AbrirPantallaPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(TornadoPayload.TYPE, TornadoPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(ZonaAvisoPayload.TYPE, ZonaAvisoPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CodigoAbrirPayload.TYPE, CodigoAbrirPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(CodigoRespuestaPayload.TYPE, CodigoRespuestaPayload.CODEC);
-      PayloadTypeRegistry.playS2C().register(EstadoPayload.TYPE, EstadoPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(LanzarPayload.TYPE, LanzarPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(MomentoPayload.TYPE, MomentoPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(DesactivarPayload.TYPE, DesactivarPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(AjustePayload.TYPE, AjustePayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(BunkerAccionPayload.TYPE, BunkerAccionPayload.CODEC);
-      PayloadTypeRegistry.playC2S().register(CodigoEnviarPayload.TYPE, CodigoEnviarPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(RuletaPayload.TYPE, RuletaPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(ReviilPayload.TYPE, ReviilPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CambiosPayload.TYPE, CambiosPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(AgujeroPayload.TYPE, AgujeroPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(OndaPayload.TYPE, OndaPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(BunkerPayload.TYPE, BunkerPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(AjustesPayload.TYPE, AjustesPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(AbrirPantallaPayload.TYPE, AbrirPantallaPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(TornadoPayload.TYPE, TornadoPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(ZonaAvisoPayload.TYPE, ZonaAvisoPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CodigoAbrirPayload.TYPE, CodigoAbrirPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(CodigoRespuestaPayload.TYPE, CodigoRespuestaPayload.CODEC);
+      PayloadTypeRegistry.clientboundPlay().register(EstadoPayload.TYPE, EstadoPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(LanzarPayload.TYPE, LanzarPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(MomentoPayload.TYPE, MomentoPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(DesactivarPayload.TYPE, DesactivarPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(AjustePayload.TYPE, AjustePayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(BunkerAccionPayload.TYPE, BunkerAccionPayload.CODEC);
+      PayloadTypeRegistry.serverboundPlay().register(CodigoEnviarPayload.TYPE, CodigoEnviarPayload.CODEC);
       ServerPlayNetworking.registerGlobalReceiver(LanzarPayload.TYPE, (m, ctx) -> Ruleta.lanzar(ctx.player(), m));
       ServerPlayNetworking.registerGlobalReceiver(MomentoPayload.TYPE, (m, ctx) -> MomentosReviil.recibir(ctx.player(), m));
       ServerPlayNetworking.registerGlobalReceiver(DesactivarPayload.TYPE, (m, ctx) -> Ruleta.desactivarCambio(ctx.player(), m.id()));

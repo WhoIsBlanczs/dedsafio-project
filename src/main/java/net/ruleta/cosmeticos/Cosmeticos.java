@@ -61,7 +61,7 @@ public final class Cosmeticos {
    }
 
    public static String aura(Player p) {
-      return Persistente.de(p).getString("ruleta_aura");
+      return Persistente.de(p).getStringOr("ruleta_aura", "");
    }
 
    public static void ponerAura(Player p, String pais) {

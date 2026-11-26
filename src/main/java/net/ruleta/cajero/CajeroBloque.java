@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class CajeroBloque extends Block {
    public static final MapCodec<CajeroBloque> CODEC = simpleCodec(CajeroBloque::new);
-   public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+   public static final EnumProperty<net.minecraft.core.Direction> FACING = HorizontalDirectionalBlock.FACING;
    public static final EnumProperty<ParteCajero> PARTE = EnumProperty.create("part", ParteCajero.class);
    private static final VoxelShape[] FORMAS = new VoxelShape[4];
 

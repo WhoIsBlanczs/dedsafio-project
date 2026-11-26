@@ -154,7 +154,7 @@ public class MisilEntity extends Entity {
             double k = 1.0 - dist / radioOnda;
             Vec3 empuje = d.normalize().scale(2.6 * k).add(0.0, 0.9 * k, 0.0);
             e.setDeltaMovement(e.getDeltaMovement().add(empuje));
-            e.hurtMarked = true;
+            e.needsSync = true;
             if (!(e instanceof ServerPlayer sp && sp.isCreative())) {
                e.igniteForSeconds(3 + (int)Math.round(9.0 * k));
             }

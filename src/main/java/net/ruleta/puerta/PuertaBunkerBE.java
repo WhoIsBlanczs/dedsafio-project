@@ -77,8 +77,8 @@ public class PuertaBunkerBE extends BlockEntity {
 
    protected void loadAdditional(CompoundTag tag, Provider registros) {
       super.loadAdditional(tag, registros);
-      this.alimentada = tag.getBoolean("Alimentada");
-      this.cierraEn = tag.contains("CierraEn") ? tag.getLong("CierraEn") : -1L;
-      this.abreEn = tag.contains("AbreEn") ? tag.getLong("AbreEn") : -1L;
+      this.alimentada = tag.getBooleanOr("Alimentada", false);
+      this.cierraEn = tag.contains("CierraEn") ? tag.getLongOr("CierraEn", 0L) : -1L;
+      this.abreEn = tag.contains("AbreEn") ? tag.getLongOr("AbreEn", 0L) : -1L;
    }
 }

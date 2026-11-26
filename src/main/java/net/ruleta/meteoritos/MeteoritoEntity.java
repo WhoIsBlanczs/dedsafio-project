@@ -173,7 +173,7 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
          if (!(dist > radioOnda) && !(dist < 0.001)) {
             double k = 1.0 - dist / radioOnda;
             e.setDeltaMovement(e.getDeltaMovement().add(d.normalize().scale(2.4 * k).add(0.0, 0.8 * k, 0.0)));
-            e.hurtMarked = true;
+            e.needsSync = true;
             if (!(e instanceof ServerPlayer sp && sp.isCreative())) {
                e.igniteForSeconds(3 + (int)Math.round(8.0 * k));
             }

@@ -123,7 +123,7 @@ public class TragamonedasBE extends BlockEntity {
                }
             }
          } else {
-            idx = level.random.nextInt(simbolos.size());
+            idx = level.getRandom().nextInt(simbolos.size());
          }
 
          List<Integer> candidatas = new ArrayList<>();
@@ -302,8 +302,8 @@ public class TragamonedasBE extends BlockEntity {
 
    protected void loadAdditional(CompoundTag tag, Provider registros) {
       super.loadAdditional(tag, registros);
-      if (tag.contains("Caras", 9)) {
-         ListTag lista = tag.getList("Caras", 8);
+      if (tag.contains("Caras")) {
+         ListTag lista = tag.getListOrEmpty("Caras");
 
          for (int i = 0; i < 8 && i < lista.size(); i++) {
             this.caras[i] = lista.getString(i);
@@ -324,10 +324,10 @@ public class TragamonedasBE extends BlockEntity {
       }
 
       if (tag.contains("Inicio")) {
-         this.inicio = tag.getLong("Inicio");
+         this.inicio = tag.getLongOr("Inicio", 0L);
       }
 
-      this.pagoPendiente = tag.getBoolean("Pago");
+      this.pagoPendiente = tag.getBooleanOr("Pago", false);
    }
 
    public CompoundTag getUpdateTag(Provider registros) {

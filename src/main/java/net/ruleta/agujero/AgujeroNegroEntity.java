@@ -93,7 +93,7 @@ public class AgujeroNegroEntity extends Entity {
          }
 
          jugador.setDeltaMovement(v);
-         jugador.hurtMarked = true;
+         jugador.needsSync = true;
          jugador.fallDistance = 0.0F;
       }
    }
@@ -116,7 +116,7 @@ public class AgujeroNegroEntity extends Entity {
 
    protected void readAdditionalSaveData(CompoundTag tag) {
       if (tag.contains("Radio")) {
-         this.fijarRadio(tag.getFloat("Radio"));
+         this.fijarRadio(tag.getFloatOr("Radio", 0.0F));
       }
    }
 

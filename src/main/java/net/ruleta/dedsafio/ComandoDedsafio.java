@@ -53,7 +53,7 @@ public final class ComandoDedsafio {
 
    private static void registrarEn(CommandDispatcher<CommandSourceStack> d) {
       d.register(
-         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("dedsafio").requires(s -> s.hasPermission(2)))
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("dedsafio").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                .then(
                   ((LiteralArgumentBuilder)Commands.literal("ir").executes(c -> viaje(c, null, true)))
                      .then(Commands.argument("jugadores", EntityArgument.players()).executes(c -> viaje(c, EntityArgument.getPlayers(c, "jugadores"), true)))
@@ -64,7 +64,7 @@ public final class ComandoDedsafio {
             )
       );
       d.register(
-         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("dedsafioescena").requires(s -> s.hasPermission(2)))
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("dedsafioescena").requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                .then(
                   Commands.literal("iniciar")
                      .executes(
@@ -224,7 +224,7 @@ public final class ComandoDedsafio {
 
       for (Entry<UUID, ComandoDedsafio.Previo> e : previos.entrySet()) {
          ComandoDedsafio.Previo v = e.getValue();
-         l.add(e.getKey() + ";" + v.dimension().location() + ";" + v.x() + ";" + v.y() + ";" + v.z() + ";" + v.giro() + ";" + v.cabeceo());
+         l.add(e.getKey() + ";" + v.dimension().identifier() + ";" + v.x() + ";" + v.y() + ";" + v.z() + ";" + v.giro() + ";" + v.cabeceo());
       }
 
       try {

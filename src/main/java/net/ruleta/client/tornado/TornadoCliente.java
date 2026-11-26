@@ -160,7 +160,7 @@ public final class TornadoCliente {
          double mejor = Double.MAX_VALUE;
 
          for (TornadoCliente.Torn t : TORNADOS) {
-            if (t.dim.equals(mc.level.dimension().location().toString())) {
+            if (t.dim.equals(mc.level.dimension().identifier().toString())) {
                double d = Math.hypot(mc.player.getX() - t.x, mc.player.getZ() - t.z) - t.radio;
                mejor = Math.min(mejor, d / (t.radio * 3.0 + 80.0));
             }
@@ -196,7 +196,7 @@ public final class TornadoCliente {
             sonidosAmbiente(mc);
 
             for (TornadoCliente.Torn t : TORNADOS) {
-               if (t.dim.equals(mc.level.dimension().location().toString())) {
+               if (t.dim.equals(mc.level.dimension().identifier().toString())) {
                   Vec3 p = posicion(t, 0.0F);
                   double dx = p.x - mc.player.getX();
                   double dz = p.z - mc.player.getZ();

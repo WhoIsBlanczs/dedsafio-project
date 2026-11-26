@@ -55,7 +55,7 @@ public final class ComandoAgujero {
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
                            "blackhole"
                         )
-                        .requires(s -> s.hasPermission(2)))
+                        .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                      .then(Commands.literal("run").executes(ctx -> empezar((CommandSourceStack)ctx.getSource()))))
                   .then(Commands.literal("stop").executes(ctx -> parar((CommandSourceStack)ctx.getSource()))))
                .then(
@@ -182,7 +182,7 @@ public final class ComandoAgujero {
          mundo.addFreshEntity(agujero);
          VIVOS.add(agujero.getUUID());
          AgujeroPayload.Agujero dato = new AgujeroPayload.Agujero(
-            donde, agujero.radio() > 0.0 ? (float)agujero.radio() : radio, mundo.dimension().location().toString()
+            donde, agujero.radio() > 0.0 ? (float)agujero.radio() : radio, mundo.dimension().identifier().toString()
          );
          AGUJEROS.add(dato);
          POR_ID.put(agujero.getUUID(), dato);
@@ -218,7 +218,7 @@ public final class ComandoAgujero {
          agujero.snapTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);
          mundo.addFreshEntity(agujero);
          VIVOS.add(agujero.getUUID());
-         AGUJEROS.add(new AgujeroPayload.Agujero(donde, agujero.radio() > 0.0 ? (float)agujero.radio() : radio, mundo.dimension().location().toString()));
+         AGUJEROS.add(new AgujeroPayload.Agujero(donde, agujero.radio() > 0.0 ? (float)agujero.radio() : radio, mundo.dimension().identifier().toString()));
          enviarATodos(mundo.getServer());
       }
    }

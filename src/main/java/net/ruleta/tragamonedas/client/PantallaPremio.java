@@ -213,7 +213,7 @@ public class PantallaPremio extends UiPantalla {
          PantallaPremio pp = PantallaPremio.this;
          List<String> libres = new ArrayList<>(pp.simbolos());
          libres.removeAll(pp.premio.items);
-         Minecraft.getInstance().setScreen(new PantallaSelectorItem(pp, id -> {
+         Minecraft.getInstance().setScreenAndShow(new PantallaSelectorItem(pp, id -> {
             if (!pp.premio.items.contains(id)) {
                pp.premio.items.add(id);
                pp.cambio();

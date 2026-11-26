@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommands;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -102,7 +102,7 @@ public class PantallaHud extends UiPantalla {
          ClientCommandRegistrationCallback.EVENT
             .register(
                (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
-                  (LiteralArgumentBuilder)ClientCommandManager.literal("hud").executes(c -> {
+                  (LiteralArgumentBuilder)ClientCommands.literal("hud").executes(c -> {
                      Minecraft mc = Minecraft.getInstance();
                      mc.tell(() -> mc.setScreen(new PantallaHud()));
                      return 1;
