@@ -28,6 +28,11 @@ jobs:
           echo "exit=$(cat /tmp/build.rc)" > /tmp/pub/status.txt
           ls build/libs 2>/dev/null >> /tmp/pub/status.txt
           cp build/libs/*[0-9].jar /tmp/pub/ 2>/dev/null || true
+          MC=$(find ~/.gradle .gradle -name '*.jar' -size +10M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q 'net/minecraft/world/level/Level.class' && echo "$j"; done | head -1)
+          echo "mc=$MC" >> /tmp/pub/status.txt
+          FA=$(find ~/.gradle .gradle -name 'fabric-*.jar' 2>/dev/null | grep -v sources | tr '\n' ':')
+          { for j in "$MC" $(echo $FA | tr ':' ' '); do unzip -Z1 "$j" 2>/dev/null | grep '\.class$' | grep -v 'package-info' | sed 's/\.class$//' ; done; } | sort -u > /tmp/pub/classes.txt
+          if [ -s tools/queries.txt ]; then javap -public -cp "$MC:$FA" $(grep -v '^#' tools/queries.txt | tr '\n' ' ') > /tmp/pub/sigs.txt 2>&1 || true; fi
           git config user.name github-actions; git config user.email actions@github.com
           git symbolic-ref HEAD refs/heads/port-result; rm -f .git/index
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
