@@ -1,4 +1,34 @@
 {
-  "roulette.spin": { "sounds": [ { "name": "ruleta:ruleta", "stream": false } ] },
-  "roulette.nutria": { "sounds": [ { "name": "ruleta:nutria", "stream": false } ] }
+ "roulette.spin": {
+  "sounds": [
+   {
+    "name": "ruleta:ruleta",
+    "stream": false
+   }
+  ]
+ },
+ "roulette.nutria": {
+  "sounds": [
+   {
+    "name": "ruleta:nutria",
+    "stream": false
+   }
+  ]
+ },
+ "tragamonedas.palanca": {
+  "sounds": [
+   {
+    "name": "ruleta:tragamonedas/palanca",
+    "preload": true
+   }
+  ]
+ },
+ "tragamonedas.giro": {
+  "sounds": [
+   {
+    "name": "ruleta:tragamonedas/giro",
+    "preload": true
+   }
+  ]
+ }
 }

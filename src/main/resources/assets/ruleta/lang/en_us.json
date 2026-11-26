@@ -1,1 +1,9 @@
-{ "ruleta.title": "Ruleta" }
+{
+ "ruleta.title": "Ruleta",
+ "block.ruleta.tragamonedas": "Tragamonedas",
+ "item.ruleta.dedita_casino": "Dedita Naranja",
+ "item.ruleta.dedita_azul": "Dedita Azul",
+ "item.ruleta.dedita_rojo": "Dedita Roja",
+ "item.ruleta.dedita_cian": "Dedita Cian",
+ "item.ruleta.dedita_verde": "Dedita Verde"
+}
