@@ -1,7 +1,7 @@
 package net.ruleta.compat;
 
 import net.minecraft.server.level.ServerPlayer;
-import Nonenet.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
 
 public final class EntityTeleportEvent {
    private EntityTeleportEvent() {

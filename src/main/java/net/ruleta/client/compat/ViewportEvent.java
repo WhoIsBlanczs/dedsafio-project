@@ -2,7 +2,7 @@ package net.ruleta.client.compat;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import net.minecraft.client.Camera;
-import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
+import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.world.level.material.FogType;
 
 public final class ViewportEvent {

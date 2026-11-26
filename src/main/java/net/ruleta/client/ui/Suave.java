@@ -1,6 +1,6 @@
 package net.ruleta.client.ui;
 
-import Nonenet.minecraft.util.Util;
+import net.minecraft.util.Util;
 
 public final class Suave {
    public float v;

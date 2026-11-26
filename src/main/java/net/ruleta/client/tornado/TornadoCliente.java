@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ShaderInstance;
-import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
+import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.core.BlockPos;

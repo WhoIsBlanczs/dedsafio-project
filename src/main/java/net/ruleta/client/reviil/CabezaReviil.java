@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.BufferUploader;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
-import Nonecom.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
+import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
 import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
 import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import java.io.BufferedInputStream;

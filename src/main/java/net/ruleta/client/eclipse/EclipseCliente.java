@@ -15,7 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.DimensionSpecialEffects.SkyType;
-import Nonenet.minecraft.client.renderer.fog.FogRenderer.FogMode;
+import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;

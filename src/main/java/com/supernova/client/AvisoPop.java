@@ -3,7 +3,7 @@ package com.supernova.client;
 import com.supernova.SupernovaState;
 import java.util.HashMap;
 import java.util.Map;
-import Nonenet.minecraft.util.Util;
+import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

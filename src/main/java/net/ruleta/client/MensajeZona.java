@@ -1,6 +1,6 @@
 package net.ruleta.client;
 
-import Nonenet.minecraft.util.Util;
+import net.minecraft.util.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

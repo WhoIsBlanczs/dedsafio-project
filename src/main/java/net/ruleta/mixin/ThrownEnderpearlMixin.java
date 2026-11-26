@@ -3,7 +3,7 @@ package net.ruleta.mixin;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import Nonenet.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.ruleta.compat.Bus;
 import net.ruleta.compat.EntityTeleportEvent;

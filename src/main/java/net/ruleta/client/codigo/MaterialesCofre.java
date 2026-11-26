@@ -1,7 +1,7 @@
 package net.ruleta.client.codigo;
 
 import net.minecraft.client.renderer.Sheets;
-import Nonenet.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 
 public final class MaterialesCofre {

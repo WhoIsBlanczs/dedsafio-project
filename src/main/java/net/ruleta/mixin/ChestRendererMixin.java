@@ -1,7 +1,7 @@
 package net.ruleta.mixin;
 
 import net.minecraft.client.renderer.Sheets;
-import Nonenet.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.ChestType;
