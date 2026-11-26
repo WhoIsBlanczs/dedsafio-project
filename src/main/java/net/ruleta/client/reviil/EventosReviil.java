@@ -1,10 +1,8 @@
 package net.ruleta.client.reviil;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.DimensionSpecialEffects.SkyType;
 import net.minecraft.world.level.material.FogType;
 import net.ruleta.client.agujero.AgujeroCliente;
 import net.ruleta.client.compat.ClientPlayerNetworkEvent;
@@ -19,38 +17,7 @@ public final class EventosReviil {
    }
 
    @SubscribeEvent
-   public static void alDibujarMundo(RenderLevelStageEvent e) {
-      if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL && CieloReviil.visible() && !AgujeroCliente.tapaCielo()) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null && mc.level.effects().skyType() == SkyType.NORMAL) {
-            FogType dentro = e.getCamera().getFluidInCamera();
-            if (dentro != FogType.LAVA && dentro != FogType.POWDER_SNOW) {
-               Camera camara = e.getCamera();
-               Matrix4f vista = new Matrix4f()
-                  .rotateX(camara.getXRot() * (float) (Math.PI / 180.0))
-                  .rotateY((camara.getYRot() + 180.0F) * (float) (Math.PI / 180.0));
-               Matrix4f proyeccion = new Matrix4f(e.getProjectionMatrix());
-               float lejos = mc.options.getEffectiveRenderDistance() * 16.0F * 4.0F;
-               Matrix4f proyeccionAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-               VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-               mc.getMainRenderTarget().bindWrite(true);
-               RenderSystem.setProjectionMatrix(proyeccion, VertexSorting.DISTANCE_TO_ORIGIN);
-               RenderSystem.depthFunc(515);
-
-               try {
-                  CieloReviil.dibujar(vista, lejos);
-               } finally {
-                  RenderSystem.depthMask(true);
-                  RenderSystem.enableDepthTest();
-                  RenderSystem.enableCull();
-                  RenderSystem.disableBlend();
-                  RenderSystem.defaultBlendFunc();
-                  RenderSystem.setProjectionMatrix(proyeccionAntes, ordenAntes);
-               }
-            }
-         }
-      }
-   }
+   public static void alDibujarMundo(RenderLevelStageEvent e) { }
 
    @SubscribeEvent
    public static void alColorearNiebla(ViewportEvent.ComputeFogColor e) {

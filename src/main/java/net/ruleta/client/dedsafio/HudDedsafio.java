@@ -1,11 +1,8 @@
 package net.ruleta.client.dedsafio;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -238,60 +235,9 @@ public final class HudDedsafio {
       }
    }
 
-   private static void mascara(GuiGraphicsExtractor g, int w, int h, float aper, float blanco) {
-      g.flush();
-      if (aper >= 0.999F) {
-         if (blanco > 0.01F) {
-            g.fill(0, 0, w, h, (int)(blanco * 255.0F) << 24 | 16773856);
-         }
-      } else {
-         if (blanco > 0.01F) {
-            g.fill(0, 0, w, h, (int)(blanco * 255.0F) << 24 | 16773856);
-            g.flush();
-         }
+   private static void mascara(GuiGraphicsExtractor g, int w, int h, float aper, float blanco) { }
 
-         float cx = w * 0.5F;
-         float cy = h * 0.5F;
-         float semiX = w * 0.72F;
-         float b = h * 0.72F * aper;
-         float eps = b > 1.0F ? Math.min(0.85F, Math.max(0.14F, h * 0.012F / b)) : 1.0F;
-         Matrix4f m = g.pose().last().pose();
-         RenderSystem.setShader(GameRenderer::getPositionColorShader);
-         RenderSystem.enableBlend();
-         RenderSystem.defaultBlendFunc();
-         RenderSystem.disableDepthTest();
-         BufferBuilder bb = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-         float paso = 3.0F;
-
-         for (float y0 = 0.0F; y0 < h; y0 += paso) {
-            float y1 = Math.min(h, y0 + paso);
-            float v = b > 1.0F ? Math.abs((y0 + y1) * 0.5F - cy) / b : 2.0F;
-            if (v >= 1.0F) {
-               quad(bb, m, 0.0F, y0, w, y1, 1.0F, 1.0F);
-            } else {
-               float xFuera = semiX * (float)Math.sqrt(1.0F - v * v);
-               if (v <= 1.0F - eps) {
-                  float xDentro = semiX * (float)Math.sqrt((1.0F - eps) * (1.0F - eps) - v * v);
-                  quad(bb, m, 0.0F, y0, cx - xFuera, y1, 1.0F, 1.0F);
-                  quad(bb, m, cx - xFuera, y0, cx - xDentro, y1, 1.0F, 0.0F);
-                  quad(bb, m, cx + xDentro, y0, cx + xFuera, y1, 0.0F, 1.0F);
-                  quad(bb, m, cx + xFuera, y0, w, y1, 1.0F, 1.0F);
-               } else {
-                  float ac = (v - (1.0F - eps)) / eps;
-                  quad(bb, m, 0.0F, y0, cx - xFuera, y1, 1.0F, 1.0F);
-                  quad(bb, m, cx - xFuera, y0, cx, y1, 1.0F, ac);
-                  quad(bb, m, cx, y0, cx + xFuera, y1, ac, 1.0F);
-                  quad(bb, m, cx + xFuera, y0, w, y1, 1.0F, 1.0F);
-               }
-            }
-         }
-
-         BufferUploader.drawWithShader(bb.buildOrThrow());
-         RenderSystem.enableDepthTest();
-      }
-   }
-
-   private static void quad(BufferBuilder bb, Matrix4f m, float x0, float y0, float x1, float y1, float aIzq, float aDer) {
+   private static void quad(Object bb, Matrix4f m, float x0, float y0, float x1, float y1, float aIzq, float aDer) {
       if (!(x1 - x0 < 0.01F)) {
          bb.addVertex(m, x0, y0, 0.0F).setColor(0.0F, 0.0F, 0.0F, aIzq);
          bb.addVertex(m, x0, y1, 0.0F).setColor(0.0F, 0.0F, 0.0F, aIzq);

@@ -1,13 +1,13 @@
 package net.ruleta.client.cosmeticos;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -33,7 +33,7 @@ public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerMod
 
    public void render(
       PoseStack pila,
-      MultiBufferSource buf,
+      Object buf,
       int luz,
       AbstractClientPlayer p,
       float limb,
@@ -56,13 +56,13 @@ public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerMod
    }
 
    private static void v(
-      VertexConsumer vc, Pose pose, int luz, float x, float y, float z, float u, float w, float r, float g, float b, float a, float nx, float ny, float nz
+      Object vc, Pose pose, int luz, float x, float y, float z, float u, float w, float r, float g, float b, float a, float nx, float ny, float nz
    ) {
       vc.addVertex(pose.pose(), x, y, z).setColor(r, g, b, a).setUv(u, w).setOverlay(OverlayTexture.NO_OVERLAY).setLight(luz).setNormal(pose, nx, ny, nz);
    }
 
    private static void quad(
-      VertexConsumer vc,
+      Object vc,
       Pose pose,
       int luz,
       float x0,
@@ -85,26 +85,9 @@ public class CosmeticosLayer extends RenderLayer<AbstractClientPlayer, PlayerMod
       v(vc, pose, luz, x0, y1, z, u0, v1, r, g, b, a, 0.0F, 0.0F, 1.0F);
    }
 
-   private void bandera(PoseStack pila, MultiBufferSource buf, int luz, String pais, float t, float movimiento) {
-      Identifier tex = tex("bandera_" + pais);
-      VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(tex));
-      float mov = 0.0F;
+   private void bandera(PoseStack pila, Object buf, int luz, String pais, float t, float movimiento) { }
 
-      for (int i = 0; i < BANDERAS.length; i++) {
-         float[] b = BANDERAS[i];
-         float ang = t * b[2] + b[3];
-         float y = b[0] + b[4] * (float)Math.sin(t * b[5] + i * 1.9F);
-         pila.pushPose();
-         pila.translate(Math.cos(ang) * b[1], y, Math.sin(ang) * b[1]);
-         pila.mulPose(Axis.YP.rotation(-ang + (float) (Math.PI / 2) + 0.45F * (float)Math.sin(t * 0.03F + b[3] * 1.7F)));
-         pila.mulPose(Axis.ZP.rotationDegrees(22.0F * (float)Math.sin(t * 0.055F + b[3] * 1.3F)));
-         pila.mulPose(Axis.XP.rotationDegrees(14.0F * (float)Math.sin(t * 0.047F + b[3] * 2.1F)));
-         ondeada(vc, pila.last(), t + b[3] * 9.0F, mov);
-         pila.popPose();
-      }
-   }
-
-   private static void ondeada(VertexConsumer vc, Pose pose, float t, float mov) {
+   private static void ondeada(Object vc, Pose pose, float t, float mov) {
       float hw = 0.18F;
       float hh = 0.135F;
       float amp = 0.012F + 0.075F * mov;

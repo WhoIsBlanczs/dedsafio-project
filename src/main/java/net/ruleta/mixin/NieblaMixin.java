@@ -1,10 +1,7 @@
 package net.ruleta.mixin;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.fog.FogRenderer;
-import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.ruleta.client.compat.Bus;
 import net.ruleta.client.compat.ViewportEvent;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,12 +1,9 @@
 package net.ruleta.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.MeshData;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -42,47 +39,9 @@ public final class OndaExplosion {
    }
 
    @SubscribeEvent
-   public static void alDibujar(RenderLevelStageEvent evento) {
-      if (evento.getStage() == RenderLevelStageEvent.Stage.AFTER_PARTICLES && !ONDAS.isEmpty()) {
-         long ahora = System.nanoTime();
-         Vec3 cam = evento.getCamera().getPosition();
-         Matrix4f m = evento.getPoseStack().last().pose();
-         RenderSystem.enableBlend();
-         RenderSystem.defaultBlendFunc();
-         RenderSystem.disableCull();
-         RenderSystem.enableDepthTest();
-         RenderSystem.depthMask(false);
-         RenderSystem.setShader(GameRenderer::getPositionColorShader);
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-         boolean algo = false;
-         Iterator<OndaExplosion.Onda> it = ONDAS.iterator();
+   public static void alDibujar(RenderLevelStageEvent evento) { }
 
-         while (it.hasNext()) {
-            OndaExplosion.Onda o = it.next();
-            float t = (float)(ahora - o.inicio) / 1.0E9F / 1.1F;
-            if (t >= 1.0F) {
-               it.remove();
-            } else {
-               algo |= dibujar(b, m, o, t, cam);
-            }
-         }
-
-         if (algo) {
-            BufferUploader.drawWithShader(b.buildOrThrow());
-         } else {
-            MeshData vacio = b.build();
-            if (vacio != null) {
-               vacio.close();
-            }
-         }
-
-         RenderSystem.depthMask(true);
-         RenderSystem.enableCull();
-         RenderSystem.disableBlend();
-      }
-   }
-
-   private static boolean dibujar(BufferBuilder b, Matrix4f m, OndaExplosion.Onda o, float t, Vec3 cam) {
+   private static boolean dibujar(Object b, Matrix4f m, OndaExplosion.Onda o, float t, Vec3 cam) {
       float sale = 1.0F - t;
       float r = o.radio * (1.0F - sale * sale * sale);
       float ancho = Math.max(0.5F, r * (0.95F * (float)Math.pow(sale, 1.6F) + 0.04F));

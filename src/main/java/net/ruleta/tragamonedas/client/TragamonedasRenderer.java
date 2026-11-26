@@ -1,13 +1,13 @@
 package net.ruleta.tragamonedas.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -54,7 +54,7 @@ public class TragamonedasRenderer implements BlockEntityRenderer<TragamonedasBE>
       return 96;
    }
 
-   public void render(TragamonedasBE be, float parcial, PoseStack ps, MultiBufferSource buf, int luz, int overlay) {
+   public void render(TragamonedasBE be, float parcial, PoseStack ps, Object buf, int luz, int overlay) {
       Level nivel = be.getLevel();
       if (nivel != null && be.getBlockState().getBlock() instanceof TragamonedasBloque) {
          Camera camara = Minecraft.getInstance().gameRenderer.getMainCamera();
@@ -130,110 +130,11 @@ public class TragamonedasRenderer implements BlockEntityRenderer<TragamonedasBE>
       return x * x * (3.0F - 2.0F * x);
    }
 
-   private static void dibujarRodillo(TragamonedasBE be, int r, float grados, PoseStack ps, MultiBufferSource buf, int luz, int overlay, boolean conItems) {
-      float cx = RODILLO_X[r];
-      ps.pushPose();
-      ps.translate(cx, 25.2F, -1.0F);
-      Pose pose = ps.last();
-      VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(TEX_TAMBOR));
+   private static void dibujarRodillo(TragamonedasBE be, int r, float grados, PoseStack ps, Object buf, int luz, int overlay, boolean conItems) { }
 
-      for (int k = 0; k < 8; k++) {
-         float a = (float)Math.toRadians(k * 45.0F + grados);
-         float ny = Mth.sin(a);
-         float nz = -Mth.cos(a);
-         float ty = Mth.cos(a);
-         float tz = Mth.sin(a);
-         float cy = 5.4F * ny;
-         float cz = 5.4F * nz;
-         float y1 = cy - ty * MEDIA_CARA;
-         float z1 = cz - tz * MEDIA_CARA;
-         float y2 = cy + ty * MEDIA_CARA;
-         float z2 = cz + tz * MEDIA_CARA;
-         float sombra = 0.78F + 0.22F * Mth.clamp(-nz, 0.0F, 1.0F) + 0.1F * Mth.clamp(ny, 0.0F, 1.0F);
-         quad(vc, pose, -2.9F, y1, z1, 2.9F, y1, z1, 2.9F, y2, z2, -2.9F, y2, z2, 0.0F, ny, nz, Math.min(1.0F, sombra), luz, overlay);
-      }
+   private static void dibujarPalanca(float extra, PoseStack ps, Object buf, int luz, int overlay) { }
 
-      float radio = 5.4F / (float)Math.cos(Math.PI / 8);
-
-      for (int lado = 0; lado < 2; lado++) {
-         float x = lado == 0 ? -2.9F : 2.9F;
-         float nx = lado == 0 ? -1.0F : 1.0F;
-
-         for (int k = 0; k < 8; k++) {
-            float b1 = (float)Math.toRadians(k * 45.0F + grados - 22.5F);
-            float b2 = (float)Math.toRadians((k + 1) * 45.0F + grados - 22.5F);
-            quad(
-               vc,
-               pose,
-               x,
-               0.0F,
-               0.0F,
-               x,
-               radio * Mth.sin(b1),
-               -radio * Mth.cos(b1),
-               x,
-               radio * Mth.sin(b2),
-               -radio * Mth.cos(b2),
-               x,
-               0.0F,
-               0.0F,
-               nx,
-               0.0F,
-               0.0F,
-               0.7F,
-               luz,
-               overlay
-            );
-         }
-      }
-
-      ItemStack[] pilas = be.pilas();
-
-      for (int k = 0; k < 8 && conItems; k++) {
-         float grad = k * 45.0F + grados;
-         float c = Mth.cos((float)Math.toRadians(grad));
-         if (!(c < 0.05F)) {
-            ps.pushPose();
-            ps.mulPose(Axis.XP.rotationDegrees(grad));
-            ps.translate(0.0, 0.0, -5.65F);
-            ps.mulPose(Axis.YP.rotationDegrees(180.0F));
-            ps.scale(4.3F, 4.3F, 0.6F);
-            if (pilas[k].getItem() instanceof DeditaItem) {
-               ps.translate(0.0, 0.0, 0.171875);
-               ps.mulPose(Axis.XP.rotationDegrees(90.0F));
-               Minecraft.getInstance().getItemRenderer().renderStatic(pilas[k], ItemDisplayContext.NONE, luz, overlay, ps, buf, be.getLevel(), 0);
-            } else {
-               Minecraft.getInstance().getItemRenderer().renderStatic(pilas[k], ItemDisplayContext.GUI, luz, overlay, ps, buf, be.getLevel(), 0);
-            }
-
-            ps.popPose();
-         }
-      }
-
-      ps.popPose();
-   }
-
-   private static void dibujarPalanca(float extra, PoseStack ps, MultiBufferSource buf, int luz, int overlay) {
-      ps.pushPose();
-      ps.translate(13.7, 18.785, -5.185);
-      ps.mulPose(Axis.XP.rotationDegrees(extra));
-      ps.translate(-13.7, -18.785, 5.185);
-      ps.pushPose();
-      ps.translate(13.7, 20.8, -7.2);
-      ps.mulPose(Axis.XP.rotationDegrees(-45.0F));
-      ps.translate(-13.7, -20.8, 7.2);
-      caja(buf.getBuffer(RenderType.entityCutoutNoCull(TEX_BRAZO)), ps.last(), 12.85F, 17.95F, -8.05F, 14.55F, 23.65F, -6.35F, luz, overlay);
-      ps.popPose();
-      ps.pushPose();
-      ps.translate(13.7, 23.8, -9.8);
-      ps.mulPose(Axis.XP.rotationDegrees(-45.0F));
-      ps.translate(-13.7, -23.8, 9.8);
-      caja(buf.getBuffer(RenderType.entityCutoutNoCull(TEX_BOLA)), ps.last(), 12.2F, 22.3F, -11.3F, 15.2F, 25.3F, -8.3F, luz, overlay);
-      ps.popPose();
-      ps.popPose();
-   }
-
-   private static void caja(VertexConsumer vc, Pose p, float x1, float y1, float z1, float x2, float y2, float z2, int luz, int ovl) {
+   private static void caja(Object vc, Pose p, float x1, float y1, float z1, float x2, float y2, float z2, int luz, int ovl) {
       quad(vc, p, x1, y1, z1, x2, y1, z1, x2, y2, z1, x1, y2, z1, 0.0F, 0.0F, -1.0F, 0.8F, luz, ovl);
       quad(vc, p, x2, y1, z2, x1, y1, z2, x1, y2, z2, x2, y2, z2, 0.0F, 0.0F, 1.0F, 0.8F, luz, ovl);
       quad(vc, p, x2, y1, z1, x2, y1, z2, x2, y2, z2, x2, y2, z1, 1.0F, 0.0F, 0.0F, 0.65F, luz, ovl);
@@ -243,7 +144,7 @@ public class TragamonedasRenderer implements BlockEntityRenderer<TragamonedasBE>
    }
 
    private static void quad(
-      VertexConsumer vc,
+      Object vc,
       Pose p,
       float ax,
       float ay,
@@ -271,7 +172,7 @@ public class TragamonedasRenderer implements BlockEntityRenderer<TragamonedasBE>
       v(vc, p, dx, dy, dz, c, nx, ny, nz, luz, ovl);
    }
 
-   private static void v(VertexConsumer vc, Pose p, float x, float y, float z, int c, float nx, float ny, float nz, int luz, int ovl) {
+   private static void v(Object vc, Pose p, float x, float y, float z, int c, float nx, float ny, float nz, int luz, int ovl) {
       vc.addVertex(p, x, y, z).setColor(c, c, c, 255).setUv(0.03F, 0.03F).setOverlay(OverlayTexture.NO_OVERLAY).setLight(luz).setNormal(p, nx, ny, nz);
    }
 }

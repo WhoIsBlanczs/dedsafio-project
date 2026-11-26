@@ -1,7 +1,7 @@
 package net.ruleta.nuclear.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -92,7 +92,7 @@ public class NuclearCreeperModel<T extends Entity> extends EntityModel<T> {
       this.body.xRot = -0.32F * ease;
    }
 
-   public void renderToBuffer(PoseStack pose, VertexConsumer buffer, int light, int overlay, int color) {
+   public void renderToBuffer(PoseStack pose, Object buffer, int light, int overlay, int color) {
       this.root.render(pose, buffer, light, overlay, color);
    }
 }

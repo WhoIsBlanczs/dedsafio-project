@@ -1,17 +1,16 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.world.entity.Entity;
 import net.ruleta.dedsafio.EscenaPayload;
 import org.joml.Matrix4f;
 
 public final class OlaCliente {
-   private static ShaderInstance shaderOla;
-   private static ShaderInstance shaderVista;
+   private static Object shaderOla;
+   private static Object shaderVista;
    private static boolean activa;
    private static long t0;
    private static float altura;
@@ -30,11 +29,11 @@ public final class OlaCliente {
    private OlaCliente() {
    }
 
-   public static void shaderOla(ShaderInstance s) {
+   public static void shaderOla(Object s) {
       shaderOla = s;
    }
 
-   public static void shaderVista(ShaderInstance s) {
+   public static void shaderVista(Object s) {
       shaderVista = s;
    }
 
@@ -150,7 +149,7 @@ public final class OlaCliente {
       }
    }
 
-   private static void fijar(ShaderInstance sh, String nombre, float a, float b, float c, float d, int n) {
+   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) {
       Uniform u = sh.getUniform(nombre);
       if (u != null) {
          if (n == 4) {
@@ -161,104 +160,15 @@ public final class OlaCliente {
       }
    }
 
-   public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) {
-      ShaderInstance sh = shaderOla;
-      if (activa && sh != null) {
-         double zf = frente();
-         double lejos = adelante(camX, camZ) - zf;
-         if (!(lejos > 1600.0) && !(zf > 1500.0)) {
-            if (lejos < -140.0 && !dentro) {
-               activa = false;
-               AudioDedsafio.pararOla();
-            } else {
-               float t = DedsafioCielo.tiempo();
-               fijar(sh, "Tiempo", t % 3600.0F, 0.0F, 0.0F, 0.0F, 1);
-               fijar(sh, "Ola", altura, largo, 0.0F, 0.0F, 4);
-               fijar(sh, "Dir", (float)dirX(), (float)dirZ(), 0.0F, 0.0F, 4);
-               fijar(sh, "Mundo", (float)(camX % 4096.0), (float)(camZ % 4096.0), 0.0F, 0.0F, 4);
-               Vtx.empujarVista(vista);
-               RenderSystem.setShader(() -> sh);
-               RenderSystem.enableBlend();
-               RenderSystem.defaultBlendFunc();
-               RenderSystem.depthMask(true);
-               RenderSystem.enableDepthTest();
-               RenderSystem.disableCull();
+   public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) { }
 
-               try {
-                  int FILAS = 56;
-                  float paso = Math.max(0.4F, largo / 330.0F);
-                  int cols = (int)Math.ceil(largo / paso);
-                  BufferBuilder b = Vtx.quads();
-
-                  for (int i = 0; i < cols; i++) {
-                     float ua = -largo / 2.0F + i * paso;
-                     float ub = Math.min(ua + paso, largo / 2.0F);
-
-                     for (int k = 0; k < 56; k++) {
-                        float ta = 2.0F * k / 56.0F;
-                        float tb = 2.0F * (k + 1) / 56.0F;
-                        vertice(b, ua, ta, zf, yBase, camX, camY, camZ);
-                        vertice(b, ub, ta, zf, yBase, camX, camY, camZ);
-                        vertice(b, ub, tb, zf, yBase, camX, camY, camZ);
-                        vertice(b, ua, tb, zf, yBase, camX, camY, camZ);
-                     }
-                  }
-
-                  Vtx.dibujar(b);
-               } finally {
-                  RenderSystem.enableCull();
-                  RenderSystem.depthMask(true);
-                  RenderSystem.disableBlend();
-                  Vtx.sacarVista();
-               }
-            }
-         }
-      }
-   }
-
-   private static void vertice(BufferBuilder b, float u, float t, double zf, float y0, double cx, double cy, double cz) {
+   private static void vertice(Object b, float u, float t, double zf, float y0, double cx, double cy, double cz) {
       double wx = x0 - dirZ() * u + dirX() * zf;
       double wz = z0 + dirX() * u + dirZ() * zf;
       Vtx.v(b, (float)(wx - cx), (float)(y0 - cy), (float)(wz - cz), u, t);
    }
 
-   public static void dibujarDentro() {
-      ShaderInstance sh = shaderVista;
-      if (dentro && sh != null) {
-         Minecraft mc = Minecraft.getInstance();
-         float seg = segundosDentro();
-         float cubre = Math.min(1.0F, seg / 0.35F);
-         if (!dentroVuelve) {
-            float k = Math.min(1.0F, Math.max(0.0F, (seg - dentroDur) / 0.6F));
-            cubre *= 1.0F - k * k * (3.0F - 2.0F * k);
-         }
-
-         float asp = (float)mc.getWindow().getWidth() / Math.max(1, mc.getWindow().getHeight());
-         float cabeceo = mc.player == null ? 0.0F : mc.player.getXRot();
-         fijar(sh, "Dentro", cubre, seg, asp, cabeceo, 4);
-         fijar(sh, "Tiempo", DedsafioCielo.tiempo() % 3600.0F, 0.0F, 0.0F, 0.0F, 1);
-         RenderSystem.setShader(() -> sh);
-         RenderSystem.enableBlend();
-         RenderSystem.defaultBlendFunc();
-         RenderSystem.disableDepthTest();
-         RenderSystem.depthMask(false);
-         RenderSystem.disableCull();
-
-         try {
-            BufferBuilder b = Vtx.quads();
-            Vtx.v(b, -1.0F, -1.0F, 0.0F, 0.0F, 0.0F);
-            Vtx.v(b, 1.0F, -1.0F, 0.0F, 1.0F, 0.0F);
-            Vtx.v(b, 1.0F, 1.0F, 0.0F, 1.0F, 1.0F);
-            Vtx.v(b, -1.0F, 1.0F, 0.0F, 0.0F, 1.0F);
-            Vtx.dibujar(b);
-         } finally {
-            RenderSystem.enableCull();
-            RenderSystem.depthMask(true);
-            RenderSystem.enableDepthTest();
-            RenderSystem.disableBlend();
-         }
-      }
-   }
+   public static void dibujarDentro() { }
 
    public static float[] balanceo() {
       if (!dentro) {

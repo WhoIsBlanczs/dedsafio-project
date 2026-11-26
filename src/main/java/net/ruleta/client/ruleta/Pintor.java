@@ -1,15 +1,10 @@
 package net.ruleta.client.ruleta;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
-import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,13 +16,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.joml.Matrix4f;
 
 public final class Pintor {
-   private static ShaderInstance shader;
+   private static Object shader;
    private static final Map<String, Identifier> TEXTURAS = new HashMap<>();
    private static final Map<String, NativeImage[]> LISTAS = new ConcurrentHashMap<>();
    private static final ConcurrentLinkedQueue<String> POR_SUBIR = new ConcurrentLinkedQueue<>();
@@ -36,7 +31,7 @@ public final class Pintor {
    private Pintor() {
    }
 
-   static void shader(ShaderInstance s) {
+   static void shader(Object s) {
       shader = s;
    }
 
@@ -105,17 +100,9 @@ public final class Pintor {
       }
    }
 
-   static void empezar() {
-      RenderSystem.enableBlend();
-      RenderSystem.blendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ONE_MINUS_SRC_ALPHA);
-      RenderSystem.setShader(() -> shader != null ? shader : GameRenderer.getPositionTexColorShader());
-   }
+   static void empezar() { }
 
-   static void terminar() {
-      RenderSystem.defaultBlendFunc();
-      RenderSystem.disableBlend();
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-   }
+   static void terminar() { }
 
    static void rectTono(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb, float giro, float luz, float saturacion) {
       Uniform u = shader == null ? null : shader.getUniform("Recolor");
@@ -132,29 +119,7 @@ public final class Pintor {
       }
    }
 
-   static void rectSuma(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb) {
-      RenderSystem.blendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE, SourceFactor.ONE, DestFactor.ONE_MINUS_SRC_ALPHA);
+   static void rectSuma(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb) { }
 
-      try {
-         rect(m, textura, x0, y0, x1, y1, argb);
-      } finally {
-         RenderSystem.blendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ONE_MINUS_SRC_ALPHA);
-      }
-   }
-
-   static void rect(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb) {
-      if (argb >>> 24 != 0) {
-         RenderSystem.setShaderTexture(0, textura(textura));
-         float a = (argb >>> 24) / 255.0F;
-         float r = (argb >> 16 & 0xFF) / 255.0F;
-         float g = (argb >> 8 & 0xFF) / 255.0F;
-         float b = (argb & 0xFF) / 255.0F;
-         BufferBuilder bb = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-         bb.addVertex(m, x0, y0, 0.0F).setUv(0.0F, 0.0F).setColor(r, g, b, a);
-         bb.addVertex(m, x0, y1, 0.0F).setUv(0.0F, 1.0F).setColor(r, g, b, a);
-         bb.addVertex(m, x1, y1, 0.0F).setUv(1.0F, 1.0F).setColor(r, g, b, a);
-         bb.addVertex(m, x1, y0, 0.0F).setUv(1.0F, 0.0F).setColor(r, g, b, a);
-         BufferUploader.drawWithShader(bb.buildOrThrow());
-      }
-   }
+   static void rect(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb) { }
 }

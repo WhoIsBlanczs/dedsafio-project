@@ -1,13 +1,9 @@
 package net.ruleta.client.reviil;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
-import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
+import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.InputStream;
@@ -46,7 +42,7 @@ public final class CabezaReviil {
    private static int[] colR;
    private static int[] colG;
    private static int[] colB;
-   private static VertexBuffer vbo;
+   private static Object vbo;
    private static int luzSubida = Integer.MIN_VALUE;
    private static final float PASO_LUZ = 2.0F;
    public static float retroceso;
@@ -180,109 +176,7 @@ public final class CabezaReviil {
       }
    }
 
-   public static void dibujar(Matrix4f vista, float angulo, float centroY, float visible, float tiempo, float distancia) {
-      if (!(visible <= 0.001F)) {
-         cargar();
-         if (vertices != null) {
-            float px = -((float)Math.sin(angulo)) * centroY;
-            float pz = (float)Math.cos(angulo) * centroY;
-            float th = (float)Math.sqrt(px * px + pz * pz);
-            Vector3f dir = th < 1.0E-5F
-               ? new Vector3f(0.0F, 1.0F, 0.0F)
-               : new Vector3f(px / th * (float)Math.sin(th), (float)Math.cos(th), pz / th * (float)Math.sin(th));
-            Vector3f ex = new Vector3f((float)Math.cos(angulo), 0.0F, (float)Math.sin(angulo));
-            Vector3f ez = new Vector3f(dir).negate();
-            Vector3f ey = new Vector3f(ez).cross(ex).normalize();
-            ex = new Vector3f(ey).cross(ez).normalize();
-            double fase = tiempo * 2.0 * Math.PI / 5.5;
-            float cabeceo = (float)Math.toRadians(1.0 + 5.0 * Math.sin(fase) + 1.2 * Math.sin(fase * 2.0 + 0.8)) + cabeceoExtra;
-            float giroLado = (float)Math.toRadians(0.0 * Math.sin(tiempo * 2.0 * Math.PI / 9.0 + 1.3));
-            float tam = distancia * (float)Math.tan(0.34F) * (1.0F - 0.22F * retroceso);
-            float sx = tam * 1.15F;
-            float sy = tam;
-            float sz = tam * 1.6F;
-            int paso = Math.round((float)Math.toDegrees(cabeceo) / 2.0F);
-            boolean reconstruir = vbo == null || paso != luzSubida;
-            if (reconstruir) {
-               iluminar((float)Math.toRadians(paso * 2.0F), giroLado);
-            }
-
-            Matrix4f m = new Matrix4f(vista)
-               .translate(dir.x * distancia, dir.y * distancia, dir.z * distancia)
-               .mul(new Matrix4f(ex.x, ex.y, ex.z, 0.0F, ey.x, ey.y, ey.z, 0.0F, ez.x, ez.y, ez.z, 0.0F, 0.0F, 0.0F, 0.0F, 1.0F))
-               .rotateX(cabeceo)
-               .rotateY(giroLado)
-               .scale(sx, sy, sz);
-            Matrix4fStack mv = RenderSystem.getModelViewStack();
-            mv.pushMatrix();
-            mv.identity();
-            RenderSystem.applyModelViewMatrix();
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.enableDepthTest();
-            RenderSystem.depthFunc(515);
-            RenderSystem.depthMask(true);
-            RenderSystem.disableCull();
-            RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-            RenderSystem.setShaderTexture(0, TEXTURA);
-            int a = 255;
-
-            try {
-               if (!reconstruir) {
-                  vbo.bind();
-               } else {
-                  BufferBuilder b = Tesselator.getInstance().begin(Mode.TRIANGLES, DefaultVertexFormat.POSITION_TEX_COLOR);
-                  float[] v = vertices;
-
-                  for (int idx : caras) {
-                     int o = idx * 6;
-                     b.addVertex(v[o], v[o + 1], v[o + 2]).setColor(colR[idx], colG[idx], colB[idx], a).setUv(v[o + 3], v[o + 4]);
-                  }
-
-                  if (vbo == null) {
-                     vbo = new VertexBuffer(Usage.STATIC);
-                  }
-
-                  vbo.bind();
-                  vbo.upload(b.buildOrThrow());
-                  luzSubida = paso;
-               }
-
-               vbo.drawWithShader(new Matrix4f(m), new Matrix4f(RenderSystem.getProjectionMatrix()), GameRenderer.getPositionTexColorShader());
-               VertexBuffer.unbind();
-               RenderSystem.depthMask(false);
-               RenderSystem.setShaderTexture(0, OJO);
-               BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-
-               for (int i = 0; i < OJOS.length; i++) {
-                  float[] ojo = OJOS[i];
-                  float giro = tiempo * 2.4F * (i == 0 ? 1.0F : -1.0F);
-                  float c = (float)Math.cos(giro);
-                  float s = (float)Math.sin(giro);
-                  float r = ojo[3] * 0.8F;
-                  float z = 0.318F;
-                  float[][] esquinas = new float[][]{
-                     {-1.0F, -1.0F, 0.0F, 1.0F}, {1.0F, -1.0F, 1.0F, 1.0F}, {1.0F, 1.0F, 1.0F, 0.0F}, {-1.0F, 1.0F, 0.0F, 0.0F}
-                  };
-
-                  for (float[] e : esquinas) {
-                     float qx = (e[0] * c - e[1] * s) * r / 1.15F;
-                     float qy = (e[0] * s + e[1] * c) * r;
-                     b.addVertex(m, ojo[0] + qx, ojo[1] + qy, z).setColor(255, 255, 255, a).setUv(e[2], e[3]);
-                  }
-               }
-
-               BufferUploader.drawWithShader(b.buildOrThrow());
-            } finally {
-               RenderSystem.depthMask(true);
-               RenderSystem.enableCull();
-               RenderSystem.disableBlend();
-               mv.popMatrix();
-               RenderSystem.applyModelViewMatrix();
-            }
-         }
-      }
-   }
+   public static void dibujar(Matrix4f vista, float angulo, float centroY, float visible, float tiempo, float distancia) { }
 
    private static int[] mezclar(int x, int y, int z) {
       x = x * 1664525 + 1013904223;

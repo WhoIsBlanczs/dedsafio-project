@@ -1,6 +1,6 @@
 package net.ruleta.client;
 
-import com.mojang.blaze3d.shaders.FogShape;
+import com.mojang.blaze3d.shaders.Object;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
@@ -41,16 +41,7 @@ public final class MisOjos {
    }
 
    @SubscribeEvent
-   public static void alPonerNiebla(ViewportEvent.RenderFog e) {
-      if (!(nieblaK <= 0.0F) && e.getType() == FogType.NONE) {
-         float lejos = e.getFarPlaneDistance() + (Math.min(e.getFarPlaneDistance(), 12.0F) - e.getFarPlaneDistance()) * nieblaK;
-         float cerca = e.getNearPlaneDistance() * (1.0F - nieblaK);
-         e.setNearPlaneDistance(cerca);
-         e.setFarPlaneDistance(lejos);
-         e.setFogShape(FogShape.SPHERE);
-         e.setCanceled(true);
-      }
-   }
+   public static void alPonerNiebla(ViewportEvent.RenderFog e) { }
 
    @SubscribeEvent
    public static void alDibujarGui(RenderGuiEvent.Pre e) {

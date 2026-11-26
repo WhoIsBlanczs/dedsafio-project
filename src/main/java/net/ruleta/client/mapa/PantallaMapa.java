@@ -1,12 +1,9 @@
 package net.ruleta.client.mapa;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.math.Axis;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -178,112 +175,9 @@ public class PantallaMapa extends Screen {
       super.render(g, ratonX, ratonY, parcial);
    }
 
-   private void losetas(GuiGraphicsExtractor g, float cx, float cy) {
-      double bx0 = this.centroX - cx / zoom;
-      double bx1 = this.centroX + cx / zoom;
-      double bz0 = this.centroZ - cy / zoom;
-      double bz1 = this.centroZ + cy / zoom;
-      int r0x = Math.floorDiv(Mth.floor(bx0), 128);
-      int r1x = Math.floorDiv(Mth.floor(bx1), 128);
-      int r0z = Math.floorDiv(Mth.floor(bz0), 128);
-      int r1z = Math.floorDiv(Mth.floor(bz1), 128);
+   private void losetas(GuiGraphicsExtractor g, float cx, float cy) { }
 
-      for (PantallaMapa.Loseta l : this.losetas.values()) {
-         l.vista = false;
-      }
-
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
-      int nuevas = 0;
-
-      for (int rz = r0z; rz <= r1z; rz++) {
-         for (int rx = r0x; rx <= r1x; rx++) {
-            long reg = ChunkPos.asLong(rx, rz);
-            PantallaMapa.Loseta l = this.losetas.get(reg);
-            if (l == null) {
-               if (this.vacias.contains(reg) || nuevas >= 6) {
-                  continue;
-               }
-
-               l = this.crear(reg);
-               nuevas++;
-               if (l == null) {
-                  continue;
-               }
-            }
-
-            l.vista = true;
-            float x0 = cx + (float)((rx * 128 - this.centroX) * zoom);
-            float y0 = cy + (float)((rz * 128 - this.centroZ) * zoom);
-            g.pose().pushPose();
-            g.pose().translate(x0, y0, 0.0F);
-            g.pose().scale(zoom, zoom, 1.0F);
-            g.blit(l.id, 0, 0, 0.0F, 0.0F, 128, 128, 128, 128);
-            g.pose().popPose();
-         }
-      }
-
-      if (this.losetas.size() > 400) {
-         Iterator<Entry<Long, PantallaMapa.Loseta>> it = this.losetas.entrySet().iterator();
-
-         while (it.hasNext()) {
-            PantallaMapa.Loseta l = it.next().getValue();
-            if (!l.vista) {
-               this.minecraft.getTextureManager().release(l.id);
-               it.remove();
-            }
-         }
-      }
-   }
-
-   private void texturas(GuiGraphicsExtractor g, float cx, float cy) {
-      int bx0 = Mth.floor(this.centroX - cx / zoom);
-      int bx1 = Mth.ceil(this.centroX + cx / zoom);
-      int bz0 = Mth.floor(this.centroZ - cy / zoom);
-      int bz1 = Mth.ceil(this.centroZ + cy / zoom);
-      Matrix4f m = g.pose().last().pose();
-      RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
-      RenderSystem.setShaderTexture(0, MapaDatos.atlasEstatico(this.minecraft));
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
-      BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-
-      for (int ccz = bz0 >> 4; ccz <= bz1 >> 4; ccz++) {
-         for (int ccx = bx0 >> 4; ccx <= bx1 >> 4; ccx++) {
-            MapaDatos.Trozo t = MapaDatos.CACHE.get(ChunkPos.asLong(ccx, ccz));
-            if (t != null) {
-               for (int z = 0; z < 16; z++) {
-                  int wz = (ccz << 4) + z;
-                  if (wz >= bz0 && wz <= bz1) {
-                     float y0 = cy + (float)((wz - this.centroZ) * zoom);
-                     float y1 = y0 + zoom;
-
-                     for (int x = 0; x < 16; x++) {
-                        int wx = (ccx << 4) + x;
-                        if (wx >= bx0 && wx <= bx1) {
-                           TextureAtlasSprite sp = t.sprite[z * 16 + x];
-                           if (sp != null) {
-                              int c = t.mult[z * 16 + x];
-                              float r = (c >> 16 & 0xFF) / 255.0F;
-                              float v = (c >> 8 & 0xFF) / 255.0F;
-                              float a = (c & 0xFF) / 255.0F;
-                              float x0 = cx + (float)((wx - this.centroX) * zoom);
-                              float x1 = x0 + zoom;
-                              b.addVertex(m, x0, y0, 0.0F).setColor(r, v, a, 1.0F).setUv(sp.getU0(), sp.getV0());
-                              b.addVertex(m, x0, y1, 0.0F).setColor(r, v, a, 1.0F).setUv(sp.getU0(), sp.getV1());
-                              b.addVertex(m, x1, y1, 0.0F).setColor(r, v, a, 1.0F).setUv(sp.getU1(), sp.getV1());
-                              b.addVertex(m, x1, y0, 0.0F).setColor(r, v, a, 1.0F).setUv(sp.getU1(), sp.getV0());
-                           }
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      }
-
-      BufferUploader.drawWithShader(b.buildOrThrow());
-   }
+   private void texturas(GuiGraphicsExtractor g, float cx, float cy) { }
 
    private void vineta(GuiGraphicsExtractor g) {
       int w = this.width;
@@ -329,31 +223,9 @@ public class PantallaMapa extends Screen {
       }
    }
 
-   private void jugador(GuiGraphicsExtractor g, float parcial, float cx, float cy) {
-      Player p = this.minecraft == null ? null : this.minecraft.player;
-      if (p != null) {
-         double px = Mth.lerp(parcial, p.xo, p.getX());
-         double pz = Mth.lerp(parcial, p.zo, p.getZ());
-         float sx = cx + (float)((px - this.centroX) * zoom);
-         float sy = cy + (float)((pz - this.centroZ) * zoom);
-         float yaw = p.getViewYRot(parcial);
-         g.pose().pushPose();
-         g.pose().translate(sx, sy, 0.0F);
-         g.pose().mulPose(Axis.ZP.rotationDegrees(yaw + 180.0F));
-         Matrix4f m = g.pose().last().pose();
-         RenderSystem.setShader(GameRenderer::getPositionColorShader);
-         RenderSystem.enableBlend();
-         RenderSystem.disableCull();
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.TRIANGLES, DefaultVertexFormat.POSITION_COLOR);
-         flecha(b, m, 0.62F, 0.35F, 0.0F, 0.0F);
-         flecha(b, m, 0.45F, 0.95F, 0.12F, 0.12F);
-         BufferUploader.drawWithShader(b.buildOrThrow());
-         RenderSystem.enableCull();
-         g.pose().popPose();
-      }
-   }
+   private void jugador(GuiGraphicsExtractor g, float parcial, float cx, float cy) { }
 
-   private static void flecha(BufferBuilder b, Matrix4f m, float s, float r, float v, float a) {
+   private static void flecha(Object b, Matrix4f m, float s, float r, float v, float a) {
       float[] punta = new float[]{0.0F, -9.0F * s};
       float[] izq = new float[]{-6.5F * s, 7.0F * s};
       float[] muesca = new float[]{0.0F, 3.0F * s};
@@ -366,36 +238,11 @@ public class PantallaMapa extends Screen {
       vertice(b, m, der, r, v, a);
    }
 
-   private static void vertice(BufferBuilder b, Matrix4f m, float[] p, float r, float v, float a) {
+   private static void vertice(Object b, Matrix4f m, float[] p, float r, float v, float a) {
       b.addVertex(m, p[0], p[1], 0.0F).setColor(r, v, a, 1.0F);
    }
 
-   private void brujula(GuiGraphicsExtractor g) {
-      float cx = this.width - 34.0F;
-      float cy = 30.0F;
-      float largo = 20.0F;
-      g.pose().pushPose();
-      g.pose().translate(cx, cy, 0.0F);
-      Matrix4f m = g.pose().last().pose();
-      RenderSystem.setShader(GameRenderer::getPositionColorShader);
-      RenderSystem.enableBlend();
-      RenderSystem.disableCull();
-      BufferBuilder b = Tesselator.getInstance().begin(Mode.TRIANGLES, DefaultVertexFormat.POSITION_COLOR);
-      linea(b, m, -largo, -largo, largo, largo, 3.0F, 0.0F);
-      linea(b, m, -largo, largo, largo, -largo, 3.0F, 0.0F);
-      linea(b, m, -largo, -largo, largo, largo, 1.2F, 1.0F);
-      linea(b, m, -largo, largo, largo, -largo, 1.2F, 1.0F);
-      BufferUploader.drawWithShader(b.buildOrThrow());
-      RenderSystem.enableCull();
-      g.pose().popPose();
-      int ix = Math.round(cx);
-      int iy = Math.round(cy);
-      int d = 11;
-      this.letra(g, "N", ix, iy - d);
-      this.letra(g, "S", ix, iy + d);
-      this.letra(g, "W", ix - d, iy);
-      this.letra(g, "E", ix + d, iy);
-   }
+   private void brujula(GuiGraphicsExtractor g) { }
 
    private void letra(GuiGraphicsExtractor g, String t, int x, int y) {
       int w = this.font.width(t);
@@ -413,7 +260,7 @@ public class PantallaMapa extends Screen {
       g.text(this.font, t, lx, ly, 16777215, false);
    }
 
-   private static void linea(BufferBuilder b, Matrix4f m, float x1, float y1, float x2, float y2, float grosor, float tono) {
+   private static void linea(Object b, Matrix4f m, float x1, float y1, float x2, float y2, float grosor, float tono) {
       float dx = x2 - x1;
       float dy = y2 - y1;
       float l = Mth.sqrt(dx * dx + dy * dy);

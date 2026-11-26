@@ -1,11 +1,10 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Object;
 import java.util.Arrays;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
@@ -13,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Matrix4f;
 
 public final class EspumaDedsafio {
-   private static ShaderInstance shader;
+   private static Object shader;
    private static final int R = 40;
    private static final int Y = -3;
    private static final double Y_DIBUJO = -2.17;
@@ -28,7 +27,7 @@ public final class EspumaDedsafio {
    private EspumaDedsafio() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shader = s;
    }
 
@@ -112,7 +111,7 @@ public final class EspumaDedsafio {
       cuantos = k;
    }
 
-   private static void fijar(ShaderInstance sh, String nombre, float a, float b, float c, float d, int n) {
+   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) {
       Uniform u = sh.getUniform(nombre);
       if (u != null) {
          if (n == 4) {
@@ -123,53 +122,5 @@ public final class EspumaDedsafio {
       }
    }
 
-   public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) {
-      ShaderInstance sh = shader;
-      Minecraft mc = Minecraft.getInstance();
-      if (sh != null && mc.level != null) {
-         int bx = (int)Math.floor(camX);
-         int bz = (int)Math.floor(camZ);
-         long ahora = System.nanoTime();
-         boolean lejos = Math.abs(bx - ultX) > 8 || Math.abs(bz - ultZ) > 8;
-         if (lejos || ahora - ultimoEscaneo > 1500000000L) {
-            escanear(mc.level, bx, bz);
-            ultX = bx;
-            ultZ = bz;
-            ultimoEscaneo = ahora;
-         }
-
-         if (cuantos != 0) {
-            fijar(sh, "Tiempo", DedsafioCielo.tiempo() % 3600.0F, 0.0F, 0.0F, 0.0F, 1);
-            fijar(sh, "Mundo", (float)(camX % 4096.0), (float)(camZ % 4096.0), 0.0F, 0.0F, 4);
-            Vtx.empujarVista(vista);
-            RenderSystem.setShader(() -> sh);
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.depthMask(false);
-            RenderSystem.enableDepthTest();
-            RenderSystem.disableCull();
-
-            try {
-               float y = (float)(-2.17 - camY);
-               BufferBuilder b = Vtx.quads();
-
-               for (int k = 0; k < cuantos; k++) {
-                  float x0 = (float)(quads[k * 2] - camX);
-                  float z0 = (float)(quads[k * 2 + 1] - camZ);
-                  Vtx.v(b, x0, y, z0, valores[k * 4], 0.0F);
-                  Vtx.v(b, x0 + 1.0F, y, z0, valores[k * 4 + 1], 0.0F);
-                  Vtx.v(b, x0 + 1.0F, y, z0 + 1.0F, valores[k * 4 + 2], 0.0F);
-                  Vtx.v(b, x0, y, z0 + 1.0F, valores[k * 4 + 3], 0.0F);
-               }
-
-               Vtx.dibujar(b);
-            } finally {
-               RenderSystem.enableCull();
-               RenderSystem.depthMask(true);
-               RenderSystem.disableBlend();
-               Vtx.sacarVista();
-            }
-         }
-      }
-   }
+   public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) { }
 }

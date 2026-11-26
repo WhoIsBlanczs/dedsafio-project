@@ -1,7 +1,6 @@
 package net.ruleta.client;
 
 import com.mojang.blaze3d.platform.Window;
-import com.mojang.blaze3d.systems.RenderSystem;
 import java.lang.reflect.Field;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -41,46 +40,9 @@ public final class FiltroPantalla {
       }
    }
 
-   public boolean preparar() {
-      if (this.fallo) {
-         return false;
-      }
+   public boolean preparar() { return false; }
 
-      Minecraft mc = Minecraft.getInstance();
-
-      try {
-         Window v = mc.getWindow();
-         if (this.cadena == null) {
-            this.cadena = new PostChain(mc.getTextureManager(), mc.getResourceManager(), mc.getMainRenderTarget(), this.ruta);
-            this.cadena.resize(v.getWidth(), v.getHeight());
-            this.ancho = v.getWidth();
-            this.alto = v.getHeight();
-            this.pasadas = pasadasDe(this.cadena);
-         } else if (this.ancho != v.getWidth() || this.alto != v.getHeight()) {
-            this.cadena.resize(v.getWidth(), v.getHeight());
-            this.ancho = v.getWidth();
-            this.alto = v.getHeight();
-         }
-
-         return true;
-      } catch (Exception ex) {
-         LOG.warn("No se pudo cargar el filtro {}", this.ruta, ex);
-         this.fallo = true;
-         this.cerrar();
-         return false;
-      }
-   }
-
-   public void pasar(float parcial) {
-      if (this.cadena != null) {
-         Minecraft mc = Minecraft.getInstance();
-         RenderSystem.disableBlend();
-         RenderSystem.disableDepthTest();
-         RenderSystem.resetTextureMatrix();
-         this.cadena.process(parcial);
-         mc.getMainRenderTarget().bindWrite(true);
-      }
-   }
+   public void pasar(float parcial) { }
 
    public void cerrar() {
       if (this.cadena != null) {

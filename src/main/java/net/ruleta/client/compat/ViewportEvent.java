@@ -1,8 +1,7 @@
 package net.ruleta.client.compat;
 
-import com.mojang.blaze3d.shaders.FogShape;
+import com.mojang.blaze3d.shaders.Object;
 import net.minecraft.client.Camera;
-import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
 import net.minecraft.world.level.material.FogType;
 
 public final class ViewportEvent {
@@ -106,9 +105,9 @@ public final class ViewportEvent {
       private final FogType tipo;
       private float cerca;
       private float lejos;
-      private FogShape forma;
+      private Object forma;
 
-      public RenderFog(FogMode modo, FogType tipo, Camera camara, float parcial, float cerca, float lejos, FogShape forma) {
+      public RenderFog(FogMode modo, FogType tipo, Camera camara, float parcial, float cerca, float lejos, Object forma) {
          super(camara, parcial);
          this.modo = modo;
          this.tipo = tipo;
@@ -133,7 +132,7 @@ public final class ViewportEvent {
          return this.lejos;
       }
 
-      public FogShape getFogShape() {
+      public Object getFogShape() {
          return this.forma;
       }
 
@@ -145,7 +144,7 @@ public final class ViewportEvent {
          this.lejos = v;
       }
 
-      public void setFogShape(FogShape v) {
+      public void setFogShape(Object v) {
          this.forma = v;
       }
    }

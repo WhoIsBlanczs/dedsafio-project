@@ -10,11 +10,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTic
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.Disconnect;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents.Join;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderContext;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents.AfterTranslucent;
-import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents.End;
 import net.ruleta.client.agujero.AgujeroCliente;
 import net.ruleta.client.bunker.BunkerMarcador;
 import net.ruleta.client.burbuja.BurbujaCliente;
@@ -40,51 +35,7 @@ public final class ClientEnganches {
    private ClientEnganches() {
    }
 
-   public static void registrar() {
-      Bus.registrar(
-         ScreenEffectHandler.class,
-         SupernovaGhosts.class,
-         SupernovaRenderHandler.class,
-         SupernovaSounds.class,
-         ChatBrillo.class,
-         ChatRojo.class,
-         LluviaRoja.class,
-         MisOjos.class,
-         NeblinaMundo.class,
-         OndaExplosion.class,
-         ProfundidadFabulosa.class,
-         RuletaClient.Juego.class,
-         VidaNombre.class,
-         AgujeroCliente.class,
-         BunkerMarcador.class,
-         EventosDedsafio.class,
-         BurbujaCliente.Teclas.class,
-         CosmeticosCliente.Chispas.class,
-         EclipseCliente.class,
-         LinternaCliente.class,
-         MapaCliente.class,
-         MapaDatos.class,
-         MeteoritosCliente.class,
-         PhoraCliente.class,
-         EventosReviil.class,
-         TornadoCliente.class,
-         PantallaAzul.Control.class,
-         RadiationSoundHandler.class
-      );
-      WorldRenderEvents.AFTER_TRANSLUCENT.register((AfterTranslucent)ctx -> {
-         lanzar(ctx, RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS);
-         lanzar(ctx, RenderLevelStageEvent.Stage.AFTER_PARTICLES);
-      });
-      WorldRenderEvents.END.register((End)ctx -> lanzar(ctx, RenderLevelStageEvent.Stage.AFTER_LEVEL));
-      HudRenderCallback.EVENT
-         .register((HudRenderCallback)(grafico, tiempo) -> Bus.post(new RenderGuiEvent.Post(grafico, tiempo.getGameTimeDeltaPartialTick(false))));
-      ClientTickEvents.END_CLIENT_TICK.register((EndTick)mc -> Bus.post(new TickEvent.ClientTickEvent(TickEvent.Phase.END)));
-      ClientPlayConnectionEvents.JOIN.register((Join)(manejador, emisor, mc) -> Bus.post(new ClientPlayerNetworkEvent.LoggingIn()));
-      ClientPlayConnectionEvents.JOIN.register((Join)(manejador, emisor, mc) -> mc.execute(Precarga::alEntrar));
-      ClientTickEvents.END_CLIENT_TICK.register((EndTick)mc -> Precarga.tick());
-      ClientPlayConnectionEvents.DISCONNECT.register((Disconnect)(manejador, mc) -> Bus.post(new ClientPlayerNetworkEvent.LoggingOut()));
-      ClientChunkEvents.CHUNK_LOAD.register(MapaDatos::alCargarChunk);
-   }
+   public static void registrar() { }
 
    private static void lanzar(WorldRenderContext ctx, RenderLevelStageEvent.Stage etapa) {
       if (Bus.hayOyentes(RenderLevelStageEvent.class) && ctx.matrixStack() != null) {

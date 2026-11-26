@@ -1,16 +1,13 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
-import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
+import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -31,7 +28,7 @@ public final class DedsafioCielo {
    public static final float DESHACE = 8.0F;
    public static final float DESCANSO = 6.0F;
    public static final int NUM_FIGURAS = 6;
-   private static ShaderInstance shader;
+   private static Object shader;
    private static long inicio = -1L;
    public static float formacion = 0.0F;
    public static int figuraFija = -1;
@@ -46,13 +43,13 @@ public final class DedsafioCielo {
    private static float figuraVista = -1.0F;
    private static final float[] FIG_OFFX = new float[]{0.0765F, -0.0169F, 0.0104F, -0.022F, -0.0065F, 0.0195F, 0.0123F};
    private static final float[] FIG_OFFY = new float[]{0.2516F, 0.3035F, 0.2464F, 0.2672F, 0.249F, 0.2309F, 0.2509F};
-   private static VertexBuffer cuboVbo;
+   private static Object cuboVbo;
    private static float cuboLado = -1.0F;
 
    private DedsafioCielo() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shader = s;
    }
 
@@ -148,84 +145,11 @@ public final class DedsafioCielo {
       return new float[]{(float)(Math.sin(az) * Math.cos(el)), (float)Math.sin(el), (float)(Math.cos(az) * Math.cos(el))};
    }
 
-   public static void dibujar(Matrix4f vista, float lejos, double alturaCamara) {
-      ShaderInstance sh = shader;
-      if (sh != null && inicio >= 0L) {
-         float t = (float)(System.nanoTime() - inicio) / 1.0E9F;
-         float[] fig = figuraAhora(t);
-         formacion = fig[0] > -0.5F ? fig[1] : 0.0F;
-         figuraVista = fig[0];
-         double az = Math.toRadians(0.0);
-         double el = Math.toRadians(2.8F);
-         float sx = (float)(Math.sin(az) * Math.cos(el));
-         float sy = (float)Math.sin(el);
-         float sz = (float)(Math.cos(az) * Math.cos(el));
-         fijar(sh, "Tiempo", t % 3600.0F);
-         fijar(sh, "Sol", sx, sy, sz, 1.0F);
-         fijar(sh, "Escena", fig[0], fig[1], 0.34F, (float)(alturaCamara - -2.2));
-         fijar(sh, "Ajuste", 0.0F, 1.0F, 0.4F, 0.0F);
-         fijar(sh, "Mundo", (float)(camX % 4096.0), (float)(camZ % 4096.0), 0.0F, 0.0F);
-         AbstractTexture texFig = Minecraft.getInstance().getTextureManager().getTexture(FIGURAS);
-         texFig.setFilter(true, false);
-         sh.setSampler("Figuras", texFig);
-         Matrix4fStack mv = RenderSystem.getModelViewStack();
-         mv.pushMatrix();
-         mv.identity();
-         mv.mul(vista);
-         RenderSystem.applyModelViewMatrix();
-         RenderSystem.setShader(() -> sh);
-         RenderSystem.disableBlend();
-         RenderSystem.depthMask(false);
-         RenderSystem.enableDepthTest();
-         RenderSystem.depthFunc(515);
-         RenderSystem.disableCull();
+   public static void dibujar(Matrix4f vista, float lejos, double alturaCamara) { }
 
-         try {
-            cubo(lejos * 0.3F, sh);
-         } finally {
-            RenderSystem.enableCull();
-            RenderSystem.enableDepthTest();
-            RenderSystem.depthMask(true);
-            mv.popMatrix();
-            RenderSystem.applyModelViewMatrix();
-         }
-      }
-   }
+   private static void cubo(float s, Object sh) { }
 
-   private static void cubo(float s, ShaderInstance sh) {
-      if (cuboVbo != null && !(Math.abs(cuboLado - s) > 0.001F)) {
-         cuboVbo.bind();
-      } else {
-         float[][] caras = new float[][]{
-            {-s, s, -s, s, s, -s, s, s, s, -s, s, s},
-            {-s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s},
-            {-s, -s, -s, s, -s, -s, s, s, -s, -s, s, -s},
-            {s, -s, s, -s, -s, s, -s, s, s, s, s, s},
-            {-s, -s, s, -s, -s, -s, -s, s, -s, -s, s, s},
-            {s, -s, -s, s, -s, s, s, s, s, s, s, -s}
-         };
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION);
-
-         for (float[] c : caras) {
-            for (int k = 0; k < 12; k += 3) {
-               b.addVertex(c[k], c[k + 1], c[k + 2]);
-            }
-         }
-
-         if (cuboVbo == null) {
-            cuboVbo = new VertexBuffer(Usage.STATIC);
-         }
-
-         cuboVbo.bind();
-         cuboVbo.upload(b.buildOrThrow());
-         cuboLado = s;
-      }
-
-      cuboVbo.drawWithShader(new Matrix4f(RenderSystem.getModelViewMatrix()), new Matrix4f(RenderSystem.getProjectionMatrix()), sh);
-      VertexBuffer.unbind();
-   }
-
-   private static void fijar(ShaderInstance sh, String nombre, float... v) {
+   private static void fijar(Object sh, String nombre, float... v) {
       Uniform u = sh.getUniform(nombre);
       if (u != null) {
          if (v.length == 4) {

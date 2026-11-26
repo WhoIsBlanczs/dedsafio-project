@@ -3,21 +3,16 @@ package net.ruleta.client.escenas;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
-import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -62,7 +57,7 @@ public final class MomentoNutria {
    private static final FiltroPantalla FILTRO = new FiltroPantalla(Identifier.fromNamespaceAndPath("ruleta", "shaders/post/momento_nutria.json"));
    private static final float ARCO_HASTA = 17.49797F;
    private static final float VUELTAS_POR_SEGUNDO = 6.1F;
-   private static ShaderInstance shaderArco;
+   private static Object shaderArco;
 
    private MomentoNutria() {
    }
@@ -215,102 +210,11 @@ public final class MomentoNutria {
       }
    }
 
-   private static void pintar(GuiGraphicsExtractor ctx, float t, int n) {
-      int w = ctx.guiWidth();
-      int h = ctx.guiHeight();
-      if (n >= 0 && cuadros[n] >= 0) {
-         int f = cuadros[n];
-         boolean enLado = f >= 80;
-         Flujo actual = enLado ? lado : flujo;
-         int prox = -1;
+   private static void pintar(GuiGraphicsExtractor ctx, float t, int n) { }
 
-         for (int i = n + 1; i < cuadros.length && i < n + 30; i++) {
-            if (cuadros[i] >= 0 && cuadros[i] != f) {
-               prox = cuadros[i];
-               break;
-            }
-         }
+   private static void estrellas(GuiGraphicsExtractor ctx, int f, float x0, float y0, float escala, float t) { }
 
-         if (prox >= 0 && prox >= 80 != enLado) {
-            (enLado ? flujo : lado).mostrar(prox, -1);
-            prox = -1;
-         }
-
-         if (actual.mostrar(f, prox)) {
-            float escala = Math.max(w / 640.0F, h / 360.0F);
-            float fw = 640.0F * escala;
-            float fh = 360.0F * escala;
-            float x0 = (w - fw) / 2.0F;
-            float y0 = (h - fh) / 2.0F;
-            RenderSystem.enableBlend();
-            RenderSystem.defaultBlendFunc();
-            float arco = arco(t);
-            if (arco > 0.0F && shaderArco != null) {
-               shaderArco.safeGetUniform("Giro").set(t * 6.1F * (float) (Math.PI * 2));
-               shaderArco.safeGetUniform("Arco").set(arco);
-               RenderSystem.setShader(() -> shaderArco);
-               RenderSystem.setShaderTexture(0, actual.id());
-               Matrix4f m = ctx.pose().last().pose();
-               BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-               b.addVertex(m, x0, y0, 0.0F).setUv(0.0F, 0.0F);
-               b.addVertex(m, x0, y0 + fh, 0.0F).setUv(0.0F, 1.0F);
-               b.addVertex(m, x0 + fw, y0 + fh, 0.0F).setUv(1.0F, 1.0F);
-               b.addVertex(m, x0 + fw, y0, 0.0F).setUv(1.0F, 0.0F);
-               BufferUploader.drawWithShader(b.buildOrThrow());
-            } else {
-               ctx.blit(
-                  actual.id(), Math.round(x0), Math.round(y0), Math.round(fw), Math.round(fh), 0.0F, 0.0F, actual.ancho, actual.alto, actual.ancho, actual.alto
-               );
-            }
-
-            estrellas(ctx, actual.subido(), x0, y0, escala, t);
-         }
-      } else if (n < 0 && flujo != null) {
-         for (int c : cuadros) {
-            if (c >= 0) {
-               (c >= 80 ? lado : flujo).mostrar(c, -1);
-               break;
-            }
-         }
-      }
-
-      RenderSystem.defaultBlendFunc();
-      RenderSystem.disableBlend();
-   }
-
-   private static void estrellas(GuiGraphicsExtractor ctx, int f, float x0, float y0, float escala, float t) {
-      if (estrellas != null && f >= 0 && f < estrellas.length && estrellas[f] != null && estrellas[f].length != 0) {
-         float[] e = estrellas[f];
-         RenderSystem.enableBlend();
-         RenderSystem.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE);
-         RenderSystem.setShader(GameRenderer::getPositionTexShader);
-         RenderSystem.setShaderTexture(0, ESTRELLA);
-         Matrix4f m = ctx.pose().last().pose();
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-
-         for (int i = 0; i + 2 < e.length; i += 3) {
-            float ex = e[i];
-            float ey = e[i + 1];
-            float semilla = ex * 0.137F + ey * 0.271F;
-            float titila = 0.8F + 0.35F * (float)Math.sin(t * 11.0F + semilla * 7.0F);
-            float r = e[i + 2] * 2.6F * titila * escala;
-            float ang = (float)Math.sin(t * 2.0F + semilla) * 0.35F;
-            float cx = x0 + ex * escala;
-            float cy = y0 + ey * escala;
-            float c = (float)Math.cos(ang) * r;
-            float s = (float)Math.sin(ang) * r;
-            b.addVertex(m, cx - c + s, cy - s - c, 0.0F).setUv(0.0F, 0.0F);
-            b.addVertex(m, cx - c - s, cy - s + c, 0.0F).setUv(0.0F, 1.0F);
-            b.addVertex(m, cx + c - s, cy + s + c, 0.0F).setUv(1.0F, 1.0F);
-            b.addVertex(m, cx + c + s, cy + s - c, 0.0F).setUv(1.0F, 0.0F);
-         }
-
-         BufferUploader.drawWithShader(b.buildOrThrow());
-         RenderSystem.defaultBlendFunc();
-      }
-   }
-
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shaderArco = s;
    }
 

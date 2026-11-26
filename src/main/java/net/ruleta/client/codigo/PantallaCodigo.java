@@ -1,6 +1,5 @@
 package net.ruleta.client.codigo;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -179,40 +178,7 @@ public class PantallaCodigo extends Screen {
    public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
-   public void render(GuiGraphicsExtractor g, int mxReal, int myReal, float parcial) {
-      g.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
-      int mx = (int)Math.floor(mxReal / this.escala());
-      int my = (int)Math.floor(myReal / this.escala());
-      g.pose().pushPose();
-      g.pose().scale(this.escala(), this.escala(), 1.0F);
-      int x0 = this.x0();
-      int y0 = this.y0();
-      RenderSystem.enableBlend();
-      g.blit(FONDO, x0, y0, 194, 229, 0.0F, 0.0F, 776, 916, 776, 916);
-      String texto = this.ver ? this.codigo.toString() : "*".repeat(this.codigo.length());
-      g.text(this.font, texto, x0 + 48, y0 + 38, -11141291, false);
-
-      for (int f = 0; f < 3; f++) {
-         for (int c = 0; c < 3; c++) {
-            this.numeroTecla(g, mx, my, c, f, String.valueOf(f * 3 + c + 1));
-         }
-      }
-
-      this.numeroTecla(g, mx, my, 1, 3, "0");
-      this.marco(g, mx, my, this.teclaX(0), this.teclaY(3));
-      this.marco(g, mx, my, this.teclaX(2), this.teclaY(3));
-      this.resalte(g, mx, my, this.ojoX(), this.ojoY(), 17, 16);
-      if (this.ver) {
-         g.fill(this.ojoX(), this.ojoY(), this.ojoX() + 17, this.ojoY() + 16, 822083583);
-      }
-
-      if (System.currentTimeMillis() < this.avisoHasta) {
-         g.drawCenteredString(this.font, this.aviso, x0 + 97, y0 + 229 + 6, 16733525);
-      }
-
-      g.pose().popPose();
-      super.render(g, mxReal, myReal, parcial);
-   }
+   public void render(GuiGraphicsExtractor g, int mxReal, int myReal, float parcial) { }
 
    private void numeroTecla(GuiGraphicsExtractor g, int mx, int my, int c, int f, String t) {
       int x = this.teclaX(c);

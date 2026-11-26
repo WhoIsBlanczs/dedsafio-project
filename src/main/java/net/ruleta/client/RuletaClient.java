@@ -5,12 +5,10 @@ import com.supernova.client.AvisoPop;
 import com.supernova.client.ClientSetup;
 import com.supernova.client.SupernovaDebugCommand;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
@@ -62,45 +60,9 @@ import net.ruleta.tornado.TornadoPayload;
 import net.ruleta.tragamonedas.client.TragamonedasCliente;
 
 public final class RuletaClient implements ClientModInitializer {
-   public void onInitializeClient() {
-      OpcionesCliente.leer();
-      Red.cliente = RuletaClient::recibir;
-      RedCliente.registrar();
-      KeyBindingHelper.registerKeyBinding(AvisoHud.OCULTAR);
-      KeyBindingHelper.registerKeyBinding(LanzadorRuleta.ABRIR);
-      KeyBindingHelper.registerKeyBinding(MapaCliente.TECLA);
-      BlockRenderLayerMap.INSTANCE.putBlock(Candados.PUERTA.get(), RenderType.cutout());
-      registrarShaders();
-      registrarDibujos();
-      PantallaHud.Comando.registrar();
-      ComandoCieloReviil.registrar();
-      DedsafioCliente.registrar();
-      SupernovaDebugCommand.registrar();
-      CosmeticosCliente.registrar();
-      BurbujaCliente.registrar();
-      ClientSetup.registrar();
-      ClientEnganches.registrar();
-   }
+   public void onInitializeClient() { }
 
-   private static void registrarShaders() {
-      CoreShaderRegistrationCallback.EVENT.register((CoreShaderRegistrationCallback)ctx -> {
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "ruleta_hd"), DefaultVertexFormat.POSITION_TEX_COLOR, RuletaHud::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "cielo_reviil"), DefaultVertexFormat.POSITION, CieloReviil::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "dedsafio_cielo"), DefaultVertexFormat.POSITION, DedsafioCielo::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "linterna_haz"), DefaultVertexFormat.POSITION, LinternaCliente::shaderHaz);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "linterna_negro"), DefaultVertexFormat.POSITION, LinternaCliente::shaderNegro);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "nutria_arco"), DefaultVertexFormat.POSITION_TEX, MomentoNutria::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_cielo"), DefaultVertexFormat.POSITION, AgujeroCliente::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_objeto"), DefaultVertexFormat.POSITION_TEX, AgujeroCliente::shaderObjeto);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "agujero_bake"), DefaultVertexFormat.POSITION, CieloBake::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "eclipse"), DefaultVertexFormat.POSITION, EclipseCliente::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "phora_cielo"), DefaultVertexFormat.POSITION, PhoraCliente::shaderCielo);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "tormenta_cielo"), DefaultVertexFormat.POSITION, TornadoCliente::shaderCielo);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "tornado_embudo"), DefaultVertexFormat.POSITION_TEX_COLOR, TornadoCliente::shaderEmbudo);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "phora"), DefaultVertexFormat.POSITION_TEX_COLOR, PhoraCliente::shader);
-         ctx.register(Identifier.fromNamespaceAndPath("ruleta", "meteoritos"), DefaultVertexFormat.POSITION_TEX_COLOR, MeteoritosCliente::shader);
-      });
-   }
+   private static void registrarShaders() { }
 
    private static void registrarDibujos() {
       EntityRendererRegistry.register(PhoraMod.MISIL.get(), NoopRenderer::new);

@@ -1,6 +1,5 @@
 package net.ruleta.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -190,19 +189,7 @@ public class MomentosPantalla extends UiPantalla {
       }
    }
 
-   private void encabezado(GuiGraphicsExtractor g) {
-      int y0 = this.py + 46;
-      int ih = 78;
-      int iw = 84;
-      RenderSystem.enableBlend();
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, Ui.alfa);
-      g.blit(CARA, this.px + 24, y0, iw, ih, 0.0F, 0.0F, 96, 104, 96, 104);
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-      String t = "MOMENTOS REVIIL";
-      int xt = this.px + 24 + iw + 16;
-      float escala = Math.min(3.0F, (float)(this.pw - (xt - this.px) - 40) / Math.max(1, Ui.anchoN(this.font, t)));
-      Ui.titulo3D(g, this.font, t, xt, y0 + (ih - Math.round(9.0F * escala)) / 2 - 2, escala, 14687774, 16741480, 7211016, 2359296);
-   }
+   private void encabezado(GuiGraphicsExtractor g) { }
 
    private void dibujar(GuiGraphicsExtractor g, MomentosPantalla.Tarjeta t, int y, int mx, int my) {
       Momentos.Momento m = t.momento();

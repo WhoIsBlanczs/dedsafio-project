@@ -2,7 +2,6 @@ package net.ruleta.client.ruleta;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
-import com.mojang.blaze3d.systems.RenderSystem;
 import java.io.IOException;
 import java.io.InputStream;
 import net.minecraft.client.renderer.texture.AbstractTexture;
@@ -53,24 +52,7 @@ final class TexturaHD extends AbstractTexture {
       return mips;
    }
 
-   public void load(ResourceManager recursos) throws IOException {
-      NativeImage[] mips = this.listas;
-      this.listas = null;
-      if (mips == null) {
-         try (InputStream in = recursos.getResourceOrThrow(this.archivo).open()) {
-            mips = preparar(in);
-         }
-      }
-
-      this.ancho = mips[0].getWidth();
-      this.alto = mips[0].getHeight();
-      NativeImage[] subir = mips;
-      if (RenderSystem.isOnRenderThreadOrInit()) {
-         this.subir(subir);
-      } else {
-         RenderSystem.recordRenderCall(() -> this.subir(subir));
-      }
-   }
+   public void load(ResourceManager recursos) throws IOException { }
 
    private void subir(NativeImage[] mips) {
       TextureUtil.prepareImage(this.getId(), mips.length - 1, mips[0].getWidth(), mips[0].getHeight());

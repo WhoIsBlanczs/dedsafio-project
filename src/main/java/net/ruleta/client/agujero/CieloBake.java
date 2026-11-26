@@ -2,14 +2,11 @@ package net.ruleta.client.agujero;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,7 +15,7 @@ public final class CieloBake {
    private static final int RES_NEBULOSA = 768;
    private static final int RES_CONSTELACIONES = 1024;
    private static final int CARAS = 12;
-   private static ShaderInstance shader;
+   private static Object shader;
    private static RenderTarget nebulosa;
    private static RenderTarget constelaciones;
    private static int hechas;
@@ -27,7 +24,7 @@ public final class CieloBake {
    private CieloBake() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shader = s;
       fallo = false;
       liberar();
@@ -101,31 +98,5 @@ public final class CieloBake {
       return t;
    }
 
-   private static void dibujarCara(RenderTarget destino, int res, int cara, float modo) {
-      Minecraft mc = Minecraft.getInstance();
-      ShaderInstance sh = shader;
-      sh.safeGetUniform("Cara").set(cara);
-      sh.safeGetUniform("Modo").set(modo);
-      destino.bindWrite(false);
-      RenderSystem.viewport(cara % 3 * res, cara / 3 * res, res, res);
-      RenderSystem.disableBlend();
-      RenderSystem.disableDepthTest();
-      RenderSystem.depthMask(false);
-      RenderSystem.disableCull();
-      RenderSystem.setShader(() -> sh);
-
-      try {
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION);
-         b.addVertex(-1.0F, -1.0F, 0.0F);
-         b.addVertex(1.0F, -1.0F, 0.0F);
-         b.addVertex(1.0F, 1.0F, 0.0F);
-         b.addVertex(-1.0F, 1.0F, 0.0F);
-         BufferUploader.drawWithShader(b.buildOrThrow());
-      } finally {
-         mc.getMainRenderTarget().bindWrite(true);
-         RenderSystem.enableCull();
-         RenderSystem.depthMask(true);
-         RenderSystem.enableDepthTest();
-      }
-   }
+   private static void dibujarCara(RenderTarget destino, int res, int cara, float modo) { }
 }

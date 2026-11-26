@@ -3,7 +3,6 @@ package net.ruleta.client.reviil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mojang.blaze3d.systems.RenderSystem;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
@@ -223,78 +222,7 @@ public final class AnimacionReviil {
       }
    }
 
-   public static void dibujar(GuiGraphicsExtractor ctx) {
-      if (temaEn >= 0L && System.nanoTime() >= temaEn) {
-         temaEn = -1L;
-         if (temaEsCielo) {
-            CieloReviil.temaMomento(false);
-         } else {
-            CieloReviil.temaAdelantado();
-         }
-      }
-
-      if (inicio >= 0L) {
-         float t = (float)(System.nanoTime() - inicio) / 1.0E9F;
-         if (!(t < 0.0F)) {
-            if (t >= 15.2F) {
-               terminar();
-            } else {
-               int w = ctx.guiWidth();
-               int h = ctx.guiHeight();
-               float k = h * altoPantalla / refAlto;
-               float cx = w / 2.0F;
-               float cy = h / 2.0F + bajada * h;
-               float pulso = 0.0F;
-
-               for (float pt : pulsosT) {
-                  if (t >= pt && t < pt + pulsoTau * 5.0F) {
-                     pulso += (float)Math.exp(-(t - pt) / pulsoTau);
-                  }
-               }
-
-               if (pulso > 0.0F) {
-                  float ruido1 = (float)Math.sin(t * 91.7F) * 0.5F + (float)Math.sin(t * 53.3F) * 0.5F;
-                  float ruido2 = (float)Math.sin(t * 77.1F + 1.3F) * 0.5F + (float)Math.sin(t * 41.9F) * 0.5F;
-                  k *= 1.0F + pulsoZoom * pulso;
-                  cx += ruido1 * pulsoSacudida * pulso * k;
-                  cy += ruido2 * pulsoSacudida * pulso * k;
-               }
-
-               int n = buscar(tiempos, t);
-               int prox = -1;
-
-               for (int i = Math.max(0, n + 1); i < cuadros.length && i < n + 30; i++) {
-                  if (cuadros[i] >= 0 && (n < 0 || cuadros[i] != cuadros[n])) {
-                     prox = cuadros[i];
-                     break;
-                  }
-               }
-
-               RenderSystem.enableBlend();
-               RenderSystem.defaultBlendFunc();
-               if (n >= 0 && cuadros[n] >= 0) {
-                  if (flujo.mostrar(cuadros[n], prox)) {
-                     int bx = Math.round(cx + (x0 - refX) * k);
-                     int by = Math.round(cy + (y0 - refY) * k);
-                     int bw = Math.round((x1 - x0) * k);
-                     int bh = Math.round((y1 - y0) * k);
-                     ctx.blit(flujo.id(), bx, by, bw, bh, 0.0F, 0.0F, flujo.ancho, flujo.alto, flujo.ancho, flujo.alto);
-                  }
-               } else if (prox >= 0) {
-                  flujo.mostrar(prox, -1);
-               }
-
-               int c = buscar(celdasT, t);
-               if (c >= 0 && (c + 1 < celdasT.length ? t < celdasT[c + 1] : t < celdasT[c] + 0.07F) && c < celdasT.length - 1) {
-                  celdas(ctx, celdasBlanco[c], colorBlanco, cx, cy, k);
-                  celdas(ctx, celdasRojo[c], colorRojo, cx, cy, k);
-               }
-
-               RenderSystem.disableBlend();
-            }
-         }
-      }
-   }
+   public static void dibujar(GuiGraphicsExtractor ctx) { }
 
    private static void celdas(GuiGraphicsExtractor ctx, int[] tramos, int color, float cx, float cy, float k) {
       for (int i = 0; i + 2 < tramos.length; i += 3) {

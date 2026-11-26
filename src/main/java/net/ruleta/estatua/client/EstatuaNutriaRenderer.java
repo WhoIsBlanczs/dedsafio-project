@@ -1,11 +1,11 @@
 package net.ruleta.estatua.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -26,7 +26,7 @@ public class EstatuaNutriaRenderer implements BlockEntityRenderer<EstatuaNutriaB
       return 96;
    }
 
-   public void render(EstatuaNutriaBE be, float parcial, PoseStack ps, MultiBufferSource buf, int luz, int overlay) {
+   public void render(EstatuaNutriaBE be, float parcial, PoseStack ps, Object buf, int luz, int overlay) {
       BlockState estado = be.getBlockState();
       if (estado.getBlock() instanceof EstatuaNutriaBloque) {
          ps.pushPose();
@@ -37,24 +37,5 @@ public class EstatuaNutriaRenderer implements BlockEntityRenderer<EstatuaNutriaB
       }
    }
 
-   public static void dibujar(PoseStack ps, MultiBufferSource buf, int luz, int overlay) {
-      ObjModelo modelo = ObjModelo.obtener();
-      if (!modelo.grupos().isEmpty()) {
-         Pose p = ps.last();
-
-         for (ObjModelo.Grupo g : modelo.grupos()) {
-            VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(g.textura()));
-            float[] d = g.datos();
-
-            for (int i = 0; i < d.length; i += 8) {
-               vc.addVertex(p, d[i], d[i + 1], d[i + 2])
-                  .setColor(255, 255, 255, 255)
-                  .setUv(d[i + 3], d[i + 4])
-                  .setOverlay(OverlayTexture.NO_OVERLAY)
-                  .setLight(luz)
-                  .setNormal(p, d[i + 5], d[i + 6], d[i + 7]);
-            }
-         }
-      }
-   }
+   public static void dibujar(PoseStack ps, Object buf, int luz, int overlay) { }
 }

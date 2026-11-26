@@ -1,12 +1,9 @@
 package net.ruleta.client.tornado;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +13,7 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.core.BlockPos;
@@ -54,8 +50,8 @@ public final class TornadoCliente {
    private static TornadoCliente.Bucle lluvia;
    private static TornadoCliente.Bucle viento;
    private static final Map<Integer, TornadoCliente.Bucle[]> RUGIDOS = new HashMap<>();
-   private static ShaderInstance shaderCielo;
-   private static ShaderInstance shaderEmbudo;
+   private static Object shaderCielo;
+   private static Object shaderEmbudo;
    private static boolean cielo;
    private static final List<TornadoCliente.Torn> TORNADOS = new ArrayList<>();
    private static int[] atrapados = new int[0];
@@ -77,11 +73,11 @@ public final class TornadoCliente {
    private TornadoCliente() {
    }
 
-   public static void shaderCielo(ShaderInstance s) {
+   public static void shaderCielo(Object s) {
       shaderCielo = s;
    }
 
-   public static void shaderEmbudo(ShaderInstance s) {
+   public static void shaderEmbudo(Object s) {
       shaderEmbudo = s;
    }
 
@@ -329,99 +325,7 @@ public final class TornadoCliente {
    }
 
    @SubscribeEvent
-   public static void alDibujarMundo(RenderLevelStageEvent e) {
-      if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null && (!(nivel <= 0.001F) || !TORNADOS.isEmpty())) {
-            FogType dentro = e.getCamera().getFluidInCamera();
-            if (dentro != FogType.LAVA && dentro != FogType.POWDER_SNOW) {
-               float pt = e.getPartialTick();
-               Camera camara = e.getCamera();
-               Vec3 cam = camara.getPosition();
-               String dim = mc.level.dimension().location().toString();
-               TornadoCliente.Torn cerca = null;
-               double mejor = Double.MAX_VALUE;
-
-               for (TornadoCliente.Torn t : TORNADOS) {
-                  if (t.dim.equals(dim)) {
-                     Vec3 p = posicion(t, pt);
-                     double d = p.distanceToSqr(cam);
-                     if (d < mejor) {
-                        mejor = d;
-                        cerca = t;
-                     }
-                  }
-               }
-
-               Matrix4f vista = new Matrix4f()
-                  .rotateX(camara.getXRot() * (float) (Math.PI / 180.0))
-                  .rotateY((camara.getYRot() + 180.0F) * (float) (Math.PI / 180.0));
-               float lejos = mc.options.getEffectiveRenderDistance() * 16.0F * 4.0F;
-               Matrix4f proyeccionAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-               VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-               Matrix4fStack mv = RenderSystem.getModelViewStack();
-               mc.getMainRenderTarget().bindWrite(true);
-               RenderSystem.setProjectionMatrix(new Matrix4f(e.getProjectionMatrix()), VertexSorting.DISTANCE_TO_ORIGIN);
-               mv.pushMatrix();
-               mv.identity();
-               mv.mul(vista);
-               RenderSystem.applyModelViewMatrix();
-               RenderSystem.enableBlend();
-               RenderSystem.defaultBlendFunc();
-               RenderSystem.depthMask(false);
-               RenderSystem.enableDepthTest();
-               RenderSystem.depthFunc(515);
-               RenderSystem.disableCull();
-
-               try {
-                  float t = (float)(System.nanoTime() % 100000000000000L) / 1.0E9F;
-                  if (nivel > 0.001F && shaderCielo != null) {
-                     ShaderInstance sh = shaderCielo;
-                     sh.safeGetUniform("Tiempo").set(t);
-                     sh.safeGetUniform("Nivel").set(nivel);
-                     sh.safeGetUniform("Rayo").set(rayo * nivel);
-                     sh.safeGetUniform("Niebla").set(NIEBLA[0], NIEBLA[1], NIEBLA[2]);
-                     sh.safeGetUniform("CamPos").set((float)cam.x, (float)cam.y, (float)cam.z);
-                     if (cerca != null) {
-                        Vec3 p = posicion(cerca, pt);
-                        double dist = Math.sqrt(p.distanceToSqr(cam));
-                        float fuerza = (float)Mth.clamp(1.0 - dist / 2500.0, 0.0, 1.0);
-                        sh.safeGetUniform("Losa").set((float)(p.y + cerca.alto * 0.93), 170.0F);
-                        sh.safeGetUniform("Torn").set((float)p.x, (float)p.z, cerca.radio, fuerza);
-                     } else {
-                        sh.safeGetUniform("Losa").set((float)cam.y + 260.0F, 190.0F);
-                        sh.safeGetUniform("Torn").set(0.0F, 0.0F, 50.0F, 0.0F);
-                     }
-
-                     RenderSystem.setShader(() -> sh);
-                     cubo(lejos * 0.4F);
-                  }
-
-                  if (shaderEmbudo != null) {
-                     ShaderInstance sh = shaderEmbudo;
-                     sh.safeGetUniform("Tiempo").set(t);
-                     sh.safeGetUniform("Niebla").set(NIEBLA[0], NIEBLA[1], NIEBLA[2]);
-                     RenderSystem.setShader(() -> sh);
-
-                     for (TornadoCliente.Torn tor : TORNADOS) {
-                        if (tor.dim.equals(dim)) {
-                           dibujarEmbudo(sh, tor, pt, cam, t);
-                        }
-                     }
-                  }
-               } finally {
-                  RenderSystem.enableCull();
-                  RenderSystem.depthMask(true);
-                  RenderSystem.disableBlend();
-                  RenderSystem.defaultBlendFunc();
-                  mv.popMatrix();
-                  RenderSystem.applyModelViewMatrix();
-                  RenderSystem.setProjectionMatrix(proyeccionAntes, ordenAntes);
-               }
-            }
-         }
-      }
-   }
+   public static void alDibujarMundo(RenderLevelStageEvent e) { }
 
    private static float radioEn(float R, float v) {
       return R * (0.06F + 1.55F * v + 1.1F * (float)Math.pow(v, 5.0) + 0.3F * (float)Math.exp(-v * 18.0));
@@ -442,7 +346,7 @@ public final class TornadoCliente {
       return new Vec3(ox, v * t.alto, oz);
    }
 
-   private static void dibujarEmbudo(ShaderInstance sh, TornadoCliente.Torn t, float pt, Vec3 cam, float tiempo) {
+   private static void dibujarEmbudo(Object sh, TornadoCliente.Torn t, float pt, Vec3 cam, float tiempo) {
       Vec3 p = posicion(t, pt);
       double dx = p.x - cam.x;
       double dy = p.y - cam.y;
@@ -462,51 +366,9 @@ public final class TornadoCliente {
       }
    }
 
-   private static void cono(TornadoCliente.Torn t, double dx, double dy, double dz, float tiempo, boolean polvo, float escala) {
-      BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
-      float[] cx = new float[49];
-      float[] cy = new float[49];
-      float[] cz = new float[49];
-      float[] rr = new float[49];
-      float[] vv = new float[49];
+   private static void cono(TornadoCliente.Torn t, double dx, double dy, double dz, float tiempo, boolean polvo, float escala) { }
 
-      for (int i = 0; i <= 48; i++) {
-         float v = (float)Math.pow(i / 48.0F, 1.25);
-         vv[i] = v;
-         if (polvo) {
-            float vp = i / 48.0F;
-            float R = t.radio;
-            cx[i] = 0.0F;
-            cy[i] = vp * R * 1.3F;
-            cz[i] = 0.0F;
-            rr[i] = R * (1.55F - 1.0F * vp) * escala;
-            vv[i] = vp;
-         } else {
-            Vec3 eje = ejeEn(t, v, tiempo);
-            cx[i] = (float)eje.x;
-            cy[i] = (float)eje.y;
-            cz[i] = (float)eje.z;
-            rr[i] = radioEn(t.radio, v) * escala;
-         }
-      }
-
-      for (int i = 0; i < 48; i++) {
-         for (int j = 0; j < 28; j++) {
-            float a0 = j / 28.0F * (float) (Math.PI * 2);
-            float a1 = (j + 1) / 28.0F * (float) (Math.PI * 2);
-            float u0 = j / 28.0F;
-            float u1 = (j + 1) / 28.0F;
-            vertice(b, dx, dy, dz, cx[i], cy[i], cz[i], rr[i], a0, u0, vv[i]);
-            vertice(b, dx, dy, dz, cx[i], cy[i], cz[i], rr[i], a1, u1, vv[i]);
-            vertice(b, dx, dy, dz, cx[i + 1], cy[i + 1], cz[i + 1], rr[i + 1], a1, u1, vv[i + 1]);
-            vertice(b, dx, dy, dz, cx[i + 1], cy[i + 1], cz[i + 1], rr[i + 1], a0, u0, vv[i + 1]);
-         }
-      }
-
-      BufferUploader.drawWithShader(b.buildOrThrow());
-   }
-
-   private static void vertice(BufferBuilder b, double dx, double dy, double dz, float ex, float ey, float ez, float r, float ang, float u, float v) {
+   private static void vertice(Object b, double dx, double dy, double dz, float ex, float ey, float ez, float r, float ang, float u, float v) {
       float irregular = 1.0F
          + 0.0F
             * (
@@ -520,25 +382,7 @@ public final class TornadoCliente {
       b.addVertex((float)(dx + ex + c * rr), (float)(dy + ey), (float)(dz + ez + s * rr)).setUv(u, v).setColor(c * 0.5F + 0.5F, s * 0.5F + 0.5F, 0.0F, 1.0F);
    }
 
-   private static void cubo(float s) {
-      float[][] caras = new float[][]{
-         {-s, s, -s, s, s, -s, s, s, s, -s, s, s},
-         {-s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s},
-         {-s, -s, -s, s, -s, -s, s, s, -s, -s, s, -s},
-         {s, -s, s, -s, -s, s, -s, s, s, s, s, s},
-         {-s, -s, s, -s, -s, -s, -s, s, -s, -s, s, s},
-         {s, -s, -s, s, -s, s, s, s, s, s, s, -s}
-      };
-      BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION);
-
-      for (float[] c : caras) {
-         for (int k = 0; k < 12; k += 3) {
-            b.addVertex(c[k], c[k + 1], c[k + 2]);
-         }
-      }
-
-      BufferUploader.drawWithShader(b.buildOrThrow());
-   }
+   private static void cubo(float s) { }
 
    @SubscribeEvent
    public static void alColorearNiebla(ViewportEvent.ComputeFogColor e) {

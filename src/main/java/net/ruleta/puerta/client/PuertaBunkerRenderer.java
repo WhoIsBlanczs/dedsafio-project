@@ -1,12 +1,12 @@
 package net.ruleta.puerta.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.LevelRenderer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.core.BlockPos;
@@ -47,7 +47,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       return 192;
    }
 
-   public void render(PuertaBunkerBE be, float parcial, PoseStack ps, MultiBufferSource buf, int luzCelda, int overlay) {
+   public void render(PuertaBunkerBE be, float parcial, PoseStack ps, Object buf, int luzCelda, int overlay) {
       Level level = be.getLevel();
       BlockState st = be.getBlockState();
       if (level != null && st.getBlock() instanceof PuertaBunkerBloque) {
@@ -104,7 +104,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
    }
 
    private static void hoja(
-      MultiBufferSource buf,
+      Object buf,
       PoseStack ps,
       Identifier texFrente,
       Identifier texDorso,
@@ -114,50 +114,12 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       int[] luzF,
       int[] luzB,
       int ovl
-   ) {
-      Pose pose = ps.last();
-      VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(texFrente));
+   ) { }
 
-      for (int j = 0; j < 11; j++) {
-         float va = (11 - (j + 1)) / 11.0F;
-         float vb = (11 - j) / 11.0F;
-         cara(vc, pose, xa, xb, j, j + 1, 1.0F, 0.0F, 1.0F, va, vb, 1.0F, luzF[j], ovl);
-      }
-
-      vc = buf.getBuffer(RenderType.entityCutoutNoCull(texDorso));
-
-      for (int j = 0; j < 11; j++) {
-         float va = (11 - (j + 1)) / 11.0F;
-         float vb = (11 - j) / 11.0F;
-         cara(vc, pose, xa, xb, j, j + 1, 0.0F, 1.0F, 0.0F, va, vb, -1.0F, luzB[j], ovl);
-      }
-
-      vc = buf.getBuffer(RenderType.entityCutoutNoCull(TEX_BORDE));
-      float xBisagra = derecha ? xb : xa;
-      float xLibre = derecha ? xa : xb;
-
-      for (int j = 0; j < 11; j++) {
-         int luz = Math.max(luzF[j], luzB[j]);
-         canto(vc, pose, xLibre, j, j + 1, derecha ? -1.0F : 1.0F, luz, ovl);
-         canto(vc, pose, xBisagra, j, j + 1, derecha ? 1.0F : -1.0F, luz, ovl);
-      }
-
-      int ancho = Math.round(xb - xa);
-
-      for (int i = 0; i < ancho; i++) {
-         tapa(vc, pose, xa + i, xa + i + 1.0F, 11.0F, 1.0F, luzF[10], ovl);
-         tapa(vc, pose, xa + i, xa + i + 1.0F, 0.0F, -1.0F, luzF[0], ovl);
-      }
-   }
-
-   private static void manijas(MultiBufferSource buf, PoseStack ps, float x, float balanceo, int luzF, int luzB, int ovl) {
-      VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(TEX_MANIJA));
-      manija(vc, ps, x, 1.75F, 1.0F, 1.0F, balanceo, luzF, ovl);
-      manija(vc, ps, x, 1.75F, 0.0F, -1.0F, balanceo, luzB, ovl);
-   }
+   private static void manijas(Object buf, PoseStack ps, float x, float balanceo, int luzF, int luzB, int ovl) { }
 
    private static void cara(
-      VertexConsumer vc, Pose pose, float xa, float xb, float y0, float y1, float z, float ua, float ub, float va, float vb, float nz, int luz, int ovl
+      Object vc, Pose pose, float xa, float xb, float y0, float y1, float z, float ua, float ub, float va, float vb, float nz, int luz, int ovl
    ) {
       vert(vc, pose, xa, y0, z, ua, vb, 0.0F, 0.0F, nz, luz, ovl);
       vert(vc, pose, xb, y0, z, ub, vb, 0.0F, 0.0F, nz, luz, ovl);
@@ -165,21 +127,21 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       vert(vc, pose, xa, y1, z, ua, va, 0.0F, 0.0F, nz, luz, ovl);
    }
 
-   private static void tapa(VertexConsumer vc, Pose pose, float xa, float xb, float y, float ny, int luz, int ovl) {
+   private static void tapa(Object vc, Pose pose, float xa, float xb, float y, float ny, int luz, int ovl) {
       vert(vc, pose, xa, y, 0.0F, 0.0F, 0.0F, 0.0F, ny, 0.0F, luz, ovl);
       vert(vc, pose, xb, y, 0.0F, 1.0F, 0.0F, 0.0F, ny, 0.0F, luz, ovl);
       vert(vc, pose, xb, y, 1.0F, 1.0F, 1.0F, 0.0F, ny, 0.0F, luz, ovl);
       vert(vc, pose, xa, y, 1.0F, 0.0F, 1.0F, 0.0F, ny, 0.0F, luz, ovl);
    }
 
-   private static void canto(VertexConsumer vc, Pose pose, float x, float y0, float y1, float nx, int luz, int ovl) {
+   private static void canto(Object vc, Pose pose, float x, float y0, float y1, float nx, int luz, int ovl) {
       vert(vc, pose, x, y0, 0.0F, 0.0F, 1.0F, nx, 0.0F, 0.0F, luz, ovl);
       vert(vc, pose, x, y0, 1.0F, 1.0F, 1.0F, nx, 0.0F, 0.0F, luz, ovl);
       vert(vc, pose, x, y1, 1.0F, 1.0F, 0.0F, nx, 0.0F, 0.0F, luz, ovl);
       vert(vc, pose, x, y1, 0.0F, 0.0F, 0.0F, nx, 0.0F, 0.0F, luz, ovl);
    }
 
-   private static void manija(VertexConsumer vc, PoseStack ps, float cx, float cy, float zCara, float dir, float grados, int luz, int ovl) {
+   private static void manija(Object vc, PoseStack ps, float cx, float cy, float zCara, float dir, float grados, int luz, int ovl) {
       float radio = 0.4F;
       float tubo = 0.1F;
       float cuello = 0.55F;
@@ -193,7 +155,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       ps.popPose();
    }
 
-   private static void caja(VertexConsumer vc, Pose pose, float xa, float ya, float za, float xb, float yb, float zb, int luz, int ovl) {
+   private static void caja(Object vc, Pose pose, float xa, float ya, float za, float xb, float yb, float zb, int luz, int ovl) {
       float xl = Math.min(xa, xb);
       float xh = Math.max(xa, xb);
       float yl = Math.min(ya, yb);
@@ -209,7 +171,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
    }
 
    private static void quad(
-      VertexConsumer vc,
+      Object vc,
       Pose pose,
       float ax,
       float ay,
@@ -235,7 +197,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       vert(vc, pose, dx, dy, dz, 0.0F, 1.0F, nx, ny, nz, luz, ovl);
    }
 
-   private static void toro(VertexConsumer vc, Pose pose, float cx, float cy, float cz, float dir, float radio, float tubo, int luz, int ovl) {
+   private static void toro(Object vc, Pose pose, float cx, float cy, float cz, float dir, float radio, float tubo, int luz, int ovl) {
       int n = 16;
       int m = 6;
 
@@ -255,7 +217,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
    }
 
    private static void punto(
-      VertexConsumer vc, Pose pose, float cx, float cy, float cz, float dir, float radio, float tubo, double a, double b, float u, float v, int luz, int ovl
+      Object vc, Pose pose, float cx, float cy, float cz, float dir, float radio, float tubo, double a, double b, float u, float v, int luz, int ovl
    ) {
       float ca = (float)Math.cos(a);
       float sa = (float)Math.sin(a);
@@ -267,7 +229,7 @@ public class PuertaBunkerRenderer implements BlockEntityRenderer<PuertaBunkerBE>
       vert(vc, pose, x, y, z, u, v, cb * ca, cb * sa, dir * sb, luz, ovl);
    }
 
-   private static void vert(VertexConsumer vc, Pose pose, float x, float y, float z, float u, float v, float nx, float ny, float nz, int luz, int ovl) {
+   private static void vert(Object vc, Pose pose, float x, float y, float z, float u, float v, float nx, float ny, float nz, int luz, int ovl) {
       vc.addVertex(pose.pose(), x, y, z).setColor(255, 255, 255, 255).setUv(u, v).setOverlay(ovl).setLight(luz).setNormal(pose, nx, ny, nz);
    }
 }

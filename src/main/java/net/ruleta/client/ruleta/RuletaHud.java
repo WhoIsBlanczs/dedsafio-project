@@ -1,13 +1,12 @@
 package net.ruleta.client.ruleta;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import java.util.EnumMap;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.resources.Identifier;
@@ -40,7 +39,7 @@ public final class RuletaHud {
    private RuletaHud() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       Pintor.shader(s);
    }
 
@@ -305,10 +304,5 @@ public final class RuletaHud {
       return 0.86F + 0.14F * Mth.sin(t * 2.6F + i * 0.8F);
    }
 
-   public static void icono(GuiGraphicsExtractor ctx, int x, int y, int lado, RuletaColor color) {
-      Identifier id = ICONOS.computeIfAbsent(color, c -> Identifier.fromNamespaceAndPath("ruleta", "textures/gui/icono_ruleta_" + c.id + ".png"));
-      RenderSystem.enableBlend();
-      ctx.blit(id, x, y, lado, lado, 0.0F, 0.0F, 256, 256, 256, 256);
-      RenderSystem.disableBlend();
-   }
+   public static void icono(GuiGraphicsExtractor ctx, int x, int y, int lado, RuletaColor color) { }
 }

@@ -1,17 +1,14 @@
 package net.ruleta.client.reviil;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.VertexBuffer;
-import com.mojang.blaze3d.vertex.VertexBuffer.Usage;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
+import com.mojang.blaze3d.vertex.Object;
+import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import com.supernova.client.ScreenEffectHandler;
 import java.util.function.Supplier;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ShaderInstance;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -50,7 +47,7 @@ public final class CieloReviil {
    private static final SoundEvent CABEZAZO = sonido("momento_reviil.cabezazo");
    private static final SoundEvent MUSICA = sonido("momento_reviil.musica");
    private static final SoundEvent MUSICA_CIELO = sonido("momento_reviil.musica_cielo");
-   private static ShaderInstance shader;
+   private static Object shader;
    private static long desde = -1L;
    private static boolean bloqueado;
    private static long acaba = -1L;
@@ -81,13 +78,13 @@ public final class CieloReviil {
    private static final float CAB_GOLPE = 1.6F;
    private static final float CAB_FIN = 7.6F;
    private static SoundInstance musicaSola;
-   private static VertexBuffer cuboVbo;
+   private static Object cuboVbo;
    private static float cuboLado = -1.0F;
 
    private CieloReviil() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shader = s;
    }
 
@@ -597,116 +594,13 @@ public final class CieloReviil {
       return k <= 0.0F ? null : new float[]{r + (0.06F - r) * k, g + (0.0F - g) * k, b + (0.006F - b) * k};
    }
 
-   public static void dibujar(Matrix4f vista, float lejos) {
-      ShaderInstance sh = shader;
-      if (desde >= 0L && sh != null) {
-         long ahora = System.nanoTime();
-         float f = acabando(ahora);
-         float cubre;
-         float largo;
-         float abre;
-         float[] luz;
-         if (f >= 0.0F) {
-            float cierra = 1.0F - suave(f / 1.5F);
-            cubre = cubreAcabando(f);
-            largo = largoAlAcabar * cierra;
-            abre = abreAlAcabar * cierra;
-            luz = new float[]{0.0F, 0.0F, 0.0F};
-         } else {
-            float t = segundos(ahora);
-            float tg = segGrieta(ahora);
-            cubre = cubreAct(t);
-            largo = hayGrieta ? largo(tg) : 0.0F;
-            abre = hayGrieta ? abre(tg) : 0.0F;
-            luz = hayGrieta ? golpes(tg) : new float[]{0.0F, 0.0F, 0.0F};
-            float[] lc = luzCabezazo(ahora);
-            luz = new float[]{Math.max(luz[0], lc[0]), lc[2] > luz[2] ? lc[1] : luz[1], Math.max(luz[2], lc[2])};
-         }
+   public static void dibujar(Matrix4f vista, float lejos) { }
 
-         fijar(sh, "Tiempo", (float)(ahora - desde) / 1.0E9F % 3600.0F);
-         fijar(sh, "Cubre", cubre);
-         fijar(sh, "Forma", bordeGiro, tormentaSemilla, f >= 0.0F ? 0.0F : temblorNubes(ahora), 0.0F);
-         animarCabeza(ahora);
-         fijar(sh, "GrietaForma", angulo, semilla, luz[1], luz[2]);
-         float tiempo = (float)(ahora - desde) / 1.0E9F % 3600.0F;
-         if (abre > 0.001F) {
-            pasada(sh, vista, largo, abre, 3.0F, luz[0], lejos);
-            pasada(sh, vista, largo, abre, 1.0F, luz[0], lejos);
-            CabezaReviil.dibujar(vista, angulo, CabezaReviil.centroGrieta(semilla), abre, tiempo, lejos * 0.72F);
-            pasada(sh, vista, largo, abre, 2.0F, luz[0], lejos);
-         } else {
-            pasada(sh, vista, largo, abre, 0.0F, luz[0], lejos);
-         }
-      }
-   }
+   private static void pasada(Object sh, Matrix4f vista, float largo, float abre, float modo, float destello, float lejos) { }
 
-   private static void pasada(ShaderInstance sh, Matrix4f vista, float largo, float abre, float modo, float destello, float lejos) {
-      fijar(sh, "Grieta", largo, abre, modo, destello);
-      Matrix4fStack mv = RenderSystem.getModelViewStack();
-      mv.pushMatrix();
-      mv.identity();
-      mv.mul(vista);
-      RenderSystem.applyModelViewMatrix();
-      RenderSystem.setShader(() -> sh);
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
-      boolean marco = modo > 2.5F;
-      if (marco) {
-         RenderSystem.colorMask(false, false, false, false);
-      }
+   private static void cubo(float s, Object sh) { }
 
-      RenderSystem.depthMask(marco);
-      RenderSystem.enableDepthTest();
-      RenderSystem.depthFunc(515);
-      RenderSystem.disableCull();
-
-      try {
-         cubo(lejos * 0.3F, sh);
-      } finally {
-         RenderSystem.colorMask(true, true, true, true);
-         RenderSystem.enableCull();
-         RenderSystem.enableDepthTest();
-         RenderSystem.depthMask(true);
-         RenderSystem.disableBlend();
-         mv.popMatrix();
-         RenderSystem.applyModelViewMatrix();
-      }
-   }
-
-   private static void cubo(float s, ShaderInstance sh) {
-      if (cuboVbo != null && !(Math.abs(cuboLado - s) > 0.001F)) {
-         cuboVbo.bind();
-      } else {
-         float[][] caras = new float[][]{
-            {-s, s, -s, s, s, -s, s, s, s, -s, s, s},
-            {-s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s},
-            {-s, -s, -s, s, -s, -s, s, s, -s, -s, s, -s},
-            {s, -s, s, -s, -s, s, -s, s, s, s, s, s},
-            {-s, -s, s, -s, -s, -s, -s, s, -s, -s, s, s},
-            {s, -s, -s, s, -s, s, s, s, s, s, s, -s}
-         };
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION);
-
-         for (float[] c : caras) {
-            for (int k = 0; k < 12; k += 3) {
-               b.addVertex(c[k], c[k + 1], c[k + 2]);
-            }
-         }
-
-         if (cuboVbo == null) {
-            cuboVbo = new VertexBuffer(Usage.STATIC);
-         }
-
-         cuboVbo.bind();
-         cuboVbo.upload(b.buildOrThrow());
-         cuboLado = s;
-      }
-
-      cuboVbo.drawWithShader(new Matrix4f(RenderSystem.getModelViewMatrix()), new Matrix4f(RenderSystem.getProjectionMatrix()), sh);
-      VertexBuffer.unbind();
-   }
-
-   private static void fijar(ShaderInstance sh, String nombre, float... v) {
+   private static void fijar(Object sh, String nombre, float... v) {
       Uniform u = sh.getUniform(nombre);
       if (u != null) {
          if (v.length == 4) {

@@ -1,21 +1,14 @@
 package net.ruleta.client.eclipse;
 
-import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
-import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.BufferUploader;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
-import com.mojang.blaze3d.vertex.VertexFormat.Mode;
 import java.lang.reflect.Method;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.DimensionSpecialEffects.SkyType;
-import net.minecraft.client.renderer.fog.FogRenderer.FogMode;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -59,7 +52,7 @@ public final class EclipseCliente {
    private static SoundInstance ambiente;
    private static SoundInstance musica;
    private static float sonadoHasta = -1.0F;
-   private static ShaderInstance shader;
+   private static Object shader;
    private static long desde = -1L;
    private static float totalidad = 30.0F;
    private static Vector3f solFijado;
@@ -74,7 +67,7 @@ public final class EclipseCliente {
    private EclipseCliente() {
    }
 
-   public static void shader(ShaderInstance s) {
+   public static void shader(Object s) {
       shader = s;
    }
 
@@ -319,95 +312,7 @@ public final class EclipseCliente {
    }
 
    @SubscribeEvent
-   public static void alDibujarMundo(RenderLevelStageEvent e) {
-      if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL && desde >= 0L && shader != null) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null && mc.level.dimension() == Level.OVERWORLD && mc.level.effects().skyType() == SkyType.NORMAL) {
-            FogType dentro = e.getCamera().getFluidInCamera();
-            if (dentro != FogType.LAVA && dentro != FogType.POWDER_SNOW) {
-               long ahora = System.nanoTime();
-               float t = t(ahora);
-               if (t >= fin()) {
-                  desde = -1L;
-               } else {
-                  float[] f = fases(t);
-                  float pt = e.getPartialTick();
-                  Camera camara = e.getCamera();
-                  if (solFijado == null) {
-                     solFijado = solDeVerdad(pt);
-                  }
-
-                  Vector3f sol = new Vector3f(solFijado);
-                  Vector3f lado = new Vector3f(sol).cross(0.0F, 1.0F, 0.0F);
-                  if (lado.lengthSquared() < 1.0E-4F) {
-                     lado.set(1.0F, 0.0F, 0.0F);
-                  }
-
-                  lado.normalize();
-                  Vector3f arriba = new Vector3f(lado).cross(sol).normalize();
-                  lado.mul(0.8F).add(arriba.mul(0.6F)).normalize();
-                  Vec3 cielo = mc.level.getSkyColor(camara.getPosition(), pt);
-                  Matrix4f vista = new Matrix4f()
-                     .rotateX(camara.getXRot() * (float) (Math.PI / 180.0))
-                     .rotateY((camara.getYRot() + 180.0F) * (float) (Math.PI / 180.0));
-                  float lejos = mc.options.getEffectiveRenderDistance() * 16.0F * 4.0F;
-                  float conShaders = shadersActivos() ? Math.max(f[6] - 0.125F, 0.0F) / 1.0F * 0.82F : 0.0F;
-                  float total = Math.min(Math.max(f[7] * 0.995F, conShaders), suavizar());
-                  float luz = LinternaCliente.luz();
-                  if ((luz > 0.0F || LinternaCliente.luzOtros() > 0.0F) && total > 0.005F) {
-                     LinternaCliente.oscurecer(total, luz);
-                  } else if (total > 0.005F) {
-                     oscurecerMundo(1.0F - Math.min(0.995F, total));
-                  }
-
-                  if (total > 0.005F) {
-                     OjosBrillo.dibujar(camara, new Matrix4f(e.getProjectionMatrix()), vista, pt);
-                  }
-
-                  if (!AgujeroCliente.tapaCielo()) {
-                     ShaderInstance sh = shader;
-                     sh.safeGetUniform("Tiempo").set(t);
-                     sh.safeGetUniform("SolDir").set(sol.x, sol.y, sol.z);
-                     sh.safeGetUniform("Lado").set(lado.x, lado.y, lado.z);
-                     sh.safeGetUniform("Cielo").set((float)cielo.x, (float)cielo.y, (float)cielo.z);
-                     sh.safeGetUniform("Horizonte")
-                        .set(Mth.lerp(0.6F, (float)cielo.x, 0.78F), Mth.lerp(0.6F, (float)cielo.y, 0.86F), Mth.lerp(0.6F, (float)cielo.z, 1.0F));
-                     sh.safeGetUniform("Fase").set(f[0], f[1], f[2], f[3]);
-                     sh.safeGetUniform("Brillo").set(f[4], f[5]);
-                     Matrix4f proyeccionAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-                     VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-                     Matrix4fStack mv = RenderSystem.getModelViewStack();
-                     mc.getMainRenderTarget().bindWrite(true);
-                     RenderSystem.setProjectionMatrix(new Matrix4f(e.getProjectionMatrix()), VertexSorting.DISTANCE_TO_ORIGIN);
-                     mv.pushMatrix();
-                     mv.identity();
-                     mv.mul(vista);
-                     RenderSystem.applyModelViewMatrix();
-                     RenderSystem.setShader(() -> sh);
-                     RenderSystem.enableBlend();
-                     RenderSystem.defaultBlendFunc();
-                     RenderSystem.depthMask(false);
-                     RenderSystem.enableDepthTest();
-                     RenderSystem.depthFunc(515);
-                     RenderSystem.disableCull();
-
-                     try {
-                        cubo(lejos * 0.4F);
-                     } finally {
-                        RenderSystem.enableCull();
-                        RenderSystem.depthMask(true);
-                        RenderSystem.disableBlend();
-                        RenderSystem.defaultBlendFunc();
-                        mv.popMatrix();
-                        RenderSystem.applyModelViewMatrix();
-                        RenderSystem.setProjectionMatrix(proyeccionAntes, ordenAntes);
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
+   public static void alDibujarMundo(RenderLevelStageEvent e) { }
 
    private static boolean shadersActivos() {
       try {
@@ -426,39 +331,7 @@ public final class EclipseCliente {
       }
    }
 
-   private static void oscurecerMundo(float k) {
-      Matrix4f proyAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-      VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-      Matrix4fStack mv = RenderSystem.getModelViewStack();
-      mv.pushMatrix();
-      mv.identity();
-      RenderSystem.applyModelViewMatrix();
-      RenderSystem.setProjectionMatrix(new Matrix4f(), VertexSorting.ORTHOGRAPHIC_Z);
-      RenderSystem.enableBlend();
-      RenderSystem.blendFunc(SourceFactor.DST_COLOR, DestFactor.ZERO);
-      RenderSystem.disableDepthTest();
-      RenderSystem.depthMask(false);
-      RenderSystem.disableCull();
-      RenderSystem.setShader(GameRenderer::getPositionColorShader);
-
-      try {
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-         b.addVertex(-1.0F, -1.0F, 0.0F).setColor(k, k, k, 1.0F);
-         b.addVertex(1.0F, -1.0F, 0.0F).setColor(k, k, k, 1.0F);
-         b.addVertex(1.0F, 1.0F, 0.0F).setColor(k, k, k, 1.0F);
-         b.addVertex(-1.0F, 1.0F, 0.0F).setColor(k, k, k, 1.0F);
-         BufferUploader.drawWithShader(b.buildOrThrow());
-      } finally {
-         RenderSystem.defaultBlendFunc();
-         RenderSystem.disableBlend();
-         RenderSystem.enableDepthTest();
-         RenderSystem.depthMask(true);
-         RenderSystem.enableCull();
-         mv.popMatrix();
-         RenderSystem.applyModelViewMatrix();
-         RenderSystem.setProjectionMatrix(proyAntes, ordenAntes);
-      }
-   }
+   private static void oscurecerMundo(float k) { }
 
    @SubscribeEvent
    public static void alColorearNiebla(ViewportEvent.ComputeFogColor e) {
@@ -500,61 +373,12 @@ public final class EclipseCliente {
       }
    }
 
-   private static void velo(float alfa) {
-      Matrix4f proyAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-      VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-      Matrix4fStack mv = RenderSystem.getModelViewStack();
-      mv.pushMatrix();
-      mv.identity();
-      RenderSystem.applyModelViewMatrix();
-      RenderSystem.setProjectionMatrix(new Matrix4f(), VertexSorting.ORTHOGRAPHIC_Z);
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
-      RenderSystem.disableDepthTest();
-      RenderSystem.depthMask(false);
-      RenderSystem.disableCull();
-      RenderSystem.setShader(GameRenderer::getPositionColorShader);
-
-      try {
-         BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION_COLOR);
-         b.addVertex(-1.0F, -1.0F, 0.0F).setColor(0.5F, 0.55F, 0.62F, alfa);
-         b.addVertex(1.0F, -1.0F, 0.0F).setColor(0.5F, 0.55F, 0.62F, alfa);
-         b.addVertex(1.0F, 1.0F, 0.0F).setColor(0.5F, 0.55F, 0.62F, alfa);
-         b.addVertex(-1.0F, 1.0F, 0.0F).setColor(0.5F, 0.55F, 0.62F, alfa);
-         BufferUploader.drawWithShader(b.buildOrThrow());
-      } finally {
-         RenderSystem.disableBlend();
-         RenderSystem.enableDepthTest();
-         RenderSystem.depthMask(true);
-         RenderSystem.enableCull();
-         mv.popMatrix();
-         RenderSystem.applyModelViewMatrix();
-         RenderSystem.setProjectionMatrix(proyAntes, ordenAntes);
-      }
-   }
+   private static void velo(float alfa) { }
 
    @SubscribeEvent
    public static void alSalir(ClientPlayerNetworkEvent.LoggingOut e) {
       limpiar();
    }
 
-   private static void cubo(float s) {
-      float[][] caras = new float[][]{
-         {-s, s, -s, s, s, -s, s, s, s, -s, s, s},
-         {-s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s},
-         {-s, -s, -s, s, -s, -s, s, s, -s, -s, s, -s},
-         {s, -s, s, -s, -s, s, -s, s, s, s, s, s},
-         {-s, -s, s, -s, -s, -s, -s, s, -s, -s, s, s},
-         {s, -s, -s, s, -s, s, s, s, s, s, s, -s}
-      };
-      BufferBuilder b = Tesselator.getInstance().begin(Mode.QUADS, DefaultVertexFormat.POSITION);
-
-      for (float[] c : caras) {
-         for (int k = 0; k < 12; k += 3) {
-            b.addVertex(c[k], c[k + 1], c[k + 2]);
-         }
-      }
-
-      BufferUploader.drawWithShader(b.buildOrThrow());
-   }
+   private static void cubo(float s) { }
 }

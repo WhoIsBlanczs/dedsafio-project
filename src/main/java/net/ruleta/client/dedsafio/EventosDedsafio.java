@@ -1,10 +1,8 @@
 package net.ruleta.client.dedsafio;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.DimensionSpecialEffects.SkyType;
 import net.minecraft.world.level.material.FogType;
 import net.ruleta.client.compat.ClientPlayerNetworkEvent;
 import net.ruleta.client.compat.RenderGuiEvent;
@@ -20,61 +18,7 @@ public final class EventosDedsafio {
    }
 
    @SubscribeEvent
-   public static void alDibujarMundo(RenderLevelStageEvent e) {
-      if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL && (DedsafioCielo.visible() || OlaCliente.activaFuera())) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null && mc.level.effects().skyType() == SkyType.NORMAL) {
-            FogType dentro = e.getCamera().getFluidInCamera();
-            if (dentro == FogType.NONE) {
-               Camera camara = e.getCamera();
-               Matrix4f vista = new Matrix4f()
-                  .rotateX(camara.getXRot() * (float) (Math.PI / 180.0))
-                  .rotateY((camara.getYRot() + 180.0F) * (float) (Math.PI / 180.0));
-               Matrix4f vistaMundo = e.getModelViewMatrix();
-               if (vistaMundo != null) {
-                  Matrix4f m = new Matrix4f(vistaMundo).setTranslation(0.0F, 0.0F, 0.0F);
-                  Vector3f a = vista.transformDirection(new Vector3f(0.0F, 0.0F, -1.0F));
-                  Vector3f b = m.transformDirection(new Vector3f(0.0F, 0.0F, -1.0F));
-                  if (Float.isFinite(b.x()) && Float.isFinite(b.y()) && Float.isFinite(b.z()) && Math.abs(m.determinant() - 1.0F) < 0.05F && a.dot(b) > 0.99F) {
-                     vista = m;
-                  }
-               }
-
-               Matrix4f proyeccion = new Matrix4f(e.getProjectionMatrix());
-               float lejos = mc.options.getEffectiveRenderDistance() * 16.0F * 4.0F;
-               Matrix4f proyeccionAntes = new Matrix4f(RenderSystem.getProjectionMatrix());
-               VertexSorting ordenAntes = RenderSystem.getVertexSorting();
-               mc.getMainRenderTarget().bindWrite(true);
-               RenderSystem.setProjectionMatrix(proyeccion, VertexSorting.DISTANCE_TO_ORIGIN);
-               RenderSystem.depthFunc(515);
-
-               try {
-                  if (DedsafioCielo.visible()) {
-                     DedsafioCielo.camX = camara.getPosition().x;
-                     DedsafioCielo.camZ = camara.getPosition().z;
-                     DedsafioCielo.dibujar(vista, lejos, camara.getPosition().y);
-                     AguaDedsafio.dibujar(vista, mc.options.getEffectiveRenderDistance() * 16.0F * 1.5F, camara.getPosition().y);
-                     EspumaDedsafio.dibujar(vista, camara.getPosition().x, camara.getPosition().y, camara.getPosition().z);
-                     OlaCliente.dibujar(vista, camara.getPosition().x, camara.getPosition().y, camara.getPosition().z);
-                     RayosDedsafio.dibujar(proyeccion, vista);
-                     OlaCliente.dibujarDentro();
-                     return;
-                  }
-
-                  OlaCliente.dibujar(vista, camara.getPosition().x, camara.getPosition().y, camara.getPosition().z);
-                  OlaCliente.dibujarDentro();
-               } finally {
-                  RenderSystem.depthMask(true);
-                  RenderSystem.enableDepthTest();
-                  RenderSystem.enableCull();
-                  RenderSystem.disableBlend();
-                  RenderSystem.defaultBlendFunc();
-                  RenderSystem.setProjectionMatrix(proyeccionAntes, ordenAntes);
-               }
-            }
-         }
-      }
-   }
+   public static void alDibujarMundo(RenderLevelStageEvent e) { }
 
    @SubscribeEvent
    public static void alColorearNiebla(ViewportEvent.ComputeFogColor e) {

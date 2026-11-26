@@ -1,13 +1,13 @@
 package net.ruleta.client.mobs;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Object;
+import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
@@ -39,44 +39,9 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
       return frustum.isVisible(e.getBoundingBox().inflate(1.0, 0.8, 1.0));
    }
 
-   public void render(BombaWarden e, float yaw, float pt, PoseStack ps, MultiBufferSource buf, int luz) {
-      float cuerpo = Mth.rotLerp(pt, e.yBodyRotO, e.yBodyRot);
-      float edad = e.tickCount + pt;
-      boolean alerta = e.enAlerta();
-      Vec3 mov = e.getDeltaMovement();
-      double horiz = Math.sqrt(mov.x * mov.x + mov.z * mov.z);
-      float frec = alerta ? 1.35F : 0.55F;
-      float aleteo = (float)Math.sin(edad * frec) * (alerta ? 40.0F : 28.0F) + (alerta ? 8.0F : 4.0F);
-      float inclina = Mth.clamp((float)horiz * 70.0F, 0.0F, 42.0F);
-      LocalPlayer jugador = Minecraft.getInstance().player;
-      double dist = jugador == null ? 99.0 : Math.sqrt(e.distanceToSqr(jugador));
-      float cerca = (float)Mth.clamp((10.0 - dist) / 10.0, 0.0, 1.0);
-      float latido = (float)(Math.sin(edad * (0.5F + cerca * 1.4F)) * 0.5 + 0.5);
-      float escala = 1.0F + cerca * 0.12F * latido;
-      ps.pushPose();
-      ps.translate(0.0, 0.3 + Math.sin(edad * 0.22F) * (alerta ? 0.015 : 0.04), 0.0);
-      ps.mulPose(Axis.YP.rotationDegrees(180.0F - cuerpo));
-      ps.mulPose(Axis.XP.rotationDegrees(-inclina));
-      ps.scale(escala / 16.0F, escala / 16.0F, escala / 16.0F);
-      VertexConsumer vc = buf.getBuffer(RenderType.entityCutoutNoCull(WARDEN));
-      float giroCabeza = (float)Math.sin(edad * frec + 1.2F) * (alerta ? 6.0F : 3.0F) + (alerta ? 6.0F : 0.0F);
-      ps.pushPose();
-      ps.mulPose(Axis.XP.rotationDegrees(giroCabeza));
-      caja(vc, ps, luz, -3.5F, -3.5F, -2.25F, 3.5F, 3.5F, 2.25F, 0, 32, 16, 16, 10);
-      ps.popPose();
-      alas(vc, ps, luz, aleteo);
-      ps.pushPose();
-      ps.mulPose(Axis.XP.rotationDegrees(giroCabeza));
-      alfa = (int)(70.0F + 185.0F * (0.35F + 0.65F * latido));
-      VertexConsumer vb = buf.getBuffer(RenderType.entityTranslucentEmissive(BRILLO));
-      caja(vb, ps, 15728880, -3.6F, -3.6F, -2.35F, 3.6F, 3.6F, 2.35F, 0, 32, 16, 16, 10);
-      alfa = 255;
-      ps.popPose();
-      ps.popPose();
-      super.render(e, yaw, pt, ps, buf, luz);
-   }
+   public void render(BombaWarden e, float yaw, float pt, PoseStack ps, Object buf, int luz) { }
 
-   private static void alas(VertexConsumer vc, PoseStack ps, int luz, float aleteo) {
+   private static void alas(Object vc, PoseStack ps, int luz, float aleteo) {
       float A = aleteo * (float) (Math.PI / 180.0);
       float B = (aleteo - 22.0F - 0.35F * aleteo) * (float) (Math.PI / 180.0);
       float[][] L = new float[5][];
@@ -107,13 +72,13 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
    }
 
    private static void panel(
-      VertexConsumer vc, PoseStack ps, int luz, int lado, float[] a, float[] b, float[] c, float[] d, float u0, float v0, float u1, float v1
+      Object vc, PoseStack ps, int luz, int lado, float[] a, float[] b, float[] c, float[] d, float u0, float v0, float u1, float v1
    ) {
       cara(vc, ps, luz, lado * a[0], a[1], a[2], lado * b[0], b[1], b[2], lado * c[0], c[1], c[2], lado * d[0], d[1], d[2], u0, v0, u1, v1, 0.0F, 1.0F, 0.0F);
       cara(vc, ps, luz, lado * d[0], d[1], d[2], lado * c[0], c[1], c[2], lado * b[0], b[1], b[2], lado * a[0], a[1], a[2], u0, v0, u1, v1, 0.0F, -1.0F, 0.0F);
    }
 
-   private static void hueso(VertexConsumer vc, PoseStack ps, int luz, int lado, float[] a, float[] b, float grosor, float u, float v) {
+   private static void hueso(Object vc, PoseStack ps, int luz, int lado, float[] a, float[] b, float grosor, float u, float v) {
       Vector3f desde = new Vector3f(lado * a[0], a[1], a[2]);
       Vector3f dir = new Vector3f(lado * b[0], b[1], b[2]).sub(desde);
       float largo = dir.length();
@@ -128,7 +93,7 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
    }
 
    private static void caja(
-      VertexConsumer vc, PoseStack ps, int luz, float x0, float y0, float z0, float x1, float y1, float z1, int u, int v, int tw, int th, int td
+      Object vc, PoseStack ps, int luz, float x0, float y0, float z0, float x1, float y1, float z1, int u, int v, int tw, int th, int td
    ) {
       float uN = u + td;
       float vN = v + td;
@@ -154,7 +119,7 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
    }
 
    private static void cara(
-      VertexConsumer vc,
+      Object vc,
       PoseStack ps,
       int luz,
       float x1,
@@ -185,7 +150,7 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden> {
       punto(vc, p, n, luz, x4, y4, z4, u0 / 128.0F, v1 / 128.0F, nx, ny, nz);
    }
 
-   private static void punto(VertexConsumer vc, Matrix4f p, Pose n, int luz, float x, float y, float z, float u, float v, float nx, float ny, float nz) {
+   private static void punto(Object vc, Matrix4f p, Pose n, int luz, float x, float y, float z, float u, float v, float nx, float ny, float nz) {
       vc.addVertex(p, x, y, z).setColor(255, 255, 255, alfa).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(luz).setNormal(n, nx, ny, nz);
    }
 }
