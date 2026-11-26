@@ -1,0 +1,59 @@
+name: remap-mod
+on:
+  push:
+    branches: [port-tools]
+permissions:
+  contents: write
+jobs:
+  remap:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: '8.10.2'
+      - name: remap jar intermediary -> mojmap (1.21.1)
+        run: |
+          mkdir -p /tmp/rm/libs && cd /tmp/rm
+          cp "$GITHUB_WORKSPACE"/jar/DEDsafio4RuletaFanProjectFabric-1_3_0.jar libs/mod.jar
+          cat > settings.gradle <<'S'
+          pluginManagement { repositories { maven { url 'https://maven.fabricmc.net/' }; mavenCentral(); gradlePluginPortal() } }
+          rootProject.name='rm'
+          S
+          cat > build.gradle <<'S'
+          plugins { id 'fabric-loom' version '1.9.2' }
+          repositories { mavenCentral() }
+          dependencies {
+            minecraft 'com.mojang:minecraft:1.21.1'
+            mappings loom.officialMojangMappings()
+            modImplementation 'net.fabricmc:fabric-loader:0.16.10'
+            modImplementation 'net.fabricmc.fabric-api:fabric-api:0.105.0+1.21.1'
+            modImplementation files('libs/mod.jar')
+          }
+          S
+          gradle --no-daemon build -x test || gradle --no-daemon classes || true
+          find ~/.gradle /tmp/rm -path '*remapped_mods*' -name '*.jar' | tee /tmp/found.txt
+      - name: decompile
+        run: |
+          cd /tmp
+          V=$(curl -s https://repo1.maven.org/maven2/org/vineflower/vineflower/maven-metadata.xml | grep -oP '(?<=<release>)[^<]+')
+          curl -sL -o vf.jar https://repo1.maven.org/maven2/org/vineflower/vineflower/$V/vineflower-$V.jar
+          J=$(grep -i 'mod' /tmp/found.txt | grep -vi 'fabric-api\|fabric-loader\|fabric_api' | head -1); echo "jar: $J"
+          mkdir -p dec && java -Xmx6g -jar vf.jar -dgs=1 -log=WARN "$J" dec/
+          mkdir -p jarx && cd jarx && unzip -q "$J" && cd ..
+          echo "$J" > /tmp/jarpath.txt
+      - name: commit result to branch mojmap-src
+        run: |
+          cd /tmp && rm -rf out && mkdir out && cd out
+          git init -q -b mojmap-src
+          mkdir -p src/main/java src/main/resources
+          unzip -q /tmp/dec/*.jar -d src/main/java 2>/dev/null || cp -r /tmp/dec/* src/main/java/ || true
+          cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' | while read f; do mkdir -p "/tmp/out/src/main/resources/$(dirname "$f")"; cp "$f" "/tmp/out/src/main/resources/$f"; done
+          cd /tmp/out
+          git config user.name github-actions; git config user.email actions@github.com
+          git add -A && git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" mojmap-src
