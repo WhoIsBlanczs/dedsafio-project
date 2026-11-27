@@ -65,7 +65,7 @@ public class PincelBosqueItem extends Item {
       }
    }
 
-   public InteractionResult useOn(UseOnContext ctx) { return null; }
+   public InteractionResult useOn(UseOnContext ctx) { return InteractionResult.PASS; }
 
    private static boolean suelo(BlockState s) {
       return s.is(BlockTags.SAND) || s.is(BlockTags.DIRT) || s.is(Blocks.GRAVEL);

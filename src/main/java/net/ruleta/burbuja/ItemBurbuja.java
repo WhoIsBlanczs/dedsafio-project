@@ -18,5 +18,5 @@ public class ItemBurbuja extends Item {
       super(propiedades);
    }
 
-   public InteractionResult useOn(UseOnContext ctx) { return null; }
+   public InteractionResult useOn(UseOnContext ctx) { return InteractionResult.PASS; }
 }

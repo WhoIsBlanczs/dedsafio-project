@@ -37,7 +37,7 @@ public final class Playa {
    private Playa() {
    }
 
-   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades(MapColor color, SoundType sonido) { return null; }
+   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades(MapColor color, SoundType sonido) { return net.ruleta.Reg.bprops().mapColor(color).noCollision().instabreak().sound(sonido); }
 
    public static void init() { }
 

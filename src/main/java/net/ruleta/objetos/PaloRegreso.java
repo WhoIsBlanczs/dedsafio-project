@@ -27,7 +27,7 @@ public class PaloRegreso extends Item {
       super(p);
    }
 
-   public InteractionResult interactLivingEntity(ItemStack palo, Player quien, LivingEntity objetivo, InteractionHand mano) { return null; }
+   public InteractionResult interactLivingEntity(ItemStack palo, Player quien, LivingEntity objetivo, InteractionHand mano) { return InteractionResult.PASS; }
 
    public static void regresar(ServerPlayer p) { }
 

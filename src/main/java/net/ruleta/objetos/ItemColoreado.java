@@ -14,5 +14,5 @@ public class ItemColoreado extends Item {
       this.color = color;
    }
 
-   public Component getName(ItemStack pila) { return null; }
+   public Component getName(ItemStack pila) { return super.getName(pila); }
 }

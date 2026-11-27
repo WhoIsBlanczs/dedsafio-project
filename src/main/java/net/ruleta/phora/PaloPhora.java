@@ -27,7 +27,7 @@ public class PaloPhora extends Item {
       super(p);
    }
 
-   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) { return null; }
+   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) { return InteractionResult.PASS; }
 
    public boolean isFoil(ItemStack s) {
       return true;

@@ -29,7 +29,7 @@ public final class Arboles {
    private Arboles() {
    }
 
-   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades() { return null; }
+   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades() { return net.ruleta.Reg.bprops().mapColor(MapColor.PLANT).noCollision().randomTicks().instabreak().sound(SoundType.GRASS); }
 
    public static void init() { }
 

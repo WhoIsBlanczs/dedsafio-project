@@ -34,7 +34,7 @@ public class DecoPlayaBloque extends Block {
       return Component.literal(this.nombre);
    }
 
-   protected VoxelShape getShape(BlockState estado, BlockGetter nivel, BlockPos pos, CollisionContext ctx) { return null; }
+   protected VoxelShape getShape(BlockState estado, BlockGetter nivel, BlockPos pos, CollisionContext ctx) { return FORMA; }
 
    protected boolean canSurvive(BlockState estado, LevelReader nivel, BlockPos pos) {
       return Block.canSupportCenter(nivel, pos.below(), Direction.UP);
