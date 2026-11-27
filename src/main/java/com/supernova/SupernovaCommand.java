@@ -85,7 +85,7 @@ public class SupernovaCommand {
                int total = 0;
 
                for (ServerLevel level : ((CommandSourceStack)ctx.getSource()).getServer().getAllLevels()) {
-                  for (SupernovaEntity nx : new ArrayList(level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), x -> true))) {
+                  for (SupernovaEntity nx : new ArrayList<>(level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), x -> true))) {
                      nx.discard();
                      total++;
                   }

@@ -198,7 +198,7 @@ public final class Bunkers {
          return 0;
       }
 
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getStructureTemplateManager().get(ESTRUCTURA);
       if (!t.isEmpty() && mascaras(nivel)) {
          String malo = motivoCerca(server, nivel.dimension().identifier().toString(), pe.esquina());
          if (malo != null) {
@@ -265,7 +265,7 @@ public final class Bunkers {
 
    @Nullable
    static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
-      if (!nivel.getServer().getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
+      if (!nivel.getStructureTemplateManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
          if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
             return null;
          }
@@ -291,7 +291,7 @@ public final class Bunkers {
             Bunkers.Bunker b = (Bunkers.Bunker)o[1];
             Consumer<Bunkers.Bunker> fin = (Consumer<Bunkers.Bunker>)o[2];
             ServerLevel nivel = obra.nivel();
-            Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
+            Optional<StructureTemplate> t = nivel.getStructureTemplateManager().get(ESTRUCTURA);
             BlockPos esquina = new BlockPos(b.ex(), b.ey(), b.ez());
             StructurePlaceSettings ajustes = new StructurePlaceSettings().setIgnoreEntities(false);
             boolean ok = t.isPresent() && t.get().placeInWorld(nivel, esquina, esquina, ajustes, nivel.getRandom(), 18);
@@ -438,7 +438,7 @@ public final class Bunkers {
       }
 
       BitSet r = new BitSet(323136);
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getStructureTemplateManager().get(ESTRUCTURA);
       if (t.isPresent()) {
          CompoundTag nbt = t.get().save(new CompoundTag());
          ListTag paleta = nbt.getListOrEmpty("palette");
@@ -646,7 +646,7 @@ public final class Bunkers {
          return true;
       }
 
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getStructureTemplateManager().get(ESTRUCTURA);
       if (t.isEmpty()) {
          return false;
       }

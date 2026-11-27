@@ -339,7 +339,7 @@ public final class CambiosEfectos {
    }
 
    private static void ponerTelarana(Level nivel, BlockPos pos) {
-      if (nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
+      if (((net.minecraft.server.level.ServerLevel)nivel).getGameRules().get(GameRules.MOB_GRIEFING)) {
          BlockState actual = nivel.getBlockState(pos);
          if ((actual.isAir() || actual.canBeReplaced()) && actual.getFluidState().isEmpty()) {
             nivel.setBlockAndUpdate(pos, Blocks.COBWEB.defaultBlockState());
@@ -815,7 +815,7 @@ public final class CambiosEfectos {
                nucleeper.getMoveControl().setWantedPosition(objetivo.getX(), objetivo.getY(), objetivo.getZ(), 1.0);
             }
 
-            if (nucleeper.tickCount % 5 == 0 && nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
+            if (nucleeper.tickCount % 5 == 0 && ((net.minecraft.server.level.ServerLevel)nivel).getGameRules().get(GameRules.MOB_GRIEFING)) {
                abrirCamino(nivel, nucleeper, objetivo);
             }
          }
@@ -1083,7 +1083,7 @@ public final class CambiosEfectos {
                zombie.getMoveControl().setWantedPosition(objetivo.getX(), objetivo.getY(), objetivo.getZ(), 1.0);
             }
 
-            if (nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
+            if (((net.minecraft.server.level.ServerLevel)nivel).getGameRules().get(GameRules.MOB_GRIEFING)) {
                double dx = objetivo.getX() - zombie.getX();
                double dz = objetivo.getZ() - zombie.getZ();
                double dy = objetivo.getY() - zombie.getY();

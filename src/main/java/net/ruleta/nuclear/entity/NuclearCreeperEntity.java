@@ -85,7 +85,7 @@ public class NuclearCreeperEntity extends Creeper {
          this.getMoveControl().setWantedPosition(this.getX(), this.getY(), this.getZ(), 0.0);
       } else {
          LivingEntity target = this.getTarget();
-         if (target == null || !target.isAlive() || !this.level().getGameRules().get(GameRules.MOB_GRIEFING)) {
+         if (target == null || !target.isAlive() || !((net.minecraft.server.level.ServerLevel)this.level()).getGameRules().get(GameRules.MOB_GRIEFING)) {
             this.tunneling = false;
             this.lastDist = Double.MAX_VALUE;
          } else if (this.isFaceToFace(target)) {
