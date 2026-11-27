@@ -140,7 +140,59 @@ public final class MomentoPhora {
       }
    }
 
-   public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) { }
+   public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
+      dispatcher.register(
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("phora")
+                     .requires(s -> s.hasPermission(2)))
+                  .then(
+                     Commands.literal("lluvia")
+                        .executes(
+                           ctx -> {
+                              if (ComandoEclipse.enMarcha()) {
+                                 ((CommandSourceStack)ctx.getSource())
+                                    .sendFailure(Component.literal("No se puede lanzar el Momento Phora con un eclipse en curso."));
+                                 return 0;
+                              } else if (MomentoReviil.enMarcha()) {
+                                 ((CommandSourceStack)ctx.getSource())
+                                    .sendFailure(Component.literal("No se puede lanzar el Momento Phora con un Momento Reviil en curso."));
+                                 return 0;
+                              } else {
+                                 empezar(((CommandSourceStack)ctx.getSource()).getServer(), -1);
+                                 ((CommandSourceStack)ctx.getSource())
+                                    .sendSuccess(() -> Component.literal("Momento Phora: empieza la lluvia de misiles (/phora detener para pararla)."), true);
+                                 return 1;
+                              }
+                           }
+                        )
+                  ))
+               .then(Commands.literal("detener").executes(ctx -> {
+                  if (!enMarcha()) {
+                     ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("No hay ningún Momento Phora en marcha."));
+                     return 0;
+                  } else {
+                     terminar(((CommandSourceStack)ctx.getSource()).getServer());
+                     ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Momento Phora detenido."), true);
+                     return 1;
+                  }
+               })))
+            .then(
+               Commands.literal("palo")
+                  .executes(
+                     ctx -> {
+                        ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
+                        ItemStack palo = new ItemStack((ItemLike)PhoraMod.PALO.get());
+                        if (!p.getInventory().add(palo)) {
+                           p.drop(palo, false);
+                        }
+
+                        ((CommandSourceStack)ctx.getSource())
+                           .sendSuccess(() -> Component.literal("Palo de los Phora: clic derecho para hacer caer un misil donde miras."), false);
+                        return 1;
+                     }
+                  )
+            )
+      );
+   }
 
    public static void alEntrar(ServerPlayer p) {
       if (desde >= 0L) {

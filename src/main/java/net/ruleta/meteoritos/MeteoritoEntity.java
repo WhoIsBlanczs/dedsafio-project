@@ -58,7 +58,29 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
       return x < 0.3F ? 0.8F + r.nextFloat() * 0.2F : (x < 0.85F ? 1.0F + r.nextFloat() * 0.3F : 1.5F + r.nextFloat() * 0.4F);
    }
 
-   public static MeteoritoEntity lanzar(ServerLevel nivel, Vec3 objetivo, RandomSource r, Vec3 cerca) { return null; }
+   public static MeteoritoEntity lanzar(ServerLevel nivel, Vec3 objetivo, RandomSource r, Vec3 cerca) {
+      MeteoritoEntity m = new MeteoritoEntity(MeteoritosMod.METEORITO.get(), nivel);
+      Vec3 base = cerca != null ? cerca : objetivo;
+      double az;
+      if (cerca != null) {
+         double haciaObj = Math.atan2(objetivo.z - cerca.z, objetivo.x - cerca.x);
+         az = haciaObj + Math.PI + (r.nextDouble() - 0.5) * Math.toRadians(70.0);
+      } else {
+         az = r.nextDouble() * Math.PI * 2.0;
+      }
+
+      int zona = Math.min(nivel.getServer().getPlayerList().getViewDistance(), nivel.getServer().getPlayerList().getSimulationDistance());
+      double maxLado = Math.max(56.0, Math.min(420.0, zona * 16.0 - 28.0));
+      double lado = maxLado * (0.8 + r.nextDouble() * 0.2);
+      double alto = objetivo.y + 345.0 + r.nextDouble() * 10.0;
+      lado = Math.min(lado, alto / Math.tan(Math.toRadians(37.0 + r.nextDouble() * 6.0)));
+      Vec3 desde = new Vec3(base.x + Math.cos(az) * lado, alto, base.z + Math.sin(az) * lado);
+      m.moveTo(desde.x, desde.y, desde.z, 0.0F, 0.0F);
+      m.setDeltaMovement(objetivo.subtract(desde).normalize().scale(2.6));
+      m.entityData.set(TAMANO, tamanoAlAzar(r));
+      nivel.addFreshEntity(m);
+      return m;
+   }
 
    protected void defineSynchedData(Builder builder) {
       builder.define(TAMANO, 1.0F);

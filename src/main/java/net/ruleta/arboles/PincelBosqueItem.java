@@ -65,7 +65,30 @@ public class PincelBosqueItem extends Item {
       }
    }
 
-   public InteractionResult useOn(UseOnContext ctx) { return InteractionResult.PASS; }
+   public InteractionResult useOn(UseOnContext ctx) {
+      Player jugador = ctx.getPlayer();
+      if (jugador == null) {
+         return InteractionResult.PASS;
+      }
+
+      if (jugador.isShiftKeyDown()) {
+         if (!ctx.getLevel().isClientSide()) {
+            cambiar(jugador);
+         }
+
+         return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide());
+      } else if (!(ctx.getLevel() instanceof ServerLevel nivel)) {
+         return InteractionResult.SUCCESS;
+      } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+         int n = plantar(nivel, ctx.getClickedPos(), modo(jugador));
+         jugador.getCooldowns().addCooldown(this, 10);
+         jugador.sendOverlayMessage(Component.literal("Árboles plantados: " + n));
+         return InteractionResult.CONSUME;
+      } else {
+         jugador.sendOverlayMessage(Component.literal("El pincel de bosque es solo para creativo u OP."));
+         return InteractionResult.FAIL;
+      }
+   }
 
    private static boolean suelo(BlockState s) {
       return s.is(BlockTags.SAND) || s.is(BlockTags.DIRT) || s.is(Blocks.GRAVEL);

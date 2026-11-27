@@ -281,7 +281,62 @@ public final class MomentosBunker {
       return mundo.getSeaLevel();
    }
 
-   static void tick(MinecraftServer server) { }
+   static void tick(MinecraftServer server) {
+      tick++;
+      eclipse(server);
+      if (puertaPedida != null) {
+         if (activo != null) {
+            intentarPuerta(server, bunker, puerta);
+         } else {
+            intentarPuerta(server, bunkerFinal, puertaFinal);
+         }
+      }
+
+      if (activo == null) {
+         despues(server);
+      } else {
+         if (!cerrada && tick >= cierra) {
+            cerrada = true;
+            abre = tick + encerrados;
+            ponerPuerta(server, false);
+         }
+
+         if (cerrada && tick >= abre) {
+            terminar(server);
+         } else {
+            if ("bunker_agujeros".equals(activo) && tick % (Math.max(2, Ajustes.entero("agujeros.reponer")) * 20L) == 0L) {
+               agujeros(server);
+            }
+
+            if ("bunker_meteoritos_tornados".equals(activo) && tick % (Math.max(2, Ajustes.entero("tornado.momento_reponer")) * 20L) == 0L) {
+               ComandoTornado.momentoTornados(server);
+            }
+
+            long cada = Math.max(1, Ajustes.entero("dano.bunker_intervalo")) * 20L;
+            if (cerrada && tick % cada == 0L) {
+               float dano = Ajustes.decimal("dano.bunker") * 2.0F;
+
+               for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
+                  if (p.isAlive() && !p.isCreative() && !p.isSpectator() && !dentro(p)) {
+                     p.setInvulnerableTime(0);
+                     if ("bunker_rayo".equals(activo)) {
+                        p.hurt(Ruleta.fuenteLetal(p, "ruleta.rayo", " murió por el Rayo mortal de Reviil"), dano);
+                        if (Ajustes.bool("rayo.activo") && p.getRandom().nextInt(100) < Ajustes.entero("rayo.prob")) {
+                           rayo(p);
+                        }
+                     } else if ("bunker_meteoritos".equals(activo)) {
+                        p.hurt(Ruleta.fuenteLetal(p, "ruleta.meteoritos", " murió por la Lluvia de Meteoritos de Reviil"), dano);
+                     } else if ("bunker_meteoritos_tornados".equals(activo)) {
+                        p.hurt(Ruleta.fuenteLetal(p, "ruleta.meteoritos_tornados", " murió por los Tornados de Reviil"), dano);
+                     } else {
+                        p.hurt(Ruleta.fuenteLetal(p, "ruleta.agujero", " fue absorbido por los Agujeros Negros de Reviil"), dano);
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
 
    public static boolean usa(Bunkers.Bunker b) {
       return b == null
@@ -369,7 +424,28 @@ public final class MomentosBunker {
       }
    }
 
-   private static void despues(MinecraftServer server) { }
+   private static void despues(MinecraftServer server) {
+      if (cierreFinal >= 0L) {
+         if (tick < cierreFinal) {
+            return;
+         }
+
+         cierreFinal = -1L;
+         puertaPedida = false;
+         intentarPuerta(server, bunkerFinal, puertaFinal);
+      }
+
+      if (tick % 40L == 0L && Ajustes.bool("bunker.expulsar")) {
+         for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
+            if (p.isAlive() && !p.isCreative() && !p.isSpectator()) {
+               Bunkers.Bunker b = Bunkers.interiorDe(p.level(), p.blockPosition());
+               if (b != null) {
+                  Bunkers.sacar(p, b);
+               }
+            }
+         }
+      }
+   }
 
    private static void acabarEclipse(MinecraftServer server) {
       if (eclipseHastaBunker) {

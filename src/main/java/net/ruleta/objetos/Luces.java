@@ -96,7 +96,19 @@ public final class Luces {
       return true;
    }
 
-   static void quitar(MinecraftServer server, UUID id) { }
+   static void quitar(MinecraftServer server, UUID id) {
+      Object[] o = PUESTAS.remove(id);
+      if (o != null && server != null) {
+         ServerLevel nivel = server.getLevel((ResourceKey)o[0]);
+
+         for (Object[] l : (List)o[1]) {
+            BlockPos pos = (BlockPos)l[0];
+            if (nivel != null && nivel.getBlockState(pos).is(Blocks.LIGHT)) {
+               nivel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+            }
+         }
+      }
+   }
 
    public static void alTick(MinecraftServer servidor) {
       if (!PUESTAS.isEmpty()) {

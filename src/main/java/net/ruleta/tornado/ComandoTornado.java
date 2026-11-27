@@ -108,9 +108,24 @@ public final class ComandoTornado {
       }
    }
 
-   public static void pararTodo(MinecraftServer server) { }
+   public static void pararTodo(MinecraftServer server) {
+      boolean habia = cielo;
+      cielo = false;
+      LISTA.clear();
+      CAPTURAS.clear();
+      if (habia) {
+         server.overworld().setWeatherParameters(6000, 0, false, false);
+      }
 
-   private static void lluvia(MinecraftServer server) { }
+      enviarATodos(server);
+   }
+
+   private static void lluvia(MinecraftServer server) {
+      ServerLevel mundo = server.overworld();
+      if (!mundo.isRaining() || !mundo.isThundering()) {
+         mundo.setWeatherParameters(0, 24000, true, true);
+      }
+   }
 
    public static void momentoTornados(MinecraftServer server) {
       ServerLevel mundo = server.overworld();
@@ -475,7 +490,22 @@ public final class ComandoTornado {
       e.needsSync = true;
    }
 
-   private static TornadoPayload estado() { return null; }
+   private static TornadoPayload estado() {
+      List<TornadoPayload.Torn> l = new ArrayList<>();
+
+      for (ComandoTornado.Tornado t : LISTA) {
+         l.add(new TornadoPayload.Torn(t.id, new Vec3(t.x, t.y, t.z), t.radio, t.alto, (float)t.vx, (float)t.vz, t.edad, t.dim.location().toString()));
+      }
+
+      int[] ids = new int[CAPTURAS.size()];
+      int k = 0;
+
+      for (ComandoTornado.Captura c : CAPTURAS.values()) {
+         ids[k++] = c.ent.getId();
+      }
+
+      return new TornadoPayload(cielo, l, ids);
+   }
 
    private static void enviarATodos(MinecraftServer server) {
       Red.enviarATodos(server, estado());

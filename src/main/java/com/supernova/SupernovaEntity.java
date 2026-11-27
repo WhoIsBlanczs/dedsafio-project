@@ -235,9 +235,42 @@ public class SupernovaEntity extends Entity {
       }
    }
 
-   private void smite(ServerLevel sl, LivingEntity e, Vec3 center, boolean first) { }
+   private void smite(ServerLevel sl, LivingEntity e, Vec3 center, boolean first) {
+      e.igniteForSeconds(Ajustes.entero("supernova.fuego"));
 
-   private static void wearArmor(LivingEntity e) { }
+      for (EquipmentSlot slot : ARMOR) {
+         ItemStack st = e.getItemBySlot(slot);
+         if (!st.isEmpty() && st.isDamageableItem()) {
+            e.onEquippedItemBroken(st.getItem(), slot);
+            e.setItemSlot(slot, ItemStack.EMPTY);
+         }
+      }
+
+      e.hurt(this.lethalSource(sl), 1000000.0F);
+      if (first && e.isAlive()) {
+         Vec3 dir = e.position().subtract(center);
+         dir = dir.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 1.0, 0.0) : dir.normalize();
+         e.push(dir.x * 3.0, 1.0, dir.z * 3.0);
+         e.hurtMarked = true;
+      }
+   }
+
+   private static void wearArmor(LivingEntity e) {
+      for (EquipmentSlot slot : ARMOR) {
+         ItemStack st = e.getItemBySlot(slot);
+         if (!st.isEmpty() && st.isDamageableItem()) {
+            int max = st.getMaxDamage();
+            int loss = Math.max(1, Math.round(max * Ajustes.decimal("supernova.armadura") / 100.0F));
+            int now = st.getDamageValue() + loss;
+            if (now >= max) {
+               e.onEquippedItemBroken(st.getItem(), slot);
+               e.setItemSlot(slot, ItemStack.EMPTY);
+            } else {
+               st.setDamageValue(now);
+            }
+         }
+      }
+   }
 
    protected void defineSynchedData(Builder builder) {
       builder.define(MAX_RADIUS, 250.0F);

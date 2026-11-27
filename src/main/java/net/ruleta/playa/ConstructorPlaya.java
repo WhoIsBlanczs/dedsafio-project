@@ -58,7 +58,45 @@ public final class ConstructorPlaya {
 
    private static boolean hecho(LevelChunk trozo) { return false; }
 
-   private static void tick(MinecraftServer servidor) { }
+   private static void tick(MinecraftServer servidor) {
+      ServerLevel nivel = servidor.getLevel(ComandoDedsafio.DIMENSION);
+      if (nivel != null) {
+         if (++contador >= 10) {
+            contador = 0;
+            buscar(servidor, nivel);
+         }
+
+         long limite = System.nanoTime() + 12000000L;
+
+         while (System.nanoTime() < limite) {
+            if (actual == null) {
+               int[] c = cola.poll();
+               if (c == null) {
+                  return;
+               }
+
+               actual = new ConstructorPlaya.Actual(nivel, c[0], c[1]);
+            }
+
+            LevelChunk trozo = nivel.getChunkSource().getChunkNow(actual.cx, actual.cz);
+            if (trozo != null && !hecho(trozo)) {
+               try {
+                  fila(nivel, trozo, actual.fila);
+               } catch (RuntimeException e) {
+                  actual = null;
+                  continue;
+               }
+
+               if (++actual.fila >= 16) {
+                  trozo.setBlockState(marca(actual.cx, actual.cz), Blocks.DEEPSLATE.defaultBlockState(), false);
+                  actual = null;
+               }
+            } else {
+               actual = null;
+            }
+         }
+      }
+   }
 
    private static void buscar(MinecraftServer servidor, ServerLevel nivel) {
       int radio = Math.max(4, Math.min(24, servidor.getPlayerList().getViewDistance()));

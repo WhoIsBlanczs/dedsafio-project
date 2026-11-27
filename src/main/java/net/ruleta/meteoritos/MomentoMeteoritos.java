@@ -146,7 +146,91 @@ public final class MomentoMeteoritos {
       return new ReviilPayload("meteoritos", valor, Component.empty(), Component.empty());
    }
 
-   public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) { }
+   public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
+      dispatcher.register(
+         (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
+                              "meteoritos"
+                           )
+                           .requires(s -> s.hasPermission(2)))
+                        .then(
+                           Commands.literal("cielo")
+                              .executes(
+                                 ctx -> {
+                                    if (ComandoEclipse.enMarcha() || MomentoReviil.enMarcha() || MomentoPhora.enMarcha()) {
+                                       ((CommandSourceStack)ctx.getSource())
+                                          .sendFailure(
+                                             Component.literal(
+                                                "No se puede poner el cielo de meteoritos con un eclipse, un Momento Reviil o el Momento Phora en curso."
+                                             )
+                                          );
+                                       return 0;
+                                    } else if (cielo) {
+                                       ((CommandSourceStack)ctx.getSource())
+                                          .sendFailure(Component.literal("El cielo de los meteoritos ya está puesto (/meteoritos detener para quitarlo)."));
+                                       return 0;
+                                    } else {
+                                       empezar(((CommandSourceStack)ctx.getSource()).getServer());
+                                       ((CommandSourceStack)ctx.getSource())
+                                          .sendSuccess(() -> Component.literal("Cielo de los meteoritos puesto (/meteoritos detener para quitarlo)."), true);
+                                       return 1;
+                                    }
+                                 }
+                              )
+                        ))
+                     .then(
+                        Commands.literal("lluvia")
+                           .executes(
+                              ctx -> {
+                                 if (cielo || !ComandoEclipse.enMarcha() && !MomentoReviil.enMarcha() && !MomentoPhora.enMarcha()) {
+                                    empezar(((CommandSourceStack)ctx.getSource()).getServer());
+                                    lluvia = true;
+                                    siguiente = tick + 60L;
+                                    ((CommandSourceStack)ctx.getSource())
+                                       .sendSuccess(
+                                          () -> Component.literal(
+                                             "Lluvia de meteoritos: cae uno cada 10-22 s, lejos del anterior (/meteoritos detener para pararla)."
+                                          ),
+                                          true
+                                       );
+                                    return 1;
+                                 } else {
+                                    ((CommandSourceStack)ctx.getSource())
+                                       .sendFailure(Component.literal("No se puede con un eclipse, un Momento Reviil o el Momento Phora en curso."));
+                                    return 0;
+                                 }
+                              }
+                           )
+                     ))
+                  .then(Commands.literal("meteorito").executes(ctx -> {
+                     ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
+                     Vec3 objetivo = MeteoritoEntity.dondeMira(p);
+                     MeteoritoEntity.lanzar(p.level(), objetivo, p.getRandom(), p.position());
+                     ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Cae un meteorito donde miras."), false);
+                     return 1;
+                  })))
+               .then(Commands.literal("detener").executes(ctx -> {
+                  terminar(((CommandSourceStack)ctx.getSource()).getServer());
+                  ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Meteoritos detenidos."), true);
+                  return 1;
+               })))
+            .then(
+               Commands.literal("palo")
+                  .executes(
+                     ctx -> {
+                        ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
+                        ItemStack palo = new ItemStack((ItemLike)MeteoritosMod.PALO.get());
+                        if (!p.getInventory().add(palo)) {
+                           p.drop(palo, false);
+                        }
+
+                        ((CommandSourceStack)ctx.getSource())
+                           .sendSuccess(() -> Component.literal("Palo de los meteoritos: clic derecho para hacer caer un meteorito donde miras."), false);
+                        return 1;
+                     }
+                  )
+            )
+      );
+   }
 
    public static void alEntrar(ServerPlayer p) {
       if (cielo) {

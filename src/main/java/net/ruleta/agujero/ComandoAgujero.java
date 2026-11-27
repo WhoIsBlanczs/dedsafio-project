@@ -299,7 +299,31 @@ public final class ComandoAgujero {
       return x * x * (3.0F - 2.0F * x);
    }
 
-   private static void hora(MinecraftServer server) { }
+   private static void hora(MinecraftServer server) {
+      if (horaInicio >= 0L) {
+         ServerLevel mundo = server.overworld();
+         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
+         boolean termina = false;
+         long hora;
+         if (cortadoEn >= 0L) {
+            long destino = ciclo ? horaInicio + (relojHora - desdeHora) : horaInicio;
+            float u = suave((float)(relojHora - cortadoEn) / 60.0F);
+            termina = relojHora - cortadoEn >= 60L;
+            hora = termina ? destino : horaCortada + Math.round((float)corto(horaCortada, destino) * u);
+         } else {
+            long hasta = horaInicio + corto(horaInicio, 18000L);
+            hora = horaInicio + Math.round((float)(hasta - horaInicio) * suave((float)(relojHora - desdeHora) / 60.0F));
+         }
+
+         mundo.setDayTime(hora);
+         if (termina) {
+            horaInicio = -1L;
+            cortadoEn = -1L;
+         }
+
+         server.getPlayerList().broadcastAll(new ClientboundSetTimePacket(mundo.getGameTime(), hora, ciclo && termina), Level.OVERWORLD);
+      }
+   }
 
    public static void alTick(MinecraftServer servidor) {
       relojHora++;

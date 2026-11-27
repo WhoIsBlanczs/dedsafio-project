@@ -173,7 +173,21 @@ public final class ComandoDedsafio {
       }
    }
 
-   static void devolver(MinecraftServer servidor, ServerPlayer p) { }
+   static void devolver(MinecraftServer servidor, ServerPlayer p) {
+      OlaServidor.alSalir(p);
+      ComandoDedsafio.Previo antes = previos.remove(p.getUUID());
+      estabanDentro.remove(p.getUUID());
+      guardarPrevios(servidor);
+      ServerLevel nivel = antes != null && !antes.dimension().equals(DIMENSION) ? servidor.getLevel(antes.dimension()) : null;
+      if (antes != null && nivel != null) {
+         p.teleportTo(nivel, antes.x(), antes.y(), antes.z(), antes.giro(), antes.cabeceo());
+      } else {
+         ServerLevel mundo = servidor.overworld();
+         BlockPos cama = p.getRespawnPosition();
+         BlockPos pos = cama != null && p.getRespawnDimension() == Level.OVERWORLD ? cama : mundo.getRespawnData().pos();
+         p.teleportTo(mundo, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5, p.getYRot(), p.getXRot());
+      }
+   }
 
    private static Path archivoPrevios(MinecraftServer servidor) {
       return servidor.getWorldPath(LevelResource.ROOT).resolve("dedsafio_previos.txt");

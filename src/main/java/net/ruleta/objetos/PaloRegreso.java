@@ -27,9 +27,38 @@ public class PaloRegreso extends Item {
       super(p);
    }
 
-   public InteractionResult interactLivingEntity(ItemStack palo, Player quien, LivingEntity objetivo, InteractionHand mano) { return InteractionResult.PASS; }
+   public InteractionResult interactLivingEntity(ItemStack palo, Player quien, LivingEntity objetivo, InteractionHand mano) {
+      if (objetivo instanceof ServerPlayer jugador) {
+         if (quien.level().isClientSide()) {
+            return InteractionResult.SUCCESS;
+         }
 
-   public static void regresar(ServerPlayer p) { }
+         humo(jugador.level(), jugador.position());
+         regresar(jugador);
+         quien.getCooldowns().addCooldown(this, 10);
+         return InteractionResult.CONSUME;
+      } else {
+         return InteractionResult.PASS;
+      }
+   }
+
+   public static void regresar(ServerPlayer p) {
+      MinecraftServer server = p.getServer();
+      if (server != null) {
+         TeleportTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, TeleportTransition.DO_NOTHING);
+         if (!sitio.missingRespawnBlock()) {
+            Vec3 v = sitio.pos();
+            p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, sitio.yRot(), 0.0F);
+            despues(p, "Has vuelto a tu zona de respawn.");
+         } else {
+            ServerLevel mundo = server.overworld();
+            BlockPos spawn = mundo.getRespawnData().pos();
+            int y = mundo.getHeight(Types.MOTION_BLOCKING_NO_LEAVES, spawn.getX(), spawn.getZ());
+            p.teleportTo(mundo, spawn.getX() + 0.5, y, spawn.getZ() + 0.5, mundo.getSharedSpawnAngle(), 0.0F);
+            despues(p, "No tienes zona de respawn.");
+         }
+      }
+   }
 
    private static void despues(ServerPlayer p, String texto) {
       p.fallDistance = 0.0F;
