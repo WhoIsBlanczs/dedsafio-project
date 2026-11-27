@@ -170,7 +170,7 @@ public class HerobrineEntity extends Monster {
       }
    }
 
-   public boolean hurt(DamageSource fuente, float cantidad) { return false; }
+   public boolean hurtServer(net.minecraft.server.level.ServerLevel lvl_, DamageSource fuente, float cantidad) { return false; }
 
    public boolean isInvulnerableTo(DamageSource fuente) {
       return true;

@@ -100,13 +100,13 @@ public final class ViewportEvent {
    }
 
    public static final class RenderFog extends ViewportEvent.Base {
-      private final FogMode modo;
+      private final Object modo;
       private final FogType tipo;
       private float cerca;
       private float lejos;
       private Object forma;
 
-      public RenderFog(FogMode modo, FogType tipo, Camera camara, float parcial, float cerca, float lejos, Object forma) {
+      public RenderFog(Object modo, FogType tipo, Camera camara, float parcial, float cerca, float lejos, Object forma) {
          super(camara, parcial);
          this.modo = modo;
          this.tipo = tipo;
@@ -115,7 +115,7 @@ public final class ViewportEvent {
          this.forma = forma;
       }
 
-      public FogMode getMode() { return null; }
+      public Object getMode() { return null; }
 
       public FogType getType() {
          return this.tipo;

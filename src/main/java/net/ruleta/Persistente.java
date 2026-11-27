@@ -6,7 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 
 public final class Persistente {
-   private static final AttachmentType<CompoundTag> DATOS = AttachmentRegistry.builder()
+   private static final AttachmentType<CompoundTag> DATOS = AttachmentRegistry.<CompoundTag>builder()
       .persistent(CompoundTag.CODEC)
       .copyOnDeath()
       .initializer(CompoundTag::new)

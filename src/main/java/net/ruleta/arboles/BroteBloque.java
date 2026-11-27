@@ -22,9 +22,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BroteBloque extends BushBlock implements BonemealableBlock {
-   public static final MapCodec<BroteBloque> CODEC = RecordCodecBuilder.mapCodec(
-      i -> i.group(propertiesCodec(), Codec.INT.fieldOf("tipo").forGetter(b -> b.tipo)).apply(i, BroteBloque::new)
-   );
    private static final VoxelShape FORMA = Block.box(2.0, 0.0, 2.0, 14.0, 12.0, 14.0);
    private final int tipo;
 

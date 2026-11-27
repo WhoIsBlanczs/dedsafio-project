@@ -84,4 +84,6 @@ public final class ComercioEstatua implements Merchant {
    public boolean isClientSide() {
       return false;
    }
+
+   public boolean stillValid(net.minecraft.world.entity.player.Player p_) { return true; }
 }

@@ -41,7 +41,6 @@ public final class PuertaBunker {
             .strength(-1.0F, 3600000.0F)
             .noLootTable()
             .noOcclusion()
-            .isViewBlocking((st, lv, p) -> false)
             .isSuffocating((st, lv, p) -> false)
             .pushReaction(PushReaction.IMMOVEABLE)
       )

@@ -25,7 +25,7 @@ import net.ruleta.client.ui.UiBoton;
 import net.ruleta.tragamonedas.client.PantallaPanel;
 
 public class LanzadorRuleta extends Screen {
-   public static final KeyMapping ABRIR = new KeyMapping("key.ruleta.lanzador", Type.KEYSYM, 71, "key.categories.ruleta");
+   public static final KeyMapping ABRIR = new KeyMapping("key.ruleta.lanzador", Type.KEYBOARD, 71, net.minecraft.client.KeyMapping.Category.MISC);
    private static final float RADIO = 214.0F;
    private static final float CRECE = 1.12F;
    private static final int Y_BOTON = 50;

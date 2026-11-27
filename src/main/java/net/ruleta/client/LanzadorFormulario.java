@@ -427,7 +427,7 @@ public class LanzadorFormulario extends Screen {
          this.setTooltip(Tooltip.create(Component.literal(ayuda)));
       }
 
-      public void onPress() {
+      public void onPress(net.minecraft.client.input.InputWithModifiers in_) {
          this.activo = !this.activo;
          this.alCambiar.accept(this.activo);
       }
@@ -472,7 +472,7 @@ public class LanzadorFormulario extends Screen {
          this.alPulsar = alPulsar;
       }
 
-      public void onPress() {
+      public void onPress(net.minecraft.client.input.InputWithModifiers in_) {
          this.alPulsar.run();
       }
 
@@ -552,7 +552,7 @@ public class LanzadorFormulario extends Screen {
          this.setTooltip(Tooltip.create(Component.literal(ayuda)));
       }
 
-      public void onPress() {
+      public void onPress(net.minecraft.client.input.InputWithModifiers in_) {
          this.alPulsar.run();
       }
 

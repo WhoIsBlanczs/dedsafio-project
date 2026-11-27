@@ -19,7 +19,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.ruleta.Mensajes;
 
 public final class AvisoHud {
-   public static final KeyMapping OCULTAR = new KeyMapping("key.ruleta.ocultar_aviso", Type.KEYSYM, 79, "key.categories.ruleta");
+   public static final KeyMapping OCULTAR = new KeyMapping("key.ruleta.ocultar_aviso", Type.KEYBOARD, 79, net.minecraft.client.KeyMapping.Category.MISC);
    private static final int X = 10;
    private static final int Y = 10;
    private static final int ANCHO = 240;

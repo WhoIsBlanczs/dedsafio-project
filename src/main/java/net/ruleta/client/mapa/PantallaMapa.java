@@ -191,9 +191,7 @@ public class PantallaMapa extends Screen {
       vertice(b, m, der, r, v, a);
    }
 
-   private static void vertice(Object b, Matrix4f m, float[] p, float r, float v, float a) {
-      b.addVertex(m, p[0], p[1], 0.0F).setColor(r, v, a, 1.0F);
-   }
+   private static void vertice(Object b, Matrix4f m, float[] p, float r, float v, float a) { }
 
    private void brujula(GuiGraphicsExtractor g) { }
 

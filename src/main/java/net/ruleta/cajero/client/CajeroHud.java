@@ -23,7 +23,7 @@ public final class CajeroHud {
    @SubscribeEvent
    public static void dibujar(RenderGuiEvent.Post e) {
       Minecraft mc = Minecraft.getInstance();
-      if (mc.player != null && !mc.options.hideGui) {
+      if (mc.player != null && true) {
          GuiGraphicsExtractor g = e.getGuiGraphics();
          Font f = mc.font;
          long[] p = CajeroCliente.partes(CajeroCliente.saldo);

@@ -12,7 +12,7 @@ public final class MeteoritosMod {
    public static final Reg<EntityType<MeteoritoEntity>> METEORITO = Reg.entidadFabric(
       "ruleta",
       "meteorito",
-      k -> net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType.Builder.create(MeteoritoEntity::new, MobCategory.MISC).sized(2.0F, 2.0F).trackRangeChunks(28).trackedUpdateRate(1).forceTrackedVelocityUpdates(true).fireImmune().noSave().build(k)
+      k -> net.minecraft.world.entity.EntityType.Builder.of(MeteoritoEntity::new, MobCategory.MISC).sized(2.0F, 2.0F).clientTrackingRange(28).updateInterval(1).fireImmune().noSave().build(k)
    );
    public static final Reg<Item> PALO = Reg.item(
       "ruleta", "palo_meteorito", () -> new PaloMeteorito(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC))

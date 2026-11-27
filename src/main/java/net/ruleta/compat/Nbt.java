@@ -14,9 +14,9 @@ public final class Nbt {
 
    public static void editar(Creeper c, Consumer<CompoundTag> cambios) {
       TagValueOutput out = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, c.level().registryAccess());
-      c.addAdditionalSaveData(out);
+      c.saveWithoutId(out);
       CompoundTag tag = out.buildResult();
       cambios.accept(tag);
-      c.readAdditionalSaveData(TagValueInput.create(ProblemReporter.DISCARDING, c.level().registryAccess(), tag));
+      c.load(TagValueInput.create(ProblemReporter.DISCARDING, c.level().registryAccess(), tag));
    }
 }

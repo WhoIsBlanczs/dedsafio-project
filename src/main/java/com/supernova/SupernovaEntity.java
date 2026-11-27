@@ -260,4 +260,6 @@ public class SupernovaEntity extends Entity {
       tag.putFloat("MaxRadius", this.getMaxRadius());
       tag.putInt("HoldTicks", this.getHoldTicks());
    }
+
+   public boolean hurtServer(net.minecraft.server.level.ServerLevel lvl_, DamageSource f_, float c_) { return false; }
 }

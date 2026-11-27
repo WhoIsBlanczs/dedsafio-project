@@ -8,7 +8,7 @@ import net.ruleta.client.compat.TickEvent;
 import net.ruleta.client.dedsafio.DedsafioCielo;
 
 public final class MapaCliente {
-   public static final KeyMapping TECLA = new KeyMapping("key.ruleta.mapa", Type.KEYSYM, 77, "key.categories.ruleta");
+   public static final KeyMapping TECLA = new KeyMapping("key.ruleta.mapa", Type.KEYBOARD, 77, net.minecraft.client.KeyMapping.Category.MISC);
 
    private MapaCliente() {
    }

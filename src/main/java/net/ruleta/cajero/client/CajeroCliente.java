@@ -54,7 +54,7 @@ public final class CajeroCliente {
    }
 
    public static void respuesta(boolean ok, String clave) {
-      if (Minecraft.getInstance().screen instanceof PantallaCajero p) {
+      if (Minecraft.getInstance().gui.screen() instanceof PantallaCajero p) {
          p.recibirRespuesta(ok, clave);
       }
    }

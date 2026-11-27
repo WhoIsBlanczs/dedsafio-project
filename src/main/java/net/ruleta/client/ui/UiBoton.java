@@ -59,7 +59,7 @@ public class UiBoton extends AbstractButton {
       this.marcado = m;
    }
 
-   public void onPress() {
+   public void onPress(net.minecraft.client.input.InputWithModifiers in_) {
       this.pulso.fijar(1.0F);
       this.alPulsar.run();
    }
@@ -68,7 +68,7 @@ public class UiBoton extends AbstractButton {
       sm.play(SimpleSoundInstance.forUI((SoundEvent)SoundEvents.UI_BUTTON_CLICK.value(), 1.25F, 0.55F));
    }
 
-   protected void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
+   protected void extractContents(GuiGraphicsExtractor g, int mx, int my, float pt) {
       Font f = Minecraft.getInstance().font;
       float h = this.hover.hacia(this.isHoveredOrFocused() && this.active ? 1.0F : 0.0F, 16.0F);
       float p = this.pulso.hacia(0.0F, 7.0F);

@@ -53,7 +53,6 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
    private static final VoxelShape LOSA_X = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
    private static boolean desmontando = false;
    private final boolean grande;
-   public static final MapCodec<PuertaBunkerBloque> CODEC = simpleCodec(props -> new PuertaBunkerBloque(props, false));
 
 
    public PuertaBunkerBloque(Properties props, boolean grande) {

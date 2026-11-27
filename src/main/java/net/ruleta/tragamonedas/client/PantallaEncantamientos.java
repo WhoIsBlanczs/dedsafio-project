@@ -40,7 +40,7 @@ public class PantallaEncantamientos extends UiPantalla {
          Registry<Enchantment> reg = nivel.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
 
          for (Identifier k : reg.keySet()) {
-            Enchantment e = (Enchantment)reg.get(k);
+            Enchantment e = reg.get(k).map(h_ -> h_.value()).orElse(null);
             if (e != null) {
                this.todos.add(new PantallaEncantamientos.Info(k.toString(), e.description().getString(), e.getMaxLevel()));
             }
