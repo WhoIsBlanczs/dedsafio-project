@@ -14,6 +14,5 @@ jobs:
         run: |
           MC=$(find ~/.gradle .gradle -name '*.jar' -size +10M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q 'net/minecraft/client/Minecraft.class' && echo "$j"; done | head -1)
           echo "MC=$MC"
-          unzip -Z1 "$MC" | grep -iE 'gui/.*Face|PlayerSkinRenderCache|SkinManager' | head -30
-          for c in net.minecraft.client.gui.components.PlayerFaceExtractor net.minecraft.client.gui.components.PlayerFaceRenderer net.minecraft.client.multiplayer.PlayerInfo; do echo "=== $c"; javap -cp "$MC" "$c" 2>&1 | grep -iE "class |static|Skin|public" | head -40; done
-          javap -cp "$MC" net.minecraft.server.MinecraftServer | grep -iE "CommandSource|getCommands"; javap -cp "$MC" net.minecraft.client.gui.GuiGraphicsExtractor | grep -iE 'blit|item\\(|text\\(' | head -30
+          javap -cp "$MC" -constants com.mojang.blaze3d.platform.InputConstants | grep -iE "MOUSE|KEY_G " | head -20
+          javap -cp "$MC" net.minecraft.client.input.MouseButtonEvent net.minecraft.client.input.MouseButtonInfo net.minecraft.client.input.InputWithModifiers 2>&1 | head -60
