@@ -32,6 +32,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: menu-g-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
           name: Ruleta Menú G 26.3 (build ${{ github.run_number }})
           body: |
             Mod del menú G de la Ruleta para Minecraft 26.3 (Fabric).
