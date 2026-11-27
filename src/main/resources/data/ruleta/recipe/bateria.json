@@ -7,15 +7,9 @@
     "PDP"
   ],
   "key": {
-    "P": {
-      "item": "ruleta:piedra_dilitio"
-    },
-    "D": {
-      "item": "ruleta:dilitio"
-    },
-    "N": {
-      "item": "minecraft:netherite_scrap"
-    }
+    "P": "ruleta:piedra_dilitio",
+    "D": "ruleta:dilitio",
+    "N": "minecraft:netherite_scrap"
   },
   "result": {
     "id": "ruleta:bateria"

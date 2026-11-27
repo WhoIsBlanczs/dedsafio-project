@@ -7,15 +7,9 @@
     "N  "
   ],
   "key": {
-    "D": {
-      "item": "ruleta:dilitio"
-    },
-    "B": {
-      "item": "ruleta:bateria"
-    },
-    "N": {
-      "item": "minecraft:netherite_ingot"
-    }
+    "D": "ruleta:dilitio",
+    "B": "ruleta:bateria",
+    "N": "minecraft:netherite_ingot"
   },
   "result": {
     "id": "ruleta:linterna"
