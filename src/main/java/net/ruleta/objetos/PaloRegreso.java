@@ -43,7 +43,7 @@ public class PaloRegreso extends Item {
    }
 
    public static void regresar(ServerPlayer p) {
-      MinecraftServer server = p.getServer();
+      MinecraftServer server = p.level().getServer();
       if (server != null) {
          TeleportTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, TeleportTransition.DO_NOTHING);
          if (!sitio.missingRespawnBlock()) {

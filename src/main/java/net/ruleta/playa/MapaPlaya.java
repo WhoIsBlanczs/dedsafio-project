@@ -208,8 +208,8 @@ public final class MapaPlaya {
    }
 
    private static boolean aterrizaje(ServerLevel nivel, ServerPlayer j, long limite) {
-      int px = j.chunkPosition().x;
-      int pz = j.chunkPosition().z;
+      int px = j.chunkPosition().x();
+      int pz = j.chunkPosition().z();
 
       for (int[] o : ATERRIZAJE) {
          int cx = px + o[0];

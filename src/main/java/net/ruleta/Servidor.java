@@ -126,7 +126,7 @@ public final class Servidor {
          Luces.alSalir(jugador);
          CosmeticosServidor.alSalir(jugador);
       });
-      ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((AfterPlayerChange)(jugador, origen, destino) -> {
+      net.fabricmc.fabric.api.entity.event.v1.ServerEntityLevelChangeEvents.AFTER_PLAYER_CHANGE_LEVEL.register((AfterPlayerChange)(jugador, origen, destino) -> {
          Luces.alCambiarDimension(jugador);
          SupernovaEvents.onDimension(jugador);
       });

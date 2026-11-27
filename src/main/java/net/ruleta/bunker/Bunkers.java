@@ -154,7 +154,7 @@ public final class Bunkers {
       if (!nombre.isEmpty() && nombre.length() <= 32) {
          BlockPos pie = p.blockPosition();
          BlockPos esquina = pie.offset(-48, 0, -49);
-         String malo = motivoCerca(p.getServer(), p.level().dimension().location().toString(), esquina);
+         String malo = motivoCerca(p.level().getServer(), p.level().dimension().identifier().toString(), esquina);
          if (malo != null) {
             ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
             return 0;
@@ -192,7 +192,7 @@ public final class Bunkers {
          return 0;
       }
 
-      MinecraftServer server = p.getServer();
+      MinecraftServer server = p.level().getServer();
       ServerLevel nivel = server.getLevel(pe.dimension());
       if (nivel == null) {
          return 0;
@@ -200,7 +200,7 @@ public final class Bunkers {
 
       Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
       if (!t.isEmpty() && mascaras(nivel)) {
-         String malo = motivoCerca(server, nivel.dimension().location().toString(), pe.esquina());
+         String malo = motivoCerca(server, nivel.dimension().identifier().toString(), pe.esquina());
          if (malo != null) {
             ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
             return 0;
@@ -266,11 +266,11 @@ public final class Bunkers {
    @Nullable
    static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
       if (!nivel.getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
-         if (motivoCerca(nivel.getServer(), nivel.dimension().location().toString(), esquina) != null) {
+         if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
             return null;
          }
 
-         Bunkers.Bunker b = new Bunkers.Bunker(nombre, nivel.dimension().location().toString(), esquina.getX(), esquina.getY(), esquina.getZ());
+         Bunkers.Bunker b = new Bunkers.Bunker(nombre, nivel.dimension().identifier().toString(), esquina.getX(), esquina.getY(), esquina.getZ());
          OBRAS.add(new Object[]{new Terreno.Obra(nivel, esquina, ocupado), b, alTerminar});
          return b;
       } else {

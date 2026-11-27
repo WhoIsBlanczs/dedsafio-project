@@ -377,8 +377,8 @@ public class Ruleta {
    }
 
    static void desactivarCambio(ServerPlayer jugador, String id) {
-      if (jugador != null && jugador.getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-         MinecraftServer server = jugador.getServer();
+      if (jugador != null && jugador.level().getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+         MinecraftServer server = jugador.level().getServer();
          Ruleta.DificultadDatos d = cambios(server);
          if (d.activo(id)) {
             d.desactivar(id);

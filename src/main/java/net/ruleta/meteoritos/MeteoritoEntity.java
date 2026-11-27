@@ -75,7 +75,7 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
       double alto = objetivo.y + 345.0 + r.nextDouble() * 10.0;
       lado = Math.min(lado, alto / Math.tan(Math.toRadians(37.0 + r.nextDouble() * 6.0)));
       Vec3 desde = new Vec3(base.x + Math.cos(az) * lado, alto, base.z + Math.sin(az) * lado);
-      m.moveTo(desde.x, desde.y, desde.z, 0.0F, 0.0F);
+      m.snapTo(desde.x, desde.y, desde.z, 0.0F, 0.0F);
       m.setDeltaMovement(objetivo.subtract(desde).normalize().scale(2.6));
       m.entityData.set(TAMANO, tamanoAlAzar(r));
       nivel.addFreshEntity(m);

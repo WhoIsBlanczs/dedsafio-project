@@ -494,7 +494,7 @@ public final class ComandoTornado {
       List<TornadoPayload.Torn> l = new ArrayList<>();
 
       for (ComandoTornado.Tornado t : LISTA) {
-         l.add(new TornadoPayload.Torn(t.id, new Vec3(t.x, t.y, t.z), t.radio, t.alto, (float)t.vx, (float)t.vz, t.edad, t.dim.location().toString()));
+         l.add(new TornadoPayload.Torn(t.id, new Vec3(t.x, t.y, t.z), t.radio, t.alto, (float)t.vx, (float)t.vz, t.edad, t.dim.identifier().toString()));
       }
 
       int[] ids = new int[CAPTURAS.size()];
