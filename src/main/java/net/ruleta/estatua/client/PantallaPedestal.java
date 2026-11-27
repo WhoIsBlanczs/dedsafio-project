@@ -95,21 +95,7 @@ public class PantallaPedestal extends UiPantalla {
       }
    }
 
-   private void nuevoComercio() {
-      if (this.cfg.tratos.size() >= 40) {
-         this.aviso("Máximo 40 comercios");
-      } else {
-         this.elegirItem(da -> Minecraft.getInstance().setScreen(new PantallaSelectorItem(this, recibe -> {
-            if (ConfigTragamonedas.itemExiste(da) && ConfigTragamonedas.itemExiste(recibe)) {
-               this.cfg.tratos.add(new ConfigPedestal.Trato(da, 1, recibe, 1));
-               this.sucio = true;
-               this.reconstruir();
-            } else {
-               this.aviso("Ese item no existe");
-            }
-         })));
-      }
-   }
+   private void nuevoComercio() { }
 
    private static ItemStack pila(String id) {
       Item item = ConfigPedestal.item(id);

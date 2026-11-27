@@ -18,7 +18,5 @@ public class DeditaItem extends Item {
       this.color = color;
    }
 
-   public Component getName(ItemStack pila) {
-      return Component.translatable(this.getDescriptionId(pila)).withStyle(this.color);
-   }
+   public Component getName(ItemStack pila) { return null; }
 }

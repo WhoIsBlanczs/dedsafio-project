@@ -37,17 +37,7 @@ public class PantallaEclipse extends UiPantalla {
       };
    }
 
-   private UiCampo caja(int i, int x, int y, int w) {
-      UiCampo e = new UiCampo(this.font, x, y, w, 24, Component.literal("Tiempo"));
-      e.setMaxLength(8);
-      e.setFilter(t -> t.matches("[0-9:]*"));
-      e.setValue(this.guardado[i] != null ? this.guardado[i] : Ui.mmss(porDefecto(i)));
-      e.malo(() -> {
-         String v = e.getValue().trim();
-         return !v.isEmpty() && !LanzadorFormulario.tiempoValido(v);
-      });
-      return (UiCampo)this.addRenderableWidget(e);
-   }
+   private UiCampo caja(int i, int x, int y, int w) { return null; }
 
    protected void init() {
       for (int i = 0; i < 5; i++) {

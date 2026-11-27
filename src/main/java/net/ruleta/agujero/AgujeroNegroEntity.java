@@ -106,9 +106,7 @@ public class AgujeroNegroEntity extends Entity {
       return false;
    }
 
-   public boolean hurt(DamageSource fuente, float cantidad) {
-      return false;
-   }
+   public boolean hurt(DamageSource fuente, float cantidad) { return false; }
 
    public boolean shouldRenderAtSqrDistance(double distancia) {
       return true;

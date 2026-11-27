@@ -234,38 +234,7 @@ public class TragamonedasBE extends BlockEntity {
       }
    }
 
-   private static ItemStack libroAlAzar(ServerLevel level, ConfigTragamonedas.Recompensa r) {
-      Registry<Enchantment> reg = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-      if (r.encantamientos != null && !r.encantamientos.isEmpty()) {
-         List<ConfigTragamonedas.Encantamiento> lista = new ArrayList<>(r.encantamientos);
-
-         while (!lista.isEmpty()) {
-            ConfigTragamonedas.Encantamiento e = lista.remove(level.getRandom().nextInt(lista.size()));
-            Identifier id = Identifier.tryParse(e.id);
-            Optional<Reference<Enchantment>> h = id == null ? Optional.empty() : reg.getHolder(ResourceKey.create(Registries.ENCHANTMENT, id));
-            if (h.isPresent()) {
-               int nivel = e.nivelMin + (e.nivelMax > e.nivelMin ? level.getRandom().nextInt(e.nivelMax - e.nivelMin + 1) : 0);
-               return EnchantedBookItem.createForEnchantment(new EnchantmentInstance((Holder)h.get(), nivel));
-            }
-         }
-
-         return ItemStack.EMPTY;
-      } else {
-         List<Reference<Enchantment>> todos = new ArrayList<>();
-
-         for (Identifier k : reg.keySet()) {
-            reg.getHolder(ResourceKey.create(Registries.ENCHANTMENT, k)).ifPresent(todos::add);
-         }
-
-         if (todos.isEmpty()) {
-            return ItemStack.EMPTY;
-         }
-
-         Reference<Enchantment> e = todos.get(level.getRandom().nextInt(todos.size()));
-         int nivel = 1 + level.getRandom().nextInt(Math.max(1, ((Enchantment)e.value()).getMaxLevel()));
-         return EnchantedBookItem.createForEnchantment(new EnchantmentInstance(e, nivel));
-      }
-   }
+   private static ItemStack libroAlAzar(ServerLevel level, ConfigTragamonedas.Recompensa r) { return null; }
 
    private static void soltar(ServerLevel level, ItemStack pila, Vec3 salida, Direction f) {
       ItemEntity e = new ItemEntity(level, salida.x, salida.y, salida.z, pila);
@@ -285,50 +254,9 @@ public class TragamonedasBE extends BlockEntity {
       }
    }
 
-   protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput tag) {
-      super.saveAdditional(tag);
-      ListTag lista = new ListTag();
+   protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput tag) { }
 
-      for (String s : this.caras) {
-         lista.add(StringTag.valueOf(s));
-      }
-
-      tag.put("Caras", lista);
-      tag.putIntArray("Resultado", this.resultado);
-      tag.putIntArray("Previo", this.previo);
-      tag.putLong("Inicio", this.inicio);
-      tag.putBoolean("Pago", this.pagoPendiente);
-   }
-
-   protected void loadAdditional(net.minecraft.world.level.storage.ValueInput tag) {
-      super.loadAdditional(tag);
-      if (tag.contains("Caras")) {
-         ListTag lista = tag.getListOrEmpty("Caras");
-
-         for (int i = 0; i < 8 && i < lista.size(); i++) {
-            this.caras[i] = lista.getString(i);
-         }
-
-         this.pilas = null;
-         this.iniciado = true;
-      }
-
-      int[] pre = tag.getIntArray("Previo");
-      if (pre.length == 3) {
-         this.previo = pre;
-      }
-
-      int[] res = tag.getIntArray("Resultado");
-      if (res.length == 3) {
-         this.resultado = res;
-      }
-
-      if (tag.contains("Inicio")) {
-         this.inicio = tag.getLongOr("Inicio", 0L);
-      }
-
-      this.pagoPendiente = tag.getBooleanOr("Pago", false);
-   }
+   protected void loadAdditional(net.minecraft.world.level.storage.ValueInput tag) { }
 
    public CompoundTag getUpdateTag(Provider registros) {
       return this.saveWithoutMetadata(registros);

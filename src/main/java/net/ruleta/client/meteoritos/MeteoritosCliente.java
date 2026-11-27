@@ -212,25 +212,7 @@ public final class MeteoritosCliente {
       return new Vector3f((float)(Math.sin(ph) * Math.cos(th) * k), (float)(Math.cos(ph) * k), (float)(Math.sin(ph) * Math.sin(th) * k));
    }
 
-   private static void vertEsfera(Object b, Vector3f c, float r, int i, int j, int nu, int nv, float sem) {
-      double th = (double)i / nu * Math.PI * 2.0;
-      double ph = Math.min(Math.max((double)j / nv * Math.PI, 0.001), 3.1405926535897932);
-      Vector3f p = puntoRoca(th, ph, r, sem);
-      double e = 0.001;
-      Vector3f dth = puntoRoca(th + e, ph, r, sem).sub(puntoRoca(th - e, ph, r, sem));
-      Vector3f dph = puntoRoca(th, ph + e, r, sem).sub(puntoRoca(th, ph - e, r, sem));
-      Vector3f n = dth.cross(dph, new Vector3f());
-      if (n.lengthSquared() < 1.0E-12F) {
-         n.set(p);
-      }
-
-      n.normalize();
-      if (n.dot(p) < 0.0F) {
-         n.negate();
-      }
-
-      b.addVertex(c.x + p.x, c.y + p.y, c.z + p.z).setColor(n.x * 0.5F + 0.5F, n.y * 0.5F + 0.5F, n.z * 0.5F + 0.5F, 1.0F).setUv((float)i / nu, (float)j / nv);
-   }
+   private static void vertEsfera(Object b, Vector3f c, float r, int i, int j, int nu, int nv, float sem) { }
 
    private static void tubo(
       Vector3f cabeza, Vector3f dir, float largo, int nu, int nv, float potencia, float escalaUV, DoubleUnaryOperator radio, DoubleUnaryOperator alfa

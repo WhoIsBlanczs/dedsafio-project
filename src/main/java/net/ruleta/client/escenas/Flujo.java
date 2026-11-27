@@ -75,19 +75,7 @@ public final class Flujo {
       return this.subido;
    }
 
-   private void subir(NativeImage img) {
-      if (this.textura == null) {
-         this.textura = new DynamicTexture(this.ancho, this.alto, false);
-         this.textura.setFilter(true, false);
-         Minecraft.getInstance().getTextureManager().register(this.id, this.textura);
-      }
-
-      NativeImage destino = this.textura.getPixels();
-      if (destino != null && img.getWidth() == this.ancho && img.getHeight() == this.alto) {
-         destino.copyFrom(img);
-         this.textura.upload();
-      }
-   }
+   private void subir(NativeImage img) { }
 
    private void pedir(int n) {
       this.pedido = n;
@@ -95,19 +83,7 @@ public final class Flujo {
       this.lectura = CompletableFuture.supplyAsync(() -> leer(ruta), LECTOR);
    }
 
-   private static NativeImage leer(Identifier ruta) {
-      Optional<Resource> r = Minecraft.getInstance().getResourceManager().getResource(ruta);
-      if (r.isEmpty()) {
-         return null;
-      }
-
-      try (InputStream in = r.get().open()) {
-         return NativeImage.read(Format.RGBA, in);
-      } catch (Exception ex) {
-         LOG.warn("No se pudo leer el cuadro {}", ruta, ex);
-         return null;
-      }
-   }
+   private static NativeImage leer(Identifier ruta) { return null; }
 
    public void soltar() {
       if (this.lectura != null) {

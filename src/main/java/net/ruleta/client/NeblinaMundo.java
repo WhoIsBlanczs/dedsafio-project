@@ -25,20 +25,7 @@ public final class NeblinaMundo {
    }
 
    @SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
-   public static void alNiebla(ViewportEvent.RenderFog e) {
-      if (e.getMode() == FogMode.FOG_TERRAIN) {
-         float rojo = rojo();
-         float azul = azul();
-         float k = Math.max(rojo, azul);
-         if (!(k <= 0.01F)) {
-            float lejos = e.getFarPlaneDistance();
-            float meta = Math.max(56.0F, lejos * (rojo > azul ? 0.42F : 0.36F));
-            e.setFarPlaneDistance(Mth.lerp(k * 0.85F, lejos, Math.min(lejos, meta)));
-            e.setNearPlaneDistance(Mth.lerp(k, e.getNearPlaneDistance(), 0.0F));
-            e.setCanceled(true);
-         }
-      }
-   }
+   public static void alNiebla(ViewportEvent.RenderFog e) { }
 
    @SubscribeEvent(priority = EventPriority.HIGH)
    public static void alDibujarGui(RenderGuiEvent.Pre e) {

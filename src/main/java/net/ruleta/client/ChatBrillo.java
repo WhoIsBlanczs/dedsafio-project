@@ -25,45 +25,7 @@ public final class ChatBrillo {
    }
 
    @SubscribeEvent
-   public static void alChat(RenderGuiEvent.Pre e) {
-      try {
-         ChatComponent chat = Minecraft.getInstance().gui.getChat();
-         if (!buscado) {
-            buscado = true;
-
-            for (Field f : ChatComponent.class.getDeclaredFields()) {
-               if (List.class.isAssignableFrom(f.getType())
-                  && f.getGenericType() instanceof ParameterizedType pt
-                  && pt.getActualTypeArguments().length == 1
-                  && pt.getActualTypeArguments()[0] == Line.class) {
-                  f.setAccessible(true);
-                  lineas = f;
-                  break;
-               }
-            }
-         }
-
-         if (lineas == null) {
-            return;
-         }
-
-         List<Line> lista = (List<Line>)lineas.get(chat);
-
-         for (int i = 0; i < lista.size(); i++) {
-            Line ln = lista.get(i);
-            FormattedCharSequence c = ln.content();
-            if (!(c instanceof ChatBrillo.Titulo) && !VISTAS.containsKey(c)) {
-               VISTAS.put(c, Boolean.TRUE);
-               ChatBrillo.Titulo t = ChatBrillo.Titulo.de(c);
-               if (t != null) {
-                  lista.set(i, new Line(ln.addedTime(), t, ln.tag(), ln.endOfEntry()));
-               }
-            }
-         }
-      } catch (Throwable ex) {
-         lineas = null;
-      }
-   }
+   public static void alChat(RenderGuiEvent.Pre e) { }
 
    private static final class Titulo implements FormattedCharSequence {
       private final int[] cps;
@@ -78,31 +40,7 @@ public final class ChatBrillo {
          this.n = n;
       }
 
-      static ChatBrillo.Titulo de(FormattedCharSequence c) {
-         List<int[]> cps = new ArrayList<>();
-         List<Style> estilos = new ArrayList<>();
-         c.accept((i, estilo, cpx) -> {
-            cps.add(new int[]{cpx});
-            estilos.add(estilo);
-            return true;
-         });
-         if (!cps.isEmpty() && cps.get(0)[0] == 57344) {
-            int base = Mensajes.baseDeFuente(estilos.get(0).getFont());
-            if (base < 0) {
-               return null;
-            }
-
-            int[] cp = new int[cps.size()];
-
-            for (int k = 0; k < cp.length; k++) {
-               cp[k] = cps.get(k)[0];
-            }
-
-            return new ChatBrillo.Titulo(cp, estilos.toArray(new Style[0]), base, Math.max(1, cp.length - 2));
-         } else {
-            return null;
-         }
-      }
+      static ChatBrillo.Titulo de(FormattedCharSequence c) { return null; }
 
       public boolean accept(FormattedCharSink sink) {
          for (int k = 0; k < this.cps.length; k++) {

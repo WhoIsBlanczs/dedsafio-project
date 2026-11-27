@@ -1,8 +1,6 @@
 package net.ruleta.client.dedsafio;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
@@ -237,14 +235,7 @@ public final class HudDedsafio {
 
    private static void mascara(GuiGraphicsExtractor g, int w, int h, float aper, float blanco) { }
 
-   private static void quad(Object bb, Matrix4f m, float x0, float y0, float x1, float y1, float aIzq, float aDer) {
-      if (!(x1 - x0 < 0.01F)) {
-         bb.addVertex(m, x0, y0, 0.0F).setColor(0.0F, 0.0F, 0.0F, aIzq);
-         bb.addVertex(m, x0, y1, 0.0F).setColor(0.0F, 0.0F, 0.0F, aIzq);
-         bb.addVertex(m, x1, y1, 0.0F).setColor(0.0F, 0.0F, 0.0F, aDer);
-         bb.addVertex(m, x1, y0, 0.0F).setColor(0.0F, 0.0F, 0.0F, aDer);
-      }
-   }
+   private static void quad(Object bb, Matrix4f m, float x0, float y0, float x1, float y1, float aIzq, float aDer) { }
 
    private static void subtitulos(GuiGraphicsExtractor g, Minecraft mc, int w, int h) {
       String texto = EscenaDedsafio.subtitulo();

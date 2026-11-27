@@ -17,9 +17,7 @@ final class Vtx {
 
    static Object quads() { return null; }
 
-   static void v(Object b, float x, float y, float z, float u, float w) {
-      b.addVertex(x, y, z).setUv(u, w);
-   }
+   static void v(Object b, float x, float y, float z, float u, float w) { }
 
    static void dibujar(Object b) { }
 

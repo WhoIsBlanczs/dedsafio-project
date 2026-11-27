@@ -23,22 +23,7 @@ public final class EscenaServidor {
    private EscenaServidor() {
    }
 
-   public static void registrar() {
-      PayloadTypeRegistry.clientboundPlay().register(EscenaPayload.TYPE, EscenaPayload.CODEC);
-      PayloadTypeRegistry.serverboundPlay().register(DulceAzarAccionPayload.TYPE, DulceAzarAccionPayload.CODEC);
-      ServerPlayNetworking.registerGlobalReceiver(DulceAzarAccionPayload.TYPE, (m, ctx) -> PanelDulceAzar.recibir(ctx.player(), m));
-      ServerEntityWorldChangeEvents.AFTER_PLAYER_CHANGE_WORLD.register((AfterPlayerChange)(jugador, origen, destino) -> alEntrar(jugador));
-      ServerPlayConnectionEvents.JOIN.register((Join)(manejador, emisor, servidor) -> alEntrar(manejador.getPlayer()));
-      ServerLifecycleEvents.SERVER_STOPPED.register((ServerStopped)servidor -> {
-         inicioNs = -1L;
-         ComandoDedsafio.reiniciar();
-         OlaServidor.reiniciar();
-      });
-      ServerTickEvents.END_SERVER_TICK.register(ComandoDedsafio::tick);
-      ProteccionDedsafio.registrar();
-      ConstructorPlaya.registrar();
-      MapaPlaya.registrar();
-   }
+   public static void registrar() { }
 
    public static void enviar(ServerPlayer p, EscenaPayload m) {
       ServerPlayNetworking.send(p, m);

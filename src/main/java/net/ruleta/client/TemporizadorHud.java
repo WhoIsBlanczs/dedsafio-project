@@ -38,30 +38,5 @@ public final class TemporizadorHud {
       return saliendo;
    }
 
-   static void render(GuiGraphicsExtractor ctx, Font tr) {
-      if (finNanos >= 0L) {
-         if (!saliendo && System.nanoTime() >= finNanos) {
-            saliendo = true;
-         }
-
-         float k = fundido.avanzar(!saliendo && !HudCliente.tapado() && OpcionesCliente.temporizador);
-         if (saliendo && fundido.apagado()) {
-            limpiar();
-         } else {
-            int alfa = Math.round(k * 255.0F);
-            if (alfa >= 4) {
-               long quedanNs = finNanos - System.nanoTime();
-               int quedan = (int)Math.max(0L, (quedanNs + 999999999L) / 1000000000L);
-               String txt = quedan >= 3600
-                  ? String.format("%d:%02d:%02d", quedan / 3600, quedan / 60 % 60, quedan % 60)
-                  : String.format("%02d:%02d", quedan / 60, quedan % 60);
-               PoseStack m = ctx.pose();
-               m.pushPose();
-               m.translate(0.0F, 0.0F, 2951.0F);
-               ctx.centeredText(tr, txt, ctx.guiWidth() / 2, 6, alfa << 24 | (quedan <= 10 ? 16733525 : 16777215));
-               m.popPose();
-            }
-         }
-      }
-   }
+   static void render(GuiGraphicsExtractor ctx, Font tr) { }
 }

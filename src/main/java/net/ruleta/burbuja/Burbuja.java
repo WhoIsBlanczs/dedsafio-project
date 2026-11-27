@@ -83,9 +83,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
       return !fuente.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
    }
 
-   public boolean hurt(DamageSource fuente, float cantidad) {
-      return false;
-   }
+   public boolean hurt(DamageSource fuente, float cantidad) { return false; }
 
    public boolean isAttackable() {
       return false;
@@ -190,54 +188,9 @@ public class Burbuja extends Entity implements ExplosionInmune {
       this.setPos(this.getX() + delta.x, this.getY() + delta.y, this.getZ() + delta.z);
    }
 
-   public void tick() {
-      super.tick();
-      if (this.level().isClientSide()) {
-         if (this.isControlledByLocalInstance()) {
-            this.pasos = 0;
-            this.lx = this.getX();
-            this.ly = this.getY();
-            this.lz = this.getZ();
-            movimientoCliente.accept(this);
-         } else if (this.pasos > 0) {
-            double p = 1.0 / this.pasos;
-            this.setPos(this.getX() + (this.lx - this.getX()) * p, this.getY() + (this.ly - this.getY()) * p, this.getZ() + (this.lz - this.getZ()) * p);
-            this.pasos--;
-         }
-      } else if (this.getPassengers().isEmpty()) {
-         if (this.hubo) {
-            this.discard();
-         }
-      } else {
-         this.hubo = true;
-         if (this.tickCount % 10 != 0) {
-            return;
-         }
+   public void tick() { }
 
-         float mayor = 0.0F;
-
-         for (Entity e : this.getPassengers()) {
-            if (e instanceof Player p) {
-               mayor = Math.max(mayor, p.getDimensions(Pose.STANDING).height());
-            }
-         }
-
-         float d = Mth.clamp(mayor * 1.25F + 0.45F, 0.9F, 6.0F);
-         if (Math.abs(d - this.getDiametro()) > 0.01F) {
-            this.setDiametro(d);
-         }
-      }
-   }
-
-   public void lerpTo(double x, double y, double z, float yRot, float xRot, int pasos) {
-      if (!this.isControlledByLocalInstance()) {
-         this.lx = x;
-         this.ly = y;
-         this.lz = z;
-         this.pasos = 3;
-         this.setYRot(yRot);
-      }
-   }
+   public void lerpTo(double x, double y, double z, float yRot, float xRot, int pasos) { }
 
    protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput nbt) {
       if (nbt.contains("Propietario")) {

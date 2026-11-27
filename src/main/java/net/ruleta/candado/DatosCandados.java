@@ -20,10 +20,7 @@ public final class DatosCandados extends SavedData {
    private static final String NOMBRE = "ruleta_candados";
    private final Map<Long, DatosCandados.Candado> mapa = new HashMap<>();
 
-   public static DatosCandados de(ServerLevel nivel) {
-      return (DatosCandados)nivel.getDataStorage()
-         .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_candados"), DatosCandados::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> DatosCandados(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
-   }
+   public static DatosCandados de(ServerLevel nivel) { return null; }
 
    public DatosCandados.Candado obtener(BlockPos clave) {
       return this.mapa.get(clave.asLong());
@@ -45,54 +42,9 @@ public final class DatosCandados extends SavedData {
       }
    }
 
-   public static DatosCandados cargar(CompoundTag tag, Provider registros) {
-      DatosCandados d = new DatosCandados();
-      ListTag lista = tag.getListOrEmpty("Candados");
+   public static DatosCandados cargar(CompoundTag tag, Provider registros) { return null; }
 
-      for (int i = 0; i < lista.size(); i++) {
-         CompoundTag t = lista.getCompoundOrEmpty(i);
-         DatosCandados.Candado c = new DatosCandados.Candado();
-         c.propietario = t.contains("Dueno") ? t.read("Dueno", net.minecraft.core.UUIDUtil.CODEC).orElse(null) : null;
-         c.nombre = t.getStringOr("Nombre", "");
-         c.codigo = t.getStringOr("Codigo", "");
-         ListTag ab = t.getListOrEmpty("Abiertos");
-
-         for (int j = 0; j < ab.size(); j++) {
-            c.abiertos.add(NbtUtils.loadUUID(ab.get(j)));
-         }
-
-         d.mapa.put(t.getLongOr("Pos", 0L), c);
-      }
-
-      return d;
-   }
-
-   public CompoundTag save(CompoundTag tag, Provider registros) {
-      ListTag lista = new ListTag();
-
-      for (Entry<Long, DatosCandados.Candado> en : this.mapa.entrySet()) {
-         CompoundTag t = new CompoundTag();
-         t.putLong("Pos", en.getKey());
-         DatosCandados.Candado c = en.getValue();
-         if (c.propietario != null) {
-            t.store("Dueno", net.minecraft.core.UUIDUtil.CODEC, c.propietario);
-         }
-
-         t.putString("Nombre", c.nombre);
-         t.putString("Codigo", c.codigo);
-         ListTag ab = new ListTag();
-
-         for (UUID u : c.abiertos) {
-            ab.add(NbtUtils.createUUID(u));
-         }
-
-         t.put("Abiertos", ab);
-         lista.add(t);
-      }
-
-      tag.put("Candados", lista);
-      return tag;
-   }
+   public CompoundTag save(CompoundTag tag, Provider registros) { return null; }
 
    public static final class Candado {
       public UUID propietario;

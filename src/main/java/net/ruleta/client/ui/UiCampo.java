@@ -36,24 +36,7 @@ public class UiCampo extends EditBox {
       return this.oy;
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
-      if (this.active && this.visible && Ui.dentro(mx, my, this.ox, this.oy, this.ow, this.oh)) {
-         double cx = Math.max(this.getX(), Math.min(this.getX() + this.getWidth() - 1, mx));
-         return super.mouseClicked(cx, this.getY() + 1, boton);
-      } else {
-         return super.mouseClicked(mx, my, boton);
-      }
-   }
+   public boolean mouseClicked(double mx, double my, int boton) { return false; }
 
-   public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
-      float f = this.foco.hacia(this.isFocused() ? 1.0F : 0.0F, 14.0F);
-      boolean rojo = this.malo.getAsBoolean() && !this.getValue().isEmpty();
-      int borde = rojo ? 16735340 : Ui.mezcla(3028037, 7113983, f);
-      Ui.cajaBorde(g, this.ox, this.oy, this.ow, this.oh, 4, Ui.c(1711656), Ui.c(borde));
-      if (f > 0.02F) {
-         Ui.caja(g, this.ox + 4, this.oy + this.oh - 2, Math.round((this.ow - 8) * f), 1, 0, Ui.c(rojo ? 16735340 : 7113983));
-      }
-
-      super.renderWidget(g, mx, my, pt);
-   }
+   public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) { }
 }

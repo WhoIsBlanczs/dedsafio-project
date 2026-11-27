@@ -21,32 +21,7 @@ public final class BurbujaCliente {
    private BurbujaCliente() {
    }
 
-   static void mover(Burbuja b) {
-      if (b.getControllingPassenger() instanceof LocalPlayer p) {
-         Input var26 = p.input;
-         double yaw = Math.toRadians(p.getYRot());
-         double pitch = Math.toRadians(p.getXRot());
-         double f = var26.forwardImpulse;
-         double s = var26.leftImpulse;
-         double cp = Math.cos(pitch);
-         double wx = -Math.sin(yaw) * cp * f + Math.cos(yaw) * s;
-         double wy = -Math.sin(pitch) * f + (var26.jumping ? 0.7 : 0.0);
-         double wz = Math.cos(yaw) * cp * f + Math.sin(yaw) * s;
-         double largo = Math.sqrt(wx * wx + wy * wy + wz * wz);
-         if (largo > 1.0) {
-            wx /= largo;
-            wy /= largo;
-            wz /= largo;
-         }
-
-         double vel = 0.3;
-         Vec3 d = b.getDeltaMovement();
-         double k = 0.16;
-         b.setDeltaMovement(d.x + (wx * vel - d.x) * k, d.y + (wy * vel - d.y) * k, d.z + (wz * vel - d.z) * k);
-         b.setYRot(p.getYRot());
-         colisionar(b, 0.3F);
-      }
-   }
+   static void mover(Burbuja b) { }
 
    private static void colisionar(Burbuja b, float hundir) {
       Level nivel = b.level();

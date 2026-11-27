@@ -126,7 +126,5 @@ public final class BunkerMarcador {
       v(b, m, x1, y0, c);
    }
 
-   private static void v(Object b, Matrix4f m, float x, float y, int argb) {
-      b.addVertex(m, x, y, 0.0F).setColor(argb >> 16 & 0xFF, argb >> 8 & 0xFF, argb & 0xFF, argb >>> 24);
-   }
+   private static void v(Object b, Matrix4f m, float x, float y, int argb) { }
 }

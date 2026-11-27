@@ -64,55 +64,9 @@ public class HerobrineEntity extends Monster {
       this.goalSelector.addGoal(0, new FloatGoal(this));
    }
 
-   protected void customServerAiStep() {
-      super.customServerAiStep();
-      if (this.level() instanceof ServerLevel nivel) {
-         ServerPlayer presa = this.objetivo == null ? null : (ServerPlayer)nivel.getPlayerByUUID(this.objetivo);
-         if (this.objetivo == null || presa != null && presa.isAlive() && !presa.isSpectator() && !presa.isCreative()) {
-            if (presa == null) {
-               this.quieto(nivel);
-            } else {
-               this.cazar(nivel, presa);
-            }
-         } else {
-            this.desaparecer();
-         }
-      }
-   }
+   protected void customServerAiStep() { }
 
-   private void quieto(ServerLevel nivel) {
-      this.setSprinting(false);
-      this.getNavigation().stop();
-      this.setTarget(null);
-      double vision = Ajustes.entero("herobrine.vision");
-
-      for (ServerPlayer p : this.tickCount % 2 == 0 ? nivel.players() : List.of()) {
-         if (p.isAlive() && !p.isSpectator() && !p.isCreative() && this.distanceToSqr(p) < vision * vision && this.meMiraALosOjos(p)) {
-            this.elegir(p);
-            return;
-         }
-      }
-
-      if (--this.proximoGiro <= 0) {
-         this.proximoGiro = 40 + this.random.nextInt(120);
-         this.yawQuieto = this.random.nextFloat() * 360.0F;
-         this.pitchQuieto = (this.random.nextFloat() - 0.5F) * 40.0F;
-      }
-
-      this.setYRot(this.yawQuieto);
-      this.yBodyRot = this.yawQuieto;
-      this.yHeadRot = this.yawQuieto;
-      this.setXRot(this.pitchQuieto);
-      if (--this.proximoTp <= 0) {
-         this.proximoTp = this.siguienteTp();
-         Player cerca = nivel.getNearestPlayer(this, 128.0);
-         if (cerca != null && !cerca.isSpectator()) {
-            this.tpCercaDe(cerca, 10.0, 24.0);
-         } else {
-            this.tpAlAzar(16.0);
-         }
-      }
-   }
+   private void quieto(ServerLevel nivel) { }
 
    private int siguienteTp() {
       int min = Ajustes.entero("herobrine.tp_min");
@@ -216,9 +170,7 @@ public class HerobrineEntity extends Monster {
       }
    }
 
-   public boolean hurt(DamageSource fuente, float cantidad) {
-      return false;
-   }
+   public boolean hurt(DamageSource fuente, float cantidad) { return false; }
 
    public boolean isInvulnerableTo(DamageSource fuente) {
       return true;
@@ -248,24 +200,7 @@ public class HerobrineEntity extends Monster {
       return false;
    }
 
-   public boolean doHurtTarget(Entity victima) {
-      if (victima instanceof ServerPlayer p) {
-         this.swing(InteractionHand.MAIN_HAND);
-         if (p.isBlocking()) {
-            Vec3 hacia = this.position().vectorTo(p.position());
-            Vec3 plano = new Vec3(hacia.x, 0.0, hacia.z).normalize();
-            if (plano.dot(p.getViewVector(1.0F)) < 0.0) {
-               this.level().broadcastEntityEvent(p, (byte)29);
-               p.getUseItem().hurtAndBreak(1 + Mth.floor(dano()), p, LivingEntity.getSlotForHand(p.getUsedItemHand()));
-               return true;
-            }
-         }
-
-         return p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.herobrine", " fue asesinado por Herobrine"), dano());
-      } else {
-         return super.doHurtTarget(victima);
-      }
-   }
+   public boolean doHurtTarget(Entity victima) { return false; }
 
    private boolean tpCercaDe(Entity e, double min, double max) {
       for (int i = 0; i < 24; i++) {
@@ -295,32 +230,7 @@ public class HerobrineEntity extends Monster {
       return false;
    }
 
-   private boolean teletransportar(double x, double y, double z) {
-      MutableBlockPos pos = new MutableBlockPos(x, y, z);
-
-      while (pos.getY() > this.level().getMinY() && !this.level().getBlockState(pos).isSolid()) {
-         pos.move(0, -1, 0);
-      }
-
-      if (this.level().getBlockState(pos).isSolid() && !this.level().getBlockState(pos.above()).liquid()) {
-         if (this.level() instanceof ServerLevel sl && Bunkers.interiorDe(sl, pos.above()) != null) {
-            return false;
-         } else {
-            double ox = this.getX();
-            double oy = this.getY();
-            double oz = this.getZ();
-            boolean ok = this.randomTeleport(x, pos.getY() + 1, z, true);
-            if (ok) {
-               this.level().playSound(null, ox, oy, oz, SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 1.0F, 0.5F);
-               this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 0.5F);
-            }
-
-            return ok;
-         }
-      } else {
-         return false;
-      }
-   }
+   private boolean teletransportar(double x, double y, double z) { return false; }
 
    public void desaparecer() {
       if (this.level() instanceof ServerLevel nivel) {

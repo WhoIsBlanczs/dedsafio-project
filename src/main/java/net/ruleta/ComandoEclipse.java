@@ -136,42 +136,7 @@ public final class ComandoEclipse {
       return x * x * (3.0F - 2.0F * x);
    }
 
-   private static void hora(MinecraftServer server) {
-      if (horaInicio >= 0L) {
-         ServerLevel mundo = server.overworld();
-         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
-         boolean termina = false;
-         long hora;
-         if (cortadoEn >= 0L) {
-            float u = suave((float)(tick - cortadoEn) / 80.0F);
-            long destino = horaNormal();
-            termina = tick - cortadoEn >= 80L;
-            hora = termina ? destino : horaCortada + Math.round((float)corto(horaCortada, destino) * u);
-         } else {
-            float s = (float)(tick - desdeHora) / 20.0F;
-            float totalFin = 29.5F + totalidad;
-            if (s < 29.5F) {
-               long recorrido = corto(horaInicio, noche);
-               long saltoDias = noche - horaInicio - recorrido;
-               hora = horaInicio + saltoDias + Math.round((float)recorrido * suave(s / 29.5F));
-            } else if (s < totalFin) {
-               hora = noche;
-            } else {
-               long destino = horaNormal();
-               termina = s >= totalFin + 29.5F;
-               hora = termina ? destino : noche + Math.round((float)corto(noche, destino) * suave((s - totalFin) / 29.5F));
-            }
-         }
-
-         mundo.setDayTime(hora);
-         if (termina) {
-            horaInicio = -1L;
-            cortadoEn = -1L;
-         }
-
-         server.getPlayerList().broadcastAll(new ClientboundSetTimePacket(mundo.getGameTime(), hora, ciclo && termina), Level.OVERWORLD);
-      }
-   }
+   private static void hora(MinecraftServer server) { }
 
    private static ReviilPayload mensaje(int segundos, int lleva) {
       return new ReviilPayload("eclipse", segundos, Component.literal(Integer.toString(lleva)), Component.empty());

@@ -215,44 +215,7 @@ public final class Ui {
       return r + "…";
    }
 
-   public static void titulo3D(GuiGraphicsExtractor g, Font f, String s, int x, int y, float escala, int cara, int caraClara, int lado, int contorno) {
-      int prof = Math.max(2, Math.round(escala * 1.6F));
-      float alto = 9.0F * escala;
-      PoseStack pose = g.pose();
-      pose.pushPose();
-      pose.translate(x, y, 0.0F);
-      pose.scale(escala, escala, 1.0F);
-      float u = 1.0F / escala;
-
-      for (int dx = -1; dx <= prof + 1; dx++) {
-         for (int dy = -1; dy <= prof + 1; dy++) {
-            boolean borde = dx < 1 || dy < 1 || dx > prof || dy > prof;
-            if (borde) {
-               g.text(f, tb(s), Math.round(dx * u), Math.round(dy * u), c(contorno, 0.95F), false);
-            }
-         }
-      }
-
-      for (int d = prof; d >= 1; d--) {
-         int col = mezcla(lado, contorno, (float)d / (prof + 1) * 0.6F);
-         g.text(f, tb(s), Math.round(d * u), Math.round(d * u), c(col), false);
-      }
-
-      pose.popPose();
-
-      for (int pasada = 0; pasada < 2; pasada++) {
-         int y0 = pasada == 0 ? y - 2 : y + Math.round(alto * 0.42F);
-         int y1 = pasada == 0 ? y + Math.round(alto * 0.42F) : y + Math.round(alto) + 4;
-         g.enableScissor(x - 4, y0, x + Math.round(anchoN(f, s) * escala) + 8, y1);
-         PoseStack p = g.pose();
-         p.pushPose();
-         p.translate(x, y, 0.0F);
-         p.scale(escala, escala, 1.0F);
-         g.text(f, tb(s), 0, 0, c(pasada == 0 ? caraClara : cara), false);
-         p.popPose();
-         g.disableScissor();
-      }
-   }
+   public static void titulo3D(GuiGraphicsExtractor g, Font f, String s, int x, int y, float escala, int cara, int caraClara, int lado, int contorno) { }
 
    public static String mmss(int segundos) {
       int h = segundos / 3600;

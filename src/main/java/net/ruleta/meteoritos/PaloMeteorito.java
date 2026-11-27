@@ -20,16 +20,7 @@ public class PaloMeteorito extends Item {
       super(p);
    }
 
-   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) {
-      ItemStack palo = jugador.getItemInHand(mano);
-      if (!nivel.isClientSide() && nivel instanceof ServerLevel sl) {
-         Vec3 objetivo = MeteoritoEntity.dondeMira(jugador);
-         MeteoritoEntity.lanzar(sl, objetivo, jugador.getRandom(), jugador.position());
-         jugador.getCooldowns().addCooldown(this, 20);
-      }
-
-      return InteractionResult.SUCCESS;
-   }
+   public InteractionResult use(Level nivel, Player jugador, InteractionHand mano) { return null; }
 
    public boolean isFoil(ItemStack s) {
       return true;

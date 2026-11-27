@@ -93,64 +93,9 @@ public final class CajeroServidor {
       }
    }
 
-   private static int contar(Player jugador, Item item) {
-      int n = 0;
+   private static int contar(Player jugador, Item item) { return 0; }
 
-      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
-         if (s.is(item)) {
-            n += s.getCount();
-         }
-      }
+   private static void quitar(Player jugador, Item item, int cantidad) { }
 
-      for (ItemStack s : jugador.getInventory().offhand) {
-         if (s.is(item)) {
-            n += s.getCount();
-         }
-      }
-
-      return n;
-   }
-
-   private static void quitar(Player jugador, Item item, int cantidad) {
-      int falta = cantidad;
-
-      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
-         if (falta <= 0) {
-            return;
-         }
-
-         if (s.is(item)) {
-            int t = Math.min(falta, s.getCount());
-            s.shrink(t);
-            falta -= t;
-         }
-      }
-
-      for (ItemStack s : jugador.getInventory().offhand) {
-         if (falta <= 0) {
-            return;
-         }
-
-         if (s.is(item)) {
-            int t = Math.min(falta, s.getCount());
-            s.shrink(t);
-            falta -= t;
-         }
-      }
-   }
-
-   private static void dar(Player jugador, Item item, int cantidad) {
-      int resto = cantidad;
-
-      while (resto > 0) {
-         int c = Math.min(resto, 64);
-         ItemStack pila = new ItemStack(item, c);
-         jugador.getInventory().add(pila);
-         if (!pila.isEmpty()) {
-            jugador.drop(pila, false);
-         }
-
-         resto -= c;
-      }
-   }
+   private static void dar(Player jugador, Item item, int cantidad) { }
 }

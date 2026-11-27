@@ -35,15 +35,7 @@ public final class ProteccionDedsafio {
       return n != null && n.dimension().equals(DIMENSION);
    }
 
-   private static boolean prohibido(ItemStack s) {
-      return s.getItem() instanceof BucketItem
-         || s.getItem() instanceof EnderpearlItem
-         || s.getItem() instanceof ChorusFruitItem
-         || s.getItem() instanceof BlockItem
-         || s.getItem() instanceof BoneMealItem
-         || s.getItem() instanceof FlintAndSteelItem
-         || s.getItem() instanceof FireChargeItem;
-   }
+   private static boolean prohibido(ItemStack s) { return false; }
 
    @SubscribeEvent
    public static void alExplotar(ExplosionEvent.Detonate e) {

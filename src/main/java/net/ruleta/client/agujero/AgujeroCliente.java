@@ -105,13 +105,7 @@ public final class AgujeroCliente {
       }
    }
 
-   private static void puntoEsfera(Object b, Matrix4f vista, float r, float a, float c) {
-      float x = r * Mth.sin(a) * Mth.cos(c);
-      float y = r * Mth.cos(a);
-      float z = r * Mth.sin(a) * Mth.sin(c);
-      Vector3f v = vista.transformPosition(new Vector3f(x, y, z));
-      b.addVertex(v.x(), v.y(), v.z()).setUv(0.0F, 0.0F);
-   }
+   private static void puntoEsfera(Object b, Matrix4f vista, float r, float a, float c) { }
 
    private static void cuboAgujero(Object b, Matrix4f vista, float s) { }
 

@@ -10,27 +10,7 @@ public final class Fondo {
    private Fondo() {
    }
 
-   public static void poner() {
-      Minecraft mc = Minecraft.getInstance();
+   public static void poner() { }
 
-      try {
-         if (mc.gameRenderer.currentEffect() == null) {
-            ((GameRendererInvoker)mc.gameRenderer).ruleta$cargarEfecto(Identifier.parse("shaders/post/blur.json"));
-            puesto = true;
-         }
-      } catch (Exception ignorado) {
-         puesto = false;
-      }
-   }
-
-   public static void quitar() {
-      if (puesto) {
-         puesto = false;
-
-         try {
-            Minecraft.getInstance().gameRenderer.shutdownEffect();
-         } catch (Exception var1) {
-         }
-      }
-   }
+   public static void quitar() { }
 }

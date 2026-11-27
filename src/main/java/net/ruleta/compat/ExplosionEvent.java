@@ -31,9 +31,7 @@ public abstract class ExplosionEvent extends Evento {
          this.entidades = entidades;
       }
 
-      public List<BlockPos> getAffectedBlocks() {
-         return this.getExplosion().getToBlow();
-      }
+      public List<BlockPos> getAffectedBlocks() { return null; }
 
       public List<Entity> getAffectedEntities() {
          return this.entidades;

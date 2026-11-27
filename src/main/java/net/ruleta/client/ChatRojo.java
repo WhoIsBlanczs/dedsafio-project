@@ -85,70 +85,7 @@ public final class ChatRojo {
       return Character.isLetterOrDigit(c) || c == '_';
    }
 
-   private static void nombreMentaTexto(ClientChatReceivedEvent e) {
-      Component m = e.getMessage();
-      ClientPacketListener conexion = Minecraft.getInstance().getConnection();
-      if (m != null && conexion != null) {
-         String s = m.getString();
-         int ini = -1;
-         int fin = -1;
-
-         for (PlayerInfo pi : conexion.getOnlinePlayers()) {
-            String n = pi.getProfile().getName();
-            int desde = 0;
-
-            while (n != null && !n.isEmpty() && (desde = s.indexOf(n, desde)) >= 0) {
-               int a = desde;
-               int b = desde + n.length();
-               desde = b;
-               if (a <= 40 && (a <= 0 || !letraNombre(s.charAt(a - 1))) && (b >= s.length() || !letraNombre(s.charAt(b)))) {
-                  int j = b;
-                  if (j < s.length() && s.charAt(j) == '>') {
-                     j = b;
-                  } else {
-                     while (j < s.length() && (s.charAt(j) == ' ' || s.charAt(j) == ']' || s.charAt(j) == ')')) {
-                        j++;
-                     }
-                  }
-
-                  if (j < s.length() && (s.charAt(j) == ':' || s.charAt(j) == 187 || s.charAt(j) == '>') && (ini < 0 || a < ini)) {
-                     ini = a;
-                     fin = b;
-                  }
-               }
-            }
-         }
-
-         if (ini >= 0) {
-            int a0 = ini;
-            int b0 = fin;
-            MutableComponent r = Component.empty();
-            int[] pos = new int[]{0};
-            m.visit((estilo, texto) -> {
-               int i0 = pos[0];
-               int f0 = i0 + texto.length();
-               pos[0] = f0;
-               int x = Math.max(a0, i0);
-               int y = Math.min(b0, f0);
-               if (x >= y) {
-                  r.append(Component.literal(texto).setStyle(estilo));
-               } else {
-                  if (x > i0) {
-                     r.append(Component.literal(texto.substring(0, x - i0)).setStyle(estilo));
-                  }
-
-                  r.append(Component.literal(texto.substring(x - i0, y - i0)).setStyle(estilo.withColor(TextColor.fromRgb(4971418))));
-                  if (y < f0) {
-                     r.append(Component.literal(texto.substring(y - i0)).setStyle(estilo));
-                  }
-               }
-
-               return Optional.empty();
-            }, Style.EMPTY);
-            e.setMessage(r);
-         }
-      }
-   }
+   private static void nombreMentaTexto(ClientChatReceivedEvent e) { }
 
    @SubscribeEvent
    public static void alLlegarChat(ClientChatReceivedEvent e) {

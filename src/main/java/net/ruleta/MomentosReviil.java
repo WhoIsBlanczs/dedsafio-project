@@ -283,72 +283,11 @@ public final class MomentosReviil {
       lunaEn = -1L;
    }
 
-   public static void alTick(MinecraftServer servidor) {
-      MinecraftServer server = Servidor.actual();
-      if (server != null) {
-         tick++;
-         ruletaLuna(server);
-         MomentosBunker.tick(server);
-         if (!MomentoReviil.enMarcha()) {
-            if (!DESDE.isEmpty()) {
-               DESDE.clear();
-               devolverRegeneracion(server);
-               sincronizar(server);
-            }
-         } else if (!DESDE.isEmpty()) {
-            for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
-               if (p.isAlive() && !p.isCreative() && !p.isSpectator()) {
-                  if (tick % 20L == 0L) {
-                     gas(p);
-                     creepers(p);
-                  }
+   public static void alTick(MinecraftServer servidor) { }
 
-                  if (tick % 5L == 0L && enEfecto("luna")) {
-                     luna(server, p);
-                  }
-               }
-            }
-         }
-      }
-   }
+   private static void empezar(MinecraftServer server, String id) { }
 
-   private static void empezar(MinecraftServer server, String id) {
-      Momentos.Momento m = Momentos.porId(id);
-      if (m != null) {
-         int segundos = SEGUNDOS.getOrDefault(id, 0);
-         if (m.temporizador() && segundos <= 0) {
-            segundos = Momentos.delBunker(id) ? Ajustes.entero("bunker.contador") : Ajustes.entero("gas.contador");
-            SEGUNDOS.put(id, segundos);
-         }
-
-         if (m.temporizador() && segundos > 0) {
-            Red.enviarATodos(server, new ReviilPayload("temporizador", segundos, Component.empty(), Component.empty()));
-         }
-
-         MomentosBunker.empezar(server, id, segundos, SEGUNDOS2.getOrDefault(id, 0));
-         if ("ceguera_creepers".equals(id)) {
-            for (ServerPlayer p : server.getPlayerList().getPlayers()) {
-               p.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, Ajustes.entero("ceguera.duracion") * 20, 0, false, false, true));
-            }
-         }
-
-         if ("sin_regeneracion".equals(id)) {
-            BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION);
-            if (regeneracionAntes == null) {
-               regeneracionAntes = regla.get();
-            }
-
-            regla.set(false, server);
-         }
-      }
-   }
-
-   private static void devolverRegeneracion(MinecraftServer server) {
-      if (regeneracionAntes != null && server != null) {
-         ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(regeneracionAntes, server);
-         regeneracionAntes = null;
-      }
-   }
+   private static void devolverRegeneracion(MinecraftServer server) { }
 
    private static boolean gasListo(String id) {
       Long desde = DESDE.get(id);

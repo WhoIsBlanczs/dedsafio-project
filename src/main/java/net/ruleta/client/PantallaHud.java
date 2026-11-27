@@ -98,18 +98,7 @@ public class PantallaHud extends UiPantalla {
       private Comando() {
       }
 
-      public static void registrar() {
-         ClientCommandRegistrationCallback.EVENT
-            .register(
-               (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
-                  (LiteralArgumentBuilder)ClientCommands.literal("hud").executes(c -> {
-                     Minecraft mc = Minecraft.getInstance();
-                     mc.tell(() -> mc.setScreenAndShow(new PantallaHud()));
-                     return 1;
-                  })
-               )
-            );
-      }
+      public static void registrar() { }
    }
 
    private record Opcion(String nombre, String ayuda, BooleanSupplier leer, Consumer<Boolean> poner) {

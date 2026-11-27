@@ -280,17 +280,7 @@ public class MomentosPantalla extends UiPantalla {
          return Ajustes.entero("bunker.cerrado");
       }
 
-      private UiCampo caja(int x, int y, int w, String inicial) {
-         UiCampo e = new UiCampo(this.font, x, y, w, 24, Component.literal("Temporizador"));
-         e.setMaxLength(8);
-         e.setFilter(t -> t.matches("[0-9:]*"));
-         e.setValue(inicial);
-         e.malo(() -> {
-            String v = e.getValue().trim();
-            return !v.isEmpty() && !LanzadorFormulario.tiempoValido(v);
-         });
-         return (UiCampo)this.addRenderableWidget(e);
-      }
+      private UiCampo caja(int x, int y, int w, String inicial) { return null; }
 
       protected void init() {
          this.panel(460, this.bunker ? 330 : 250);

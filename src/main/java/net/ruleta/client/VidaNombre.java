@@ -28,44 +28,5 @@ public final class VidaNombre {
    @SubscribeEvent
    public static void alDibujarNombre(RenderNameTagEvent e) { }
 
-   private static boolean seVeElNombre(Player jugador, double distancia) {
-      Minecraft mc = Minecraft.getInstance();
-      LocalPlayer yo = mc.player;
-      if (yo == null) {
-         return false;
-      }
-
-      float maxima = jugador.isDiscrete() ? 32.0F : 64.0F;
-      if (distancia >= maxima * maxima) {
-         return false;
-      }
-
-      boolean noInvisible = !jugador.isInvisibleTo(yo);
-      if (jugador != yo) {
-         Team suyo = jugador.getTeam();
-         Team mio = yo.getTeam();
-         if (suyo != null) {
-            Visibility vis = suyo.getNameTagVisibility();
-            if (vis == Visibility.ALWAYS) {
-               return noInvisible;
-            }
-
-            if (vis == Visibility.NEVER) {
-               return false;
-            }
-
-            if (vis == Visibility.HIDE_FOR_OTHER_TEAMS) {
-               return mio == null ? noInvisible : suyo.isAlliedTo(mio) && (suyo.canSeeFriendlyInvisibles() || noInvisible);
-            }
-
-            if (vis != Visibility.HIDE_FOR_OWN_TEAM) {
-               return true;
-            }
-
-            return mio == null ? noInvisible : !suyo.isAlliedTo(mio) && noInvisible;
-         }
-      }
-
-      return Minecraft.renderNames() && jugador != mc.getCameraEntity() && noInvisible && !jugador.isVehicle();
-   }
+   private static boolean seVeElNombre(Player jugador, double distancia) { return false; }
 }

@@ -168,61 +168,7 @@ public final class CambiosEfectos {
    private CambiosEfectos() {
    }
 
-   static void alActivar(MinecraftServer server, String id) {
-      if ("sin-regeneracion".equals(id)) {
-         ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(false, server);
-      }
-
-      if ("respirar-bajo-agua".equals(id)) {
-         llenarTrampillasConAgua(server);
-      }
-
-      if ("zombies-mejorados".equals(id)) {
-         for (ServerLevel nivel : server.getAllLevels()) {
-            for (Entity entidad : nivel.getAllEntities()) {
-               if (entidad instanceof Zombie zombie && esZombieComun(zombie)) {
-                  mejorarZombie(zombie, false);
-               }
-            }
-         }
-      }
-
-      if ("aranas-cueva-overworld".equals(id) || "aranas-fuerza".equals(id) || "aranas-fuerza-iv".equals(id)) {
-         for (ServerLevel nivel : server.getAllLevels()) {
-            for (Entity entidad : nivel.getAllEntities()) {
-               if (entidad instanceof Spider arana) {
-                  potenciarArana(arana);
-               }
-            }
-         }
-      }
-
-      if ("extincion-animales".equals(id)) {
-         for (ServerLevel nivel : server.getAllLevels()) {
-            List<Animal> victimas = new ArrayList<>();
-
-            for (Entity entidad : nivel.getAllEntities()) {
-               if (entidad instanceof Animal animal && esAnimalExtinguible(animal)) {
-                  victimas.add(animal);
-               }
-            }
-
-            for (Animal animal : victimas) {
-               animal.discard();
-            }
-         }
-      }
-
-      if ("creepers-electricos".equals(id)) {
-         for (ServerLevel nivel : server.getAllLevels()) {
-            for (Entity entidad : nivel.getAllEntities()) {
-               if (entidad instanceof Creeper creeper) {
-                  electrificar(creeper);
-               }
-            }
-         }
-      }
-   }
+   static void alActivar(MinecraftServer server, String id) { }
 
    @SubscribeEvent
    public static void alUnirseAlMundo(EntityJoinLevelEvent e) {
@@ -286,46 +232,7 @@ public final class CambiosEfectos {
    }
 
    @SubscribeEvent
-   public static void alHerir(LivingHurtEvent e) {
-      LivingEntity victima = e.getEntity();
-      if (!victima.level().isClientSide()) {
-         if (!e.getSource().is(DamageTypes.IN_FIRE) && !e.getSource().is(DamageTypes.ON_FIRE) && !e.getSource().is(DamageTypes.LAVA)) {
-            if (e.getSource().is(DamageTypes.FALL)) {
-               if (!eraPerla(victima) && Ruleta.cambioActivo("dano-caida")) {
-                  e.setAmount(e.getAmount() * 2.0F);
-               }
-            } else if (e.getSource().is(DamageTypes.DROWN) && Ruleta.cambioActivo("ahogamiento-aumentado")) {
-               e.setAmount(e.getAmount() * 10.0F);
-            }
-         } else {
-            if (Ruleta.cambioActivo("dano-lava-fuego")) {
-               e.setAmount(e.getAmount() * 3.0F);
-            }
-
-            if (Ruleta.cambioActivo("dano-fuego-lava-x10")) {
-               e.setAmount(e.getAmount() * 10.0F);
-            }
-         }
-
-         if (e.getSource().getDirectEntity() instanceof Endermite
-            && victima instanceof Player
-            && e.getAmount() > 0.0F
-            && Ruleta.cambioActivo("endermite-100-dano")) {
-            e.setAmount(DANO_ENDERMITE());
-         }
-
-         if (e.getSource().getDirectEntity() instanceof EnderMan
-            && victima instanceof Player
-            && e.getAmount() > 0.0F
-            && Ruleta.cambioActivo("enderman-100-dano")) {
-            e.setAmount(DANO_ENDERMAN());
-         }
-
-         if (e.getSource().getDirectEntity() instanceof Spider && victima instanceof Player && e.getAmount() > 0.0F && Ruleta.cambioActivo("aranas-telarana")) {
-            ponerTelarana(victima.level(), victima.blockPosition());
-         }
-      }
-   }
+   public static void alHerir(LivingHurtEvent e) { }
 
    @SubscribeEvent
    public static void alMorir(LivingDeathEvent e) {
@@ -339,14 +246,7 @@ public final class CambiosEfectos {
       }
    }
 
-   private static void ponerTelarana(Level nivel, BlockPos pos) {
-      if (nivel.getGameRules().get(GameRules.MOB_GRIEFING)) {
-         BlockState actual = nivel.getBlockState(pos);
-         if ((actual.isAir() || actual.canBeReplaced()) && actual.getFluidState().isEmpty()) {
-            nivel.setBlockAndUpdate(pos, Blocks.COBWEB.defaultBlockState());
-         }
-      }
-   }
+   private static void ponerTelarana(Level nivel, BlockPos pos) { }
 
    static void marcarPerla(ServerPlayer jugador) {
       PERLAS.put(jugador.getUUID(), jugador.level().getGameTime());
@@ -383,23 +283,7 @@ public final class CambiosEfectos {
    }
 
    @SubscribeEvent
-   public static void alMedirVisibilidad(LivingEvent.LivingVisibilityEvent e) {
-      LivingEntity visto = e.getEntity();
-      if (visto.isInvisible() && !visto.level().isClientSide() && Ruleta.cambioActivo("criaturas-detectan-invisibles")) {
-         int piezas = 0;
-         int total = 0;
-
-         for (ItemStack pieza : visto.getArmorSlots()) {
-            total++;
-            if (!pieza.isEmpty()) {
-               piezas++;
-            }
-         }
-
-         double cobertura = total > 0 ? (double)piezas / total : 0.0;
-         e.modifyVisibility(1.0 / (0.7 * Math.max(0.1, cobertura)));
-      }
-   }
+   public static void alMedirVisibilidad(LivingEvent.LivingVisibilityEvent e) { }
 
    private static void electrificar(Creeper creeper) {
       if (!creeper.isPowered() && creeper.getType() != tipoNucleeper()) {
@@ -469,44 +353,9 @@ public final class CambiosEfectos {
       AIRE.remove(jugador.getUUID());
    }
 
-   private static void fuegoEnElNether(ServerPlayer jugador) {
-      UUID id = jugador.getUUID();
-      if (jugador.level().dimension() == Level.NETHER && jugador.isAlive() && !jugador.isCreative() && !jugador.isSpectator()) {
-         boolean arde = false;
-         if (Ruleta.cambioActivo("fuego-sin-armadura-nether")) {
-            for (ItemStack pieza : jugador.getArmorSlots()) {
-               if (pieza.isEmpty()) {
-                  arde = true;
-                  break;
-               }
-            }
-         }
+   private static void fuegoEnElNether(ServerPlayer jugador) { }
 
-         if (Ruleta.cambioActivo("fuego-infinito-nether")) {
-            if (jugador.isOnFire()) {
-               ARDIENDO.add(id);
-            }
-
-            arde |= ARDIENDO.contains(id);
-         }
-
-         if (arde && jugador.getRemainingFireTicks() < 40) {
-            jugador.setRemainingFireTicks(200);
-         }
-      } else {
-         ARDIENDO.remove(id);
-      }
-   }
-
-   private static void sinRegeneracion(ServerPlayer jugador) {
-      MinecraftServer server = jugador.level().getServer();
-      if (server != null && jugador.tickCount % 100 == 0 && Ruleta.cambioActivo("sin-regeneracion")) {
-         BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION);
-         if (regla.get()) {
-            regla.set(false, server);
-         }
-      }
-   }
+   private static void sinRegeneracion(ServerPlayer jugador) { }
 
    private static void placaDePresion(ServerPlayer jugador) {
       UUID id = jugador.getUUID();
@@ -859,97 +708,9 @@ public final class CambiosEfectos {
    }
 
    @SubscribeEvent(priority = EventPriority.LOWEST)
-   public static void alRomperBloque(BlockEvent.BreakEvent e) {
-      if (e.getState().is(Blocks.COBWEB) && e.getLevel() instanceof ServerLevel nivel && nivel.getDifficulty() != Difficulty.PEACEFUL) {
-         if (Ruleta.cambioActivo("aranas-telaranas") && !(nivel.getRandom().nextFloat() >= PROB_ARANA_CUEVA())) {
-            CaveSpider arana = (CaveSpider)net.minecraft.world.entity.EntityTypes.CAVE_SPIDER.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
-            if (arana != null) {
-               BlockPos pos = e.getPos();
-               arana.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
-               arana.setTarget(e.getPlayer());
-               nivel.addFreshEntity(arana);
-            }
-         }
-      }
-   }
+   public static void alRomperBloque(BlockEvent.BreakEvent e) { }
 
-   private static void aparicionesTerrestres(ServerPlayer jugador) {
-      if (jugador.tickCount % INTERVALO_PROFUNDO() == 0 && !jugador.isSpectator()) {
-         ServerLevel nivel = jugador.level();
-         if (nivel.getDifficulty() != Difficulty.PEACEFUL && nivel.getGameRules().get(GameRules.SPAWN_MOBS)) {
-            RandomSource azar = nivel.getRandom();
-            AABB zona = jugador.getBoundingBox().inflate(48.0);
-            if (nivel.dimension() == Level.NETHER) {
-               if (azar.nextFloat() < 0.35F
-                  && Ruleta.cambioActivo("zombies-nether")
-                  && nivel.getEntitiesOfClass(Zombie.class, zona, z -> z.getType() == net.minecraft.world.entity.EntityTypes.ZOMBIE).size() < 8) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.ZOMBIE, false);
-               }
-
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("wither-skeleton-nether") && nivel.getEntitiesOfClass(WitherSkeleton.class, zona).size() < 4
-                  )
-                {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.WITHER_SKELETON, false);
-               }
-
-               EntityType<?> nucleeper = tipoNucleeper();
-               if (nucleeper != null
-                  && jugador.getY() >= 128.0
-                  && azar.nextFloat() < 0.25F
-                  && Ruleta.cambioActivo("nucleepers-techo-nether")
-                  && nivel.getEntitiesOfClass(Mob.class, zona, m -> m.getType() == nucleeper).size() < 3) {
-                  EntityType<Mob> tipo = (EntityType<Mob>)nucleeper;
-                  aparecerCerca(nivel, jugador, azar, tipo, false);
-               }
-            } else if (nivel.dimension() == Level.OVERWORLD && nivel.isDarkOutside()) {
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("stray-overworld") && nivel.getEntitiesOfClass(Stray.class, zona).size() < 4) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.STRAY, true);
-               }
-
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("aranas-cueva-overworld") && nivel.getEntitiesOfClass(CaveSpider.class, zona).size() < 4) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.CAVE_SPIDER, true);
-               }
-
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("wither-skeleton-noche") && nivel.getEntitiesOfClass(WitherSkeleton.class, zona).size() < 4) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.WITHER_SKELETON, true);
-               }
-
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("bogged-noche") && nivel.getEntitiesOfClass(Bogged.class, zona).size() < 4) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.BOGGED, true);
-               }
-            }
-
-            if (nivel.dimension() == Level.OVERWORLD) {
-               EntityType<?> nucleeperNieve = tipoNucleeper();
-               if (nucleeperNieve != null
-                  && azar.nextFloat() < 0.2F
-                  && Ruleta.cambioActivo("mob-creeper-nuclear-nieve")
-                  && ((Biome)nivel.getBiome(jugador.blockPosition()).value()).coldEnoughToSnow(jugador.blockPosition())
-                  && nivel.getEntitiesOfClass(Mob.class, zona, m -> m.getType() == nucleeperNieve).size() < 2) {
-                  EntityType<Mob> tipo = (EntityType<Mob>)nucleeperNieve;
-                  Mob nuevo = aparecerCerca(nivel, jugador, azar, tipo, false);
-                  if (nuevo != null && !((Biome)nivel.getBiome(nuevo.blockPosition()).value()).coldEnoughToSnow(nuevo.blockPosition())) {
-                     nuevo.discard();
-                  }
-               }
-
-               if (azar.nextFloat() < 0.25F && Ruleta.cambioActivo("aranas-fuerza-iv") && nivel.getEntitiesOfClass(CaveSpider.class, zona).size() < 4) {
-                  aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.CAVE_SPIDER, false, true, Integer.MAX_VALUE);
-               }
-
-               if (jugador.getY() <= CAPA_INTELIGENTES()
-                  && azar.nextFloat() < 0.25F
-                  && Ruleta.cambioActivo("zombies-inteligentes")
-                  && nivel.getEntitiesOfClass(Zombie.class, zona, z -> z.entityTags().contains("ruleta_zombie_inteligente")).size() < 5) {
-                  Zombie inteligente = aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.ZOMBIE, true, false, CAPA_INTELIGENTES());
-                  if (inteligente != null) {
-                     inteligente.addTag("ruleta_zombie_inteligente");
-                  }
-               }
-            }
-         }
-      }
-   }
+   private static void aparicionesTerrestres(ServerPlayer jugador) { }
 
    private static <T extends Mob> T aparecerCerca(ServerLevel nivel, ServerPlayer jugador, RandomSource azar, EntityType<T> tipo, boolean exigirOscuridad) {
       return aparecerCerca(nivel, jugador, azar, tipo, exigirOscuridad, false, Integer.MAX_VALUE);

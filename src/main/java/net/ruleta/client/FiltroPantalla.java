@@ -24,21 +24,9 @@ public final class FiltroPantalla {
       this.ruta = ruta;
    }
 
-   public void fijar(String nombre, float valor) {
-      if (this.pasadas != null) {
-         for (PostPass p : this.pasadas) {
-            p.getEffect().safeGetUniform(nombre).set(valor);
-         }
-      }
-   }
+   public void fijar(String nombre, float valor) { }
 
-   public void fijar(String nombre, float a, float b, float c, float d) {
-      if (this.pasadas != null) {
-         for (PostPass p : this.pasadas) {
-            p.getEffect().safeGetUniform(nombre).set(a, b, c, d);
-         }
-      }
-   }
+   public void fijar(String nombre, float a, float b, float c, float d) { }
 
    public boolean preparar() { return false; }
 

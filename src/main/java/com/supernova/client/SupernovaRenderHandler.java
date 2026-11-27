@@ -67,10 +67,7 @@ public class SupernovaRenderHandler {
 
    private static void groundLight(SupernovaState n, Vector3f axisW, float lenW, float widthW, Vec3 cam, Matrix4f view, float far, float strength) { }
 
-   private static void groundVert(Object bb, Matrix4f view, float x, float y, float z, float r, float g, float b, float a, float u, float v) {
-      Vector3f q = view.transformPosition(new Vector3f(x, y, z));
-      bb.addVertex(q.x(), q.y(), q.z()).setColor(r, g, b, a).setUv(u, v);
-   }
+   private static void groundVert(Object bb, Matrix4f view, float x, float y, float z, float r, float g, float b, float a, float u, float v) { }
 
    private static void setSphere(Object sh, float mode, float time, float charge, float expl, float fade, Vector3f center, Vec3 viewDirW) { }
 

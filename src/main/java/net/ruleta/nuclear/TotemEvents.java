@@ -143,13 +143,7 @@ public final class TotemEvents {
       return ItemStack.EMPTY;
    }
 
-   private static void repairArmor(ServerPlayer player) {
-      for (ItemStack armor : player.getArmorSlots()) {
-         if (!armor.isEmpty() && armor.isDamageableItem()) {
-            armor.setDamageValue(0);
-         }
-      }
-   }
+   private static void repairArmor(ServerPlayer player) { }
 
    public static void onPlayerTick(ServerPlayer jugador) {
       Player player = jugador;

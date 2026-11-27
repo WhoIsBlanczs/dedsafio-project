@@ -148,89 +148,9 @@ public final class Bunkers {
       return r;
    }
 
-   private static int set(CommandContext<CommandSourceStack> ctx, String crudo) throws CommandSyntaxException {
-      ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
-      String nombre = limpiar(crudo);
-      if (!nombre.isEmpty() && nombre.length() <= 32) {
-         BlockPos pie = p.blockPosition();
-         BlockPos esquina = pie.offset(-48, 0, -49);
-         String malo = motivoCerca(p.level().getServer(), p.level().dimension().identifier().toString(), esquina);
-         if (malo != null) {
-            ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
-            return 0;
-         } else {
-            PENDIENTES.put(p.getUUID(), new Bunkers.Pendiente(nombre, p.level().dimension(), esquina));
-            BlockPos otra = esquina.offset(95, 33, 98);
-            ((CommandSourceStack)ctx.getSource())
-               .sendSuccess(
-                  () -> Component.literal("«" + nombre + "» apuntado aquí. Ocupará de " + texto(esquina) + " a " + texto(otra) + ". Usa ")
-                     .withStyle(ChatFormatting.YELLOW)
-                     .append(
-                        Component.literal("/bunker build")
-                           .withStyle(
-                              s -> s.withColor(ChatFormatting.GOLD)
-                                 .withUnderlined(true)
-                                 .withClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, "/bunker build"))
-                           )
-                     )
-                     .append(Component.literal(" para construirlo.").withStyle(ChatFormatting.YELLOW)),
-                  false
-               );
-            return 1;
-         }
-      } else {
-         ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("El nombre tiene que tener entre 1 y 32 letras."));
-         return 0;
-      }
-   }
+   private static int set(CommandContext<CommandSourceStack> ctx, String crudo) throws CommandSyntaxException { return 0; }
 
-   private static int build(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-      ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
-      Bunkers.Pendiente pe = PENDIENTES.get(p.getUUID());
-      if (pe == null) {
-         ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("Primero apunta dónde va con /bunker set [nombre]."));
-         return 0;
-      }
-
-      MinecraftServer server = p.level().getServer();
-      ServerLevel nivel = server.getLevel(pe.dimension());
-      if (nivel == null) {
-         return 0;
-      }
-
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
-      if (!t.isEmpty() && mascaras(nivel)) {
-         String malo = motivoCerca(server, nivel.dimension().identifier().toString(), pe.esquina());
-         if (malo != null) {
-            ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
-            return 0;
-         } else {
-            ((CommandSourceStack)ctx.getSource())
-               .sendSuccess(
-                  () -> Component.literal("Construyendo «" + pe.nombre() + "» y preparando el terreno... (unos segundos)").withStyle(ChatFormatting.GRAY),
-                  false
-               );
-            CommandSourceStack fuente = (CommandSourceStack)ctx.getSource();
-            Bunkers.Bunker b = construir(nivel, pe.esquina(), pe.nombre(), hecho -> {
-               if (hecho != null) {
-                  fuente.sendSuccess(() -> Component.literal("«" + hecho.nombre() + "» construido.").withStyle(ChatFormatting.GREEN), true);
-               } else {
-                  fuente.sendFailure(Component.literal("No se pudo construir el bunker ahí."));
-               }
-            });
-            if (b == null) {
-               ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("No se pudo construir el bunker ahí."));
-               return 0;
-            } else {
-               PENDIENTES.remove(p.getUUID());
-               return 1;
-            }
-         }
-      } else {
-         ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("No se encontró la estructura del bunker (data/ruleta/structures/bunker.nbt)."));
-         return 0;
-      }
-   }
+   private static int build(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException { return 0; }
 
    public static BlockPos puerta(Bunkers.Bunker b, int i) {
       return new BlockPos(b.ex(), b.ey(), b.ez()).offset(PUERTAS[i]);
@@ -264,78 +184,11 @@ public final class Bunkers {
    }
 
    @Nullable
-   static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
-      if (!nivel.getServer().getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
-         if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
-            return null;
-         }
+   static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) { return null; }
 
-         Bunkers.Bunker b = new Bunkers.Bunker(nombre, nivel.dimension().identifier().toString(), esquina.getX(), esquina.getY(), esquina.getZ());
-         OBRAS.add(new Object[]{new Terreno.Obra(nivel, esquina, ocupado), b, alTerminar});
-         return b;
-      } else {
-         return null;
-      }
-   }
+   public static void alTickServidor(MinecraftServer servidor) { }
 
-   public static void alTickServidor(MinecraftServer servidor) {
-      if (!DEMOLICIONES.isEmpty()) {
-         avanzarDemoliciones(servidor);
-      }
-
-      if (!OBRAS.isEmpty()) {
-         Object[] o = OBRAS.get(0);
-         Terreno.Obra obra = (Terreno.Obra)o[0];
-         if (obra.paso()) {
-            OBRAS.remove(0);
-            Bunkers.Bunker b = (Bunkers.Bunker)o[1];
-            Consumer<Bunkers.Bunker> fin = (Consumer<Bunkers.Bunker>)o[2];
-            ServerLevel nivel = obra.nivel();
-            Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
-            BlockPos esquina = new BlockPos(b.ex(), b.ey(), b.ez());
-            StructurePlaceSettings ajustes = new StructurePlaceSettings().setIgnoreEntities(false);
-            boolean ok = t.isPresent() && t.get().placeInWorld(nivel, esquina, esquina, ajustes, nivel.getRandom(), 18);
-            if (ok) {
-               Bunkers.Datos d = datos(nivel.getServer());
-               d.lista.add(b);
-               d.setDirty();
-               sincronizar(nivel.getServer());
-            }
-
-            if (fin != null) {
-               fin.accept(ok ? b : null);
-            }
-         }
-      }
-   }
-
-   private static int list(CommandContext<CommandSourceStack> ctx) {
-      List<Bunkers.Bunker> l = datos(((CommandSourceStack)ctx.getSource()).getServer()).lista;
-      if (l.isEmpty()) {
-         ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("No hay ningún bunker construido.").withStyle(ChatFormatting.GRAY), false);
-         return 0;
-      }
-
-      ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> Component.literal("Bunkers (" + l.size() + "):").withStyle(ChatFormatting.GOLD), false);
-
-      for (Bunkers.Bunker b : l) {
-         int x = (int)Math.floor(b.mx());
-         int y = b.ey() + 1;
-         int z = (int)Math.floor(b.mz());
-         String tp = "/execute in " + b.dimension() + " run tp @s " + x + " " + (b.ey() + 34 + 1) + " " + z;
-         Component linea = Component.literal(" • ")
-            .withStyle(ChatFormatting.GRAY)
-            .append(Component.literal(b.nombre()).withStyle(new ChatFormatting[]{ChatFormatting.WHITE, ChatFormatting.BOLD}))
-            .append(Component.literal("  " + x + ", " + y + ", " + z + "  (" + dim(b.dimension()) + ")").withStyle(ChatFormatting.GRAY))
-            .withStyle(
-               s -> s.withClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, tp))
-                  .withHoverEvent(new HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, Component.literal("Clic para ir")))
-            );
-         ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> linea, false);
-      }
-
-      return l.size();
-   }
+   private static int list(CommandContext<CommandSourceStack> ctx) { return 0; }
 
    private static int delete(CommandContext<CommandSourceStack> ctx) {
       String nombre = limpiar(StringArgumentType.getString(ctx, "nombre"));
@@ -432,48 +285,7 @@ public final class Bunkers {
             + " bloques (se cambia en Ajustes).";
    }
 
-   private static BitSet solidos(ServerLevel nivel) {
-      if (solidoEstructura != null) {
-         return solidoEstructura;
-      }
-
-      BitSet r = new BitSet(323136);
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
-      if (t.isPresent()) {
-         CompoundTag nbt = t.get().save(new CompoundTag());
-         ListTag paleta = nbt.getListOrEmpty("palette");
-         if (paleta.isEmpty() && nbt.contains("palettes")) {
-            ListTag ps = nbt.getListOrEmpty("palettes");
-            if (!ps.isEmpty()) {
-               paleta = ps.getList(0);
-            }
-         }
-
-         BitSet aire = new BitSet();
-
-         for (int k = 0; k < paleta.size(); k++) {
-            String n = paleta.getCompoundOrEmpty(k).getStringOr("Name", "");
-            if (n.equals("minecraft:air") || n.equals("minecraft:cave_air") || n.equals("minecraft:void_air") || n.equals("minecraft:structure_void")) {
-               aire.set(k);
-            }
-         }
-
-         ListTag bloques = nbt.getListOrEmpty("blocks");
-
-         for (int k = 0; k < bloques.size(); k++) {
-            CompoundTag c = bloques.getCompoundOrEmpty(k);
-            if (!aire.get(c.getIntOr("state", 0))) {
-               ListTag pos = c.getListOrEmpty("pos");
-               if (pos.size() == 3) {
-                  marcar(r, new BlockPos(pos.getInt(0), pos.getInt(1), pos.getInt(2)));
-               }
-            }
-         }
-      }
-
-      solidoEstructura = r;
-      return r;
-   }
+   private static BitSet solidos(ServerLevel nivel) { return null; }
 
    @Nullable
    static String demoler(MinecraftServer server, Bunkers.Bunker b, @Nullable UUID quien) {
@@ -641,43 +453,7 @@ public final class Bunkers {
       };
    }
 
-   private static boolean mascaras(ServerLevel nivel) {
-      if (interior != null) {
-         return true;
-      }
-
-      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
-      if (t.isEmpty()) {
-         return false;
-      }
-
-      BitSet in = new BitSet(323136);
-      BitSet oc = new BitSet(323136);
-      StructurePlaceSettings s = new StructurePlaceSettings();
-
-      for (StructureBlockInfo info : t.get().filterBlocks(BlockPos.ZERO, s, Blocks.AIR)) {
-         marcar(in, info.pos());
-      }
-
-      Block[] propios = new Block[]{
-         BloquesBunker.LADRILLO.get(),
-         BloquesBunker.ESCALERA.get(),
-         BloquesBunker.PISO.get(),
-         BloquesBunker.PELIGRO.get(),
-         PuertaBunker.BLOQUE.get(),
-         PuertaBunker.BLOQUE_HOJA.get()
-      };
-
-      for (Block bl : propios) {
-         for (StructureBlockInfo info : t.get().filterBlocks(BlockPos.ZERO, s, bl)) {
-            marcar(oc, info.pos());
-         }
-      }
-
-      interior = in;
-      ocupado = oc;
-      return true;
-   }
+   private static boolean mascaras(ServerLevel nivel) { return false; }
 
    private static void marcar(BitSet b, BlockPos p) {
       if (p.getX() >= 0 && p.getY() >= 0 && p.getZ() >= 0 && p.getX() < 96 && p.getY() < 34 && p.getZ() < 99) {
@@ -775,9 +551,7 @@ public final class Bunkers {
       }
    }
 
-   private static boolean privilegiado(Player p) {
-      return p == null ? false : p.isCreative() || p instanceof ServerPlayer sp && sp.hasPermissions(Ajustes.entero("bunker.nivel_construir"));
-   }
+   private static boolean privilegiado(Player p) { return false; }
 
    private static void avisar(Player p) {
       if (p instanceof ServerPlayer sp) {
@@ -913,11 +687,7 @@ public final class Bunkers {
       ocupado = null;
    }
 
-   private static Bunkers.Datos datos(MinecraftServer server) {
-      return (Bunkers.Datos)server.overworld()
-         .getDataStorage()
-         .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_bunkers"), Bunkers.Datos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Bunkers.Datos(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
-   }
+   private static Bunkers.Datos datos(MinecraftServer server) { return null; }
 
    public record Bunker(String nombre, String dimension, int ex, int ey, int ez) {
       public double mx() {

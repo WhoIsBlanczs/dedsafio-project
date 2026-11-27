@@ -337,21 +337,7 @@ public class PantallaPremio extends UiPantalla {
          );
       }
 
-      private void cambiarItem() {
-         PantallaPremio pp = PantallaPremio.this;
-         ConfigTragamonedas.Recompensa r = this.r();
-         Minecraft.getInstance().setScreen(new PantallaSelectorItem(pp, id -> {
-            r.item = id;
-            if (r.esLibro()) {
-               r.cantidad = Math.min(r.cantidad, 64);
-               r.maximo = Math.min(r.maximo, 64);
-            } else {
-               r.encantamientos = new ArrayList<>();
-            }
-
-            pp.cambio();
-         }));
-      }
+      private void cambiarItem() { }
 
       private void borrar() {
          PantallaPremio pp = PantallaPremio.this;

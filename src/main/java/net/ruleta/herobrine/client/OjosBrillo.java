@@ -124,19 +124,7 @@ public final class OjosBrillo {
       quad(vc, o, in[0], in[1], in[2], in[3], 1.0F, 1.0F, 1.0F, 1.0F);
    }
 
-   private static void quad(Object vc, OjosBrillo.Ojo o, float[] p0, float[] p1, float[] p2, float[] p3, float a0, float a1, float a2, float a3) {
-      float[][] p = new float[][]{p0, p1, p2, p3};
-      float[] al = new float[]{a0, a1, a2, a3};
-
-      for (int k = 0; k < 8; k++) {
-         int i = k < 4 ? k : 7 - k;
-         Vector3f c = o.centro();
-         float x = c.x + o.px().x * p[i][0] + o.py().x * p[i][1] + o.normal().x * 0.012F;
-         float y = c.y + o.px().y * p[i][0] + o.py().y * p[i][1] + o.normal().y * 0.012F;
-         float z = c.z + o.px().z * p[i][0] + o.py().z * p[i][1] + o.normal().z * 0.012F;
-         vc.addVertex(x, y, z).setColor(1.0F, 1.0F, 1.0F, al[i]);
-      }
-   }
+   private static void quad(Object vc, OjosBrillo.Ojo o, float[] p0, float[] p1, float[] p2, float[] p3, float a0, float a1, float a2, float a3) { }
 
    public static void dibujar(Camera camara, Matrix4f proyeccion, Matrix4f vista, float pt) { }
 

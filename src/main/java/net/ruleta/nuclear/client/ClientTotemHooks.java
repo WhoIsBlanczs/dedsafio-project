@@ -7,7 +7,5 @@ public final class ClientTotemHooks {
    private ClientTotemHooks() {
    }
 
-   public static void showActivation(ItemStack stack) {
-      Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
-   }
+   public static void showActivation(ItemStack stack) { }
 }

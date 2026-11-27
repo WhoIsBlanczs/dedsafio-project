@@ -19,36 +19,7 @@ public final class LluviaRoja {
    private LluviaRoja() {
    }
 
-   public static void poner(boolean roja) {
-      if (roja != puesta) {
-         Minecraft mc = Minecraft.getInstance();
-         TextureManager tm = mc.getTextureManager();
-         if (roja) {
-            NativeImage img = leer(mc);
-            if (img == null) {
-               return;
-            }
-
-            for (int y = 0; y < img.getHeight(); y++) {
-               for (int x = 0; x < img.getWidth(); x++) {
-                  int abgr = img.getPixel(x, y);
-                  int a = abgr >>> 24;
-                  int lum = ((abgr & 0xFF) + (abgr >> 8 & 0xFF) + (abgr >> 16 & 0xFF)) / 3;
-                  int r = Math.min(255, 110 + lum / 2);
-                  int g = lum / 12;
-                  int b = lum / 14;
-                  img.setPixelRGBA(x, y, a << 24 | b << 16 | g << 8 | r);
-               }
-            }
-
-            tm.register(LLUVIA, new DynamicTexture(img));
-         } else {
-            tm.register(LLUVIA, new SimpleTexture(LLUVIA));
-         }
-
-         puesta = roja;
-      }
-   }
+   public static void poner(boolean roja) { }
 
    private static NativeImage leer(Minecraft mc) {
       try {

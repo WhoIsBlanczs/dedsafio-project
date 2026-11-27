@@ -25,9 +25,7 @@ public final class RenderNameTagEvent extends Evento {
       return this.entidad;
    }
 
-   public EntityRenderer<?> getEntityRenderer() {
-      return this.dibujante;
-   }
+   public EntityRenderer<?> getEntityRenderer() { return null; }
 
    public PoseStack getPoseStack() {
       return this.pila;

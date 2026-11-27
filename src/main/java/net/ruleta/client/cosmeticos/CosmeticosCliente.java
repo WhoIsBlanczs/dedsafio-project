@@ -88,30 +88,7 @@ public final class CosmeticosCliente {
 
    public static final class Chispas {
       @SubscribeEvent
-      public static void alTick(TickEvent.ClientTickEvent e) {
-         Minecraft mc = Minecraft.getInstance();
-         if (e.phase == TickEvent.Phase.END && mc.level != null && !mc.isPaused()) {
-            for (Entry<UUID, CosmeticosCliente.Estado> en : CosmeticosCliente.ESTADOS.entrySet()) {
-               if (!en.getValue().aura.isEmpty()) {
-                  Player p = mc.level.getPlayerByUUID(en.getKey());
-                  if (p instanceof AbstractClientPlayer && !p.isInvisible() && !p.isSpectator()) {
-                     Random r = new Random();
-                     Integer color = CosmeticosCliente.COLORES.get(en.getValue().aura);
-                     if (r.nextFloat() < 0.6F) {
-                        CosmeticosCliente.particula(mc, p, r, ParticleTypes.END_ROD, 0.16F, 12 + r.nextInt(8));
-                     }
-
-                     if (color != null && r.nextFloat() < 0.3F) {
-                        float cr = (color >> 16 & 0xFF) / 255.0F;
-                        float cg = (color >> 8 & 0xFF) / 255.0F;
-                        float cb = (color & 0xFF) / 255.0F;
-                        CosmeticosCliente.particula(mc, p, r, new DustParticleOptions(new Vector3f(cr, cg, cb), 0.45F), 1.0F, 16 + r.nextInt(10));
-                     }
-                  }
-               }
-            }
-         }
-      }
+      public static void alTick(TickEvent.ClientTickEvent e) { }
 
       @SubscribeEvent
       public static void alSalirDelMundo(ClientPlayerNetworkEvent.LoggingOut e) {

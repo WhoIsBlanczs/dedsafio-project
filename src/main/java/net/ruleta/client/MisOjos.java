@@ -1,6 +1,5 @@
 package net.ruleta.client;
 
-import com.mojang.blaze3d.shaders.Object;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;

@@ -103,98 +103,9 @@ public final class MapaPlaya {
       return new BlockPos(1, -63, 1);
    }
 
-   private static boolean hecho(LevelChunk trozo) {
-      return trozo.getBlockState(marca(trozo.getPos().x(), trozo.getPos().z)).is(Blocks.DEEPSLATE);
-   }
+   private static boolean hecho(LevelChunk trozo) { return false; }
 
-   public static void tick(MinecraftServer servidor) {
-      if (!listo && !fallo) {
-         if (datos == null && !cargando && !cargaFallida && !servidor.getPlayerList().getPlayers().isEmpty()) {
-            precargar(servidor);
-         }
-
-         ServerLevel nivel = servidor.getLevel(ComandoDedsafio.DIMENSION);
-         if (nivel != null && !nivel.players().isEmpty()) {
-            if (!comprobado) {
-               comprobado = true;
-               Ruleta.LOG
-                  .info(
-                     "[mapa] primer jugador en la dimensión; marca de mapa completo: {}", nivel.getChunk(0, 0).getBlockState(marcaFin()).is(Blocks.DEEPSLATE)
-                  );
-               if (nivel.getChunk(0, 0).getBlockState(marcaFin()).is(Blocks.DEEPSLATE)) {
-                  listo = true;
-                  datos = null;
-                  paleta = null;
-                  return;
-               }
-            }
-
-            if (cargaFallida) {
-               fallo = true;
-            } else {
-               libres.removeIf(u -> nivel.getPlayerByUUID(u) == null);
-               esperas.keySet().removeIf(u -> nivel.getPlayerByUUID(u) == null);
-               long limiteEspera = System.nanoTime() + 40000000L;
-
-               for (ServerPlayer j : nivel.players()) {
-                  if (!libres.contains(j.getUUID())) {
-                     int n = esperas.merge(j.getUUID(), 1, Integer::sum);
-                     if (n > 1200 || datos != null && aterrizaje(nivel, j, limiteEspera)) {
-                        libres.add(j.getUUID());
-                        Ruleta.LOG
-                           .info(
-                              "[mapa] jugador liberado tras {} ticks (timeout={}, mapa en memoria={}) en {}",
-                              new Object[]{n, n > 1200, datos != null, j.blockPosition()}
-                           );
-                        j.removeEffect(MobEffects.BLINDNESS);
-                        j.sendOverlayMessage(Component.empty());
-                     } else {
-                        j.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false));
-                        j.setDeltaMovement(Vec3.ZERO);
-                        j.needsSync = true;
-                        j.fallDistance = 0.0F;
-                        j.sendOverlayMessage(Component.literal("Cargando la playa..."));
-                     }
-                  }
-               }
-
-               if (datos != null) {
-                  if (!armada) {
-                     armar(nivel);
-                     armada = true;
-                     Ruleta.LOG
-                        .info(
-                           "[mapa] colocación iniciada: {} trozos, origen ({}, {}, {}), tamaño {}x{}x{}", new Object[]{cola.size(), -440, -4, -185, sx, sy, sz}
-                        );
-                  }
-
-                  long limite = System.nanoTime() + 12000000L;
-
-                  while (System.nanoTime() < limite) {
-                     int[] c = cola.poll();
-                     if (c == null) {
-                        Ruleta.LOG.info("[mapa] colocación terminada");
-                        nivel.getChunk(0, 0).setBlockState(marcaFin(), Blocks.DEEPSLATE.defaultBlockState(), false);
-                        listo = true;
-                        datos = null;
-                        paleta = null;
-                        return;
-                     }
-
-                     LevelChunk trozo = nivel.getChunk(c[0], c[1]);
-                     if (!hecho(trozo)) {
-                        colocar(nivel, trozo);
-                        trozo.setBlockState(marca(c[0], c[1]), Blocks.DEEPSLATE.defaultBlockState(), false);
-                     }
-                  }
-               }
-            }
-         } else {
-            libres.clear();
-            esperas.clear();
-         }
-      }
-   }
+   public static void tick(MinecraftServer servidor) { }
 
    private static void precargar(MinecraftServer servidor) {
       cargando = true;
@@ -209,28 +120,7 @@ public final class MapaPlaya {
       hilo.start();
    }
 
-   private static boolean aterrizaje(ServerLevel nivel, ServerPlayer j, long limite) {
-      int px = j.chunkPosition().x();
-      int pz = j.chunkPosition().z();
-
-      for (int[] o : ATERRIZAJE) {
-         int cx = px + o[0];
-         int cz = pz + o[1];
-         if (cx * 16 + 15 >= -440 && cx * 16 < -440 + (sx > 0 ? sx : 690) && cz * 16 + 15 >= -185 && cz * 16 < -185 + (sz > 0 ? sz : 199)) {
-            LevelChunk trozo = nivel.getChunk(cx, cz);
-            if (!hecho(trozo)) {
-               if (System.nanoTime() >= limite) {
-                  return false;
-               }
-
-               colocar(nivel, trozo);
-               trozo.setBlockState(marca(cx, cz), Blocks.DEEPSLATE.defaultBlockState(), false);
-            }
-         }
-      }
-
-      return true;
-   }
+   private static boolean aterrizaje(ServerLevel nivel, ServerPlayer j, long limite) { return false; }
 
    private static void armar(ServerLevel nivel) {
       ServerPlayer j = (ServerPlayer)nivel.players().get(0);
@@ -390,40 +280,7 @@ public final class MapaPlaya {
       }
    }
 
-   private static BlockState leerEstado(DataInputStream in) throws IOException {
-      String nombre = "minecraft:air";
-      Map<String, String> props = new HashMap<>();
-
-      for (int t = in.readByte(); t != 0; t = in.readByte()) {
-         String nm = in.readUTF();
-         if (t == 8 && nm.equals("Name")) {
-            nombre = in.readUTF();
-         } else if (t == 10 && nm.equals("Properties")) {
-            for (int tt = in.readByte(); tt != 0; tt = in.readByte()) {
-               String k = in.readUTF();
-               if (tt == 8) {
-                  props.put(k, in.readUTF());
-               } else {
-                  saltar(in, tt);
-               }
-            }
-         } else {
-            saltar(in, t);
-         }
-      }
-
-      Block bloque = (Block)BuiltInRegistries.BLOCK.get(Identifier.parse(nombre));
-      BlockState e = bloque.defaultBlockState();
-
-      for (Entry<String, String> par : props.entrySet()) {
-         Property<?> prop = bloque.getStateDefinition().getProperty(par.getKey());
-         if (prop != null) {
-            e = con(e, prop, par.getValue());
-         }
-      }
-
-      return e;
-   }
+   private static BlockState leerEstado(DataInputStream in) throws IOException { return null; }
 
    private static <T extends Comparable<T>> BlockState con(BlockState e, Property<T> prop, String valor) {
       return prop.getValue(valor).map(v -> (BlockState)e.setValue(prop, v)).orElse(e);

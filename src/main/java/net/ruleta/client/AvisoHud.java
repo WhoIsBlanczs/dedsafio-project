@@ -86,53 +86,7 @@ public final class AvisoHud {
       }
    }
 
-   static void render(GuiGraphicsExtractor ctx, Font tr) {
-      if (titulo != null && !saliendo && System.nanoTime() - puesto > 10000000000L) {
-         saliendo = true;
-      }
-
-      if (titulo != null) {
-         float k = fundido.avanzar(!saliendo && !oculto && OpcionesCliente.aviso && !HudCliente.tapado(), !oculto && OpcionesCliente.aviso ? 1.5F : 0.25F);
-         if (saliendo && fundido.apagado()) {
-            limpiar();
-         } else {
-            int centro = ctx.guiWidth() / 2;
-            boolean choca = 250 > centro - tr.width("00:00") / 2 - 4;
-            float y0 = 10.0F + 8.0F * bajada.avanzar(choca && TemporizadorHud.activo());
-            int alfa = Math.round(k * 255.0F);
-            if (alfa >= 4) {
-               int alto = Math.max(80, 21 + Math.round(lineas.size() * 11.5F * escala) + 6);
-               int x = 18;
-               int color = alfa << 24 | 16777215;
-               PoseStack m = ctx.pose();
-               m.pushPose();
-               m.translate(0.0F, y0 + 11.0F, 2951.0F);
-               ctx.fill(10, 0, 250, alto, Math.round(94.0F * k) << 24);
-               m.translate(0.0F, 0.0F, 1.0F);
-               tituloMetalico(ctx, tr, titulo, x, 6, alfa);
-               m.pushPose();
-               m.translate(x, 21.0F, 0.0F);
-               m.scale(escala, escala, 1.0F);
-
-               for (FormattedCharSequence linea : lineas) {
-                  ctx.text(tr, linea, 0, 0, color);
-                  m.translate(0.0F, 11.5F, 0.0F);
-               }
-
-               m.popPose();
-               if (!OCULTAR.isUnbound()) {
-                  Component pista = Component.literal("[Presiona ")
-                     .append(OCULTAR.getTranslatedKeyMessage())
-                     .append("] para ocultar aviso")
-                     .withStyle(ChatFormatting.GRAY);
-                  ctx.text(tr, pista, x, alto + 4, color);
-               }
-
-               m.popPose();
-            }
-         }
-      }
-   }
+   static void render(GuiGraphicsExtractor ctx, Font tr) { }
 
    static void coordenadas(GuiGraphicsExtractor ctx, Font tr) {
       coordenadas(ctx, tr, 255);
@@ -146,62 +100,7 @@ public final class AvisoHud {
       }
    }
 
-   private static void tituloMetalico(GuiGraphicsExtractor ctx, Font tr, Component t, int x, int y, int alfa) {
-      int[] base = new int[]{-1};
-      List<Object[]> trozos = new ArrayList<>();
-      t.visit((estilox, textox) -> {
-         trozos.add(new Object[]{estilox, textox});
-         if (base[0] < 0 && !textox.isBlank() && textox.codePointAt(0) < 57344) {
-            int deFuente = Mensajes.baseDeFuente(estilox.getFont());
-            if (deFuente >= 0) {
-               base[0] = deFuente;
-            } else if (estilox.getColor() != null) {
-               base[0] = estilox.getColor().getValue();
-            }
-         }
-
-         return Optional.empty();
-      }, Style.EMPTY);
-      if (base[0] < 0) {
-         ctx.text(tr, t, x, y, alfa << 24 | 16777215);
-      } else {
-         int claro = Mensajes.claro(base[0]);
-         int oscuro = mezcla(claro, 0, 0.3F);
-         float ancho = Math.max(1, tr.width(t));
-         double s = System.nanoTime() / 1.0E9 % 4.4;
-         float pasada = (float)(s < 2.2 ? s / 2.2 : 2.0 - s / 2.2);
-         float centro = -0.2F + 1.4F * (pasada * pasada * (3.0F - 2.0F * pasada));
-         int cx = x;
-
-         for (Object[] tr0 : trozos) {
-            Style estilo = (Style)tr0[0];
-            String texto = (String)tr0[1];
-            int k = 0;
-
-            while (k < texto.length()) {
-               int cp = texto.codePointAt(k);
-               k += Character.charCount(cp);
-               Component letra = Component.literal(new String(Character.toChars(cp)));
-               MutableComponent var27;
-               int col;
-               if (cp >= 57344 && cp <= 63743) {
-                  var27 = letra.copy().setStyle(estilo.withColor(16777215));
-                  col = 16777215;
-               } else {
-                  float u = (cx - x) / ancho;
-                  float onda = 0.5F + 0.5F * (float)Math.cos((u - centro) * Math.PI * 2.2);
-                  int colx = mezcla(oscuro, claro, onda);
-                  float brillo = (float)Math.exp(-Math.pow((u - centro) / 0.12F, 2.0));
-                  col = mezcla(colx, 16774898, brillo * 0.8F);
-                  var27 = letra.copy().setStyle(estilo.withColor(col));
-               }
-
-               ctx.text(tr, var27, cx, y, alfa << 24 | col);
-               cx += tr.width(var27);
-            }
-         }
-      }
-   }
+   private static void tituloMetalico(GuiGraphicsExtractor ctx, Font tr, Component t, int x, int y, int alfa) { }
 
    private static int mezcla(int a, int b, float k) {
       k = Math.max(0.0F, Math.min(1.0F, k));

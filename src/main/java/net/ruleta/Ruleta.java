@@ -377,23 +377,7 @@ public class Ruleta {
       return 1;
    }
 
-   static void desactivarCambio(ServerPlayer jugador, String id) {
-      if (jugador != null && jugador.level().getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-         MinecraftServer server = jugador.level().getServer();
-         Ruleta.DificultadDatos d = cambios(server);
-         if (d.activo(id)) {
-            d.desactivar(id);
-            d.setDirty();
-            if ("sin-regeneracion".equals(id)) {
-               ((BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION)).set(true, server);
-            }
-
-            Red.enviarATodos(server, new CambiosPayload(d.csv()));
-            Cambios.Entrada e = Cambios.porId(id);
-            jugador.sendSystemMessage(Component.literal("Desactivado: " + (e == null ? id : e.titulo())).withStyle(ChatFormatting.YELLOW));
-         }
-      }
-   }
+   static void desactivarCambio(ServerPlayer jugador, String id) { }
 
    private static void parar(MinecraftServer server) {
       Mensajes.parar(server);
@@ -455,15 +439,7 @@ public class Ruleta {
       return server != null && server.overworld() != null && cambios(server).activo(id);
    }
 
-   private static Ruleta.DificultadDatos cambios(MinecraftServer server) {
-      if (cambios == null) {
-         cambios = (Ruleta.DificultadDatos)server.overworld()
-            .getDataStorage()
-            .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_perla"), Ruleta.DificultadDatos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Ruleta.DificultadDatos(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
-      }
-
-      return cambios;
-   }
+   private static Ruleta.DificultadDatos cambios(MinecraftServer server) { return null; }
 
    static boolean perlaX2() {
       MinecraftServer server = Servidor.actual();
@@ -575,19 +551,7 @@ public class Ruleta {
       boolean sinMensajeTotem;
       final Set<String> otros = new LinkedHashSet<>();
 
-      static Ruleta.DificultadDatos cargar(CompoundTag tag, Provider registros) {
-         Ruleta.DificultadDatos d = new Ruleta.DificultadDatos();
-         d.perla = tag.getBooleanOr("activo", false);
-         d.magma = tag.getBooleanOr("magma", false);
-         d.sinMensajeTotem = tag.getBooleanOr("sin_mensaje_totem", false);
-         ListTag lista = tag.getListOrEmpty("cambios");
-
-         for (int i = 0; i < lista.size(); i++) {
-            d.otros.add(lista.getString(i));
-         }
-
-         return d;
-      }
+      static Ruleta.DificultadDatos cargar(CompoundTag tag, Provider registros) { return null; }
 
       public CompoundTag save(CompoundTag tag, Provider registros) {
          tag.putBoolean("activo", this.perla);

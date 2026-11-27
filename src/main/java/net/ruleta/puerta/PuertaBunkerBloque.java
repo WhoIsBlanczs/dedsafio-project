@@ -267,30 +267,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
       return super.playerWillDestroy(level, pos, state, player);
    }
 
-   public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) {
-      if (!state.is(newState.getBlock()) && !desmontando && !level.isClientSide()) {
-         desmontando = true;
-
-         try {
-            Direction frente = (Direction)state.getValue(FACING);
-            BlockPos o = origen(pos, state);
-            this.quitarHojas(level, o, frente);
-
-            for (int dx = 0; dx < 8; dx++) {
-               for (int dy = 0; dy < 11; dy++) {
-                  BlockPos p = celda(o, frente, dx, dy);
-                  if (!p.equals(pos) && this.esDeEstaPuerta(level.getBlockState(p), frente, dx, dy)) {
-                     level.setBlock(p, Blocks.AIR.defaultBlockState(), 35);
-                  }
-               }
-            }
-         } finally {
-            desmontando = false;
-         }
-      }
-
-      super.onRemove(state, level, pos, newState, moving);
-   }
+   public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moving) { }
 
    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
       boolean todos = !this.grande && Ajustes.bool("bunker.puerta_todos");

@@ -111,9 +111,7 @@ public final class LinternaCliente {
       }
    }
 
-   private static void v(Object b, Matrix4f m, float x, float y, int argb) {
-      b.addVertex(m, x, y, 0.0F).setColor(argb >> 16 & 0xFF, argb >> 8 & 0xFF, argb & 0xFF, argb >>> 24);
-   }
+   private static void v(Object b, Matrix4f m, float x, float y, int argb) { }
 
    public static float luzOtros() { return 0; }
 
@@ -235,9 +233,7 @@ public final class LinternaCliente {
 
    private static void haz(boolean negro, float fuera) { }
 
-   private static void g(Object b, float x, float y, float k) {
-      b.addVertex(x, y, 0.0F).setColor(k, k, k, 1.0F);
-   }
+   private static void g(Object b, float x, float y, float k) { }
 
    @SubscribeEvent
    public static void alDibujarMundo(RenderLevelStageEvent e) {

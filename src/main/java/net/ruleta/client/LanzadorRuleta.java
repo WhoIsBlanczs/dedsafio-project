@@ -62,34 +62,7 @@ public class LanzadorRuleta extends Screen {
       return mc.getConnection() != null && RedCliente.servidorConMod();
    }
 
-   protected void init() {
-      EscalaGui.ajustar(this, 640, 340);
-      Fondo.poner();
-      int bw = Math.min(118, (this.width - 40 - 32) / 5);
-      int total = bw * 5 + 32;
-      int x0 = (this.width - total) / 2;
-      int yb = this.height - 50;
-      this.addRenderableWidget(
-         new UiBoton(x0, yb, bw, 22, "Ajustes", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreen(new PantallaAjustes(this)))
-            .ayuda("Daños, tiempos, rayos, distancias... todo lo configurable")
-      );
-      this.addRenderableWidget(
-         new UiBoton(x0 + bw + 8, yb, bw, 22, "Cambios activos", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreenAndShow(new PantallaCambiosActivos()))
-            .ayuda("Los cambios de dificultad que hay ahora en el mundo")
-      );
-      this.addRenderableWidget(
-         new UiBoton(x0 + (bw + 8) * 2, yb, bw, 22, "Bunkers", UiBoton.Estilo.NORMAL, () -> RedCliente.enviar(new BunkerAccionPayload("abrir", "")))
-            .ayuda("Ver los bunkers y demolerlos")
-      );
-      this.addRenderableWidget(
-         new UiBoton(x0 + (bw + 8) * 3, yb, bw, 22, "Panel", UiBoton.Estilo.NORMAL, () -> Minecraft.getInstance().setScreenAndShow(new PantallaPanel(this)))
-            .ayuda("Opciones para configurar el casino y lo que vaya añadiendo el mod")
-      );
-      this.addRenderableWidget(new UiBoton(x0 + (bw + 8) * 4, yb, bw, 22, "Detener ruleta", UiBoton.Estilo.PELIGRO, () -> {
-         RedCliente.enviar(new LanzarPayload(-1, 1, false, false, "", "", "", ""));
-         this.onClose();
-      }));
-   }
+   protected void init() { }
 
    public void removed() {
       EscalaGui.restaurar();
@@ -125,52 +98,7 @@ public class LanzadorRuleta extends Screen {
       }
    }
 
-   public void extractRenderState(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
-      float aparicion = this.aparece.hacia(1.0F, 11.0F);
-      this.fondoRuleta(ctx);
-      this.calcular();
-      this.hover = this.elegir(mx, my);
-      long ahora = Util.getMillis();
-      float dt = Math.min(0.1F, (float)(ahora - this.ultimo) / 1000.0F);
-      this.ultimo = ahora;
-
-      for (int i = 0; i < 8; i++) {
-         float objetivo = i == this.hover ? 1.12F : 1.0F;
-         this.escala[i] = this.escala[i] + (objetivo - this.escala[i]) * Math.min(1.0F, dt * 16.0F);
-         float brillo = i == this.hover ? 1.0F : 0.0F;
-         this.luz[i] = this.luz[i] + (brillo - this.luz[i]) * Math.min(1.0F, dt * 12.0F);
-      }
-
-      PoseStack pose = ctx.pose();
-      BufferSource vcp = ctx.bufferSource();
-
-      for (int pase = 0; pase < 2; pase++) {
-         for (int i = 0; i < 8; i++) {
-            if (!(this.escala[i] > 1.02F) && !(this.luz[i] > 0.01F) ? pase == 0 : pase == 1) {
-               pose.pushPose();
-               pose.translate(this.cx, this.cy, 0.0F);
-               pose.scale(this.s, this.s, 1.0F);
-               pose.mulPose(Axis.ZP.rotationDegrees(i * 45.0F));
-               pose.scale(this.escala[i], this.escala[i], 1.0F);
-               RuletaHud.casillaLanzador(pose.last().pose(), i, this.luz[i]);
-               pose.popPose();
-            }
-         }
-      }
-
-      ctx.flush();
-      Ui.alfa = aparicion;
-      Ui.textoCentro(ctx, this.font, "Elige una ruleta", this.width / 2, 12, 15330549, 1.0F, true);
-      if (this.hover >= 0) {
-         RuletaColor c = RuletaColor.byIndex(this.hover);
-         String nombre = Mensajes.encabezado(c);
-         nombre = nombre.endsWith(":") ? nombre.substring(0, nombre.length() - 1) : nombre;
-         Ui.textoCentro(ctx, this.font, nombre, this.width / 2, this.height - 50 - 13, c.rgb, 1.0F, true);
-      }
-
-      super.extractRenderState(ctx, mx, my, pt);
-      Ui.alfa = 1.0F;
-   }
+   public void extractRenderState(GuiGraphicsExtractor ctx, int mx, int my, float pt) { }
 
    public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
       double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
@@ -189,15 +117,7 @@ public class LanzadorRuleta extends Screen {
       }
    }
 
-   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
-      int key = ev_.key(); int scan = 0; int mods = ev_.modifiers();
-      if (ABRIR.matches(key, scan)) {
-         this.onClose();
-         return true;
-      } else {
-         return super.keyPressed(ev_);
-      }
-   }
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) { return false; }
 
    public boolean isPauseScreen() {
       return false;

@@ -143,14 +143,7 @@ public class PantallaSelectorItem extends UiPantalla {
    }
 
    @Override
-   protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) {
-      if (this.hoverId != null) {
-         List<Component> t = new ArrayList<>();
-         t.add(this.hoverPila.getHoverName());
-         t.add(Component.literal(this.hoverId).withStyle(ChatFormatting.GRAY));
-         g.renderTooltip(this.font, t, Optional.empty(), mx, my);
-      }
-   }
+   protected void encima(GuiGraphicsExtractor g, int mx, int my, float pt) { }
 
    public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
       double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();

@@ -140,13 +140,5 @@ public final class HudCliente {
       return RuletaHud.girando();
    }
 
-   public static void render(GuiGraphicsExtractor ctx) {
-      Font tr = Minecraft.getInstance().font;
-      if (Minecraft.getInstance().player != null && !Minecraft.getInstance().options.hideGui) {
-         AvisoHud.coordenadas(ctx, tr);
-      }
-
-      TemporizadorHud.render(ctx, tr);
-      AvisoHud.render(ctx, tr);
-   }
+   public static void render(GuiGraphicsExtractor ctx) { }
 }

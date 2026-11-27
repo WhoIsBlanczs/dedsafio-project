@@ -277,19 +277,7 @@ public final class TornadoCliente {
 
    private static void cono(TornadoCliente.Torn t, double dx, double dy, double dz, float tiempo, boolean polvo, float escala) { }
 
-   private static void vertice(Object b, double dx, double dy, double dz, float ex, float ey, float ez, float r, float ang, float u, float v) {
-      float irregular = 1.0F
-         + 0.0F
-            * (
-               0.1F * Mth.sin(ang * 5.0F + v * 9.0F + tiempoCapa * 0.9F + semillaCapa)
-                  + 0.07F * Mth.sin(ang * 9.0F - v * 17.0F - tiempoCapa * 1.3F + semillaCapa * 2.0F)
-                  + 0.04F * Mth.sin(ang * 17.0F + v * 31.0F + tiempoCapa * 2.1F)
-            );
-      float rr = r * irregular;
-      float c = Mth.cos(ang);
-      float s = Mth.sin(ang);
-      b.addVertex((float)(dx + ex + c * rr), (float)(dy + ey), (float)(dz + ez + s * rr)).setUv(u, v).setColor(c * 0.5F + 0.5F, s * 0.5F + 0.5F, 0.0F, 1.0F);
-   }
+   private static void vertice(Object b, double dx, double dy, double dz, float ex, float ey, float ez, float r, float ang, float u, float v) { }
 
    private static void cubo(float s) { }
 

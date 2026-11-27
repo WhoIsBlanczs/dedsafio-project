@@ -62,86 +62,10 @@ public final class MapaDatos {
       COLA.add(chunk);
    }
 
-   public static void alCargarChunk(ClientLevel nivelCargado, LevelChunk chunk) {
-      COLA.add(chunk.getPos().toLong());
-   }
+   public static void alCargarChunk(ClientLevel nivelCargado, LevelChunk chunk) { }
 
    @SubscribeEvent
-   public static void alTick(TickEvent.ClientTickEvent e) {
-      if (e.phase == TickEvent.Phase.END) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level == null) {
-            if (mundo != null) {
-               MUNDOS.clear();
-               vaciar();
-            }
-         } else {
-            if (mundo != mc.level) {
-               COLA.clear();
-               CAMBIADOS.clear();
-               mundo = mc.level;
-               if (!mc.level.dimension().equals(dimension)) {
-                  dimension = mc.level.dimension();
-                  CACHE = MUNDOS.computeIfAbsent(dimension, k -> new HashMap<>());
-               }
-            }
-
-            int id = mc.getTextureManager().getTexture(TextureAtlas.LOCATION_BLOCKS).getId();
-            if (id != atlasId) {
-               atlasId = id;
-               MEDIOS.clear();
-               CARAS.clear();
-               if (atlas != null) {
-                  atlas.close();
-                  atlas = null;
-               }
-
-               COLA.addAll(CACHE.keySet());
-            }
-
-            if (++ticks % 40 == 0 && mc.player != null) {
-               int pcx = mc.player.getBlockX() >> 4;
-               int pcz = mc.player.getBlockZ() >> 4;
-
-               for (int dz = -2; dz <= 2; dz++) {
-                  for (int dx = -2; dx <= 2; dx++) {
-                     COLA.add(ChunkPos.pack(pcx + dx, pcz + dz));
-                  }
-               }
-            }
-
-            boolean abierto = mc.gui.screen() instanceof PantallaMapa;
-            if (!abierto) {
-               CAMBIADOS.clear();
-            }
-
-            int presupuesto = abierto ? 40 : 6;
-            Iterator<Long> it = COLA.iterator();
-
-            while (presupuesto > 0 && it.hasNext()) {
-               long c = it.next();
-               it.remove();
-               LevelChunk ch = mc.level.getChunkSource().getChunk(ChunkPos.getX(c), ChunkPos.getZ(c), ChunkStatus.FULL, false);
-               if (ch != null) {
-                  CACHE.put(c, convertir(mc, ch, ChunkPos.getX(c), ChunkPos.getZ(c)));
-                  if (abierto) {
-                     CAMBIADOS.add(c);
-                  }
-
-                  presupuesto--;
-               }
-            }
-
-            if (!COLA.isEmpty() || abierto) {
-               sinUsarAtlas = 0;
-            } else if (atlas != null && ++sinUsarAtlas > 1200) {
-               atlas.close();
-               atlas = null;
-               sinUsarAtlas = 0;
-            }
-         }
-      }
-   }
+   public static void alTick(TickEvent.ClientTickEvent e) { }
 
    private static void vaciar() {
       CACHE.clear();

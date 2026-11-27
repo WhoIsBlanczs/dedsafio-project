@@ -39,25 +39,9 @@ public final class Playa {
    private Playa() {
    }
 
-   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades(MapColor color, SoundType sonido) {
-      return net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
-         .mapColor(color)
-         .noCollission()
-         .instabreak()
-         .offsetType(OffsetType.XZ)
-         .sound(sonido)
-         .pushReaction(PushReaction.DESTROY);
-   }
+   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades(MapColor color, SoundType sonido) { return null; }
 
-   public static void init() {
-      ResourceKey<CreativeModeTab> pestana = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Reg.id("ruleta", "ruleta"));
-      ItemGroupEvents.modifyEntriesEvent(pestana).register((ModifyEntries)salida -> {
-         salida.accept((ItemLike)ITEM_CONCHA.get());
-         salida.accept((ItemLike)ITEM_CARACOLA.get());
-         salida.accept((ItemLike)ITEM_PIEDRITAS.get());
-         salida.accept((ItemLike)ITEM_ESTRELLA_MAR.get());
-      });
-   }
+   public static void init() { }
 
    private static final class NombreBlockItem extends BlockItem {
       private final String nombre;

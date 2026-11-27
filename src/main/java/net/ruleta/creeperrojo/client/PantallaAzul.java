@@ -67,26 +67,7 @@ public class PantallaAzul extends Screen {
       return true;
    }
 
-   public void extractRenderState(GuiGraphicsExtractor g, int mx, int my, float parcial) {
-      int w = this.width;
-      int h = this.height;
-      g.fill(0, 0, w, h, -16746281);
-      float u = Math.min(h, w * 9.0F / 16.0F);
-      float x = 0.137F * u;
-      float tam = 0.033F * u;
-      this.texto(g, FUENTE_CARA, 40.0F, ":(", x, 0.085F * u, 0.11F * u);
-      this.texto(g, FUENTE, 11.0F, "Tu dispositivo se ha encontrado con un problema y necesita reiniciarse. Solo estamos", x, 0.326F * u, tam);
-      this.texto(g, FUENTE, 11.0F, "recopilando información del error, y luego reiniciaremos por ti.", x, 0.366F * u, tam);
-      int pct = Math.min(100, (int)(progreso() * 100.0F));
-      this.texto(g, FUENTE, 11.0F, pct + "% completado", x, 0.435F * u, tam);
-      this.texto(g, FUENTE, 11.0F, "Para más información sobre este problema y posibles soluciones, visita", x, 0.505F * u, tam);
-      this.texto(g, FUENTE, 11.0F, "https://www.windows.com/stopcode", x, 0.546F * u, tam);
-      int lado = Math.round(0.19F * u);
-      g.blit(QR, Math.round(x), Math.round(0.61F * u), lado, lado, 0.0F, 0.0F, 31, 31, 31, 31);
-      float xSoporte = x + lado + 0.036F * u;
-      this.texto(g, FUENTE, 11.0F, "Si llamas a soporte, dales esta información:", xSoporte, 0.635F * u, tam);
-      this.texto(g, FUENTE, 11.0F, "Código de detención: CRITICAL_PROCESS_DIED", xSoporte, 0.68F * u, tam);
-   }
+   public void extractRenderState(GuiGraphicsExtractor g, int mx, int my, float parcial) { }
 
    private void texto(GuiGraphicsExtractor g, Identifier fuente, float tamFuente, String linea, float x, float y, float alto) {
       float escala = alto / tamFuente;
@@ -122,94 +103,14 @@ public class PantallaAzul extends Screen {
       private Control() {
       }
 
-      private static void cortarCreeper(Minecraft mc) {
-         mc.getSoundManager().stop(((SoundEvent)SoundEvents.GENERIC_EXPLODE.value()).getLocation(), null);
-         mc.getSoundManager().stop(SoundEvents.CREEPER_PRIMED.location(), null);
-      }
+      private static void cortarCreeper(Minecraft mc) { }
 
-      private static boolean esCreeper(SoundEvent e, SoundInstance s) {
-         return s.location().equals(((SoundEvent)SoundEvents.GENERIC_EXPLODE.value()).getLocation())
-            || s.location().equals(SoundEvents.CREEPER_PRIMED.location());
-      }
+      private static boolean esCreeper(SoundEvent e, SoundInstance s) { return false; }
 
       @SubscribeEvent
-      public static void alTerminarTick(TickEvent.ClientTickEvent evento) {
-         if (evento.phase == TickEvent.Phase.END) {
-            Minecraft mc = Minecraft.getInstance();
-            if (sinExplosion > 0) {
-               sinExplosion--;
-               cortarCreeper(mc);
-            }
-
-            if (mc.level != null) {
-               long ahora = mc.level.getGameTime();
-               ROJOS.removeIf(r -> ahora - (long)r[3] > 600L);
-               Map<Integer, double[]> ahoraVistos = new HashMap<>();
-
-               for (Entity en : mc.level.entitiesForRendering()) {
-                  if (en instanceof CreeperRojoEntity c) {
-                     double[] pos = new double[]{c.getX(), c.getY(), c.getZ(), ahora};
-                     ahoraVistos.put(c.getId(), pos);
-                     if (c.getSwelling(1.0F) > 0.2F) {
-                        ROJOS.add(pos);
-                     }
-                  }
-               }
-
-               for (Entry<Integer, double[]> v : VISTOS.entrySet()) {
-                  if (!ahoraVistos.containsKey(v.getKey())) {
-                     double[] pos = v.getValue();
-                     ROJOS.add(new double[]{pos[0], pos[1], pos[2], ahora});
-                  }
-               }
-
-               VISTOS.clear();
-               VISTOS.putAll(ahoraVistos);
-            }
-
-            LocalPlayer jugador = mc.player;
-            boolean activa = jugador != null && jugador.isAlive() && jugador.hasEffect(Efectos.PANTALLA_AZUL.get());
-            if (activa) {
-               if (!silenciado) {
-                  cortarCreeper(mc);
-                  mc.getSoundManager().pause();
-                  silenciado = true;
-                  mc.getSoundManager().play(SimpleSoundInstance.forUI(PANTALLAZO, 1.0F, 1.0F));
-               }
-
-               if (!(mc.gui.screen() instanceof PantallaAzul)) {
-                  mc.setScreenAndShow(new PantallaAzul());
-               }
-            } else {
-               if (mc.gui.screen() instanceof PantallaAzul) {
-                  mc.setScreenAndShow(null);
-               }
-
-               if (silenciado) {
-                  silenciado = false;
-                  cortarCreeper(mc);
-                  mc.getSoundManager().resume();
-                  cortarCreeper(mc);
-                  sinExplosion = 200;
-               }
-            }
-         }
-      }
+      public static void alTerminarTick(TickEvent.ClientTickEvent evento) { }
 
       @SubscribeEvent
-      public static void alSonar(PlaySoundEvent evento) {
-         if (evento.getSound() != null) {
-            if (silenciado) {
-               if (!evento.getSound().getLocation().equals(PANTALLAZO.location())) {
-                  evento.setSound(null);
-               }
-            } else {
-               boolean explosion = esCreeper(null, evento.getSound());
-               if (explosion && (sinExplosion > 0 || esDeRojo(evento.getSound()))) {
-                  evento.setSound(null);
-               }
-            }
-         }
-      }
+      public static void alSonar(PlaySoundEvent evento) { }
    }
 }

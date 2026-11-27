@@ -1,9 +1,7 @@
 package net.ruleta.client.mapa;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.math.Axis;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -69,46 +67,7 @@ public class PantallaMapa extends Screen {
       return ChunkPos.pack(Math.floorDiv(cx, 8), Math.floorDiv(cz, 8));
    }
 
-   private PantallaMapa.Loseta crear(long reg) {
-      int rx = ChunkPos.getX(reg);
-      int rz = ChunkPos.getZ(reg);
-      boolean hay = false;
-
-      for (int z = 0; z < 8 && !hay; z++) {
-         for (int x = 0; x < 8; x++) {
-            if (MapaDatos.CACHE.containsKey(ChunkPos.pack(rx * 8 + x, rz * 8 + z))) {
-               hay = true;
-               break;
-            }
-         }
-      }
-
-      if (!hay) {
-         this.vacias.add(reg);
-         return null;
-      }
-
-      DynamicTexture tex = new DynamicTexture(128, 128, true);
-      Identifier id = this.minecraft.getTextureManager().register("ruleta_mapa", tex);
-      PantallaMapa.Loseta l = new PantallaMapa.Loseta(tex, id);
-      NativeImage img = tex.getPixels();
-      if (img != null) {
-         for (int z = 0; z < 8; z++) {
-            for (int x = 0; x < 8; x++) {
-               int cx = rx * 8 + x;
-               int cz = rz * 8 + z;
-               MapaDatos.Trozo t = MapaDatos.CACHE.get(ChunkPos.pack(cx, cz));
-               if (t != null) {
-                  pintar(img, x * 16, z * 16, t);
-               }
-            }
-         }
-      }
-
-      tex.upload();
-      this.losetas.put(reg, l);
-      return l;
-   }
+   private PantallaMapa.Loseta crear(long reg) { return null; }
 
    public void tick() {
       if (!MapaDatos.CAMBIADOS.isEmpty()) {
@@ -135,13 +94,7 @@ public class PantallaMapa extends Screen {
       }
    }
 
-   private static void pintar(NativeImage img, int ox, int oz, MapaDatos.Trozo t) {
-      for (int z = 0; z < 16; z++) {
-         for (int x = 0; x < 16; x++) {
-            img.setPixelRGBA(ox + x, oz + z, t.abgr[z * 16 + x]);
-         }
-      }
-   }
+   private static void pintar(NativeImage img, int ox, int oz, MapaDatos.Trozo t) { }
 
    public void removed() {
       if (this.minecraft != null) {
@@ -260,19 +213,7 @@ public class PantallaMapa extends Screen {
       g.text(this.font, t, lx, ly, 16777215, false);
    }
 
-   private static void linea(Object b, Matrix4f m, float x1, float y1, float x2, float y2, float grosor, float tono) {
-      float dx = x2 - x1;
-      float dy = y2 - y1;
-      float l = Mth.sqrt(dx * dx + dy * dy);
-      float nx = -dy / l * grosor * 0.5F;
-      float ny = dx / l * grosor * 0.5F;
-      float[][] q = new float[][]{{x1 + nx, y1 + ny}, {x1 - nx, y1 - ny}, {x2 - nx, y2 - ny}, {x2 + nx, y2 + ny}};
-      int[] orden = new int[]{0, 1, 2, 0, 2, 3};
-
-      for (int i : orden) {
-         b.addVertex(m, q[i][0], q[i][1], 0.0F).setColor(tono, tono, tono, 1.0F);
-      }
-   }
+   private static void linea(Object b, Matrix4f m, float x1, float y1, float x2, float y2, float grosor, float tono) { }
 
    public boolean mouseScrolled(double ratonX, double ratonY, double deltaX, double delta) {
       double bx = this.centroX + (ratonX - this.width / 2.0) / zoom;
@@ -290,19 +231,7 @@ public class PantallaMapa extends Screen {
       return true;
    }
 
-   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
-      int tecla = ev_.key(); int codigo = 0; int mods = ev_.modifiers();
-      if (MapaCliente.TECLA.matches(tecla, codigo)) {
-         this.onClose();
-         return true;
-      } else if (tecla == 32 && this.minecraft != null && this.minecraft.player != null) {
-         this.centroX = this.minecraft.player.getX();
-         this.centroZ = this.minecraft.player.getZ();
-         return true;
-      } else {
-         return super.keyPressed(ev_);
-      }
-   }
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) { return false; }
 
    private static final class Loseta {
       final DynamicTexture textura;

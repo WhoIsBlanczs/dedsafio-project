@@ -34,15 +34,7 @@ public class JugadoresPantalla extends UiPantalla {
       this.alElegir = alElegir;
    }
 
-   private List<PlayerInfo> jugadores() {
-      List<PlayerInfo> out = new ArrayList<>();
-      if (Minecraft.getInstance().getConnection() != null) {
-         out.addAll(Minecraft.getInstance().getConnection().getOnlinePlayers());
-      }
-
-      out.sort((a, b) -> String.CASE_INSENSITIVE_ORDER.compare(a.getProfile().name(), b.getProfile().getName()));
-      return out;
-   }
+   private List<PlayerInfo> jugadores() { return null; }
 
    protected void init() {
       this.panel(420, 420);
@@ -112,20 +104,7 @@ public class JugadoresPantalla extends UiPantalla {
       }
 
       @Override
-      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) {
-         float h = this.hover.hacia(hover ? 1.0F : 0.0F, 14.0F);
-         Ui.cajaBorde(g, x, y, w, this.alto, 7, Ui.c(Ui.mezcla(1711656, 2369846, h * 0.7F)), Ui.c(Ui.mezcla(3028037, 7113983, h * 0.6F)));
-         boolean todos = this.nombre.isEmpty();
-         if (!todos && this.info != null) {
-            Ui.caja(g, x + 7, y + 6, 26, 26, 5, Ui.c(Ui.mezcla(3028037, 7113983, h * 0.8F)));
-            PlayerFaceRenderer.draw(g, this.info.getSkin(), x + 9, y + 8, 22);
-         } else {
-            Ui.caja(g, x + 8, y + 7, 24, 24, 12, Ui.c(16762967, 0.2F));
-            Ui.textoCentro(g, f, "*", x + 20, y + 15, 16762967, 1.0F, true);
-         }
-
-         Ui.textoN(g, f, todos ? "Todos" : this.nombre, x + 42, y + 15, 15330549, 1.0F);
-      }
+      public void dibujar(GuiGraphicsExtractor g, Font f, int x, int y, int w, int mx, int my, boolean hover) { }
 
       @Override
       public boolean clic(double mx, double my, int boton, int x, int y, int w) {
