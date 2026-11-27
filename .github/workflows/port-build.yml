@@ -17,8 +17,12 @@ jobs:
       - name: build
         run: |
           set +e
-          ./gradlew build --no-daemon --console=plain > /tmp/build.log 2>&1
-          echo $? > /tmp/build.rc
+          for i in 1 2 3 4; do
+            ./gradlew build --no-daemon --console=plain > /tmp/build.log 2>&1
+            rc=$?
+            if [ $rc -ne 0 ] && grep -q 'status code 429\|Could not resolve' /tmp/build.log && ! grep -q 'error:' /tmp/build.log; then sleep 40; else break; fi
+          done
+          echo $rc > /tmp/build.rc
           exit 0
       - name: publish log and jar
         shell: bash {0}
