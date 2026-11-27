@@ -1,10 +1,5 @@
-PayloadTypeRegistry
-class .*ClientCommand|ClientCommands
-ServerPlayNetworking.*(registerGlobalReceiver|send)\(
-ClientPlayNetworking.*(registerGlobalReceiver|send)\(
-EntityRendererRegistry|EntityRenderers.register|BlockEntityRenderers.register|EntityModelLayerRegistry
-LevelRenderEvents.*(AfterTranslucent|End|Last|AfterEntities|Start)
-HudElementRegistry.*(attach|add)
-KeyMappingHelper.*registerKeyMapping|KeyMapping\(
- ScreenEvents.*Render
-TerrainRenderLayerMap|ChunkSectionLayerMap|BlockRenderLayer
+ (updateShape|getSkyDarken|getStructureManager|getTimeOfDay|getHolderOrThrow|getToBlow|isDetonating|blocksMotion|getLightColor|setPixelRGBA|asLong)\(
+Component.*(withStyle|withFont)|class .*FontDescription
+ (items|offhand|selected)\b
+class .*(MonsterRenderState|LivingEntityRenderState|EntityRenderState)$
+net.minecraft.client.renderer.entity.EntityRenderer<
