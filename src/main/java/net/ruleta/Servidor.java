@@ -253,6 +253,7 @@ public final class Servidor {
 
 		JsonObject perm = new JsonObject();
 		perm.addProperty("admin", esAdmin(p));
+		perm.addProperty("hombrosafio", PuenteHombrosafio.disponible());
 		enviar(p, "permiso", perm);
 		enviar(p, "ajustes", jsonAjustes());
 		enviar(p, "cambios", jsonCambios());
@@ -331,12 +332,46 @@ public final class Servidor {
 			}
 			case "detener" -> {
 				PENDIENTES.clear();
+				TIRADAS.clear();
+
+				if (PuenteHombrosafio.disponible()) {
+					if (PuenteHombrosafio.girando()) {
+						PuenteHombrosafio.comando(server, "ruleta cancelar");
+					}
+
+					PuenteHombrosafio.comando(server, "ruleta rojo finalizar");
+					PuenteHombrosafio.comando(server, "ruleta rojo finalizar cielo");
+				}
+
 				enviarATodos("detener", new JsonObject());
 			}
 			case "lanzar" -> lanzar(p, json);
 			default -> {
 			}
 		}
+	}
+
+	/** Orden de los colores, igual en este mod y en Hombrosafío: rojo, rosa, morado, azul, cian, verde, amarillo, naranja. */
+	private static final List<String> COLORES = List.of("reviil", "nutria", "sancion", "evento", "mision", "anuncio", "mob", "cambio");
+
+	/** Una tirada de la ruleta de Hombrosafío que todavía está girando; al pararse sale el aviso. */
+	private record Tirada(ServerPlayer quien, JsonObject json, List<ServerPlayer> destino, long desde) { }
+
+	private static final List<Tirada> TIRADAS = new ArrayList<>();
+
+	private static String textoRuleta(JsonObject json) {
+		String t = json.has("mensaje") ? json.get("mensaje").getAsString() : "";
+
+		if (t.isBlank()) {
+			t = json.has("titulo") ? json.get("titulo").getAsString() : "";
+		}
+
+		if (t.isBlank()) {
+			t = json.has("nombre") ? json.get("nombre").getAsString() : "Ruleta";
+		}
+
+		t = t.replaceAll("\\s+", " ").replaceAll("\\p{Cntrl}", "").strip();
+		return t.length() > 240 ? t.substring(0, 239) + "…" : t;
 	}
 
 	private static void lanzar(ServerPlayer quien, JsonObject json) {
@@ -356,11 +391,44 @@ public final class Servidor {
 			destino.add(objetivo);
 		}
 
+		String tipo = json.get("tipo").getAsString();
+		boolean girar = !json.has("girar") || json.get("girar").getAsBoolean();
+
+		if (girar && PuenteHombrosafio.disponible()) {
+			if (PuenteHombrosafio.girando() || !TIRADAS.isEmpty()) {
+				aviso(quien, "Ya hay una ruleta girando. Espera a que termine o pulsa Detener ruleta.");
+				return;
+			}
+
+			boolean sinCielo = tipo.equals("reviil")
+					&& (!json.has("reviil") || !json.get("reviil").getAsBoolean() || "mensaje".equals(json.has("modo") ? json.get("modo").getAsString() : "mensaje"));
+
+			if (!PuenteHombrosafio.girar(server, Math.max(0, COLORES.indexOf(tipo)), textoRuleta(json), sinCielo)) {
+				aviso(quien, "La ruleta de Hombrosafío no pudo girar. Mira la consola del servidor.");
+				return;
+			}
+
+			TIRADAS.add(new Tirada(quien, json, destino, tick));
+			return;
+		}
+
+		if (girar && !PuenteHombrosafio.disponible()) {
+			aviso(quien, PuenteHombrosafio.error() + ": el aviso sale sin girar la ruleta.");
+		}
+
+		terminarTirada(quien, json, destino);
+	}
+
+	/** Lo que pasa cuando la ruleta se detiene (o enseguida si no gira). */
+	private static void terminarTirada(ServerPlayer quien, JsonObject json, List<ServerPlayer> destino) {
 		for (ServerPlayer p : destino) {
-			enviar(p, "anuncio", json);
+			if (!p.hasDisconnected()) {
+				enviar(p, "anuncio", json);
+			}
 		}
 
 		String tipo = json.get("tipo").getAsString();
+		String para = json.has("para") ? json.get("para").getAsString() : "";
 
 		if (tipo.equals("cambio") && json.has("cambios")) {
 			for (JsonElement e : json.getAsJsonArray("cambios")) {
@@ -375,12 +443,34 @@ public final class Servidor {
 			enviarATodos("cambios", jsonCambios());
 		}
 
-		if (tipo.equals("sancion") && !para.isEmpty() && json.has("castigo")) {
+		if (tipo.equals("reviil") && json.has("reviil") && json.get("reviil").getAsBoolean() && json.has("momentos")) {
+			for (JsonElement e : json.getAsJsonArray("momentos")) {
+				JsonObject o = e.getAsJsonObject();
+				MomentosHS.Momento m = MomentosHS.porId(o.get("id").getAsString());
+
+				if (m == null) {
+					continue;
+				}
+
+				String fallo = PuenteHombrosafio.activarMomento(server, m,
+						o.has("segundos") ? o.get("segundos").getAsInt() : 0,
+						o.has("num") ? o.get("num").getAsInt() : 1,
+						o.has("texto") ? o.get("texto").getAsString() : "");
+
+				if (fallo != null && quien != null && !quien.hasDisconnected()) {
+					aviso(quien, "Momento Revil «" + m.titulo() + "» no activado: " + fallo + ".");
+				}
+			}
+		}
+
+		String castigado = json.has("castigado") ? json.get("castigado").getAsString() : para;
+
+		if (tipo.equals("sancion") && !castigado.isEmpty() && json.has("castigo")) {
 			String castigo = json.get("castigo").getAsString();
 
 			if (castigo.equals("kick") || castigo.equals("ban")) {
 				int minutos = json.has("minutos") ? json.get("minutos").getAsInt() : 0;
-				PENDIENTES.add(new Castigo(tick + 200, para, castigo, minutos));
+				PENDIENTES.add(new Castigo(tick + 200, castigado, castigo, minutos));
 			}
 		}
 	}
@@ -390,6 +480,16 @@ public final class Servidor {
 	public static void tick(MinecraftServer s) {
 		server = s;
 		tick++;
+
+		if (!TIRADAS.isEmpty()) {
+			Tirada t = TIRADAS.get(0);
+
+			// Espera a que la ruleta de Hombrosafío se detenga (como mucho 20 s).
+			if (tick - t.desde() > 10 && (!PuenteHombrosafio.girando() || tick - t.desde() > 400)) {
+				TIRADAS.remove(0);
+				terminarTirada(t.quien(), t.json(), t.destino());
+			}
+		}
 
 		Iterator<Castigo> it = PENDIENTES.iterator();
 

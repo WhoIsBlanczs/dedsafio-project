@@ -26,6 +26,8 @@ public final class ClienteEstado {
 	public static boolean admin;
 	/** Si el servidor tiene el mod instalado (si no, el menú funciona solo de forma local). */
 	public static boolean conectado;
+	/** Si el servidor tiene Hombrosafío (su ruleta y sus Momentos Revil). */
+	public static boolean hombrosafio;
 
 	private ClienteEstado() {
 	}
@@ -40,7 +42,10 @@ public final class ClienteEstado {
 		JsonElement json = JsonParser.parseString(texto);
 
 		switch (tipo) {
-			case "permiso" -> admin = json.getAsJsonObject().get("admin").getAsBoolean();
+			case "permiso" -> {
+				admin = json.getAsJsonObject().get("admin").getAsBoolean();
+				hombrosafio = json.getAsJsonObject().has("hombrosafio") && json.getAsJsonObject().get("hombrosafio").getAsBoolean();
+			}
 			case "ajustes" -> {
 				for (Map.Entry<String, JsonElement> e : json.getAsJsonObject().entrySet()) {
 					AJUSTES.put(e.getKey(), e.getValue().getAsDouble());
@@ -78,6 +83,7 @@ public final class ClienteEstado {
 		pedestal = Servidor.pedestalPorDefecto();
 		admin = false;
 		conectado = false;
+		hombrosafio = false;
 		HudAnuncio.detener();
 	}
 
