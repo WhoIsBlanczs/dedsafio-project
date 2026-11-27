@@ -1,38 +1,30 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "ruleta",
 	"version": "${version}",
-	"name": "Example Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Ruleta - Menú G (26.3)",
+	"description": "Recreación para Minecraft 26.3 del menú de la tecla G del DEDsafío 4 Ruleta Fan Project: ruleta, ajustes, cambios activos, bunkers y panel (casino y Nutria Pedestal). De fan para fans, sin fines de lucro.",
 	"authors": [
-		"Me!"
+		"DarkPlayer y colaboradores (obra original)",
+		"Adaptación 26.3"
 	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
-	"license": "CC0-1.0",
-	"icon": "assets/modid/icon.png",
+	"license": "CC-BY-NC-SA-4.0",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"net.ruleta.RuletaMod"
 		],
 		"client": [
-			"com.example.client.ExampleModClient"
+			"net.ruleta.client.RuletaClient"
 		]
 	},
-	"mixins": [
-		"modid.mixins.json",
-		{
-			"config": "modid.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.20.1",
 		"minecraft": "~26.3",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"custom": {
+		"credits": "Basado en DEDsafío 4 Ruleta Fan Project (CC BY-NC-SA 4.0) de DarkPlayer y colaboradores. Serie DEDsafío 4: Eufonia Studios."
 	}
 }
