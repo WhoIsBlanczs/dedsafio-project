@@ -45,14 +45,15 @@ public class LanzadorRuleta extends Screen {
 
    public static void tecla(Minecraft mc) {
       while (ABRIR.consumeClick()) {
-         if (mc.player != null && mc.gui.screen() == null) {
-            if (!mc.player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
-               mc.player.sendOverlayMessage(Component.literal("El lanzador de la ruleta es sólo para operadores."));
-            } else if (!servidorConMod()) {
-               mc.player.sendOverlayMessage(Component.literal("Este servidor no tiene el mod de la ruleta."));
-            } else {
-               mc.setScreenAndShow(new LanzadorRuleta());
-            }
+         if (mc.player == null || mc.gui.screen() != null) {
+            continue;
+         }
+         if (!mc.player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+            mc.player.sendSystemMessage(Component.literal("[Ruleta] El lanzador es sólo para operadores. Activa los trucos del mundo o usa /op."));
+         } else if (!servidorConMod()) {
+            mc.player.sendSystemMessage(Component.literal("[Ruleta] Este servidor no tiene el mod de la ruleta."));
+         } else {
+            mc.setScreenAndShow(new LanzadorRuleta());
          }
       }
    }

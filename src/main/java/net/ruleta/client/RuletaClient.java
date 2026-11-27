@@ -60,6 +60,7 @@ public final class RuletaClient implements ClientModInitializer {
       net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(AvisoHud.OCULTAR);
       net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(LanzadorRuleta.ABRIR);
       net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(MapaCliente.TECLA);
+      net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.END_CLIENT_TICK.register(LanzadorRuleta::tecla);
       registrarDibujos();
       PantallaHud.Comando.registrar();
       ComandoCieloReviil.registrar();
@@ -131,7 +132,6 @@ public final class RuletaClient implements ClientModInitializer {
                AvisoHud.alternar();
             }
 
-            LanzadorRuleta.tecla(Minecraft.getInstance());
          }
       }
 
