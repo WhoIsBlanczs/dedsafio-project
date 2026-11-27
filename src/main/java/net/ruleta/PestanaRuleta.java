@@ -1,6 +1,5 @@
 package net.ruleta;
 
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -28,7 +27,7 @@ public final class PestanaRuleta {
    public static final Reg<CreativeModeTab> PESTANA = Reg.pestana(
       "ruleta",
       "ruleta",
-      () -> FabricItemGroup.builder()
+      () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
          .title(Component.translatable("itemGroup.ruleta"))
          .icon(() -> new ItemStack((ItemLike)ICONO.get()))
          .displayItems((parametros, salida) -> {

@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BoneMealItem;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ChorusFruitItem;
 import net.minecraft.world.item.EnderpearlItem;
 import net.minecraft.world.item.FireChargeItem;
 import net.minecraft.world.item.FlintAndSteelItem;

@@ -5,7 +5,6 @@ import com.supernova.client.AvisoPop;
 import com.supernova.client.ClientSetup;
 import com.supernova.client.SupernovaDebugCommand;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.NoopRenderer;

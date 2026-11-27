@@ -14,7 +14,7 @@ public final class PhoraMod {
       "misil",
       k -> net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType.Builder.create(MisilEntity::new, MobCategory.MISC).sized(2.0F, 2.0F).trackRangeChunks(20).trackedUpdateRate(1).forceTrackedVelocityUpdates(true).fireImmune().noSave().build(k)
    );
-   public static final Reg<Item> PALO = Reg.item("ruleta", "palo_phora", () -> new PaloPhora(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+   public static final Reg<Item> PALO = Reg.item("ruleta", "palo_phora", () -> new PaloPhora(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC)));
 
    private PhoraMod() {
    }

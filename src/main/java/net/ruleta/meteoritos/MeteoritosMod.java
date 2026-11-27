@@ -15,7 +15,7 @@ public final class MeteoritosMod {
       k -> net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType.Builder.create(MeteoritoEntity::new, MobCategory.MISC).sized(2.0F, 2.0F).trackRangeChunks(28).trackedUpdateRate(1).forceTrackedVelocityUpdates(true).fireImmune().noSave().build(k)
    );
    public static final Reg<Item> PALO = Reg.item(
-      "ruleta", "palo_meteorito", () -> new PaloMeteorito(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC).fireResistant())
+      "ruleta", "palo_meteorito", () -> new PaloMeteorito(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC))
    );
 
    private MeteoritosMod() {
