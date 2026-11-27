@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.mojang.blaze3d.platform.InputConstants;
+
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.screens.Screen;
@@ -304,7 +306,7 @@ public abstract class PantallaBase extends Screen {
 
 		this.setFocused(null);
 
-		if (event.button() == 0) {
+		if (event.button() == InputConstants.MOUSE_BUTTON_LEFT) {
 			for (int i = zonas.size() - 1; i >= 0; i--) {
 				Zona z = zonas.get(i);
 
