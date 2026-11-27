@@ -65,12 +65,6 @@ public final class CosmeticosCliente {
    }
 
    public static void registrar() {
-      LivingEntityFeatureRendererRegistrationCallback.EVENT
-         .register((LivingEntityFeatureRendererRegistrationCallback)(tipo, renderizador, ayudante, contexto) -> {
-            if (renderizador instanceof PlayerRenderer pr) {
-               ayudante.register(new CosmeticosLayer(pr));
-            }
-         });
    }
 
    private static void particula(Minecraft mc, Player p, Random r, ParticleOptions tipo, float escala, int vida) {

@@ -24,7 +24,6 @@ import net.ruleta.candado.Candados;
 import net.ruleta.client.agujero.AgujeroCliente;
 import net.ruleta.client.agujero.CieloBake;
 import net.ruleta.client.burbuja.BurbujaCliente;
-import net.ruleta.client.burbuja.BurbujaRenderer;
 import net.ruleta.client.compat.ClientPlayerNetworkEvent;
 import net.ruleta.client.compat.RenderGuiEvent;
 import net.ruleta.client.compat.SubscribeEvent;
@@ -39,7 +38,6 @@ import net.ruleta.client.escenas.MomentoNutria;
 import net.ruleta.client.linterna.LinternaCliente;
 import net.ruleta.client.mapa.MapaCliente;
 import net.ruleta.client.meteoritos.MeteoritosCliente;
-import net.ruleta.client.mobs.BombaWardenRenderer;
 import net.ruleta.client.phora.PhoraCliente;
 import net.ruleta.client.reviil.AnimacionReviil;
 import net.ruleta.client.reviil.CieloReviil;
@@ -48,34 +46,43 @@ import net.ruleta.client.ruleta.RuletaHud;
 import net.ruleta.client.tornado.TornadoCliente;
 import net.ruleta.creeperes.client.RegistroClienteCreeperes;
 import net.ruleta.creeperrojo.client.RegistroClienteCreeperRojo;
-import net.ruleta.estatua.client.EstatuaNutriaCliente;
 import net.ruleta.herobrine.client.RegistroClienteHerobrine;
 import net.ruleta.meteoritos.MeteoritosMod;
 import net.ruleta.mobs.MobsNuevos;
 import net.ruleta.nuclear.client.ClientEvents;
 import net.ruleta.phora.PhoraMod;
-import net.ruleta.puerta.client.PuertaBunkerCliente;
 import net.ruleta.tornado.TornadoPayload;
-import net.ruleta.tragamonedas.client.TragamonedasCliente;
 
 public final class RuletaClient implements ClientModInitializer {
-   public void onInitializeClient() { }
+   public void onInitializeClient() {
+      OpcionesCliente.leer();
+      Red.cliente = RuletaClient::recibir;
+      RedCliente.registrar();
+      net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(AvisoHud.OCULTAR);
+      net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(LanzadorRuleta.ABRIR);
+      net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper.registerKeyMapping(MapaCliente.TECLA);
+      registrarDibujos();
+      PantallaHud.Comando.registrar();
+      ComandoCieloReviil.registrar();
+      DedsafioCliente.registrar();
+      SupernovaDebugCommand.registrar();
+      CosmeticosCliente.registrar();
+      BurbujaCliente.registrar();
+      ClientSetup.registrar();
+      ClientEnganches.registrar();
+   }
 
    private static void registrarShaders() { }
 
    private static void registrarDibujos() {
       EntityRendererRegistry.register(PhoraMod.MISIL.get(), NoopRenderer::new);
       EntityRendererRegistry.register(MeteoritosMod.METEORITO.get(), NoopRenderer::new);
-      EntityRendererRegistry.register(MobsNuevos.BOMBA_WARDEN.get(), BombaWardenRenderer::new);
-      EntityRendererRegistry.register(Burbujas.BURBUJA.get(), BurbujaRenderer::new);
-      EntityRendererRegistry.register(net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT, RayoRealista::new);
+      EntityRendererRegistry.register(MobsNuevos.BOMBA_WARDEN.get(), net.minecraft.client.renderer.entity.VexRenderer::new);
+      EntityRendererRegistry.register(Burbujas.BURBUJA.get(), NoopRenderer::new);
       AgujeroCliente.Registro.registrar();
       RegistroClienteCreeperes.registrar();
       RegistroClienteHerobrine.registrar();
       RegistroClienteCreeperRojo.registrar();
-      PuertaBunkerCliente.registrar();
-      TragamonedasCliente.registrar();
-      EstatuaNutriaCliente.registrar();
       ClientEvents.registrar();
    }
 

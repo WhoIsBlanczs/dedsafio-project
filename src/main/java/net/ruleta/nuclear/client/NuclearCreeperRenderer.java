@@ -1,37 +1,20 @@
 package net.ruleta.nuclear.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.CreeperRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
+import net.minecraft.client.renderer.entity.state.CreeperRenderState;
 import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
-import net.ruleta.nuclear.entity.NuclearCreeperEntity;
 
-public class NuclearCreeperRenderer extends MobRenderer<NuclearCreeperEntity, NuclearCreeperModel<NuclearCreeperEntity>> {
+/** Renderer del Nuclear Creeper: modelo de creeper vanilla con su textura propia. */
+public class NuclearCreeperRenderer extends CreeperRenderer {
    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath("nuclearcreeper", "textures/entity/nuclear_creeper.png");
-   private static final float BASE_SCALE = 0.85F;
 
    public NuclearCreeperRenderer(Context context) {
-      super(context, new NuclearCreeperModel(context.bakeLayer(NuclearCreeperModel.LAYER_LOCATION)), 0.5F);
+      super(context);
    }
 
-   protected void scale(NuclearCreeperEntity entity, PoseStack pose, float partialTick) {
-      float swell = entity.getSwelling(partialTick);
-      float wobble = 1.0F + Mth.sin(swell * 100.0F) * swell * 0.01F;
-      swell = Mth.clamp(swell, 0.0F, 1.0F);
-      swell *= swell;
-      swell *= swell;
-      float sxz = (1.0F + swell * 0.4F) * wobble;
-      float sy = (1.0F + swell * 0.1F) / wobble;
-      pose.scale(sxz * 0.85F, sy * 0.85F, sxz * 0.85F);
-   }
-
-   protected float getWhiteOverlayProgress(NuclearCreeperEntity entity, float partialTick) {
-      float swell = entity.getSwelling(partialTick);
-      return (int)(swell * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(swell, 0.5F, 1.0F);
-   }
-
-   public Identifier getTextureLocation(NuclearCreeperEntity entity) {
+   @Override
+   public Identifier getTextureLocation(CreeperRenderState state) {
       return TEXTURE;
    }
 }

@@ -27,7 +27,6 @@
   "client": [
     "ChestRendererMixin",
     "JugadorOcultoMixin",
-    "KeyboardInputMixin",
     "CamaraEventosMixin",
     "SonidoMixin",
     "GuiMixin",

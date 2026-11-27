@@ -23,5 +23,7 @@ public class ClientSetup {
       return multiply;
    }
 
-   public static void registrar() { }
+   public static void registrar() {
+      net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry.register(SupernovaMod.SUPERNOVA.get(), net.minecraft.client.renderer.entity.NoopRenderer::new);
+   }
 }
