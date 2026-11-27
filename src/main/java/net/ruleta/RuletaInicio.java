@@ -43,6 +43,7 @@ public class RuletaInicio implements ModInitializer {
       Cajero.init();
       EstatuaNutria.init();
       Playa.init();
+      net.ruleta.arboles.Arboles.init();
       Red.registrar();
       Servidor.registrar();
       Enganches.registrar();
