@@ -1,0 +1,19 @@
+name: sondeo
+on:
+  push:
+    branches: [sondeo]
+jobs:
+  s:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with: { java-version: '25', distribution: 'microsoft' }
+      - run: chmod +x ./gradlew && ./gradlew compileJava --no-daemon -q || true
+      - name: javap
+        run: |
+          MC=$(find ~/.gradle .gradle -name '*.jar' -size +10M 2>/dev/null | while read j; do unzip -l "$j" 2>/dev/null | grep -q 'net/minecraft/world/level/Level.class' && echo "$j"; done | head -1)
+          echo "MC=$MC"
+          unzip -Z1 "$MC" | grep -iE 'Face|PlayerSkin' | head -30
+          for c in net.minecraft.client.gui.components.PlayerFaceExtractor net.minecraft.client.gui.components.PlayerFaceRenderer net.minecraft.client.multiplayer.PlayerInfo net.minecraft.world.entity.player.PlayerSkin net.minecraft.commands.Commands; do echo "=== $c"; javap -cp "$MC" "$c" 2>&1 | grep -iE "class |static|Skin|perform" | head -40; done
+          javap -cp "$MC" net.minecraft.server.MinecraftServer | grep -iE "CommandSource|getCommands"
