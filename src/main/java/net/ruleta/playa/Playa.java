@@ -41,7 +41,7 @@ public final class Playa {
 
    public static void init() {
       ResourceKey<CreativeModeTab> pestana = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Reg.id("ruleta", "ruleta"));
-      ItemGroupEvents.modifyEntriesEvent(pestana).register((ModifyEntries)salida -> {
+      net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents.modifyOutputEvent(pestana).register(salida -> {
          salida.accept((ItemLike)ITEM_CONCHA.get());
          salida.accept((ItemLike)ITEM_CARACOLA.get());
          salida.accept((ItemLike)ITEM_PIEDRITAS.get());

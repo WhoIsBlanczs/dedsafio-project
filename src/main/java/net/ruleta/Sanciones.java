@@ -98,7 +98,7 @@ public final class Sanciones {
                      Date ahora = new Date();
                      Date hasta = new Date(ahora.getTime() + s.segundos() * 1000L);
                      String razon = s.textoTiempo() + " baneado/a por la Ruleta Morada.";
-                     server.getPlayerList().getBans().add(new UserBanListEntry(p.getGameProfile(), ahora, s.quien(), hasta, razon));
+                     server.getPlayerList().getBans().add(new UserBanListEntry(new net.minecraft.server.players.NameAndId(p.getGameProfile()), ahora, s.quien(), hasta, razon));
                      p.connection.disconnect(Component.literal("Desconectado/a.\n" + s.textoTiempo() + " baneado/a."));
                   } else if (s.tipo() == 2) {
                      p.connection.disconnect(Component.literal("GG"));

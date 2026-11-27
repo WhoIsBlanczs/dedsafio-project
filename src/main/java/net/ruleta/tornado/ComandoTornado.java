@@ -114,7 +114,6 @@ public final class ComandoTornado {
       LISTA.clear();
       CAPTURAS.clear();
       if (habia) {
-         server.overworld().setWeatherParameters(6000, 0, false, false);
       }
 
       enviarATodos(server);
@@ -123,7 +122,6 @@ public final class ComandoTornado {
    private static void lluvia(MinecraftServer server) {
       ServerLevel mundo = server.overworld();
       if (!mundo.isRaining() || !mundo.isThundering()) {
-         mundo.setWeatherParameters(0, 24000, true, true);
       }
    }
 

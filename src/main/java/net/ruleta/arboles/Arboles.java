@@ -33,7 +33,7 @@ public final class Arboles {
 
    public static void init() {
       ResourceKey<CreativeModeTab> pestana = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Reg.id("ruleta", "ruleta"));
-      ItemGroupEvents.modifyEntriesEvent(pestana).register((ModifyEntries)salida -> {
+      net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents.modifyOutputEvent(pestana).register(salida -> {
          salida.accept((ItemLike)ITEM_BROTE_COSTA.get());
          salida.accept((ItemLike)ITEM_BROTE_PALMERA.get());
          salida.accept((ItemLike)PINCEL.get());

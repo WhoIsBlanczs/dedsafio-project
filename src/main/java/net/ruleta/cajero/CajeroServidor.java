@@ -96,13 +96,13 @@ public final class CajeroServidor {
    private static int contar(Player jugador, Item item) {
       int n = 0;
 
-      for (ItemStack s : jugador.getInventory().items) {
+      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
          if (s.is(item)) {
             n += s.getCount();
          }
       }
 
-      for (ItemStack s : jugador.getInventory().offhand) {
+      for (ItemStack s : java.util.List.of(jugador.getInventory().getItem(40))) {
          if (s.is(item)) {
             n += s.getCount();
          }
@@ -114,7 +114,7 @@ public final class CajeroServidor {
    private static void quitar(Player jugador, Item item, int cantidad) {
       int falta = cantidad;
 
-      for (ItemStack s : jugador.getInventory().items) {
+      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
          if (falta <= 0) {
             return;
          }
@@ -126,7 +126,7 @@ public final class CajeroServidor {
          }
       }
 
-      for (ItemStack s : jugador.getInventory().offhand) {
+      for (ItemStack s : java.util.List.of(jugador.getInventory().getItem(40))) {
          if (falta <= 0) {
             return;
          }
@@ -147,7 +147,7 @@ public final class CajeroServidor {
          ItemStack pila = new ItemStack(item, c);
          jugador.getInventory().add(pila);
          if (!pila.isEmpty()) {
-            jugador.drop(pila, false);
+            net.ruleta.compat.Util.dar(jugador, pila);
          }
 
          resto -= c;

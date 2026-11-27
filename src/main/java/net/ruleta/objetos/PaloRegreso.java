@@ -35,7 +35,7 @@ public class PaloRegreso extends Item {
 
          humo(jugador.level(), jugador.position());
          regresar(jugador);
-         quien.getCooldowns().addCooldown(this, 10);
+         quien.getCooldowns().addCooldown(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(this), 10);
          return InteractionResult.CONSUME;
       } else {
          return InteractionResult.PASS;
@@ -47,14 +47,14 @@ public class PaloRegreso extends Item {
       if (server != null) {
          TeleportTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, TeleportTransition.DO_NOTHING);
          if (!sitio.missingRespawnBlock()) {
-            Vec3 v = sitio.pos();
-            p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, sitio.yRot(), 0.0F);
+            Vec3 v = sitio.position();
+            p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, java.util.Set.of(), sitio.yRot(), 0.0F, true);
             despues(p, "Has vuelto a tu zona de respawn.");
          } else {
             ServerLevel mundo = server.overworld();
             BlockPos spawn = mundo.getRespawnData().pos();
             int y = mundo.getHeight(Types.MOTION_BLOCKING_NO_LEAVES, spawn.getX(), spawn.getZ());
-            p.teleportTo(mundo, spawn.getX() + 0.5, y, spawn.getZ() + 0.5, mundo.getSharedSpawnAngle(), 0.0F);
+            p.teleportTo(mundo, spawn.getX() + 0.5, y, spawn.getZ() + 0.5, java.util.Set.of(), mundo.getRespawnData().yaw(), 0.0F, true);
             despues(p, "No tienes zona de respawn.");
          }
       }

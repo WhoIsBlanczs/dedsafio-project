@@ -287,8 +287,6 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
             desmontando = false;
          }
       }
-
-      super.onRemove(state, level, pos, newState, moving);
    }
 
    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {

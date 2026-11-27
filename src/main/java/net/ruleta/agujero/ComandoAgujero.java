@@ -302,7 +302,7 @@ public final class ComandoAgujero {
    private static void hora(MinecraftServer server) {
       if (horaInicio >= 0L) {
          ServerLevel mundo = server.overworld();
-         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
+         boolean ciclo = mundo.getGameRules().get(GameRules.ADVANCE_TIME);
          boolean termina = false;
          long hora;
          if (cortadoEn >= 0L) {
@@ -314,14 +314,11 @@ public final class ComandoAgujero {
             long hasta = horaInicio + corto(horaInicio, 18000L);
             hora = horaInicio + Math.round((float)(hasta - horaInicio) * suave((float)(relojHora - desdeHora) / 60.0F));
          }
-
-         mundo.setDayTime(hora);
          if (termina) {
             horaInicio = -1L;
             cortadoEn = -1L;
          }
 
-         server.getPlayerList().broadcastAll(new ClientboundSetTimePacket(mundo.getGameTime(), hora, ciclo && termina), Level.OVERWORLD);
       }
    }
 

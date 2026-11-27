@@ -149,7 +149,6 @@ public final class MapaPlaya {
                      } else {
                         j.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false));
                         j.setDeltaMovement(Vec3.ZERO);
-                        j.hurtMarked = true;
                         j.fallDistance = 0.0F;
                         j.sendOverlayMessage(Component.literal("Cargando la playa..."));
                      }
@@ -172,7 +171,7 @@ public final class MapaPlaya {
                      int[] c = cola.poll();
                      if (c == null) {
                         Ruleta.LOG.info("[mapa] colocación terminada");
-                        nivel.getChunk(0, 0).setBlockState(marcaFin(), Blocks.DEEPSLATE.defaultBlockState(), false);
+                        nivel.getChunk(0, 0).setBlockState(marcaFin(), Blocks.DEEPSLATE.defaultBlockState(), 0);
                         listo = true;
                         datos = null;
                         paleta = null;
@@ -182,7 +181,7 @@ public final class MapaPlaya {
                      LevelChunk trozo = nivel.getChunk(c[0], c[1]);
                      if (!hecho(trozo)) {
                         colocar(nivel, trozo);
-                        trozo.setBlockState(marca(c[0], c[1]), Blocks.DEEPSLATE.defaultBlockState(), false);
+                        trozo.setBlockState(marca(c[0], c[1]), Blocks.DEEPSLATE.defaultBlockState(), 0);
                      }
                   }
                }
@@ -222,7 +221,7 @@ public final class MapaPlaya {
                }
 
                colocar(nivel, trozo);
-               trozo.setBlockState(marca(cx, cz), Blocks.DEEPSLATE.defaultBlockState(), false);
+               trozo.setBlockState(marca(cx, cz), Blocks.DEEPSLATE.defaultBlockState(), 0);
             }
          }
       }
@@ -410,7 +409,7 @@ public final class MapaPlaya {
          }
       }
 
-      Block bloque = (Block)BuiltInRegistries.BLOCK.get(Identifier.parse(nombre));
+      Block bloque = BuiltInRegistries.BLOCK.get(Identifier.parse(nombre)).map(h_ -> h_.value()).orElse(Blocks.AIR);
       BlockState e = bloque.defaultBlockState();
 
       for (Entry<String, String> par : props.entrySet()) {

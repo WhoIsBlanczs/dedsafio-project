@@ -23,7 +23,7 @@ import net.ruleta.Tiempo;
 public class SupernovaCommand {
    public static void onRegister(CommandDispatcher<CommandSourceStack> dispatcher) {
       LiteralArgumentBuilder<CommandSourceStack> raiz = (LiteralArgumentBuilder<CommandSourceStack>)Commands.literal("supernova")
-         .requires(src -> src.hasPermission(2));
+         .requires(src -> src.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER));
       raiz.then(
          ((LiteralArgumentBuilder)Commands.literal("romper")
                .then(
@@ -67,7 +67,7 @@ public class SupernovaCommand {
                         boolean quedan = false;
 
                         for (ServerLevel l : ((CommandSourceStack)ctx.getSource()).getServer().getAllLevels()) {
-                           for (SupernovaEntity o : l.getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), x -> x.isDetonating())) {
+                           for (SupernovaEntity o : l.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), x -> x.isDetonating())) {
                               quedan |= o.isAlive();
                            }
                         }
@@ -85,7 +85,7 @@ public class SupernovaCommand {
                int total = 0;
 
                for (ServerLevel level : ((CommandSourceStack)ctx.getSource()).getServer().getAllLevels()) {
-                  for (SupernovaEntity nx : new ArrayList(level.getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), x -> true))) {
+                  for (SupernovaEntity nx : new ArrayList(level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), x -> true))) {
                      nx.discard();
                      total++;
                   }
@@ -107,7 +107,7 @@ public class SupernovaCommand {
             .executes(
                ctx -> {
                   ServerLevel level = ((CommandSourceStack)ctx.getSource()).getLevel();
-                  List<? extends SupernovaEntity> idle = level.getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), nxx -> !nxx.isDetonating());
+                  List<? extends SupernovaEntity> idle = level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), nxx -> !nxx.isDetonating());
                   if (idle.isEmpty()) {
                      ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("No hay ninguna supernova sin detonar en esta dimensión."));
                      return 0;
@@ -295,7 +295,7 @@ public class SupernovaCommand {
       }
 
       ServerLevel level = ((CommandSourceStack)ctx.getSource()).getLevel();
-      List<? extends SupernovaEntity> idle = level.getEntities((EntityTypeTest)SupernovaMod.SUPERNOVA.get(), n -> !n.isDetonating());
+      List<? extends SupernovaEntity> idle = level.getEntities(net.minecraft.world.level.entity.EntityTypeTest.forClass(SupernovaEntity.class), n -> !n.isDetonating());
 
       for (SupernovaEntity n : idle) {
          if (v.tam != null) {

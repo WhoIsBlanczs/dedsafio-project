@@ -57,7 +57,7 @@ public class ItemBurbuja extends Item {
          Burbujas.quitarDe(jugador.level().getServer(), jugador.getUUID());
          nivel.addFreshEntity(b);
          nivel.playSound(null, b.getX(), b.getY(), b.getZ(), SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.PLAYERS, 1.0F, 1.4F);
-         jugador.getCooldowns().addCooldown(this, 10);
+         jugador.getCooldowns().addCooldown(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(this), 10);
          return InteractionResult.CONSUME;
       }
    }

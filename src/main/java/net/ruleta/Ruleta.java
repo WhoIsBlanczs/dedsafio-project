@@ -384,7 +384,7 @@ public class Ruleta {
             d.desactivar(id);
             d.setDirty();
             if ("sin-regeneracion".equals(id)) {
-               ((BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION)).set(true, server);
+               server.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, true, server);
             }
 
             Red.enviarATodos(server, new CambiosPayload(d.csv()));
@@ -458,7 +458,7 @@ public class Ruleta {
       if (cambios == null) {
          cambios = (Ruleta.DificultadDatos)server.overworld()
             .getDataStorage()
-            .computeIfAbsent(new Factory(Ruleta.DificultadDatos::new, Ruleta.DificultadDatos::cargar, DataFixTypes.LEVEL), "ruleta_perla");
+            .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_perla"), Ruleta.DificultadDatos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Ruleta.DificultadDatos.cargar(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
       }
 
       return cambios;
@@ -576,13 +576,13 @@ public class Ruleta {
 
       static Ruleta.DificultadDatos cargar(CompoundTag tag, Provider registros) {
          Ruleta.DificultadDatos d = new Ruleta.DificultadDatos();
-         d.perla = tag.getBoolean("activo");
-         d.magma = tag.getBoolean("magma");
-         d.sinMensajeTotem = tag.getBoolean("sin_mensaje_totem");
-         ListTag lista = tag.getList("cambios", 8);
+         d.perla = tag.getBooleanOr("activo", false);
+         d.magma = tag.getBooleanOr("magma", false);
+         d.sinMensajeTotem = tag.getBooleanOr("sin_mensaje_totem", false);
+         ListTag lista = tag.getListOrEmpty("cambios");
 
          for (int i = 0; i < lista.size(); i++) {
-            d.otros.add(lista.getString(i));
+            lista.getString(i).ifPresent(d.otros::add);
          }
 
          return d;

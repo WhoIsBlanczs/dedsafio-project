@@ -151,7 +151,7 @@ public final class MomentoMeteoritos {
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
                               "meteoritos"
                            )
-                           .requires(s -> s.hasPermission(2)))
+                           .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                         .then(
                            Commands.literal("cielo")
                               .executes(
@@ -220,7 +220,7 @@ public final class MomentoMeteoritos {
                         ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
                         ItemStack palo = new ItemStack((ItemLike)MeteoritosMod.PALO.get());
                         if (!p.getInventory().add(palo)) {
-                           p.drop(palo, false);
+                           net.ruleta.compat.Util.dar(p, palo);
                         }
 
                         ((CommandSourceStack)ctx.getSource())

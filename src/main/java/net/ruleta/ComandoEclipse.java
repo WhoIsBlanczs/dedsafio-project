@@ -139,7 +139,7 @@ public final class ComandoEclipse {
    private static void hora(MinecraftServer server) {
       if (horaInicio >= 0L) {
          ServerLevel mundo = server.overworld();
-         boolean ciclo = mundo.getGameRules().get(GameRules.RULE_DAYLIGHT);
+         boolean ciclo = mundo.getGameRules().get(GameRules.ADVANCE_TIME);
          boolean termina = false;
          long hora;
          if (cortadoEn >= 0L) {
@@ -162,14 +162,11 @@ public final class ComandoEclipse {
                hora = termina ? destino : noche + Math.round((float)corto(noche, destino) * suave((s - totalFin) / 29.5F));
             }
          }
-
-         mundo.setDayTime(hora);
          if (termina) {
             horaInicio = -1L;
             cortadoEn = -1L;
          }
 
-         server.getPlayerList().broadcastAll(new ClientboundSetTimePacket(mundo.getGameTime(), hora, ciclo && termina), Level.OVERWORLD);
       }
    }
 

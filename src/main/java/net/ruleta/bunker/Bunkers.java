@@ -170,7 +170,7 @@ public final class Bunkers {
                            .withStyle(
                               s -> s.withColor(ChatFormatting.GOLD)
                                  .withUnderlined(true)
-                                 .withClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, "/bunker build"))
+                                 .withClickEvent(new ClickEvent.SuggestCommand("/bunker build"))
                            )
                      )
                      .append(Component.literal(" para construirlo.").withStyle(ChatFormatting.YELLOW)),
@@ -198,7 +198,7 @@ public final class Bunkers {
          return 0;
       }
 
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (!t.isEmpty() && mascaras(nivel)) {
          String malo = motivoCerca(server, nivel.dimension().identifier().toString(), pe.esquina());
          if (malo != null) {
@@ -265,7 +265,7 @@ public final class Bunkers {
 
    @Nullable
    static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
-      if (!nivel.getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
+      if (!nivel.getServer().getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
          if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
             return null;
          }
@@ -291,7 +291,7 @@ public final class Bunkers {
             Bunkers.Bunker b = (Bunkers.Bunker)o[1];
             Consumer<Bunkers.Bunker> fin = (Consumer<Bunkers.Bunker>)o[2];
             ServerLevel nivel = obra.nivel();
-            Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+            Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
             BlockPos esquina = new BlockPos(b.ex(), b.ey(), b.ez());
             StructurePlaceSettings ajustes = new StructurePlaceSettings().setIgnoreEntities(false);
             boolean ok = t.isPresent() && t.get().placeInWorld(nivel, esquina, esquina, ajustes, nivel.getRandom(), 18);
@@ -328,8 +328,8 @@ public final class Bunkers {
             .append(Component.literal(b.nombre()).withStyle(new ChatFormatting[]{ChatFormatting.WHITE, ChatFormatting.BOLD}))
             .append(Component.literal("  " + x + ", " + y + ", " + z + "  (" + dim(b.dimension()) + ")").withStyle(ChatFormatting.GRAY))
             .withStyle(
-               s -> s.withClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, tp))
-                  .withHoverEvent(new HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, Component.literal("Clic para ir")))
+               s -> s.withClickEvent(new ClickEvent.SuggestCommand(tp))
+                  .withHoverEvent(new HoverEvent.ShowText(Component.literal("Clic para ir")))
             );
          ((CommandSourceStack)ctx.getSource()).sendSuccess(() -> linea, false);
       }
@@ -438,34 +438,34 @@ public final class Bunkers {
       }
 
       BitSet r = new BitSet(323136);
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (t.isPresent()) {
          CompoundTag nbt = t.get().save(new CompoundTag());
-         ListTag paleta = nbt.getList("palette", 10);
-         if (paleta.isEmpty() && nbt.contains("palettes", 9)) {
-            ListTag ps = nbt.getList("palettes", 9);
+         ListTag paleta = nbt.getListOrEmpty("palette");
+         if (paleta.isEmpty() && nbt.contains("palettes")) {
+            ListTag ps = nbt.getListOrEmpty("palettes");
             if (!ps.isEmpty()) {
-               paleta = ps.getList(0);
+               paleta = ps.getListOrEmpty(0);
             }
          }
 
          BitSet aire = new BitSet();
 
          for (int k = 0; k < paleta.size(); k++) {
-            String n = paleta.getCompound(k).getString("Name");
+            String n = paleta.getCompoundOrEmpty(k).getStringOr("Name", "");
             if (n.equals("minecraft:air") || n.equals("minecraft:cave_air") || n.equals("minecraft:void_air") || n.equals("minecraft:structure_void")) {
                aire.set(k);
             }
          }
 
-         ListTag bloques = nbt.getList("blocks", 10);
+         ListTag bloques = nbt.getListOrEmpty("blocks");
 
          for (int k = 0; k < bloques.size(); k++) {
-            CompoundTag c = bloques.getCompound(k);
-            if (!aire.get(c.getInt("state"))) {
-               ListTag pos = c.getList("pos", 3);
+            CompoundTag c = bloques.getCompoundOrEmpty(k);
+            if (!aire.get(c.getIntOr("state", 0))) {
+               ListTag pos = c.getListOrEmpty("pos");
                if (pos.size() == 3) {
-                  marcar(r, new BlockPos(pos.getInt(0), pos.getInt(1), pos.getInt(2)));
+                  marcar(r, new BlockPos(pos.getIntOr(0, 0), pos.getIntOr(1, 0), pos.getIntOr(2, 0)));
                }
             }
          }
@@ -646,7 +646,7 @@ public final class Bunkers {
          return true;
       }
 
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (t.isEmpty()) {
          return false;
       }
@@ -911,7 +911,7 @@ public final class Bunkers {
       ocupado = null;
    }
 
-   private static Bunkers.Datos datos(MinecraftServer server) { return null; }
+   private static Bunkers.Datos datos(MinecraftServer server) { return server.overworld().getDataStorage().computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_bunkers"), Bunkers.Datos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Bunkers.Datos.cargar(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), net.minecraft.util.datafix.DataFixTypes.LEVEL)); }
 
    public record Bunker(String nombre, String dimension, int ex, int ey, int ez) {
       public double mx() {

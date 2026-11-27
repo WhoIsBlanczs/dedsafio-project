@@ -20,7 +20,7 @@ public final class DatosCandados extends SavedData {
    private static final String NOMBRE = "ruleta_candados";
    private final Map<Long, DatosCandados.Candado> mapa = new HashMap<>();
 
-   public static DatosCandados de(ServerLevel nivel) { return null; }
+   public static DatosCandados de(ServerLevel nivel) { return nivel.getServer().overworld().getDataStorage().computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_candados"), DatosCandados::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> DatosCandados.cargar(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), net.minecraft.util.datafix.DataFixTypes.LEVEL)); }
 
    public DatosCandados.Candado obtener(BlockPos clave) {
       return this.mapa.get(clave.asLong());
@@ -44,21 +44,21 @@ public final class DatosCandados extends SavedData {
 
    public static DatosCandados cargar(CompoundTag tag, Provider registros) {
       DatosCandados d = new DatosCandados();
-      ListTag lista = tag.getList("Candados", 10);
+      ListTag lista = tag.getListOrEmpty("Candados");
 
       for (int i = 0; i < lista.size(); i++) {
-         CompoundTag t = lista.getCompound(i);
+         CompoundTag t = lista.getCompoundOrEmpty(i);
          DatosCandados.Candado c = new DatosCandados.Candado();
-         c.propietario = t.hasUUID("Dueno") ? t.getUUID("Dueno") : null;
-         c.nombre = t.getString("Nombre");
-         c.codigo = t.getString("Codigo");
-         ListTag ab = t.getList("Abiertos", 11);
+         c.propietario = t.getString("Dueno").map(UUID::fromString).orElse(null);
+         c.nombre = t.getStringOr("Nombre", "");
+         c.codigo = t.getStringOr("Codigo", "");
+         ListTag ab = t.getListOrEmpty("Abiertos");
 
          for (int j = 0; j < ab.size(); j++) {
-            c.abiertos.add(NbtUtils.loadUUID(ab.get(j)));
+            ab.getString(j).ifPresent(s_ -> c.abiertos.add(UUID.fromString(s_)));
          }
 
-         d.mapa.put(t.getLong("Pos"), c);
+         d.mapa.put(t.getLongOr("Pos", 0L), c);
       }
 
       return d;
@@ -72,7 +72,7 @@ public final class DatosCandados extends SavedData {
          t.putLong("Pos", en.getKey());
          DatosCandados.Candado c = en.getValue();
          if (c.propietario != null) {
-            t.putUUID("Dueno", c.propietario);
+            t.putString("Dueno", c.propietario.toString());
          }
 
          t.putString("Nombre", c.nombre);
@@ -80,7 +80,7 @@ public final class DatosCandados extends SavedData {
          ListTag ab = new ListTag();
 
          for (UUID u : c.abiertos) {
-            ab.add(NbtUtils.createUUID(u));
+            ab.add(net.minecraft.nbt.StringTag.valueOf(u.toString()));
          }
 
          t.put("Abiertos", ab);

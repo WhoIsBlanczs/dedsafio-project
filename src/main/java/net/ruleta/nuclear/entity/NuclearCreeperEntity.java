@@ -56,7 +56,6 @@ public class NuclearCreeperEntity extends Creeper {
       this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
       this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, false, false, null) {
          {
-            this.targetConditions = this.targetConditions.ignoreLineOfSight();
          }
       });
       this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
@@ -79,7 +78,7 @@ public class NuclearCreeperEntity extends Creeper {
    public boolean isInvulnerableTo(DamageSource source) { return false; }
 
    protected void customServerAiStep() {
-      super.customServerAiStep();
+      super.customServerAiStep((net.minecraft.server.level.ServerLevel)this.level());
       if (this.isCharging()) {
          this.tunneling = false;
          this.getNavigation().stop();

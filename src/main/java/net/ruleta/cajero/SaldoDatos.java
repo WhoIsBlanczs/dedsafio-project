@@ -16,7 +16,7 @@ public class SaldoDatos extends SavedData {
    public static final long MAXIMO = 9000000000000L;
    private final Map<UUID, Long> saldos = new HashMap<>();
 
-   public static SaldoDatos get(MinecraftServer servidor) { return null; }
+   public static SaldoDatos get(MinecraftServer servidor) { return servidor.overworld().getDataStorage().computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_cajero"), SaldoDatos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> SaldoDatos.cargar(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), net.minecraft.util.datafix.DataFixTypes.LEVEL)); }
 
    public long saldo(UUID jugador) {
       return this.saldos.getOrDefault(jugador, 0L);

@@ -65,7 +65,7 @@ public class HerobrineEntity extends Monster {
    }
 
    protected void customServerAiStep() {
-      super.customServerAiStep();
+      super.customServerAiStep((net.minecraft.server.level.ServerLevel)this.level());
       if (this.level() instanceof ServerLevel nivel) {
          ServerPlayer presa = this.objetivo == null ? null : (ServerPlayer)nivel.getPlayerByUUID(this.objetivo);
          if (this.objetivo == null || presa != null && presa.isAlive() && !presa.isSpectator() && !presa.isCreative()) {
@@ -86,7 +86,7 @@ public class HerobrineEntity extends Monster {
       this.setTarget(null);
       double vision = Ajustes.entero("herobrine.vision");
 
-      for (ServerPlayer p : this.tickCount % 2 == 0 ? nivel.players() : List.of()) {
+      for (ServerPlayer p : this.tickCount % 2 == 0 ? nivel.players() : List.<ServerPlayer>of()) {
          if (p.isAlive() && !p.isSpectator() && !p.isCreative() && this.distanceToSqr(p) < vision * vision && this.meMiraALosOjos(p)) {
             this.elegir(p);
             return;
@@ -248,20 +248,19 @@ public class HerobrineEntity extends Monster {
 
    public boolean doHurtTarget(Entity victima) {
       if (victima instanceof ServerPlayer p) {
-         this.swing(InteractionHand.MAIN_HAND);
          if (p.isBlocking()) {
             Vec3 hacia = this.position().vectorTo(p.position());
             Vec3 plano = new Vec3(hacia.x, 0.0, hacia.z).normalize();
             if (plano.dot(p.getViewVector(1.0F)) < 0.0) {
                this.level().broadcastEntityEvent(p, (byte)29);
-               p.getUseItem().hurtAndBreak(1 + Mth.floor(dano()), p, LivingEntity.getSlotForHand(p.getUsedItemHand()));
+               p.getUseItem().hurtAndBreak(1 + Mth.floor(dano()), p, (p.getUsedItemHand() == InteractionHand.MAIN_HAND ? net.minecraft.world.entity.EquipmentSlot.MAINHAND : net.minecraft.world.entity.EquipmentSlot.OFFHAND));
                return true;
             }
          }
 
-         return p.hurt(Ruleta.fuenteLetalPublica(p, "ruleta.herobrine", " fue asesinado por Herobrine"), dano());
+         return p.hurtServer((net.minecraft.server.level.ServerLevel)p.level(), Ruleta.fuenteLetalPublica(p, "ruleta.herobrine", " fue asesinado por Herobrine"), dano());
       } else {
-         return super.doHurtTarget(victima);
+         return super.doHurtTarget((net.minecraft.server.level.ServerLevel)this.level(), victima);
       }
    }
 
@@ -296,18 +295,18 @@ public class HerobrineEntity extends Monster {
    private boolean teletransportar(double x, double y, double z) {
       MutableBlockPos pos = new MutableBlockPos(x, y, z);
 
-      while (pos.getY() > this.level().getMinY() && !this.level().getBlockState(pos).blocksMotion()) {
+      while (pos.getY() > this.level().getMinY() && !!this.level().getBlockState(pos).getCollisionShape(this.level(), pos).isEmpty()) {
          pos.move(0, -1, 0);
       }
 
-      if (this.level().getBlockState(pos).blocksMotion() && !this.level().getBlockState(pos.above()).liquid()) {
+      if (!this.level().getBlockState(pos).getCollisionShape(this.level(), pos).isEmpty() && this.level().getBlockState(pos.above()).getFluidState().isEmpty()) {
          if (this.level() instanceof ServerLevel sl && Bunkers.interiorDe(sl, pos.above()) != null) {
             return false;
          } else {
             double ox = this.getX();
             double oy = this.getY();
             double oz = this.getZ();
-            boolean ok = this.randomTeleport(x, pos.getY() + 1, z, true);
+            boolean ok = this.randomTeleport(x, pos.getY() + 1.0, z, true, (java.util.function.Predicate<net.minecraft.world.level.block.state.BlockState>)(st_ -> true));
             if (ok) {
                this.level().playSound(null, ox, oy, oz, SoundEvents.ENDERMAN_TELEPORT, SoundSource.HOSTILE, 1.0F, 0.5F);
                this.playSound(SoundEvents.ENDERMAN_TELEPORT, 1.0F, 0.5F);

@@ -191,7 +191,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
    public void tick() {
       super.tick();
       if (this.level().isClientSide()) {
-         if (this.isControlledByLocalInstance()) {
+         if (this.isLocalInstanceAuthoritative()) {
             this.pasos = 0;
             this.lx = this.getX();
             this.ly = this.getY();
@@ -228,7 +228,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
    }
 
    public void lerpTo(double x, double y, double z, float yRot, float xRot, int pasos) {
-      if (!this.isControlledByLocalInstance()) {
+      if (!this.isLocalInstanceAuthoritative()) {
          this.lx = x;
          this.ly = y;
          this.lz = z;

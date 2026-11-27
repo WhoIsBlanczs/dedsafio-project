@@ -144,7 +144,7 @@ public final class TotemEvents {
    }
 
    private static void repairArmor(ServerPlayer player) {
-      for (ItemStack armor : player.getArmorSlots()) {
+      for (ItemStack armor : net.ruleta.compat.Util.armadura(player)) {
          if (!armor.isEmpty() && armor.isDamageableItem()) {
             armor.setDamageValue(0);
          }

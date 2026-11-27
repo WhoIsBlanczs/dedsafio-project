@@ -241,7 +241,7 @@ public class SupernovaEntity extends Entity {
       for (EquipmentSlot slot : ARMOR) {
          ItemStack st = e.getItemBySlot(slot);
          if (!st.isEmpty() && st.isDamageableItem()) {
-            e.onEquippedItemBroken(st.getItem(), slot);
+            e.onEquippedItemBroken(st, slot);
             e.setItemSlot(slot, ItemStack.EMPTY);
          }
       }
@@ -251,7 +251,6 @@ public class SupernovaEntity extends Entity {
          Vec3 dir = e.position().subtract(center);
          dir = dir.lengthSqr() < 1.0E-4 ? new Vec3(0.0, 1.0, 0.0) : dir.normalize();
          e.push(dir.x * 3.0, 1.0, dir.z * 3.0);
-         e.hurtMarked = true;
       }
    }
 
@@ -263,7 +262,7 @@ public class SupernovaEntity extends Entity {
             int loss = Math.max(1, Math.round(max * Ajustes.decimal("supernova.armadura") / 100.0F));
             int now = st.getDamageValue() + loss;
             if (now >= max) {
-               e.onEquippedItemBroken(st.getItem(), slot);
+               e.onEquippedItemBroken(st, slot);
                e.setItemSlot(slot, ItemStack.EMPTY);
             } else {
                st.setDamageValue(now);

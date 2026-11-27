@@ -143,7 +143,7 @@ public final class MomentoPhora {
    public static void alRegistrar(CommandDispatcher<CommandSourceStack> dispatcher) {
       dispatcher.register(
          (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal("phora")
-                     .requires(s -> s.hasPermission(2)))
+                     .requires(s -> s.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)))
                   .then(
                      Commands.literal("lluvia")
                         .executes(
@@ -182,7 +182,7 @@ public final class MomentoPhora {
                         ServerPlayer p = ((CommandSourceStack)ctx.getSource()).getPlayerOrException();
                         ItemStack palo = new ItemStack((ItemLike)PhoraMod.PALO.get());
                         if (!p.getInventory().add(palo)) {
-                           p.drop(palo, false);
+                           net.ruleta.compat.Util.dar(p, palo);
                         }
 
                         ((CommandSourceStack)ctx.getSource())

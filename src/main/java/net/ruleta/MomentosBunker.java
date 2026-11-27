@@ -316,7 +316,7 @@ public final class MomentosBunker {
             if (cerrada && tick % cada == 0L) {
                float dano = Ajustes.decimal("dano.bunker") * 2.0F;
 
-               for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
+               for (ServerPlayer p : new ArrayList<>(server.getPlayerList().getPlayers())) {
                   if (p.isAlive() && !p.isCreative() && !p.isSpectator() && !dentro(p)) {
                      p.setInvulnerableTime(0);
                      if ("bunker_rayo".equals(activo)) {
@@ -436,7 +436,7 @@ public final class MomentosBunker {
       }
 
       if (tick % 40L == 0L && Ajustes.bool("bunker.expulsar")) {
-         for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
+         for (ServerPlayer p : new ArrayList<>(server.getPlayerList().getPlayers())) {
             if (p.isAlive() && !p.isCreative() && !p.isSpectator()) {
                Bunkers.Bunker b = Bunkers.interiorDe(p.level(), p.blockPosition());
                if (b != null) {

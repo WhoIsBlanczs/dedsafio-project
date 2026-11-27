@@ -76,12 +76,12 @@ public class PincelBosqueItem extends Item {
             cambiar(jugador);
          }
 
-         return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide());
+         return InteractionResult.SUCCESS;
       } else if (!(ctx.getLevel() instanceof ServerLevel nivel)) {
          return InteractionResult.SUCCESS;
       } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          int n = plantar(nivel, ctx.getClickedPos(), modo(jugador));
-         jugador.getCooldowns().addCooldown(this, 10);
+         jugador.getCooldowns().addCooldown(net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(this), 10);
          jugador.sendOverlayMessage(Component.literal("Árboles plantados: " + n));
          return InteractionResult.CONSUME;
       } else {

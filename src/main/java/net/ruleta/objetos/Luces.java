@@ -101,7 +101,7 @@ public final class Luces {
       if (o != null && server != null) {
          ServerLevel nivel = server.getLevel((ResourceKey)o[0]);
 
-         for (Object[] l : (List)o[1]) {
+         for (Object[] l : (List<Object[]>)o[1]) {
             BlockPos pos = (BlockPos)l[0];
             if (nivel != null && nivel.getBlockState(pos).is(Blocks.LIGHT)) {
                nivel.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);

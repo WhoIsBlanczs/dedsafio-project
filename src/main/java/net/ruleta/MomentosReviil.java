@@ -295,7 +295,7 @@ public final class MomentosReviil {
                sincronizar(server);
             }
          } else if (!DESDE.isEmpty()) {
-            for (ServerPlayer p : new ArrayList(server.getPlayerList().getPlayers())) {
+            for (ServerPlayer p : new ArrayList<>(server.getPlayerList().getPlayers())) {
                if (p.isAlive() && !p.isCreative() && !p.isSpectator()) {
                   if (tick % 20L == 0L) {
                      gas(p);
@@ -332,19 +332,19 @@ public final class MomentosReviil {
          }
 
          if ("sin_regeneracion".equals(id)) {
-            BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION);
+            Boolean regla = server.getGameRules().get(GameRules.NATURAL_HEALTH_REGENERATION);
             if (regeneracionAntes == null) {
-               regeneracionAntes = regla.get();
+               regeneracionAntes = regla;
             }
 
-            regla.set(false, server);
+            server.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, false, server);
          }
       }
    }
 
    private static void devolverRegeneracion(MinecraftServer server) {
       if (regeneracionAntes != null && server != null) {
-         ((BooleanValue)server.getGameRules().getRule(GameRules.RULE_NATURAL_REGENERATION)).set(regeneracionAntes, server);
+         server.getGameRules().set(GameRules.NATURAL_HEALTH_REGENERATION, regeneracionAntes, server);
          regeneracionAntes = null;
       }
    }

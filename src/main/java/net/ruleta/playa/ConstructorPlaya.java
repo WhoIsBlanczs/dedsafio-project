@@ -88,7 +88,7 @@ public final class ConstructorPlaya {
                }
 
                if (++actual.fila >= 16) {
-                  trozo.setBlockState(marca(actual.cx, actual.cz), Blocks.DEEPSLATE.defaultBlockState(), false);
+                  trozo.setBlockState(marca(actual.cx, actual.cz), Blocks.DEEPSLATE.defaultBlockState(), 0);
                   actual = null;
                }
             } else {
