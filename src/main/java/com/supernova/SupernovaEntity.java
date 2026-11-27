@@ -279,7 +279,7 @@ public class SupernovaEntity extends Entity {
       builder.define(HOLD, 0);
    }
 
-   protected void readAdditionalSaveData(CompoundTag tag) {
+   protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput tag) {
       if (tag.contains("MaxRadius")) {
          this.setMaxRadius(tag.getFloatOr("MaxRadius", 0.0F));
       }
@@ -289,7 +289,7 @@ public class SupernovaEntity extends Entity {
       }
    }
 
-   protected void addAdditionalSaveData(CompoundTag tag) {
+   protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput tag) {
       tag.putFloat("MaxRadius", this.getMaxRadius());
       tag.putInt("HoldTicks", this.getHoldTicks());
    }

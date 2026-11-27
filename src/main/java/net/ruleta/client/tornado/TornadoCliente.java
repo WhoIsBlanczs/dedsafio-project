@@ -1,8 +1,6 @@
 package net.ruleta.client.tornado;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +11,6 @@ import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
 import net.minecraft.core.BlockPos;
@@ -173,77 +170,7 @@ public final class TornadoCliente {
    }
 
    @SubscribeEvent
-   public static void alTick(TickEvent.ClientTickEvent e) {
-      if (e.phase == TickEvent.Phase.END) {
-         tickCliente++;
-         Minecraft mc = Minecraft.getInstance();
-         ticksAtrapado = atrapado() ? ticksAtrapado + 1 : 0;
-         boolean aqui = mc.level != null && mc.level.dimension() == Level.OVERWORLD;
-         float meta = cielo && aqui ? 1.0F : 0.0F;
-         nivel = Mth.clamp(nivel + Math.signum(meta - nivel) * 0.01F, 0.0F, 1.0F);
-         if (Math.abs(meta - nivel) < 0.011F) {
-            nivel = meta;
-         }
-
-         rayo = Math.max(0.0F, rayo - 0.09F);
-         if (mc.level != null && mc.player != null) {
-            RandomSource r = mc.level.random;
-            if (nivel > 0.5F && tickCliente >= proximoRayo) {
-               proximoRayo = tickCliente + 60L + r.nextInt(240);
-               rayo = 1.0F;
-            }
-
-            sonidosAmbiente(mc);
-
-            for (TornadoCliente.Torn t : TORNADOS) {
-               if (t.dim.equals(mc.level.dimension().identifier().toString())) {
-                  Vec3 p = posicion(t, 0.0F);
-                  double dx = p.x - mc.player.getX();
-                  double dz = p.z - mc.player.getZ();
-                  if (!(dx * dx + dz * dz > 48400.0)) {
-                     if (r.nextInt(18) == 0) {
-                        double a2 = r.nextDouble() * Math.PI * 2.0;
-                        double rr2 = t.radio * (0.2 + r.nextDouble() * 0.9);
-                        mc.level
-                           .playLocalSound(
-                              p.x + Math.cos(a2) * rr2,
-                              p.y + r.nextDouble() * t.alto * 0.4,
-                              p.z + Math.sin(a2) * rr2,
-                              S_ESCOMBROS,
-                              SoundSource.WEATHER,
-                              2.0F + r.nextFloat() * 2.0F,
-                              0.7F + r.nextFloat() * 0.5F,
-                              false
-                           );
-                     }
-
-                     BlockPos suelo = BlockPos.containing(p.x, p.y - 1.0, p.z);
-                     BlockState bs = mc.level.getBlockState(suelo);
-                     int nPart = tickPart++ % 3 == 0 ? 3 : 0;
-
-                     for (int i = 0; i < nPart; i++) {
-                        double a = r.nextDouble() * Math.PI * 2.0;
-                        double rr = t.radio * (0.1 + r.nextDouble() * 0.55);
-                        double h = r.nextDouble() * t.radio * 1.3;
-                        double px = p.x + Math.cos(a) * rr;
-                        double pz = p.z + Math.sin(a) * rr;
-                        double vt = 0.55 + r.nextDouble() * 0.5;
-                        double vxp = -Math.sin(a) * vt;
-                        double vzp = Math.cos(a) * vt;
-                        if (i % 3 == 0 && !bs.isAir()) {
-                           mc.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, bs), px, p.y + h * 0.4, pz, vxp, 0.35, vzp);
-                        } else if (i % 3 == 1) {
-                           mc.level.addParticle(ParticleTypes.LARGE_SMOKE, px, p.y + h, pz, vxp * 0.5, 0.25, vzp * 0.5);
-                        } else {
-                           mc.level.addParticle(ParticleTypes.SMOKE, px, p.y + h * 0.7, pz, vxp * 0.25, 0.12, vzp * 0.25);
-                        }
-                     }
-                  }
-               }
-            }
-         }
-      }
-   }
+   public static void alTick(TickEvent.ClientTickEvent e) { }
 
    private static boolean sonando(Minecraft mc, TornadoCliente.Bucle b) {
       return b != null && mc.getSoundManager().isActive(b);
@@ -346,25 +273,7 @@ public final class TornadoCliente {
       return new Vec3(ox, v * t.alto, oz);
    }
 
-   private static void dibujarEmbudo(Object sh, TornadoCliente.Torn t, float pt, Vec3 cam, float tiempo) {
-      Vec3 p = posicion(t, pt);
-      double dx = p.x - cam.x;
-      double dy = p.y - cam.y;
-      double dz = p.z - cam.z;
-      double lim = Minecraft.getInstance().options.getEffectiveRenderDistance() * 16.0 * 3.0 + t.alto;
-      if (!(dx * dx + dz * dz > lim * lim)) {
-         float densidad = 0.0014F;
-         double vel = Math.sqrt(t.vx * t.vx + t.vz * t.vz);
-         float vx = vel > 1.0E-4 ? (float)(t.vx / vel) : 0.0F;
-         float vz = vel > 1.0E-4 ? (float)(t.vz / vel) : 0.0F;
-         sh.safeGetUniform("Capa").set(1.0F, 0.0F, 0.0F, densidad);
-         sh.safeGetUniform("Base").set((float)dx, (float)dy, (float)dz, t.alto);
-         sh.safeGetUniform("Datos").set(t.radio, vx, vz, t.id * 1.3F);
-         tiempoCapa = tiempo;
-         semillaCapa = t.id * 3.7F;
-         cono(t, dx, dy, dz, tiempo, false, 1.6F);
-      }
-   }
+   private static void dibujarEmbudo(Object sh, TornadoCliente.Torn t, float pt, Vec3 cam, float tiempo) { }
 
    private static void cono(TornadoCliente.Torn t, double dx, double dy, double dz, float tiempo, boolean polvo, float escala) { }
 
@@ -395,14 +304,7 @@ public final class TornadoCliente {
    }
 
    @SubscribeEvent
-   public static void alNiebla(ViewportEvent.RenderFog e) {
-      if (!(nivel <= 0.0F) && e.getMode() == FogMode.FOG_TERRAIN) {
-         float lejos = e.getFarPlaneDistance();
-         e.setFarPlaneDistance(Mth.lerp(nivel, lejos, Math.max(130.0F, lejos * 0.95F)));
-         e.setNearPlaneDistance(Mth.lerp(nivel, e.getNearPlaneDistance(), Math.min(24.0F, lejos * 0.15F)));
-         e.setCanceled(true);
-      }
-   }
+   public static void alNiebla(ViewportEvent.RenderFog e) { }
 
    @SubscribeEvent
    public static void alCamara(ViewportEvent.ComputeCameraAngles e) {

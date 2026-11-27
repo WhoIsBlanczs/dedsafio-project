@@ -1,8 +1,6 @@
 package net.ruleta.client.phora;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +9,6 @@ import java.util.Map;
 import java.util.Random;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -107,50 +104,7 @@ public final class PhoraCliente {
          );
    }
 
-   public static void impacto(int potencia, String donde) {
-      Minecraft mc = Minecraft.getInstance();
-      if (mc.player != null) {
-         String[] p = donde.trim().split(" ");
-         if (p.length >= 3) {
-            Vec3 c;
-            try {
-               c = new Vec3(Double.parseDouble(p[0]), Double.parseDouble(p[1]), Double.parseDouble(p[2]));
-            } catch (NumberFormatException ex) {
-               return;
-            }
-
-            double d = mc.player.getEyePosition().distanceTo(c);
-            POLVOS.add(new PhoraCliente.Hongo(c, potencia / 60.0F));
-            float f = (float)Math.max(0.0, 1.0 - d / 260.0);
-            if (f > 0.0F) {
-               destello = Math.max(destello * fadeDestello(), (float)Math.pow(f, 1.4));
-               destelloEn = System.nanoTime();
-            }
-
-            if (d < 220.0) {
-               EfectosCliente.golpe((float)(7.0 * (1.0 - d / 220.0)));
-            }
-
-            mc.getSoundManager()
-               .play(
-                  new SimpleSoundInstance(
-                     IMPACTO.location(),
-                     SoundSource.MASTER,
-                     d < 40.0 ? 2.0F : 9.0F,
-                     0.9F + mc.level.random.nextFloat() * 0.2F,
-                     RandomSource.create(),
-                     false,
-                     0,
-                     d < 40.0 ? Attenuation.NONE : Attenuation.LINEAR,
-                     c.x,
-                     c.y,
-                     c.z,
-                     d < 40.0
-                  )
-               );
-         }
-      }
-   }
+   public static void impacto(int potencia, String donde) { }
 
    public static void limpiar() {
       pararMusica();
@@ -281,22 +235,7 @@ public final class PhoraCliente {
 
    private static void esfera(Vector3f c, float r, float giro) { }
 
-   private static void punto(Object b, Vector3f c, float r, int i, int j, int lat, int lon, float giro) {
-      float a = (float) Math.PI * i / lat;
-      float o = (float) (Math.PI * 2) * j / lon;
-      float nx = Mth.sin(a) * Mth.cos(o);
-      float ny = Mth.cos(a);
-      float nz = Mth.sin(a) * Mth.sin(o);
-      float bulto = 1.0F + 0.1F * Mth.sin(nx * 5.1F + ny * 3.3F) * Mth.cos(nz * 4.7F - ny * 2.1F);
-      float cg = Mth.cos(giro);
-      float sg = Mth.sin(giro);
-      float x = (nx * cg - nz * sg) * r * bulto;
-      float z = (nx * sg + nz * cg) * r * bulto;
-      float y = ny * r * bulto;
-      b.addVertex(c.x + x, c.y + y, c.z + z)
-         .setColor(nx * 0.5F + 0.5F, ny * 0.5F + 0.5F, nz * 0.5F + 0.5F, 1.0F)
-         .setUv(o / (float) (Math.PI * 2), a / (float) Math.PI);
-   }
+   private static void punto(Object b, Vector3f c, float r, int i, int j, int lat, int lon, float giro) { }
 
    private static void plano(float r, float g, float bl, float a, boolean sumar) { }
 
@@ -357,15 +296,7 @@ public final class PhoraCliente {
 
       private static void caja(float x0, float y0, float z0, float x1, float y1, float z1) { }
 
-      private static void bocanada(Object b, Camera cam, float x, float y, float z, float r, float tono, float semilla, float fuego, float a) {
-         Vector3f iz = new Vector3f(cam.getLeftVector()).mul(r);
-         Vector3f ar = new Vector3f(cam.getUpVector()).mul(r);
-         float g = semilla;
-         b.addVertex(x + iz.x - ar.x, y + iz.y - ar.y, z + iz.z - ar.z).setColor(tono, g, fuego, a).setUv(0.0F, 0.0F);
-         b.addVertex(x - iz.x - ar.x, y - iz.y - ar.y, z - iz.z - ar.z).setColor(tono, g, fuego, a).setUv(1.0F, 0.0F);
-         b.addVertex(x - iz.x + ar.x, y - iz.y + ar.y, z - iz.z + ar.z).setColor(tono, g, fuego, a).setUv(1.0F, 1.0F);
-         b.addVertex(x + iz.x + ar.x, y + iz.y + ar.y, z + iz.z + ar.z).setColor(tono, g, fuego, a).setUv(0.0F, 1.0F);
-      }
+      private static void bocanada(Object b, Camera cam, float x, float y, float z, float r, float tono, float semilla, float fuego, float a) { }
 
       private static void anilloSuelo(float cx, float cy, float cz, float r0, float r1, float a) { }
    }

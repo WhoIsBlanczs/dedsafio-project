@@ -86,10 +86,10 @@ public class MeteoritoEntity extends Entity implements ExplosionInmune {
       builder.define(TAMANO, 1.0F);
    }
 
-   protected void readAdditionalSaveData(CompoundTag t) {
+   protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput t) {
    }
 
-   protected void addAdditionalSaveData(CompoundTag t) {
+   protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput t) {
    }
 
    public boolean shouldRenderAtSqrDistance(double d) {

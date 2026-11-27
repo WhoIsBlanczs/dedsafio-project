@@ -10,7 +10,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedData.Factory;
 
 public class SaldoDatos extends SavedData {
    private static final String NOMBRE = "ruleta_cajero";
@@ -20,7 +19,7 @@ public class SaldoDatos extends SavedData {
    public static SaldoDatos get(MinecraftServer servidor) {
       return (SaldoDatos)servidor.overworld()
          .getDataStorage()
-         .computeIfAbsent(new Factory(SaldoDatos::new, SaldoDatos::cargar, DataFixTypes.LEVEL), "ruleta_cajero");
+         .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_cajero"), SaldoDatos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> SaldoDatos(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
    }
 
    public long saldo(UUID jugador) {

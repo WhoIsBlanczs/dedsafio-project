@@ -15,7 +15,7 @@ public class SupernovaEvents {
          if (e.getLevel() instanceof ServerLevel sl) {
             try {
                ChunkPos cp = n.chunkPosition();
-               sl.setChunkForced(cp.x, cp.z, true);
+               sl.setChunkForced(cp.x(), cp.z, true);
             } catch (Exception var4) {
             }
          }
@@ -31,7 +31,7 @@ public class SupernovaEvents {
          if (e.getLevel() instanceof ServerLevel sl && sl.getServer().isRunning()) {
             try {
                ChunkPos cp = n.chunkPosition();
-               sl.setChunkForced(cp.x, cp.z, false);
+               sl.setChunkForced(cp.x(), cp.z, false);
             } catch (Exception var4) {
             }
          }

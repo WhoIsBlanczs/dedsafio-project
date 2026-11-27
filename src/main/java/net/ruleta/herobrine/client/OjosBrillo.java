@@ -1,10 +1,7 @@
 package net.ruleta.herobrine.client;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.io.InputStream;
 import java.util.ArrayList;

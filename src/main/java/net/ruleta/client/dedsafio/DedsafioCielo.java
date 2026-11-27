@@ -1,13 +1,9 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -76,14 +72,7 @@ public final class DedsafioCielo {
       formacion = 0.0F;
    }
 
-   public static void liberar() {
-      formacion = 0.0F;
-      if (cuboVbo != null) {
-         cuboVbo.close();
-         cuboVbo = null;
-         cuboLado = -1.0F;
-      }
-   }
+   public static void liberar() { }
 
    private static float suave(float x) {
       x = Math.max(0.0F, Math.min(1.0F, x));
@@ -149,14 +138,5 @@ public final class DedsafioCielo {
 
    private static void cubo(float s, Object sh) { }
 
-   private static void fijar(Object sh, String nombre, float... v) {
-      Uniform u = sh.getUniform(nombre);
-      if (u != null) {
-         if (v.length == 4) {
-            u.set(v[0], v[1], v[2], v[3]);
-         } else {
-            u.set(v[0]);
-         }
-      }
-   }
+   private static void fijar(Object sh, String nombre, float... v) { }
 }

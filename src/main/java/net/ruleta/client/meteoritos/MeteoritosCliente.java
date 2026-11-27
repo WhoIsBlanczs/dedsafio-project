@@ -1,8 +1,6 @@
 package net.ruleta.client.meteoritos;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +13,6 @@ import java.util.Map.Entry;
 import java.util.function.DoubleUnaryOperator;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -91,51 +88,7 @@ public final class MeteoritosCliente {
       }
    }
 
-   public static void impacto(int tamano, String donde) {
-      Minecraft mc = Minecraft.getInstance();
-      if (mc.player != null) {
-         String[] p = donde.trim().split(" ");
-         if (p.length >= 3) {
-            Vec3 c;
-            try {
-               c = new Vec3(Double.parseDouble(p[0]), Double.parseDouble(p[1]), Double.parseDouble(p[2]));
-            } catch (NumberFormatException ex) {
-               return;
-            }
-
-            double d = mc.player.getEyePosition().distanceTo(c);
-            IMPACTOS.add(new MeteoritosCliente.Impacto(c, tamano / 100.0F));
-            polvo = Math.min(1.0F, polvo + 0.3F);
-            float f = (float)Math.max(0.0, 1.0 - d / 220.0);
-            if (f > 0.0F) {
-               destello = Math.max(destello * fadeDestello(), (float)Math.pow(f, 1.4));
-               destelloEn = System.nanoTime();
-            }
-
-            if (d < 180.0) {
-               EfectosCliente.golpe((float)(5.0 * (1.0 - d / 180.0)));
-            }
-
-            mc.getSoundManager()
-               .play(
-                  new SimpleSoundInstance(
-                     IMPACTO.location(),
-                     SoundSource.MASTER,
-                     d < 40.0 ? 2.0F : 8.0F,
-                     0.95F + mc.level.random.nextFloat() * 0.2F,
-                     RandomSource.create(),
-                     false,
-                     0,
-                     d < 40.0 ? Attenuation.NONE : Attenuation.LINEAR,
-                     c.x,
-                     c.y,
-                     c.z,
-                     d < 40.0
-                  )
-               );
-         }
-      }
-   }
+   public static void impacto(int tamano, String donde) { }
 
    public static void limpiar() {
       desde = -1L;
@@ -198,90 +151,7 @@ public final class MeteoritosCliente {
    }
 
    @SubscribeEvent
-   public static void alTick(TickEvent.ClientTickEvent e) {
-      if (e.phase == TickEvent.Phase.END) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null) {
-            polvo = Math.max(0.0F, polvo - 7.142857E-4F);
-            if (fuerza() > 0.0F && ambiente == null) {
-               ambiente = new SonidoMeteoritos(AMBIENTE, true, () -> desde < 0L ? -1.0F : 0.9F * fuerza(), null);
-               mc.getSoundManager().play(ambiente);
-            } else if (desde < 0L && ambiente != null) {
-               mc.getSoundManager().stop(ambiente);
-               ambiente = null;
-            }
-
-            for (Entity ent : mc.level.entitiesForRendering()) {
-               if (ent instanceof MeteoritoEntity m) {
-                  if (!SILBIDOS.containsKey(m.getId()) && mc.player != null && mc.player.distanceToSqr(m) < 176400.0) {
-                     SoundInstance s = new SonidoMeteoritos(VUELO, true, () -> m.isRemoved() ? -1.0F : 26.0F, () -> m.isRemoved() ? null : m.position());
-                     SILBIDOS.put(m.getId(), s);
-                     mc.getSoundManager().play(s);
-                  }
-
-                  float rr = 4.2F * Math.max(0.4F, m.tamano());
-                  float dura = Mth.clamp(26.0F * rr / Math.max(1.0F, (float)m.getDeltaMovement().length() * 20.0F), 1.5F, 7.0F);
-                  RandomSource re = mc.level.random;
-
-                  for (int k = 0; k < 2; k++) {
-                     double f = re.nextDouble();
-                     MeteoritosCliente.Bocanada bo = new MeteoritosCliente.Bocanada(
-                        Mth.lerp(f, m.xo, m.getX()) + (re.nextDouble() - 0.5) * rr * 0.5,
-                        Mth.lerp(f, m.yo, m.getY()) + 0.5 * rr + (re.nextDouble() - 0.5) * rr * 0.5,
-                        Mth.lerp(f, m.zo, m.getZ()) + (re.nextDouble() - 0.5) * rr * 0.4,
-                        (re.nextFloat() - 0.5F) * 0.25F,
-                        (re.nextFloat() - 0.5F) * 0.25F,
-                        (re.nextFloat() - 0.5F) * 0.25F,
-                        rr * 1.8F,
-                        rr * 6.2F,
-                        0.0F,
-                        0.0F,
-                        1.0F,
-                        re.nextFloat(),
-                        1.0F,
-                        1000.0F
-                     );
-                     bo.estela = true;
-                     bo.met = m.getId();
-                     HUMOS.add(bo);
-                  }
-
-                  rr = Math.max(0.4F, m.tamano());
-                  RandomSource r = mc.level.getRandom();
-                  if (r.nextInt(2) == 0) {
-                     double f = r.nextDouble();
-                     HUMOS.add(
-                        new MeteoritosCliente.Bocanada(
-                           Mth.lerp(f, m.xo, m.getX()) + (r.nextDouble() - 0.5) * 2.4 * rr,
-                           Mth.lerp(f, m.yo, m.getY()) + 2.1F * rr + (r.nextDouble() - 0.5) * 2.4 * rr,
-                           Mth.lerp(f, m.zo, m.getZ()) + (r.nextDouble() - 0.5) * 2.4 * rr,
-                           (r.nextFloat() - 0.5F) * 1.5F,
-                           (r.nextFloat() - 0.5F) * 1.5F,
-                           (r.nextFloat() - 0.5F) * 1.5F,
-                           0.2F * rr,
-                           0.26F * rr,
-                           1.0F,
-                           0.0F,
-                           4.0F,
-                           r.nextFloat(),
-                           1.0F,
-                           2.6F
-                        )
-                     );
-                  }
-               }
-            }
-
-            while (HUMOS.size() > 3600) {
-               HUMOS.remove(0);
-            }
-
-            SILBIDOS.entrySet().removeIf(x -> mc.level.getEntity(x.getKey()) == null && !mc.getSoundManager().isActive(x.getValue()));
-            HUMOS.removeIf(h -> h.edad() > h.dura || h.fin != 0L && (float)(System.nanoTime() - h.fin) / 1.0E9F > 3.1F);
-            IMPACTOS.removeIf(p -> p.edad() > 24.0F);
-         }
-      }
-   }
+   public static void alTick(TickEvent.ClientTickEvent e) { }
 
    @SubscribeEvent
    public static void alSalir(ClientPlayerNetworkEvent.LoggingOut e) {
@@ -381,23 +251,7 @@ public final class MeteoritosCliente {
       int j,
       int nu,
       int nv
-   ) {
-      double tt = (double)i / nu;
-      double d = largo * Math.pow(tt, potencia);
-      double ph = (double)j / nv * Math.PI * 2.0;
-      double r = radio.applyAsDouble(d);
-      double eps = Math.max(0.001, largo * 0.001);
-      double dr = (radio.applyAsDouble(Math.min(largo, d + eps)) - radio.applyAsDouble(Math.max(0.0, d - eps)))
-         / (Math.min(largo, d + eps) - Math.max(0.0, d - eps));
-      float cx = (float)Math.cos(ph);
-      float sx = (float)Math.sin(ph);
-      Vector3f radial = new Vector3f(e1).mul(cx).add(new Vector3f(e2).mul(sx));
-      Vector3f pos = new Vector3f(cabeza).add(new Vector3f(a).mul((float)d)).add(new Vector3f(radial).mul((float)r));
-      Vector3f n = new Vector3f(radial).sub(new Vector3f(a).mul((float)dr)).normalize();
-      b.addVertex(pos.x, pos.y, pos.z)
-         .setColor(n.x * 0.5F + 0.5F, n.y * 0.5F + 0.5F, n.z * 0.5F + 0.5F, (float)alfa.applyAsDouble(d))
-         .setUv((float)(d / escalaUV), (float)j / nv);
-   }
+   ) { }
 
    private static void tapas(Vector3f cabeza, Vector3f cola, float largo, float rm) { }
 

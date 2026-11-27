@@ -3,7 +3,6 @@ package com.supernova.client;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.supernova.SupernovaMod;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.Identifier;
 

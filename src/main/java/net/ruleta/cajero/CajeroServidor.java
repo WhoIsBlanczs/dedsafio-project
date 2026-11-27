@@ -22,7 +22,7 @@ public final class CajeroServidor {
    }
 
    public static void enviarSaldo(ServerPlayer jugador) {
-      long saldo = SaldoDatos.get(jugador.server).saldo(jugador.getUUID());
+      long saldo = SaldoDatos.get(jugador.level().getServer()).saldo(jugador.getUUID());
       ServerPlayNetworking.send(jugador, new CajeroRed.SaldoPayload(saldo));
    }
 
@@ -46,7 +46,7 @@ public final class CajeroServidor {
             if (valor <= 0L) {
                responder(jugador, false, "vacio");
             } else {
-               SaldoDatos datos = SaldoDatos.get(jugador.server);
+               SaldoDatos datos = SaldoDatos.get(jugador.level().getServer());
                long saldo = datos.saldo(jugador.getUUID());
                Item[] items = fichas();
                if (m.ingresar()) {
@@ -96,7 +96,7 @@ public final class CajeroServidor {
    private static int contar(Player jugador, Item item) {
       int n = 0;
 
-      for (ItemStack s : jugador.getInventory().items) {
+      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
          if (s.is(item)) {
             n += s.getCount();
          }
@@ -114,7 +114,7 @@ public final class CajeroServidor {
    private static void quitar(Player jugador, Item item, int cantidad) {
       int falta = cantidad;
 
-      for (ItemStack s : jugador.getInventory().items) {
+      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
          if (falta <= 0) {
             return;
          }

@@ -57,7 +57,7 @@ public final class ConstructorPlaya {
    }
 
    private static boolean hecho(LevelChunk trozo) {
-      return trozo.getBlockState(marca(trozo.getPos().x, trozo.getPos().z)).is(Blocks.DEEPSLATE);
+      return trozo.getBlockState(marca(trozo.getPos().x(), trozo.getPos().z)).is(Blocks.DEEPSLATE);
    }
 
    private static void tick(MinecraftServer servidor) {
@@ -106,8 +106,8 @@ public final class ConstructorPlaya {
       Set<Long> vistos = new HashSet<>();
 
       for (ServerPlayer j : nivel.players()) {
-         int px = j.chunkPosition().x;
-         int pz = j.chunkPosition().z;
+         int px = j.chunkPosition().x();
+         int pz = j.chunkPosition().z();
 
          for (int dx = -radio; dx <= radio; dx++) {
             for (int dz = -radio; dz <= radio; dz++) {
@@ -213,8 +213,8 @@ public final class ConstructorPlaya {
    }
 
    private static void fila(ServerLevel nivel, LevelChunk trozo, int dz) {
-      int cx = trozo.getPos().x;
-      int cz = trozo.getPos().z;
+      int cx = trozo.getPos().x();
+      int cz = trozo.getPos().z();
       MutableBlockPos p = new MutableBlockPos();
 
       for (int dx = 0; dx < 16; dx++) {

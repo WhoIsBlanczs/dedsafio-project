@@ -68,17 +68,17 @@ public class PuertaBunkerBE extends BlockEntity {
       }
    }
 
-   protected void saveAdditional(CompoundTag tag, Provider registros) {
-      super.saveAdditional(tag, registros);
+   protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput tag) {
+      super.saveAdditional(tag);
       tag.putBoolean("Alimentada", this.alimentada);
       tag.putLong("CierraEn", this.cierraEn);
       tag.putLong("AbreEn", this.abreEn);
    }
 
-   protected void loadAdditional(CompoundTag tag, Provider registros) {
-      super.loadAdditional(tag, registros);
+   protected void loadAdditional(net.minecraft.world.level.storage.ValueInput tag) {
+      super.loadAdditional(tag);
       this.alimentada = tag.getBooleanOr("Alimentada", false);
-      this.cierraEn = tag.contains("CierraEn") ? tag.getLongOr("CierraEn", 0L) : -1L;
-      this.abreEn = tag.contains("AbreEn") ? tag.getLongOr("AbreEn", 0L) : -1L;
+      this.cierraEn = tag.getLongOr("CierraEn", -1L);
+      this.abreEn = tag.getLongOr("AbreEn", -1L);
    }
 }

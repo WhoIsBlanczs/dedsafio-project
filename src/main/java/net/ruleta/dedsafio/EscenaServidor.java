@@ -101,7 +101,7 @@ public final class EscenaServidor {
    }
 
    private static void alEntrar(ServerPlayer jugador) {
-      if (enDimension(jugador) && jugador.getServer() != null) {
+      if (enDimension(jugador) && jugador.level().getServer() != null) {
          OlaServidor.alEntrar(jugador.level().getServer(), jugador);
       }
 

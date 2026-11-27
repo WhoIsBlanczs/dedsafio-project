@@ -33,9 +33,6 @@ public class BroteBloque extends BushBlock implements BonemealableBlock {
       this.tipo = tipo;
    }
 
-   protected MapCodec<? extends BushBlock> codec() {
-      return CODEC;
-   }
 
    public MutableComponent getName() {
       return Component.literal(this.tipo == 1 ? "Retoño de palmera" : "Retoño de árbol de costa");

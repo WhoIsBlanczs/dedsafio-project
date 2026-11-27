@@ -91,7 +91,7 @@ public final class MomentoPhora {
             }
 
             if (!jugadores.isEmpty()) {
-               ServerPlayer p = jugadores.get(server.overworld().random.nextInt(jugadores.size()));
+               ServerPlayer p = jugadores.get(server.overworld().getRandom().nextInt(jugadores.size()));
                RandomSource r = p.getRandom();
                siguiente = tick + minEspera() + r.nextInt(Math.max(1, maxEspera() - minEspera()));
                ServerLevel nivel = p.level();

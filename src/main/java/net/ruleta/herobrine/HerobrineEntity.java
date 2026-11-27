@@ -351,14 +351,14 @@ public class HerobrineEntity extends Monster {
       return SoundEvents.PLAYER_DEATH;
    }
 
-   public void addAdditionalSaveData(CompoundTag tag) {
+   public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput tag) {
       super.addAdditionalSaveData(tag);
       if (this.objetivo != null) {
          tag.store("Objetivo", net.minecraft.core.UUIDUtil.CODEC, this.objetivo);
       }
    }
 
-   public void readAdditionalSaveData(CompoundTag tag) {
+   public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput tag) {
       super.readAdditionalSaveData(tag);
       this.objetivo = tag.contains("Objetivo") ? tag.read("Objetivo", net.minecraft.core.UUIDUtil.CODEC).orElse(null) : null;
    }

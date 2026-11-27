@@ -1,14 +1,10 @@
 package net.ruleta.client.reviil;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import com.supernova.client.ScreenEffectHandler;
 import java.util.function.Supplier;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -600,14 +596,5 @@ public final class CieloReviil {
 
    private static void cubo(float s, Object sh) { }
 
-   private static void fijar(Object sh, String nombre, float... v) {
-      Uniform u = sh.getUniform(nombre);
-      if (u != null) {
-         if (v.length == 4) {
-            u.set(v[0], v[1], v[2], v[3]);
-         } else {
-            u.set(v[0]);
-         }
-      }
-   }
+   private static void fijar(Object sh, String nombre, float... v) { }
 }

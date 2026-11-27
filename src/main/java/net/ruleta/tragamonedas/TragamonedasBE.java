@@ -191,7 +191,7 @@ public class TragamonedasBE extends BlockEntity {
             total += Math.max(1, r.peso);
          }
 
-         int tirada = level.random.nextInt(Math.max(1, total));
+         int tirada = level.getRandom().nextInt(Math.max(1, total));
 
          for (ConfigTragamonedas.Recompensa r : p.recompensas) {
             tirada -= Math.max(1, r.peso);
@@ -261,7 +261,7 @@ public class TragamonedasBE extends BlockEntity {
             return ItemStack.EMPTY;
          }
 
-         Reference<Enchantment> e = todos.get(level.random.nextInt(todos.size()));
+         Reference<Enchantment> e = todos.get(level.getRandom().nextInt(todos.size()));
          int nivel = 1 + level.getRandom().nextInt(Math.max(1, ((Enchantment)e.value()).getMaxLevel()));
          return EnchantedBookItem.createForEnchantment(new EnchantmentInstance(e, nivel));
       }
@@ -285,8 +285,8 @@ public class TragamonedasBE extends BlockEntity {
       }
    }
 
-   protected void saveAdditional(CompoundTag tag, Provider registros) {
-      super.saveAdditional(tag, registros);
+   protected void saveAdditional(net.minecraft.world.level.storage.ValueOutput tag) {
+      super.saveAdditional(tag);
       ListTag lista = new ListTag();
 
       for (String s : this.caras) {
@@ -300,8 +300,8 @@ public class TragamonedasBE extends BlockEntity {
       tag.putBoolean("Pago", this.pagoPendiente);
    }
 
-   protected void loadAdditional(CompoundTag tag, Provider registros) {
-      super.loadAdditional(tag, registros);
+   protected void loadAdditional(net.minecraft.world.level.storage.ValueInput tag) {
+      super.loadAdditional(tag);
       if (tag.contains("Caras")) {
          ListTag lista = tag.getListOrEmpty("Caras");
 

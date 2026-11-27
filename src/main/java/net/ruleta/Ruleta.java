@@ -41,7 +41,6 @@ import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.GameRules.BooleanValue;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedData.Factory;
 import net.minecraft.world.phys.AABB;
 import net.ruleta.compat.EntityTeleportEvent;
 import net.ruleta.compat.EventPriority;
@@ -105,7 +104,7 @@ public class Ruleta {
          if (!jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
             jugador.sendSystemMessage(Component.literal("Solo los operadores pueden lanzar la ruleta."));
          } else {
-            MinecraftServer server = jugador.getServer();
+            MinecraftServer server = jugador.level().getServer();
             if (server != null) {
                if (m.color() == -1) {
                   parar(server);
@@ -379,7 +378,7 @@ public class Ruleta {
    }
 
    static void desactivarCambio(ServerPlayer jugador, String id) {
-      if (jugador != null && jugador.getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+      if (jugador != null && jugador.level().getServer() != null && jugador.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          MinecraftServer server = jugador.level().getServer();
          Ruleta.DificultadDatos d = cambios(server);
          if (d.activo(id)) {
@@ -460,7 +459,7 @@ public class Ruleta {
       if (cambios == null) {
          cambios = (Ruleta.DificultadDatos)server.overworld()
             .getDataStorage()
-            .computeIfAbsent(new Factory(Ruleta.DificultadDatos::new, Ruleta.DificultadDatos::cargar, DataFixTypes.LEVEL), "ruleta_perla");
+            .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_perla"), Ruleta.DificultadDatos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Ruleta.DificultadDatos(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
       }
 
       return cambios;
@@ -482,12 +481,12 @@ public class Ruleta {
    }
 
    public static void avisarTotem(ServerPlayer p, DamageSource fuente, Component nombreTotem) {
-      if (p.level().getServer() != null && !cambios(p.getServer()).sinMensajeTotem) {
+      if (p.level().getServer() != null && !cambios(p.level().getServer()).sinMensajeTotem) {
          long ahora = p.level().getGameTime();
          Long previo = ULTIMO_AVISO_TOTEM.put(p.getUUID(), ahora);
          if (previo == null || ahora - previo > 1L) {
             Component mensaje = Component.empty()
-               .append(Component.literal("\ue000").setStyle(Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", "totem"))))
+               .append(Component.literal("\ue000").setStyle(Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", "totem")))))
                .append(Component.literal(" "))
                .append(p.getName().copy())
                .append(Component.literal(" consumió "))
@@ -496,7 +495,7 @@ public class Ruleta {
                .append(razonTotem(fuente, p))
                .append(Component.literal(")"))
                .withStyle(estilo -> estilo.withColor(COLOR_TOTEM));
-            p.getServer().getPlayerList().broadcastSystemMessage(mensaje, false);
+            p.level().getServer().getPlayerList().broadcastSystemMessage(mensaje, false);
          }
       }
    }
@@ -692,7 +691,7 @@ public class Ruleta {
          }
 
          ServerPlayer jugador = e.getPlayer();
-         MinecraftServer servidor = jugador == null ? null : jugador.getServer();
+         MinecraftServer servidor = jugador == null ? null : jugador.level().getServer();
          if (jugador != null) {
             CambiosEfectos.marcarPerla(jugador);
          }
@@ -801,7 +800,7 @@ public class Ruleta {
 
       public static void alEntrar(ServerPlayer p) {
          if (p.level().getServer() != null) {
-            Red.enviar(p, new CambiosPayload(Ruleta.cambios(p.getServer()).csv()));
+            Red.enviar(p, new CambiosPayload(Ruleta.cambios(p.level().getServer()).csv()));
             MomentoReviil.alEntrar(p);
             Pantalla.alEntrar(p);
          }

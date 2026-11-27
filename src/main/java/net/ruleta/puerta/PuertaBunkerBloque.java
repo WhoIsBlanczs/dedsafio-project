@@ -55,9 +55,6 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
    private final boolean grande;
    public static final MapCodec<PuertaBunkerBloque> CODEC = simpleCodec(props -> new PuertaBunkerBloque(props, false));
 
-   public MapCodec<? extends BaseEntityBlock> codec() {
-      return CODEC;
-   }
 
    public PuertaBunkerBloque(Properties props, boolean grande) {
       super(props);

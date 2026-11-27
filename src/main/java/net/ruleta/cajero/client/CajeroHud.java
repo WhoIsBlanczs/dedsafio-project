@@ -54,7 +54,7 @@ public final class CajeroHud {
                String t = Long.toString(p[i]);
                g.text(f, t, cx, y + 5, -1, true);
                cx += f.width(t) + 3;
-               g.blit(CajeroCliente.icono(i), cx, y + 2, 0.0F, 0.0F, 12, 13, 12, 13);
+               g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CajeroCliente.icono(i), cx, y + 2, 0, 0, 12, 13, 12, 13);
                cx += 18;
             }
          }

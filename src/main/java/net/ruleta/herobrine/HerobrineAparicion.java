@@ -43,7 +43,7 @@ public final class HerobrineAparicion {
          int z = (int)Math.floor(p.getZ() + Math.sin(ang) * r);
          BlockPos pos = buscarSuelo(nivel, x, (int)p.getY(), z);
          if (pos != null) {
-            HerobrineEntity h = (HerobrineEntity)Herobrine.HEROBRINE.get().create(nivel);
+            HerobrineEntity h = (HerobrineEntity)Herobrine.HEROBRINE.get().create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
             if (h == null) {
                return false;
             }

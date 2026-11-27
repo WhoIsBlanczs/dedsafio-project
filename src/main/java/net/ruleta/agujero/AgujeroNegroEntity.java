@@ -114,13 +114,13 @@ public class AgujeroNegroEntity extends Entity {
       return true;
    }
 
-   protected void readAdditionalSaveData(CompoundTag tag) {
+   protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput tag) {
       if (tag.contains("Radio")) {
          this.fijarRadio(tag.getFloatOr("Radio", 0.0F));
       }
    }
 
-   protected void addAdditionalSaveData(CompoundTag tag) {
+   protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput tag) {
       tag.putFloat("Radio", (float)this.radio());
    }
 }

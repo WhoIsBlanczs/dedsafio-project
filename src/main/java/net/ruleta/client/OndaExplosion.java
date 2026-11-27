@@ -1,9 +1,7 @@
 package net.ruleta.client;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.MeshData;
-import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -41,49 +39,7 @@ public final class OndaExplosion {
    @SubscribeEvent
    public static void alDibujar(RenderLevelStageEvent evento) { }
 
-   private static boolean dibujar(Object b, Matrix4f m, OndaExplosion.Onda o, float t, Vec3 cam) {
-      float sale = 1.0F - t;
-      float r = o.radio * (1.0F - sale * sale * sale);
-      float ancho = Math.max(0.5F, r * (0.95F * (float)Math.pow(sale, 1.6F) + 0.04F));
-      float dentro = r - ancho;
-      float alfa = t < 0.55F ? 1.0F : 1.0F - (t - 0.55F) / 0.45F;
-      if (!(r < 0.25F) && !(alfa <= 0.0F)) {
-         float y = (float)(o.y + 0.12 - cam.y);
-         int n = Mth.ceil(r / 0.5F);
-         boolean algo = false;
-
-         for (int gx = -n; gx < n; gx++) {
-            for (int gz = -n; gz < n; gz++) {
-               float cx = (gx + 0.5F) * 0.5F;
-               float cz = (gz + 0.5F) * 0.5F;
-               float d = Mth.sqrt(cx * cx + cz * cz);
-               if (!(d > r) && !(d < dentro)) {
-                  float u = (d - dentro) / ancho;
-                  int color = color(u, t);
-                  int a = (int)(alfa * (color >>> 24 & 0xFF));
-                  if (a > 2) {
-                     int rr = color >> 16 & 0xFF;
-                     int gg = color >> 8 & 0xFF;
-                     int bb = color & 0xFF;
-                     float x0 = (float)(o.x - cam.x) + gx * 0.5F;
-                     float z0 = (float)(o.z - cam.z) + gz * 0.5F;
-                     float x1 = x0 + 0.5F;
-                     float z1 = z0 + 0.5F;
-                     b.addVertex(m, x0, y, z0).setColor(rr, gg, bb, a);
-                     b.addVertex(m, x0, y, z1).setColor(rr, gg, bb, a);
-                     b.addVertex(m, x1, y, z1).setColor(rr, gg, bb, a);
-                     b.addVertex(m, x1, y, z0).setColor(rr, gg, bb, a);
-                     algo = true;
-                  }
-               }
-            }
-         }
-
-         return algo;
-      } else {
-         return false;
-      }
-   }
+   private static boolean dibujar(Object b, Matrix4f m, OndaExplosion.Onda o, float t, Vec3 cam) { return false; }
 
    private static int color(float u, float t) {
       if (t > 0.6F) {

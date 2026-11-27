@@ -104,7 +104,7 @@ public class PantallaCajero extends Screen {
       Item item = CajeroServidor.fichas()[i];
       int n = 0;
 
-      for (ItemStack s : jugador.getInventory().items) {
+      for (ItemStack s : jugador.getInventory().getNonEquipmentItems()) {
          if (s.is(item)) {
             n += s.getCount();
          }
@@ -211,7 +211,7 @@ public class PantallaCajero extends Screen {
       g.pose().scale(esc, esc);
       RenderSystem.enableBlend();
       RenderSystem.defaultBlendFunc();
-      g.blit(MARCO, 0, 0, 0.0F, 0.0F, 176, 176, 176, 176);
+      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, MARCO, 0, 0, 0, 0, 176, 176, 176, 176);
 
       String titulo = switch (this.modo) {
          case MENU -> "Cajero";
@@ -253,7 +253,7 @@ public class PantallaCajero extends Screen {
 
    private void boton(GuiGraphicsExtractor g, int x, int y, String texto, double lx, double ly) {
       boolean hover = dentro(lx, ly, x, y, 61, 16);
-      g.blit(BOTON, x, y, 0.0F, hover ? 16.0F : 0.0F, 61, 16, 61, 32);
+      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BOTON, x, y, 0, (int)hover ? 16.0F : 0.0F, 61, 16, 61, 32);
       this.texto(g, texto, x + 30.5F, y + 8.0F + 0.5F, hover ? -96 : -1, 50.0F, 0.8F);
    }
 
@@ -285,7 +285,7 @@ public class PantallaCajero extends Screen {
             String t = Long.toString(p[i]);
             this.textoIzq(g, t, x, cy, -1, sc);
             x += this.font.width(t) * sc + 2.0F;
-            g.blit(CajeroCliente.icono(i), Math.round(x), Math.round(cy - 6.5F), 0.0F, 0.0F, 12, 13, 12, 13);
+            g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CajeroCliente.icono(i), Math.round(x), Math.round(cy - 6.5F), 0, 0, 12, 13, 12, 13);
             x += 16.0F;
          }
       }
@@ -305,7 +305,7 @@ public class PantallaCajero extends Screen {
       boolean puedeBajar = this.cant[i] > 0;
       this.flecha(g, FLECHA_ARRIBA, cx - 6, 56, puedeSubir, lx, ly);
       this.flecha(g, FLECHA_ABAJO, cx - 6, 87, puedeBajar, lx, ly);
-      g.blit(CajeroCliente.icono(i), cx - 12 - 1, 70, 0.0F, 0.0F, 12, 13, 12, 13);
+      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, CajeroCliente.icono(i), cx - 12 - 1, 70, 0, 0, 12, 13, 12, 13);
       this.textoIzq(g, Integer.toString(this.cant[i]), cx + 3.0F, 77.0F, -1, 1.0F);
    }
 
@@ -314,7 +314,7 @@ public class PantallaCajero extends Screen {
       float a = !activa ? 0.3F : (hover ? 1.0F : 0.85F);
       RenderSystem.enableBlend();
       RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, a);
-      g.blit(tex, x, y - (hover ? 1 : 0), 0.0F, 0.0F, 12, 10, 12, 10);
+      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y - (hover ? 1 : 0), 0, 0, 12, 10, 12, 10);
       RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
    }
 
@@ -357,7 +357,7 @@ public class PantallaCajero extends Screen {
       } else {
          int[] f = this.flechaBajo(lx, ly);
          if (f != null) {
-            if (this.cambiar(f[0], f[1] * (hasShiftDown() ? 10 : 1))) {
+            if (this.cambiar(f[0], f[1] * (net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1))) {
                this.click();
             }
 
@@ -389,7 +389,7 @@ public class PantallaCajero extends Screen {
 
          for (int i = 0; i < 3; i++) {
             if (dentro(lx, ly, COLX[i] - 17, 56, 34, 41)) {
-               int paso = hasShiftDown() ? 10 : 1;
+               int paso = net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1;
                this.cambiar(i, delta > 0.0 ? paso : -paso);
                return true;
             }
@@ -409,7 +409,7 @@ public class PantallaCajero extends Screen {
       if (this.mantenerCol >= 0) {
          this.mantenerTicks++;
          if (this.mantenerTicks > 8 && this.mantenerTicks % 2 == 0) {
-            this.cambiar(this.mantenerCol, this.mantenerDir * (hasShiftDown() ? 10 : 1));
+            this.cambiar(this.mantenerCol, this.mantenerDir * (net.minecraft.client.Minecraft.getInstance().hasShiftDown() ? 10 : 1));
          }
       }
    }

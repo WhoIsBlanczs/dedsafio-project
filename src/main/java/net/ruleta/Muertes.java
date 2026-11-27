@@ -12,7 +12,7 @@ public final class Muertes {
 
    @SubscribeEvent(priority = EventPriority.LOWEST)
    public static void alMorir(LivingDeathEvent e) {
-      if (!e.isCanceled() && e.getEntity() instanceof ServerPlayer p && p.getServer() != null) {
+      if (!e.isCanceled() && e.getEntity() instanceof ServerPlayer p && p.level().getServer() != null) {
          Component mensaje = p.getCombatTracker().getDeathMessage();
          Red.enviarATodos(p.level().getServer(), new ReviilPayload("muerte", 1, mensaje, Component.empty()));
       }

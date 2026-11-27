@@ -5,8 +5,6 @@ import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;

@@ -243,7 +243,7 @@ public class SupernovaCommand {
       }
 
       ServerLevel level = ((CommandSourceStack)ctx.getSource()).getLevel();
-      SupernovaEntity n = (SupernovaEntity)SupernovaMod.SUPERNOVA.get().create(level);
+      SupernovaEntity n = (SupernovaEntity)SupernovaMod.SUPERNOVA.get().create(level, net.minecraft.world.entity.EntitySpawnReason.EVENT);
       if (n == null) {
          ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("No se pudo crear la estrella."));
          return 0;

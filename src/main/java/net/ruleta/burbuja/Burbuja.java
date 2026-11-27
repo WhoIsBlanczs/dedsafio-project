@@ -139,13 +139,13 @@ public class Burbuja extends Entity implements ExplosionInmune {
             this.discard();
          }
 
-         return InteractionResult.sidedSuccess(this.level().isClientSide());
+         return InteractionResult.SUCCESS;
       } else if (this.getPassengers().size() < 2 && !jugador.isPassenger()) {
          if (!this.level().isClientSide()) {
             jugador.startRiding(this);
          }
 
-         return InteractionResult.sidedSuccess(this.level().isClientSide());
+         return InteractionResult.SUCCESS;
       } else {
          return InteractionResult.PASS;
       }
@@ -239,7 +239,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
       }
    }
 
-   protected void readAdditionalSaveData(CompoundTag nbt) {
+   protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput nbt) {
       if (nbt.contains("Propietario")) {
          this.propietario = nbt.read("Propietario", net.minecraft.core.UUIDUtil.CODEC).orElse(null);
       }
@@ -249,7 +249,7 @@ public class Burbuja extends Entity implements ExplosionInmune {
       }
    }
 
-   protected void addAdditionalSaveData(CompoundTag nbt) {
+   protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput nbt) {
       if (this.propietario != null) {
          nbt.store("Propietario", net.minecraft.core.UUIDUtil.CODEC, this.propietario);
       }

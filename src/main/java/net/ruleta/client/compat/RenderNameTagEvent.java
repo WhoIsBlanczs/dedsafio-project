@@ -1,7 +1,6 @@
 package net.ruleta.client.compat;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.Entity;
 

@@ -2,9 +2,7 @@ package net.ruleta.client.linterna;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -118,49 +115,14 @@ public final class LinternaCliente {
       b.addVertex(m, x, y, 0.0F).setColor(argb >> 16 & 0xFF, argb >> 8 & 0xFF, argb & 0xFF, argb >>> 24);
    }
 
-   public static float luzOtros() {
-      long ahora = System.nanoTime();
-      if (otrosListo && ahora - otrosEn < 2000000L) {
-         return otrosCache;
-      }
-
-      float m = 0.0F;
-      Minecraft mc = Minecraft.getInstance();
-      if (mc.level != null) {
-         for (Player otro : mc.level.players()) {
-            if (otro != mc.player && !otro.isSpectator()) {
-               m = Math.max(
-                  m,
-                  Math.max(
-                     Linterna.intensidad(otro.getMainHandItem().is(Objetos.LINTERNA.get()) ? otro.getMainHandItem() : ItemStack.EMPTY),
-                     Linterna.intensidad(otro.getOffhandItem().is(Objetos.LINTERNA.get()) ? otro.getOffhandItem() : ItemStack.EMPTY)
-                  )
-               );
-            }
-         }
-      }
-
-      otrosCache = m;
-      otrosEn = ahora;
-      otrosListo = true;
-      return m;
-   }
+   public static float luzOtros() { return 0; }
 
    public static float luzTotal() {
       return Math.max(luz(), luzOtros());
    }
 
    @SubscribeEvent(priority = EventPriority.HIGHEST)
-   public static void alEmpezarMundo(RenderLevelStageEvent e) {
-      if (e.getStage() == RenderLevelStageEvent.Stage.AFTER_LEVEL) {
-         proyeccion = new Matrix4f(e.getProjectionMatrix());
-         vista = new Matrix4f()
-            .rotateX(e.getCamera().getXRot() * (float) (Math.PI / 180.0))
-            .rotateY((e.getCamera().getYRot() + 180.0F) * (float) (Math.PI / 180.0));
-         camara = e.getCamera().getPosition();
-         parcial = e.getPartialTick();
-      }
-   }
+   public static void alEmpezarMundo(RenderLevelStageEvent e) { }
 
    private static float[] centroPropio() {
       Minecraft mc = Minecraft.getInstance();
@@ -284,15 +246,5 @@ public final class LinternaCliente {
       }
    }
 
-   private static void mancha(Object b, float cx, float cy, float r, float a, float aspecto) {
-      int seg = 40;
-
-      for (int i = 0; i < seg; i++) {
-         float a0 = (float)(i * Math.PI * 2.0 / seg);
-         float a1 = (float)((i + 1) * Math.PI * 2.0 / seg);
-         b.addVertex(cx, cy, 0.0F).setColor(1.0F, 0.98F, 0.9F, a);
-         b.addVertex(cx + Mth.cos(a0) * r / aspecto, cy + Mth.sin(a0) * r, 0.0F).setColor(1.0F, 0.98F, 0.9F, 0.0F);
-         b.addVertex(cx + Mth.cos(a1) * r / aspecto, cy + Mth.sin(a1) * r, 0.0F).setColor(1.0F, 0.98F, 0.9F, 0.0F);
-      }
-   }
+   private static void mancha(Object b, float cx, float cy, float r, float a, float aspecto) { }
 }

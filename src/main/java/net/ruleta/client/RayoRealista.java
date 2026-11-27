@@ -1,12 +1,9 @@
 package net.ruleta.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Object;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
@@ -55,32 +52,7 @@ public final class RayoRealista extends EntityRenderer<LightningBolt> {
 
    private static void tira(
       Object vc, Matrix4f m, RayoRealista.Tramo t, Vec3 cam, double ex, double ey, double ez, float grosor, float alfa, float cr, float cg, float cb
-   ) {
-      Vec3 dir = t.b.subtract(t.a);
-      Vec3 medio = t.a.add(t.b).scale(0.5).add(ex - cam.x, ey - cam.y, ez - cam.z);
-      Vec3 lado = dir.cross(medio);
-      if (!(lado.lengthSqr() < 1.0E-8)) {
-         lado = lado.normalize();
-         float wa = t.wa * grosor;
-         float wb = t.wb * grosor;
-         float ax = (float)(t.a.x + lado.x * wa);
-         float ay = (float)(t.a.y + lado.y * wa);
-         float az = (float)(t.a.z + lado.z * wa);
-         float bx = (float)(t.a.x - lado.x * wa);
-         float by = (float)(t.a.y - lado.y * wa);
-         float bz = (float)(t.a.z - lado.z * wa);
-         float cx = (float)(t.b.x - lado.x * wb);
-         float cy = (float)(t.b.y - lado.y * wb);
-         float cz = (float)(t.b.z - lado.z * wb);
-         float dx = (float)(t.b.x + lado.x * wb);
-         float dy = (float)(t.b.y + lado.y * wb);
-         float dz = (float)(t.b.z + lado.z * wb);
-         vc.addVertex(m, ax, ay, az).setColor(cr, cg, cb, alfa);
-         vc.addVertex(m, bx, by, bz).setColor(cr, cg, cb, alfa);
-         vc.addVertex(m, cx, cy, cz).setColor(cr, cg, cb, alfa);
-         vc.addVertex(m, dx, dy, dz).setColor(cr, cg, cb, alfa);
-      }
-   }
+   ) { }
 
    public boolean shouldRender(LightningBolt e, Frustum f, double x, double y, double z) {
       return true;

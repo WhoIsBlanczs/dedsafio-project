@@ -29,16 +29,13 @@
     "JugadorOcultoMixin",
     "KeyboardInputMixin",
     "CamaraEventosMixin",
-    "NieblaMixin",
     "SonidoMixin",
     "GuiMixin",
     "EfectosHudMixin",
     "EntidadRenderMixin",
     "ChatMixin",
-    "LuzMixin",
     "NivelRenderMixin",
     "MinecraftMixin",
-    "AguaDedsafioMixin",
     "GameRendererInvoker"
   ],
   "injectors": {

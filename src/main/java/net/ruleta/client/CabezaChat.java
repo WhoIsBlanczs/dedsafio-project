@@ -60,7 +60,7 @@ public final class CabezaChat {
          for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                String s = "" + (char)(57600 + y) + (char)(y == 7 ? 57617 : 57616);
-               r.append(Component.literal(s).setStyle(Style.EMPTY.withFont(FUENTE).withColor(TextColor.fromRgb(cara[y * 8 + x]))));
+               r.append(Component.literal(s).setStyle(Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(FUENTE)).withColor(TextColor.fromRgb(cara[y * 8 + x]))));
             }
          }
 

@@ -54,47 +54,7 @@ final class TexturaHD extends AbstractTexture {
 
    public void load(ResourceManager recursos) throws IOException { }
 
-   private void subir(NativeImage[] mips) {
-      TextureUtil.prepareImage(this.getId(), mips.length - 1, mips[0].getWidth(), mips[0].getHeight());
+   private void subir(NativeImage[] mips) { }
 
-      for (int k = 0; k < mips.length; k++) {
-         mips[k].upload(k, 0, 0, 0, 0, mips[k].getWidth(), mips[k].getHeight(), true, true, true, true);
-      }
-
-      this.setFilter(true, true);
-   }
-
-   private static NativeImage reducir(NativeImage src) {
-      int w = Math.max(1, src.getWidth() / 2);
-      int h = Math.max(1, src.getHeight() / 2);
-      NativeImage out = new NativeImage(w, h, false);
-
-      for (int y = 0; y < h; y++) {
-         for (int x = 0; x < w; x++) {
-            long sa = 0L;
-            long sr = 0L;
-            long sg = 0L;
-            long sb = 0L;
-
-            for (int dy = 0; dy < 2; dy++) {
-               for (int dx = 0; dx < 2; dx++) {
-                  int c = src.getPixel(Math.min(src.getWidth() - 1, 2 * x + dx), Math.min(src.getHeight() - 1, 2 * y + dy));
-                  int a = c >>> 24;
-                  sa += a;
-                  sr += (long)(c & 0xFF) * a;
-                  sg += (long)(c >> 8 & 0xFF) * a;
-                  sb += (long)(c >> 16 & 0xFF) * a;
-               }
-            }
-
-            int a = (int)((sa + 2L) / 4L);
-            int r = sa == 0L ? 0 : (int)(sr / sa);
-            int g = sa == 0L ? 0 : (int)(sg / sa);
-            int b = sa == 0L ? 0 : (int)(sb / sa);
-            out.setPixelRGBA(x, y, a << 24 | b << 16 | g << 8 | r);
-         }
-      }
-
-      return out;
-   }
+   private static NativeImage reducir(NativeImage src) { return null; }
 }

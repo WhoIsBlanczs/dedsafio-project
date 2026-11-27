@@ -2,9 +2,7 @@ package com.supernova.client;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import com.mojang.logging.LogUtils;
 import com.supernova.SupernovaState;
@@ -13,7 +11,6 @@ import java.util.List;
 import java.util.function.Supplier;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ClipContext.Block;
@@ -75,15 +72,7 @@ public class SupernovaRenderHandler {
       bb.addVertex(q.x(), q.y(), q.z()).setColor(r, g, b, a).setUv(u, v);
    }
 
-   private static void setSphere(Object sh, float mode, float time, float charge, float expl, float fade, Vector3f center, Vec3 viewDirW) {
-      sh.safeGetUniform("Mode").set(mode);
-      sh.safeGetUniform("Time").set(time);
-      sh.safeGetUniform("Charge").set(charge);
-      sh.safeGetUniform("Expl").set(expl);
-      sh.safeGetUniform("Fade").set(fade);
-      sh.safeGetUniform("SphereCenter").set(center.x(), center.y(), center.z());
-      sh.safeGetUniform("ViewDirW").set((float)viewDirW.x, (float)viewDirW.y, (float)viewDirW.z);
-   }
+   private static void setSphere(Object sh, float mode, float time, float charge, float expl, float fade, Vector3f center, Vec3 viewDirW) { }
 
    private static int copiarProfundidad(Minecraft mc) { return 0; }
 
@@ -101,12 +90,5 @@ public class SupernovaRenderHandler {
 
    private static void drawSphere(Matrix4f m, float r, boolean inside) { }
 
-   private static void vert(Object bb, Matrix4f m, float r, float a, float b) {
-      float nx = Mth.sin(a) * Mth.cos(b);
-      float ny = Mth.cos(a);
-      float nz = Mth.sin(a) * Mth.sin(b);
-      bb.addVertex(m, nx * r, ny * r, nz * r)
-         .setColor(nx * 0.5F + 0.5F, ny * 0.5F + 0.5F, nz * 0.5F + 0.5F, 1.0F)
-         .setUv(b / (float) (Math.PI * 2), a / (float) Math.PI);
-   }
+   private static void vert(Object bb, Matrix4f m, float r, float a, float b) { }
 }

@@ -64,7 +64,7 @@ public final class ComandoDeditas {
          ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal("Color desconocido: " + pedido + ". Usa: rojo, azul o verde."));
          return 0;
       } else {
-         SaldoDatos datos = SaldoDatos.get(jugador.server);
+         SaldoDatos datos = SaldoDatos.get(jugador.level().getServer());
          long saldo = datos.saldo(jugador.getUUID());
          long nuevo = saldo + cantidad * unidad;
          if (nuevo > 9000000000000L) {

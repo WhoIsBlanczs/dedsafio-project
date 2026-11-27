@@ -51,7 +51,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate.StructureBlockInfo;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedData.Factory;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.HitResult.Type;
@@ -193,7 +192,7 @@ public final class Bunkers {
          return 0;
       }
 
-      MinecraftServer server = p.getServer();
+      MinecraftServer server = p.level().getServer();
       ServerLevel nivel = server.getLevel(pe.dimension());
       if (nivel == null) {
          return 0;
@@ -576,7 +575,7 @@ public final class Bunkers {
    }
 
    public static void accion(@Nullable ServerPlayer p, String accion, String clave) {
-      if (p != null && p.getServer() != null && p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
+      if (p != null && p.level().getServer() != null && p.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
          MinecraftServer server = p.level().getServer();
          if ("abrir".equals(accion)) {
             abrirBorrar(p);
@@ -598,7 +597,7 @@ public final class Bunkers {
             Bunkers.Bunker b = porClave(server, clave);
             ServerLevel nivel = b == null ? null : nivel(server, b);
             if (b != null && nivel != null) {
-               p.teleportTo(nivel, b.mx(), b.ey() + 34 + 1, b.mz(), p.getYRot(), p.getXRot());
+               p.teleportTo(nivel, b.mx(), b.ey() + 34 + 1, b.mz(), java.util.Set.of(), p.getYRot(), p.getXRot(), true);
             }
          }
       }
@@ -728,7 +727,7 @@ public final class Bunkers {
          q.move(0, 1, 0);
       }
 
-      p.teleportTo(nivel, x, q.getY(), z, p.getYRot(), p.getXRot());
+      p.teleportTo(nivel, x, q.getY(), z, java.util.Set.of(), p.getYRot(), p.getXRot(), true);
       p.sendOverlayMessage(Component.literal("El bunker se ha cerrado."));
    }
 
@@ -898,7 +897,7 @@ public final class Bunkers {
    public static void alEntrar(ServerPlayer p) {
       if (p.level().getServer() != null) {
          Red.enviar(p, marcadores());
-         Red.enviar(p, todos(p.getServer()));
+         Red.enviar(p, todos(p.level().getServer()));
       }
    }
 
@@ -917,7 +916,7 @@ public final class Bunkers {
    private static Bunkers.Datos datos(MinecraftServer server) {
       return (Bunkers.Datos)server.overworld()
          .getDataStorage()
-         .computeIfAbsent(new Factory(Bunkers.Datos::new, Bunkers.Datos::cargar, DataFixTypes.LEVEL), "ruleta_bunkers");
+         .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_bunkers"), Bunkers.Datos::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> Bunkers.Datos(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
    }
 
    public record Bunker(String nombre, String dimension, int ex, int ey, int ez) {

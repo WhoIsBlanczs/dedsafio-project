@@ -19,7 +19,7 @@ import net.ruleta.client.compat.SubscribeEvent;
 import org.joml.Matrix4f;
 
 public final class VidaNombre {
-   private static final Style CORAZON = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", "vida")).withColor(16777215);
+   private static final Style CORAZON = Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", "vida"))).withColor(16777215);
    private static final int COLOR_TRAS_PARED = 553648127;
 
    private VidaNombre() {

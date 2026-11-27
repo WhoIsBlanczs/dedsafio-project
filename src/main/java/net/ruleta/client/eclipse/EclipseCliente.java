@@ -1,14 +1,11 @@
 package net.ruleta.client.eclipse;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.lang.reflect.Method;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance.Attenuation;
@@ -357,21 +354,7 @@ public final class EclipseCliente {
    }
 
    @SubscribeEvent
-   public static void alNiebla(ViewportEvent.RenderFog e) {
-      if (desde >= 0L && e.getMode() == FogMode.FOG_TERRAIN) {
-         Minecraft mc = Minecraft.getInstance();
-         if (mc.level != null && mc.level.dimension() == Level.OVERWORLD) {
-            float[] f = fases(t(System.nanoTime()));
-            float g = nivelNeblina(f) * (1.0F - f[1]);
-            if (!(g <= 0.01F)) {
-               float lejos = e.getFarPlaneDistance();
-               e.setFarPlaneDistance(Mth.lerp(g, lejos, Math.max(130.0F, lejos * 0.95F)));
-               e.setNearPlaneDistance(Mth.lerp(g, e.getNearPlaneDistance(), Math.min(24.0F, lejos * 0.15F)));
-               e.setCanceled(true);
-            }
-         }
-      }
-   }
+   public static void alNiebla(ViewportEvent.RenderFog e) { }
 
    private static void velo(float alfa) { }
 

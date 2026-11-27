@@ -104,7 +104,7 @@ public final class MapaPlaya {
    }
 
    private static boolean hecho(LevelChunk trozo) {
-      return trozo.getBlockState(marca(trozo.getPos().x, trozo.getPos().z)).is(Blocks.DEEPSLATE);
+      return trozo.getBlockState(marca(trozo.getPos().x(), trozo.getPos().z)).is(Blocks.DEEPSLATE);
    }
 
    public static void tick(MinecraftServer servidor) {
@@ -210,8 +210,8 @@ public final class MapaPlaya {
    }
 
    private static boolean aterrizaje(ServerLevel nivel, ServerPlayer j, long limite) {
-      int px = j.chunkPosition().x;
-      int pz = j.chunkPosition().z;
+      int px = j.chunkPosition().x();
+      int pz = j.chunkPosition().z();
 
       for (int[] o : ATERRIZAJE) {
          int cx = px + o[0];
@@ -234,8 +234,8 @@ public final class MapaPlaya {
 
    private static void armar(ServerLevel nivel) {
       ServerPlayer j = (ServerPlayer)nivel.players().get(0);
-      int px = j.chunkPosition().x;
-      int pz = j.chunkPosition().z;
+      int px = j.chunkPosition().x();
+      int pz = j.chunkPosition().z();
       List<int[]> todos = new ArrayList<>();
 
       for (int cx = Math.floorDiv(-440, 16); cx <= Math.floorDiv(-440 + sx - 1, 16); cx++) {
@@ -250,8 +250,8 @@ public final class MapaPlaya {
    }
 
    private static void colocar(ServerLevel nivel, LevelChunk trozo) {
-      int x0 = trozo.getPos().x * 16;
-      int z0 = trozo.getPos().z * 16;
+      int x0 = trozo.getPos().x() * 16;
+      int z0 = trozo.getPos().z() * 16;
       MutableBlockPos p = new MutableBlockPos();
 
       for (int dz = 0; dz < 16; dz++) {

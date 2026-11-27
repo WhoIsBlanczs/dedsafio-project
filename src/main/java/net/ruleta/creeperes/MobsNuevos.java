@@ -47,7 +47,7 @@ public final class MobsNuevos {
          if (esHierba(e.getState())
             && Ruleta.cambioActivoPublico("mob-creeper-pasto")
             && !(nivel.getRandom().nextFloat() >= Ajustes.entero("mobs.prob_pasto") / 100.0F)) {
-            CreeperCespedEntity c = (CreeperCespedEntity)Creeperes.CESPED.get().create(nivel);
+            CreeperCespedEntity c = (CreeperCespedEntity)Creeperes.CESPED.get().create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
             if (c != null) {
                c.snapTo(e.getPos().getX() + 0.5, e.getPos().getY(), e.getPos().getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
                c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(e.getPos()), EntitySpawnReason.EVENT, null);
@@ -64,7 +64,7 @@ public final class MobsNuevos {
          if (razon == EntitySpawnReason.NATURAL || razon == EntitySpawnReason.CHUNK_GENERATION) {
             if (Ruleta.cambioActivoPublico("mob-creeper-rojo") && !(e.getEntity().getRandom().nextFloat() >= Ajustes.entero("mobs.prob_rojo") / 100.0F)) {
                ServerLevel nivel = e.getLevel().getLevel();
-               CreeperRojoEntity rojo = (CreeperRojoEntity)CreeperRojo.TIPO.get().create(nivel);
+               CreeperRojoEntity rojo = (CreeperRojoEntity)CreeperRojo.TIPO.get().create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
                if (rojo != null) {
                   e.setSpawnCancelled(true);
                   rojo.snapTo(e.getX(), e.getY(), e.getZ(), e.getEntity().getYRot(), 0.0F);

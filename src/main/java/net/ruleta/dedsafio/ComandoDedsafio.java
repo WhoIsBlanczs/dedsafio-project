@@ -161,7 +161,7 @@ public final class ComandoDedsafio {
             if (p != null) {
                if (yendo) {
                   if (dedsafio != null) {
-                     p.teleportTo(dedsafio, 37.5, -2.0, -17.5, 0.0F, -4.0F);
+                     p.teleportTo(dedsafio, 37.5, -2.0, -17.5, java.util.Set.of(), 0.0F, -4.0F, true);
                   }
                } else {
                   devolver(servidor, p);
@@ -180,12 +180,12 @@ public final class ComandoDedsafio {
       guardarPrevios(servidor);
       ServerLevel nivel = antes != null && !antes.dimension().equals(DIMENSION) ? servidor.getLevel(antes.dimension()) : null;
       if (antes != null && nivel != null) {
-         p.teleportTo(nivel, antes.x(), antes.y(), antes.z(), antes.giro(), antes.cabeceo());
+         p.teleportTo(nivel, antes.x(), antes.y(), antes.z(), java.util.Set.of(), antes.giro(), antes.cabeceo(), true);
       } else {
          ServerLevel mundo = servidor.overworld();
          BlockPos cama = p.getRespawnPosition();
          BlockPos pos = cama != null && p.getRespawnDimension() == Level.OVERWORLD ? cama : mundo.getRespawnData().pos();
-         p.teleportTo(mundo, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5, p.getYRot(), p.getXRot());
+         p.teleportTo(mundo, pos.getX() + 0.5, pos.getY() + 0.1, pos.getZ() + 0.5, java.util.Set.of(), p.getYRot(), p.getXRot(), true);
       }
    }
 

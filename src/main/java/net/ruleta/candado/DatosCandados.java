@@ -15,7 +15,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedData.Factory;
 
 public final class DatosCandados extends SavedData {
    private static final String NOMBRE = "ruleta_candados";
@@ -23,7 +22,7 @@ public final class DatosCandados extends SavedData {
 
    public static DatosCandados de(ServerLevel nivel) {
       return (DatosCandados)nivel.getDataStorage()
-         .computeIfAbsent(new Factory(DatosCandados::new, DatosCandados::cargar, DataFixTypes.LEVEL), "ruleta_candados");
+         .computeIfAbsent(new net.minecraft.world.level.saveddata.SavedDataType<>(net.minecraft.resources.Identifier.fromNamespaceAndPath("ruleta", "ruleta_candados"), DatosCandados::new, net.minecraft.nbt.CompoundTag.CODEC.xmap(t_ -> DatosCandados(t_, null), d_ -> d_.save(new net.minecraft.nbt.CompoundTag(), null)), DataFixTypes.LEVEL));
    }
 
    public DatosCandados.Candado obtener(BlockPos clave) {

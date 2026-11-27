@@ -136,7 +136,7 @@ public final class Luces {
    }
 
    public static void alCambiarDimension(ServerPlayer p) {
-      quitar(p.getServer(), p.getUUID());
+      quitar(p.level().getServer(), p.getUUID());
    }
 
    public static void alParar(MinecraftServer servidor) {

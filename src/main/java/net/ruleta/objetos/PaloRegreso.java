@@ -48,7 +48,7 @@ public class PaloRegreso extends Item {
          TeleportTransition sitio = p.findRespawnPositionAndUseSpawnBlock(true, TeleportTransition.DO_NOTHING);
          if (!sitio.missingRespawnBlock()) {
             Vec3 v = sitio.pos();
-            p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, sitio.yRot(), 0.0F);
+            p.teleportTo(sitio.newLevel(), v.x, v.y, v.z, java.util.Set.of(), sitio.yRot(), 0.0F, true);
             despues(p, "Has vuelto a tu zona de respawn.");
          } else {
             ServerLevel mundo = server.overworld();

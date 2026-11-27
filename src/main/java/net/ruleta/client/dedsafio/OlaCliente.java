@@ -1,9 +1,7 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.world.entity.Entity;
 import net.ruleta.dedsafio.EscenaPayload;
 import org.joml.Matrix4f;
@@ -149,16 +147,7 @@ public final class OlaCliente {
       }
    }
 
-   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) {
-      Uniform u = sh.getUniform(nombre);
-      if (u != null) {
-         if (n == 4) {
-            u.set(a, b, c, d);
-         } else {
-            u.set(a);
-         }
-      }
-   }
+   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) { }
 
    public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) { }
 

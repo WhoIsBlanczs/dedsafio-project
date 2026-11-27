@@ -32,7 +32,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class CajeroBloque extends Block {
-   public static final MapCodec<CajeroBloque> CODEC = simpleCodec(CajeroBloque::new);
    public static final EnumProperty<net.minecraft.core.Direction> FACING = HorizontalDirectionalBlock.FACING;
    public static final EnumProperty<ParteCajero> PARTE = EnumProperty.create("part", ParteCajero.class);
    private static final VoxelShape[] FORMAS = new VoxelShape[4];
@@ -65,9 +64,6 @@ public class CajeroBloque extends Block {
       );
    }
 
-   protected MapCodec<? extends Block> codec() {
-      return CODEC;
-   }
 
    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
       builder.add(new Property[]{FACING, PARTE});
@@ -102,14 +98,14 @@ public class CajeroBloque extends Block {
 
       if (jugador instanceof ServerPlayer sp) {
          BlockPos base = pos.below(((ParteCajero)estado.getValue(PARTE)).altura());
-         long saldo = SaldoDatos.get(sp.server).saldo(sp.getUUID());
+         long saldo = SaldoDatos.get(sp.level().getServer()).saldo(sp.getUUID());
          ServerPlayNetworking.send(sp, new CajeroRed.AbrirPayload(base, saldo));
       }
 
       return InteractionResult.CONSUME;
    }
 
-   protected BlockState updateShape(BlockState estado, Direction direccion, BlockState vecino, LevelAccessor nivel, BlockPos pos, BlockPos posVecino) {
+   protected BlockState updateShape(BlockState estado, net.minecraft.world.level.LevelReader nivel, net.minecraft.world.level.ScheduledTickAccess ticks_, BlockPos pos, Direction direccion, BlockPos posVecino, BlockState vecino, net.minecraft.util.RandomSource rnd_) {
       ParteCajero parte = (ParteCajero)estado.getValue(PARTE);
       if (direccion == Direction.UP && parte == ParteCajero.LOWER) {
          if (!vecino.is(this) || vecino.getValue(PARTE) != ParteCajero.UPPER) {
@@ -119,7 +115,7 @@ public class CajeroBloque extends Block {
          return Blocks.AIR.defaultBlockState();
       }
 
-      return super.updateShape(estado, direccion, vecino, nivel, pos, posVecino);
+      return super.updateShape(estado, nivel, ticks_, pos, direccion, posVecino, vecino, rnd_);
    }
 
    public BlockState playerWillDestroy(Level nivel, BlockPos pos, BlockState estado, Player jugador) {

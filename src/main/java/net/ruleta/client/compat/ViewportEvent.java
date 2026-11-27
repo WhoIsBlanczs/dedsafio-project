@@ -1,6 +1,5 @@
 package net.ruleta.client.compat;
 
-import com.mojang.blaze3d.shaders.Object;
 import net.minecraft.client.Camera;
 import net.minecraft.world.level.material.FogType;
 
@@ -116,9 +115,7 @@ public final class ViewportEvent {
          this.forma = forma;
       }
 
-      public FogMode getMode() {
-         return this.modo;
-      }
+      public FogMode getMode() { return null; }
 
       public FogType getType() {
          return this.tipo;

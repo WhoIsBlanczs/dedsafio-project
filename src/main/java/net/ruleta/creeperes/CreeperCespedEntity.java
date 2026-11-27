@@ -22,9 +22,6 @@ public class CreeperCespedEntity extends Creeper {
    }
 
    static void mechaInstantanea(Creeper c) {
-      CompoundTag t = new CompoundTag();
-      c.addAdditionalSaveData(t);
-      t.putShort("Fuse", (short)1);
-      c.readAdditionalSaveData(t);
+      net.ruleta.compat.Nbt.editar(c, t_ -> t_.putShort("Fuse", (short)1));
    }
 }

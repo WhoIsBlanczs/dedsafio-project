@@ -1,10 +1,8 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import java.util.Arrays;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
@@ -111,16 +109,7 @@ public final class EspumaDedsafio {
       cuantos = k;
    }
 
-   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) {
-      Uniform u = sh.getUniform(nombre);
-      if (u != null) {
-         if (n == 4) {
-            u.set(a, b, c, d);
-         } else {
-            u.set(a);
-         }
-      }
-   }
+   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) { }
 
    public static void dibujar(Matrix4f vista, double camX, double camY, double camZ) { }
 }

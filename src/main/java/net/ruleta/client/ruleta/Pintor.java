@@ -2,9 +2,7 @@ package net.ruleta.client.ruleta;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +14,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.joml.Matrix4f;
@@ -104,20 +101,7 @@ public final class Pintor {
 
    static void terminar() { }
 
-   static void rectTono(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb, float giro, float luz, float saturacion) {
-      Uniform u = shader == null ? null : shader.getUniform("Recolor");
-      if (u == null) {
-         rect(m, textura, x0, y0, x1, y1, argb);
-      } else {
-         u.set(giro / 360.0F, luz, saturacion, 1.0F);
-
-         try {
-            rect(m, textura, x0, y0, x1, y1, argb);
-         } finally {
-            u.set(0.0F, 0.0F, 1.0F, 0.0F);
-         }
-      }
-   }
+   static void rectTono(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb, float giro, float luz, float saturacion) { }
 
    static void rectSuma(Matrix4f m, String textura, float x0, float y0, float x1, float y1, int argb) { }
 

@@ -1,11 +1,8 @@
 package net.ruleta.client.dedsafio;
 
 import com.mojang.renderpearl.backend.opengl.Uniform;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.material.FluidState;
@@ -32,14 +29,5 @@ public final class AguaDedsafio {
 
    public static void dibujar(Matrix4f vista, float radio, double alturaCamara) { }
 
-   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) {
-      Uniform u = sh.getUniform(nombre);
-      if (u != null) {
-         if (n == 4) {
-            u.set(a, b, c, d);
-         } else {
-            u.set(a);
-         }
-      }
-   }
+   private static void fijar(Object sh, String nombre, float a, float b, float c, float d, int n) { }
 }

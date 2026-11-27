@@ -78,10 +78,10 @@ public class MisilEntity extends Entity {
    protected void defineSynchedData(Builder builder) {
    }
 
-   protected void readAdditionalSaveData(CompoundTag t) {
+   protected void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput t) {
    }
 
-   protected void addAdditionalSaveData(CompoundTag t) {
+   protected void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput t) {
    }
 
    public boolean shouldRenderAtSqrDistance(double d) {

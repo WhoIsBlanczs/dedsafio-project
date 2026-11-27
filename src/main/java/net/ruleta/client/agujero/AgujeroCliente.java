@@ -2,16 +2,13 @@ package net.ruleta.client.agujero;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.VertexSorting;
 import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
@@ -116,23 +113,7 @@ public final class AgujeroCliente {
       b.addVertex(v.x(), v.y(), v.z()).setUv(0.0F, 0.0F);
    }
 
-   private static void cuboAgujero(Object b, Matrix4f vista, float s) {
-      float[][] caras = new float[][]{
-         {-s, s, -s, s, s, -s, s, s, s, -s, s, s},
-         {-s, -s, -s, -s, -s, s, s, -s, s, s, -s, -s},
-         {-s, -s, -s, s, -s, -s, s, s, -s, -s, s, -s},
-         {s, -s, s, -s, -s, s, -s, s, s, s, s, s},
-         {-s, -s, s, -s, -s, -s, -s, s, -s, -s, s, s},
-         {s, -s, -s, s, -s, s, s, s, s, s, s, -s}
-      };
-
-      for (float[] c : caras) {
-         for (int k = 0; k < 12; k += 3) {
-            Vector3f v = vista.transformPosition(new Vector3f(c[k], c[k + 1], c[k + 2]));
-            b.addVertex(v.x(), v.y(), v.z()).setUv(0.0F, 0.0F);
-         }
-      }
-   }
+   private static void cuboAgujero(Object b, Matrix4f vista, float s) { }
 
    private static void cielo(RenderLevelStageEvent e, Minecraft mc) { }
 

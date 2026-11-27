@@ -169,7 +169,7 @@ public final class ComandoTornado {
          for (int intento = 0; intento < Math.max(1, faltan) * 60 && puestosNuevos < faltan; intento++) {
             ServerPlayer base = jugadores.get(mundo.getRandom().nextInt(jugadores.size()));
             double ang = mundo.getRandom().nextDouble() * Math.PI * 2.0;
-            double d = 20.0 + mundo.random.nextDouble() * alcance;
+            double d = 20.0 + mundo.getRandom().nextDouble() * alcance;
             double x = base.getX() + Math.cos(ang) * d;
             double z = base.getZ() + Math.sin(ang) * d;
             if (mundo.hasChunkAt(BlockPos.containing(x, base.getY(), z)) && (bun == null || !(Math.hypot(x - bun[0], z - bun[1]) < 200.0))) {
@@ -238,7 +238,7 @@ public final class ComandoTornado {
          alto,
          mundo.getRandom().nextDouble() * Math.PI * 2.0,
          vida,
-         mundo.random.nextDouble() * 1000.0
+         mundo.getRandom().nextDouble() * 1000.0
       );
       LISTA.add(t);
       if (Ajustes.bool("tornado.lluvia") && !cielo) {

@@ -35,7 +35,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class TragamonedasBloque extends BaseEntityBlock {
-   public static final MapCodec<TragamonedasBloque> CODEC = simpleCodec(TragamonedasBloque::new);
    public static final EnumProperty<net.minecraft.core.Direction> FACING = HorizontalDirectionalBlock.FACING;
    public static final EnumProperty<ParteTragamonedas> PARTE = EnumProperty.create("part", ParteTragamonedas.class);
 
@@ -46,9 +45,6 @@ public class TragamonedasBloque extends BaseEntityBlock {
       );
    }
 
-   protected MapCodec<? extends BaseEntityBlock> codec() {
-      return CODEC;
-   }
 
    protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
       builder.add(new Property[]{FACING, PARTE});
@@ -123,7 +119,7 @@ public class TragamonedasBloque extends BaseEntityBlock {
       }
    }
 
-   protected BlockState updateShape(BlockState estado, Direction direccion, BlockState vecino, LevelAccessor nivel, BlockPos pos, BlockPos posVecino) {
+   protected BlockState updateShape(BlockState estado, net.minecraft.world.level.LevelReader nivel, net.minecraft.world.level.ScheduledTickAccess ticks_, BlockPos pos, Direction direccion, BlockPos posVecino, BlockState vecino, net.minecraft.util.RandomSource rnd_) {
       ParteTragamonedas parte = (ParteTragamonedas)estado.getValue(PARTE);
       if (direccion == Direction.UP && parte != ParteTragamonedas.UPPER) {
          if (!vecino.is(this) || ((ParteTragamonedas)vecino.getValue(PARTE)).altura() != parte.altura() + 1) {
@@ -135,7 +131,7 @@ public class TragamonedasBloque extends BaseEntityBlock {
          return Blocks.AIR.defaultBlockState();
       }
 
-      return super.updateShape(estado, direccion, vecino, nivel, pos, posVecino);
+      return super.updateShape(estado, nivel, ticks_, pos, direccion, posVecino, vecino, rnd_);
    }
 
    public BlockState playerWillDestroy(Level nivel, BlockPos pos, BlockState estado, Player jugador) {

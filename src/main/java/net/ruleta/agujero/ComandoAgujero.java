@@ -172,7 +172,7 @@ public final class ComandoAgujero {
 
       Vec3 donde = sitio;
       ServerLevel mundo = fuente.getLevel();
-      AgujeroNegroEntity agujero = (AgujeroNegroEntity)AgujeroNegro.TIPO.get().create(mundo);
+      AgujeroNegroEntity agujero = (AgujeroNegroEntity)AgujeroNegro.TIPO.get().create(mundo, net.minecraft.world.entity.EntitySpawnReason.EVENT);
       if (agujero == null) {
          fuente.sendFailure(Component.literal("No se pudo crear el agujero negro."));
          return 0;
@@ -212,7 +212,7 @@ public final class ComandoAgujero {
    }
 
    public static void crearAgujero(ServerLevel mundo, Vec3 donde, float radio) {
-      AgujeroNegroEntity agujero = (AgujeroNegroEntity)AgujeroNegro.TIPO.get().create(mundo);
+      AgujeroNegroEntity agujero = (AgujeroNegroEntity)AgujeroNegro.TIPO.get().create(mundo, net.minecraft.world.entity.EntitySpawnReason.EVENT);
       if (agujero != null) {
          agujero.fijarRadio(radio);
          agujero.snapTo(donde.x, donde.y, donde.z, 0.0F, 0.0F);

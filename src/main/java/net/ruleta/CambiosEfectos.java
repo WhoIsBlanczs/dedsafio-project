@@ -247,8 +247,8 @@ public final class CambiosEfectos {
                if (Ruleta.cambioActivo("zombies-mejorados")) {
                   mejorarZombie(zombie, !e.loadedFromDisk());
                } else if (!e.loadedFromDisk()
-                  && !zombie.getTags().contains("ruleta_zombie_trepador")
-                  && !zombie.getTags().contains("ruleta_zombie_normal")
+                  && !zombie.entityTags().contains("ruleta_zombie_trepador")
+                  && !zombie.entityTags().contains("ruleta_zombie_normal")
                   && Ruleta.cambioActivo("zombies-trepadores")) {
                   zombie.addTag(zombie.getRandom().nextBoolean() ? "ruleta_zombie_trepador" : "ruleta_zombie_normal");
                }
@@ -403,10 +403,7 @@ public final class CambiosEfectos {
 
    private static void electrificar(Creeper creeper) {
       if (!creeper.isPowered() && creeper.getType() != tipoNucleeper()) {
-         CompoundTag tag = new CompoundTag();
-         creeper.addAdditionalSaveData(tag);
-         tag.putBoolean("powered", true);
-         creeper.readAdditionalSaveData(tag);
+         net.ruleta.compat.Nbt.editar(creeper, tag_ -> tag_.putBoolean("powered", true));
       }
    }
 
@@ -502,7 +499,7 @@ public final class CambiosEfectos {
    }
 
    private static void sinRegeneracion(ServerPlayer jugador) {
-      MinecraftServer server = jugador.getServer();
+      MinecraftServer server = jugador.level().getServer();
       if (server != null && jugador.tickCount % 100 == 0 && Ruleta.cambioActivo("sin-regeneracion")) {
          BooleanValue regla = (BooleanValue)server.getGameRules().getRule(GameRules.NATURAL_HEALTH_REGENERATION);
          if (regla.get()) {
@@ -680,7 +677,7 @@ public final class CambiosEfectos {
             int z = Mth.floor(jugador.getZ() + Math.sin(angulo) * distancia);
             BlockPos suelo = buscarSuelo(nivel, x, Mth.floor(jugador.getY()) + 6, z);
             if (suelo != null) {
-               Warden warden = (Warden)net.minecraft.world.entity.EntityTypes.WARDEN.create(nivel);
+               Warden warden = (Warden)net.minecraft.world.entity.EntityTypes.WARDEN.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
                if (warden == null) {
                   return;
                }
@@ -719,7 +716,7 @@ public final class CambiosEfectos {
                double z = jugador.getZ() + Math.sin(angulo) * distancia;
                BlockPos pos = BlockPos.containing(x, y, z);
                if (nivel.getBiome(pos).is(Biomes.DEEP_DARK) && nivel.noCollision(MobsNuevos.BOMBA_WARDEN.get().getSpawnAABB(x, y, z))) {
-                  Vex bomba = (Vex)MobsNuevos.BOMBA_WARDEN.get().create(nivel);
+                  Vex bomba = (Vex)MobsNuevos.BOMBA_WARDEN.get().create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
                   if (bomba == null) {
                      return;
                   }
@@ -784,7 +781,7 @@ public final class CambiosEfectos {
    }
 
    private static void tickZombieTrepador(Zombie zombie) {
-      if (zombie.isAlive() && zombie.getTags().contains("ruleta_zombie_trepador")) {
+      if (zombie.isAlive() && zombie.entityTags().contains("ruleta_zombie_trepador")) {
          Level nivel = zombie.level();
          if (zombie.getRemainingFireTicks() > 0 && nivel.isBrightOutside() && !zombie.isInLava() && nivel.canSeeSky(zombie.blockPosition())) {
             zombie.clearFire();
@@ -865,7 +862,7 @@ public final class CambiosEfectos {
    public static void alRomperBloque(BlockEvent.BreakEvent e) {
       if (e.getState().is(Blocks.COBWEB) && e.getLevel() instanceof ServerLevel nivel && nivel.getDifficulty() != Difficulty.PEACEFUL) {
          if (Ruleta.cambioActivo("aranas-telaranas") && !(nivel.getRandom().nextFloat() >= PROB_ARANA_CUEVA())) {
-            CaveSpider arana = (CaveSpider)net.minecraft.world.entity.EntityTypes.CAVE_SPIDER.create(nivel);
+            CaveSpider arana = (CaveSpider)net.minecraft.world.entity.EntityTypes.CAVE_SPIDER.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
             if (arana != null) {
                BlockPos pos = e.getPos();
                arana.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, nivel.getRandom().nextFloat() * 360.0F, 0.0F);
@@ -943,7 +940,7 @@ public final class CambiosEfectos {
                if (jugador.getY() <= CAPA_INTELIGENTES()
                   && azar.nextFloat() < 0.25F
                   && Ruleta.cambioActivo("zombies-inteligentes")
-                  && nivel.getEntitiesOfClass(Zombie.class, zona, z -> z.getTags().contains("ruleta_zombie_inteligente")).size() < 5) {
+                  && nivel.getEntitiesOfClass(Zombie.class, zona, z -> z.entityTags().contains("ruleta_zombie_inteligente")).size() < 5) {
                   Zombie inteligente = aparecerCerca(nivel, jugador, azar, net.minecraft.world.entity.EntityTypes.ZOMBIE, true, false, CAPA_INTELIGENTES());
                   if (inteligente != null) {
                      inteligente.addTag("ruleta_zombie_inteligente");
@@ -976,7 +973,7 @@ public final class CambiosEfectos {
                   : nivel.getBlockState(debajo).isFaceSturdy(nivel, debajo, Direction.UP);
                if (sueloValido && y <= maxY && nivel.getFluidState(pos).isEmpty() && nivel.noCollision(tipo.getSpawnAABB(x + 0.5, y, z + 0.5))) {
                   if (!exigirOscuridad || Monster.isDarkEnoughToSpawn(nivel, pos, azar)) {
-                     T criatura = (T)tipo.create(nivel);
+                     T criatura = (T)tipo.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
                      if (criatura == null) {
                         return null;
                      }
@@ -1012,7 +1009,7 @@ public final class CambiosEfectos {
                   double z = jugador.getZ() + Math.sin(angulo) * distancia;
                   BlockPos pos = BlockPos.containing(x, y, z);
                   if (nivel.isLoaded(pos) && nivel.getFluidState(pos).isEmpty() && nivel.noCollision(net.minecraft.world.entity.EntityTypes.BLAZE.getSpawnAABB(x, y, z))) {
-                     Blaze blaze = (Blaze)net.minecraft.world.entity.EntityTypes.BLAZE.create(nivel);
+                     Blaze blaze = (Blaze)net.minecraft.world.entity.EntityTypes.BLAZE.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
                      if (blaze == null) {
                         return;
                      }
@@ -1052,7 +1049,7 @@ public final class CambiosEfectos {
       if (Ruleta.cambioActivo("perla-creeper-nuclear") && !(jugador.getRandom().nextFloat() >= PROB_PERLA_NUCLEEPER())) {
          EntityType<?> tipo = tipoNucleeper();
          ServerLevel nivel = jugador.level();
-         if (tipo != null && nivel.getDifficulty() != Difficulty.PEACEFUL && tipo.create(nivel) instanceof Mob nucleeper) {
+         if (tipo != null && nivel.getDifficulty() != Difficulty.PEACEFUL && tipo.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT) instanceof Mob nucleeper) {
             double[][] desvios = new double[][]{{2.0, 0.0}, {-2.0, 0.0}, {0.0, 2.0}, {0.0, -2.0}, {0.0, 0.0}};
 
             for (double[] d : desvios) {
@@ -1069,7 +1066,7 @@ public final class CambiosEfectos {
    }
 
    private static void tickZombieInteligente(Zombie zombie) {
-      if (zombie.isAlive() && zombie.getTags().contains("ruleta_zombie_inteligente")) {
+      if (zombie.isAlive() && zombie.entityTags().contains("ruleta_zombie_inteligente")) {
          AttributeInstance velocidad = zombie.getAttribute(Attributes.MOVEMENT_SPEED);
          if (velocidad != null && velocidad.getModifier(UUID_VELOCIDAD_INTELIGENTE) == null) {
             velocidad.addPermanentModifier(new AttributeModifier(UUID_VELOCIDAD_INTELIGENTE, 0.5, Operation.ADD_MULTIPLIED_BASE));

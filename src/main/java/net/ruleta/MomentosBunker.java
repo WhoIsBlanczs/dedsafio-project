@@ -130,7 +130,7 @@ public final class MomentosBunker {
       }
 
       if (bunker == null || activo == null) {
-         Bunkers.Bunker elegido = Bunkers.porClave(admin.getServer(), bunkerElegido(quien));
+         Bunkers.Bunker elegido = Bunkers.porClave(admin.level().getServer(), bunkerElegido(quien));
          bunker = elegido != null ? elegido : Bunkers.elegirOConstruir(admin);
          puerta = admin.getRandom().nextInt(Bunkers.PUERTAS.length);
       }
@@ -365,7 +365,7 @@ public final class MomentosBunker {
 
    private static void rayo(ServerPlayer p) {
       ServerLevel nivel = p.level();
-      LightningBolt r = (LightningBolt)net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(nivel);
+      LightningBolt r = (LightningBolt)net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
       if (r != null) {
          double x = p.getX() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");
          double z = p.getZ() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");

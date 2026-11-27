@@ -65,7 +65,7 @@ public final class MomentosReviil {
          } else {
             Momentos.Momento momento = Momentos.porId(m.id());
             if (momento != null) {
-               MinecraftServer server = jugador.getServer();
+               MinecraftServer server = jugador.level().getServer();
                if (m.activar()) {
                   if ("creepers_negativas".equals(m.id()) && !enEfecto("gas_abajo")) {
                      jugador.sendSystemMessage(
@@ -377,14 +377,11 @@ public final class MomentosReviil {
 
       ServerLevel nivel = p.level();
       if (hay && nivel.getDifficulty() != Difficulty.PEACEFUL && p.getRandom().nextInt(Math.max(1, Ajustes.entero("creepers.cada"))) == 0) {
-         Creeper c = (Creeper)net.minecraft.world.entity.EntityTypes.CREEPER.create(nivel);
+         Creeper c = (Creeper)net.minecraft.world.entity.EntityTypes.CREEPER.create(nivel, net.minecraft.world.entity.EntitySpawnReason.EVENT);
          if (c != null) {
             c.snapTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0.0F);
             c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(p.blockPosition()), EntitySpawnReason.EVENT, null);
-            CompoundTag t = new CompoundTag();
-            c.addAdditionalSaveData(t);
-            t.putBoolean("powered", true);
-            c.readAdditionalSaveData(t);
+            net.ruleta.compat.Nbt.editar(c, t_ -> t_.putBoolean("powered", true));
             c.setHealth(1.0F);
             nivel.addFreshEntity(c);
          }

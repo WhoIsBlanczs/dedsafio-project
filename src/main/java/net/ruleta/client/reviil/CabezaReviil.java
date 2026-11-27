@@ -1,9 +1,6 @@
 package net.ruleta.client.reviil;
 
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
-import com.mojang.renderpearl.backend.api.BackendRenderPipeline.CreateInfo.Object;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.InputStream;

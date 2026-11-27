@@ -76,7 +76,7 @@ public class PincelBosqueItem extends Item {
             cambiar(jugador);
          }
 
-         return InteractionResult.sidedSuccess(ctx.getLevel().isClientSide());
+         return InteractionResult.SUCCESS;
       } else if (!(ctx.getLevel() instanceof ServerLevel nivel)) {
          return InteractionResult.SUCCESS;
       } else if (jugador.isCreative() || jugador instanceof ServerPlayer sp && sp.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {

@@ -2,11 +2,8 @@ package net.ruleta.client.agujero;
 
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
-import com.mojang.blaze3d.vertex.Object;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Object;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,13 +87,7 @@ public final class CieloBake {
       hechas = 0;
    }
 
-   private static RenderTarget crear(int ancho, int alto) {
-      RenderTarget t = new TextureTarget(ancho, alto, false, Minecraft.ON_OSX);
-      t.setClearColor(0.0F, 0.0F, 0.0F, 0.0F);
-      t.clear(Minecraft.ON_OSX);
-      t.setFilterMode(9729);
-      return t;
-   }
+   private static RenderTarget crear(int ancho, int alto) { return null; }
 
    private static void dibujarCara(RenderTarget destino, int res, int cara, float modo) { }
 }

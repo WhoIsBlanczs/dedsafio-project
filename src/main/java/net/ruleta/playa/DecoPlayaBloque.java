@@ -17,7 +17,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DecoPlayaBloque extends Block {
-   public static final MapCodec<DecoPlayaBloque> CODEC = simpleCodec(DecoPlayaBloque::new);
    private static final VoxelShape FORMA = Block.box(5.0, 0.0, 5.0, 11.0, 2.0, 11.0);
    private final String nombre;
 
@@ -30,9 +29,6 @@ public class DecoPlayaBloque extends Block {
       this.nombre = nombre;
    }
 
-   protected MapCodec<? extends Block> codec() {
-      return CODEC;
-   }
 
    public MutableComponent getName() {
       return Component.literal(this.nombre);
@@ -47,9 +43,9 @@ public class DecoPlayaBloque extends Block {
       return Block.canSupportCenter(nivel, pos.below(), Direction.UP);
    }
 
-   protected BlockState updateShape(BlockState estado, Direction dir, BlockState vecino, LevelAccessor nivel, BlockPos pos, BlockPos posVecino) {
+   protected BlockState updateShape(BlockState estado, net.minecraft.world.level.LevelReader nivel, net.minecraft.world.level.ScheduledTickAccess ticks_, BlockPos pos, Direction dir, BlockPos posVecino, BlockState vecino, net.minecraft.util.RandomSource rnd_) {
       return dir == Direction.DOWN && !estado.canSurvive(nivel, pos)
          ? Blocks.AIR.defaultBlockState()
-         : super.updateShape(estado, dir, vecino, nivel, pos, posVecino);
+         : super.updateShape(estado, nivel, ticks_, pos, dir, posVecino, vecino, rnd_);
    }
 }

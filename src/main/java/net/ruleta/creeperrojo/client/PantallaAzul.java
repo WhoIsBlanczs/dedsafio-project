@@ -93,7 +93,7 @@ public class PantallaAzul extends Screen {
       g.pose().pushMatrix();
       g.pose().translate(x, y);
       g.pose().scale(escala, escala);
-      g.text(this.font, Component.literal(linea).withStyle(Style.EMPTY.withFont(fuente)), 0, 0, -1, false);
+      g.text(this.font, Component.literal(linea).withStyle(Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(fuente))), 0, 0, -1, false);
       g.pose().popMatrix();
    }
 

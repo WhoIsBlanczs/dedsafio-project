@@ -315,7 +315,7 @@ public final class Mensajes {
 
    public static Component vistaMomento(boolean reviil, String titulo, String texto, String jugador) {
       Style t = Style.EMPTY
-         .withFont(Identifier.fromNamespaceAndPath("ruleta", reviil ? "rotulo" : "rotulo_nutria"))
+         .withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", reviil ? "rotulo" : "rotulo_nutria")))
          .withColor(reviil ? 11013656 : 11540590);
       Style cuerpo = Style.EMPTY.applyFormat(reviil ? ChatFormatting.RED : ChatFormatting.LIGHT_PURPLE);
       RuletaColor c = reviil ? RuletaColor.ROJO : RuletaColor.ROSA;
@@ -337,7 +337,7 @@ public final class Mensajes {
    static Component anuncio(RuletaColor c, String tituloPropio, String txt, String quien) {
       String encabezado = tituloPropio != null && !tituloPropio.isBlank() ? tituloPropio : ENCABEZADO.get(c);
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", e.fuente()))).withColor(e.titulo());
       MutableComponent t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))
@@ -420,7 +420,7 @@ public final class Mensajes {
    static Component[] aviso(RuletaColor c, String tituloPropio, String txt, String quien) {
       String encabezado = tituloPropio != null && !tituloPropio.isBlank() ? tituloPropio : ENCABEZADO.get(c);
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", e.fuente()))).withColor(e.titulo());
       Component t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))
@@ -431,7 +431,7 @@ public final class Mensajes {
 
    static Component mensaje(RuletaColor c, Mensajes.Config cfg, String quien) {
       Mensajes.Estilo e = ESTILO.get(c);
-      Style titulo = Style.EMPTY.withFont(Identifier.fromNamespaceAndPath("ruleta", e.fuente())).withColor(e.titulo());
+      Style titulo = Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(Identifier.fromNamespaceAndPath("ruleta", e.fuente()))).withColor(e.titulo());
       MutableComponent t = Component.empty()
          .append(Component.literal("\ue000").setStyle(titulo.withColor(16777215)))
          .append(Component.literal(" ").setStyle(titulo))

@@ -89,7 +89,7 @@ public final class MomentoMeteoritos {
          }
 
          if (!jugadores.isEmpty()) {
-            ServerPlayer p = jugadores.get(server.overworld().random.nextInt(jugadores.size()));
+            ServerPlayer p = jugadores.get(server.overworld().getRandom().nextInt(jugadores.size()));
             RandomSource r = p.getRandom();
             siguiente = tick + 200L + r.nextInt(240);
             int cuantos = 1;
