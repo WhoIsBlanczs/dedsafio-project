@@ -16,7 +16,7 @@ public final class PantallasCliente {
             mc.setScreenAndShow(new PantallaBunkerBorrar(null, datos));
             break;
          case "bunker_borrar_act":
-            if (mc.screen instanceof PantallaBunkerBorrar p) {
+            if (mc.gui.screen() instanceof PantallaBunkerBorrar p) {
                p.actualizar(datos);
             }
       }

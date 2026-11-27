@@ -15,14 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ServerPlayerMixin {
    @Inject(method = "die", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$morir(DamageSource fuente, CallbackInfo ci) {
-      if (Lanzador.muerte((ServerPlayer)this, fuente)) {
+      if (Lanzador.muerte((ServerPlayer)(Object)this, fuente)) {
          ci.cancel();
       }
    }
 
    @Inject(method = "changeDimension", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$viaje(TeleportTransition destino, CallbackInfoReturnable<Entity> cir) {
-      if (Lanzador.viaje((ServerPlayer)this, destino)) {
+      if (Lanzador.viaje((ServerPlayer)(Object)this, destino)) {
          cir.setReturnValue(null);
       }
    }

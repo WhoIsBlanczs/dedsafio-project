@@ -201,7 +201,7 @@ public final class HudDedsafio {
       if (estado != 2) {
          if (estado == 3) {
             mascara(g, w, h, 0.0F, 0.0F);
-            if (mc.screen == null) {
+            if (mc.gui.screen() == null) {
                estado = 4;
                t0 = ahora;
             }

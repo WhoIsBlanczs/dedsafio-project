@@ -106,12 +106,12 @@ public final class MapaDatos {
 
                for (int dz = -2; dz <= 2; dz++) {
                   for (int dx = -2; dx <= 2; dx++) {
-                     COLA.add(ChunkPos.asLong(pcx + dx, pcz + dz));
+                     COLA.add(ChunkPos.pack(pcx + dx, pcz + dz));
                   }
                }
             }
 
-            boolean abierto = mc.screen instanceof PantallaMapa;
+            boolean abierto = mc.gui.screen() instanceof PantallaMapa;
             if (!abierto) {
                CAMBIADOS.clear();
             }
@@ -175,7 +175,7 @@ public final class MapaDatos {
          return propio.alto[lz * 16 + lx];
       }
 
-      MapaDatos.Trozo v = CACHE.get(ChunkPos.asLong(ccx, ccz));
+      MapaDatos.Trozo v = CACHE.get(ChunkPos.pack(ccx, ccz));
       return v == null ? Integer.MIN_VALUE : v.alto[lz * 16 + lx];
    }
 

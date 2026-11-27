@@ -40,7 +40,7 @@ public class PantallaCodigo extends Screen {
 
    public static void respuesta(boolean ok) {
       Minecraft mc = Minecraft.getInstance();
-      if (mc.screen instanceof PantallaCodigo p) {
+      if (mc.gui.screen() instanceof PantallaCodigo p) {
          if (ok) {
             mc.setScreenAndShow(null);
          } else {
@@ -115,7 +115,8 @@ public class PantallaCodigo extends Screen {
       }
    }
 
-   public boolean keyPressed(int tecla, int scan, int mods) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
+      int tecla = ev_.key(); int scan = 0; int mods = ev_.modifiers();
       if (tecla >= 48 && tecla <= 57) {
          this.numero(tecla - 48);
          return true;
@@ -132,7 +133,7 @@ public class PantallaCodigo extends Screen {
       }
 
       if (tecla != 257 && tecla != 335) {
-         return super.keyPressed(tecla, scan, mods);
+         return super.keyPressed(ev_);
       }
 
       this.confirmar();
@@ -143,7 +144,8 @@ public class PantallaCodigo extends Screen {
       return mx >= x && mx < x + w && my >= y && my < y + h;
    }
 
-   public boolean mouseClicked(double mxReal, double myReal, int boton) {
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mxReal = ev_.x(); double myReal = ev_.y(); int boton = ev_.button();
       double mx = mxReal / this.escala();
       double my = myReal / this.escala();
       if (boton == 0) {
@@ -172,13 +174,13 @@ public class PantallaCodigo extends Screen {
          }
       }
 
-      return super.mouseClicked(mxReal, myReal, boton);
+      return super.mouseClicked(ev_, dbl_);
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
+   public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
-   public void render(GuiGraphicsExtractor g, int mxReal, int myReal, float parcial) { }
+   public void extractRenderState(GuiGraphicsExtractor g, int mxReal, int myReal, float parcial) { }
 
    private void numeroTecla(GuiGraphicsExtractor g, int mx, int my, int c, int f, String t) {
       int x = this.teclaX(c);

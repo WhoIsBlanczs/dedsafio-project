@@ -45,7 +45,7 @@ public class LanzadorRuleta extends Screen {
 
    public static void tecla(Minecraft mc) {
       while (ABRIR.consumeClick()) {
-         if (mc.player != null && mc.screen == null) {
+         if (mc.player != null && mc.gui.screen() == null) {
             if (!mc.player.permissions().hasPermission(net.minecraft.server.permissions.Permissions.COMMANDS_GAMEMASTER)) {
                mc.player.sendOverlayMessage(Component.literal("El lanzador de la ruleta es sólo para operadores."));
             } else if (!servidorConMod()) {
@@ -97,7 +97,7 @@ public class LanzadorRuleta extends Screen {
       Ui.alfa = 1.0F;
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
+   public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
    private void fondoRuleta(GuiGraphicsExtractor g) {
@@ -125,7 +125,7 @@ public class LanzadorRuleta extends Screen {
       }
    }
 
-   public void render(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
+   public void extractRenderState(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
       float aparicion = this.aparece.hacia(1.0F, 11.0F);
       this.fondoRuleta(ctx);
       this.calcular();
@@ -168,12 +168,13 @@ public class LanzadorRuleta extends Screen {
          Ui.textoCentro(ctx, this.font, nombre, this.width / 2, this.height - 50 - 13, c.rgb, 1.0F, true);
       }
 
-      super.render(ctx, mx, my, pt);
+      super.extractRenderState(ctx, mx, my, pt);
       Ui.alfa = 1.0F;
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
-      if (super.mouseClicked(mx, my, boton)) {
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      if (super.mouseClicked(ev_, dbl_)) {
          return true;
       } else {
          this.calcular();
@@ -188,12 +189,13 @@ public class LanzadorRuleta extends Screen {
       }
    }
 
-   public boolean keyPressed(int key, int scan, int mods) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
+      int key = ev_.key(); int scan = 0; int mods = ev_.modifiers();
       if (ABRIR.matches(key, scan)) {
          this.onClose();
          return true;
       } else {
-         return super.keyPressed(key, scan, mods);
+         return super.keyPressed(ev_);
       }
    }
 

@@ -24,7 +24,7 @@ public abstract class LivingEntityMixin {
 
    @Inject(method = "die", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$morir(DamageSource fuente, CallbackInfo ci) {
-      if (Lanzador.muerte((LivingEntity)this, fuente)) {
+      if (Lanzador.muerte((LivingEntity)(Object)this, fuente)) {
          ci.cancel();
       }
    }
@@ -36,22 +36,22 @@ public abstract class LivingEntityMixin {
 
    @ModifyVariable(method = "actuallyHurt", at = @At("HEAD"), argsOnly = true, require = 0)
    private float ruleta$danoBruto(float cantidad) {
-      return Lanzador.dano((LivingEntity)this, this.ruleta$fuente, cantidad);
+      return Lanzador.dano((LivingEntity)(Object)this, this.ruleta$fuente, cantidad);
    }
 
    @ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 1), argsOnly = true, require = 0)
    private float ruleta$danoFinal(float cantidad) {
-      return Lanzador.danoTrasArmadura((LivingEntity)this, this.ruleta$fuente, cantidad);
+      return Lanzador.danoTrasArmadura((LivingEntity)(Object)this, this.ruleta$fuente, cantidad);
    }
 
    @Inject(method = "getVisibilityPercent", at = @At("RETURN"), cancellable = true, require = 0)
    private void ruleta$visibilidad(@Nullable Entity observador, CallbackInfoReturnable<Double> cir) {
-      cir.setReturnValue(Lanzador.visibilidad((LivingEntity)this, observador, cir.getReturnValueD()));
+      cir.setReturnValue(Lanzador.visibilidad((LivingEntity)(Object)this, observador, cir.getReturnValueD()));
    }
 
    @Inject(method = "tick", at = @At("HEAD"), require = 0)
    private void ruleta$tick(CallbackInfo ci) {
-      Lanzador.tick((LivingEntity)this);
+      Lanzador.tick((LivingEntity)(Object)this);
    }
 
    @Redirect(
@@ -72,11 +72,11 @@ public abstract class LivingEntityMixin {
    private void ruleta$gastarTotem(ItemStack totem, int cuanto, DamageSource fuente) {
       ItemStack copia = totem.copy();
       totem.shrink(cuanto);
-      Lanzador.totem((LivingEntity)this, fuente, copia);
+      Lanzador.totem((LivingEntity)(Object)this, fuente, copia);
    }
 
    @Inject(method = "dropAllDeathLoot", at = @At("TAIL"), require = 0)
    private void ruleta$botin(ServerLevel nivel, DamageSource fuente, CallbackInfo ci) {
-      Lanzador.botin((LivingEntity)this, fuente);
+      Lanzador.botin((LivingEntity)(Object)this, fuente);
    }
 }

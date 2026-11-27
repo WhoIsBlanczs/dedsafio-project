@@ -38,7 +38,7 @@ public abstract class MobMixin implements MobCancelable {
       ServerLevelAccessor nivel, DifficultyInstance dificultad, EntitySpawnReason tipo, SpawnGroupData datos, CallbackInfoReturnable<SpawnGroupData> cir
    ) {
       if (Bus.hayOyentes(MobSpawnEvent.FinalizeSpawn.class)) {
-         Mob yo = (Mob)this;
+         Mob yo = (Mob)(Object)this;
          MobSpawnEvent.FinalizeSpawn ev = new MobSpawnEvent.FinalizeSpawn(yo, nivel, dificultad, tipo);
          if (Bus.post(ev)) {
             this.ruleta$spawnCancelado = true;

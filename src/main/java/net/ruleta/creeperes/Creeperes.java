@@ -15,10 +15,10 @@ public final class Creeperes {
    public static final Reg<EntityType<CreeperCespedEntity>> CESPED = Reg.entidad(
       "ruleta",
       "creeper_cesped",
-      () -> Builder.of(CreeperCespedEntity::new, MobCategory.MONSTER).sized(0.3F, 0.5F).clientTrackingRange(8).build("creeper_cesped")
+      () -> Builder.of(CreeperCespedEntity::new, MobCategory.MONSTER).sized(0.3F, 0.5F).clientTrackingRange(8).build(net.ruleta.Reg.ekey())
    );
    public static final Reg<Item> HUEVO_CESPED = Reg.item(
-      "ruleta", "creeper_cesped_spawn_egg", () -> new SpawnEggItem(CESPED.get(), 4160042, 1784340, new Properties())
+      "ruleta", "creeper_cesped_spawn_egg", () -> new SpawnEggItem(net.ruleta.Reg.props().spawnEgg(CESPED.get()))
    );
 
    private Creeperes() {

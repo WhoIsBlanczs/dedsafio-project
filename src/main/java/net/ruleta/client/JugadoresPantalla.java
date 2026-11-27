@@ -86,12 +86,14 @@ public class JugadoresPantalla extends UiPantalla {
       }
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
-      return super.mouseClicked(mx, my, boton) || this.lista.mouseClicked(mx, my, boton);
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      return super.mouseClicked(ev_, dbl_) || this.lista.mouseClicked(mx, my, boton);
    }
 
-   public boolean mouseReleased(double mx, double my, int boton) {
-      return this.lista.mouseReleased() || super.mouseReleased(mx, my, boton);
+   public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent ev_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      return this.lista.mouseReleased() || super.mouseReleased(ev_);
    }
 
    public boolean mouseScrolled(double mx, double my, double deltaX, double delta) {

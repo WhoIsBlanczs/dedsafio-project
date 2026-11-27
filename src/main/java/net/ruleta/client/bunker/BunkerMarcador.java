@@ -52,7 +52,7 @@ public final class BunkerMarcador {
          return r;
       }
 
-      String dim = mc.level.dimension().location().toString();
+      String dim = mc.level.dimension().identifier().toString();
 
       for (Bunkers.Bunker b : bunkers) {
          if (b.dimension().equals(dim)) {

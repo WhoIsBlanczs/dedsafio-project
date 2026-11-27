@@ -31,7 +31,7 @@ public abstract class ChatMixin {
             this.ruleta$dentro = true;
 
             try {
-               ((ChatComponent)this).addMessage(e.getMessage(), firma, etiqueta);
+               ((ChatComponent)(Object)this).addMessage(e.getMessage(), firma, etiqueta);
             } finally {
                this.ruleta$dentro = false;
             }

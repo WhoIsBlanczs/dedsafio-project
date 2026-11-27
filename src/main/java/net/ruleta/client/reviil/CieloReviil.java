@@ -406,7 +406,7 @@ public final class CieloReviil {
 
    private static SoundInstance tocar(SoundEvent evento) {
       SoundInstance s = new SimpleSoundInstance(
-         evento.getLocation(), SoundSource.MASTER, 1.0F, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
+         evento.location(), SoundSource.MASTER, 1.0F, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
       );
       Minecraft.getInstance().getSoundManager().play(s);
       return s;

@@ -20,10 +20,10 @@ public final class PedestalCliente {
       ConfigPedestal c = ConfigPedestal.desdeJson(json);
       if (c != null) {
          Minecraft mc = Minecraft.getInstance();
-         if (mc.screen instanceof PantallaPedestal pantalla) {
+         if (mc.gui.screen() instanceof PantallaPedestal pantalla) {
             pantalla.alRecibir(c);
          } else {
-            mc.setScreenAndShow(new PantallaPedestal(mc.screen, c));
+            mc.setScreenAndShow(new PantallaPedestal(mc.gui.screen(), c));
          }
       }
    }

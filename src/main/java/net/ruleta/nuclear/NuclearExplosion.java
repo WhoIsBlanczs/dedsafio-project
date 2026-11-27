@@ -46,7 +46,7 @@ public final class NuclearExplosion {
       double z = creeper.getZ();
       level.playSound(null, x, y, z, SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 12.0F, 0.5F);
       level.sendParticles(ParticleTypes.EXPLOSION_EMITTER, x, y, z, 8, 6.0, 2.0, 6.0, 0.0);
-      DamageSource source = new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DAMAGE_TYPE), creeper, creeper);
+      DamageSource source = new DamageSource(level.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(DAMAGE_TYPE), creeper, creeper);
       double radius = Ajustes.entero("nuclear.radio");
       AABB box = new AABB(x - radius, y - radius, z - radius, x + radius, y + radius, z + radius);
       double maxSq = radius * radius;

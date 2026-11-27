@@ -21,12 +21,12 @@ public final class Arboles {
    public static final Reg<Block> BROTE_COSTA = Reg.block("ruleta", "brote_costa", () -> new BroteBloque(propiedades(), 0));
    public static final Reg<Block> BROTE_PALMERA = Reg.block("ruleta", "brote_palmera", () -> new BroteBloque(propiedades(), 1));
    public static final Reg<Item> ITEM_BROTE_COSTA = Reg.item(
-      "ruleta", "brote_costa", () -> new Arboles.NombreBlockItem(BROTE_COSTA.get(), new Properties(), "Retoño de árbol de costa")
+      "ruleta", "brote_costa", () -> new Arboles.NombreBlockItem(BROTE_COSTA.get(), net.ruleta.Reg.props(), "Retoño de árbol de costa")
    );
    public static final Reg<Item> ITEM_BROTE_PALMERA = Reg.item(
-      "ruleta", "brote_palmera", () -> new Arboles.NombreBlockItem(BROTE_PALMERA.get(), new Properties(), "Retoño de palmera")
+      "ruleta", "brote_palmera", () -> new Arboles.NombreBlockItem(BROTE_PALMERA.get(), net.ruleta.Reg.props(), "Retoño de palmera")
    );
-   public static final Reg<Item> PINCEL = Reg.item("ruleta", "pincel_bosque", () -> new PincelBosqueItem(new Properties().stacksTo(1)));
+   public static final Reg<Item> PINCEL = Reg.item("ruleta", "pincel_bosque", () -> new PincelBosqueItem(net.ruleta.Reg.props().stacksTo(1)));
 
    private Arboles() {
    }

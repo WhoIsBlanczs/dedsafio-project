@@ -31,7 +31,7 @@ public abstract class ThrownEnderpearlMixin {
    private Entity ruleta$teletransportar(Entity dueno, TeleportTransition destino) {
       this.ruleta$dano = 5.0F;
       this.ruleta$anulada = false;
-      ThrownEnderpearl yo = (ThrownEnderpearl)this;
+      ThrownEnderpearl yo = (ThrownEnderpearl)(Object)this;
       if (dueno instanceof ServerPlayer jugador && Bus.hayOyentes(EntityTeleportEvent.EnderPearl.class)) {
          EntityTeleportEvent.EnderPearl ev = new EntityTeleportEvent.EnderPearl(jugador, yo.getX(), yo.getY(), yo.getZ(), yo, 5.0F);
          if (Bus.post(ev)) {

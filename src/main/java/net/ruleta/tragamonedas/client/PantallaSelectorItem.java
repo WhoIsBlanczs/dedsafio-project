@@ -152,12 +152,14 @@ public class PantallaSelectorItem extends UiPantalla {
       }
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
-      return super.mouseClicked(mx, my, boton) ? true : this.lista.mouseClicked(mx, my, boton);
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      return super.mouseClicked(ev_, dbl_) ? true : this.lista.mouseClicked(mx, my, boton);
    }
 
-   public boolean mouseReleased(double mx, double my, int boton) {
-      return this.lista.mouseReleased() || super.mouseReleased(mx, my, boton);
+   public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent ev_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      return this.lista.mouseReleased() || super.mouseReleased(ev_);
    }
 
    public boolean mouseScrolled(double mx, double my, double dx, double dy) {
@@ -186,7 +188,7 @@ public class PantallaSelectorItem extends UiPantalla {
                && my >= PantallaSelectorItem.this.lista.y
                && my < PantallaSelectorItem.this.lista.y + PantallaSelectorItem.this.lista.h;
             Ui.cajaBorde(g, cx, y, 34, 34, 4, Ui.c(h ? 2369846 : 1711656), Ui.c(h ? 7113983 : 3028037));
-            g.renderItem(e.pila(), cx + 9, y + 9);
+            g.item(e.pila(), cx + 9, y + 9);
             if (h) {
                PantallaSelectorItem.this.hoverId = e.id();
                PantallaSelectorItem.this.hoverPila = e.pila();

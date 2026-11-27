@@ -27,18 +27,18 @@ public abstract class PlayerMixin {
 
    @ModifyVariable(method = "actuallyHurt", at = @At("HEAD"), argsOnly = true, require = 0)
    private float ruleta$danoBruto(float cantidad) {
-      return Lanzador.dano((LivingEntity)this, this.ruleta$fuenteJugador, cantidad);
+      return Lanzador.dano((LivingEntity)(Object)this, this.ruleta$fuenteJugador, cantidad);
    }
 
    @ModifyVariable(method = "actuallyHurt", at = @At(value = "STORE", ordinal = 1), argsOnly = true, require = 0)
    private float ruleta$danoFinal(float cantidad) {
-      return Lanzador.danoTrasArmadura((LivingEntity)this, this.ruleta$fuenteJugador, cantidad);
+      return Lanzador.danoTrasArmadura((LivingEntity)(Object)this, this.ruleta$fuenteJugador, cantidad);
    }
 
    @Inject(method = "getDisplayName", at = @At("RETURN"), cancellable = true, require = 0)
    private void ruleta$nombre(CallbackInfoReturnable<Component> cir) {
       if (Bus.hayOyentes(PlayerEvent.NameFormat.class)) {
-         Player yo = (Player)this;
+         Player yo = (Player)(Object)this;
          PlayerEvent.NameFormat ev = new PlayerEvent.NameFormat(yo, yo.getName(), (Component)cir.getReturnValue());
          Bus.post(ev);
          cir.setReturnValue(ev.getDisplayname());

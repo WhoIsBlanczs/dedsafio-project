@@ -261,7 +261,7 @@ public class Ruleta {
                                  }
 
                                  int tipoSancion = m.sancion();
-                                 String quienSanciona = jugador.getGameProfile().getName();
+                                 String quienSanciona = jugador.getGameProfile().name();
                                  sancion = () -> Sanciones.programar(obj, tipoSancion, segs, quienSanciona);
                               }
 
@@ -309,7 +309,7 @@ public class Ruleta {
                               }
 
                               Mensajes.programar(
-                                 color, jugador.getGameProfile().getName(), titulo, texto, segundos, destino, idCambio, alEnviar, conAnimacion, sinRuleta
+                                 color, jugador.getGameProfile().name(), titulo, texto, segundos, destino, idCambio, alEnviar, conAnimacion, sinRuleta
                               );
                               if (color == RuletaColor.ROSA && !m.animacion()) {
                                  Mensajes.sinNutria();

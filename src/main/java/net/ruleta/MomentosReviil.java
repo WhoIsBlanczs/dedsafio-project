@@ -377,7 +377,7 @@ public final class MomentosReviil {
 
       ServerLevel nivel = p.level();
       if (hay && nivel.getDifficulty() != Difficulty.PEACEFUL && p.getRandom().nextInt(Math.max(1, Ajustes.entero("creepers.cada"))) == 0) {
-         Creeper c = (Creeper)EntityType.CREEPER.create(nivel);
+         Creeper c = (Creeper)net.minecraft.world.entity.EntityTypes.CREEPER.create(nivel);
          if (c != null) {
             c.snapTo(p.getX(), p.getY(), p.getZ(), p.getYRot(), 0.0F);
             c.finalizeSpawn(nivel, nivel.getCurrentDifficultyAt(p.blockPosition()), EntitySpawnReason.EVENT, null);
@@ -394,7 +394,7 @@ public final class MomentosReviil {
    private static void luna(MinecraftServer server, ServerPlayer p) {
       ServerLevel nivel = p.level();
       if (nivel.dimension() == Level.OVERWORLD && !p.hasEffect(MobEffects.BLINDNESS)) {
-         float angulo = nivel.getTimeOfDay(1.0F) * (float) (Math.PI * 2);
+         float angulo = (((float)(nivel.getOverworldClockTime() % 24000L)) / 24000.0F) * (float) (Math.PI * 2);
          Vec3 luna = new Vec3(Mth.sin(angulo), -Mth.cos(angulo), 0.0);
          if (!(luna.y < 0.05) && !(p.getViewVector(1.0F).dot(luna) < 0.985)) {
             Vec3 ojos = p.getEyePosition();

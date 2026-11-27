@@ -7,7 +7,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityType.Builder;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -29,7 +28,7 @@ public final class PuertaBunker {
       "ruleta",
       "puerta_bunker",
       () -> new PuertaBunkerBloque(
-         Properties.of().mapColor(MapColor.COLOR_GRAY).strength(20.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion().pushReaction(PushReaction.BLOCK),
+         net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_GRAY).strength(20.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion().pushReaction(PushReaction.IMMOVEABLE),
          false
       )
    );
@@ -37,30 +36,30 @@ public final class PuertaBunker {
       "ruleta",
       "puerta_bunker_hoja",
       () -> new PuertaBunkerHoja(
-         Properties.of()
+         net.ruleta.Reg.bprops()
             .mapColor(MapColor.COLOR_GRAY)
             .strength(-1.0F, 3600000.0F)
             .noLootTable()
             .noOcclusion()
             .isViewBlocking((st, lv, p) -> false)
             .isSuffocating((st, lv, p) -> false)
-            .pushReaction(PushReaction.BLOCK)
+            .pushReaction(PushReaction.IMMOVEABLE)
       )
    );
    public static final Reg<Block> BLOQUE_GRANDE = Reg.block(
       "ruleta",
       "puerta_grande",
       () -> new PuertaBunkerBloque(
-         Properties.of().mapColor(MapColor.COLOR_GRAY).strength(20.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion().pushReaction(PushReaction.BLOCK),
+         net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_GRAY).strength(20.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion().pushReaction(PushReaction.IMMOVEABLE),
          true
       )
    );
-   public static final Reg<Item> ITEM = Reg.item("ruleta", "puerta_bunker", () -> new BlockItem(BLOQUE.get(), new net.minecraft.world.item.Item.Properties()));
+   public static final Reg<Item> ITEM = Reg.item("ruleta", "puerta_bunker", () -> new BlockItem(BLOQUE.get(), net.ruleta.Reg.props()));
    public static final Reg<Item> ITEM_GRANDE = Reg.item(
-      "ruleta", "puerta_grande", () -> new BlockItem(BLOQUE_GRANDE.get(), new net.minecraft.world.item.Item.Properties())
+      "ruleta", "puerta_grande", () -> new BlockItem(BLOQUE_GRANDE.get(), net.ruleta.Reg.props())
    );
    public static final Reg<BlockEntityType<PuertaBunkerBE>> BE = Reg.blockEntity(
-      "ruleta", "puerta_bunker", () -> Builder.of(PuertaBunkerBE::new, new Block[]{BLOQUE.get(), BLOQUE_GRANDE.get()}).build(null)
+      "ruleta", "puerta_bunker", () -> new net.minecraft.world.level.block.entity.BlockEntityType<>(PuertaBunkerBE::new, java.util.Set.of(BLOQUE.get(), BLOQUE_GRANDE.get()))
    );
 
    private PuertaBunker() {

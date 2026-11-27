@@ -94,7 +94,7 @@ public final class CosmeticosServidor {
                                     if (pedido.equals("quitar")) {
                                        Cosmeticos.ponerAura(j, "");
                                        ((CommandSourceStack)ctx.getSource())
-                                          .sendSuccess(() -> Component.literal("Aura quitada a " + j.getGameProfile().getName()), true);
+                                          .sendSuccess(() -> Component.literal("Aura quitada a " + j.getGameProfile().name()), true);
                                        return 1;
                                     }
 

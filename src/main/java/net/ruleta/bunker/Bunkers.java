@@ -155,7 +155,7 @@ public final class Bunkers {
       if (!nombre.isEmpty() && nombre.length() <= 32) {
          BlockPos pie = p.blockPosition();
          BlockPos esquina = pie.offset(-48, 0, -49);
-         String malo = motivoCerca(p.level().getServer(), p.level().dimension().location().toString(), esquina);
+         String malo = motivoCerca(p.level().getServer(), p.level().dimension().identifier().toString(), esquina);
          if (malo != null) {
             ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
             return 0;
@@ -199,9 +199,9 @@ public final class Bunkers {
          return 0;
       }
 
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (!t.isEmpty() && mascaras(nivel)) {
-         String malo = motivoCerca(server, nivel.dimension().location().toString(), pe.esquina());
+         String malo = motivoCerca(server, nivel.dimension().identifier().toString(), pe.esquina());
          if (malo != null) {
             ((CommandSourceStack)ctx.getSource()).sendFailure(Component.literal(malo));
             return 0;
@@ -266,12 +266,12 @@ public final class Bunkers {
 
    @Nullable
    static Bunkers.Bunker construir(ServerLevel nivel, BlockPos esquina, String nombre, @Nullable Consumer<Bunkers.Bunker> alTerminar) {
-      if (!nivel.getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
+      if (!nivel.getServer().getStructureManager().get(ESTRUCTURA).isEmpty() && mascaras(nivel)) {
          if (motivoCerca(nivel.getServer(), nivel.dimension().identifier().toString(), esquina) != null) {
             return null;
          }
 
-         Bunkers.Bunker b = new Bunkers.Bunker(nombre, nivel.dimension().location().toString(), esquina.getX(), esquina.getY(), esquina.getZ());
+         Bunkers.Bunker b = new Bunkers.Bunker(nombre, nivel.dimension().identifier().toString(), esquina.getX(), esquina.getY(), esquina.getZ());
          OBRAS.add(new Object[]{new Terreno.Obra(nivel, esquina, ocupado), b, alTerminar});
          return b;
       } else {
@@ -292,7 +292,7 @@ public final class Bunkers {
             Bunkers.Bunker b = (Bunkers.Bunker)o[1];
             Consumer<Bunkers.Bunker> fin = (Consumer<Bunkers.Bunker>)o[2];
             ServerLevel nivel = obra.nivel();
-            Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+            Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
             BlockPos esquina = new BlockPos(b.ex(), b.ey(), b.ez());
             StructurePlaceSettings ajustes = new StructurePlaceSettings().setIgnoreEntities(false);
             boolean ok = t.isPresent() && t.get().placeInWorld(nivel, esquina, esquina, ajustes, nivel.getRandom(), 18);
@@ -381,7 +381,7 @@ public final class Bunkers {
          return false;
       }
 
-      String dim = nivel.dimension().location().toString();
+      String dim = nivel.dimension().identifier().toString();
       List<Bunkers.Bunker> todos = new ArrayList<>(datos(nivel.getServer()).lista);
 
       for (Object[] o : OBRAS) {
@@ -439,7 +439,7 @@ public final class Bunkers {
       }
 
       BitSet r = new BitSet(323136);
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (t.isPresent()) {
          CompoundTag nbt = t.get().save(new CompoundTag());
          ListTag paleta = nbt.getListOrEmpty("palette");
@@ -453,7 +453,7 @@ public final class Bunkers {
          BitSet aire = new BitSet();
 
          for (int k = 0; k < paleta.size(); k++) {
-            String n = paleta.getCompound(k).getStringOr("Name", "");
+            String n = paleta.getCompoundOrEmpty(k).getStringOr("Name", "");
             if (n.equals("minecraft:air") || n.equals("minecraft:cave_air") || n.equals("minecraft:void_air") || n.equals("minecraft:structure_void")) {
                aire.set(k);
             }
@@ -462,7 +462,7 @@ public final class Bunkers {
          ListTag bloques = nbt.getListOrEmpty("blocks");
 
          for (int k = 0; k < bloques.size(); k++) {
-            CompoundTag c = bloques.getCompound(k);
+            CompoundTag c = bloques.getCompoundOrEmpty(k);
             if (!aire.get(c.getIntOr("state", 0))) {
                ListTag pos = c.getListOrEmpty("pos");
                if (pos.size() == 3) {
@@ -537,7 +537,7 @@ public final class Bunkers {
 
    private static String datosBorrar(ServerPlayer p) {
       StringBuilder sb = new StringBuilder();
-      String dimP = p.level().dimension().location().toString();
+      String dimP = p.level().dimension().identifier().toString();
 
       for (Bunkers.Bunker b : datos(p.level().getServer()).lista) {
          sb.append(linea(b, dimP, p, -1));
@@ -647,7 +647,7 @@ public final class Bunkers {
          return true;
       }
 
-      Optional<StructureTemplate> t = nivel.getStructureManager().get(ESTRUCTURA);
+      Optional<StructureTemplate> t = nivel.getServer().getStructureManager().get(ESTRUCTURA);
       if (t.isEmpty()) {
          return false;
       }
@@ -692,7 +692,7 @@ public final class Bunkers {
          return null;
       }
 
-      String dim = nivel.dimension().location().toString();
+      String dim = nivel.dimension().identifier().toString();
 
       for (Bunkers.Bunker b : datos(nivel.getServer()).lista) {
          if (b.dimension().equals(dim) && b.contiene(p) && interior.get(i(p.getX() - b.ex(), p.getY() - b.ey(), p.getZ() - b.ez()))) {
@@ -953,7 +953,7 @@ public final class Bunkers {
          ListTag l = tag.getListOrEmpty("bunkers");
 
          for (int k = 0; k < l.size(); k++) {
-            CompoundTag c = l.getCompound(k);
+            CompoundTag c = l.getCompoundOrEmpty(k);
             if (c.contains("ex")) {
                d.lista.add(new Bunkers.Bunker(c.getStringOr("nombre", ""), c.getStringOr("dim", ""), c.getIntOr("ex", 0), c.getIntOr("ey", 0), c.getIntOr("ez", 0)));
             } else {

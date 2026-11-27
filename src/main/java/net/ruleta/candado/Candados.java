@@ -29,9 +29,9 @@ import net.ruleta.Reg;
 import net.ruleta.Vanilla;
 
 public final class Candados {
-   public static final Reg<Block> PUERTA = Reg.block("ruleta", "puerta_candado", () -> new PuertaCandadoBloque(Properties.ofFullCopy(Blocks.IRON_DOOR)));
-   public static final Reg<Item> CHIP_PHORA = Reg.item("ruleta", "chip_phora", () -> new Item(new net.minecraft.world.item.Item.Properties()));
-   public static final Reg<Item> CANDADO = Reg.item("ruleta", "candado", () -> new Item(new net.minecraft.world.item.Item.Properties().rarity(Rarity.UNCOMMON)));
+   public static final Reg<Block> PUERTA = Reg.block("ruleta", "puerta_candado", () -> new PuertaCandadoBloque(net.ruleta.Reg.bcopy(Blocks.IRON_DOOR)));
+   public static final Reg<Item> CHIP_PHORA = Reg.item("ruleta", "chip_phora", () -> new Item(net.ruleta.Reg.props()));
+   public static final Reg<Item> CANDADO = Reg.item("ruleta", "candado", () -> new Item(net.ruleta.Reg.props().rarity(Rarity.UNCOMMON)));
    public static final int MODO_FIJAR = 0;
    public static final int MODO_ABRIR = 1;
    public static final int MAX_DIGITOS = 8;

@@ -50,7 +50,7 @@ public final class OlaCliente {
             yaw = m.r();
             yBase = Float.isNaN(m.y()) ? -2.2F : m.y();
             Minecraft mcr = Minecraft.getInstance();
-            dimAct = mcr.level == null ? "" : mcr.level.dimension().location().toString();
+            dimAct = mcr.level == null ? "" : mcr.level.dimension().identifier().toString();
             break;
          case 4:
             dentro = true;

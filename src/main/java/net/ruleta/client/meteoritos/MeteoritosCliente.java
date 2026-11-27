@@ -119,7 +119,7 @@ public final class MeteoritosCliente {
             mc.getSoundManager()
                .play(
                   new SimpleSoundInstance(
-                     IMPACTO.getLocation(),
+                     IMPACTO.location(),
                      SoundSource.MASTER,
                      d < 40.0 ? 2.0F : 8.0F,
                      0.95F + mc.level.random.nextFloat() * 0.2F,

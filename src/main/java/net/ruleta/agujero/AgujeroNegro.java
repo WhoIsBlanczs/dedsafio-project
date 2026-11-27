@@ -14,7 +14,7 @@ public final class AgujeroNegro {
          .clientTrackingRange(32)
          .updateInterval(20)
          .fireImmune()
-         .build("agujero_negro")
+         .build(net.ruleta.Reg.ekey())
    );
 
    private AgujeroNegro() {

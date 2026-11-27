@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin {
    @Inject(method = "changeDimension", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$viaje(TeleportTransition destino, CallbackInfoReturnable<Entity> cir) {
-      if (Lanzador.viaje((Entity)this, destino)) {
+      if (Lanzador.viaje((Entity)(Object)this, destino)) {
          cir.setReturnValue(null);
       }
    }

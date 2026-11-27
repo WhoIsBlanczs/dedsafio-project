@@ -32,7 +32,7 @@ public abstract class ChestBlockMixin extends Block {
    @Inject(method = "<init>", at = @At("TAIL"))
    private void ruleta$sinCandadoPorDefecto(Properties propiedades, Supplier<BlockEntityType<? extends ChestBlockEntity>> tipo, CallbackInfo ci) {
       if (this.defaultBlockState().hasProperty(Propiedades.LOCKED)) {
-         this.registerDefaultState((BlockState)this.defaultBlockState().setValue(Propiedades.LOCKED, false));
+         this.registerDefaultState((BlockState)(Object)this.defaultBlockState().setValue(Propiedades.LOCKED, false));
       }
    }
 }

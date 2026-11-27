@@ -20,10 +20,10 @@ public final class CasinoCliente {
       ConfigTragamonedas c = ConfigTragamonedas.desdeJson(json);
       if (c != null) {
          Minecraft mc = Minecraft.getInstance();
-         if (mc.screen instanceof PantallaCasino pantalla) {
+         if (mc.gui.screen() instanceof PantallaCasino pantalla) {
             pantalla.alRecibir(c);
          } else {
-            mc.setScreenAndShow(new PantallaCasino(mc.screen, c));
+            mc.setScreenAndShow(new PantallaCasino(mc.gui.screen(), c));
          }
       }
    }

@@ -650,7 +650,7 @@ public class LanzadorFormulario extends Screen {
       Ui.cajaBorde(g, x, y, w, h, 4, cara, borde);
    }
 
-   public void render(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
+   public void extractRenderState(GuiGraphicsExtractor ctx, int mx, int my, float pt) {
       float aparicion = this.aparece.hacia(1.0F, 11.0F);
       Ui.alfa = aparicion;
       this.fondoFormulario(ctx);
@@ -795,11 +795,11 @@ public class LanzadorFormulario extends Screen {
       Ui.caja(ctx, this.xR, this.ySumario - 6, this.anchoR, 1, 0, Ui.c(3028037, 0.8F));
       String resumen = Ui.recortar(this.font, this.resumen(), this.anchoR);
       Ui.texto(ctx, this.font, resumen, this.xR, this.ySumario, 13160411, 1.0F);
-      super.render(ctx, mx, my, pt);
+      super.extractRenderState(ctx, mx, my, pt);
       Ui.alfa = 1.0F;
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
+   public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
    private void fondoFormulario(GuiGraphicsExtractor g) {

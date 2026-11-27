@@ -38,7 +38,7 @@ abstract class FilaZonasPedestal extends UiFila {
       boolean hov = Ui.dentro(mx, my, this.ox + rx, this.oy + ry, w, h);
       Ui.cajaBorde(g, this.ox + rx, this.oy + ry, w, h, 4, Ui.c(hov ? 2369846 : 1119259), Ui.c(hov ? color : 3028037));
       if (!pila.isEmpty()) {
-         g.renderItem(pila, this.ox + rx + (w - 16) / 2, this.oy + ry + (h - 16) / 2);
+         g.item(pila, this.ox + rx + (w - 16) / 2, this.oy + ry + (h - 16) / 2);
       }
 
       if (accion != null) {

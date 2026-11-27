@@ -21,7 +21,7 @@ public class SupernovaMod {
          .updateInterval(20)
          .fireImmune()
          .noSave()
-         .build("supernova:supernova")
+         .build(net.ruleta.Reg.ekey())
    );
    public static final Reg<SoundEvent> SND_IDLE = sound("idle_hum");
    public static final Reg<SoundEvent> SND_COLAPSO = sound("colapso");

@@ -197,18 +197,18 @@ public class PantallaCajero extends Screen {
       }
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcial) {
+   public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcial) {
    }
 
-   public void render(GuiGraphicsExtractor g, int mx, int my, float pt) {
+   public void extractRenderState(GuiGraphicsExtractor g, int mx, int my, float pt) {
       g.fillGradient(0, 0, this.width, this.height, -1072689136, -804253680);
       this.medir();
       double lx = this.localX(mx);
       double ly = this.localY(my);
-      g.pose().pushPose();
+      g.pose().pushMatrix();
       g.pose().translate((float)(this.px0 / this.gs), (float)(this.py0 / this.gs), 0.0F);
       float esc = (float)(this.k / this.gs);
-      g.pose().scale(esc, esc, 1.0F);
+      g.pose().scale(esc, esc);
       RenderSystem.enableBlend();
       RenderSystem.defaultBlendFunc();
       g.blit(MARCO, 0, 0, 0.0F, 0.0F, 176, 176, 176, 176);
@@ -238,17 +238,17 @@ public class PantallaCajero extends Screen {
          this.boton(g, 57, 140, this.modo == PantallaCajero.Modo.SACAR ? "Sacar" : "Ingresar", lx, ly);
       }
 
-      g.pose().popPose();
+      g.pose().popMatrix();
    }
 
    private void texto(GuiGraphicsExtractor g, String s, float cx, float cy, int color, float maxW, float escMax) {
       float w = this.font.width(s);
       float sc = Math.min(escMax, maxW / Math.max(1.0F, w));
-      g.pose().pushPose();
-      g.pose().translate(cx - w * sc / 2.0F, cy - 4.0F * sc, 0.0F);
-      g.pose().scale(sc, sc, 1.0F);
+      g.pose().pushMatrix();
+      g.pose().translate(cx - w * sc / 2.0F, cy - 4.0F * sc);
+      g.pose().scale(sc, sc);
       g.text(this.font, s, 0, 0, color, true);
-      g.pose().popPose();
+      g.pose().popMatrix();
    }
 
    private void boton(GuiGraphicsExtractor g, int x, int y, String texto, double lx, double ly) {
@@ -292,11 +292,11 @@ public class PantallaCajero extends Screen {
    }
 
    private void textoIzq(GuiGraphicsExtractor g, String s, float x, float cy, int color, float sc) {
-      g.pose().pushPose();
-      g.pose().translate(x, cy - 4.0F * sc, 0.0F);
-      g.pose().scale(sc, sc, 1.0F);
-      g.drawString(this.font, s, 0, 0, color, true);
-      g.pose().popPose();
+      g.pose().pushMatrix();
+      g.pose().translate(x, cy - 4.0F * sc);
+      g.pose().scale(sc, sc);
+      g.text(this.font, s, 0, 0, color, true);
+      g.pose().popMatrix();
    }
 
    private void columna(GuiGraphicsExtractor g, int i, double lx, double ly) {
@@ -333,9 +333,10 @@ public class PantallaCajero extends Screen {
       return null;
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
       if (boton != 0) {
-         return super.mouseClicked(mx, my, boton);
+         return super.mouseClicked(ev_, dbl_);
       }
 
       this.medir();
@@ -351,7 +352,7 @@ public class PantallaCajero extends Screen {
             this.ir(PantallaCajero.Modo.SACAR);
             return true;
          } else {
-            return super.mouseClicked(mx, my, boton);
+            return super.mouseClicked(ev_, dbl_);
          }
       } else {
          int[] f = this.flechaBajo(lx, ly);
@@ -369,14 +370,15 @@ public class PantallaCajero extends Screen {
             this.confirmar();
             return true;
          } else {
-            return super.mouseClicked(mx, my, boton);
+            return super.mouseClicked(ev_, dbl_);
          }
       }
    }
 
-   public boolean mouseReleased(double mx, double my, int boton) {
+   public boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent ev_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
       this.mantenerCol = -1;
-      return super.mouseReleased(mx, my, boton);
+      return super.mouseReleased(ev_);
    }
 
    public boolean mouseScrolled(double mx, double my, double deltaX, double delta) {
@@ -412,12 +414,13 @@ public class PantallaCajero extends Screen {
       }
    }
 
-   public boolean keyPressed(int tecla, int escaneo, int mods) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
+      int tecla = ev_.key(); int escaneo = 0; int mods = ev_.modifiers();
       if (tecla == 256 && this.modo != PantallaCajero.Modo.MENU) {
          this.ir(PantallaCajero.Modo.MENU);
          return true;
       } else {
-         return super.keyPressed(tecla, escaneo, mods);
+         return super.keyPressed(ev_);
       }
    }
 

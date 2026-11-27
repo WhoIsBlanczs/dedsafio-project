@@ -14,7 +14,7 @@ public final class BloquesBunker {
       "ruleta",
       "ladrillo_bunker",
       () -> new LadrilloBunkerBloque(
-         Properties.of().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops()
+         net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops()
       )
    );
    public static final Reg<Block> ESCALERA = Reg.block(
@@ -22,28 +22,28 @@ public final class BloquesBunker {
       "escalera_bunker",
       () -> new StairBlock(
          LADRILLO.get().defaultBlockState(),
-         Properties.of().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops()
+         net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_GRAY).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops()
       )
    );
    public static final Reg<Block> PISO = Reg.block(
       "ruleta",
       "piso_bunker",
-      () -> new Block(Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2.0F, 8.0F).sound(SoundType.STONE).requiresCorrectToolForDrops())
+      () -> new Block(net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_BROWN).strength(2.0F, 8.0F).sound(SoundType.STONE).requiresCorrectToolForDrops())
    );
    public static final Reg<Block> PELIGRO = Reg.block(
       "ruleta",
       "peligro_bunker",
-      () -> new Block(Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops())
+      () -> new Block(net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_YELLOW).strength(3.0F, 12.0F).sound(SoundType.DEEPSLATE_BRICKS).requiresCorrectToolForDrops())
    );
    public static final Reg<Item> ITEM_LADRILLO = Reg.item(
-      "ruleta", "ladrillo_bunker", () -> new BlockItem(LADRILLO.get(), new net.minecraft.world.item.Item.Properties())
+      "ruleta", "ladrillo_bunker", () -> new BlockItem(LADRILLO.get(), net.ruleta.Reg.props())
    );
    public static final Reg<Item> ITEM_ESCALERA = Reg.item(
-      "ruleta", "escalera_bunker", () -> new BlockItem(ESCALERA.get(), new net.minecraft.world.item.Item.Properties())
+      "ruleta", "escalera_bunker", () -> new BlockItem(ESCALERA.get(), net.ruleta.Reg.props())
    );
-   public static final Reg<Item> ITEM_PISO = Reg.item("ruleta", "piso_bunker", () -> new BlockItem(PISO.get(), new net.minecraft.world.item.Item.Properties()));
+   public static final Reg<Item> ITEM_PISO = Reg.item("ruleta", "piso_bunker", () -> new BlockItem(PISO.get(), net.ruleta.Reg.props()));
    public static final Reg<Item> ITEM_PELIGRO = Reg.item(
-      "ruleta", "peligro_bunker", () -> new BlockItem(PELIGRO.get(), new net.minecraft.world.item.Item.Properties())
+      "ruleta", "peligro_bunker", () -> new BlockItem(PELIGRO.get(), net.ruleta.Reg.props())
    );
 
    private BloquesBunker() {

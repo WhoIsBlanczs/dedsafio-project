@@ -1,6 +1,6 @@
 package net.ruleta.mixin;
 
-import net.minecraft.client.player.Input;
+import net.minecraft.client.player.ClientInput;
 import net.minecraft.client.player.KeyboardInput;
 import net.ruleta.client.tornado.TornadoCliente;
 import org.spongepowered.asm.mixin.Mixin;

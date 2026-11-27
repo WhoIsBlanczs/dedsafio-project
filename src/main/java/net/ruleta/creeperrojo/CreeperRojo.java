@@ -23,9 +23,9 @@ import net.ruleta.compat.SubscribeEvent;
 public final class CreeperRojo {
    public static final double RADIO_EFECTO = 12.0;
    public static final Reg<EntityType<CreeperRojoEntity>> TIPO = Reg.entidad(
-      "ruleta", "creeper_rojo", () -> Builder.of(CreeperRojoEntity::new, MobCategory.MONSTER).sized(0.6F, 1.0F).clientTrackingRange(8).build("creeper_rojo")
+      "ruleta", "creeper_rojo", () -> Builder.of(CreeperRojoEntity::new, MobCategory.MONSTER).sized(0.6F, 1.0F).clientTrackingRange(8).build(net.ruleta.Reg.ekey())
    );
-   public static final Reg<Item> HUEVO = Reg.item("ruleta", "creeper_rojo_spawn_egg", () -> new SpawnEggItem(TIPO.get(), 14687764, 5900805, new Properties()));
+   public static final Reg<Item> HUEVO = Reg.item("ruleta", "creeper_rojo_spawn_egg", () -> new SpawnEggItem(net.ruleta.Reg.props().spawnEgg(TIPO.get())));
 
    private static double radioEfecto() {
       return Ajustes.entero("creeperrojo.radio");

@@ -71,11 +71,11 @@ public final class AvisoPop {
                int cx = ancho / 2;
                int cy = alto - 62;
                int a = Math.max(4, (int)(alfa * 255.0F));
-               g.pose().pushPose();
-               g.pose().translate(cx, cy, 0.0F);
-               g.pose().scale(escala, escala, 1.0F);
+               g.pose().pushMatrix();
+               g.pose().translate(cx, cy);
+               g.pose().scale(escala, escala);
                g.text(f, texto, -f.width(texto) / 2, -9 / 2, a << 24 | 16777215, true);
-               g.pose().popPose();
+               g.pose().popMatrix();
             }
          }
       } else {

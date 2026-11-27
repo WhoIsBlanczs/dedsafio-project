@@ -59,7 +59,7 @@ public final class MobsNuevos {
 
    @SubscribeEvent
    public static void alAparecer(MobSpawnEvent.FinalizeSpawn e) {
-      if (e.getEntity().getType() == EntityType.CREEPER && !e.isSpawnCancelled()) {
+      if (e.getEntity().getType() == net.minecraft.world.entity.EntityTypes.CREEPER && !e.isSpawnCancelled()) {
          EntitySpawnReason razon = e.getSpawnType();
          if (razon == EntitySpawnReason.NATURAL || razon == EntitySpawnReason.CHUNK_GENERATION) {
             if (Ruleta.cambioActivoPublico("mob-creeper-rojo") && !(e.getEntity().getRandom().nextFloat() >= Ajustes.entero("mobs.prob_rojo") / 100.0F)) {

@@ -113,8 +113,9 @@ abstract class PantallaTarjetas extends UiPantalla {
       return true;
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
-      if (super.mouseClicked(mx, my, boton)) {
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
+      if (super.mouseClicked(ev_, dbl_)) {
          return true;
       }
 

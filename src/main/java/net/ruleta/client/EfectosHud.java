@@ -26,7 +26,7 @@ public final class EfectosHud {
       Minecraft mc = Minecraft.getInstance();
       LocalPlayer jugador = mc.player;
       if (jugador != null && !jugador.getActiveEffects().isEmpty()) {
-         if (!(mc.screen instanceof EffectRenderingInventoryScreen<?> inv && inv.canSeeEffects())) {
+         if (!(mc.gui.screen() instanceof EffectRenderingInventoryScreen<?> inv && inv.canSeeEffects())) {
             List<MobEffectInstance> buenos = new ArrayList<>();
             List<MobEffectInstance> malos = new ArrayList<>();
 

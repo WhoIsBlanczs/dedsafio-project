@@ -24,7 +24,7 @@ import net.ruleta.puerta.PuertaBunker;
 import net.ruleta.tragamonedas.Tragamonedas;
 
 public final class PestanaRuleta {
-   public static final Reg<Item> ICONO = Reg.item("ruleta", "ruleta", () -> new Item(new Properties()));
+   public static final Reg<Item> ICONO = Reg.item("ruleta", "ruleta", () -> new Item(net.ruleta.Reg.props()));
    public static final Reg<CreativeModeTab> PESTANA = Reg.pestana(
       "ruleta",
       "ruleta",

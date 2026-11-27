@@ -27,7 +27,7 @@ public abstract class CamaraEventosMixin {
    @Inject(method = "setup", at = @At("TAIL"), require = 0)
    private void ruleta$angulos(BlockGetter nivel, Entity entidad, boolean tercera, boolean invertida, float parcial, CallbackInfo ci) {
       if (Bus.hayOyentes(ViewportEvent.ComputeCameraAngles.class)) {
-         ViewportEvent.ComputeCameraAngles e = new ViewportEvent.ComputeCameraAngles((Camera)this, parcial, this.field_18718, this.field_18717, 0.0F);
+         ViewportEvent.ComputeCameraAngles e = new ViewportEvent.ComputeCameraAngles((Camera)(Object)this, parcial, this.field_18718, this.field_18717, 0.0F);
          Bus.post(e);
          if (e.getYaw() != this.field_18718 || e.getPitch() != this.field_18717) {
             this.method_19325(e.getYaw(), e.getPitch());

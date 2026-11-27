@@ -16,9 +16,9 @@ public final class Burbujas {
    public static final Reg<EntityType<Burbuja>> BURBUJA = Reg.entidad(
       "ruleta",
       "burbuja",
-      () -> Builder.of(Burbuja::new, MobCategory.MISC).sized(2.2F, 2.2F).clientTrackingRange(10).updateInterval(2).fireImmune().build("ruleta:burbuja")
+      () -> Builder.of(Burbuja::new, MobCategory.MISC).sized(2.2F, 2.2F).clientTrackingRange(10).updateInterval(2).fireImmune().build(net.ruleta.Reg.ekey())
    );
-   public static final Reg<Item> ITEM = Reg.item("ruleta", "burbuja", () -> new ItemBurbuja(new Properties().stacksTo(1).rarity(Rarity.EPIC)));
+   public static final Reg<Item> ITEM = Reg.item("ruleta", "burbuja", () -> new ItemBurbuja(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.EPIC)));
 
    private Burbujas() {
    }

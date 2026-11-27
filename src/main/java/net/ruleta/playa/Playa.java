@@ -27,13 +27,13 @@ public final class Playa {
    public static final Reg<Block> ESTRELLA_MAR = Reg.block(
       "ruleta", "estrella_mar", () -> new DecoPlayaBloque(propiedades(MapColor.COLOR_ORANGE, SoundType.SAND), "Estrella de mar")
    );
-   public static final Reg<Item> ITEM_CONCHA = Reg.item("ruleta", "concha", () -> new Playa.NombreBlockItem(CONCHA.get(), new Properties(), "Concha de mar"));
-   public static final Reg<Item> ITEM_CARACOLA = Reg.item("ruleta", "caracola", () -> new Playa.NombreBlockItem(CARACOLA.get(), new Properties(), "Caracola"));
+   public static final Reg<Item> ITEM_CONCHA = Reg.item("ruleta", "concha", () -> new Playa.NombreBlockItem(CONCHA.get(), net.ruleta.Reg.props(), "Concha de mar"));
+   public static final Reg<Item> ITEM_CARACOLA = Reg.item("ruleta", "caracola", () -> new Playa.NombreBlockItem(CARACOLA.get(), net.ruleta.Reg.props(), "Caracola"));
    public static final Reg<Item> ITEM_PIEDRITAS = Reg.item(
-      "ruleta", "piedritas", () -> new Playa.NombreBlockItem(PIEDRITAS.get(), new Properties(), "Piedritas")
+      "ruleta", "piedritas", () -> new Playa.NombreBlockItem(PIEDRITAS.get(), net.ruleta.Reg.props(), "Piedritas")
    );
    public static final Reg<Item> ITEM_ESTRELLA_MAR = Reg.item(
-      "ruleta", "estrella_mar", () -> new Playa.NombreBlockItem(ESTRELLA_MAR.get(), new Properties(), "Estrella de mar")
+      "ruleta", "estrella_mar", () -> new Playa.NombreBlockItem(ESTRELLA_MAR.get(), net.ruleta.Reg.props(), "Estrella de mar")
    );
 
    private Playa() {

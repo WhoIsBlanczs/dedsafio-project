@@ -1,7 +1,9 @@
 package net.ruleta;
 
 import java.util.function.Supplier;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,6 +20,32 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public final class Reg<T> implements Supplier<T> {
    private final T valor;
+   private static final ThreadLocal<ResourceKey<Item>> ITEM_KEY = new ThreadLocal<>();
+   private static final ThreadLocal<ResourceKey<Block>> BLOCK_KEY = new ThreadLocal<>();
+   private static final ThreadLocal<ResourceKey<EntityType<?>>> ENTITY_KEY = new ThreadLocal<>();
+
+   /** Item.Properties con el ID del item que se esta registrando (obligatorio desde 1.21.2). */
+   public static Item.Properties props() {
+      Item.Properties p = new Item.Properties();
+      ResourceKey<Item> k = ITEM_KEY.get();
+      return k != null ? p.setId(k) : p;
+   }
+
+   public static BlockBehaviour.Properties bprops() {
+      BlockBehaviour.Properties p = BlockBehaviour.Properties.of();
+      ResourceKey<Block> k = BLOCK_KEY.get();
+      return k != null ? p.setId(k) : p;
+   }
+
+   public static BlockBehaviour.Properties bcopy(BlockBehaviour origen) {
+      BlockBehaviour.Properties p = BlockBehaviour.Properties.ofFullCopy(origen);
+      ResourceKey<Block> k = BLOCK_KEY.get();
+      return k != null ? p.setId(k) : p;
+   }
+
+   public static ResourceKey<EntityType<?>> ekey() {
+      return ENTITY_KEY.get();
+   }
 
    private Reg(T valor) {
       this.valor = valor;
@@ -33,19 +61,35 @@ public final class Reg<T> implements Supplier<T> {
    }
 
    public static <T extends Item> Reg<T> item(String espacio, String nombre, Supplier<T> fabrica) {
-      return new Reg<>((T)Registry.register(BuiltInRegistries.ITEM, id(espacio, nombre), fabrica.get()));
+      ITEM_KEY.set(ResourceKey.create(Registries.ITEM, id(espacio, nombre)));
+      try {
+         return new Reg<>((T)Registry.register(BuiltInRegistries.ITEM, id(espacio, nombre), fabrica.get()));
+      } finally {
+         ITEM_KEY.remove();
+      }
    }
 
    public static <T extends Block> Reg<T> block(String espacio, String nombre, Supplier<T> fabrica) {
-      return new Reg<>((T)Registry.register(BuiltInRegistries.BLOCK, id(espacio, nombre), fabrica.get()));
+      BLOCK_KEY.set(ResourceKey.create(Registries.BLOCK, id(espacio, nombre)));
+      try {
+         return new Reg<>((T)Registry.register(BuiltInRegistries.BLOCK, id(espacio, nombre), fabrica.get()));
+      } finally {
+         BLOCK_KEY.remove();
+      }
    }
 
    public static <T extends Entity> Reg<EntityType<T>> entidad(String espacio, String nombre, Supplier<EntityType<T>> fabrica) {
-      return new Reg<>((EntityType<T>)Registry.register(BuiltInRegistries.ENTITY_TYPE, id(espacio, nombre), fabrica.get()));
+      ENTITY_KEY.set(ResourceKey.create(Registries.ENTITY_TYPE, id(espacio, nombre)));
+      try {
+         return new Reg<>((EntityType<T>)Registry.register(BuiltInRegistries.ENTITY_TYPE, id(espacio, nombre), fabrica.get()));
+      } finally {
+         ENTITY_KEY.remove();
+      }
    }
 
-   public static <T extends Entity> Reg<EntityType<T>> entidadFabric(String espacio, String nombre, FabricEntityTypeBuilder<T> constructor) {
-      return new Reg<>((EntityType<T>)Registry.register(BuiltInRegistries.ENTITY_TYPE, id(espacio, nombre), constructor.build()));
+   public static <T extends Entity> Reg<EntityType<T>> entidadFabric(String espacio, String nombre, java.util.function.Function<ResourceKey<EntityType<?>>, EntityType<T>> constructor) {
+      ResourceKey<EntityType<?>> k = ResourceKey.create(Registries.ENTITY_TYPE, id(espacio, nombre));
+      return new Reg<>((EntityType<T>)Registry.register(BuiltInRegistries.ENTITY_TYPE, id(espacio, nombre), constructor.apply(k)));
    }
 
    public static Reg<SoundEvent> sonido(String espacio, String nombre, Supplier<SoundEvent> fabrica) {

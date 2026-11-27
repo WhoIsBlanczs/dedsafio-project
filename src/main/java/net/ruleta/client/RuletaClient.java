@@ -69,7 +69,7 @@ public final class RuletaClient implements ClientModInitializer {
       EntityRendererRegistry.register(MeteoritosMod.METEORITO.get(), NoopRenderer::new);
       EntityRendererRegistry.register(MobsNuevos.BOMBA_WARDEN.get(), BombaWardenRenderer::new);
       EntityRendererRegistry.register(Burbujas.BURBUJA.get(), BurbujaRenderer::new);
-      EntityRendererRegistry.register(EntityType.LIGHTNING_BOLT, RayoRealista::new);
+      EntityRendererRegistry.register(net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT, RayoRealista::new);
       AgujeroCliente.Registro.registrar();
       RegistroClienteCreeperes.registrar();
       RegistroClienteHerobrine.registrar();

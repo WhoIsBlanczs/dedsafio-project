@@ -33,7 +33,7 @@ public final class DatosCandados extends SavedData {
    public void poner(BlockPos clave, Player dueno, String codigo) {
       DatosCandados.Candado c = new DatosCandados.Candado();
       c.propietario = dueno.getUUID();
-      c.nombre = dueno.getGameProfile().getName();
+      c.nombre = dueno.getGameProfile().name();
       c.codigo = codigo;
       c.abiertos.add(dueno.getUUID());
       this.mapa.put(clave.asLong(), c);
@@ -51,7 +51,7 @@ public final class DatosCandados extends SavedData {
       ListTag lista = tag.getListOrEmpty("Candados");
 
       for (int i = 0; i < lista.size(); i++) {
-         CompoundTag t = lista.getCompound(i);
+         CompoundTag t = lista.getCompoundOrEmpty(i);
          DatosCandados.Candado c = new DatosCandados.Candado();
          c.propietario = t.contains("Dueno") ? t.read("Dueno", net.minecraft.core.UUIDUtil.CODEC).orElse(null) : null;
          c.nombre = t.getStringOr("Nombre", "");

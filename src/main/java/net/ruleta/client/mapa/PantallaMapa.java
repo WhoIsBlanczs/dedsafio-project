@@ -52,7 +52,7 @@ public class PantallaMapa extends Screen {
 
          for (int dz = -radio; dz <= radio; dz++) {
             for (int dx = -radio; dx <= radio; dx++) {
-               long c = ChunkPos.asLong(pcx + dx, pcz + dz);
+               long c = ChunkPos.pack(pcx + dx, pcz + dz);
                if (!MapaDatos.CACHE.containsKey(c) && this.minecraft.level.getChunkSource().getChunk(pcx + dx, pcz + dz, ChunkStatus.FULL, false) != null) {
                   MapaDatos.pedir(c);
                }
@@ -66,7 +66,7 @@ public class PantallaMapa extends Screen {
    }
 
    private static long region(int cx, int cz) {
-      return ChunkPos.asLong(Math.floorDiv(cx, 8), Math.floorDiv(cz, 8));
+      return ChunkPos.pack(Math.floorDiv(cx, 8), Math.floorDiv(cz, 8));
    }
 
    private PantallaMapa.Loseta crear(long reg) {
@@ -76,7 +76,7 @@ public class PantallaMapa extends Screen {
 
       for (int z = 0; z < 8 && !hay; z++) {
          for (int x = 0; x < 8; x++) {
-            if (MapaDatos.CACHE.containsKey(ChunkPos.asLong(rx * 8 + x, rz * 8 + z))) {
+            if (MapaDatos.CACHE.containsKey(ChunkPos.pack(rx * 8 + x, rz * 8 + z))) {
                hay = true;
                break;
             }
@@ -97,7 +97,7 @@ public class PantallaMapa extends Screen {
             for (int x = 0; x < 8; x++) {
                int cx = rx * 8 + x;
                int cz = rz * 8 + z;
-               MapaDatos.Trozo t = MapaDatos.CACHE.get(ChunkPos.asLong(cx, cz));
+               MapaDatos.Trozo t = MapaDatos.CACHE.get(ChunkPos.pack(cx, cz));
                if (t != null) {
                   pintar(img, x * 16, z * 16, t);
                }
@@ -155,10 +155,10 @@ public class PantallaMapa extends Screen {
       super.removed();
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
+   public void extractBackground(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
    }
 
-   public void render(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
+   public void extractRenderState(GuiGraphicsExtractor g, int ratonX, int ratonY, float parcial) {
       g.fill(0, 0, this.width, this.height, -16777216);
       float cx = this.width / 2.0F;
       float cy = this.height / 2.0F;
@@ -172,7 +172,7 @@ public class PantallaMapa extends Screen {
       this.bunkers(g, cx, cy);
       this.jugador(g, parcial, cx, cy);
       this.brujula(g);
-      super.render(g, ratonX, ratonY, parcial);
+      super.extractRenderState(g, ratonX, ratonY, parcial);
    }
 
    private void losetas(GuiGraphicsExtractor g, float cx, float cy) { }
@@ -252,7 +252,7 @@ public class PantallaMapa extends Screen {
       for (int ox = -1; ox <= 1; ox++) {
          for (int oy = -1; oy <= 1; oy++) {
             if (ox != 0 || oy != 0) {
-               g.drawString(this.font, t, lx + ox, ly + oy, 0, false);
+               g.text(this.font, t, lx + ox, ly + oy, 0, false);
             }
          }
       }
@@ -283,13 +283,15 @@ public class PantallaMapa extends Screen {
       return true;
    }
 
-   public boolean mouseDragged(double ratonX, double ratonY, int boton, double dx, double dy) {
+   public boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent ev_, double dx, double dy) {
+      double ratonX = ev_.x(); double ratonY = ev_.y(); int boton = ev_.button();
       this.centroX = this.centroX - dx / zoom;
       this.centroZ = this.centroZ - dy / zoom;
       return true;
    }
 
-   public boolean keyPressed(int tecla, int codigo, int mods) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
+      int tecla = ev_.key(); int codigo = 0; int mods = ev_.modifiers();
       if (MapaCliente.TECLA.matches(tecla, codigo)) {
          this.onClose();
          return true;
@@ -298,7 +300,7 @@ public class PantallaMapa extends Screen {
          this.centroZ = this.minecraft.player.getZ();
          return true;
       } else {
-         return super.keyPressed(tecla, codigo, mods);
+         return super.keyPressed(ev_);
       }
    }
 

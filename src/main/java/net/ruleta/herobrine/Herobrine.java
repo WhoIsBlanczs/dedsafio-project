@@ -13,9 +13,9 @@ public final class Herobrine {
    public static final Reg<EntityType<HerobrineEntity>> HEROBRINE = Reg.entidad(
       "ruleta",
       "herobrine",
-      () -> Builder.of(HerobrineEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).eyeHeight(1.62F).clientTrackingRange(10).build("herobrine")
+      () -> Builder.of(HerobrineEntity::new, MobCategory.MONSTER).sized(0.6F, 1.8F).eyeHeight(1.62F).clientTrackingRange(10).build(net.ruleta.Reg.ekey())
    );
-   public static final Reg<Item> HUEVO = Reg.item("ruleta", "herobrine_spawn_egg", () -> new SpawnEggItem(HEROBRINE.get(), 43176, 3878812, new Properties()));
+   public static final Reg<Item> HUEVO = Reg.item("ruleta", "herobrine_spawn_egg", () -> new SpawnEggItem(net.ruleta.Reg.props().spawnEgg(HEROBRINE.get())));
 
    private Herobrine() {
    }

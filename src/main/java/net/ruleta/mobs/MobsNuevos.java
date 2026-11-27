@@ -15,10 +15,10 @@ public final class MobsNuevos {
    public static final Reg<EntityType<BombaWarden>> BOMBA_WARDEN = Reg.entidad(
       "ruleta",
       "bomba_warden",
-      () -> Builder.of(BombaWarden::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).fireImmune().build("ruleta:bomba_warden")
+      () -> Builder.of(BombaWarden::new, MobCategory.MONSTER).sized(0.6F, 0.6F).clientTrackingRange(10).fireImmune().build(net.ruleta.Reg.ekey())
    );
    public static final Reg<Item> HUEVO_BOMBA_WARDEN = Reg.item(
-      "ruleta", "bomba_warden_spawn_egg", () -> new SpawnEggItem(BOMBA_WARDEN.get(), 736586, 4182472, new Properties())
+      "ruleta", "bomba_warden_spawn_egg", () -> new SpawnEggItem(net.ruleta.Reg.props().spawnEgg(BOMBA_WARDEN.get()))
    );
 
    private MobsNuevos() {

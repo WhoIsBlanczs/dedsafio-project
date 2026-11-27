@@ -14,10 +14,10 @@ public final class Cajero {
       "ruleta",
       "cajero",
       () -> new CajeroBloque(
-         Properties.of().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noOcclusion().pushReaction(PushReaction.BLOCK)
+         net.ruleta.Reg.bprops().mapColor(MapColor.COLOR_LIGHT_GRAY).strength(-1.0F, 3600000.0F).sound(SoundType.METAL).noOcclusion().pushReaction(PushReaction.IMMOVEABLE)
       )
    );
-   public static final Reg<Item> ITEM = Reg.item("ruleta", "cajero", () -> new BlockItem(BLOQUE.get(), new net.minecraft.world.item.Item.Properties()));
+   public static final Reg<Item> ITEM = Reg.item("ruleta", "cajero", () -> new BlockItem(BLOQUE.get(), net.ruleta.Reg.props()));
 
    private Cajero() {
    }

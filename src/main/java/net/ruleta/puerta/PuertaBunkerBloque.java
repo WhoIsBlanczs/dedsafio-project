@@ -312,7 +312,7 @@ public class PuertaBunkerBloque extends BaseEntityBlock {
          }
       }
 
-      return InteractionResult.sidedSuccess(level.isClientSide());
+      return InteractionResult.SUCCESS;
    }
 
    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block bloque, BlockPos desde, boolean moviendo) {

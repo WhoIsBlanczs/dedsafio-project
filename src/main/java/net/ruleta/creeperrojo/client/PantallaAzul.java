@@ -57,15 +57,17 @@ public class PantallaAzul extends Screen {
       return false;
    }
 
-   public boolean keyPressed(int tecla, int scan, int mods) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent ev_) {
+      int tecla = ev_.key(); int scan = 0; int mods = ev_.modifiers();
       return true;
    }
 
-   public boolean mouseClicked(double mx, double my, int boton) {
+   public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent ev_, boolean dbl_) {
+      double mx = ev_.x(); double my = ev_.y(); int boton = ev_.button();
       return true;
    }
 
-   public void render(GuiGraphicsExtractor g, int mx, int my, float parcial) {
+   public void extractRenderState(GuiGraphicsExtractor g, int mx, int my, float parcial) {
       int w = this.width;
       int h = this.height;
       g.fill(0, 0, w, h, -16746281);
@@ -88,11 +90,11 @@ public class PantallaAzul extends Screen {
 
    private void texto(GuiGraphicsExtractor g, Identifier fuente, float tamFuente, String linea, float x, float y, float alto) {
       float escala = alto / tamFuente;
-      g.pose().pushPose();
-      g.pose().translate(x, y, 0.0F);
-      g.pose().scale(escala, escala, 1.0F);
-      g.drawString(this.font, Component.literal(linea).withStyle(Style.EMPTY.withFont(fuente)), 0, 0, -1, false);
-      g.pose().popPose();
+      g.pose().pushMatrix();
+      g.pose().translate(x, y);
+      g.pose().scale(escala, escala);
+      g.text(this.font, Component.literal(linea).withStyle(Style.EMPTY.withFont(fuente)), 0, 0, -1, false);
+      g.pose().popMatrix();
    }
 
    public static final class Control {
@@ -122,12 +124,12 @@ public class PantallaAzul extends Screen {
 
       private static void cortarCreeper(Minecraft mc) {
          mc.getSoundManager().stop(((SoundEvent)SoundEvents.GENERIC_EXPLODE.value()).getLocation(), null);
-         mc.getSoundManager().stop(SoundEvents.CREEPER_PRIMED.getLocation(), null);
+         mc.getSoundManager().stop(SoundEvents.CREEPER_PRIMED.location(), null);
       }
 
       private static boolean esCreeper(SoundEvent e, SoundInstance s) {
-         return s.getLocation().equals(((SoundEvent)SoundEvents.GENERIC_EXPLODE.value()).getLocation())
-            || s.getLocation().equals(SoundEvents.CREEPER_PRIMED.getLocation());
+         return s.location().equals(((SoundEvent)SoundEvents.GENERIC_EXPLODE.value()).getLocation())
+            || s.location().equals(SoundEvents.CREEPER_PRIMED.location());
       }
 
       @SubscribeEvent
@@ -175,11 +177,11 @@ public class PantallaAzul extends Screen {
                   mc.getSoundManager().play(SimpleSoundInstance.forUI(PANTALLAZO, 1.0F, 1.0F));
                }
 
-               if (!(mc.screen instanceof PantallaAzul)) {
+               if (!(mc.gui.screen() instanceof PantallaAzul)) {
                   mc.setScreenAndShow(new PantallaAzul());
                }
             } else {
-               if (mc.screen instanceof PantallaAzul) {
+               if (mc.gui.screen() instanceof PantallaAzul) {
                   mc.setScreenAndShow(null);
                }
 
@@ -198,7 +200,7 @@ public class PantallaAzul extends Screen {
       public static void alSonar(PlaySoundEvent evento) {
          if (evento.getSound() != null) {
             if (silenciado) {
-               if (!evento.getSound().getLocation().equals(PANTALLAZO.getLocation())) {
+               if (!evento.getSound().getLocation().equals(PANTALLAZO.location())) {
                   evento.setSound(null);
                }
             } else {

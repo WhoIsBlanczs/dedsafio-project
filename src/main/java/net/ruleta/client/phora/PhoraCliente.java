@@ -103,7 +103,7 @@ public final class PhoraCliente {
       Minecraft.getInstance()
          .getSoundManager()
          .play(
-            new SimpleSoundInstance(VOZ.getLocation(), SoundSource.MASTER, 1.0F, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true)
+            new SimpleSoundInstance(VOZ.location(), SoundSource.MASTER, 1.0F, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true)
          );
    }
 
@@ -134,7 +134,7 @@ public final class PhoraCliente {
             mc.getSoundManager()
                .play(
                   new SimpleSoundInstance(
-                     IMPACTO.getLocation(),
+                     IMPACTO.location(),
                      SoundSource.MASTER,
                      d < 40.0 ? 2.0F : 9.0F,
                      0.9F + mc.level.random.nextFloat() * 0.2F,

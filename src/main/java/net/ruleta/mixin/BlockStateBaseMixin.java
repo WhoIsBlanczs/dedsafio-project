@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockStateBaseMixin {
    @Inject(method = "getFluidState", at = @At("HEAD"), cancellable = true)
    private void ruleta$puertaConAgua(CallbackInfoReturnable<FluidState> cir) {
-      BlockState self = (BlockState)this;
+      BlockState self = (BlockState)(Object)this;
       if (self.getBlock() instanceof DoorBlock
          && self.hasProperty(BlockStateProperties.WATERLOGGED)
          && (Boolean)self.getValue(BlockStateProperties.WATERLOGGED)
@@ -32,7 +32,7 @@ public abstract class BlockStateBaseMixin {
 
    @Inject(method = "getDestroyProgress", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$soloCreativoOOp(Player jugador, BlockGetter nivel, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-      BlockState self = (BlockState)this;
+      BlockState self = (BlockState)(Object)this;
       if (Proteccion.protegido(self.getBlock()) && !Proteccion.puede(jugador)) {
          cir.setReturnValue(0.0F);
       }
@@ -40,8 +40,8 @@ public abstract class BlockStateBaseMixin {
 
    @Inject(method = "getPistonPushReaction", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$sinPiston(CallbackInfoReturnable<PushReaction> cir) {
-      if (Proteccion.protegido(((BlockState)this).getBlock())) {
-         cir.setReturnValue(PushReaction.BLOCK);
+      if (Proteccion.protegido(((BlockState)(Object)this).getBlock())) {
+         cir.setReturnValue(PushReaction.IMMOVEABLE);
       }
    }
 }

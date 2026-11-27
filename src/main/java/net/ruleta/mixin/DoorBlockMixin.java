@@ -41,7 +41,7 @@ public abstract class DoorBlockMixin extends Block {
    @Inject(method = "<init>", at = @At("TAIL"))
    private void ruleta$sinAguaPorDefecto(BlockSetType tipo, Properties propiedades, CallbackInfo ci) {
       if (this.defaultBlockState().hasProperty(BlockStateProperties.WATERLOGGED)) {
-         this.registerDefaultState((BlockState)this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
+         this.registerDefaultState((BlockState)(Object)this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false));
       }
    }
 

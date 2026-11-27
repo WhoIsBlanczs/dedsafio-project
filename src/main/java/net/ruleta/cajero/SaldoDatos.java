@@ -43,7 +43,7 @@ public class SaldoDatos extends SavedData {
       ListTag lista = tag.getListOrEmpty("saldos");
 
       for (int i = 0; i < lista.size(); i++) {
-         CompoundTag c = lista.getCompound(i);
+         CompoundTag c = lista.getCompoundOrEmpty(i);
 
          try {
             d.saldos.put(UUID.fromString(c.getStringOr("id", "")), c.getLongOr("saldo", 0L));

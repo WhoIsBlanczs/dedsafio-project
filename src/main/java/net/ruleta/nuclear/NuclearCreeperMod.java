@@ -27,10 +27,10 @@ public class NuclearCreeperMod {
    public static final Reg<EntityType<NuclearCreeperEntity>> NUCLEAR_CREEPER = Reg.entidad(
       "nuclearcreeper",
       "nuclear_creeper",
-      () -> Builder.of(NuclearCreeperEntity::new, MobCategory.MONSTER).sized(0.8F, 1.25F).clientTrackingRange(8).build("nuclear_creeper")
+      () -> Builder.of(NuclearCreeperEntity::new, MobCategory.MONSTER).sized(0.8F, 1.25F).clientTrackingRange(8).build(net.ruleta.Reg.ekey())
    );
    public static final Reg<Item> NUCLEAR_CREEPER_SPAWN_EGG = Reg.item(
-      "nuclearcreeper", "nuclear_creeper_spawn_egg", () -> new SpawnEggItem(NUCLEAR_CREEPER.get(), 15255552, 12593176, new Properties())
+      "nuclearcreeper", "nuclear_creeper_spawn_egg", () -> new SpawnEggItem(net.ruleta.Reg.props().spawnEgg(NUCLEAR_CREEPER.get()))
    );
    private static final FoodProperties HEART_FOOD = new net.minecraft.world.food.FoodProperties.Builder()
       .nutrition(0)
@@ -38,25 +38,25 @@ public class NuclearCreeperMod {
       .alwaysEdible()
       .build();
    public static final Reg<Item> RED_HEART = Reg.item(
-      "nuclearcreeper", "red_heart", () -> new RedHeartItem(new Properties().food(HEART_FOOD).rarity(Rarity.RARE))
+      "nuclearcreeper", "red_heart", () -> new RedHeartItem(net.ruleta.Reg.props().food(HEART_FOOD).rarity(Rarity.RARE))
    );
    public static final Reg<Item> ABSORPTION_HEART = Reg.item(
-      "nuclearcreeper", "absorption_heart", () -> new AbsorptionHeartItem(new Properties().food(HEART_FOOD).rarity(Rarity.RARE))
+      "nuclearcreeper", "absorption_heart", () -> new AbsorptionHeartItem(net.ruleta.Reg.props().food(HEART_FOOD).rarity(Rarity.RARE))
    );
    public static final Reg<Item> GLEBANOIDE_TOTEM = Reg.item(
-      "nuclearcreeper", "glebanoide_totem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.GLEBANOIDE)
+      "nuclearcreeper", "glebanoide_totem", () -> new TotemItem(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.GLEBANOIDE)
    );
    public static final Reg<Item> NUTRITOTEM = Reg.item(
-      "nuclearcreeper", "nutritotem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.NUTRITOTEM)
+      "nuclearcreeper", "nutritotem", () -> new TotemItem(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.NUTRITOTEM)
    );
    public static final Reg<Item> EON_TOTEM = Reg.item(
-      "nuclearcreeper", "eon_totem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.EON)
+      "nuclearcreeper", "eon_totem", () -> new TotemItem(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.EON)
    );
    public static final Reg<Item> YUNQUE_TOTEM = Reg.item(
-      "nuclearcreeper", "yunque_totem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.YUNQUE)
+      "nuclearcreeper", "yunque_totem", () -> new TotemItem(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.YUNQUE)
    );
    public static final Reg<Item> GOLEM_TOTEM = Reg.item(
-      "nuclearcreeper", "golem_totem", () -> new TotemItem(new Properties().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.GOLEM)
+      "nuclearcreeper", "golem_totem", () -> new TotemItem(net.ruleta.Reg.props().stacksTo(1).rarity(Rarity.COMMON), TotemItem.Kind.GOLEM)
    );
    public static final Reg<SoundEvent> RADIATION_LOOP = Reg.sonido(
       "nuclearcreeper", "radiation_loop", () -> SoundEvent.createVariableRangeEvent(Identifier.fromNamespaceAndPath("nuclearcreeper", "radiation_loop"))

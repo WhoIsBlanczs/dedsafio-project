@@ -5,7 +5,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityType.Builder;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -16,12 +15,12 @@ public final class EstatuaNutria {
       "ruleta",
       "estatua_nutria",
       () -> new EstatuaNutriaBloque(
-         Properties.of().mapColor(MapColor.STONE).strength(-1.0F, 3600000.0F).sound(SoundType.STONE).noOcclusion().pushReaction(PushReaction.BLOCK)
+         net.ruleta.Reg.bprops().mapColor(MapColor.STONE).strength(-1.0F, 3600000.0F).sound(SoundType.STONE).noOcclusion().pushReaction(PushReaction.IMMOVEABLE)
       )
    );
-   public static final Reg<Item> ITEM = Reg.item("ruleta", "estatua_nutria", () -> new BlockItem(BLOQUE.get(), new net.minecraft.world.item.Item.Properties()));
+   public static final Reg<Item> ITEM = Reg.item("ruleta", "estatua_nutria", () -> new BlockItem(BLOQUE.get(), net.ruleta.Reg.props()));
    public static final Reg<BlockEntityType<EstatuaNutriaBE>> BE = Reg.blockEntity(
-      "ruleta", "estatua_nutria", () -> Builder.of(EstatuaNutriaBE::new, new Block[]{BLOQUE.get()}).build(null)
+      "ruleta", "estatua_nutria", () -> new net.minecraft.world.level.block.entity.BlockEntityType<>(EstatuaNutriaBE::new, java.util.Set.of(BLOQUE.get()))
    );
 
    private EstatuaNutria() {

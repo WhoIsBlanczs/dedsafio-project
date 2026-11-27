@@ -271,7 +271,7 @@ public final class MomentosBunker {
 
       while (p.getY() > mundo.getMinY()) {
          BlockState s = mundo.getBlockState(p);
-         if (!s.isAir() && s.blocksMotion() && !s.is(BlockTags.LEAVES)) {
+         if (!s.isAir() && s.isSolid() && !s.is(BlockTags.LEAVES)) {
             return p.getY() + 1;
          }
 
@@ -365,7 +365,7 @@ public final class MomentosBunker {
 
    private static void rayo(ServerPlayer p) {
       ServerLevel nivel = p.level();
-      LightningBolt r = (LightningBolt)EntityType.LIGHTNING_BOLT.create(nivel);
+      LightningBolt r = (LightningBolt)net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(nivel);
       if (r != null) {
          double x = p.getX() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");
          double z = p.getZ() + (p.getRandom().nextDouble() - 0.5) * 2.0 * Ajustes.entero("rayo.radio");

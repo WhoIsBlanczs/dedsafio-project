@@ -65,7 +65,7 @@ public abstract class UiPantalla extends Screen {
       Ui.alfa = 1.0F;
    }
 
-   public void renderBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
+   public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float parcialFondo) {
    }
 
    protected void fondoUi(GuiGraphicsExtractor g) {
@@ -73,7 +73,7 @@ public abstract class UiPantalla extends Screen {
       g.fillGradient(0, 0, this.width, this.height, Ui.c(329484, 0.55F * a), Ui.c(329484, 0.78F * a));
    }
 
-   public void render(GuiGraphicsExtractor g, int mx, int my, float pt) {
+   public void extractRenderState(GuiGraphicsExtractor g, int mx, int my, float pt) {
       float a = this.aparece.hacia(1.0F, 11.0F);
       Ui.alfa = a;
       this.fondoUi(g);
@@ -110,7 +110,7 @@ public abstract class UiPantalla extends Screen {
 
       Ui.linea(g, this.px + 12, this.py + 40, this.pw - 24, Ui.c(3028037, 0.8F));
       this.contenido(g, mx, my, pt);
-      super.render(g, mx, my, pt);
+      super.extractRenderState(g, mx, my, pt);
       this.encima(g, mx, my, pt);
       Ui.alfa = 1.0F;
    }

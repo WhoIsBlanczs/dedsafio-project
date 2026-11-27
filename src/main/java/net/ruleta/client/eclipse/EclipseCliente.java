@@ -99,7 +99,7 @@ public final class EclipseCliente {
          return new Vector3f(SOL_FIJO);
       }
 
-      float giro = mc.level.getTimeOfDay(pt) * (float) (Math.PI * 2);
+      float giro = (((float)(mc.level.getOverworldClockTime() % 24000L)) / 24000.0F) * (float) (Math.PI * 2);
       Vector3f sol = new Vector3f(-Mth.sin(giro), Mth.cos(giro), 0.0F);
       return sol.y < 0.03F ? new Vector3f(SOL_FIJO) : sol;
    }
@@ -192,7 +192,7 @@ public final class EclipseCliente {
          .getSoundManager()
          .play(
             new SimpleSoundInstance(
-               evento.getLocation(), SoundSource.MASTER, volumen, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
+               evento.location(), SoundSource.MASTER, volumen, 1.0F, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
             )
          );
    }

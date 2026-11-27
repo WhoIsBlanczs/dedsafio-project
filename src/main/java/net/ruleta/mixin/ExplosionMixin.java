@@ -45,7 +45,7 @@ public abstract class ExplosionMixin implements ExplosionCentro {
 
    @Inject(method = "explode", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$inicio(CallbackInfo ci) {
-      if (!this.field_9187.isClientSide() && Bus.hayOyentes(ExplosionEvent.Start.class) && Bus.post(new ExplosionEvent.Start(this.field_9187, (Explosion)this))) {
+      if (!this.field_9187.isClientSide() && Bus.hayOyentes(ExplosionEvent.Start.class) && Bus.post(new ExplosionEvent.Start(this.field_9187, (Explosion)(Object)this))) {
          this.ruleta$cancelada = true;
          ci.cancel();
       }
@@ -54,7 +54,7 @@ public abstract class ExplosionMixin implements ExplosionCentro {
    @Inject(method = "finalizeExplosion", at = @At("HEAD"), cancellable = true, require = 0)
    private void ruleta$fin(boolean particulas, CallbackInfo ci) {
       Level nivel = this.field_9187;
-      ((Explosion)this).getToBlow().removeIf(pos -> Proteccion.protegido(nivel.getBlockState(pos).getBlock()));
+      ((Explosion)(Object)this).getToBlow().removeIf(pos -> Proteccion.protegido(nivel.getBlockState(pos).getBlock()));
       if (this.ruleta$cancelada) {
          ci.cancel();
       }
@@ -72,7 +72,7 @@ public abstract class ExplosionMixin implements ExplosionCentro {
       List<Entity> entidades = nivel.getEntities(origen, zona);
       entidades.removeIf(e -> e instanceof ExplosionInmune);
       if (!nivel.isClientSide() && Bus.hayOyentes(ExplosionEvent.Detonate.class)) {
-         Bus.post(new ExplosionEvent.Detonate(nivel, (Explosion)this, entidades));
+         Bus.post(new ExplosionEvent.Detonate(nivel, (Explosion)(Object)this, entidades));
       }
 
       return entidades;

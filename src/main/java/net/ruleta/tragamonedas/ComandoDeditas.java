@@ -76,7 +76,7 @@ public final class ComandoDeditas {
             CajeroServidor.enviarSaldo(jugador);
             ((CommandSourceStack)ctx.getSource())
                .sendSuccess(
-                  () -> Component.literal(jugador.getGameProfile().getName() + " recibió " + cantidad + " dedita(s) " + pedido + " en su saldo"), true
+                  () -> Component.literal(jugador.getGameProfile().name() + " recibió " + cantidad + " dedita(s) " + pedido + " en su saldo"), true
                );
             return cantidad;
          }

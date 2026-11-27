@@ -272,7 +272,7 @@ public final class TornadoCliente {
          }
       }
 
-      String dim = mc.level.dimension().location().toString();
+      String dim = mc.level.dimension().identifier().toString();
 
       for (TornadoCliente.Torn t : TORNADOS) {
          if (t.dim.equals(dim)) {

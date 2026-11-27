@@ -125,7 +125,7 @@ public final class AvisoHud {
                      .append(OCULTAR.getTranslatedKeyMessage())
                      .append("] para ocultar aviso")
                      .withStyle(ChatFormatting.GRAY);
-                  ctx.drawString(tr, pista, x, alto + 4, color);
+                  ctx.text(tr, pista, x, alto + 4, color);
                }
 
                m.popPose();
@@ -196,7 +196,7 @@ public final class AvisoHud {
                   var27 = letra.copy().setStyle(estilo.withColor(col));
                }
 
-               ctx.drawString(tr, var27, cx, y, alfa << 24 | col);
+               ctx.text(tr, var27, cx, y, alfa << 24 | col);
                cx += tr.width(var27);
             }
          }

@@ -87,7 +87,7 @@ public class SupernovaEntity extends Entity {
    public SupernovaState state() {
       return new SupernovaState(
          this.getId(),
-         this.level().dimension().location().toString(),
+         this.level().dimension().identifier().toString(),
          this.getX(),
          this.getY(),
          this.getZ(),
@@ -173,11 +173,11 @@ public class SupernovaEntity extends Entity {
    }
 
    private DamageSource lethalSource(ServerLevel sl) {
-      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this);
+      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this);
    }
 
    private DamageSource shockSource(ServerLevel sl) {
-      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this) {
+      return new DamageSource(sl.registryAccess().lookupOrThrow(Registries.DAMAGE_TYPE).getOrThrow(SupernovaMod.SUPERNOVA_DAMAGE), this) {
          public String getMsgId() {
             return "supernova.onda";
          }

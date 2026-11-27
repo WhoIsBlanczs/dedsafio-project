@@ -39,7 +39,7 @@ public class SupernovaSounds {
             .getSoundManager()
             .play(
                new SimpleSoundInstance(
-                  ev.getLocation(), SoundSource.MASTER, Math.min(1.0F, vol), pitch, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
+                  ev.location(), SoundSource.MASTER, Math.min(1.0F, vol), pitch, RandomSource.create(), false, 0, Attenuation.NONE, 0.0, 0.0, 0.0, true
                )
             );
       }
@@ -232,7 +232,7 @@ public class SupernovaSounds {
       public void tick() {
          Minecraft mc = Minecraft.getInstance();
          SupernovaState s = SupernovaGhosts.get(this.id);
-         boolean sigue = s != null && mc.level != null && s.dim.equals(mc.level.dimension().location().toString()) && !s.expired((float)mc.level.getGameTime());
+         boolean sigue = s != null && mc.level != null && s.dim.equals(mc.level.dimension().identifier().toString()) && !s.expired((float)mc.level.getGameTime());
          if (sigue) {
             float f = s.fade((float)mc.level.getGameTime());
             if (f <= 0.01F) {

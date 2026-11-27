@@ -104,7 +104,7 @@ public class PantallaHud extends UiPantalla {
                (ClientCommandRegistrationCallback)(dispatcher, acceso) -> dispatcher.register(
                   (LiteralArgumentBuilder)ClientCommands.literal("hud").executes(c -> {
                      Minecraft mc = Minecraft.getInstance();
-                     mc.tell(() -> mc.setScreen(new PantallaHud()));
+                     mc.tell(() -> mc.setScreenAndShow(new PantallaHud()));
                      return 1;
                   })
                )
