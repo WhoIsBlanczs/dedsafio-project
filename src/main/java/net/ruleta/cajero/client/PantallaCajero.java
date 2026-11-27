@@ -110,7 +110,7 @@ public class PantallaCajero extends Screen {
          }
       }
 
-      for (ItemStack s : jugador.getInventory().offhand) {
+      for (ItemStack s : java.util.List.of(jugador.getInventory().getItem(40))) {
          if (s.is(item)) {
             n += s.getCount();
          }
@@ -206,11 +206,9 @@ public class PantallaCajero extends Screen {
       double lx = this.localX(mx);
       double ly = this.localY(my);
       g.pose().pushMatrix();
-      g.pose().translate((float)(this.px0 / this.gs), (float)(this.py0 / this.gs), 0.0F);
+      g.pose().translate((float)(this.px0 / this.gs), (float)(this.py0 / this.gs));
       float esc = (float)(this.k / this.gs);
       g.pose().scale(esc, esc);
-      RenderSystem.enableBlend();
-      RenderSystem.defaultBlendFunc();
       g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, MARCO, 0, 0, 0, 0, 176, 176, 176, 176);
 
       String titulo = switch (this.modo) {
@@ -220,7 +218,7 @@ public class PantallaCajero extends Screen {
       };
       this.texto(g, titulo, 88.0F, 7.0F, -1, 54.0F, 0.9F);
       if (this.modo == PantallaCajero.Modo.MENU) {
-         g.blit(FICHAS, 46, 36, 84, 64, 0.0F, 0.0F, 42, 32, 42, 32);
+         g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, FICHAS, 46, 36, 0.0F, 0.0F, 84, 64, 42, 32, 42, 32);
          this.boton(g, this.btnIngresarX(), 132, "Ingresar Dinero", lx, ly);
          this.boton(g, this.btnSacarX(), 132, "Sacar Dinero", lx, ly);
       } else {
@@ -253,7 +251,7 @@ public class PantallaCajero extends Screen {
 
    private void boton(GuiGraphicsExtractor g, int x, int y, String texto, double lx, double ly) {
       boolean hover = dentro(lx, ly, x, y, 61, 16);
-      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BOTON, x, y, 0, (int)hover ? 16.0F : 0.0F, 61, 16, 61, 32);
+      g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, BOTON, x, y, 0, hover ? 16.0F : 0.0F, 61, 16, 61, 32);
       this.texto(g, texto, x + 30.5F, y + 8.0F + 0.5F, hover ? -96 : -1, 50.0F, 0.8F);
    }
 
@@ -312,10 +310,7 @@ public class PantallaCajero extends Screen {
    private void flecha(GuiGraphicsExtractor g, Identifier tex, int x, int y, boolean activa, double lx, double ly) {
       boolean hover = activa && dentro(lx, ly, x, y, 12, 10);
       float a = !activa ? 0.3F : (hover ? 1.0F : 0.85F);
-      RenderSystem.enableBlend();
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, a);
       g.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, tex, x, y - (hover ? 1 : 0), 0, 0, 12, 10, 12, 10);
-      RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
    }
 
    private int[] flechaBajo(double lx, double ly) {

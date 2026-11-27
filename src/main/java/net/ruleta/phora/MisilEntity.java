@@ -207,5 +207,5 @@ public class MisilEntity extends Entity {
       }
    }
 
-   public boolean hurtServer(net.minecraft.server.level.ServerLevel lvl_, DamageSource f_, float c_) { return false; }
+   public boolean hurtServer(net.minecraft.server.level.ServerLevel lvl_, net.minecraft.world.damagesource.DamageSource f_, float c_) { return false; }
 }

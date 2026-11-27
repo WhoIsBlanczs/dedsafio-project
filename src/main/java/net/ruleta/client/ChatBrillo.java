@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.GuiMessage.Line;
+import net.minecraft.client.multiplayer.chat.GuiMessage.Line;
 import net.minecraft.client.gui.components.ChatComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.FormattedCharSequence;

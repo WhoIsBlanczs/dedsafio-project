@@ -436,7 +436,7 @@ public class LanzadorFormulario extends Screen {
          this.activo = v;
       }
 
-      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
+      public void extractContents(GuiGraphicsExtractor g, int mx, int my, float pt) {
          int x = this.getX();
          int y = this.getY();
          int w = this.width;
@@ -476,7 +476,7 @@ public class LanzadorFormulario extends Screen {
          this.alPulsar.run();
       }
 
-      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
+      public void extractContents(GuiGraphicsExtractor g, int mx, int my, float pt) {
          int x = this.getX();
          int y = this.getY();
          int w = this.width;
@@ -556,7 +556,7 @@ public class LanzadorFormulario extends Screen {
          this.alPulsar.run();
       }
 
-      public void renderWidget(GuiGraphicsExtractor g, int mx, int my, float pt) {
+      public void extractContents(GuiGraphicsExtractor g, int mx, int my, float pt) {
          float hv = this.hover.hacia(this.isHoveredOrFocused() ? 1.0F : 0.0F, 16.0F);
          Ui.cajaBorde(
             g, this.getX(), this.getY(), this.width, this.height, 4, Ui.c(Ui.mezcla(1711656, 2369846, hv)), Ui.c(Ui.mezcla(3028037, 7113983, hv * 0.8F))
