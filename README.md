@@ -27,6 +27,16 @@ Las versiones de Loom, Loader y Fabric API son las del `fabric-example-mod` ofic
 
 En un servidor dedicado, solo los administradores (nivel de permisos 2 o más) pueden cambiar ajustes y lanzar casillas. En un mundo propio o abierto en LAN, puede cualquiera.
 
+## Con Hombrosafío
+
+Si el servidor también tiene **Hombrosafío** (Micosafio v5), al pulsar LANZAR gira la **ruleta de Hombrosafío** en el color de la casilla, con sus sonidos. Cuando se para, sale el aviso de este menú.
+
+En la casilla roja, «Momentos Reviil» muestra los **14 Momentos Revil de Hombrosafío** (refugio, intercambio de posiciones, los dos gases tóxicos, dimensión jurásica, bombas nucleares, lluvia ácida, bioma, votación, creepers eléctricos, Gleba, Limbo, agua del Limbo y montaña). Se pueden elegir varios. Los que necesitan datos piden el plazo, el bioma o las muertes. Con «REVIIL: ENCENDIDO», al parar la ruleta se activan de verdad en Hombrosafío. «MENSAJE» no pone el cielo rojo; «ANIMACIÓN» y «CIELO» sí.
+
+«Detener ruleta» cancela la ruleta de Hombrosafío y termina sus Momentos Revil y su cielo.
+
+Sin Hombrosafío, el menú funciona igual pero el aviso sale sin girar ninguna ruleta y los Momentos Revil no se activan.
+
 ## Lo que no es idéntico
 
 - Este mod es **solo el menú**. Los ajustes se guardan y se sincronizan, pero no hay bunkers, agujeros negros, tornados, Herobrine, meteoritos, etc. que los usen, porque eso es el resto del mod original.
