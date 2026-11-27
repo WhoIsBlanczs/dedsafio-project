@@ -1,5 +1,1 @@
- (updateShape|getSkyDarken|getStructureManager|getTimeOfDay|getHolderOrThrow|getToBlow|isDetonating|blocksMotion|getLightColor|setPixelRGBA|asLong)\(
-Component.*(withStyle|withFont)|class .*FontDescription
- (items|offhand|selected)\b
-class .*(MonsterRenderState|LivingEntityRenderState|EntityRenderState)$
-net.minecraft.client.renderer.entity.EntityRenderer<
+
