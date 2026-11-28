@@ -1,8 +1,6 @@
-J=$(ls minecraft-common-*.jar); mkdir -p /tmp/m && cd /tmp/m && unzip -q -o $OLDPWD/$J 'data/*' 2>/dev/null; cd data/minecraft/worldgen
-python3 -c "
-import json
-for f in ['density_function/overworld/chunk_surface_level.json','density_function/overworld/preliminary_surface_level.json']:
-    print(f, json.dumps(json.load(open(f)))[:1500])
-n=json.load(open('noise_settings/floating_islands.json')); print('FI', json.dumps({k:v for k,v in n.items() if k not in ('material_rule','debug_functions')})[:1500])
-"
-grep -rl 'interpolated' density_function | head -3
+J=$(ls minecraft-common-*.jar); mkdir -p /tmp/x && cd /tmp/x && unzip -q -o $OLDPWD/$J 'net/minecraft/world/level/levelgen/*' 2>/dev/null
+echo "== DF"; strings -n 3 net/minecraft/world/level/levelgen/DensityFunctions.class | grep -E '^[a-z_]+$' | tr '\n' ' '; echo
+echo "== PM"; strings -n 3 net/minecraft/world/level/levelgen/placement/PlacementModifierType.class | grep -E '^[a-z_]+$' | tr '\n' ' '; echo
+ls net/minecraft/world/level/levelgen/placement/ | tr '\n' ' '; echo
+echo "== OFFSET"; javap -p -cp . net.minecraft.world.level.levelgen.placement.OffsetPlacement 2>/dev/null | head; 
+echo "== NOISE"; strings -n 3 net/minecraft/world/level/levelgen/synth/NormalNoise\$NoiseParameters.class | grep -E '^[a-z_A-Z]+$' | tr '\n' ' '
