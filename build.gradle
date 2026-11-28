@@ -24,7 +24,12 @@ sourceSets {
 	}
 }
 
+repositories {
+	maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+}
+
 dependencies {
+	implementation "${project.geckolib_coord}"
 	compileOnly sourceSets.stubs.output
 	clientCompileOnly sourceSets.stubs.output
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -55,4 +60,11 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_ruleta" }
 	}
+}
+
+tasks.register('exportarClasspath', Copy) {
+	from configurations.compileClasspath
+	from configurations.clientCompileClasspath
+	into 'build/cp'
+	doLast { fileTree('build/cp').each { println it.name } }
 }
