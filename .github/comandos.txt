@@ -1,0 +1,9 @@
+say prueba
+forceload add 0 0
+summon dedsafioimitationmod:cerebro_amarillo 0 100 0
+summon dedsafioimitationmod:cerebro_rojo 0 100 0
+summon dedsafioimitationmod:nautilus_oseo_g 0 100 0
+summon dedsafioimitationmod:nautilus_oseo_p 0 100 0
+reload
+kill @e[type=!player]
+say fin
