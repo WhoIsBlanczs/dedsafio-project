@@ -24,6 +24,7 @@ public final class RuletaMod implements ModInitializer {
 		Red.registrar();
 
 		ServerLifecycleEvents.SERVER_STARTED.register(Servidor::iniciar);
+		ServerLifecycleEvents.SERVER_STARTED.register(Autoprueba::correr);
 		ServerLifecycleEvents.SERVER_STOPPING.register(server -> Servidor.guardarTodo());
 		ServerTickEvents.END_SERVER_TICK.register(Servidor::tick);
 		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> server.execute(() -> Servidor.alEntrar(handler.player)));
