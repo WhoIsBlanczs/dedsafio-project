@@ -1,0 +1,3 @@
+summon dedsafioimitationmod:cerebro_rojo 0 -60 0
+summon dedsafioimitationmod:nautilus_oseo_g 0 -58 0
+give @a dedsafioimitationmod:arco_glebanoide
