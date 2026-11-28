@@ -1,1 +1,2 @@
-G=$(ls geckolib-*.jar); mkdir -p /tmp/g && cd /tmp/g && unzip -q -o $OLDPWD/$G; strings -n 4 com/geckolib/renderer/internal/GeckolibItemSpecialRenderer*.class com/geckolib/GeckoLibClient*.class com/geckolib/*Services*.class 2>/dev/null | grep -iE 'special|geckolib$|^geckolib|item' | sort -u | head -20; ls com/geckolib/loading 2>/dev/null | head; find . -name '*.json' | head
+G=$(ls geckolib-*.jar); mkdir -p /tmp/g && cd /tmp/g && unzip -q -o $OLDPWD/$G
+for c in $(grep -rl 'SpecialModelRenderers\|ID_MAPPER\|special' --include=*.class com | head -10); do echo "== $c"; strings -n 3 $c | grep -E '^[a-z_:/]+$' | head -12 | tr '\n' ' '; echo; done
