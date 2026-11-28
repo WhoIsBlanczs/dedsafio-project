@@ -1,7 +1,7 @@
 name: remap-mod
 on:
   push:
-    branches: [port-tools2]
+    branches: [port-tools3]
 permissions:
   contents: write
 jobs:
@@ -20,20 +20,21 @@ jobs:
         run: |
           exec > >(tee -a /tmp/all.log) 2>&1
           mkdir -p /tmp/rm/libs && cd /tmp/rm
-          cp "$GITHUB_WORKSPACE"/jar/ruleta.jar libs/mod.jar
+          cp "$GITHUB_WORKSPACE"/jar/*.jar libs/
           cat > settings.gradle <<'S'
           pluginManagement { repositories { maven { url 'https://maven.fabricmc.net/' }; mavenCentral(); gradlePluginPortal() } }
           rootProject.name='rm'
           S
           cat > build.gradle <<'S'
           plugins { id 'fabric-loom' version '1.9.2' }
-          repositories { mavenCentral() }
+          repositories { mavenCentral(); maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' } }
           dependencies {
             minecraft 'com.mojang:minecraft:1.21.1'
             mappings loom.officialMojangMappings()
             modImplementation 'net.fabricmc:fabric-loader:0.16.10'
             modImplementation 'net.fabricmc.fabric-api:fabric-api:0.105.0+1.21.1'
-            modImplementation files('libs/mod.jar')
+            modImplementation files('libs/watonstudio.jar', 'libs/ghostsafio.jar', 'libs/hexagonsafio2.jar')
+            modImplementation 'software.bernie.geckolib:geckolib-fabric-1.21.1:4.7.3'
           }
           S
           gradle --no-daemon build -x test || gradle --no-daemon classes || true
@@ -44,32 +45,35 @@ jobs:
           cd /tmp
           V=$(curl -s https://repo1.maven.org/maven2/org/vineflower/vineflower/maven-metadata.xml | grep -oP '(?<=<release>)[^<]+')
           curl -sL -o vf.jar https://repo1.maven.org/maven2/org/vineflower/vineflower/$V/vineflower-$V.jar
-          J=$(grep -i 'mod' /tmp/found.txt | grep -vi 'fabric-api\|fabric-loader\|fabric_api' | head -1); echo "jar: $J"
-          mkdir -p dec && java -Xmx6g -jar vf.jar -dgs=1 -log=WARN "$J" dec/
-          mkdir -p jarx && cd jarx && unzip -q "$J"
+          mkdir -p dec jarx
+          for n in watonstudio ghostsafio hexagonsafio2; do
+            J=$(grep -i "$n" /tmp/found.txt | head -1); echo "jar $n: $J"
+            mkdir -p dec/$n jarx/$n && java -Xmx6g -jar vf.jar -dgs=1 -log=WARN "$J" dec/$n/
+            (cd jarx/$n && unzip -q -o "$J")
+          done
           ls /tmp/dec
-      - name: publish remapped sources to branch mojmap-src2
+      - name: publish remapped sources to branch mojmap-src3
         run: |
           exec > >(tee -a /tmp/all.log) 2>&1
           cd "$GITHUB_WORKSPACE"
           git config user.name github-actions; git config user.email actions@github.com
-          git symbolic-ref HEAD refs/heads/mojmap-src2; rm -f .git/index
+          git symbolic-ref HEAD refs/heads/mojmap-src3; rm -f .git/index
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           mkdir -p src/main/java src/main/resources
           ls -la /tmp/dec
           (cd /tmp/dec && find . -name '*.java' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/java/" \;)
-          (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path './META-INF/*' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/resources/" \;)
+          (cd /tmp/jarx && find . -type f ! -name '*.class' ! -path '*/META-INF/*' -exec cp --parents {} "$GITHUB_WORKSPACE/src/main/resources/" \;)
           git add -A
           git commit -q -m "mod remapped to mojmap 1.21.1 and decompiled"
-          git push -f origin mojmap-src2
+          git push -f origin mojmap-src3
       - name: publish log
         if: always()
         run: |
           cd "$GITHUB_WORKSPACE"
           git config user.name github-actions; git config user.email actions@github.com
-          git symbolic-ref HEAD refs/heads/mojmap-log2; rm -f .git/index
+          git symbolic-ref HEAD refs/heads/mojmap-log3; rm -f .git/index
           find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           tail -c 200000 /tmp/all.log > log.txt
           git add log.txt
           git commit -q -m log
-          git push -f origin mojmap-log2
+          git push -f origin mojmap-log3
