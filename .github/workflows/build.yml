@@ -9,11 +9,11 @@ jobs:
         with: { java-version: '25', distribution: 'microsoft' }
       - name: classpath 26.3
         run: chmod +x gradlew && ./gradlew exportarClasspath -q
-      - name: stubs
+      - name: sondeo
         shell: bash {0}
         run: |
-          cd build/cp; ls
-          J=$(ls *.jar | grep -v -E 'lwjgl|netty|natives|msal4j|azure|jna|text2speech|icu4j|oshi|jtracy|-sources')
-          java ../../herr/Strip.java /tmp/stubs.jar $J 2>&1 | tail -5
-          ls -la /tmp/stubs.jar
-          echo "=====B64====="; base64 -w 2000 /tmp/stubs.jar; echo "=====FIN====="
+          cd build/cp
+          CP=$(ls *.jar | tr '\n' ':')
+          echo "=====SONDEO====="
+          javap -p -cp "$CP" $(cat ../../herr/sondeo.txt)
+          echo "=====FIN====="
