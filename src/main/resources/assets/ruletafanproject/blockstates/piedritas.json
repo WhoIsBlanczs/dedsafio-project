@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruletafanproject:block/piedritas"
+   },
+   {
+    "model": "ruletafanproject:block/piedritas",
+    "y": 90
+   },
+   {
+    "model": "ruletafanproject:block/piedritas",
+    "y": 180
+   },
+   {
+    "model": "ruletafanproject:block/piedritas",
+    "y": 270
+   }
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " DD",
+    " BD",
+    "N  "
+  ],
+  "key": {
+    "D": {
+      "item": "ruletafanproject:dilitio"
+    },
+    "B": {
+      "item": "ruletafanproject:bateria"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "id": "ruletafanproject:linterna"
+  }
+}

@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruletafanproject:block/caracola"
+   },
+   {
+    "model": "ruletafanproject:block/caracola",
+    "y": 90
+   },
+   {
+    "model": "ruletafanproject:block/caracola",
+    "y": 180
+   },
+   {
+    "model": "ruletafanproject:block/caracola",
+    "y": 270
+   }
+  ]
+ }
+}

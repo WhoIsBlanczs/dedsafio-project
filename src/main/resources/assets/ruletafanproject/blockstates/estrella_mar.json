@@ -1,0 +1,21 @@
+{
+ "variants": {
+  "": [
+   {
+    "model": "ruletafanproject:block/estrella_mar"
+   },
+   {
+    "model": "ruletafanproject:block/estrella_mar",
+    "y": 90
+   },
+   {
+    "model": "ruletafanproject:block/estrella_mar",
+    "y": 180
+   },
+   {
+    "model": "ruletafanproject:block/estrella_mar",
+    "y": 270
+   }
+  ]
+ }
+}

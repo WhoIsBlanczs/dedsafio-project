@@ -1,0 +1,65 @@
+package net.ruleta.arboles;
+
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.ruleta.Reg;
+
+public final class Arboles {
+   public static final Reg<Block> BROTE_COSTA = Reg.block("ruletafanproject", "brote_costa", () -> new BroteBloque(propiedades(), 0));
+   public static final Reg<Block> BROTE_PALMERA = Reg.block("ruletafanproject", "brote_palmera", () -> new BroteBloque(propiedades(), 1));
+   public static final Reg<Item> ITEM_BROTE_COSTA = Reg.item(
+      "ruletafanproject", "brote_costa", () -> new Arboles.NombreBlockItem(BROTE_COSTA.get(), new Properties(), "Retoño de árbol de costa")
+   );
+   public static final Reg<Item> ITEM_BROTE_PALMERA = Reg.item(
+      "ruletafanproject", "brote_palmera", () -> new Arboles.NombreBlockItem(BROTE_PALMERA.get(), new Properties(), "Retoño de palmera")
+   );
+   public static final Reg<Item> PINCEL = Reg.item("ruletafanproject", "pincel_bosque", () -> new PincelBosqueItem(new Properties().stacksTo(1)));
+
+   private Arboles() {
+   }
+
+   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades() {
+      return net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
+         .mapColor(MapColor.PLANT)
+         .noCollission()
+         .randomTicks()
+         .instabreak()
+         .sound(SoundType.GRASS)
+         .pushReaction(PushReaction.DESTROY);
+   }
+
+   public static void init() {
+      ResourceKey<CreativeModeTab> pestana = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Reg.id("ruletafanproject", "ruletafanproject"));
+      ItemGroupEvents.modifyEntriesEvent(pestana).register((ModifyEntries)salida -> {
+         salida.accept((ItemLike)ITEM_BROTE_COSTA.get());
+         salida.accept((ItemLike)ITEM_BROTE_PALMERA.get());
+         salida.accept((ItemLike)PINCEL.get());
+      });
+   }
+
+   private static final class NombreBlockItem extends BlockItem {
+      private final String nombre;
+
+      NombreBlockItem(Block b, Properties p, String nombre) {
+         super(b, p);
+         this.nombre = nombre;
+      }
+
+      public Component getName(ItemStack pila) {
+         return Component.literal(this.nombre);
+      }
+   }
+}

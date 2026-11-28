@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CMC",
+    "M M",
+    "CMC"
+  ],
+  "key": {
+    "C": {
+      "item": "ruletafanproject:chip_phora"
+    },
+    "M": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "ruletafanproject:candado"
+  }
+}

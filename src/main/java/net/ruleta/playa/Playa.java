@@ -1,0 +1,82 @@
+package net.ruleta.playa;
+
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import net.ruleta.Reg;
+
+public final class Playa {
+   public static final Reg<Block> CONCHA = Reg.block(
+      "ruletafanproject", "concha", () -> new DecoPlayaBloque(propiedades(MapColor.SAND, SoundType.SAND), "Concha de mar")
+   );
+   public static final Reg<Block> CARACOLA = Reg.block(
+      "ruletafanproject", "caracola", () -> new DecoPlayaBloque(propiedades(MapColor.SAND, SoundType.SAND), "Caracola")
+   );
+   public static final Reg<Block> PIEDRITAS = Reg.block(
+      "ruletafanproject", "piedritas", () -> new DecoPlayaBloque(propiedades(MapColor.STONE, SoundType.STONE), "Piedritas")
+   );
+   public static final Reg<Block> ESTRELLA_MAR = Reg.block(
+      "ruletafanproject", "estrella_mar", () -> new DecoPlayaBloque(propiedades(MapColor.COLOR_ORANGE, SoundType.SAND), "Estrella de mar")
+   );
+   public static final Reg<Item> ITEM_CONCHA = Reg.item(
+      "ruletafanproject", "concha", () -> new Playa.NombreBlockItem(CONCHA.get(), new Properties(), "Concha de mar")
+   );
+   public static final Reg<Item> ITEM_CARACOLA = Reg.item(
+      "ruletafanproject", "caracola", () -> new Playa.NombreBlockItem(CARACOLA.get(), new Properties(), "Caracola")
+   );
+   public static final Reg<Item> ITEM_PIEDRITAS = Reg.item(
+      "ruletafanproject", "piedritas", () -> new Playa.NombreBlockItem(PIEDRITAS.get(), new Properties(), "Piedritas")
+   );
+   public static final Reg<Item> ITEM_ESTRELLA_MAR = Reg.item(
+      "ruletafanproject", "estrella_mar", () -> new Playa.NombreBlockItem(ESTRELLA_MAR.get(), new Properties(), "Estrella de mar")
+   );
+
+   private Playa() {
+   }
+
+   private static net.minecraft.world.level.block.state.BlockBehaviour.Properties propiedades(MapColor color, SoundType sonido) {
+      return net.minecraft.world.level.block.state.BlockBehaviour.Properties.of()
+         .mapColor(color)
+         .noCollission()
+         .instabreak()
+         .offsetType(OffsetType.XZ)
+         .sound(sonido)
+         .pushReaction(PushReaction.DESTROY);
+   }
+
+   public static void init() {
+      ResourceKey<CreativeModeTab> pestana = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Reg.id("ruletafanproject", "ruletafanproject"));
+      ItemGroupEvents.modifyEntriesEvent(pestana).register((ModifyEntries)salida -> {
+         salida.accept((ItemLike)ITEM_CONCHA.get());
+         salida.accept((ItemLike)ITEM_CARACOLA.get());
+         salida.accept((ItemLike)ITEM_PIEDRITAS.get());
+         salida.accept((ItemLike)ITEM_ESTRELLA_MAR.get());
+      });
+   }
+
+   private static final class NombreBlockItem extends BlockItem {
+      private final String nombre;
+
+      NombreBlockItem(Block b, Properties p, String nombre) {
+         super(b, p);
+         this.nombre = nombre;
+      }
+
+      public Component getName(ItemStack pila) {
+         return Component.literal(this.nombre);
+      }
+   }
+}

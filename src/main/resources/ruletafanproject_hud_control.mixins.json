@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.ruleta.hudcontrol.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "client-ruletafanproject-hud-control-refmap.json",
+  "client": [
+    "CajeroHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

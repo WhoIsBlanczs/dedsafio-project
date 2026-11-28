@@ -1,0 +1,5 @@
+{
+  "multipart": [
+    { "apply": { "model": "ruletafanproject:block/puerta_bunker_vacio" } }
+  ]
+}
