@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ghostsafio:ambar",
+          "modifier": {
+            "count": {
+              "type": "minecraft:uniform",
+              "min": 2.0,
+              "max": 4.0
+            },
+            "type": "minecraft:set_count"
+          }
+        }
+      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      }
+    }
+  ]
+}

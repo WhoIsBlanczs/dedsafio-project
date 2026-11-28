@@ -1,0 +1,39 @@
+{
+  "type": "minecraft:tree",
+  "trunk_provider": {
+    "id": "minecraft:dark_oak_log",
+    "properties": {
+      "axis": "y"
+    }
+  },
+  "trunk_placer": {
+    "type": "minecraft:giant_trunk_placer",
+    "base_height": 30,
+    "height_rand_a": 6,
+    "height_rand_b": 4
+  },
+  "foliage_provider": {
+    "id": "minecraft:dark_oak_leaves",
+    "properties": {
+      "distance": "7",
+      "persistent": "false",
+      "waterlogged": "false"
+    }
+  },
+  "foliage_placer": {
+    "type": "minecraft:fancy_foliage_placer",
+    "radius": 9,
+    "offset": 0,
+    "height": 3
+  },
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "limit": 1,
+    "lower_size": 1,
+    "upper_size": 2
+  },
+  "dirt_provider": "minecraft:dirt",
+  "decorators": [],
+  "ignore_vines": true,
+  "force_dirt": false
+}

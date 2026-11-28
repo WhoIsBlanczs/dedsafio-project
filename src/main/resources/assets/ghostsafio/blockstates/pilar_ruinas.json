@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "ghostsafio:item/pilar_ruinas"
+    },
+    "axis=z": {
+      "model": "ghostsafio:item/pilar_ruinas",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "ghostsafio:item/pilar_ruinas",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

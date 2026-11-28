@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "ghostsafio",
+  "version": "${version}",
+  "name": "Hexagonsafio",
+  "description": "Hexagonsafio (Ghostsafio) portado a Minecraft 26.3. Original de Nutria/\"Me!\", licencia CC0-1.0.",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/ghostsafio/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ghostsafio.mitomod.Ghostsafio"
+    ],
+    "client": [
+      "com.ghostsafio.mitomod.client.GhostsafioClient"
+    ]
+  },
+  "mixins": [
+    "ghostsafio.mixins.json",
+    {
+      "config": "ghostsafio.client.mixins.json",
+      "environment": "client"
+    },
+    "ghostsafio.compat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

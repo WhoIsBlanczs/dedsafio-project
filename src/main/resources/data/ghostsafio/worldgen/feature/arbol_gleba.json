@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:tree",
+  "trunk_provider": "ghostsafio:carne_oscura",
+  "trunk_placer": {
+    "type": "minecraft:forking_trunk_placer",
+    "base_height": 9,
+    "height_rand_a": 3,
+    "height_rand_b": 5
+  },
+  "foliage_provider": "ghostsafio:carne_podrida",
+  "foliage_placer": {
+    "type": "minecraft:random_spread_foliage_placer",
+    "radius": 3,
+    "offset": 0,
+    "foliage_height": 2,
+    "leaf_placement_attempts": 50
+  },
+  "dirt_provider": "ghostsafio:carne_blanda",
+  "minimum_size": {
+    "type": "minecraft:two_layers_feature_size",
+    "limit": 1,
+    "lower_size": 0,
+    "upper_size": 2
+  },
+  "decorators": [],
+  "ignore_vines": true
+}

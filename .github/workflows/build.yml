@@ -1,0 +1,67 @@
+name: build
+on: [push, workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with: { java-version: '25', distribution: 'microsoft' }
+      - run: chmod +x ./gradlew && ./gradlew build --stacktrace
+      - name: publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ghostsafio-26.3-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: Hexagonsafio (build ${{ github.run_number }})
+          body: |
+            Hexagonsafio para Minecraft 26.3 (Fabric).
+            Necesita Fabric API 0.166.2+26.3 y GeckoLib 26.3-5.5.7 (o más nuevos).
+          files: build/libs/hexagonsafio-26.3-1.0.0.jar
+          make_latest: false
+      - name: prueba en servidor
+        if: always()
+        shell: bash {0}
+        run: |
+          mkdir -p run && echo eula=true > run/eula.txt && printf 'online-mode=false\nspawn-protection=0\n' > run/server.properties
+          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; grep -qE 'can.t proceed with server load|Crash report|Stopping server' run/logs/latest.log 2>/dev/null && exit 0; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 2; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1500 ./gradlew runServer --console=plain > server.log 2>&1
+          sed -E 's/^\[[0-9:]+\] //' server.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.)' | grep -E '\s+at |System chat|Server thread/|ERROR|WARN|Exception|Caused|Couldn|Failed|ghostsafio|Done|Unknown|Missing|No key|Not a|Invalid' | grep -vE 'FabricLoader/Mixin|Environment:' | head -500
+      - name: prueba en cliente
+        if: always()
+        shell: bash {0}
+        run: |
+          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq --no-install-recommends xvfb mesa-utils libgl1-mesa-dri libglx-mesa0 libegl-mesa0 mesa-vulkan-drivers libvulkan1 imagemagick x11-utils xdotool > /dev/null 2>&1
+          mkdir -p run/saves && rm -rf run/saves/prueba && cp -r run/world run/saves/prueba && rm -f run/saves/prueba/session.lock
+          mkdir -p run/saves/prueba/datapacks && cp -r .github/prueba/datapacks/prueba run/saves/prueba/datapacks/
+          printf 'onboardAccessibility:false\nnarrator:0\ntutorialStep:none\nskipMultiplayerWarning:true\nguiScale:2\nrenderDistance:6\npauseOnLostFocus:false\nhideGui:true\njoinedFirstServer:true\n' > run/options.txt
+          Xvfb :99 -screen 0 1280x720x24 +extension GLX +render -noreset > /dev/null 2>&1 & export DISPLAY=:99; sleep 3
+          glxinfo -B 2>&1 | grep -E 'OpenGL (core profile )?version|renderer' | head -3
+          export LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.6 MESA_GLSL_VERSION_OVERRIDE=460
+          mkdir -p capturas
+          foto(){ W=$(xdotool search --name 'Minecraft' 2>/dev/null | tail -1); [ -n "$W" ] && { xdotool windowactivate $W 2>/dev/null; xdotool key --window $W F2; }; sleep 3; f=$(ls -t run/screenshots/*.png 2>/dev/null | head -1); [ -n "$f" ] && cp "$f" capturas/$1.png || import -window root capturas/$1.png; }
+          (timeout 1100 ./gradlew runClient --console=plain --args="--quickPlaySingleplayer prueba" > client.log 2>&1) &
+          for i in $(seq 1 330); do
+            sleep 3
+            for k in 1 2 3 4 5 6; do if grep -q "VISTA$k" client.log && [ ! -f capturas/v$k.png ]; then sleep 15; foto v$k; fi; done
+            [ -f capturas/v6.png ] && break
+            [ $((i % 30)) -eq 0 ] && foto t$i
+            grep -qE 'Stopping!|---- Minecraft Crash Report' client.log && { foto final; break; }
+          done
+          (xwininfo -root -tree | head -20; xdotool search --name 'Minecraft'; which xdotool; ls -la run/screenshots) > capturas/diag.txt 2>&1
+          foto final; pkill -f KnotClient; pkill -f gradle; sleep 5
+          sed -E 's/^\[[0-9:]+\] //' client.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.|sun\.)' | grep -E '\s+at |ERROR|WARN|Exception|Caused|Failed|ghostsafio|VISTA|MOBS_LISTOS|Missing|Unable|Couldn|OpenGL|Backend' | grep -vE 'FabricLoader/Mixin' | head -500
+      - name: subir capturas
+        if: always()
+        shell: bash {0}
+        run: |
+          mkdir -p cap && cp capturas/* cap/ 2>/dev/null; grep -vE 'soldado_reviil' client.log | tail -c 3000000 > cap/client.log 2>/dev/null; cp server.log cap/ 2>/dev/null
+          cd cap && git init -q && git checkout -q -b capturas-ghostsafio-26.3 && git add . && git -c user.name=ci -c user.email=ci@example.com commit -qm capturas && git push -q -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} capturas-ghostsafio-26.3
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: capturas
+          path: |
+            capturas/
+            client.log

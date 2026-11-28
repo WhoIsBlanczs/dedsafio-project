@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ghostsafio:item/spawn_egg_base",
+    "layer1": "ghostsafio:item/spawn_egg_manchas"
+  }
+}

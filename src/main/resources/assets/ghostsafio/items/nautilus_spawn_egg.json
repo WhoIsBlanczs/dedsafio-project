@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ghostsafio:item/spawn_egg_plantilla",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 15322064
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 10177164
+      }
+    ]
+  }
+}

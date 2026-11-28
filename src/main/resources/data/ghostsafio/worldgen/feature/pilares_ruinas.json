@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block_column",
+  "layers": [
+    {
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 3,
+        "max_inclusive": 8
+      },
+      "provider": "ghostsafio:pilar_ruinas"
+    }
+  ],
+  "direction": "up",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "prioritize_tip": false
+}

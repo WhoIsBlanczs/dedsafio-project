@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=y": {
+      "model": "ghostsafio:item/cuerda"
+    },
+    "axis=z": {
+      "model": "ghostsafio:item/cuerda",
+      "x": 90
+    },
+    "axis=x": {
+      "model": "ghostsafio:item/cuerda",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

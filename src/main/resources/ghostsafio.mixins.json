@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.ghostsafio.mitomod.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ExampleMixin",
+    "LivingEntityMixin",
+    "ArrowBounceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

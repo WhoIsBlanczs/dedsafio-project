@@ -1,0 +1,7 @@
+{
+  "eclipse": {
+    "sounds": [
+      { "name": "ghostsafio_eclipse:eclipse", "stream": true }
+    ]
+  }
+}

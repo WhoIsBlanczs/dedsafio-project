@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block_column",
+  "layers": [
+    {
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 4,
+        "max_inclusive": 14
+      },
+      "provider": "minecraft:spruce_log"
+    }
+  ],
+  "direction": "down",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "prioritize_tip": false
+}

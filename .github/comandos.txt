@@ -1,0 +1,15 @@
+say prueba
+forceload add 0 0
+summon ghostsafio:cerebro_amarillo 0 100 0
+summon ghostsafio:nautilus 0 100 0
+summon ghostsafio:nave 0 100 0
+summon ghostsafio:pod_phora_laser 0 100 0
+summon ghostsafio:pod_phora 0 100 0
+summon ghostsafio:skiff_phora 0 100 0
+execute in ghostsafio:espacio run forceload add 0 0
+execute in ghostsafio:gleba run forceload add 0 0
+execute in ghostsafio:jurasico run forceload add 0 0
+gleba
+reload
+kill @e[type=!player]
+say fin

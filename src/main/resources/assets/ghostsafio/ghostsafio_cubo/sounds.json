@@ -1,0 +1,7 @@
+{
+  "musica": {
+    "sounds": [
+      { "name": "ghostsafio_cubo:musica", "stream": true }
+    ]
+  }
+}

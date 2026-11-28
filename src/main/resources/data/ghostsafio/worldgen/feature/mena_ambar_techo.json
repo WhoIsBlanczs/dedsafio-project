@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:ore",
+  "size": 7,
+  "discard_chance_on_air_exposure": 0.0,
+  "targets": [
+    {
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "ghostsafio:tierra_jurasica"
+      },
+      "state": "ghostsafio:mena_ambar"
+    },
+    {
+      "target": {
+        "predicate_type": "minecraft:block_match",
+        "block": "minecraft:coarse_dirt"
+      },
+      "state": "ghostsafio:mena_ambar"
+    }
+  ]
+}

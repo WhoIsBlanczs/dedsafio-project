@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:block_column",
+  "layers": [
+    {
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 5,
+        "max_inclusive": 22
+      },
+      "provider": "ghostsafio:cuerda"
+    }
+  ],
+  "direction": "down",
+  "allowed_placement": {
+    "type": "minecraft:matching_blocks",
+    "blocks": "minecraft:air"
+  },
+  "prioritize_tip": false
+}
