@@ -26,5 +26,5 @@ jobs:
         shell: bash {0}
         run: |
           mkdir -p run && echo eula=true > run/eula.txt && printf 'online-mode=false\nspawn-protection=0\n' > run/server.properties
-          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; sleep 3; done; sleep 5; cat .github/comandos.txt 2>/dev/null; sleep 40; echo stop ) | timeout 1200 ./gradlew runServer --console=plain > server.log 2>&1
+          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 3; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1200 ./gradlew runServer --console=plain > server.log 2>&1
           grep -vE '^\s+at |DEBUG' server.log | grep -E 'ERROR|WARN|Exception|Caused|Couldn|Failed|nexo|Done|Unknown|Missing|No key|Not a|Invalid|template-mod' | grep -vE 'FabricLoader/Mixin|Environment:' | head -400
