@@ -21,3 +21,10 @@ jobs:
             Necesita Fabric API 0.166.2+26.3 y GeckoLib 26.3-5.5.7 (o más nuevos).
           files: build/libs/sarexstudio-26.3-1.0.0.jar
           make_latest: false
+      - name: prueba en servidor
+        if: always()
+        shell: bash {0}
+        run: |
+          mkdir -p run && echo eula=true > run/eula.txt && printf 'online-mode=false\nspawn-protection=0\n' > run/server.properties
+          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 2; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1500 ./gradlew runServer --console=plain > server.log 2>&1
+          grep -vE '^\s+at |DEBUG' server.log | grep -E 'ERROR|WARN|Exception|Caused|Couldn|Failed|modminds|Done|Unknown|Missing|No key|Not a|Invalid' | grep -vE 'FabricLoader/Mixin|Environment:' | head -500

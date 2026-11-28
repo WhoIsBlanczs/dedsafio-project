@@ -1,0 +1,100 @@
+say prueba
+forceload add 0 0
+time set day
+summon modminds:casino 0 100 0
+summon modminds:tortuga_netherita 0 100 0
+summon modminds:sapito 0 100 0
+summon modminds:gorgona 0 100 0
+summon modminds:bomba_negra 0 100 0
+summon modminds:bomba_negra_sin_alas 0 100 0
+summon modminds:infernal_bull 0 100 0
+summon modminds:murcielago_warden 0 100 0
+summon modminds:tridente_proyectil 0 100 0
+summon modminds:taxi_23 0 100 0
+summon modminds:taxi_23_de_cuatro_asientos 0 100 0
+summon modminds:nave_enemiga_de_pulso_borg 0 100 0
+summon modminds:nave_enemiga_de_pulso_proyectil 0 100 0
+summon modminds:nave_enemiga_tanque_borg 0 100 0
+summon modminds:nave_enemiga_acorazada_borg 0 100 0
+summon modminds:nave_enemiga_de_acorazada_proyectil 0 100 0
+summon modminds:nave_enemiga_atomizadora_de_astros_borg 0 100 0
+summon modminds:nave_enemiga_atomizadora_proyectil 0 100 0
+summon modminds:nave_enemiga_corta_borg 0 100 0
+summon modminds:nave_enemiga_corta_proyectil 0 100 0
+summon modminds:nave_enemiga_amarilla_acorazada_borg 0 100 0
+summon modminds:nave_enemiga_amarilla_acorazada_proyectil 0 100 0
+summon modminds:nave_enemiga_perforadora_del_vacio_borg 0 100 0
+summon modminds:nave_enemiga_perforadora_del_vacio_proyectil 0 100 0
+summon modminds:nave_enemiga_acorazada_roja_borg 0 100 0
+summon modminds:nave_enemiga_acorazada_roja_proyectil 0 100 0
+summon modminds:nave_enemiga_tripulsadora_de_iones_borg 0 100 0
+summon modminds:nave_enemiga_casita_borg 0 100 0
+summon modminds:nave_enemiga_casita_proyectil 0 100 0
+summon modminds:nave_enemiga_azul_claro_borg 0 100 0
+summon modminds:nave_enemiga_azul_claro_proyectil 0 100 0
+summon modminds:bala_de_dilitio_proyectil 0 100 0
+summon modminds:dardo_tiki_proyectil 0 100 0
+summon modminds:zona_peligro 0 100 0
+summon modminds:serpiente 0 100 0
+summon modminds:sapo 0 100 0
+summon modminds:fantasma_rojo 0 100 0
+summon modminds:puerta_borg_verde 0 100 0
+summon modminds:fantasma_amarillo 0 100 0
+summon modminds:fantasma_negro 0 100 0
+summon modminds:puerta_borg_amarillo 0 100 0
+summon modminds:puerta_borg_rosa 0 100 0
+summon modminds:puerta_borg_azul 0 100 0
+summon modminds:puerta_borg_roja 0 100 0
+summon modminds:puerta_borg_morada 0 100 0
+summon modminds:bomba_negra_sin_alas_proyectil 0 100 0
+summon modminds:bomba_negra_sin_alas_entidad 0 100 0
+summon modminds:bomba_roja 0 100 0
+summon modminds:bomba_roja_sin_alas 0 100 0
+summon modminds:bomba_roja_sin_alas_entidad 0 100 0
+summon modminds:bomba_roja_sin_alas_proyectil 0 100 0
+summon modminds:bomba_amarilla 0 100 0
+summon modminds:bomba_amarilla_sin_alas 0 100 0
+summon modminds:bomba_amarilla_sin_alas_entidad 0 100 0
+summon modminds:bomba_amarilla_sin_alas_proyectil 0 100 0
+summon modminds:creeper_cake 0 100 0
+summon modminds:flash_bang 0 100 0
+summon modminds:bomba_acuatica_grande 0 100 0
+summon modminds:bomba_acuatica_pequena 0 100 0
+summon modminds:wild_fire 0 100 0
+summon modminds:warden_mounstrosity 0 100 0
+summon modminds:piglin_del_limbo 0 100 0
+summon modminds:bone_spider 0 100 0
+summon modminds:reactor 0 100 0
+summon modminds:tiki_guardian 0 100 0
+summon modminds:soldado_reviil 0 100 0
+summon modminds:globo 0 100 0
+summon modminds:hydra 0 100 0
+summon modminds:water_charge 0 100 0
+summon modminds:water_charge_entidad 0 100 0
+summon modminds:limbo_titan 0 100 0
+summon modminds:reviil 0 100 0
+summon modminds:nereida 0 100 0
+summon modminds:nereida_agua 0 100 0
+summon modminds:shoot_reviil 0 100 0
+summon modminds:torreta_tiki 0 100 0
+summon modminds:orb 0 100 0
+summon modminds:alma_perdida 0 100 0
+summon modminds:grim_reaper 0 100 0
+summon modminds:torreta_borg 0 100 0
+summon modminds:spaceship 0 100 0
+summon modminds:radicora 0 100 0
+summon modminds:gream_reaper_pequena 0 100 0
+summon modminds:ojo_de_limbo 0 100 0
+summon modminds:candado_tiki 0 100 0
+summon modminds:intruso 0 100 0
+summon modminds:coloso 0 100 0
+summon modminds:reactor_borg 0 100 0
+summon modminds:reactor_hydra 0 100 0
+execute in modminds:limbo run forceload add 0 0
+execute in modminds:limbo run summon modminds:piglin_del_limbo 0 100 0
+execute in modminds:mounstrosity_dimension run forceload add 0 0
+give @a modminds:espada_infernal_curativa
+give @a modminds:armadura_infernal_helmet
+reload
+kill @e[type=!player]
+say fin
