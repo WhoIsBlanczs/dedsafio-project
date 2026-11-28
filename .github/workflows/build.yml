@@ -32,12 +32,12 @@ jobs:
         if: always()
         shell: bash {0}
         run: |
-          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri imagemagick x11-utils > /dev/null 2>&1
+          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri libglx-mesa0 libegl-mesa0 mesa-vulkan-drivers libvulkan1 imagemagick x11-utils > /dev/null 2>&1
           mkdir -p run/saves && rm -rf run/saves/prueba && cp -r run/world run/saves/prueba && rm -f run/saves/prueba/session.lock
           mkdir -p run/saves/prueba/datapacks && cp -r .github/prueba/datapacks/prueba run/saves/prueba/datapacks/
           printf 'onboardAccessibility:false\nnarrator:0\ntutorialStep:none\nskipMultiplayerWarning:true\nguiScale:2\nrenderDistance:6\npauseOnLostFocus:false\njoinedFirstServer:true\n' > run/options.txt
-          Xvfb :99 -screen 0 1280x720x24 > /dev/null 2>&1 & export DISPLAY=:99; sleep 3
-          glxinfo -B 2>/dev/null | grep -E 'OpenGL (core profile )?version|renderer' | head -3
+          Xvfb :99 -screen 0 1280x720x24 +extension GLX +render -noreset > /dev/null 2>&1 & export DISPLAY=:99; sleep 3
+          glxinfo -B 2>&1 | grep -E 'OpenGL (core profile )?version|renderer' | head -3
           export LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.6 MESA_GLSL_VERSION_OVERRIDE=460
           mkdir -p capturas
           (timeout 1100 ./gradlew runClient --console=plain --args="--quickPlaySingleplayer prueba" > client.log 2>&1) &
