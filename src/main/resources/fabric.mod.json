@@ -1,0 +1,23 @@
+{
+	"schemaVersion": 1,
+	"id": "dedsafioimitationmod",
+	"version": "${version}",
+	"name": "Dedsafio Imitation Mod",
+	"description": "Mobs, arcos, espada e ítems del Dedsafío (Nautilus Óseo, Cerebros glebanoides). Port a Minecraft 26.3.",
+	"authors": ["Me!"],
+	"license": "CC0-1.0",
+	"icon": "assets/dedsafioimitationmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": ["com.example.dedsafioimitationmod.DedsafioImitationMod"],
+		"client": ["com.example.dedsafioimitationmod.client.DedsafioImitationModClient"]
+	},
+	"mixins": ["dedsafio-imitation-mod.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*",
+		"geckolib": ">=5.5"
+	}
+}

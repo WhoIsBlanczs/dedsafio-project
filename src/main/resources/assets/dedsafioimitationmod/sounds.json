@@ -1,0 +1,39 @@
+{
+  "entity.nautilus_oseo_g.hurt": {
+    "subtitle": "subtitles.dedsafioimitationmod.nautilus_oseo_g.hurt",
+    "sounds": [
+      "dedsafioimitationmod:muerte1"
+    ]
+  },
+  "entity.nautilus_oseo_g.death": {
+    "subtitle": "subtitles.dedsafioimitationmod.nautilus_oseo_g.death",
+    "sounds": [
+      "dedsafioimitationmod:muerte2"
+    ]
+  },
+  "entity.nautilus_oseo_g.attack": {
+    "subtitle": "subtitles.dedsafioimitationmod.nautilus_oseo_g.attack",
+    "sounds": [
+      "dedsafioimitationmod:ataquesound1",
+      "dedsafioimitationmod:ataquesound2"
+    ]
+  },
+  "cerebro_ataque": {
+    "subtitle": "subtitles.dedsafioimitationmod.cerebro_ataque",
+    "sounds": [
+      "dedsafioimitationmod:ataquesonido1"
+    ]
+  },
+  "cerebro_muerte": {
+    "subtitle": "subtitles.dedsafioimitationmod.cerebro_muerte",
+    "sounds": [
+      "dedsafioimitationmod:muerte2_copia"
+    ]
+  },
+  "nautilus_oseo_p_attack": {
+    "subtitle": "subtitles.dedsafioimitationmod.nautilus_oseo_p_attack",
+    "sounds": [
+      "dedsafioimitationmod:dano_nautilus_p"
+    ]
+  }
+}

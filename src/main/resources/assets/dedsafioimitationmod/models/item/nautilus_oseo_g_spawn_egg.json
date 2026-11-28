@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dedsafioimitationmod:item/nautilus_oseo_g_spawn_egg"
+  }
+}

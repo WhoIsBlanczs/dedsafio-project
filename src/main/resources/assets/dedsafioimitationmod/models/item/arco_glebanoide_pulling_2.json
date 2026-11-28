@@ -1,0 +1,4 @@
+{
+  "parent": "minecraft:item/bow_pulling_2",
+  "textures": { "layer0": "dedsafioimitationmod:item/arco_glebanoide_pulling_2" }
+}

@@ -1,0 +1,23 @@
+name: build
+on: [push, workflow_dispatch]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with: { java-version: '25', distribution: 'microsoft' }
+      - run: chmod +x ./gradlew && ./gradlew build --stacktrace
+      - name: publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: imitacion-26.3-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: Dedsafio Mobs Imitation (build ${{ github.run_number }})
+          body: |
+            Dedsafio Mobs Imitation para Minecraft 26.3 (Fabric).
+            Necesita Fabric API 0.166.2+26.3 y GeckoLib 26.3-5.5.7 (o más nuevos).
+          files: build/libs/dedsafio-mobs-imitation-26.3-1.0.0.jar
+          make_latest: false
