@@ -15,5 +15,5 @@ jobs:
           cd build/cp
           CP=$(ls *.jar | tr '\n' ':')
           echo "=====SONDEO====="
-          javap -p -cp "$CP" $(cat ../../herr/sondeo.txt)
+          if [ -f ../../herr/cmd.sh ]; then bash ../../herr/cmd.sh; else javap -p -cp "$CP" $(cat ../../herr/sondeo.txt); fi
           echo "=====FIN====="
