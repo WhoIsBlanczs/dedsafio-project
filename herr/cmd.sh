@@ -1,3 +1,1 @@
-J=$(ls minecraft-common-*.jar); mkdir -p /tmp/x && cd /tmp/x && unzip -q -o $OLDPWD/$J 'data/minecraft/loot_table/*' 'data/minecraft/predicate/*' 2>/dev/null
-for f in predicate/tool/can_silk_touch.json loot_table/entities/zombie.json loot_table/entities/blaze.json loot_table/blocks/oak_leaves.json loot_table/blocks/wheat.json loot_table/blocks/oak_door.json; do echo "== $f"; tr -d ' \n' < data/minecraft/$f | head -c 1800; echo; done
-ls data/minecraft/predicate data/minecraft/predicate/* | head -40 | tr '\n' ' '
+G=$(ls geckolib-*.jar); mkdir -p /tmp/g && cd /tmp/g && unzip -q -o $OLDPWD/$G; strings -n 4 com/geckolib/renderer/internal/GeckolibItemSpecialRenderer*.class com/geckolib/GeckoLibClient*.class com/geckolib/*Services*.class 2>/dev/null | grep -iE 'special|geckolib$|^geckolib|item' | sort -u | head -20; ls com/geckolib/loading 2>/dev/null | head; find . -name '*.json' | head
