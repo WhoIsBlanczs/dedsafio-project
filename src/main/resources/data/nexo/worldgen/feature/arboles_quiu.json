@@ -3,8 +3,14 @@
   "features": [
     {
       "chance": 0.5,
-      "feature": "nexo:quiu_abedul"
+      "feature": {
+        "feature": "nexo:quiu_abedul",
+        "placement": []
+      }
     }
   ],
-  "default": "nexo:quiu_roble"
+  "default": {
+    "feature": "nexo:quiu_roble",
+    "placement": []
+  }
 }

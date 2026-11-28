@@ -3,8 +3,14 @@
   "features": [
     {
       "chance": 0.55,
-      "feature": "nexo:araucaria"
+      "feature": {
+        "feature": "nexo:araucaria",
+        "placement": []
+      }
     }
   ],
-  "default": "nexo:cicada"
+  "default": {
+    "feature": "nexo:cicada",
+    "placement": []
+  }
 }
