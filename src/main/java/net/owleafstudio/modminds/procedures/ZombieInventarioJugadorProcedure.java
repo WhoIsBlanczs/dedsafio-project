@@ -65,7 +65,7 @@ public class ZombieInventarioJugadorProcedure {
          for (String key : inventoryTag.getAllKeys()) {
             ItemStack stack = ItemStack.parseOptional(zombie.level().registryAccess(), inventoryTag.getCompound(key));
             if (!stack.isEmpty()) {
-               zombie.spawnAtLocation(stack);
+               zombie.spawnAtLocation((net.minecraft.server.level.ServerLevel)zombie.level(), stack);
             }
          }
       }

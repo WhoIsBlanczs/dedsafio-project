@@ -7,12 +7,17 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.owleafstudio.modminds.entity.WaterChargeEntidadEntity;
 
-public class WaterChargeEntidadRenderer extends MobRenderer<WaterChargeEntidadEntity, SilverfishModel<WaterChargeEntidadEntity>> {
+public class WaterChargeEntidadRenderer extends MobRenderer<WaterChargeEntidadEntity, net.minecraft.client.renderer.entity.state.LivingEntityRenderState, SilverfishModel> {
    public WaterChargeEntidadRenderer(EntityRendererProvider.Context context) {
       super(context, new SilverfishModel(context.bakeLayer(ModelLayers.SILVERFISH)), 0.0F);
    }
 
-   public Identifier getTextureLocation(WaterChargeEntidadEntity entity) {
+   @Override
+   public net.minecraft.client.renderer.entity.state.LivingEntityRenderState createRenderState() {
+      return new net.minecraft.client.renderer.entity.state.LivingEntityRenderState();
+   }
+
+   public Identifier getTextureLocation(net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado$) {
       return Identifier.parse("modminds:textures/entities/hydrabrillante.png");
    }
 }

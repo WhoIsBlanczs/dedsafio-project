@@ -60,7 +60,7 @@ public class BoneSpiderEntity extends Monster {
 
    protected void dropCustomDeathLoot(ServerLevel _lvl, DamageSource source, boolean recentlyHitIn) {
       super.dropCustomDeathLoot(_lvl, source, recentlyHitIn);
-      this.spawnAtLocation(new ItemStack((ItemLike)ModmindsModItems.FRAGMENTO_DE_HUESO.get()));
+      this.spawnAtLocation((net.minecraft.server.level.ServerLevel)this.level(), new ItemStack((ItemLike)ModmindsModItems.FRAGMENTO_DE_HUESO.get()));
    }
 
    public SoundEvent getHurtSound(DamageSource ds) {

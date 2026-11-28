@@ -21,10 +21,22 @@ public class BombaAmarillaSinAlasProyectilRenderer extends EntityRenderer<BombaA
       this.model = new Modelunknown(context.bakeLayer(Modelunknown.LAYER_LOCATION));
    }
 
-   public void render(
-      BombaAmarillaSinAlasProyectilEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn
-   ) {
-      VertexConsumer vb = bufferIn.getBuffer(net.minecraft.client.renderer.rendertype.RenderTypes.entityCutout(this.getTextureLocation(entityIn)));
+   public net.owleafstudio.modminds.compat.Compat.EstadoEntidad createRenderState() {
+      return new net.owleafstudio.modminds.compat.Compat.EstadoEntidad();
+   }
+
+   public void extractRenderState(BombaAmarillaSinAlasProyectilEntity entidad$, net.owleafstudio.modminds.compat.Compat.EstadoEntidad estado$, float pt$) {
+      super.extractRenderState(entidad$, estado$, pt$);
+      estado$.entidad = entidad$;
+      estado$.pt = pt$;
+   }
+
+   public void submit(net.owleafstudio.modminds.compat.Compat.EstadoEntidad estado$, PoseStack poseStack, net.minecraft.client.renderer.SubmitNodeCollector colector$, net.minecraft.client.renderer.state.level.CameraRenderState camara$) {
+      BombaAmarillaSinAlasProyectilEntity entityIn = (BombaAmarillaSinAlasProyectilEntity)estado$.entidad;
+      float partialTicks = estado$.pt;
+      float entityYaw = entityIn.getYRot();
+      int packedLightIn = estado$.lightCoords;
+      net.minecraft.client.renderer.rendertype.RenderType vb$tipo = (net.minecraft.client.renderer.rendertype.RenderTypes.entityCutout(this.getTextureLocation(entityIn)));
       poseStack.pushPose();
       poseStack.rotate(
          Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entityIn.yRotO, entityIn.getYRot()) - 90.0F)
@@ -32,9 +44,9 @@ public class BombaAmarillaSinAlasProyectilRenderer extends EntityRenderer<BombaA
       poseStack.rotate(
          Axis.ZP.rotationDegrees(90.0F + Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot()))
       );
-      this.model.renderToBuffer(poseStack, vb, packedLightIn, OverlayTexture.NO_OVERLAY, -1);
+      colector$.submitModel(this.model, estado$, poseStack, vb$tipo, packedLightIn, OverlayTexture.NO_OVERLAY, estado$.outlineColor);
       poseStack.popPose();
-      super.render(entityIn, entityYaw, partialTicks, poseStack, bufferIn, packedLightIn);
+      super.submit(estado$, poseStack, colector$, camara$);
    }
 
    public Identifier getTextureLocation(BombaAmarillaSinAlasProyectilEntity entity) {

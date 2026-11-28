@@ -7,12 +7,17 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.owleafstudio.modminds.entity.PiglinDelLimboEntity;
 
-public class PiglinDelLimboRenderer extends MobRenderer<PiglinDelLimboEntity, PiglinModel<PiglinDelLimboEntity>> {
+public class PiglinDelLimboRenderer extends MobRenderer<PiglinDelLimboEntity, net.minecraft.client.renderer.entity.state.PiglinRenderState, PiglinModel> {
    public PiglinDelLimboRenderer(EntityRendererProvider.Context context) {
-      super(context, new PiglinModel(context.bakeLayer(ModelLayers.PIGLIN)), 0.5F);
+      super(context, new net.minecraft.client.model.monster.piglin.AdultPiglinModel(context.bakeLayer(ModelLayers.PIGLIN)), 0.5F);
    }
 
-   public Identifier getTextureLocation(PiglinDelLimboEntity entity) {
+   @Override
+   public net.minecraft.client.renderer.entity.state.PiglinRenderState createRenderState() {
+      return new net.minecraft.client.renderer.entity.state.PiglinRenderState();
+   }
+
+   public Identifier getTextureLocation(net.minecraft.client.renderer.entity.state.PiglinRenderState estado$) {
       return Identifier.parse("modminds:textures/entities/piglin_limbo.png");
    }
 }

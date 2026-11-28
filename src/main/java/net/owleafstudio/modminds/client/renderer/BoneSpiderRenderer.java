@@ -7,12 +7,17 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.owleafstudio.modminds.entity.BoneSpiderEntity;
 
-public class BoneSpiderRenderer extends MobRenderer<BoneSpiderEntity, SpiderModel<BoneSpiderEntity>> {
+public class BoneSpiderRenderer extends MobRenderer<BoneSpiderEntity, net.minecraft.client.renderer.entity.state.LivingEntityRenderState, SpiderModel> {
    public BoneSpiderRenderer(EntityRendererProvider.Context context) {
       super(context, new SpiderModel(context.bakeLayer(ModelLayers.SPIDER)), 0.5F);
    }
 
-   public Identifier getTextureLocation(BoneSpiderEntity entity) {
+   @Override
+   public net.minecraft.client.renderer.entity.state.LivingEntityRenderState createRenderState() {
+      return new net.minecraft.client.renderer.entity.state.LivingEntityRenderState();
+   }
+
+   public Identifier getTextureLocation(net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado$) {
       return Identifier.parse("modminds:textures/entities/spider2-12886658.png");
    }
 }

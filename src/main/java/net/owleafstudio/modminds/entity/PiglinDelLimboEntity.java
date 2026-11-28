@@ -62,7 +62,7 @@ public class PiglinDelLimboEntity extends Monster {
 
    protected void dropCustomDeathLoot(ServerLevel _lvl, DamageSource source, boolean recentlyHitIn) {
       super.dropCustomDeathLoot(_lvl, source, recentlyHitIn);
-      this.spawnAtLocation(new ItemStack((ItemLike)ModmindsModItems.FRAGMENTOS_DE_GEMA_DE_ALMAS.get()));
+      this.spawnAtLocation((net.minecraft.server.level.ServerLevel)this.level(), new ItemStack((ItemLike)ModmindsModItems.FRAGMENTOS_DE_GEMA_DE_ALMAS.get()));
    }
 
    public SoundEvent getHurtSound(DamageSource ds) {
