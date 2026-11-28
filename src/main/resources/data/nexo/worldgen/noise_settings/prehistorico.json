@@ -312,13 +312,10 @@
               "right": {
                 "type": "minecraft:add",
                 "left": {
-                  "type": "minecraft:cache_2d",
-                  "input": {
-                    "type": "minecraft:noise",
-                    "noise": "nexo:prehistorico/pilares",
-                    "xz_scale": 1.0,
-                    "y_scale": 0.0
-                  }
+                  "type": "minecraft:noise",
+                  "noise": "nexo:prehistorico/pilares",
+                  "xz_scale": 1.0,
+                  "y_scale": 0.0
                 },
                 "right": {
                   "type": "minecraft:add",
@@ -374,13 +371,10 @@
                 "right": {
                   "type": "minecraft:add",
                   "left": {
-                    "type": "minecraft:cache_2d",
-                    "input": {
-                      "type": "minecraft:noise",
-                      "noise": "nexo:prehistorico/agujas",
-                      "xz_scale": 1.0,
-                      "y_scale": 0.0
-                    }
+                    "type": "minecraft:noise",
+                    "noise": "nexo:prehistorico/agujas",
+                    "xz_scale": 1.0,
+                    "y_scale": 0.0
                   },
                   "right": {
                     "type": "minecraft:add",

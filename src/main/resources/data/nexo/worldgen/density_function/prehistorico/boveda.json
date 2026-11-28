@@ -1,17 +1,14 @@
 {
-  "type": "minecraft:cache_2d",
-  "input": {
-    "type": "minecraft:add",
-    "left": 152.0,
+  "type": "minecraft:add",
+  "left": 152.0,
+  "right": {
+    "type": "minecraft:mul",
+    "left": 20.0,
     "right": {
-      "type": "minecraft:mul",
-      "left": 20.0,
-      "right": {
-        "type": "minecraft:noise",
-        "noise": "nexo:prehistorico/boveda",
-        "xz_scale": 1.0,
-        "y_scale": 0.0
-      }
+      "type": "minecraft:noise",
+      "noise": "nexo:prehistorico/boveda",
+      "xz_scale": 1.0,
+      "y_scale": 0.0
     }
   }
 }
