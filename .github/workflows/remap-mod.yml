@@ -15,7 +15,7 @@ jobs:
           distribution: 'temurin'
       - uses: gradle/actions/setup-gradle@v6
         with:
-          gradle-version: '8.12.1'
+          gradle-version: '9.2.1'
       - name: remap jar intermediary -> mojmap (1.21.1)
         run: |
           exec > >(tee -a /tmp/all.log) 2>&1
@@ -26,7 +26,7 @@ jobs:
           rootProject.name='rm'
           S
           cat > build.gradle <<'S'
-          plugins { id 'fabric-loom' version '1.9.2' }
+          plugins { id 'fabric-loom' version '1.14.10' }
           repositories { mavenCentral(); maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' } }
           dependencies {
             minecraft 'com.mojang:minecraft:1.21.1'
