@@ -296,14 +296,14 @@ public class ReviilEntity extends PathfinderMob implements GeoEntity, SceneRunne
 
    public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
       super.readAdditionalSaveData(compound);
-      if (compound.child("ModmindsTexture").isPresent()) {
+      if (compound.getString("ModmindsTexture").isPresent()) {
          this.setTexture(compound.getStringOr("ModmindsTexture", ""));
       }
 
       int phase = compound.getIntOr("ReviilPhase", 0);
       if (phase > 0) {
          this.entityData.set(PHASE, phase);
-         this.entityData.set(SIZE, compound.child("ReviilSize").isPresent() ? compound.getFloatOr("ReviilSize", 0.0F) : 3.4F);
+         this.entityData.set(SIZE, compound.getFloatOr("ReviilSize", 3.4F));
          this.applyPhaseStats();
       }
    }

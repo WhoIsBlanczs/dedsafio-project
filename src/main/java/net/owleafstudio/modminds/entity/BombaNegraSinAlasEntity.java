@@ -122,7 +122,7 @@ public class BombaNegraSinAlasEntity extends Monster implements GeoEntity {
 
    public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
       super.readAdditionalSaveData(compound);
-      if (compound.child("ModmindsTexture").isPresent()) {
+      if (compound.getString("ModmindsTexture").isPresent()) {
          this.setTexture(compound.getStringOr("ModmindsTexture", ""));
       }
    }

@@ -146,7 +146,7 @@ public class GloboEntity extends PathfinderMob implements GeoEntity {
 
    public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
       super.readAdditionalSaveData(compound);
-      if (compound.child("ModmindsTexture").isPresent()) {
+      if (compound.getString("ModmindsTexture").isPresent()) {
          this.setTexture(compound.getStringOr("ModmindsTexture", ""));
       }
    }
