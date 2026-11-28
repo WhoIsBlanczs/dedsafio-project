@@ -7,15 +7,9 @@
     "c "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:netherite_block"
-    },
-    "b": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    },
-    "c": {
-      "item": "minecraft:gold_block"
-    }
+    "a": "minecraft:netherite_block",
+    "b": "modminds:lingote_de_hierro_reforzado",
+    "c": "minecraft:gold_block"
   },
   "result": {
     "id": "modminds:ala_izquierda_frontal_de_nave",

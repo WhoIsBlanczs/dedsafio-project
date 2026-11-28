@@ -35,7 +35,7 @@ public final class BossPresentation {
       Vec3 at = BossFx.centre(entity);
       if (deathTick == 1) {
          BossFx.sound(world, at, style.death, SoundSource.HOSTILE, 2.0F, 0.85);
-         BossFx.burst(world, at, ParticleTypes.FLASH, 1, 0.0, 0.0);
+         BossFx.burst(world, at, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
          BossFx.burst(world, at, style.spark(), 8, entity.getBbWidth() * 0.6, 0.12);
       }
 

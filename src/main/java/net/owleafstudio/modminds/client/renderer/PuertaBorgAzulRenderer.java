@@ -22,7 +22,7 @@ public class PuertaBorgAzulRenderer extends GeoEntityRenderer<PuertaBorgAzulEnti
 
    
 
-   protected float getDeathMaxRotation(PuertaBorgAzulEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

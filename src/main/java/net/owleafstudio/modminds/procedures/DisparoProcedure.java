@@ -90,7 +90,7 @@ public class DisparoProcedure {
 
             if (entity instanceof Player _player) {
                _player.getCooldowns()
-                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY).getItem(), 6);
+                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY), 6);
             }
          } else if (entity instanceof Player _player && !_player.level().isClientSide()) {
             net.owleafstudio.modminds.compat.Compat.mensaje(_player, Component.literal("§4Recarga"), true);

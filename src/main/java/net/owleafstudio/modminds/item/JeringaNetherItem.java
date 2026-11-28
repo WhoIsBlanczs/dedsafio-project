@@ -22,7 +22,7 @@ public class JeringaNetherItem extends Item {
 
    public void onCraftedBy(ItemStack itemstack, Player entity) {
       super.onCraftedBy(itemstack, entity);
-      JeringaNetherAlSerCreadoProcedure.execute(world, itemstack);
+      JeringaNetherAlSerCreadoProcedure.execute(entity.level(), itemstack);
    }
 
    public void inventoryTick(ItemStack itemstack, net.minecraft.server.level.ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot ranura$) {

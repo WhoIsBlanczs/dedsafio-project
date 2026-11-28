@@ -108,7 +108,7 @@ public class NaveEnemigaTripulsadoraDeIonesBorgEntity extends Monster implements
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaTripulsadoraDeIonesBorgEntity.this.getTarget();
                   if (NaveEnemigaTripulsadoraDeIonesBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaTripulsadoraDeIonesBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaTripulsadoraDeIonesBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaTripulsadoraDeIonesBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaTripulsadoraDeIonesBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

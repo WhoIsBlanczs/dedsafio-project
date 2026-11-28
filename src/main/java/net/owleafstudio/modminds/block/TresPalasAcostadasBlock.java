@@ -15,11 +15,11 @@ public class TresPalasAcostadasBlock extends Block {
       super(BlockBehaviour.Properties.of().sound(SoundType.STONE).strength(2.0F, 10.0F).noOcclusion().isRedstoneConductor((bs, br, bp) -> false));
    }
 
-   public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+   public boolean propagatesSkylightDown(BlockState state) {
       return true;
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 

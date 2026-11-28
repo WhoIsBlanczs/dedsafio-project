@@ -23,7 +23,7 @@ public class CreeperCakeEfectoMobEffect extends MobEffect {
       return new ArrayList<>();
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       CreeperCakeEfectoAlEstarActivoElEfectoProcedure.execute(entity);
       return true;
    }

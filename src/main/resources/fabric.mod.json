@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "modminds",
+  "version": "${version}",
+  "name": "Sarex Studio",
+  "description": "Sarex Studio es un estudio de creacion de mods para Minecraft. Port a Fabric 26.3.",
+  "authors": ["Marquinho", "Beyong", "Owleaf Studio"],
+  "contact": {},
+  "license": "All Rights Reserved",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["net.owleafstudio.modminds.ModmindsMod"],
+    "client": ["net.owleafstudio.modminds.client.ModmindsModClient"]
+  },
+  "mixins": ["modminds.compat.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "geckolib": ">=5.5"
+  }
+}

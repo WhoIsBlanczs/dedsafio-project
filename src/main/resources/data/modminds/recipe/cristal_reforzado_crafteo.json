@@ -7,21 +7,11 @@
     "cba"
   ],
   "key": {
-    "a": {
-      "item": "modminds:fragmento_de_corona_de_wildfire"
-    },
-    "b": {
-      "item": "minecraft:glass"
-    },
-    "c": {
-      "item": "minecraft:quartz"
-    },
-    "d": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    },
-    "e": {
-      "item": "minecraft:black_stained_glass"
-    }
+    "a": "modminds:fragmento_de_corona_de_wildfire",
+    "b": "minecraft:glass",
+    "c": "minecraft:quartz",
+    "d": "modminds:lingote_de_hierro_reforzado",
+    "e": "minecraft:black_stained_glass"
   },
   "result": {
     "id": "modminds:cristal_reforzado",

@@ -25,7 +25,7 @@ public class EspadaInfernalCurativaItem extends Item {
    private static final int ASPECTO_DE_SANGUIJUELA_LEVEL = 2;
 
    public EspadaInfernalCurativaItem() {
-      super(new EspadaInfernalCurativaItem.CustomTier(), new Item.Properties().stacksTo(1).fireResistant());
+      super(new Item.Properties().stacksTo(1).fireResistant().sword(TIER, -TIER.attackDamageBonus(), 0.0F));
    }
 
    public Component getName(ItemStack stack) {

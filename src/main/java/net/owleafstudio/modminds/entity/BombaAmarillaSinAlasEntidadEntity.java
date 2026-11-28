@@ -91,7 +91,7 @@ public class BombaAmarillaSinAlasEntidadEntity extends Monster {
       }
    }
 
-   public boolean ignoreExplosion() {
+   public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion$) {
       return true;
    }
 

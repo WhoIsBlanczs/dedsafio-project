@@ -10,17 +10,12 @@ import net.minecraft.world.item.ItemStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 
 public interface IClientItemExtensions {
    Map<Item, IClientItemExtensions> EXTENSIONS = new ConcurrentHashMap<>();
 
    static IClientItemExtensions of(ItemStack stack) {
       return stack == null ? null : EXTENSIONS.get(stack.getItem());
-   }
-
-   default BlockEntityWithoutLevelRenderer getCustomRenderer() {
-      return null;
    }
 
    default HumanoidModel getHumanoidArmorModel(LivingEntity living, ItemStack stack, EquipmentSlot slot, HumanoidModel defaultModel) {

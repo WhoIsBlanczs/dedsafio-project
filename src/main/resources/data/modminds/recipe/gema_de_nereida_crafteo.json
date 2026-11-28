@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:pepita_de_gema_de_nereida"
-    }
+    "a": "modminds:pepita_de_gema_de_nereida"
   },
   "result": {
     "id": "modminds:gema_de_nereida",

@@ -118,7 +118,7 @@ public class NaveEnemigaAtomizadoraDeAstrosBorgEntity extends Monster implements
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.getTarget();
                   if (NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaAtomizadoraDeAstrosBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

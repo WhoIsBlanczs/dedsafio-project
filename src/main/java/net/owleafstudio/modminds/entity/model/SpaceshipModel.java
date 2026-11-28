@@ -4,9 +4,7 @@ import net.minecraft.resources.Identifier;
 import net.owleafstudio.modminds.entity.SpaceshipEntity;
 import com.geckolib.animation.state.AnimationTest;
 import com.geckolib.cache.model.GeoBone;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.model.GeoModel;
-import com.geckolib.model.data.EntityModelData;
 
 public class SpaceshipModel extends GeoModel<SpaceshipEntity> {
    private static final com.geckolib.constant.dataticket.DataTicket<Identifier> TEXTURE$ = com.geckolib.constant.dataticket.DataTicket.create("modminds_spaceshipmodel_texture", Identifier.class);
@@ -29,12 +27,5 @@ public class SpaceshipModel extends GeoModel<SpaceshipEntity> {
       return estado$.getGeckolibData(TEXTURE$);
    }
 
-   public void setCustomAnimations(SpaceshipEntity animatable, long instanceId, AnimationTest<?> animationState) {
-      GeoBone head = this.getAnimationProcessor().getBone("root");
-      if (head != null) {
-         EntityModelData entityData = (EntityModelData)animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-         head.setRotX(entityData.headPitch() * (float) (Math.PI / 180.0));
-         head.setRotY(entityData.netHeadYaw() * (float) (Math.PI / 180.0));
-      }
-   }
+   
 }

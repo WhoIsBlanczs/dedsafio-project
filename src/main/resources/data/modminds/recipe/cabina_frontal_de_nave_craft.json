@@ -6,15 +6,9 @@
     "bac"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "b": {
-      "item": "modminds:cristal_de_dilitio"
-    },
-    "c": {
-      "item": "modminds:bloque_de_hierro_reforzado"
-    }
+    "a": "minecraft:netherite_ingot",
+    "b": "modminds:cristal_de_dilitio",
+    "c": "modminds:bloque_de_hierro_reforzado"
   },
   "result": {
     "id": "modminds:cabina_frontal_de_la_nave",

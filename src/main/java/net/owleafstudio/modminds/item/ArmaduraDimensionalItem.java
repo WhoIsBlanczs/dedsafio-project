@@ -7,7 +7,6 @@ import java.util.function.Consumer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -16,28 +15,19 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.Holder;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.owleafstudio.modminds.client.model.Modelspacearmorfix;
 
-public abstract class ArmaduraDimensionalItem extends ArmorItem {
-   private static final Holder<ArmorMaterial> MATERIAL = Holder.direct(
-      new ArmorMaterial(
-         Map.of(net.minecraft.world.item.equipment.ArmorType.HELMET, 5, net.minecraft.world.item.equipment.ArmorType.CHESTPLATE, 10, net.minecraft.world.item.equipment.ArmorType.LEGGINGS, 8, net.minecraft.world.item.equipment.ArmorType.BOOTS, 5),
-         15,
-         Holder.direct(SoundEvents.EMPTY),
-         () -> Ingredient.of(),
-         List.of(),
-         3.5F,
-         0.1F
-      )
+public abstract class ArmaduraDimensionalItem extends net.owleafstudio.modminds.compat.LegacyArmorItem {
+   private static final ArmorMaterial MATERIAL = net.owleafstudio.modminds.compat.LegacyArmorItem.material(
+      "armadura_dimensional", 45, Map.of(net.minecraft.world.item.equipment.ArmorType.HELMET, 5, net.minecraft.world.item.equipment.ArmorType.CHESTPLATE, 10, net.minecraft.world.item.equipment.ArmorType.LEGGINGS, 8, net.minecraft.world.item.equipment.ArmorType.BOOTS, 5), 15, Holder.direct(SoundEvents.EMPTY), 3.5F, 0.1F
    );
 
    public ArmaduraDimensionalItem(net.minecraft.world.item.equipment.ArmorType type, Item.Properties properties) {
-      super(MATERIAL, type, properties.durability(type.getDurability(45)));
+      super(MATERIAL, type, properties);
    }
 
    public static class Boots extends ArmaduraDimensionalItem {
@@ -72,9 +62,6 @@ public abstract class ArmaduraDimensionalItem extends ArmorItem {
                         )
                      )
                   );
-                  armorModel.crouching = living.isShiftKeyDown();
-                  armorModel.riding = defaultModel.riding;
-                  armorModel.young = living.isBaby();
                   return armorModel;
                }
             }
@@ -118,9 +105,6 @@ public abstract class ArmaduraDimensionalItem extends ArmorItem {
                         )
                      )
                   );
-                  armorModel.crouching = living.isShiftKeyDown();
-                  armorModel.riding = defaultModel.riding;
-                  armorModel.young = living.isBaby();
                   return armorModel;
                }
             }
@@ -163,9 +147,6 @@ public abstract class ArmaduraDimensionalItem extends ArmorItem {
                         )
                      )
                   );
-                  armorModel.crouching = living.isShiftKeyDown();
-                  armorModel.riding = defaultModel.riding;
-                  armorModel.young = living.isBaby();
                   return armorModel;
                }
             }
@@ -209,9 +190,6 @@ public abstract class ArmaduraDimensionalItem extends ArmorItem {
                         )
                      )
                   );
-                  armorModel.crouching = living.isShiftKeyDown();
-                  armorModel.riding = defaultModel.riding;
-                  armorModel.young = living.isBaby();
                   return armorModel;
                }
             }

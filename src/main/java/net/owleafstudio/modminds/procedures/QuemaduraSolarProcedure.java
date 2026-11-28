@@ -35,7 +35,7 @@ public class QuemaduraSolarProcedure {
          && _lvl0.isBrightOutside()
          && world.canSeeSkyFromBelowWater(BlockPos.containing(x, y, z))
          && !(entity instanceof LivingEntity _livEnt2 && _livEnt2.hasEffect(CompatAccess.effect(ModmindsModMobEffects.PROTECCION_SOLAR.get())))
-         && !entity.isInWaterRainOrBubble()
+         && !entity.isInWaterOrRain()
          && entity instanceof LivingEntity _entity
          && !_entity.level().isClientSide()) {
          _entity.addEffect(new MobEffectInstance(CompatAccess.effect(ModmindsModMobEffects.EFECTO_QUEMADURA.get()), 20, 1, false, false));

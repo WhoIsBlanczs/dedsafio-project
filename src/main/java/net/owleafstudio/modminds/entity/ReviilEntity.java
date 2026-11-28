@@ -334,7 +334,8 @@ public class ReviilEntity extends PathfinderMob implements GeoEntity, SceneRunne
          : (sized && this.isFury() ? super.getDefaultDimensions(pose).scale(1.3F, 1.05F) : super.getDefaultDimensions(pose).scale(1.25F, 1.05F));
    }
 
-   public float getScale() {
+   @Override
+   public float getAgeScale() {
       return this.entityData == null ? 1.4F : (Float)this.entityData.get(SIZE);
    }
 

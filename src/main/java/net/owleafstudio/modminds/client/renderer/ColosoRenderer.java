@@ -22,7 +22,17 @@ public class ColosoRenderer extends GeoEntityRenderer<ColosoEntity, net.minecraf
 
    
 
-   protected float getDeathMaxRotation(ColosoEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
+   }
+
+   @Override
+   public void adjustModelBonesForRender(com.geckolib.renderer.base.RenderPassInfo<net.minecraft.client.renderer.entity.state.LivingEntityRenderState> info, com.geckolib.renderer.base.BoneSnapshots snapshots) {
+      super.adjustModelBonesForRender(info, snapshots);
+      net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado = info.renderState();
+      snapshots.ifPresent("head_boss", hueso -> {
+         hueso.setRotX(estado.xRot * (float)(Math.PI / 180.0));
+         hueso.setRotY(estado.yRot * (float)(Math.PI / 180.0));
+      });
    }
 }

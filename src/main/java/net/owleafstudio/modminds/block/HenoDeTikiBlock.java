@@ -33,11 +33,11 @@ public class HenoDeTikiBlock extends Block {
       );
    }
 
-   public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+   public boolean propagatesSkylightDown(BlockState state) {
       return true;
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 

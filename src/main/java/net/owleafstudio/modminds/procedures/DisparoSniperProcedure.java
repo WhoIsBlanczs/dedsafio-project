@@ -92,7 +92,7 @@ public class DisparoSniperProcedure {
 
             if (entity instanceof Player _player) {
                _player.getCooldowns()
-                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY).getItem(), 40);
+                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY), 40);
             }
          } else if (entity instanceof Player _player && !_player.level().isClientSide()) {
             net.owleafstudio.modminds.compat.Compat.mensaje(_player, Component.literal("§4Recarga"), true);

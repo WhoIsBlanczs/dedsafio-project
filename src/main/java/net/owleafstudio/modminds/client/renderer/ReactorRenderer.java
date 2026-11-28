@@ -22,7 +22,7 @@ public class ReactorRenderer extends GeoEntityRenderer<ReactorEntity, net.minecr
 
    
 
-   protected float getDeathMaxRotation(ReactorEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

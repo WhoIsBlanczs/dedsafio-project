@@ -25,11 +25,11 @@ public class CristalReforzadoBlock extends Block {
       return adjacentBlockState.getBlock() == this ? true : super.skipRendering(state, adjacentBlockState, side);
    }
 
-   public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+   public boolean propagatesSkylightDown(BlockState state) {
       return true;
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 
@@ -37,7 +37,7 @@ public class CristalReforzadoBlock extends Block {
       return Shapes.empty();
    }
 
-   public void playerDestroy(Level world, Player player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool) {
+   public void playerDestroy(net.minecraft.server.level.ServerLevel world, net.minecraft.server.level.ServerPlayer player, BlockPos pos, BlockState state, BlockEntity blockEntity, ItemStack tool) {
       if (CristalesAlRomperProcedure.execute(world, player)) {
          super.playerDestroy(world, player, pos, state, blockEntity, tool);
       }

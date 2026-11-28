@@ -105,7 +105,7 @@ public class WaterChargeEntidadEntity extends PathfinderMob {
       }
    }
 
-   public boolean ignoreExplosion() {
+   public boolean ignoreExplosion(net.minecraft.world.level.Explosion explosion$) {
       return true;
    }
 

@@ -7,15 +7,9 @@
     "aba"
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_nereida"
-    },
-    "b": {
-      "item": "modminds:placa_de_wildfire"
-    },
-    "c": {
-      "item": "modminds:cristal_de_dilitio"
-    }
+    "a": "modminds:gema_de_nereida",
+    "b": "modminds:placa_de_wildfire",
+    "c": "modminds:cristal_de_dilitio"
   },
   "result": {
     "id": "modminds:motor_de_dilitio",

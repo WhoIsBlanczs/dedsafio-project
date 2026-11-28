@@ -92,8 +92,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       this.fieldSection = field;
       this.bodyH = Math.max(16 + (rows + (field < 0 ? 0 : 1)) * 20, this.layout.size() * 20);
       this.tailH = this.tail();
-      this.imageWidth = 384;
-      this.imageHeight = bodyTop() + this.bodyH + 4 + 66 + this.tailH + 9;
+      net.owleafstudio.modminds.compat.ScreenCompat.setImageSize(this, 384, bodyTop() + this.bodyH + 4 + 66 + this.tailH + 9);
    }
 
    protected abstract Component title();
@@ -215,8 +214,8 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
                this.setSuggestion(this.getValue().isEmpty() ? hint.getString() : null);
             }
 
-            public void moveCursorTo(int pos) {
-               super.moveCursorTo(pos, false);
+            public void moveCursorTo(int pos, boolean select$) {
+               super.moveCursorTo(pos, select$);
                this.setSuggestion(this.getValue().isEmpty() ? hint.getString() : null);
             }
          };
@@ -246,7 +245,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
             this.savedFieldValue = this.numberField.getValue();
          }
 
-         this.init(this.minecraft, this.width, this.height);
+         this.init(this.width, this.height);
       }
    }
 
@@ -256,7 +255,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
             this.savedFieldValue = this.numberField.getValue();
          }
 
-         this.init(this.minecraft, this.width, this.height);
+         this.init(this.width, this.height);
       }
    }
 
@@ -280,12 +279,12 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
 
    protected abstract String panelKey();
 
-   public void resize(Minecraft minecraft, int width, int height) {
+   public void resize(int width, int height) {
       if (this.numberField != null) {
          this.savedFieldValue = this.numberField.getValue();
       }
 
-      super.resize(minecraft, width, height);
+      super.resize(width, height);
    }
 
    public boolean keyPressed(net.minecraft.client.input.KeyEvent evento$) {
@@ -296,7 +295,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          this.minecraft.player.closeContainer();
          return true;
       } else if (this.numberField != null && this.numberField.isFocused()) {
-         return this.numberField.keyPressed(key, modifiers, keyCode);
+         return this.numberField.keyPressed(evento$);
       } else if (key == 266) {
          this.cambiarTab((this.tab - 1 + this.layout.size()) % this.layout.size());
          return true;
@@ -340,7 +339,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          int badge = y + 9 - 2;
          plate(gui, x + 9 - 2, badge - 2, 26, 26, 2, fade(accent, 0.5F));
          plate(gui, x + 9 - 1, badge - 1, 24, 24, 2, -233696743);
-         gui.blit(portrait.texture(), x + 9, badge, 22, 22, 0.0F, 0.0F, portrait.texW(), portrait.texH(), portrait.texW(), portrait.texH());
+         gui.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, portrait.texture(), x + 9, badge, 0.0F, 0.0F, 22, 22, portrait.texW(), portrait.texH(), portrait.texW(), portrait.texH());
          textX = x + 9 + 28;
       }
 
@@ -529,7 +528,8 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          this.enFase = enFase;
       }
 
-      protected void renderWidget(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
+      @Override
+      protected void extractContents(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
          int x = this.getX();
          int y = this.getY();
          int w = this.getWidth();
@@ -554,7 +554,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          if (font.width(this.getMessage()) <= w - 8) {
             gui.text(font, this.getMessage(), x + (w - font.width(this.getMessage())) / 2, y + (h - 9) / 2, color);
          } else {
-            this.renderScrollingString(gui, font, 4, color);
+            net.owleafstudio.modminds.compat.ScreenCompat.scrollingText(gui, font, this.getMessage(), x + 4, y, x + w - 4, y + h, color);
          }
       }
    }
@@ -583,7 +583,8 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          this.count = count;
       }
 
-      protected void renderWidget(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
+      @Override
+      protected void extractContents(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
          int x = this.getX();
          int y = this.getY();
          int w = this.getWidth();
@@ -605,7 +606,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          if (font.width(label) <= right - (x + 7)) {
             gui.text(font, label, x + 7, y + (h - 9) / 2, color);
          } else {
-            renderScrollingString(gui, font, label, x + 7, y, right, y + h, color);
+            net.owleafstudio.modminds.compat.ScreenCompat.scrollingText(gui, font, label, x + 7, y, right, y + h, color);
          }
 
          gui.text(font, howMany, right + 2, y + (h - 9) / 2, this.selected ? -2697504 : -7697767);

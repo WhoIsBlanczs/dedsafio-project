@@ -24,7 +24,7 @@ public class ReactorHydraRenderer extends GeoEntityRenderer<ReactorHydraEntity, 
 
    
 
-   protected float getDeathMaxRotation(ReactorHydraEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

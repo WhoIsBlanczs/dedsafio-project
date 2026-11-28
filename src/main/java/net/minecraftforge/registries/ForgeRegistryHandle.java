@@ -39,7 +39,7 @@ public class ForgeRegistryHandle<T> {
    }
 
    public Holder.Reference<T> getHolderOrThrow(T value) {
-      return this.get(value).orElseThrow(() -> new IllegalStateException("Value is not registered: " + value));
+      return this.getHolder(value).orElseThrow(() -> new IllegalStateException("Value is not registered: " + value));
    }
 
    public Identifier getKey(T value) {

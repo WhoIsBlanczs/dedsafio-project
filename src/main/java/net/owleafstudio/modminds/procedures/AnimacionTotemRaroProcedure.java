@@ -30,7 +30,7 @@ public class AnimacionTotemRaroProcedure {
    private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
       if (entity != null && ModmindsModVariables.getVariables(entity).orElse(new ModmindsModVariables.PlayerVariables()).VariableTotemRaro) {
          if (world.isClientSide()) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_ESPACIAL.get()));
+            Minecraft.getInstance().player.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_ESPACIAL.get()));
          }
 
          ModmindsMod.queueServerWork(10, () -> {

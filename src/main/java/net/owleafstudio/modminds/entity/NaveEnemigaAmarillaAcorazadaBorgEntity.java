@@ -118,7 +118,7 @@ public class NaveEnemigaAmarillaAcorazadaBorgEntity extends Monster implements G
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaAmarillaAcorazadaBorgEntity.this.getTarget();
                   if (NaveEnemigaAmarillaAcorazadaBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaAmarillaAcorazadaBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaAmarillaAcorazadaBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaAmarillaAcorazadaBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaAmarillaAcorazadaBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

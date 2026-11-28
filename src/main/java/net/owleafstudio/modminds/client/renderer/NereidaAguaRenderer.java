@@ -22,4 +22,14 @@ public class NereidaAguaRenderer extends GeoEntityRenderer<NereidaAguaEntity, ne
    }
 
    
+
+   @Override
+   public void adjustModelBonesForRender(com.geckolib.renderer.base.RenderPassInfo<net.minecraft.client.renderer.entity.state.LivingEntityRenderState> info, com.geckolib.renderer.base.BoneSnapshots snapshots) {
+      super.adjustModelBonesForRender(info, snapshots);
+      net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado = info.renderState();
+      snapshots.ifPresent("head", hueso -> {
+         hueso.setRotX(estado.xRot * (float)(Math.PI / 180.0));
+         hueso.setRotY(estado.yRot * (float)(Math.PI / 180.0));
+      });
+   }
 }

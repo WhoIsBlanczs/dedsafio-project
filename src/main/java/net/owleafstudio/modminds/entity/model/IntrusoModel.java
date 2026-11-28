@@ -4,9 +4,7 @@ import net.minecraft.resources.Identifier;
 import net.owleafstudio.modminds.entity.IntrusoEntity;
 import com.geckolib.animation.state.AnimationTest;
 import com.geckolib.cache.model.GeoBone;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.model.GeoModel;
-import com.geckolib.model.data.EntityModelData;
 
 public class IntrusoModel extends GeoModel<IntrusoEntity> {
    private static final com.geckolib.constant.dataticket.DataTicket<Identifier> TEXTURE$ = com.geckolib.constant.dataticket.DataTicket.create("modminds_intrusomodel_texture", Identifier.class);
@@ -29,12 +27,5 @@ public class IntrusoModel extends GeoModel<IntrusoEntity> {
       return estado$.getGeckolibData(TEXTURE$);
    }
 
-   public void setCustomAnimations(IntrusoEntity animatable, long instanceId, AnimationTest<?> animationState) {
-      GeoBone head = this.getAnimationProcessor().getBone("root");
-      if (head != null) {
-         EntityModelData entityData = (EntityModelData)animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-         head.setRotX(entityData.headPitch() * (float) (Math.PI / 180.0));
-         head.setRotY(entityData.netHeadYaw() * (float) (Math.PI / 180.0));
-      }
-   }
+   
 }

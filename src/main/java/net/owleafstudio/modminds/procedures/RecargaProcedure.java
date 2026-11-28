@@ -26,7 +26,7 @@ public class RecargaProcedure {
                int dardosGastados = dardosMaximos - dardosEnArma;
                int dardosARecargar = Math.min(dardosGastados, dardosEnInventario);
                ItemStack dardosAEliminar = new ItemStack((ItemLike)ModmindsModItems.DARDOS_TIKIS.get());
-               _player.getInventory().clearOrCountMatchingItems(p -> p.getItem() == dardosAEliminar.getItem(), dardosARecargar, _player.inventoryMenu.getCraftSlots());
+               net.owleafstudio.modminds.compat.InvCompat.remove(_player.getInventory(), p -> p.getItem() == dardosAEliminar.getItem(), dardosARecargar);
                int nuevaDurabilidad = armaEnMano.getDamageValue() - dardosARecargar;
                armaEnMano.setDamageValue(Math.max(0, nuevaDurabilidad));
                _player.getCooldowns().addCooldown(armaEnMano, 38);

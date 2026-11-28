@@ -22,7 +22,7 @@ public class SapoRenderer extends GeoEntityRenderer<SapoEntity, net.minecraft.cl
 
    
 
-   protected float getDeathMaxRotation(SapoEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

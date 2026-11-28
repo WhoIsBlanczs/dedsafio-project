@@ -2,7 +2,7 @@ package net.owleafstudio.modminds.procedures;
 
 import javax.annotation.Nullable;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Enderman;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -26,7 +26,7 @@ public class SpawnFuncionProcedure {
       if (entity != null
          && ModmindsModVariables.MapVariables.get(world).SpawnEndermans
          && entity.level().dimension() == Level.END
-         && entity instanceof EnderMan) {
+         && entity instanceof Enderman) {
          if (event != null && event.isCancelable()) {
             event.setCanceled(true);
          } else if (event != null && event.hasResult()) {

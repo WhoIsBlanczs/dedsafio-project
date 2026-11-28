@@ -22,7 +22,7 @@ public class HydraEspaciosMobEffect extends MobEffect {
       return new ArrayList<>();
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       HydraEspaciosAlEstarActivoElEfectoProcedure.execute(entity);
       return true;
    }

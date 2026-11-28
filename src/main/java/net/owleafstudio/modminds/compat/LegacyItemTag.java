@@ -15,7 +15,7 @@ public final class LegacyItemTag {
    private static final DeferredRegister<DataComponentType<?>> COMPONENTS = DeferredRegister.create(BuiltInRegistries.DATA_COMPONENT_TYPE, "modminds");
    public static final RegistryObject<DataComponentType<CompoundTag>> TAG = COMPONENTS.register(
       "legacy_tag",
-      () -> DataComponentType.builder()
+      () -> DataComponentType.<CompoundTag>builder()
          .persistent(CompoundTag.CODEC)
          .networkSynchronized(ByteBufCodecs.compoundTagCodec(() -> NbtAccounter.create(2097152L)))
          .build()
@@ -28,114 +28,18 @@ public final class LegacyItemTag {
       DeferredRegister.flushAll();
    }
 
+   /**
+    * CompoundTag es final en 26.3: se devuelve una copia propia del stack, ya guardada en el componente.
+    * Los cambios sobre ella quedan en ese stack y se sincronizan porque el componente es un objeto nuevo.
+    */
    public static CompoundTag of(ItemStack stack) {
       if (stack != null && !stack.isEmpty() && TAG.isPresent()) {
-         CompoundTag stored = (CompoundTag)stack.get(TAG.get());
-         return new LegacyItemTag.WriteThrough(stack, stored == null ? new CompoundTag() : stored);
+         CompoundTag stored = stack.get(TAG.get());
+         CompoundTag own = stored == null ? new CompoundTag() : stored.copy();
+         stack.set(TAG.get(), own);
+         return own;
       } else {
          return new CompoundTag();
-      }
-   }
-
-   private static CompoundTag copyOf(CompoundTag source) {
-      CompoundTag copy = new CompoundTag();
-
-      for (String key : source.getAllKeys()) {
-         Tag value = source.get(key);
-         if (value != null) {
-            copy.put(key, value);
-         }
-      }
-
-      return copy;
-   }
-
-   private static final class WriteThrough extends CompoundTag {
-      private final ItemStack owner;
-
-      private WriteThrough(ItemStack owner, CompoundTag source) {
-         CompoundTag snapshot = LegacyItemTag.copyOf(source);
-
-         for (String key : snapshot.getAllKeys()) {
-            super.put(key, snapshot.get(key));
-         }
-
-         this.owner = owner;
-      }
-
-      private void sync() {
-         this.owner.set(LegacyItemTag.TAG.get(), LegacyItemTag.copyOf(this));
-      }
-
-      public Tag put(String key, Tag value) {
-         super.put(key, value);
-         this.sync();
-         return value;
-      }
-
-      public void putByte(String key, byte value) {
-         super.putByte(key, value);
-         this.sync();
-      }
-
-      public void putShort(String key, short value) {
-         super.putShort(key, value);
-         this.sync();
-      }
-
-      public void putInt(String key, int value) {
-         super.putInt(key, value);
-         this.sync();
-      }
-
-      public void putLong(String key, long value) {
-         super.putLong(key, value);
-         this.sync();
-      }
-
-      public void putUUID(String key, UUID value) {
-         super.putUUID(key, value);
-         this.sync();
-      }
-
-      public void putFloat(String key, float value) {
-         super.putFloat(key, value);
-         this.sync();
-      }
-
-      public void putDouble(String key, double value) {
-         super.putDouble(key, value);
-         this.sync();
-      }
-
-      public void putString(String key, String value) {
-         super.putString(key, value);
-         this.sync();
-      }
-
-      public void putByteArray(String key, byte[] value) {
-         super.putByteArray(key, value);
-         this.sync();
-      }
-
-      public void putIntArray(String key, int[] value) {
-         super.putIntArray(key, value);
-         this.sync();
-      }
-
-      public void putLongArray(String key, long[] value) {
-         super.putLongArray(key, value);
-         this.sync();
-      }
-
-      public void putBoolean(String key, boolean value) {
-         super.putBoolean(key, value);
-         this.sync();
-      }
-
-      public void remove(String key) {
-         super.remove(key);
-         this.sync();
       }
    }
 }

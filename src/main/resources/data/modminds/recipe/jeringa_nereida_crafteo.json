@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_nereida"
-    },
-    "b": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "c": {
-      "item": "modminds:bloque_de_coral_purpura_luminoso"
-    }
+    "a": "modminds:gema_de_nereida",
+    "b": "modminds:cristal_reforzado",
+    "c": "modminds:bloque_de_coral_purpura_luminoso"
   },
   "result": {
     "id": "modminds:jeringa_nereida",

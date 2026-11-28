@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 public interface IForgeMenuType {
    static <T extends AbstractContainerMenu> MenuType<T> create(IForgeMenuType.IContainerFactory<T> factory) {
-      return new ExtendedMenuType(
+      return new ExtendedMenuType<T, byte[]>(
          (windowId, inventory, data) -> factory.create(windowId, inventory, NetworkHooks.asBuffer(data)), ByteBufCodecs.BYTE_ARRAY
       );
    }

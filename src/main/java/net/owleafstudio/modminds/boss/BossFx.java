@@ -47,10 +47,10 @@ import org.joml.Vector3f;
 
 public final class BossFx {
    public static final Vector3f ALERT = new Vector3f(0.95F, 0.07F, 0.07F);
-   public static final DustParticleOptions ALERT_DOT = new DustParticleOptions(ALERT, 1.6F);
-   public static final DustParticleOptions ALERT_CORE = new DustParticleOptions(ALERT, 1.0F);
+   public static final DustParticleOptions ALERT_DOT = new DustParticleOptions(net.owleafstudio.modminds.compat.InvCompat.rgb(ALERT), 1.6F);
+   public static final DustParticleOptions ALERT_CORE = new DustParticleOptions(net.owleafstudio.modminds.compat.InvCompat.rgb(ALERT), 1.0F);
    public static final int ALERT_RGB = 15864338;
-   public static final DustParticleOptions CRUSHED_STONE = new DustParticleOptions(new Vector3f(0.66F, 0.62F, 0.58F), 2.4F);
+   public static final DustParticleOptions CRUSHED_STONE = new DustParticleOptions(net.owleafstudio.modminds.compat.InvCompat.rgb(new Vector3f(0.66F, 0.62F, 0.58F)), 2.4F);
    public static final int CRACK_RGB = 657417;
    public static final BlockParticleOption DUST_PILLAR = new BlockParticleOption(ParticleTypes.DUST_PILLAR, Blocks.END_STONE.defaultBlockState());
    public static final int RAYO_RGB = 11824127;
@@ -119,7 +119,7 @@ public final class BossFx {
    }
 
    public static void colored(ServerLevel world, Vec3 pos, Vector3f rgb, float scale, int count, double spread) {
-      burst(world, pos, new DustParticleOptions(rgb, scale), count, spread, 0.0);
+      burst(world, pos, new DustParticleOptions(net.owleafstudio.modminds.compat.InvCompat.rgb(rgb), scale), count, spread, 0.0);
    }
 
    public static void blastSound(ServerLevel world, Vec3 at, double scale) {
@@ -130,7 +130,7 @@ public final class BossFx {
 
    public static void blast(ServerLevel world, Vec3 at, double radius) {
       int petals = (int)Math.round(3.0 + radius * 1.4);
-      world.sendParticles(ParticleTypes.FLASH, at.x, at.y + 0.4, at.z, 1, 0.0, 0.0, 0.0, 0.0);
+      world.sendParticles(net.owleafstudio.modminds.compat.InvCompat.FLASH, at.x, at.y + 0.4, at.z, 1, 0.0, 0.0, 0.0, 0.0);
       burst(world, at.add(0.0, 0.4, 0.0), (ParticleOptions)ModmindsModParticleTypes.EXPLOSION_LIGHT.get(), petals, radius * 0.2, 0.02);
       burst(world, at.add(0.0, 0.2, 0.0), (ParticleOptions)ModmindsModParticleTypes.EXPLOSION_FIRE.get(), petals, radius * 0.32, 0.05);
       sound(world, at, SoundEvents.DRAGON_FIREBALL_EXPLODE, SoundSource.HOSTILE, 1.8F, 0.55);
@@ -171,7 +171,7 @@ public final class BossFx {
       ModmindsMod.queueServerWork(9, () -> {
          ring(world, at.add(0.0, 0.6, 0.0), radius, 12, (ParticleOptions)ModmindsModParticleTypes.EXPLOSION_LIGHT.get(), 1, 0.6);
          ring(world, at.add(0.0, 0.2, 0.0), radius * 1.15, 18, DUST_PILLAR, 1, 0.6);
-         burst(world, at, ParticleTypes.FLASH, 1, radius * 0.4, 0.0);
+         burst(world, at, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, radius * 0.4, 0.0);
          sound(world, at, SoundEvents.FIREWORK_ROCKET_LARGE_BLAST, SoundSource.HOSTILE, 2.2F, 0.42);
          sound(world, at, (SoundEvent)SoundEvents.GENERIC_EXPLODE.value(), SoundSource.HOSTILE, 1.4F, 0.5);
       });

@@ -7,27 +7,13 @@
     " g "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:redstone"
-    },
-    "b": {
-      "item": "minecraft:white_dye"
-    },
-    "c": {
-      "item": "minecraft:glowstone_dust"
-    },
-    "d": {
-      "item": "minecraft:slime_ball"
-    },
-    "e": {
-      "item": "minecraft:glass_bottle"
-    },
-    "f": {
-      "item": "minecraft:blaze_powder"
-    },
-    "g": {
-      "item": "minecraft:orange_dye"
-    }
+    "a": "minecraft:redstone",
+    "b": "minecraft:white_dye",
+    "c": "minecraft:glowstone_dust",
+    "d": "minecraft:slime_ball",
+    "e": "minecraft:glass_bottle",
+    "f": "minecraft:blaze_powder",
+    "g": "minecraft:orange_dye"
   },
   "result": {
     "id": "modminds:bloqueador",

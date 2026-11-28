@@ -165,7 +165,7 @@ public class ItemStackHandler implements IItemHandler {
       ListTag items = nbt.getListOrEmpty("Items");
 
       for (int i = 0; i < items.size(); i++) {
-         CompoundTag tag = items.getCompound(i);
+         CompoundTag tag = items.getCompoundOrEmpty(i);
          int slot = tag.getIntOr("Slot", 0);
          if (slot >= 0 && slot < this.stacks.size()) {
             Item item = (Item)BuiltInRegistries.ITEM.getValue(Identifier.parse(tag.getStringOr("id", "")));

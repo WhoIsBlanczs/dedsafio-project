@@ -7,27 +7,13 @@
     " g "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:phantom_membrane"
-    },
-    "b": {
-      "item": "minecraft:golden_apple"
-    },
-    "c": {
-      "item": "minecraft:fermented_spider_eye"
-    },
-    "d": {
-      "item": "minecraft:slime_ball"
-    },
-    "e": {
-      "item": "minecraft:echo_shard"
-    },
-    "f": {
-      "item": "minecraft:nether_wart"
-    },
-    "g": {
-      "item": "modminds:pildora_azul_vacia"
-    }
+    "a": "minecraft:phantom_membrane",
+    "b": "minecraft:golden_apple",
+    "c": "minecraft:fermented_spider_eye",
+    "d": "minecraft:slime_ball",
+    "e": "minecraft:echo_shard",
+    "f": "minecraft:nether_wart",
+    "g": "modminds:pildora_azul_vacia"
   },
   "result": {
     "id": "modminds:pildora_del_experimento_110",

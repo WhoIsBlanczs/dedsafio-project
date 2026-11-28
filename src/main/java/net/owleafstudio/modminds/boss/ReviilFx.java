@@ -94,7 +94,7 @@ public final class ReviilFx {
          });
       }
 
-      BossFx.burst(world, at, ParticleTypes.FLASH, 1, 0.0, 0.0);
+      BossFx.burst(world, at, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
    }
 
    public static int warningTicks(int ringIndex) {
@@ -155,7 +155,7 @@ public final class ReviilFx {
       }
 
       ModmindsMod.queueServerWork(drawTicks - 6, () -> {
-         BossFx.burst(world, rueda, ParticleTypes.FLASH, 1, 0.0, 0.0);
+         BossFx.burst(world, rueda, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
          BossFx.burst(world, rueda, ParticleTypes.SONIC_BOOM, 1, 0.2, 0.0);
          BossFx.colored(world, rueda, VOID, 1.8F, 8, 0.8);
          BossFx.sound(world, rueda, (SoundEvent)SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.HOSTILE, 1.6F, 0.7);
@@ -408,7 +408,7 @@ public final class ReviilFx {
       BossFx.alert(world, at, 96.0, "⚠ REVIIL: LLUVIA DEL VACÍO");
       BossFx.sound(world, at, SoundEvents.ELDER_GUARDIAN_CURSE, SoundSource.HOSTILE, 1.8F, 0.6);
       BossFx.colored(world, at, VOID, 2.0F, 12, 1.5);
-      BossFx.burst(world, at.add(0.0, attacker.getBbHeight() * 0.5, 0.0), ParticleTypes.FLASH, 1, 0.0, 0.0);
+      BossFx.burst(world, at.add(0.0, attacker.getBbHeight() * 0.5, 0.0), net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
       BossFx.shake(world, at, 52.0, 20, 0.6);
    }
 
@@ -569,7 +569,7 @@ public final class ReviilFx {
       BossFx.soundLater(world, at, SoundEvents.CHAIN_BREAK, SoundSource.HOSTILE, 2.2F, 0.55, 4);
       BossFx.soundLater(world, at, SoundEvents.CHAIN_BREAK, SoundSource.HOSTILE, 2.2F, 0.45, 9);
       BossFx.shake(world, at, 140.0, 34, 1.1);
-      BossFx.burst(world, at, ParticleTypes.FLASH, 1, 0.0, 0.0);
+      BossFx.burst(world, at, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
       BossFx.burst(world, at, (ParticleOptions)ModmindsModParticleTypes.METEOR_FLASH.get(), 4, 1.2, 0.05);
       BossFx.burst(world, ground.add(0.0, 0.8, 0.0), (ParticleOptions)ModmindsModParticleTypes.PULSE_EM.get(), 3, 1.0, 0.06);
       BossFx.burst(world, ground.add(0.0, 1.6, 0.0), (ParticleOptions)ModmindsModParticleTypes.SIGIL_DESERT.get(), 4, 6.0, 0.02);
@@ -638,7 +638,7 @@ public final class ReviilFx {
       BossFx.sound(world, at, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.HOSTILE, 1.6F, 0.5);
       BossFx.blastSound(world, ground, 1.1);
       BossFx.shake(world, at, 180.0, 46, 1.6);
-      BossFx.burst(world, at, ParticleTypes.FLASH, 1, 0.0, 0.0);
+      BossFx.burst(world, at, net.owleafstudio.modminds.compat.InvCompat.FLASH, 1, 0.0, 0.0);
       BossFx.burst(world, ground.add(0.0, 1.4, 0.0), (ParticleOptions)ModmindsModParticleTypes.METEOR_FLASH.get(), 5, width, 0.08);
       BossFx.burst(world, ground.add(0.0, 0.9, 0.0), (ParticleOptions)ModmindsModParticleTypes.PULSE_EM.get(), 4, width * 0.6, 0.08);
       BossFx.shockwave(world, ground, width * 4.0, 26);

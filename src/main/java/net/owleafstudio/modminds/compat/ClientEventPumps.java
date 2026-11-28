@@ -16,13 +16,11 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.EndTick;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents.StartTick;
 import net.fabricmc.fabric.api.client.rendering.v1.ArmorRenderer;
-import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,11 +32,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterDimensionSpecialEffectsEvent;
@@ -105,29 +102,10 @@ public final class ClientEventPumps {
          IClientItemExtensions extensions = collectInitializeClient(item, IClientItemExtensions.class);
          if (extensions != null) {
             IClientItemExtensions.EXTENSIONS.put(item, extensions);
-            BlockEntityWithoutLevelRenderer customRenderer = extensions.getCustomRenderer();
-            if (customRenderer != null) {
-               BuiltinItemRendererRegistry.INSTANCE.register(item, (stack, mode, poseStack, buffers, light, overlay) -> {
-                  poseStack.pushPose();
-                  applyHandTransform(extensions, mode, stack, poseStack);
-                  customRenderer.renderByItem(stack, mode, poseStack, buffers, light, overlay);
-                  poseStack.popPose();
-               });
-            }
-
-            if (item instanceof ArmorItem && overridesArmorModel(extensions.getClass())) {
+            if (item instanceof LegacyArmorItem && overridesArmorModel(extensions.getClass())) {
                registerArmorRenderer(item, extensions);
             }
          }
-      }
-   }
-
-   private static void applyHandTransform(IClientItemExtensions extensions, ItemDisplayContext mode, ItemStack stack, PoseStack poseStack) {
-      boolean leftHand = mode == ItemDisplayContext.FIRST_PERSON_LEFT_HAND || mode == ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
-      boolean rightHand = mode == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND || mode == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND;
-      LocalPlayer player = Minecraft.getInstance().player;
-      if (player != null && (leftHand || rightHand)) {
-         extensions.applyForgeHandTransform(poseStack, player, leftHand ? player.getMainArm().getOpposite() : player.getMainArm(), stack, 0.0F, 0.0F, 0.0F);
       }
    }
 
@@ -142,23 +120,43 @@ public final class ClientEventPumps {
       });
    }
 
+   private static final Map<Item, Map<EquipmentSlot, HumanoidModel<HumanoidRenderState>>> ARMOR_MODELS = new ConcurrentHashMap<>();
+
+   @SuppressWarnings({"unchecked", "rawtypes"})
    private static void registerArmorRenderer(Item item, IClientItemExtensions extensions) {
-      ArmorRenderer.register((poseStack, buffers, stack, entity, slot, light, contextModel) -> {
-         Identifier texture = armorTexture(item, stack, entity, slot);
+      ArmorRenderer.register((poseStack, collector, stack, state, slot, light, contextModel) -> {
+         Identifier texture = armorTexture(item, stack, slot);
          if (texture != null) {
-            HumanoidModel armorModel = extensions.getHumanoidArmorModel(entity, stack, slot, contextModel);
+            HumanoidModel<HumanoidRenderState> armorModel = ARMOR_MODELS.computeIfAbsent(item, k -> new ConcurrentHashMap<>())
+               .computeIfAbsent(slot, s -> (HumanoidModel)extensions.getHumanoidArmorModel(null, stack, s, contextModel));
             if (armorModel != null) {
-               contextModel.copyPropertiesTo(armorModel);
+               copyPose(contextModel.head, armorModel.head);
+               copyPose(contextModel.hat, armorModel.hat);
+               copyPose(contextModel.body, armorModel.body);
+               copyPose(contextModel.rightArm, armorModel.rightArm);
+               copyPose(contextModel.leftArm, armorModel.leftArm);
+               copyPose(contextModel.rightLeg, armorModel.rightLeg);
+               copyPose(contextModel.leftLeg, armorModel.leftLeg);
                setPartVisibility(armorModel, slot);
-               VertexConsumer buffer = ItemRenderer.getArmorFoilBuffer(buffers, net.minecraft.client.renderer.rendertype.RenderTypes.armorCutoutNoCull(texture), stack.hasFoil());
-               armorModel.renderToBuffer(poseStack, buffer, light, OverlayTexture.NO_OVERLAY, -1);
+               collector.submitModel(armorModel, state, poseStack, net.minecraft.client.renderer.rendertype.RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null, 0);
             }
          }
       }, new ItemLike[]{item});
    }
 
-   private static void setPartVisibility(HumanoidModel model, EquipmentSlot slot) {
-      model.setAllVisible(false);
+   private static void copyPose(net.minecraft.client.model.geom.ModelPart from, net.minecraft.client.model.geom.ModelPart to) {
+      to.loadPose(from.storePose());
+   }
+
+   private static void setPartVisibility(HumanoidModel<?> model, EquipmentSlot slot) {
+      model.root().getAllParts().forEach(p -> p.visible = true);
+      model.head.visible = false;
+      model.hat.visible = false;
+      model.body.visible = false;
+      model.rightArm.visible = false;
+      model.leftArm.visible = false;
+      model.rightLeg.visible = false;
+      model.leftLeg.visible = false;
       switch (slot) {
          case HEAD:
             model.head.visible = true;
@@ -177,10 +175,12 @@ public final class ClientEventPumps {
          case FEET:
             model.rightLeg.visible = true;
             model.leftLeg.visible = true;
+            break;
+         default:
       }
    }
 
-   private static Identifier armorTexture(Item item, ItemStack stack, LivingEntity entity, EquipmentSlot slot) {
+   private static Identifier armorTexture(Item item, ItemStack stack, EquipmentSlot slot) {
       Optional<Method> legacy = ARMOR_TEXTURE.computeIfAbsent(item, key -> {
          try {
             return Optional.of(key.getClass().getMethod("getArmorTexture", ItemStack.class, Entity.class, EquipmentSlot.class, String.class));
@@ -190,26 +190,14 @@ public final class ClientEventPumps {
       });
       if (legacy.isPresent()) {
          try {
-            if (legacy.get().invoke(item, stack, entity, slot, null) instanceof String path) {
+            if (legacy.get().invoke(item, stack, null, slot, null) instanceof String path) {
                return Identifier.parse(path);
             }
          } catch (Throwable var9) {
             LOGGER.warn("{}.getArmorTexture failed", item.getClass().getSimpleName(), var9);
          }
       }
-
-      if (item instanceof ArmorItem armorItem) {
-         try {
-            ArmorMaterial material = (ArmorMaterial)armorItem.getMaterial().value();
-            List<ArmorMaterial.Layer> layers = material.layers();
-            ArmorMaterial.Layer layer = layers.get(slot == EquipmentSlot.LEGS && layers.size() > 1 ? 1 : 0);
-            return layer.texture(layer.dyeable());
-         } catch (Throwable var10) {
-            return null;
-         }
-      } else {
-         return null;
-      }
+      return null;
    }
 
    private static void installMobEffectExtensions() {
@@ -284,7 +272,7 @@ public final class ClientEventPumps {
    private static void installHudOverlays() {
       net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry.addLast(net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "hud_79039_12496"), (guiGraphics, deltaTracker) -> {
          Minecraft client = Minecraft.getInstance();
-         if (client.level != null && client.options != null && !client.options.hideGui) {
+         if (client.level != null && client.options != null && !client.gui.hud.isHidden()) {
             try {
                ForgeEventBus.postToBoth(new RenderGuiEvent.Pre(guiGraphics));
             } catch (Throwable var4) {

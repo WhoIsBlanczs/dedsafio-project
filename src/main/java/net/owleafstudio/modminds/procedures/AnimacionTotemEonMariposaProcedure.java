@@ -30,7 +30,7 @@ public class AnimacionTotemEonMariposaProcedure {
    private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
       if (entity != null && ModmindsModVariables.getVariables(entity).orElse(new ModmindsModVariables.PlayerVariables()).VariableTotemEonMariposa) {
          if (world.isClientSide()) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_EON_MARIPOSA.get()));
+            Minecraft.getInstance().player.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_EON_MARIPOSA.get()));
          }
 
          ModmindsMod.queueServerWork(10, () -> {

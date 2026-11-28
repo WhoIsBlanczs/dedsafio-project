@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "modminds:item/spawn_egg_plantilla",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": -13421773
+      },
+      {
+        "type": "minecraft:constant",
+        "value": -3407719
+      }
+    ]
+  }
+}

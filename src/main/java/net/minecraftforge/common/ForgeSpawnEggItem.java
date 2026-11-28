@@ -8,7 +8,15 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ForgeSpawnEggItem extends SpawnEggItem {
    public ForgeSpawnEggItem(RegistryObject<? extends EntityType<?>> type, int primaryColor, int secondaryColor, Item.Properties properties) {
-      super(resolve(type), primaryColor, secondaryColor, properties);
+      super(properties.spawnEgg(resolve(type)));
+      this.primaryColor = primaryColor;
+      this.secondaryColor = secondaryColor;
+   }
+
+   public final int primaryColor;
+   public final int secondaryColor;
+
+   private static void unused() {
    }
 
    private static EntityType<? extends Mob> resolve(RegistryObject<? extends EntityType<?>> type) {

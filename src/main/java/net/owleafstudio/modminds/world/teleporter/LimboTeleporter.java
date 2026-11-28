@@ -55,7 +55,7 @@ public class LimboTeleporter implements ITeleporter {
       event.register(ForgeRegistries.Keys.POI_TYPES, registerHelper -> {
          PoiType poiType = new PoiType(ImmutableSet.copyOf(ModmindsModBlocks.LIMBO_PORTAL.get().getStateDefinition().getPossibleStates()), 0, 1);
          registerHelper.register("limbo_portal", poiType);
-         poi = (Holder<PoiType>)ForgeRegistries.POI_TYPES.get(poiType).get();
+         poi = (Holder<PoiType>)ForgeRegistries.POI_TYPES.getHolder(poiType).get();
       });
    }
 

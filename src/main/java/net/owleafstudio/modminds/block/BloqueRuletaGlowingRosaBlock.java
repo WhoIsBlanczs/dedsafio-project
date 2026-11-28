@@ -12,7 +12,7 @@ public class BloqueRuletaGlowingRosaBlock extends Block {
       super(BlockBehaviour.Properties.of().sound(SoundType.SAND).strength(1.0F, 10.0F).lightLevel(s -> 15));
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 15;
    }
 }

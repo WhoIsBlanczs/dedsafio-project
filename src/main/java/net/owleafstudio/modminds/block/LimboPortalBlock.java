@@ -55,7 +55,7 @@ public class LimboPortalBlock extends NetherPortalBlock {
       Direction.Axis direction$axis = p_54929_.getAxis();
       Direction.Axis direction$axis1 = (Direction.Axis)p_54928_.getValue(AXIS);
       boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
-      return !flag && !p_54930_.is(this) && !new LimboPortalShape(p_54931_, p_54932_, direction$axis1).isComplete()
+      return !flag && !p_54930_.is(this) && !(p_54931_ instanceof net.minecraft.world.level.LevelAccessor _la && new LimboPortalShape(_la, p_54932_, direction$axis1).isComplete())
          ? Blocks.AIR.defaultBlockState()
          : super.updateShape(p_54928_, p_54931_, tick$, p_54932_, p_54929_, p_54933_, p_54930_, rnd$);
    }

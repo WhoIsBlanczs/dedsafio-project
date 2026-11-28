@@ -87,7 +87,7 @@ public class ModmindsModKeyMappings {
       }
    };
    public static final KeyMapping PERFORADOR_DEL_VACIO_HOTKEY_RECARGAR = new KeyMapping(
-      "key.modminds.perforador_del_vacio_hotkey_recargar", 82, "key.categories.misc"
+      "key.modminds.perforador_del_vacio_hotkey_recargar", 82, KeyMapping.Category.MISC
    ) {
       private boolean isDownOld = false;
 
@@ -102,7 +102,7 @@ public class ModmindsModKeyMappings {
       }
    };
    public static final KeyMapping ATOMIZADOR_DE_ASTROS_HATKEY_RECARGAR = new KeyMapping(
-      "key.modminds.atomizador_de_astros_hatkey_recargar", 82, "key.categories.misc"
+      "key.modminds.atomizador_de_astros_hatkey_recargar", 82, KeyMapping.Category.MISC
    ) {
       private boolean isDownOld = false;
 

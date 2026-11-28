@@ -68,7 +68,7 @@ public class ReviilEncogerseProcedure {
                ModmindsMod.queueServerWork(40, () -> {
                   if (reviil.isAlive()) {
                      ReviilFx.giantLeaveLand(level, reviil);
-                     if (holdsSomeone) {
+                     if (holdsSomeonex) {
                         abreLaMano(level, reviil);
                      }
                   }

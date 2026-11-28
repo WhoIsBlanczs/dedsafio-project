@@ -48,10 +48,11 @@ public class TitanMuroProcedure {
          BossFx.sound(serverLevel, BossFx.centre(titan), SoundEvents.GHAST_WARN, SoundSource.HOSTILE, 2.0F, 0.6);
          BossFx.sound(serverLevel, origin, SoundEvents.BLAZE_AMBIENT, SoundSource.HOSTILE, 1.6F, 0.5);
 
-         for (byte burned = 0; burned < 34; burned += 4) {
-            ModmindsMod.queueServerWork(burned, () -> {
+         for (int paso = 0; paso < 34; paso += 4) {
+            final int t = paso;
+            ModmindsMod.queueServerWork(t, () -> {
                if (titan.isAlive()) {
-                  markFrame(serverLevel, origin, forward, lateral, open, burned);
+                  markFrame(serverLevel, origin, forward, lateral, open, t);
                }
             });
          }

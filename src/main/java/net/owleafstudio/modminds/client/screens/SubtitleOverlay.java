@@ -63,12 +63,12 @@ public class SubtitleOverlay {
                   for (int dx = -1; dx <= 1; dx++) {
                      for (int dy = -1; dy <= 1; dy++) {
                         if (dx != 0 || dy != 0) {
-                           gui.drawString(mc.font, line, x + dx, y + dy, -16777216, false);
+                           gui.text(mc.font, line, x + dx, y + dy, -16777216, false);
                         }
                      }
                   }
 
-                  gui.drawString(mc.font, line, x, y, -1, false);
+                  gui.text(mc.font, line, x, y, -1, false);
                   y += 11;
                }
             }

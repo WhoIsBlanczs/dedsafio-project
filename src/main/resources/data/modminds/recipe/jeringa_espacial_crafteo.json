@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_dilitio"
-    },
-    "b": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "c": {
-      "item": "modminds:puerta_borg_chip_roja"
-    }
+    "a": "modminds:gema_de_dilitio",
+    "b": "modminds:cristal_reforzado",
+    "c": "modminds:puerta_borg_chip_roja"
   },
   "result": {
     "id": "modminds:jeringa_espacial",

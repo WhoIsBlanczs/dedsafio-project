@@ -118,7 +118,7 @@ public final class CompatAccess {
    }
 
    public static boolean canChangeDimensions(Entity entity) {
-      return entity != null && entity.canChangeDimensions(entity.level(), entity.level());
+      return entity != null && entity.canTeleport(entity.level(), entity.level());
    }
 
    public static EquipmentSlot slot(InteractionHand hand) {

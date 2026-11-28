@@ -9,16 +9,16 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.Identifier;
 
 public final class PersistShim {
-   private static final AttachmentType<CompoundTag> ENTITY = AttachmentRegistry.builder()
+   private static final AttachmentType<CompoundTag> ENTITY = AttachmentRegistry.<CompoundTag>builder()
       .persistent(CompoundTag.CODEC)
       .copyOnDeath()
       .initializer(CompoundTag::new)
       .buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "forge_persistent_data"));
-   private static final AttachmentType<CompoundTag> LEVEL = AttachmentRegistry.builder()
+   private static final AttachmentType<CompoundTag> LEVEL = AttachmentRegistry.<CompoundTag>builder()
       .persistent(CompoundTag.CODEC)
       .initializer(CompoundTag::new)
       .buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "forge_level_persistent_data"));
-   private static final AttachmentType<CompoundTag> BLOCK_ENTITY = AttachmentRegistry.builder()
+   private static final AttachmentType<CompoundTag> BLOCK_ENTITY = AttachmentRegistry.<CompoundTag>builder()
       .persistent(CompoundTag.CODEC)
       .initializer(CompoundTag::new)
       .buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "forge_blockentity_persistent_data"));

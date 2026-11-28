@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:pepita_de_acero_negro_aurero"
-    }
+    "a": "modminds:pepita_de_acero_negro_aurero"
   },
   "result": {
     "id": "modminds:lamina_reforzada_de_acero_negro_aureo",

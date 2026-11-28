@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:pepita_de_dilitio"
-    }
+    "a": "modminds:pepita_de_dilitio"
   },
   "result": {
     "id": "modminds:gema_de_dilitio",

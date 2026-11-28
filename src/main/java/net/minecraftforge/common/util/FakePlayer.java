@@ -9,7 +9,13 @@ import net.minecraft.core.BlockPos;
 
 public class FakePlayer extends Player {
    public FakePlayer(Level level, BlockPos pos, GameProfile profile) {
-      super(level, pos, 0.0F, profile);
+      super(level, profile);
+      this.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+   }
+
+   @Override
+   public net.minecraft.world.level.GameType gameMode() {
+      return net.minecraft.world.level.GameType.SURVIVAL;
    }
 
    public boolean isCreative() {

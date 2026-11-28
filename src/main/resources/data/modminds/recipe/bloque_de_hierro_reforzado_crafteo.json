@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    }
+    "a": "modminds:lingote_de_hierro_reforzado"
   },
   "result": {
     "id": "modminds:bloque_de_hierro_reforzado",

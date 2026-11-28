@@ -10,31 +10,12 @@ import net.minecraft.world.item.Item;
 import net.owleafstudio.modminds.init.ModmindsModItems;
 
 public class EspadaFantasMalItem extends Item {
+   private static final net.minecraft.world.item.ToolMaterial TIER = new net.minecraft.world.item.ToolMaterial(
+      BlockTags.INCORRECT_FOR_IRON_TOOL, 250, 4.0F, 4.0F, 2,
+      TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "repairs/espada_fantasmal"))
+   );
+
    public EspadaFantasMalItem() {
-      super(new Tier() {
-         public int getUses() {
-            return 250;
-         }
-
-         public float getSpeed() {
-            return 4.0F;
-         }
-
-         public float getAttackDamageBonus() {
-            return 4.0F;
-         }
-
-         public TagKey<Block> getIncorrectBlocksForDrops() {
-            return BlockTags.INCORRECT_FOR_IRON_TOOL;
-         }
-
-         public int getEnchantmentValue() {
-            return 2;
-         }
-
-         public Ingredient getRepairIngredient() {
-            return Ingredient.of((ItemLike)ModmindsModItems.LINGOTE_DE_HIERRO_REFORZADO.get());
-         }
-      }, new Item.Properties());
+      super(new Item.Properties().sword(TIER, -TIER.attackDamageBonus(), 0.0F));
    }
 }

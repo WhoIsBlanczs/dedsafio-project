@@ -25,11 +25,11 @@ public class PisoEscenarioDegradadoBlock extends Block {
       this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH));
    }
 
-   public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+   public boolean propagatesSkylightDown(BlockState state) {
       return true;
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 

@@ -22,7 +22,7 @@ public class NaveEnemigaCasitaBorgRenderer extends GeoEntityRenderer<NaveEnemiga
 
    
 
-   protected float getDeathMaxRotation(NaveEnemigaCasitaBorgEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

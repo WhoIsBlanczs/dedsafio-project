@@ -21,7 +21,7 @@ public class EscalerasDeLadrilloPulidoDeMansionBlock extends StairBlock {
       return false;
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 }

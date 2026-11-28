@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:diamond_block"
-    },
-    "b": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "c": {
-      "item": "minecraft:music_disc_5"
-    }
+    "a": "minecraft:diamond_block",
+    "b": "modminds:cristal_reforzado",
+    "c": "minecraft:music_disc_5"
   },
   "result": {
     "id": "modminds:jeringa_overworld",

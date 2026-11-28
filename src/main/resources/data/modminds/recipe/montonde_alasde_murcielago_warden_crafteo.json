@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:ala_de_murcielago_warden"
-    }
+    "a": "modminds:ala_de_murcielago_warden"
   },
   "result": {
     "id": "modminds:monton_de_alas_de_murcielago_warden",

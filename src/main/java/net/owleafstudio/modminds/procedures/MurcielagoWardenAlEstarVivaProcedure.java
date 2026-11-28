@@ -91,7 +91,7 @@ public class MurcielagoWardenAlEstarVivaProcedure {
             float r = (startColor.getRed() + ratio * (endColor.getRed() - startColor.getRed())) / 255.0F;
             float g = (startColor.getGreen() + ratio * (endColor.getGreen() - startColor.getGreen())) / 255.0F;
             float b = (startColor.getBlue() + ratio * (endColor.getBlue() - startColor.getBlue())) / 255.0F;
-            level.addParticle(new DustColorTransitionOptions(new Vector3f(r, g, b), new Vector3f(0.0F, 0.0F, 0.0F), 1.0F), px, py, pz, 0.0, 0.0, 0.0);
+            level.addParticle(new DustColorTransitionOptions(net.owleafstudio.modminds.compat.InvCompat.rgb(r, g, b), net.owleafstudio.modminds.compat.InvCompat.rgb(0.0F, 0.0F, 0.0F), 1.0F), px, py, pz, 0.0, 0.0, 0.0);
             if (!hitPlayer && target.getBoundingBox().contains(px, py, pz)) {
                hitPlayer = true;
             }

@@ -10,7 +10,7 @@ public class ProteccionSolarMobEffect extends MobEffect {
       super(MobEffectCategory.NEUTRAL, -39424);
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       ProteccionSolarAlEstarActivoElEfectoProcedure.execute(entity);
       return true;
    }

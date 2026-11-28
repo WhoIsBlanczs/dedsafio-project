@@ -87,7 +87,7 @@ public final class ClientTickPump {
    private static void tickLivingEntities(Minecraft client) {
       ClientLevel living = client.level;
       if (living instanceof ClientLevel) {
-         ArrayList var6 = new ArrayList();
+         ArrayList<LivingEntity> var6 = new ArrayList<>();
 
          for (Entity entity : living.entitiesForRendering()) {
             if (entity instanceof LivingEntity livingEntity && !livingEntity.isRemoved()) {

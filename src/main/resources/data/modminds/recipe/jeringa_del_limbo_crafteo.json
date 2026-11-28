@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_almas"
-    },
-    "b": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "c": {
-      "item": "modminds:hueso_de_la_grim_reaper"
-    }
+    "a": "modminds:gema_de_almas",
+    "b": "modminds:cristal_reforzado",
+    "c": "modminds:hueso_de_la_grim_reaper"
   },
   "result": {
     "id": "modminds:jeringa_del_limbo",

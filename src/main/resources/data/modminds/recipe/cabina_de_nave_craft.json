@@ -7,24 +7,12 @@
     "efe"
   ],
   "key": {
-    "a": {
-      "item": "modminds:bloque_de_hierro_reforzado"
-    },
-    "b": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "c": {
-      "item": "modminds:motor_de_dilitio"
-    },
-    "d": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "e": {
-      "item": "modminds:placa_de_wildfire"
-    },
-    "f": {
-      "item": "modminds:bloque_de_nereida"
-    }
+    "a": "modminds:bloque_de_hierro_reforzado",
+    "b": "minecraft:netherite_ingot",
+    "c": "modminds:motor_de_dilitio",
+    "d": "modminds:cristal_reforzado",
+    "e": "modminds:placa_de_wildfire",
+    "f": "modminds:bloque_de_nereida"
   },
   "result": {
     "id": "modminds:cabina_de_nave",

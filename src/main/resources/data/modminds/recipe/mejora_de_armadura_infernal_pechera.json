@@ -1,14 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": {
-    "item": "modminds:plantilla_de_mejora_de_dilitio"
-  },
-  "base": {
-    "item": "modminds:armadura_infernal_chestplate"
-  },
-  "addition": {
-    "item": "modminds:motor_de_dilitio"
-  },
+  "template": "modminds:plantilla_de_mejora_de_dilitio",
+  "base": "modminds:armadura_infernal_chestplate",
+  "addition": "modminds:motor_de_dilitio",
   "result": {
     "id": "modminds:armaduras_naoneim_chestplate"
   }

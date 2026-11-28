@@ -7,9 +7,7 @@
     "a  "
   ],
   "key": {
-    "a": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    }
+    "a": "modminds:lingote_de_hierro_reforzado"
   },
   "result": {
     "id": "modminds:ala_derecha_de_nave",

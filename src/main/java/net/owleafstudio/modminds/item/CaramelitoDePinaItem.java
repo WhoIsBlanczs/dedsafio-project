@@ -16,7 +16,8 @@ public class CaramelitoDePinaItem extends Item {
       );
    }
 
-   public void releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
+   public boolean releaseUsing(ItemStack itemstack, Level world, LivingEntity entity, int time) {
       ICaramelitoDeFresaAlJugadorDejarDeUsarloProcedure.execute(entity);
+      return false;
    }
 }

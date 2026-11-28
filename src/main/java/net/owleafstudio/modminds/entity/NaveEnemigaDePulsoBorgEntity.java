@@ -116,7 +116,7 @@ public class NaveEnemigaDePulsoBorgEntity extends Monster implements GeoEntity {
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaDePulsoBorgEntity.this.getTarget();
                   if (NaveEnemigaDePulsoBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaDePulsoBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaDePulsoBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaDePulsoBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaDePulsoBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

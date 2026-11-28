@@ -12,7 +12,7 @@ public class LadrillosDeAdobeAntiguosBlock extends Block {
       super(BlockBehaviour.Properties.of().sound(SoundType.MUD_BRICKS).strength(1.0F, 10.0F));
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 15;
    }
 }

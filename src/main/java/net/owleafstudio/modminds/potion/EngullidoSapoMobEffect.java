@@ -22,11 +22,11 @@ public class EngullidoSapoMobEffect extends MobEffect {
       return cures;
    }
 
-   public void addAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+   public void onEffectStarted(LivingEntity entity, int amplifier) {
       EngullidoSapoCuandoElEfectoEmpiezaAAplicarseProcedure.execute(entity);
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       EngullidoSapoAlEstarActivoProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
       return true;
    }

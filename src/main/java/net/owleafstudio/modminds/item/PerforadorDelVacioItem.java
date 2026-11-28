@@ -12,7 +12,6 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.Level;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.owleafstudio.modminds.item.renderer.PerforadorDelVacioItemRenderer;
@@ -96,7 +95,7 @@ public class PerforadorDelVacioItem extends Item implements GeoItem {
 
    public InteractionResult use(Level world, Player entity, InteractionHand hand) {
       InteractionResult ar = super.use(world, entity, hand);
-      ItemStack itemstack = (ItemStack)ar.getObject();
+      ItemStack itemstack = entity.getItemInHand(hand);
       double x = entity.getX();
       double y = entity.getY();
       double z = entity.getZ();

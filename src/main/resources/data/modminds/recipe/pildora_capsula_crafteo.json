@@ -7,12 +7,8 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "minecraft:quartz"
-    },
-    "b": {
-      "item": "minecraft:glass"
-    }
+    "a": "minecraft:quartz",
+    "b": "minecraft:glass"
   },
   "result": {
     "id": "modminds:pildora_azul_vacia",

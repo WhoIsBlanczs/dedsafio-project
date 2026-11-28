@@ -7,18 +7,10 @@
     "bbb"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:netherite_ingot"
-    },
-    "b": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    },
-    "c": {
-      "item": "minecraft:diamond"
-    },
-    "d": {
-      "item": "modminds:vara_de_dilitio"
-    }
+    "a": "minecraft:netherite_ingot",
+    "b": "modminds:lingote_de_hierro_reforzado",
+    "c": "minecraft:diamond",
+    "d": "modminds:vara_de_dilitio"
   },
   "result": {
     "id": "modminds:propulsor_de_dilitio_derecho",

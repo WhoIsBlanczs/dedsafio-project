@@ -426,15 +426,15 @@ public class ModmindsModItems {
    public static final RegistryObject<Item> ESCALERAS_DE_TABLONES_ROSAS_ANTIGUOS = block(ModmindsModBlocks.ESCALERAS_DE_TABLONES_ROSAS_ANTIGUOS);
    public static final RegistryObject<Item> BLOQUE_NEGRO_DE_RING = block(ModmindsModBlocks.BLOQUE_NEGRO_DE_RING);
    public static final RegistryObject<Item> BLOQUE_ROJO_DE_RING = block(ModmindsModBlocks.BLOQUE_ROJO_DE_RING);
-   public static final RegistryObject<Item> DEDITA_AMARILLA_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_ROJO_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_MORADA_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_ROSA_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_CELESTE_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_NARANJA_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_AZUL_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_LIMA_OWLEAF;
-   public static final RegistryObject<Item> DEDITA_VERDE_OWLEAF;
+   public static final RegistryObject<Item> DEDITA_AMARILLA_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_ROJO_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_MORADA_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_ROSA_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_CELESTE_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_NARANJA_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_AZUL_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_LIMA_OWLEAF = null;
+   public static final RegistryObject<Item> DEDITA_VERDE_OWLEAF = null;
    public static final RegistryObject<Item> MONTON_DE_ALAS_DE_MURCIELAGO_WARDEN = REGISTRY.register(
       "monton_de_alas_de_murcielago_warden", () -> new MontonDeAlasDeMurcielagoWardenItem()
    );

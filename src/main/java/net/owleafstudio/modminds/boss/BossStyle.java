@@ -47,7 +47,7 @@ public enum BossStyle {
       new Vector3f(0.55F, 0.85F, 0.75F),
       ParticleTypes.SNOWFLAKE,
       ParticleTypes.CLOUD,
-      SoundEvents.CAT_HISS,
+      SoundEvents.CAT_SOUNDS.get(net.minecraft.world.entity.animal.feline.CatSoundVariants.SoundSet.CLASSIC).adultSounds().hissSound().value(),
       SoundEvents.PHANTOM_HURT,
       SoundEvents.PHANTOM_DEATH,
       SoundEvents.ELDER_GUARDIAN_CURSE,

@@ -7,15 +7,9 @@
     " a "
   ],
   "key": {
-    "a": {
-      "item": "modminds:cuerno_de_infernal_bull"
-    },
-    "b": {
-      "item": "modminds:lingote_de_acero_negro_aureo"
-    },
-    "c": {
-      "item": "minecraft:netherite_leggings"
-    }
+    "a": "modminds:cuerno_de_infernal_bull",
+    "b": "modminds:lingote_de_acero_negro_aureo",
+    "c": "minecraft:netherite_leggings"
   },
   "result": {
     "id": "modminds:armadura_infernal_leggings",

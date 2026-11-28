@@ -30,7 +30,7 @@ public class AnimacionTotemeonProcedure {
    private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
       if (entity != null && ModmindsModVariables.getVariables(entity).orElse(new ModmindsModVariables.PlayerVariables()).VariableTotemEon) {
          if (world.isClientSide()) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEMEON.get()));
+            Minecraft.getInstance().player.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEMEON.get()));
          }
 
          ModmindsMod.queueServerWork(10, () -> {

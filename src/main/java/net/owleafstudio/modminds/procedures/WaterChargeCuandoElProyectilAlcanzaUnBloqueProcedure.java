@@ -17,7 +17,7 @@ public class WaterChargeCuandoElProyectilAlcanzaUnBloqueProcedure {
    public static void execute(LevelAccessor world, double x, double y, double z) {
       if (world instanceof ServerLevel _level) {
          Vec3 at = new Vec3(x, y, z);
-         if (_level.getEntitiesOfClass(AreaEffectCloud.class, new AABB(at, at).inflate(32.0), e -> !e.isRemoved() && e.getTags().contains("harming_potion"))
+         if (_level.getEntitiesOfClass(AreaEffectCloud.class, new AABB(at, at).inflate(32.0), e -> !e.isRemoved() && e.entityTags().contains("harming_potion"))
                .size()
             >= 3) {
             return;

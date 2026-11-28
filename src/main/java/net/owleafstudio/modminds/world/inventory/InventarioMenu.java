@@ -307,7 +307,7 @@ public class InventarioMenu extends AbstractContainerMenu implements Supplier<Ma
             }
          } else {
             for (int j = 0; j < this.internal.getSlots(); j++) {
-               playerIn.drop(this.internal.extractItem(j, this.internal.getStackInSlot(j).getCount(), false), false);
+               playerIn.drop(this.internal.extractItem(j, this.internal.getStackInSlot(j).getCount(), false), false, net.minecraft.util.Prediction.SERVER_ONLY);
             }
          }
       }

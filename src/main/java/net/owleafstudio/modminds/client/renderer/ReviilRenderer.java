@@ -28,40 +28,41 @@ public class ReviilRenderer extends GeoEntityRenderer<ReviilEntity, net.minecraf
       return net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucent(texture);
    }
 
-   public void preRender(
-      PoseStack poseStack,
-      ReviilEntity entity,
-      BakedGeoModel model,
-      MultiBufferSource bufferSource,
-      VertexConsumer buffer,
-      boolean isReRender,
-      float partialTick,
-      int packedLight,
-      int packedOverlay,
-      int color
-   ) {
-      float scale = entity.getScale();
-      this.scaleHeight = scale;
-      this.scaleWidth = scale;
-      carryWheelOnBack(entity, model);
-      super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
+   private static final com.geckolib.constant.dataticket.DataTicket<Float> ESCALA = com.geckolib.constant.dataticket.DataTicket.create("modminds_reviil_escala", Float.class);
+   private static final com.geckolib.constant.dataticket.DataTicket<Boolean> FURIA = com.geckolib.constant.dataticket.DataTicket.create("modminds_reviil_furia", Boolean.class);
+
+   @Override
+   public void captureDefaultRenderState(ReviilEntity entity, Void relacionado$, net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado$, float partialTick) {
+      super.captureDefaultRenderState(entity, relacionado$, estado$, partialTick);
+      com.geckolib.renderer.base.GeoRenderState geo = (com.geckolib.renderer.base.GeoRenderState)estado$;
+      geo.addGeckolibData(ESCALA, entity.getScale());
+      geo.addGeckolibData(FURIA, entity.isFury());
    }
 
-   private static void carryWheelOnBack(ReviilEntity entity, BakedGeoModel model) {
+   @Override
+   public void scaleModelForRender(com.geckolib.renderer.base.RenderPassInfo<net.minecraft.client.renderer.entity.state.LivingEntityRenderState> info, float widthScale, float heightScale) {
+      float scale = info.getOrDefaultGeckolibData(ESCALA, 1.0F);
+      super.scaleModelForRender(info, widthScale * scale, heightScale * scale);
+   }
+
+   @Override
+   public void adjustModelBonesForRender(com.geckolib.renderer.base.RenderPassInfo<net.minecraft.client.renderer.entity.state.LivingEntityRenderState> info, com.geckolib.renderer.base.BoneSnapshots snapshots) {
+      super.adjustModelBonesForRender(info, snapshots);
+      boolean furia = info.getOrDefaultGeckolibData(FURIA, false);
       for (String bone : WHEEL_BONES) {
-         model.getBone(bone).ifPresent(wheel -> {
-            if (entity.isFury()) {
-               wheel.updatePosition(0.0F, 8.0F, 39.0F);
-               wheel.updateScale(1.7F, 1.7F, 1.7F);
+         snapshots.ifPresent(bone, wheel -> {
+            if (furia) {
+               wheel.setTranslation(WHEEL_BACK_X, WHEEL_BACK_Y, WHEEL_BACK_Z);
+               wheel.setScale(WHEEL_GROWTH, WHEEL_GROWTH, WHEEL_GROWTH);
             } else {
-               wheel.updatePosition(0.0F, 0.0F, 0.0F);
-               wheel.updateScale(1.0F, 1.0F, 1.0F);
+               wheel.setTranslation(0.0F, 0.0F, 0.0F);
+               wheel.setScale(1.0F, 1.0F, 1.0F);
             }
          });
       }
    }
 
-   protected float getDeathMaxRotation(ReviilEntity entityLivingBaseIn) {
+   protected float getDeathMaxRotation(com.geckolib.renderer.base.GeoRenderState estado$) {
       return 0.0F;
    }
 }

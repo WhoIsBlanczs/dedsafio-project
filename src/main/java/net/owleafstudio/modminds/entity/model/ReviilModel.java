@@ -16,7 +16,19 @@ public class ReviilModel extends GeoModel<ReviilEntity> {
       return Identifier.fromNamespaceAndPath("modminds", "reviil");
    }
 
-   public Identifier getTextureResource(ReviilEntity entity) {
+   private static final com.geckolib.constant.dataticket.DataTicket<Identifier> TEXTURE$ = com.geckolib.constant.dataticket.DataTicket.create("modminds_reviilmodel_texture", Identifier.class);
+
+   @Override
+   public void addAdditionalStateData(ReviilEntity entidad$, Object relacionado$, com.geckolib.renderer.base.GeoRenderState estado$) {
+      super.addAdditionalStateData(entidad$, relacionado$, estado$);
+      estado$.addGeckolibData(TEXTURE$, this.texturaDe(entidad$));
+   }
+
+   public Identifier getTextureResource(com.geckolib.renderer.base.GeoRenderState estado$) {
+      return estado$.getGeckolibData(TEXTURE$);
+   }
+
+   private Identifier texturaDe(ReviilEntity entity) {
       String skin = entity.getTexture();
       if (entity.isFury() && PAINTED.contains(skin)) {
          skin = skin + "_furia";

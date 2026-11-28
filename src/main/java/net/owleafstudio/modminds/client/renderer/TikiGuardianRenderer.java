@@ -22,25 +22,21 @@ public class TikiGuardianRenderer extends GeoEntityRenderer<TikiGuardianEntity, 
       return net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucent(texture);
    }
 
-   public void preRender(
-      PoseStack poseStack,
-      TikiGuardianEntity entity,
-      BakedGeoModel model,
-      MultiBufferSource bufferSource,
-      VertexConsumer buffer,
-      boolean isReRender,
-      float partialTick,
-      int packedLight,
-      int packedOverlay,
-      int color
-   ) {
-      float scale = 1.0F;
-      this.scaleHeight = scale;
-      this.scaleWidth = scale;
-      model.getBone("chanes").ifPresent(bone -> {
-         bone.setHidden(entity.isFuria());
-         bone.setChildrenHidden(entity.isFuria());
+   private static final com.geckolib.constant.dataticket.DataTicket<Boolean> FURIA = com.geckolib.constant.dataticket.DataTicket.create("modminds_tiki_furia", Boolean.class);
+
+   @Override
+   public void captureDefaultRenderState(TikiGuardianEntity entity, Void relacionado$, net.minecraft.client.renderer.entity.state.LivingEntityRenderState estado$, float partialTick) {
+      super.captureDefaultRenderState(entity, relacionado$, estado$, partialTick);
+      ((com.geckolib.renderer.base.GeoRenderState)estado$).addGeckolibData(FURIA, entity.isFuria());
+   }
+
+   @Override
+   public void adjustModelBonesForRender(com.geckolib.renderer.base.RenderPassInfo<net.minecraft.client.renderer.entity.state.LivingEntityRenderState> info, com.geckolib.renderer.base.BoneSnapshots snapshots) {
+      super.adjustModelBonesForRender(info, snapshots);
+      boolean furia = info.getOrDefaultGeckolibData(FURIA, false);
+      snapshots.ifPresent(CHAINS, bone -> {
+         bone.skipRender(furia);
+         bone.skipChildrenRender(furia);
       });
-      super.preRender(poseStack, entity, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, color);
    }
 }

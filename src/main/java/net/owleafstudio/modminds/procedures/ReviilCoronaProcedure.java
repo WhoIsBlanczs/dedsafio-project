@@ -90,7 +90,7 @@ public class ReviilCoronaProcedure {
                      if (mine[i] != null) {
                         BossFx.burst(serverLevel, mine[i], (ParticleOptions)ModmindsModParticleTypes.VOID_SIGIL.get(), 4, 0.5, 0.16);
                         if (lock[i] != null) {
-                           serverLevel.sendParticles(ParticleTypes.DRAGON_BREATH, mine[i].x, mine[i].y, mine[i].z, 1, 0.1, 0.1, 0.1, 0.0);
+                           serverLevel.sendParticles(net.minecraft.core.particles.PowerParticleOption.create(ParticleTypes.DRAGON_BREATH, 1.0F), mine[i].x, mine[i].y, mine[i].z, 1, 0.1, 0.1, 0.1, 0.0);
                         }
                      }
                   }

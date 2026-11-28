@@ -6,15 +6,9 @@
     "bc"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:white_dye"
-    },
-    "b": {
-      "item": "modminds:shulker_bundle"
-    },
-    "c": {
-      "item": "minecraft:black_dye"
-    }
+    "a": "minecraft:white_dye",
+    "b": "modminds:shulker_bundle",
+    "c": "minecraft:black_dye"
   },
   "result": {
     "id": "modminds:shulker_bundle_gris_oscuro",

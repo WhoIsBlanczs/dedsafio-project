@@ -181,6 +181,12 @@ public class ModmindsModVariables {
    }
 
    public static class MapVariables extends SavedData {
+      public static final net.minecraft.world.level.saveddata.SavedDataType<ModmindsModVariables.MapVariables> TYPE = new net.minecraft.world.level.saveddata.SavedDataType<>(
+         net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "modminds_mapvars"),
+         ModmindsModVariables.MapVariables::new,
+         CompoundTag.CODEC.xmap(ModmindsModVariables.MapVariables::load, d -> d.save(new CompoundTag(), null)),
+         DataFixTypes.LEVEL
+      );
       public static final String DATA_NAME = "modminds_mapvars";
       public double AngleReviil = 0.0;
       public boolean ComandoBloqueador = false;
@@ -232,7 +238,7 @@ public class ModmindsModVariables {
       }
 
       private static boolean readFlag(CompoundTag nbt, String key, boolean declaredDefault) {
-         return nbt.contains(key) ? nbt.getBoolean(key) : declaredDefault;
+         return nbt.getBooleanOr(key, declaredDefault);
       }
 
       public CompoundTag save(CompoundTag nbt, HolderLookup.Provider _registries) {
@@ -272,7 +278,7 @@ public class ModmindsModVariables {
                .getLevel(Level.OVERWORLD)
                .getDataStorage()
                .computeIfAbsent(
-                  new SavedData.Factory(ModmindsModVariables.MapVariables::new, (_tag, _registries) -> load(_tag), DataFixTypes.LEVEL), "modminds_mapvars"
+                  ModmindsModVariables.MapVariables.TYPE
                )
             : clientSide;
       }
@@ -545,7 +551,7 @@ public class ModmindsModVariables {
       public static void buffer(ModmindsModVariables.SavedDataSyncMessage message, FriendlyByteBuf buffer) {
          buffer.writeInt(message.type);
          if (message.data != null) {
-            buffer.writeNbt(message.data.save(new CompoundTag(), null));
+            buffer.writeNbt(message.data instanceof ModmindsModVariables.MapVariables mv ? mv.save(new CompoundTag(), null) : ((ModmindsModVariables.WorldVariables)message.data).save(new CompoundTag(), null));
          }
       }
 
@@ -565,6 +571,12 @@ public class ModmindsModVariables {
    }
 
    public static class WorldVariables extends SavedData {
+      public static final net.minecraft.world.level.saveddata.SavedDataType<ModmindsModVariables.WorldVariables> TYPE = new net.minecraft.world.level.saveddata.SavedDataType<>(
+         net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "modminds_worldvars"),
+         ModmindsModVariables.WorldVariables::new,
+         CompoundTag.CODEC.xmap(ModmindsModVariables.WorldVariables::load, d -> d.save(new CompoundTag(), null)),
+         DataFixTypes.LEVEL
+      );
       public static final String DATA_NAME = "modminds_worldvars";
       static ModmindsModVariables.WorldVariables clientSide = new ModmindsModVariables.WorldVariables();
 
@@ -592,7 +604,7 @@ public class ModmindsModVariables {
          return world instanceof ServerLevel level
             ? (ModmindsModVariables.WorldVariables)level.getDataStorage()
                .computeIfAbsent(
-                  new SavedData.Factory(ModmindsModVariables.WorldVariables::new, (_tag, _registries) -> load(_tag), DataFixTypes.LEVEL), "modminds_worldvars"
+                  ModmindsModVariables.WorldVariables.TYPE
                )
             : clientSide;
       }

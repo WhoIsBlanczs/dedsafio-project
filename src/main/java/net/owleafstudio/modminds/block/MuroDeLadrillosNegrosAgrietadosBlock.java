@@ -19,7 +19,7 @@ public class MuroDeLadrillosNegrosAgrietadosBlock extends WallBlock {
       );
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 0;
    }
 }

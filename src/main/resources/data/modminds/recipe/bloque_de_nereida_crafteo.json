@@ -7,9 +7,7 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_nereida"
-    }
+    "a": "modminds:gema_de_nereida"
   },
   "result": {
     "id": "modminds:bloque_de_nereida",

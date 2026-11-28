@@ -252,7 +252,7 @@ public class SapoEntity extends Monster implements GeoEntity {
          BlockPos pos = new BlockPos((int)rx, (int)this.getY(), (int)rz);
          int y = this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos).getY();
          BlockPos groundPos = new BlockPos((int)rx, y - 1, (int)rz);
-         if (this.level().getBlockState(groundPos).isSolidRender(this.level(), groundPos)) {
+         if (this.level().getBlockState(groundPos).isSolidRender()) {
             return new Vec3(rx, y, rz);
          }
       }

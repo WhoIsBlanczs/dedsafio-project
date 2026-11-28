@@ -15,7 +15,7 @@ public class TexturaGorgonaCongeladoMobEffect extends MobEffect {
       super(MobEffectCategory.BENEFICIAL, -1);
    }
 
-   public boolean isInstantenous() {
+   public boolean isInstantaneous() {
       return true;
    }
 
@@ -23,7 +23,7 @@ public class TexturaGorgonaCongeladoMobEffect extends MobEffect {
       return new ArrayList<>();
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       TexturaGorgonaCongeladoAlEstarActivoElEfectoProcedure.execute(entity);
       return true;
    }

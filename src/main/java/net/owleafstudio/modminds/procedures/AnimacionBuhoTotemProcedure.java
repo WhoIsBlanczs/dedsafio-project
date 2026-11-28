@@ -30,7 +30,7 @@ public class AnimacionBuhoTotemProcedure {
    private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
       if (entity != null && ModmindsModVariables.getVariables(entity).orElse(new ModmindsModVariables.PlayerVariables()).PersistenciaVariable) {
          if (world.isClientSide()) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.BUHO_TOTEM.get()));
+            Minecraft.getInstance().player.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.BUHO_TOTEM.get()));
          }
 
          ModmindsMod.queueServerWork(10, () -> {

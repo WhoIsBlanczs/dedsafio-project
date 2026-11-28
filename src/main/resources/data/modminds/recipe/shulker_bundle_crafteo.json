@@ -7,12 +7,8 @@
     "aaa"
   ],
   "key": {
-    "a": {
-      "item": "minecraft:shulker_shell"
-    },
-    "b": {
-      "item": "minecraft:bundle"
-    }
+    "a": "minecraft:shulker_shell",
+    "b": "minecraft:bundle"
   },
   "result": {
     "id": "modminds:shulker_bundle",

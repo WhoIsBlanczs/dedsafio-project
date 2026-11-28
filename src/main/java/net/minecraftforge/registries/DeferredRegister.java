@@ -43,14 +43,15 @@ public class DeferredRegister<T> {
       return instance;
    }
 
+   @SuppressWarnings({"unchecked", "rawtypes"})
    public <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> supplier) {
       Identifier id = Identifier.fromNamespaceAndPath(this.namespace, name);
       RegistryObject<I> object = new RegistryObject<>(id);
-      object.bind(this, supplier);
+      object.bind((DeferredRegister)this, supplier);
       if (this.flushed) {
          this.write(object, supplier);
       } else {
-         this.pending.add(new DeferredRegister.Pending<>(object, supplier));
+         this.pending.add(new DeferredRegister.Pending(object, supplier));
       }
 
       return object;

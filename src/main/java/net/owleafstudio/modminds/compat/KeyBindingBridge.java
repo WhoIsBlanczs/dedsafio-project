@@ -36,11 +36,10 @@ public final class KeyBindingBridge {
                rescan(client);
             }
 
-            long window = client.getWindow().getWindow();
 
             for (KeyMapping mapping : List.copyOf(polled)) {
                InputConstants.Key bound = KeyMappingHelper.getBoundKeyOf(mapping);
-               if (bound.getType() == InputConstants.Type.KEYSYM && bound.getValue() >= 0) {
+               if (bound.getType() == InputConstants.Type.KEYBOARD && bound.getValue() >= 0) {
                   mapping.setDown(InputConstants.isKeyDown(bound.getValue()));
                }
             }

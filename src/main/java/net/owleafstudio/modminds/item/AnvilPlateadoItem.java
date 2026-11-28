@@ -18,7 +18,7 @@ public class AnvilPlateadoItem extends Item {
    public InteractionResult use(Level level, Player player, InteractionHand hand) {
       ItemStack itemStack = player.getItemInHand(hand);
 
-      for (ItemStack armorPiece : player.getArmorSlots$()) {
+      for (ItemStack armorPiece : net.owleafstudio.modminds.compat.InvCompat.armor(player)) {
          if (armorPiece.isDamaged()) {
             int currentDamage = armorPiece.getDamageValue();
             int maxDamage = armorPiece.getMaxDamage();

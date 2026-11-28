@@ -41,7 +41,7 @@ public final class ItemBundleComponent {
    }
 
    private static RegistryObject<DataComponentType<ItemContainerContents>> register(String name) {
-      Supplier<DataComponentType<ItemContainerContents>> supplier = () -> DataComponentType.builder()
+      Supplier<DataComponentType<ItemContainerContents>> supplier = () -> DataComponentType.<ItemContainerContents>builder()
          .persistent(ItemContainerContents.CODEC)
          .networkSynchronized(ItemContainerContents.STREAM_CODEC)
          .cacheEncoding()

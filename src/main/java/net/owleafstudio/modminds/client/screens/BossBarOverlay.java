@@ -104,7 +104,7 @@ public class BossBarOverlay {
       int segY = px(style.segY());
       int segW = px(style.segW());
       int segH = px(style.segH());
-      gui.blit(style.artwork(), x, y, barW, barH, 0.0F, 0.0F, style.texW(), style.texH(), style.texW(), style.texH());
+      gui.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, style.artwork(), x, y, 0.0F, 0.0F, barW, barH, style.texW(), style.texH(), style.texW(), style.texH());
       float ratio = smoothedHealth(boss);
       int filled = (int)Math.ceil(segW * Math.max(ratio > 0.0F ? 1.0 / segW : 0.0, (double)ratio));
       if (filled < segW) {
@@ -116,11 +116,11 @@ public class BossBarOverlay {
       String title = raw.isEmpty() ? style.fallbackTitle() : raw;
       int textX = x + (barW - mc.font.width(title)) / 2;
       int textY = y + px(style.titleY());
-      gui.drawString(mc.font, Component.literal(title), textX - 1, textY, Integer.MIN_VALUE, false);
-      gui.drawString(mc.font, Component.literal(title), textX + 1, textY, Integer.MIN_VALUE, false);
-      gui.drawString(mc.font, Component.literal(title), textX, textY - 1, Integer.MIN_VALUE, false);
-      gui.drawString(mc.font, Component.literal(title), textX, textY + 1, Integer.MIN_VALUE, false);
-      gui.drawString(mc.font, Component.literal(title), textX, textY, style.accent());
+      gui.text(mc.font, Component.literal(title), textX - 1, textY, Integer.MIN_VALUE, false);
+      gui.text(mc.font, Component.literal(title), textX + 1, textY, Integer.MIN_VALUE, false);
+      gui.text(mc.font, Component.literal(title), textX, textY - 1, Integer.MIN_VALUE, false);
+      gui.text(mc.font, Component.literal(title), textX, textY + 1, Integer.MIN_VALUE, false);
+      gui.text(mc.font, Component.literal(title), textX, textY, style.accent());
    }
 
    private static float smoothedHealth(LivingEntity boss) {

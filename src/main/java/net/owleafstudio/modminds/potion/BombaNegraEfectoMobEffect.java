@@ -19,7 +19,7 @@ public class BombaNegraEfectoMobEffect extends MobEffect {
       super(MobEffectCategory.NEUTRAL, -1);
    }
 
-   public boolean isInstantenous() {
+   public boolean isInstantaneous() {
       return true;
    }
 
@@ -27,7 +27,7 @@ public class BombaNegraEfectoMobEffect extends MobEffect {
       return new ArrayList<>();
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       BombaNegraEfectoAlEstarActivoElEfectoProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
       return true;
    }

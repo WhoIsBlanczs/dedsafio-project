@@ -9,7 +9,6 @@ import net.minecraft.util.Mth;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import com.mojang.renderpearl.api.vertex.VertexFormat;
@@ -18,19 +17,7 @@ import net.owleafstudio.modminds.entity.ZonaPeligroEntity;
 import org.joml.Matrix4f;
 
 public class ZonaPeligroRenderer extends EntityRenderer<ZonaPeligroEntity, net.owleafstudio.modminds.compat.Compat.EstadoEntidad> {
-   private static final RenderType PINTURA = RenderType.create(
-      "modminds_zona_peligro",
-      DefaultVertexFormat.POSITION_COLOR,
-      VertexFormat.Mode.QUADS,
-      4096,
-      RenderType.CompositeState.builder()
-         .setShaderState(RenderStateShard.POSITION_COLOR_SHADER)
-         .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
-         .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
-         .setCullState(RenderStateShard.NO_CULL)
-         .setWriteMaskState(RenderStateShard.COLOR_WRITE)
-         .createCompositeState(false)
-   );
+   private static final RenderType PINTURA = net.minecraft.client.renderer.rendertype.RenderTypes.debugQuads();
    private static final int SEGMENTOS = 40;
    private static final int JAG_PASOS = 14;
    private static final int RAYO_PASOS = 10;
@@ -43,7 +30,7 @@ public class ZonaPeligroRenderer extends EntityRenderer<ZonaPeligroEntity, net.o
       return TextureAtlas.LOCATION_BLOCKS;
    }
 
-   public boolean shouldRender(ZonaPeligroEntity entity, Frustum camera, double camX, double camY, double camZ) {
+   public boolean shouldRender(ZonaPeligroEntity entity, Frustum camera, double camX, double camY, double camZ, float partialTick$) {
       return true;
    }
 
@@ -77,51 +64,52 @@ public class ZonaPeligroRenderer extends EntityRenderer<ZonaPeligroEntity, net.o
          Vec3 here = zone.paintCentre(partialTick);
          Vec3 body = zone.getPosition(partialTick);
          poseStack.translate(here.x - body.x, here.y - body.y + 0.06, here.z - body.z);
-         Matrix4f pose = poseStack.last().pose();
-         net.minecraft.client.renderer.rendertype.RenderType buffer$tipo = (PINTURA);
-         switch (zone.getForma()) {
-            case 1:
-               crack(pose, buffer, zone, red, green, blue, breathe, progress, age);
-               break;
-            case 2:
-               rayCircle(pose, buffer, zone, red, green, blue, breathe, progress, age, partialTick);
-               break;
-            case 3:
-               pozo(pose, buffer, zone, red, green, blue, breathe, progress, age);
-               break;
-            case 4:
-               columnas(pose, buffer, zone, red, green, blue, breathe, age);
-               break;
-            case 5:
-               campo(pose, buffer, zone, red, green, blue, breathe, progress);
-               break;
-            case 6:
-               surco(pose, buffer, zone, red, green, blue, breathe, age);
-               break;
-            case 7:
-               avalancha(pose, buffer, zone, red, green, blue, breathe, progress);
-               break;
-            default:
-               if (zone.getBeamLength() > 0.0) {
-                  beam(pose, buffer, zone, red, green, blue, breathe, progress);
-               } else if (wave > 0.0) {
-                  double t = Mth.clamp(age / wave, 0.0, 1.0);
-                  double head = r * t;
-                  double vida = (1.0 - progress) * breathe;
-                  band(pose, buffer, Math.max(0.0, head * 0.62), head, red, green, blue, (float)vida * 0.85F);
-                  band(pose, buffer, Math.max(0.0, head * 0.4), Math.max(0.02, head * 0.62), red, green, blue, (float)vida * 0.4F);
-                  if (head > 0.4) {
-                     rayas(pose, buffer, 0.0, Math.max(0.02, head * 0.4), 14, age * 0.11 + zone.getSeed(), red, green, blue, (float)vida * 0.2F);
-                     band(pose, buffer, Math.max(0.0, head - 0.3), head, Math.min(1.0F, red * 1.2F), Math.min(1.0F, green * 1.15F + 0.1F), blue, (float)vida);
-                     arcos(pose, buffer, head * 0.9, Math.min(r, head * 1.08), 9, 0.58, age * 0.24 + zone.getSeed(), red, green, blue, (float)vida * 0.75F);
-                     band(pose, buffer, head, Math.min(r * 1.2, head + Math.max(0.6, head * 0.1)), red, green, blue, (float)vida * 0.22F);
-                     empalizada(pose, buffer, head, Math.max(0.3, 2.4 * vida), 22, 0.5, age * 0.24 + zone.getSeed(), red, green, blue, (float)vida * 0.42F);
-                     escombros(pose, buffer, head, red, green, blue, (float)vida);
+         colector$.submitCustomGeometry(poseStack, PINTURA, (pose$, buffer) -> {
+            Matrix4f pose = pose$.pose();
+            switch (zone.getForma()) {
+               case 1:
+                  crack(pose, buffer, zone, red, green, blue, breathe, progress, age);
+                  break;
+               case 2:
+                  rayCircle(pose, buffer, zone, red, green, blue, breathe, progress, age, partialTick);
+                  break;
+               case 3:
+                  pozo(pose, buffer, zone, red, green, blue, breathe, progress, age);
+                  break;
+               case 4:
+                  columnas(pose, buffer, zone, red, green, blue, breathe, age);
+                  break;
+               case 5:
+                  campo(pose, buffer, zone, red, green, blue, breathe, progress);
+                  break;
+               case 6:
+                  surco(pose, buffer, zone, red, green, blue, breathe, age);
+                  break;
+               case 7:
+                  avalancha(pose, buffer, zone, red, green, blue, breathe, progress);
+                  break;
+               default:
+                  if (zone.getBeamLength() > 0.0) {
+                     beam(pose, buffer, zone, red, green, blue, breathe, progress);
+                  } else if (wave > 0.0) {
+                     double t = Mth.clamp(age / wave, 0.0, 1.0);
+                     double head = r * t;
+                     double vida = (1.0 - progress) * breathe;
+                     band(pose, buffer, Math.max(0.0, head * 0.62), head, red, green, blue, (float)vida * 0.85F);
+                     band(pose, buffer, Math.max(0.0, head * 0.4), Math.max(0.02, head * 0.62), red, green, blue, (float)vida * 0.4F);
+                     if (head > 0.4) {
+                        rayas(pose, buffer, 0.0, Math.max(0.02, head * 0.4), 14, age * 0.11 + zone.getSeed(), red, green, blue, (float)vida * 0.2F);
+                        band(pose, buffer, Math.max(0.0, head - 0.3), head, Math.min(1.0F, red * 1.2F), Math.min(1.0F, green * 1.15F + 0.1F), blue, (float)vida);
+                        arcos(pose, buffer, head * 0.9, Math.min(r, head * 1.08), 9, 0.58, age * 0.24 + zone.getSeed(), red, green, blue, (float)vida * 0.75F);
+                        band(pose, buffer, head, Math.min(r * 1.2, head + Math.max(0.6, head * 0.1)), red, green, blue, (float)vida * 0.22F);
+                        empalizada(pose, buffer, head, Math.max(0.3, 2.4 * vida), 22, 0.5, age * 0.24 + zone.getSeed(), red, green, blue, (float)vida * 0.42F);
+                        escombros(pose, buffer, head, red, green, blue, (float)vida);
+                     }
+                  } else {
+                     aviso(pose, buffer, zone, red, green, blue, breathe, progress, age);
                   }
-               } else {
-                  aviso(pose, buffer, zone, red, green, blue, breathe, progress, age);
-               }
-         }
+            }
+         });
 
          poseStack.popPose();
       }

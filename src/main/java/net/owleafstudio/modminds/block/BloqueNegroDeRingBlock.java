@@ -12,7 +12,7 @@ public class BloqueNegroDeRingBlock extends Block {
       super(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(-1.0F, 3600000.0F));
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 15;
    }
 }

@@ -25,6 +25,11 @@ public abstract class AguaDelLimboFluid extends ForgeFlowingFluid {
       super(PROPERTIES);
    }
 
+   @Override
+   protected boolean canConvertToSource(net.minecraft.server.level.ServerLevel level) {
+      return false;
+   }
+
    public static class Flowing extends AguaDelLimboFluid {
       protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
          super.createFluidStateDefinition(builder);

@@ -7,15 +7,9 @@
     " c "
   ],
   "key": {
-    "a": {
-      "item": "modminds:placa_de_wildfire"
-    },
-    "b": {
-      "item": "modminds:cristal_reforzado"
-    },
-    "c": {
-      "item": "modminds:lamina_reforzada_de_acero_negro_aureo"
-    }
+    "a": "modminds:placa_de_wildfire",
+    "b": "modminds:cristal_reforzado",
+    "c": "modminds:lamina_reforzada_de_acero_negro_aureo"
   },
   "result": {
     "id": "modminds:jeringa_nether",

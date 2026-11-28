@@ -118,7 +118,7 @@ public class NaveEnemigaPerforadoraDelVacioBorgEntity extends Monster implements
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaPerforadoraDelVacioBorgEntity.this.getTarget();
                   if (NaveEnemigaPerforadoraDelVacioBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaPerforadoraDelVacioBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaPerforadoraDelVacioBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaPerforadoraDelVacioBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaPerforadoraDelVacioBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

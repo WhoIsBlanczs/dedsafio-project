@@ -27,7 +27,7 @@ public class WaterChargeEntidadAlEstarVivaProcedure {
             pool.setRadius(10.0F);
             pool.setDuration(170);
             pool.addEffect(new MobEffectInstance(MobEffects.INSTANT_DAMAGE, 170, 2, false, true));
-            pool.setParticle((ParticleOptions)ModmindsModParticleTypes.HYDRA_PARTICULA.get());
+            pool.setCustomParticle((ParticleOptions)ModmindsModParticleTypes.HYDRA_PARTICULA.get());
             pool.addTag("harming_potion");
             serverLevel.addFreshEntity(pool);
          }

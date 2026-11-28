@@ -29,7 +29,7 @@ public class AnimUtils {
    }
 
    public static void setupModelFromBone(ModelPart model, GeoBone bone) {
-      model.setPos(bone.getPivotX(), bone.getPivotY(), bone.getPivotZ());
+      model.setPos(bone.pivotX(), bone.pivotY(), bone.pivotZ());
       model.xRot = 0.0F;
       model.yRot = 0.0F;
       model.zRot = 0.0F;

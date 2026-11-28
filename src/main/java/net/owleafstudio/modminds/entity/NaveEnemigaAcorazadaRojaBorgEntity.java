@@ -117,7 +117,7 @@ public class NaveEnemigaAcorazadaRojaBorgEntity extends Monster implements GeoEn
                public void tick() {
                   LivingEntity livingentity = NaveEnemigaAcorazadaRojaBorgEntity.this.getTarget();
                   if (NaveEnemigaAcorazadaRojaBorgEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     NaveEnemigaAcorazadaRojaBorgEntity.this.doHurtTarget(livingentity);
+                     if (NaveEnemigaAcorazadaRojaBorgEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) NaveEnemigaAcorazadaRojaBorgEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = NaveEnemigaAcorazadaRojaBorgEntity.this.distanceToSqr(livingentity);
                      if (d0 < 32.0) {

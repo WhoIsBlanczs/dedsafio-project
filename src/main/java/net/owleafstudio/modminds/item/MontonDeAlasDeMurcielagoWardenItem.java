@@ -15,7 +15,7 @@ public class MontonDeAlasDeMurcielagoWardenItem extends Item {
       super(new Item.Properties().stacksTo(64).rarity(Rarity.RARE));
    }
 
-   public int getUseDuration(ItemStack itemstack) {
+   public int getUseDuration(ItemStack itemstack, net.minecraft.world.entity.LivingEntity usuario$) {
       return 32;
    }
 

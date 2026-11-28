@@ -21,7 +21,7 @@ public class RenderGuiEvent extends Event {
       return Minecraft.getInstance().getWindow();
    }
 
-   public PoseStack getPose() {
+   public org.joml.Matrix3x2fStack getPose() {
       return this.guiGraphics.pose();
    }
 

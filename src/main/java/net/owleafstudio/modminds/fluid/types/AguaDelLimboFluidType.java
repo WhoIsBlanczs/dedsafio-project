@@ -51,7 +51,7 @@ public class AguaDelLimboFluidType extends FluidType {
 
          @Override
          public int getTintColor(FluidState state, BlockAndTintGetter world, BlockPos pos) {
-            return ((Biome)Minecraft.getInstance().level.getBiome(pos).value()).getWaterFogColor() | 0xFF000000;
+            return ((Biome)Minecraft.getInstance().level.getBiome(pos).value()).getWaterColor() | 0xFF000000;
          }
       });
    }

@@ -5,12 +5,8 @@
     "ab"
   ],
   "key": {
-    "a": {
-      "item": "modminds:shulker_bundle"
-    },
-    "b": {
-      "item": "minecraft:cyan_dye"
-    }
+    "a": "modminds:shulker_bundle",
+    "b": "minecraft:cyan_dye"
   },
   "result": {
     "id": "modminds:shulker_bundle_cian",

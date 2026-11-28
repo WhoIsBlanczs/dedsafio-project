@@ -4,9 +4,7 @@ import net.minecraft.resources.Identifier;
 import net.owleafstudio.modminds.entity.NereidaAguaEntity;
 import com.geckolib.animation.state.AnimationTest;
 import com.geckolib.cache.model.GeoBone;
-import com.geckolib.constant.DataTickets;
 import com.geckolib.model.GeoModel;
-import com.geckolib.model.data.EntityModelData;
 
 public class NereidaAguaModel extends GeoModel<NereidaAguaEntity> {
    private static final com.geckolib.constant.dataticket.DataTicket<Identifier> TEXTURE$ = com.geckolib.constant.dataticket.DataTicket.create("modminds_nereidaaguamodel_texture", Identifier.class);
@@ -29,12 +27,5 @@ public class NereidaAguaModel extends GeoModel<NereidaAguaEntity> {
       return estado$.getGeckolibData(TEXTURE$);
    }
 
-   public void setCustomAnimations(NereidaAguaEntity animatable, long instanceId, AnimationTest<?> animationState) {
-      GeoBone head = this.getAnimationProcessor().getBone("head");
-      if (head != null) {
-         EntityModelData entityData = (EntityModelData)animationState.getData(DataTickets.ENTITY_MODEL_DATA);
-         head.setRotX(entityData.headPitch() * (float) (Math.PI / 180.0));
-         head.setRotY(entityData.netHeadYaw() * (float) (Math.PI / 180.0));
-      }
-   }
+   
 }

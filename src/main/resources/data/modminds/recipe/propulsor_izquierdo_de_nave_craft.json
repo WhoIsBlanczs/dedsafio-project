@@ -7,18 +7,10 @@
     "cd "
   ],
   "key": {
-    "a": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    },
-    "b": {
-      "item": "modminds:vara_de_dilitio"
-    },
-    "c": {
-      "item": "minecraft:diamond"
-    },
-    "d": {
-      "item": "minecraft:netherite_ingot"
-    }
+    "a": "modminds:lingote_de_hierro_reforzado",
+    "b": "modminds:vara_de_dilitio",
+    "c": "minecraft:diamond",
+    "d": "minecraft:netherite_ingot"
   },
   "result": {
     "id": "modminds:propulsor_de_dilitio_izquierda",

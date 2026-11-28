@@ -156,7 +156,7 @@ public final class SimpleChannel {
                ResourceKey<Level> key = (ResourceKey<Level>)producer.target.get();
                ServerLevel level = server != null ? server.getLevel(key) : null;
                if (level != null) {
-                  for (ServerPlayer player : PlayerLookup.world(level)) {
+                  for (ServerPlayer player : PlayerLookup.level(level)) {
                      ServerPlayNetworking.send(player, envelope);
                   }
                }

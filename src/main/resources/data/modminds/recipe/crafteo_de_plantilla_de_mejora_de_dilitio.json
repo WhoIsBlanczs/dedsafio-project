@@ -7,18 +7,10 @@
     "ada"
   ],
   "key": {
-    "a": {
-      "item": "modminds:gema_de_dilitio"
-    },
-    "b": {
-      "item": "modminds:lingote_de_hierro_reforzado"
-    },
-    "c": {
-      "item": "minecraft:netherite_upgrade_smithing_template"
-    },
-    "d": {
-      "item": "modminds:lingote_de_acero_negro_aureo"
-    }
+    "a": "modminds:gema_de_dilitio",
+    "b": "modminds:lingote_de_hierro_reforzado",
+    "c": "minecraft:netherite_upgrade_smithing_template",
+    "d": "modminds:lingote_de_acero_negro_aureo"
   },
   "result": {
     "id": "modminds:plantilla_de_mejora_de_dilitio",

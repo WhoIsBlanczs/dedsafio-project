@@ -91,7 +91,7 @@ public class RifleDePulsoBorgDisparoProcedure {
 
             if (entity instanceof Player _player) {
                _player.getCooldowns()
-                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY).getItem(), 2);
+                  .addCooldown((entity instanceof LivingEntity _livEntxxxxx ? _livEntxxxxx.getMainHandItem() : ItemStack.EMPTY), 2);
             }
          } else if (entity instanceof Player _player && !_player.level().isClientSide()) {
             net.owleafstudio.modminds.compat.Compat.mensaje(_player, Component.literal("§4Recarga"), true);

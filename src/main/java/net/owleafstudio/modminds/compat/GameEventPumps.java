@@ -97,7 +97,7 @@ public final class GameEventPumps {
             post(new TickEvent.ServerTickEvent(TickEvent.Phase.END));
             WorkQueue.advanceTick();
          });
-         ServerTickEvents.START_WORLD_TICK.register(GameEventPumps::tickLivingEntities);
+         ServerTickEvents.START_LEVEL_TICK.register(GameEventPumps::tickLivingEntities);
          ServerPlayConnectionEvents.JOIN.register((Join)(handler, sender, server) -> post(new PlayerEvent.PlayerLoggedInEvent(handler.getPlayer())));
          ServerPlayConnectionEvents.DISCONNECT.register((Disconnect)(handler, server) -> playerDimensions.remove(handler.getPlayer().getUUID()));
          ServerPlayerEvents.COPY_FROM.register((CopyFrom)(oldPlayer, newPlayer, alive) -> post(new PlayerEvent.Clone(newPlayer, oldPlayer, !alive)));

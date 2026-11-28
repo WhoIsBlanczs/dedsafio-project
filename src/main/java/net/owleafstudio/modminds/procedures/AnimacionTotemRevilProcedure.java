@@ -30,7 +30,7 @@ public class AnimacionTotemRevilProcedure {
    private static void execute(@Nullable Event event, LevelAccessor world, Entity entity) {
       if (entity != null && ModmindsModVariables.getVariables(entity).orElse(new ModmindsModVariables.PlayerVariables()).VariableTotemRevil) {
          if (world.isClientSide()) {
-            Minecraft.getInstance().gameRenderer.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_REVIL.get()));
+            Minecraft.getInstance().player.displayItemActivation(new ItemStack((ItemLike)ModmindsModItems.TOTEM_REVIL.get()));
          }
 
          ModmindsMod.queueServerWork(10, () -> {

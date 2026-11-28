@@ -1,27 +1,23 @@
 {
-  "has_precipitation": true,
-  "temperature": 0.5,
+  "attributes": {
+    "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/sky_color": "#000000",
+    "minecraft:visual/water_fog_color": "#30789b",
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {},
+        "spawns_by_category": {}
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [],
   "downfall": 0.5,
   "effects": {
-    "foliage_color": -16777216,
-    "grass_color": -16777216,
-    "sky_color": -16777216,
-    "fog_color": -16777216,
-    "water_color": -13600613,
-    "water_fog_color": -13600613
+    "water_color": "#30789b",
+    "grass_color": "#000000",
+    "foliage_color": "#000000"
   },
-  "spawners": {
-    "monster": [],
-    "creature": [],
-    "ambient": [],
-    "axolotls": [],
-    "underground_water_creature": [],
-    "water_creature": [],
-    "water_ambient": [],
-    "misc": []
-  },
-  "spawn_costs": {},
-  "carvers": {},
   "features": [
     [],
     [],
@@ -34,5 +30,7 @@
     [],
     [],
     []
-  ]
+  ],
+  "has_precipitation": true,
+  "temperature": 0.5
 }

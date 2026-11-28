@@ -12,7 +12,7 @@ public class BloqueDeCoralNaranjaLuminosoBlock extends Block {
       super(BlockBehaviour.Properties.of().sound(SoundType.CORAL_BLOCK).strength(-1.0F, 3600000.0F).lightLevel(s -> 15));
    }
 
-   public int getLightBlock(BlockState state, BlockGetter worldIn, BlockPos pos) {
+   public int getLightDampening(BlockState state) {
       return 15;
    }
 }

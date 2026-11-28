@@ -21,7 +21,7 @@ public class LecheMobEffect extends MobEffect {
       return new ArrayList<>();
    }
 
-   public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+   public boolean applyEffectTick(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier) {
       LecheAlEstarActivoElEfectoProcedure.execute(entity);
       return true;
    }

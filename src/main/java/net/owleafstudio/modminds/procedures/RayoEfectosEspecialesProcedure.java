@@ -14,7 +14,7 @@ public class RayoEfectosEspecialesProcedure {
       for (Entity entityiterator : new ArrayList<>(world.players())) {
          if (world instanceof ServerLevel _level) {
             LightningBolt entityToSpawn = (LightningBolt)net.minecraft.world.entity.EntityTypes.LIGHTNING_BOLT.create(_level, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
-            entityToSpawn.moveTo(
+            entityToSpawn.snapTo(
                Vec3.atBottomCenterOf(BlockPos.containing(entityiterator.getX(), entityiterator.getY(), entityiterator.getZ()))
             );
             entityToSpawn.setVisualOnly(true);

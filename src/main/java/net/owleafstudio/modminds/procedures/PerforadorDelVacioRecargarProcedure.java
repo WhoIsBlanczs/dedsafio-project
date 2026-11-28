@@ -26,7 +26,7 @@ public class PerforadorDelVacioRecargarProcedure {
                int balasGastadas = balasMaximas - balasEnArma;
                int balasARecargar = Math.min(balasGastadas, balasEnInventario);
                ItemStack balasAEliminar = new ItemStack((ItemLike)ModmindsModItems.BALA_DE_DILITIO.get());
-               _player.getInventory().clearOrCountMatchingItems(p -> p.getItem() == balasAEliminar.getItem(), balasARecargar, _player.inventoryMenu.getCraftSlots());
+               net.owleafstudio.modminds.compat.InvCompat.remove(_player.getInventory(), p -> p.getItem() == balasAEliminar.getItem(), balasARecargar);
                int nuevaDurabilidad = armaEnMano.getDamageValue() - balasARecargar;
                armaEnMano.setDamageValue(Math.max(0, nuevaDurabilidad));
                _player.getCooldowns().addCooldown(armaEnMano, 50);

@@ -125,7 +125,7 @@ public class MurcielagoWardenEntity extends Monster implements GeoEntity {
                public void tick() {
                   LivingEntity livingentity = MurcielagoWardenEntity.this.getTarget();
                   if (MurcielagoWardenEntity.this.getBoundingBox().intersects(livingentity.getBoundingBox())) {
-                     MurcielagoWardenEntity.this.doHurtTarget(livingentity);
+                     if (MurcielagoWardenEntity.this.level() instanceof net.minecraft.server.level.ServerLevel _sl) MurcielagoWardenEntity.this.doHurtTarget(_sl, livingentity);
                   } else {
                      double d0 = MurcielagoWardenEntity.this.distanceToSqr(livingentity);
                      if (d0 < 30.0) {
