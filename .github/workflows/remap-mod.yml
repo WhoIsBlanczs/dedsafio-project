@@ -26,7 +26,7 @@ jobs:
           rootProject.name='rm'
           S
           cat > build.gradle <<'S'
-          plugins { id 'net.fabricmc.fabric-loom-remap' version '1.19.4' }
+          plugins { id 'net.fabricmc.fabric-loom-remap' version '1.19-SNAPSHOT' }
           repositories { mavenCentral(); maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' } }
           dependencies {
             minecraft 'com.mojang:minecraft:1.21.1'
