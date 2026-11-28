@@ -1,4 +1,5 @@
-G=$(ls geckolib-*.jar); mkdir -p /tmp/g && cd /tmp/g && unzip -q -o $OLDPWD/$G
-grep -rl 'SpecialModelRenderer' --include=*.class . | head
-for c in $(grep -rl 'SpecialModelRenderer' --include=*.class . | head -6); do echo "== $c"; strings -n 4 $c | grep -iE 'geckolib|^[a-z_]+$' | head -15 | tr '\n' ' '; echo; done
-find . -name '*.json' -path '*items*' | head; find . -path '*assets*' -name '*.json' | head
+J=$(ls minecraft-common-*-26.3.jar)
+unzip -p $J data/minecraft/dimension_type/the_nether.json | tr -d ' \n'; echo
+unzip -p $J data/minecraft/dimension_type/the_end.json | tr -d ' \n'; echo
+unzip -p $J data/minecraft/worldgen/biome/basalt_deltas.json | python3 -c "import json,sys;d=json.load(sys.stdin);print(json.dumps({k:v for k,v in d.items() if k not in ('features','carvers','spawners','spawn_costs')}))"
+CP=$(ls *.jar | tr '\n' ':'); javap -cp "$CP" net.minecraft.world.attribute.EnvironmentAttributes 2>&1 | grep -iE 'fog|cloud|sky' | head -30
