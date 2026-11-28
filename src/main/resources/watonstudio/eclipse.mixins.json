@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "refmap": "client-WatonStudio-refmap.json",
+  "package": "com.watonstudio.creepermetalico.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "WorldRendererMixin",
+    "ClientWorldMixin",
+    "LightmapTextureManagerMixin",
+    "BackgroundRendererMixin",
+    "EclipseNightVisionMixin",
+    "LinternaHeldAnimationMixin",
+    "BlockRenderViewLightMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

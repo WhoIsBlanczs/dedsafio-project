@@ -1,0 +1,11 @@
+{
+  "type": "ghostsafio:gleba",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "ghostsafio:gleba",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "ghostsafio:gleba"
+    }
+  }
+}

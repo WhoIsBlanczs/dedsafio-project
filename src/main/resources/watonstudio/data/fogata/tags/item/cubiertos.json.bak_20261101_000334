@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "watonstudio:cuchara",
+    "watonstudio:tenedor",
+    "watonstudio:cuchador",
+    "watonstudio:cuchillo"
+  ]
+}

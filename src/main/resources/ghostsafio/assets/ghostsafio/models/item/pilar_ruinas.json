@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "ghostsafio:block/pilar_ruinas_arriba",
+    "side": "ghostsafio:block/pilar_ruinas"
+  }
+}

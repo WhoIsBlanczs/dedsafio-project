@@ -1,0 +1,114 @@
+{
+    "notify":  {
+                   "sounds":  [
+                                  "watonstudio:notify"
+                              ]
+               },
+    "nutria":  {
+                   "sounds":  [
+                                  {
+                                      "name":  "watonstudio:nutria",
+                                      "stream":  true
+                                  }
+                              ]
+               },
+    "revil_music":  {
+                        "sounds":  [
+                                       {
+                                           "name":  "watonstudio:revil_music",
+                                           "stream":  true
+                                       }
+                                   ]
+                    },
+    "revil_appear":  {
+                         "sounds":  [
+                                        "watonstudio:revil_appear"
+                                    ]
+                     },
+    "rise":  {
+                 "sounds":  [
+                                "watonstudio:rise"
+                            ]
+             },
+    "boom":  {
+                 "sounds":  [
+                                "watonstudio:boom"
+                            ]
+             },
+    "crack":  {
+                  "sounds":  [
+                                 "watonstudio:crack"
+                             ]
+              },
+    "resorte_walking":  {
+                            "sounds":  [
+                                           "creeper_metalico:walking"
+                                       ]
+                        },
+    "resorte_explosion":  {
+                              "sounds":  [
+                                             "creeper_metalico:explosion"
+                                         ]
+                          },
+    "muerte":  {
+                   "sounds":  [
+                                  {
+                                      "name":  "watonstudio:muerte",
+                                      "stream":  true
+                                  }
+                              ]
+               },
+    "start":  {
+                  "sounds":  [
+                                 {
+                                     "name":  "watonstudio:eclipse_inicio",
+                                     "stream":  true
+                                 }
+                             ]
+              },
+    "post_eclipse":  {
+                         "sounds":  [
+                                        {
+                                            "name":  "watonstudio:post_eclipse",
+                                            "stream":  true
+                                        }
+                                    ]
+                     },
+    "dark":  {
+                 "sounds":  [
+                                {
+                                    "name":  "watonstudio:dark",
+                                    "stream":  true
+                                }
+                            ]
+             },
+    "ambient":  {
+                    "sounds":  [
+                                   {
+                                       "name":  "watonstudio:ambient",
+                                       "stream":  true
+                                   }
+                               ]
+                },
+    "ring":  {
+                 "sounds":  [
+                                {
+                                    "name":  "watonstudio:ring",
+                                    "stream":  true
+                                }
+                            ]
+             },
+    "phora_activar":  {
+                          "sounds":  [
+                                         {
+                                             "name":  "watonstudio:phora_activar",
+                                             "stream":  true
+                                         }
+                                     ]
+                      },
+    "phora_ambient":  {
+                          "sounds":  [
+                                         "watonstudio:click_06"
+                                     ]
+                      }
+}

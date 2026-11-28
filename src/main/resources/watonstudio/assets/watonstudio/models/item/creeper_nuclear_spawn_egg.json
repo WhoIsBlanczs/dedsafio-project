@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "watonstudio:item/creeper_nuclear_spawn_egg"
+  }
+}

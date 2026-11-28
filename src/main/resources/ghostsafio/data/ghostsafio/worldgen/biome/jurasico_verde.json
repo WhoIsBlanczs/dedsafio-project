@@ -1,0 +1,55 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.8,
+  "downfall": 0.0,
+  "effects": {
+    "sky_color": 10282440,
+    "fog_color": 11066570,
+    "water_color": 4158180,
+    "water_fog_color": 329011,
+    "grass_color": 1989658,
+    "foliage_color": 4099886
+  },
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [
+      "minecraft:cave",
+      "minecraft:cave_extra_underground"
+    ]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "ghostsafio:rocas"
+    ],
+    [],
+    [
+      "ghostsafio:mena_ambar_ore"
+    ],
+    [],
+    [],
+    [
+      "ghostsafio:arboles_altos",
+      "ghostsafio:arboles_gigantes",
+      "ghostsafio:hierba",
+      "ghostsafio:hierba_alta",
+      "ghostsafio:cicas",
+      "ghostsafio:helechos_roca",
+      "ghostsafio:helechos"
+    ],
+    []
+  ]
+}

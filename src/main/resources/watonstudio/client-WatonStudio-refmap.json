@@ -1,0 +1,84 @@
+{
+  "mappings": {
+    "com/watonstudio/creepermetalico/mixin/BackgroundRendererMixin": {
+      "Lnet/minecraft/util/CubicSampler;sampleColor(Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/CubicSampler$RgbFetcher;)Lnet/minecraft/util/math/Vec3d;": "Lnet/minecraft/class_6491;method_24895(Lnet/minecraft/class_243;Lnet/minecraft/class_6491$class_4859;)Lnet/minecraft/class_243;",
+      "render": "Lnet/minecraft/class_758;method_3210(Lnet/minecraft/class_4184;FLnet/minecraft/class_638;IF)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/ClientWorldMixin": {
+      "getCloudsColor": "Lnet/minecraft/class_638;method_23785(F)Lnet/minecraft/class_243;"
+    },
+    "com/watonstudio/creepermetalico/mixin/EclipseDarknessOverlayMixin": {
+      "renderHand": "Lnet/minecraft/class_757;method_3172(Lnet/minecraft/class_4184;FLorg/joml/Matrix4f;)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/EclipseFogDistanceMixin": {
+      "applyFog": "Lnet/minecraft/class_758;method_3211(Lnet/minecraft/class_4184;Lnet/minecraft/class_758$class_4596;FZF)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/EclipseNightVisionMixin": {
+      "getNightVisionStrength": "Lnet/minecraft/class_757;method_3174(Lnet/minecraft/class_1309;F)F"
+    },
+    "com/watonstudio/creepermetalico/mixin/FloralFirstPersonRootsMixin": {
+      "renderArm": "Lnet/minecraft/class_1007;method_23205(Lnet/minecraft/class_4587;Lnet/minecraft/class_4597;ILnet/minecraft/class_742;Lnet/minecraft/class_630;Lnet/minecraft/class_630;)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/LightmapTextureManagerMixin": {
+      "Lnet/minecraft/client/world/ClientWorld;getSkyBrightness(F)F": "Lnet/minecraft/class_638;method_23783(F)F",
+      "getBrightness": "Lnet/minecraft/class_765;method_23284(Lnet/minecraft/class_2874;I)F",
+      "update": "Lnet/minecraft/class_765;method_3313(F)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/LinternaHeldAnimationMixin": {
+      "renderFirstPersonItem(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V": "Lnet/minecraft/class_759;method_3228(Lnet/minecraft/class_742;FFLnet/minecraft/class_1268;FLnet/minecraft/class_1799;FLnet/minecraft/class_4587;Lnet/minecraft/class_4597;I)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/PhoraMerchantHudMixin": {
+      "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIFFIIII)V": "Lnet/minecraft/class_332;method_25291(Lnet/minecraft/class_2960;IIIFFIIII)V",
+      "drawBackground": "Lnet/minecraft/class_492;method_2389(Lnet/minecraft/class_332;FII)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/TotemEonClientMixin": {
+      "onEntityStatus(Lnet/minecraft/network/packet/s2c/play/EntityStatusS2CPacket;)V": "Lnet/minecraft/class_634;method_11148(Lnet/minecraft/class_2663;)V"
+    },
+    "com/watonstudio/creepermetalico/mixin/WorldRendererMixin": {
+      "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V": "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/class_2960;)V",
+      "renderSky": "Lnet/minecraft/class_761;method_3257(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/class_4184;ZLjava/lang/Runnable;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/watonstudio/creepermetalico/mixin/BackgroundRendererMixin": {
+        "Lnet/minecraft/util/CubicSampler;sampleColor(Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/CubicSampler$RgbFetcher;)Lnet/minecraft/util/math/Vec3d;": "Lnet/minecraft/class_6491;method_24895(Lnet/minecraft/class_243;Lnet/minecraft/class_6491$class_4859;)Lnet/minecraft/class_243;",
+        "render": "Lnet/minecraft/class_758;method_3210(Lnet/minecraft/class_4184;FLnet/minecraft/class_638;IF)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/ClientWorldMixin": {
+        "getCloudsColor": "Lnet/minecraft/class_638;method_23785(F)Lnet/minecraft/class_243;"
+      },
+      "com/watonstudio/creepermetalico/mixin/EclipseDarknessOverlayMixin": {
+        "renderHand": "Lnet/minecraft/class_757;method_3172(Lnet/minecraft/class_4184;FLorg/joml/Matrix4f;)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/EclipseFogDistanceMixin": {
+        "applyFog": "Lnet/minecraft/class_758;method_3211(Lnet/minecraft/class_4184;Lnet/minecraft/class_758$class_4596;FZF)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/EclipseNightVisionMixin": {
+        "getNightVisionStrength": "Lnet/minecraft/class_757;method_3174(Lnet/minecraft/class_1309;F)F"
+      },
+      "com/watonstudio/creepermetalico/mixin/FloralFirstPersonRootsMixin": {
+        "renderArm": "Lnet/minecraft/class_1007;method_23205(Lnet/minecraft/class_4587;Lnet/minecraft/class_4597;ILnet/minecraft/class_742;Lnet/minecraft/class_630;Lnet/minecraft/class_630;)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/LightmapTextureManagerMixin": {
+        "Lnet/minecraft/client/world/ClientWorld;getSkyBrightness(F)F": "Lnet/minecraft/class_638;method_23783(F)F",
+        "getBrightness": "Lnet/minecraft/class_765;method_23284(Lnet/minecraft/class_2874;I)F",
+        "update": "Lnet/minecraft/class_765;method_3313(F)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/LinternaHeldAnimationMixin": {
+        "renderFirstPersonItem(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/util/Hand;FLnet/minecraft/item/ItemStack;FLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V": "Lnet/minecraft/class_759;method_3228(Lnet/minecraft/class_742;FFLnet/minecraft/class_1268;FLnet/minecraft/class_1799;FLnet/minecraft/class_4587;Lnet/minecraft/class_4597;I)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/PhoraMerchantHudMixin": {
+        "Lnet/minecraft/client/gui/DrawContext;drawTexture(Lnet/minecraft/util/Identifier;IIIFFIIII)V": "Lnet/minecraft/class_332;method_25291(Lnet/minecraft/class_2960;IIIFFIIII)V",
+        "drawBackground": "Lnet/minecraft/class_492;method_2389(Lnet/minecraft/class_332;FII)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/TotemEonClientMixin": {
+        "onEntityStatus(Lnet/minecraft/network/packet/s2c/play/EntityStatusS2CPacket;)V": "Lnet/minecraft/class_634;method_11148(Lnet/minecraft/class_2663;)V"
+      },
+      "com/watonstudio/creepermetalico/mixin/WorldRendererMixin": {
+        "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/util/Identifier;)V": "Lcom/mojang/blaze3d/systems/RenderSystem;setShaderTexture(ILnet/minecraft/class_2960;)V",
+        "renderSky": "Lnet/minecraft/class_761;method_3257(Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;FLnet/minecraft/class_4184;ZLjava/lang/Runnable;)V"
+      }
+    }
+  }
+}

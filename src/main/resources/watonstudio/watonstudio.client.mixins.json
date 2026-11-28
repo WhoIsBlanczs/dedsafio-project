@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.watonstudio.creepermetalico.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "client-WatonStudio-refmap.json",
+  "client": [
+    "TotemEonClientMixin",
+    "PhoraMerchantHudMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

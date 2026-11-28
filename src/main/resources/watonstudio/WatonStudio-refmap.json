@@ -1,0 +1,38 @@
+{
+  "mappings": {
+    "com/watonstudio/creepermetalico/mixin/CreeperQteDamageMixin": {
+      "damage": "Lnet/minecraft/class_1309;method_5643(Lnet/minecraft/class_1282;F)Z"
+    },
+    "com/watonstudio/creepermetalico/mixin/CreeperQteExplodeInvoker": {
+      "explode": "method_7006()V"
+    },
+    "com/watonstudio/creepermetalico/mixin/CreeperQteMixin": {
+      "explode": "Lnet/minecraft/class_1548;method_7006()V"
+    },
+    "com/watonstudio/creepermetalico/mixin/PlayerTotemMixin": {
+      "tryUseTotem": "Lnet/minecraft/class_1309;method_6095(Lnet/minecraft/class_1282;)Z"
+    },
+    "com/watonstudio/creepermetalico/mixin/TotemEonMixin": {
+      "tryUseTotem": "Lnet/minecraft/class_1309;method_6095(Lnet/minecraft/class_1282;)Z"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/watonstudio/creepermetalico/mixin/CreeperQteDamageMixin": {
+        "damage": "Lnet/minecraft/class_1309;method_5643(Lnet/minecraft/class_1282;F)Z"
+      },
+      "com/watonstudio/creepermetalico/mixin/CreeperQteExplodeInvoker": {
+        "explode": "method_7006()V"
+      },
+      "com/watonstudio/creepermetalico/mixin/CreeperQteMixin": {
+        "explode": "Lnet/minecraft/class_1548;method_7006()V"
+      },
+      "com/watonstudio/creepermetalico/mixin/PlayerTotemMixin": {
+        "tryUseTotem": "Lnet/minecraft/class_1309;method_6095(Lnet/minecraft/class_1282;)Z"
+      },
+      "com/watonstudio/creepermetalico/mixin/TotemEonMixin": {
+        "tryUseTotem": "Lnet/minecraft/class_1309;method_6095(Lnet/minecraft/class_1282;)Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "watonstudio:item/arandano_nocturno"
+                 },
+    "parent":  "minecraft:item/generated"
+}

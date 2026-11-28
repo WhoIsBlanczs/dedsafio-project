@@ -1,0 +1,25 @@
+{
+  "resorte_walking": {
+    "sounds": [
+      "creeper_metalico:walking"
+    ]
+  },
+  "resorte_explosion": {
+    "sounds": [
+      "creeper_metalico:explosion"
+    ]
+  },
+  "muerte": {
+    "sounds": [
+      {
+        "name": "watonstudio:muerte",
+        "stream": true
+      }
+    ]
+  },
+  {
+    "start": { "category": "master", "sounds": [ { "name": "eclipse:start", "stream": true } ] },
+    "dark": { "category": "master", "sounds": [ { "name": "eclipse:dark", "stream": true } ] },
+    "ambient": { "category": "master", "sounds": [ { "name": "eclipse:ambient", "stream": true } ] },
+    "ring": { "category": "master", "sounds": [ { "name": "eclipse:ring", "stream": true } ] }
+  }

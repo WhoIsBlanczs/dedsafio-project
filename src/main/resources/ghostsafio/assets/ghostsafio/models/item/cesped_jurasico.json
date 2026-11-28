@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "ghostsafio:block/cesped_jurasico_arriba",
+    "bottom": "ghostsafio:block/tierra_jurasica_16",
+    "side": "ghostsafio:block/cesped_jurasico_lado"
+  }
+}

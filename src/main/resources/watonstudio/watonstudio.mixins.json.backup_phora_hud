@@ -1,0 +1,18 @@
+{
+    "required":  true,
+    "package":  "com.watonstudio.creepermetalico.mixin",
+    "compatibilityLevel":  "JAVA_21",
+    "refmap":  "WatonStudio-refmap.json",
+    "mixins":  [
+                   "TotemEonMixin",
+                   "CreeperQteMixin",
+                   "CreeperQteExplodeInvoker",
+                   "CreeperQteDamageMixin"
+               ],
+    "client":  [
+
+               ],
+    "injectors":  {
+                      "defaultRequire":  1
+                  }
+}

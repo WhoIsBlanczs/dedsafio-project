@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "watonstudio:item/semilla_arandano_nocturno"
+                 },
+    "parent":  "minecraft:item/generated"
+}

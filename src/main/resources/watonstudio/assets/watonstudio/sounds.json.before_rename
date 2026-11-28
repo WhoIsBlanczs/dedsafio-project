@@ -1,0 +1,47 @@
+{
+  "notify": {
+    "sounds": ["watonstudio:notify"]
+  },
+  "nutria": {
+    "sounds": [{"name": "watonstudio:nutria", "stream": true}]
+  },
+  "revil_music": {
+    "sounds": [{"name": "watonstudio:revil_music", "stream": true}]
+  },
+  "revil_appear": {
+    "sounds": ["watonstudio:revil_appear"]
+  },
+  "rise": {
+    "sounds": ["watonstudio:rise"]
+  },
+  "boom": {
+    "sounds": ["watonstudio:boom"]
+  },
+  "crack": {
+    "sounds": ["watonstudio:crack"]
+  },
+  "resorte_walking": {
+    "sounds": ["creeper_metalico:walking"]
+  },
+  "resorte_explosion": {
+    "sounds": ["creeper_metalico:explosion"]
+  },
+  "muerte": {
+    "sounds": [{"name": "watonstudio:muerte", "stream": true}]
+  },
+  "start": {
+    "sounds": [{"name": "watonstudio:19-58-08", "stream": true}]
+  },
+  "post_eclipse": {
+    "sounds": [{"name": "watonstudio:20-00-13", "stream": true}]
+  },
+  "dark": {
+    "sounds": [{"name": "watonstudio:dark", "stream": true}]
+  },
+  "ambient": {
+    "sounds": [{"name": "watonstudio:ambient", "stream": true}]
+  },
+  "ring": {
+    "sounds": [{"name": "watonstudio:ring", "stream": true}]
+  }
+}

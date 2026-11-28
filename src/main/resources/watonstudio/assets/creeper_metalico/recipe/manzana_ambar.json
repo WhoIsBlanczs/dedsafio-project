@@ -1,0 +1,16 @@
+
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "watonstudio:insecto"
+    }
+  ],
+  "result": {
+    "id": "watonstudio:manzana_ambar",
+    "count": 1
+  }
+}

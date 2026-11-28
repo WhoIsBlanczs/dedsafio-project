@@ -1,0 +1,19 @@
+{
+  "required": false,
+    "package": "com.ghostsafio.mitomod.client.mixin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+       "ExampleClientMixin",
+       "GameRendererMixin",
+       "ClientLevelMixin",
+       "FogRendererMixin",
+       "CameraMixin",
+       "LoadingScreenMixin"
+    ],
+    "injectors": {
+      "defaultRequire": 0
+    },
+    "overwrites": {
+       "requireAnnotations": true
+    }
+}

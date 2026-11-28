@@ -1,0 +1,55 @@
+{
+  "supernova": {
+    "sounds": [
+      {
+        "name": "ghostsafio:supernova",
+        "stream": true
+      }
+    ]
+  },
+  "skiff_phora_aparece": {
+    "subtitle": "subtitles.ghostsafio.skiff_phora_aparece",
+    "sounds": [
+      {
+        "name": "ghostsafio:skiff_phora_aparece",
+        "volume": 1.0
+      }
+    ]
+  },
+  "skiff_phora_idle": {
+    "subtitle": "subtitles.ghostsafio.skiff_phora_idle",
+    "sounds": [
+      {
+        "name": "ghostsafio:skiff_phora_idle",
+        "volume": 1.0
+      }
+    ]
+  },
+  "pod_phora_aparece": {
+    "subtitle": "subtitles.ghostsafio.pod_phora_aparece",
+    "sounds": [
+      {
+        "name": "ghostsafio:pod_phora_aparece",
+        "volume": 1.0
+      }
+    ]
+  },
+  "pod_phora_idle": {
+    "subtitle": "subtitles.ghostsafio.pod_phora_idle",
+    "sounds": [
+      {
+        "name": "ghostsafio:pod_phora_idle",
+        "volume": 1.0
+      }
+    ]
+  },
+  "pod_phora_laser": {
+    "subtitle": "subtitles.ghostsafio.pod_phora_laser",
+    "sounds": [
+      {
+        "name": "ghostsafio:pod_phora_laser",
+        "volume": 1.0
+      }
+    ]
+  }
+}
