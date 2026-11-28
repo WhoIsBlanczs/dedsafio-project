@@ -1,27 +1,17 @@
 package net.owleafstudio.modminds.init;
 
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
-import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.world.level.gamerules.GameRules;
-import net.minecraft.world.level.gamerules.GameRules;
-import net.minecraft.world.level.gamerules.GameRules;
-import net.minecraft.world.level.gamerules.GameRules;
-import net.minecraftforge.fml.common.Mod;
+import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 
-@Mod.EventBusSubscriber(
-   bus = Mod.EventBusSubscriber.Bus.MOD
-)
+/** En 26.3 las reglas de juego llevan id con espacio de nombres y en minúsculas (/gamerule modminds:...). */
 public class ModmindsModGameRules {
-   public static final GameRules.Key<GameRules.BooleanValue> BLOQUEADOR_COMANDO = GameRuleRegistry.register(
-      "bloqueadorComando", GameRules.Category.PLAYER, GameRuleFactory.createBooleanRule(true)
-   );
-   public static final GameRules.Key<GameRules.IntegerValue> ZOMBIFICACION_COMANDO = GameRuleRegistry.register(
-      "zombificacionComando", GameRules.Category.PLAYER, GameRuleFactory.createIntRule(0)
-   );
-   public static final GameRules.Key<GameRules.BooleanValue> SAPITO_PANTANO_COMANDO = GameRuleRegistry.register(
-      "sapitoPantanoComando", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true)
-   );
-   public static final GameRules.Key<GameRules.BooleanValue> TORTUGA_NETHERITA_COMANDO = GameRuleRegistry.register(
-      "tortugaNetheritaComando", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true)
-   );
+   public static final GameRule<Boolean> BLOQUEADOR_COMANDO = GameRuleBuilder.forBoolean(true).category(GameRuleCategory.PLAYER).buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "bloqueador_comando"));
+   public static final GameRule<Integer> ZOMBIFICACION_COMANDO = GameRuleBuilder.forInteger(0).category(GameRuleCategory.PLAYER).buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "zombificacion_comando"));
+   public static final GameRule<Boolean> SAPITO_PANTANO_COMANDO = GameRuleBuilder.forBoolean(true).category(GameRuleCategory.MOBS).buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "sapito_pantano_comando"));
+   public static final GameRule<Boolean> TORTUGA_NETHERITA_COMANDO = GameRuleBuilder.forBoolean(true).category(GameRuleCategory.MOBS).buildAndRegister(Identifier.fromNamespaceAndPath("modminds", "tortuga_netherita_comando"));
+
+   public static void load() {
+   }
 }

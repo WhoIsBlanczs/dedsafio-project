@@ -4,7 +4,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.food.FoodProperties;
@@ -20,8 +20,8 @@ public class CervezaItem extends Item {
       );
    }
 
-   public UseAnim getUseAnimation(ItemStack itemstack) {
-      return UseAnim.DRINK;
+   public ItemUseAnimation getUseAnimation(ItemStack itemstack) {
+      return ItemUseAnimation.DRINK;
    }
 
    public ItemStack finishUsingItem(ItemStack itemstack, Level world, LivingEntity entity) {

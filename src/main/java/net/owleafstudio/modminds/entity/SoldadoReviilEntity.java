@@ -43,6 +43,7 @@ import com.geckolib.animatable.manager.AnimatableManager.ControllerRegistrar;
 import com.geckolib.util.GeckoLibUtil;
 
 public class SoldadoReviilEntity extends PathfinderMob implements GeoEntity {
+   private boolean swingingMc$;
    public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(SoldadoReviilEntity.class, EntityDataSerializers.STRING);
    public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(SoldadoReviilEntity.class, EntityDataSerializers.STRING);
    public String animationprocedure = "empty";
@@ -179,16 +180,16 @@ public class SoldadoReviilEntity extends PathfinderMob implements GeoEntity {
    }
 
    private PlayState attackingPredicate(AnimationTest<?> event) {
-      if (this.getAttackAnim(event.renderState().getPartialTick()) > 0.0F && !this.isSwinging()) {
-         this.isSwinging() = true;
+      if (this.getSwingAnimation(event.renderState().getPartialTick()) > 0.0F && !this.swingingMc$) {
+         this.swingingMc$ = true;
          this.lastSwing = this.level().getGameTime();
       }
 
-      if (this.isSwinging() && this.lastSwing + 11L <= this.level().getGameTime()) {
-         this.isSwinging() = false;
+      if (this.swingingMc$ && this.lastSwing + 11L <= this.level().getGameTime()) {
+         this.swingingMc$ = false;
       }
 
-      if (this.isSwinging() && this.animationprocedure.equals("empty") && event.controller().hasAnimationFinished()) {
+      if (this.swingingMc$ && this.animationprocedure.equals("empty") && event.controller().hasAnimationFinished()) {
          event.controller().reset();
          return event.setAndContinue(SLASH);
       } else {

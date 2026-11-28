@@ -1,7 +1,5 @@
 package net.owleafstudio.modminds.client.screens;
 
-import com.mojang.renderpearl.backend.opengl.GlStateManager.DestFactor;
-import com.mojang.renderpearl.backend.opengl.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
 import java.util.ArrayList;
 import java.util.Comparator;

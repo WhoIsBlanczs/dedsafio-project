@@ -1,41 +1,15 @@
 package net.owleafstudio.modminds.item;
 
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
-public class EspadaTikiItem extends SwordItem {
-   private static final Tier TIER = new Tier() {
-      public int getUses() {
-         return 250;
-      }
-
-      public float getSpeed() {
-         return 6.0F;
-      }
-
-      public float getAttackDamageBonus() {
-         return 0.0F;
-      }
-
-      public TagKey<Block> getIncorrectBlocksForDrops() {
-         return BlockTags.INCORRECT_FOR_WOODEN_TOOL;
-      }
-
-      public int getEnchantmentValue() {
-         return 2;
-      }
-
-      public Ingredient getRepairIngredient() {
-         return Ingredient.of();
-      }
-   };
+public class EspadaTikiItem extends Item {
+   private static final net.minecraft.world.item.ToolMaterial TIER = new net.minecraft.world.item.ToolMaterial(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 250, 6.0F, 0.0F, 2, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "sin_reparacion")));
 
    public EspadaTikiItem() {
-      super(TIER, new Item.Properties().attributes(createAttributes(TIER, 3, -3.0F)));
+      super(new Item.Properties().sword(TIER, 3, -3.0F));
    }
 }

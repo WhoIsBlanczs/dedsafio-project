@@ -8,7 +8,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 
 public class HitEfectoMobEffect extends MobEffect {
@@ -32,7 +31,7 @@ public class HitEfectoMobEffect extends MobEffect {
          }
 
          @Override
-         public boolean renderInventoryText(MobEffectInstance instance, EffectRenderingInventoryScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+         public boolean renderInventoryText(MobEffectInstance instance, net.minecraft.client.gui.screens.Screen screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
             return false;
          }
 

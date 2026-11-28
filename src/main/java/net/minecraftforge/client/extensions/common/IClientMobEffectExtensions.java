@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 
 public interface IClientMobEffectExtensions {
    Map<MobEffect, IClientMobEffectExtensions> EXTENSIONS = new ConcurrentHashMap<>();
@@ -26,7 +25,7 @@ public interface IClientMobEffectExtensions {
       return this.isVisibleInGui(effect);
    }
 
-   default boolean renderInventoryText(MobEffectInstance instance, EffectRenderingInventoryScreen<?> screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
+   default boolean renderInventoryText(MobEffectInstance instance, net.minecraft.client.gui.screens.Screen screen, GuiGraphicsExtractor guiGraphics, int x, int y, int blitOffset) {
       return false;
    }
 }

@@ -6,8 +6,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -21,7 +19,8 @@ import net.minecraft.world.item.Item;
 import net.owleafstudio.modminds.compat.CompatAccess;
 import net.owleafstudio.modminds.init.ModmindsModEnchantments;
 
-public class EspadaInfernalCurativaItem extends SwordItem {
+public class EspadaInfernalCurativaItem extends Item {
+   private static final net.minecraft.world.item.ToolMaterial TIER = new net.minecraft.world.item.ToolMaterial(BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 2031, 1.0F, 5.0F, 15, net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "sin_reparacion")));
    private static final int FIRE_ASPECT_LEVEL = 2;
    private static final int ASPECTO_DE_SANGUIJUELA_LEVEL = 2;
 
@@ -51,9 +50,9 @@ public class EspadaInfernalCurativaItem extends SwordItem {
       }
    }
 
-   public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+   public void hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
       this.applyFreezingEffect(target);
-      return super.hurtEnemy(stack, target, attacker);
+      super.hurtEnemy(stack, target, attacker);
    }
 
    private boolean hasDefaultEnchantments(ItemStack stack) {
@@ -74,29 +73,5 @@ public class EspadaInfernalCurativaItem extends SwordItem {
       }
    }
 
-   private static class CustomTier implements Tier {
-      public int getUses() {
-         return 2031;
-      }
-
-      public float getSpeed() {
-         return 1.0F;
-      }
-
-      public float getAttackDamageBonus() {
-         return 5.0F;
-      }
-
-      public TagKey<Block> getIncorrectBlocksForDrops() {
-         return BlockTags.INCORRECT_FOR_DIAMOND_TOOL;
-      }
-
-      public int getEnchantmentValue() {
-         return 15;
-      }
-
-      public Ingredient getRepairIngredient() {
-         return Ingredient.of();
-      }
-   }
+   
 }

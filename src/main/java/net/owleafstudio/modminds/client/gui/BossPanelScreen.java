@@ -288,7 +288,10 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       super.resize(minecraft, width, height);
    }
 
-   public boolean keyPressed(int key, int modifiers, int keyCode) {
+   public boolean keyPressed(net.minecraft.client.input.KeyEvent evento$) {
+      int key = evento$.key();
+      int modifiers = 0;
+      int keyCode = evento$.modifiers();
       if (key == 256) {
          this.minecraft.player.closeContainer();
          return true;
@@ -304,7 +307,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          this.cambiarTab(key - 49);
          return true;
       } else {
-         return super.keyPressed(key, modifiers, keyCode);
+         return super.keyPressed(evento$);
       }
    }
 
@@ -316,7 +319,8 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       this.seleccionarTab(index);
    }
 
-   protected void renderBg(GuiGraphicsExtractor gui, float partialTicks, int mouseX, int mouseY) {
+   public void extractBackground(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
+      super.extractBackground(gui, mouseX, mouseY, partialTicks);
       int x = this.leftPos;
       int y = this.topPos;
       int w = this.imageWidth;
@@ -340,8 +344,8 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          textX = x + 9 + 28;
       }
 
-      gui.drawString(this.font, this.title(), textX, y + 9 - 1, accent, false);
-      gui.drawString(
+      gui.text(this.font, this.title(), textX, y + 9 - 1, accent, false);
+      gui.text(
          this.font,
          Component.translatable("gui.modminds.panel.hint").withStyle(Style.EMPTY.withItalic(true)),
          textX,
@@ -354,7 +358,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          int chipW = this.font.width(fase) + 10;
          int chipX = x + w - 9 - chipW;
          plate(gui, chipX, y + 9 - 1, chipW, 12, 2, fade(accent, 0.3F));
-         gui.drawString(this.font, fase, chipX + 5, y + 9 + 1, tint(accent, -1, 0.55F), false);
+         gui.text(this.font, fase, chipX + 5, y + 9 + 1, tint(accent, -1, 0.55F), false);
       }
 
       gui.fill(x + 9, y + 9 + 30 - 1, x + w - 9, y + 9 + 30, fade(accent, 0.3F));
@@ -367,7 +371,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       int chipW = this.font.width(name) + 8;
       plate(gui, gridLeft, top + 1, chipW, 12, 2, fade(accent, 0.22F));
       gui.fill(gridLeft, top + 3, gridLeft + 2, top + 11, accent);
-      gui.drawString(this.font, name, gridLeft + 5, top + 3, tint(accent, -1, 0.4F), false);
+      gui.text(this.font, name, gridLeft + 5, top + 3, tint(accent, -1, 0.4F), false);
       gui.fill(gridLeft + chipW + 4, top + 10, x + w - 9, top + 11, -13421750);
       if (this.fieldSection >= 0 && this.fieldSection == this.tab && this.numberField != null) {
          int fieldTop = y + this.fieldPlateY();
@@ -396,7 +400,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       int innerW = w - 14;
       BossPanelScreen.Ability ability = this.lectura;
       if (ability == null) {
-         gui.drawString(
+         gui.text(
             this.font,
             Component.translatable("gui.modminds.panel.readout.empty").withStyle(Style.EMPTY.withItalic(true)),
             innerX,
@@ -404,7 +408,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
             -7697767,
             false
          );
-         gui.drawString(
+         gui.text(
             this.font,
             Component.translatable("gui.modminds.panel.readout.nav").withStyle(Style.EMPTY.withItalic(true)),
             innerX,
@@ -414,13 +418,13 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          );
       } else {
          boolean enFase = this.appliesToPhase(this.lastPhase, ability.id());
-         gui.drawString(this.font, ability.label(), innerX, y + 5, tint(accent, -1, 0.45F), false);
+         gui.text(this.font, ability.label(), innerX, y + 5, tint(accent, -1, 0.45F), false);
          Component help = ability.help();
          if (help != null) {
             int row = y + 15;
             int lineas = 4;
             if (!enFase) {
-               gui.drawString(
+               gui.text(
                   this.font,
                   Component.translatable("gui.modminds.panel.off_phase_here").withStyle(Style.EMPTY.withItalic(true)),
                   innerX,
@@ -436,11 +440,11 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
             int hasta = Math.min(cortado.size(), lineas);
 
             for (int i = 0; i < hasta; i++) {
-               gui.drawString(this.font, cortado.get(i), innerX, row + i * 10, enFase ? -2697504 : -7697767, false);
+               gui.text(this.font, cortado.get(i), innerX, row + i * 10, enFase ? -2697504 : -7697767, false);
             }
 
             if (cortado.size() > lineas) {
-               gui.drawString(this.font, "…", x + w - 14, row + (hasta - 1) * 10, -7697767, false);
+               gui.text(this.font, "…", x + w - 14, row + (hasta - 1) * 10, -7697767, false);
             }
          }
       }
@@ -458,15 +462,13 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
       }
    }
 
-   protected void renderLabels(GuiGraphicsExtractor gui, int mouseX, int mouseY) {
+   protected void extractLabels(GuiGraphicsExtractor gui, int mouseX, int mouseY) {
    }
 
-   public void render(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
+   public void extractRenderState(GuiGraphicsExtractor gui, int mouseX, int mouseY, float partialTicks) {
       this.refrescarFase();
       this.seguirCursor(mouseX, mouseY);
-      this.renderBackground(gui, mouseX, mouseY, partialTicks);
-      super.render(gui, mouseX, mouseY, partialTicks);
-      this.renderTooltip(gui, mouseX, mouseY);
+      super.extractRenderState(gui, mouseX, mouseY, partialTicks);
    }
 
    private void seguirCursor(int mouseX, int mouseY) {
@@ -550,7 +552,7 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          int color = this.active && this.enFase ? (hovered ? -1 : -2697504) : -7697767;
          Font font = Minecraft.getInstance().font;
          if (font.width(this.getMessage()) <= w - 8) {
-            gui.drawString(font, this.getMessage(), x + (w - font.width(this.getMessage())) / 2, y + (h - 9) / 2, color);
+            gui.text(font, this.getMessage(), x + (w - font.width(this.getMessage())) / 2, y + (h - 9) / 2, color);
          } else {
             this.renderScrollingString(gui, font, 4, color);
          }
@@ -601,12 +603,12 @@ public abstract class BossPanelScreen<M extends AbstractContainerMenu> extends A
          int color = this.selected ? -1 : (hovered ? -2697504 : -7697767);
          Component label = this.getMessage();
          if (font.width(label) <= right - (x + 7)) {
-            gui.drawString(font, label, x + 7, y + (h - 9) / 2, color);
+            gui.text(font, label, x + 7, y + (h - 9) / 2, color);
          } else {
             renderScrollingString(gui, font, label, x + 7, y, right, y + h, color);
          }
 
-         gui.drawString(font, howMany, right + 2, y + (h - 9) / 2, this.selected ? -2697504 : -7697767);
+         gui.text(font, howMany, right + 2, y + (h - 9) / 2, this.selected ? -2697504 : -7697767);
       }
    }
 }

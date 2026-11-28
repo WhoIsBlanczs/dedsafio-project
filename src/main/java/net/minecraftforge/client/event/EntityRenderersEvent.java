@@ -1,7 +1,7 @@
 package net.minecraftforge.client.event;
 
 import java.util.function.Supplier;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,7 +13,7 @@ import net.minecraftforge.eventbus.api.Event;
 public class EntityRenderersEvent extends Event {
    public static class RegisterLayerDefinitions extends EntityRenderersEvent {
       public void registerLayerDefinition(ModelLayerLocation location, Supplier<LayerDefinition> generator) {
-         EntityModelLayerRegistry.registerModelLayer(location, generator::get);
+         ModelLayerRegistry.registerModelLayer(location, generator::get);
       }
    }
 

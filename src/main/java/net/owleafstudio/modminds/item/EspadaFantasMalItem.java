@@ -1,8 +1,6 @@
 package net.owleafstudio.modminds.item;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -11,7 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.owleafstudio.modminds.init.ModmindsModItems;
 
-public class EspadaFantasMalItem extends SwordItem {
+public class EspadaFantasMalItem extends Item {
    public EspadaFantasMalItem() {
       super(new Tier() {
          public int getUses() {

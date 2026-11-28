@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import com.mojang.blaze3d.platform.InputConstants;
@@ -39,7 +39,7 @@ public final class KeyBindingBridge {
             long window = client.getWindow().getWindow();
 
             for (KeyMapping mapping : List.copyOf(polled)) {
-               InputConstants.Key bound = KeyBindingHelper.getBoundKeyOf(mapping);
+               InputConstants.Key bound = KeyMappingHelper.getBoundKeyOf(mapping);
                if (bound.getType() == InputConstants.Type.KEYSYM && bound.getValue() >= 0) {
                   mapping.setDown(InputConstants.isKeyDown(bound.getValue()));
                }
@@ -53,7 +53,7 @@ public final class KeyBindingBridge {
 
       for (KeyMapping mapping : client.options.keyMappings) {
          if (mapping != null) {
-            byKey.computeIfAbsent(KeyBindingHelper.getBoundKeyOf(mapping), key -> new ArrayList<>()).add(mapping);
+            byKey.computeIfAbsent(KeyMappingHelper.getBoundKeyOf(mapping), key -> new ArrayList<>()).add(mapping);
          }
       }
 

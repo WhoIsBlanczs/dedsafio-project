@@ -45,7 +45,7 @@ import net.owleafstudio.modminds.init.ModmindsModBlocks;
    bus = Mod.EventBusSubscriber.Bus.MOD
 )
 public class MounstrosityDimensionTeleporter implements ITeleporter {
-   public static final TicketType<BlockPos> CUSTOM_PORTAL = TicketType.create("mounstrosity_dimension_portal", Vec3i::compareTo, 300);
+   public static final TicketType CUSTOM_PORTAL = net.minecraft.core.Registry.register(net.minecraft.core.registries.BuiltInRegistries.TICKET_TYPE, net.minecraft.resources.Identifier.fromNamespaceAndPath("modminds", "mounstrosity_dimension_portal"), new TicketType(300L, TicketType.FLAG_LOADING));
    public static Holder<PoiType> poi = null;
    private final ServerLevel level;
    private final BlockPos entityEnterPos;
@@ -81,7 +81,7 @@ public class MounstrosityDimensionTeleporter implements ITeleporter {
       return optional.map(
          p_192975_ -> {
             BlockPos blockpos = p_192975_.getPos();
-            this.level.getChunkSource().addRegionTicket(CUSTOM_PORTAL, new ChunkPos(blockpos), 3, blockpos);
+            this.level.getChunkSource().addTicketWithRadius(CUSTOM_PORTAL, new ChunkPos(blockpos), 3);
             BlockState blockstate = this.level.getBlockState(blockpos);
             return BlockUtil.getLargestRectangleAround(
                blockpos,

@@ -39,30 +39,18 @@ public class AtomizadorDeAstrosItem extends Item implements GeoItem {
       return false;
    }
 
-   public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-      consumer.accept(
-         new IClientItemExtensions() {
-            private final BlockEntityWithoutLevelRenderer renderer = new AtomizadorDeAstrosItemRenderer();
+   public void createGeoRenderer(java.util.function.Consumer<com.geckolib.animatable.client.GeoRenderProvider> consumer) {
+      consumer.accept(new com.geckolib.animatable.client.GeoRenderProvider() {
+         private net.owleafstudio.modminds.item.renderer.AtomizadorDeAstrosItemRenderer renderer;
 
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-               return this.renderer;
+         @Override
+         public com.geckolib.renderer.GeoItemRenderer<?> getGeoItemRenderer() {
+            if (this.renderer == null) {
+               this.renderer = new net.owleafstudio.modminds.item.renderer.AtomizadorDeAstrosItemRenderer();
             }
-
-            @Override
-            public boolean applyForgeHandTransform(
-               PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess
-            ) {
-               int i = arm == HumanoidArm.RIGHT ? 1 : -1;
-               poseStack.translate(i * 0.56F, -0.52F, -0.72F);
-               if (player.getUseItem() == itemInHand) {
-                  poseStack.translate(0.05, 0.05, 0.05);
-               }
-
-               return true;
-            }
+            return this.renderer;
          }
-      );
+      });
    }
 
    private PlayState idlePredicate(AnimationTest<?> event) {

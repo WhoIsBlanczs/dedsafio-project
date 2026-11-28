@@ -46,6 +46,7 @@ import com.geckolib.animatable.manager.AnimatableManager.ControllerRegistrar;
 import com.geckolib.util.GeckoLibUtil;
 
 public class ColosoEntity extends Monster implements GeoEntity {
+   private boolean swingingMc$;
    public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(ColosoEntity.class, EntityDataSerializers.BOOLEAN);
    public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(ColosoEntity.class, EntityDataSerializers.STRING);
    public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(ColosoEntity.class, EntityDataSerializers.STRING);
@@ -198,16 +199,16 @@ public class ColosoEntity extends Monster implements GeoEntity {
       double d1 = this.getX() - this.xOld;
       double d0 = this.getZ() - this.zOld;
       float velocity = (float)Math.sqrt(d1 * d1 + d0 * d0);
-      if (this.getAttackAnim(event.renderState().getPartialTick()) > 0.0F && !this.isSwinging()) {
-         this.isSwinging() = true;
+      if (this.getSwingAnimation(event.renderState().getPartialTick()) > 0.0F && !this.swingingMc$) {
+         this.swingingMc$ = true;
          this.lastSwing = this.level().getGameTime();
       }
 
-      if (this.isSwinging() && this.lastSwing + 7L <= this.level().getGameTime()) {
-         this.isSwinging() = false;
+      if (this.swingingMc$ && this.lastSwing + 7L <= this.level().getGameTime()) {
+         this.swingingMc$ = false;
       }
 
-      if (this.isSwinging() && event.controller().hasAnimationFinished()) {
+      if (this.swingingMc$ && event.controller().hasAnimationFinished()) {
          event.controller().reset();
          return event.setAndContinue(RawAnimation.begin().thenPlay("shoot"));
       } else {
