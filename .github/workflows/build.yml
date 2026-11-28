@@ -10,11 +10,13 @@ jobs:
       - name: classpath 26.3
         run: chmod +x gradlew && ./gradlew exportarClasspath -q
       - name: firmas
+        shell: bash {0}
         run: |
           cd build/cp
           for j in minecraft-common-*.jar minecraft-clientOnly-*.jar geckolib-*.jar fabric-api-*.jar fabric-object-builder*.jar fabric-item-group*.jar fabric-creative-tab*.jar fabric-rendering-v1*.jar fabric-networking*.jar fabric-lifecycle*.jar fabric-events-interaction*.jar fabric-command*.jar fabric-item-api*.jar fabric-screen-handler*.jar fabric-menu-api*.jar fabric-key-mapping*.jar fabric-entity-events*.jar fabric-biome*.jar fabric-loot*.jar fabric-registry-sync*.jar fabric-resource-loader*.jar fabric-content-registries*.jar fabric-block-api*.jar fabric-particles*.jar fabric-model-loading*.jar fabric-blockrenderlayer*.jar fabric-dimensions*.jar fabric-transfer*.jar fabric-data-attachment*.jar fabric-sound*.jar; do
             [ -f "$j" ] || continue
             unzip -Z1 "$j" | grep '\.class$' | grep -v 'module-info' | sed 's/\.class$//' > /tmp/c.txt
+            [ -s /tmp/c.txt ] || continue
             split -l 400 /tmp/c.txt /tmp/part_
             for p in /tmp/part_*; do javap -public -cp "$j" $(cat $p) 2>/dev/null; done >> /tmp/firmas.txt
             rm /tmp/part_*
