@@ -18,8 +18,14 @@ public class ForgeRegistryHandle<T> {
    }
 
    public T getValue(Identifier name) {
-      T value = (T)this.vanilla.get(name);
-      return (T)(value != null ? value : this.vanilla.get(vanillaDottedName(name)));
+      if (name == null) {
+         return null;
+      }
+      Optional<T> value = this.vanilla.getOptional(name);
+      if (value.isEmpty()) {
+         value = this.vanilla.getOptional(vanillaDottedName(name));
+      }
+      return value.orElseGet(() -> this.vanilla.getValue(name));
    }
 
    static Identifier vanillaDottedName(Identifier name) {
