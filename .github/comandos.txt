@@ -1,7 +1,6 @@
 say prueba
 forceload add 0 0
 summon ruletafanproject:agujero_negro 0 100 0
-summon ruletafanproject:bogged 0 100 0
 summon ruletafanproject:bomba_warden 0 100 0
 summon ruletafanproject:burbuja 0 100 0
 summon ruletafanproject:creeper_cesped 0 100 0

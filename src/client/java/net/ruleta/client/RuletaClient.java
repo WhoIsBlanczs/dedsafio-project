@@ -39,6 +39,8 @@ public final class RuletaClient implements ClientModInitializer {
       ClientPlayNetworking.registerGlobalReceiver(AgujeroPayload.TYPE, (m, ctx) -> AgujeroCliente.recibir(m));
       ClientPlayNetworking.registerGlobalReceiver(CodigoAbrirPayload.TYPE, (m, ctx) -> PantallaCodigo.abrir(m.modo(), m.pos()));
       ClientPlayNetworking.registerGlobalReceiver(CodigoRespuestaPayload.TYPE, (m, ctx) -> PantallaCodigo.respuesta(m.ok()));
+      ClientPlayNetworking.registerGlobalReceiver(net.ruleta.nuclear.network.TotemActivatePacket.TYPE, (m, ctx) -> net.ruleta.nuclear.client.ClientTotemHooks.showActivation(m.stack()));
+      net.ruleta.cajero.client.CajeroCliente.registrar();
       registrarDibujos();
       BurbujaCliente.registrar();
       ClientSetup.registrar();
