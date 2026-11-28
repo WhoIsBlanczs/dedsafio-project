@@ -138,7 +138,7 @@ public final class ClientEventPumps {
                copyPose(contextModel.rightLeg, armorModel.rightLeg);
                copyPose(contextModel.leftLeg, armorModel.leftLeg);
                setPartVisibility(armorModel, slot);
-               collector.submitModel(armorModel, state, poseStack, net.minecraft.client.renderer.rendertype.RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, state.outlineColor, null, 0);
+               collector.submitModel(armorModel, state, poseStack, net.minecraft.client.renderer.rendertype.RenderTypes.armorCutoutNoCull(texture), light, OverlayTexture.NO_OVERLAY, -1, null, state.outlineColor);
             }
          }
       }, new ItemLike[]{item});
