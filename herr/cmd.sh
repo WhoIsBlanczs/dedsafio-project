@@ -1,0 +1,2 @@
+J=$(ls minecraft-clientOnly-*.jar); mkdir -p /tmp/c && cd /tmp/c && unzip -q -o $OLDPWD/$J 'assets/minecraft/post_effect/*' 'assets/minecraft/shaders/post/*' 2>/dev/null; ls assets/minecraft/post_effect assets/minecraft/shaders/post | head -60
+cat assets/minecraft/post_effect/invert.json; echo; cat assets/minecraft/post_effect/creeper.json; echo; ls assets/minecraft/shaders/post/; cat assets/minecraft/shaders/post/color_convolve.fsh 2>/dev/null | head -60
