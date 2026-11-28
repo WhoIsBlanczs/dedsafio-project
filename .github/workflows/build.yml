@@ -15,9 +15,9 @@ jobs:
         with:
           tag_name: catalogo-26.3-${{ github.run_number }}
           target_commitish: ${{ github.sha }}
-          name: Ruleta Fan Project (catálogo: mobs, ítems y bloques) (build ${{ github.run_number }})
+          name: "Ruleta Fan Project, catálogo de mobs, ítems y bloques (build ${{ github.run_number }})"
           body: |
-            Ruleta Fan Project (catálogo: mobs, ítems y bloques) para Minecraft 26.3 (Fabric).
+            Ruleta Fan Project (catálogo de mobs, ítems y bloques) para Minecraft 26.3 (Fabric).
             Necesita Fabric API 0.166.2+26.3 (o más nuevo). Licencia CC BY-NC-SA 4.0, mod original de DarkPlayer y colaboradores.
           files: build/libs/ruleta-catalogo-26.3-1.0.0.jar
           make_latest: false
