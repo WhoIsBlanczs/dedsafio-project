@@ -89,11 +89,6 @@ public final class Compat {
       return new CommandSourceStack(src, pos, rot, nivel, permisos(permiso), servidor, entidad);
    }
 
-   /** Estado de dibujo que guarda la entidad, para renderers viejos que leían la entidad al dibujar. */
-   public static class EstadoEntidad extends net.minecraft.client.renderer.entity.state.EntityRenderState {
-      public Entity entidad;
-      public float pt;
-   }
 
    public static java.util.List<net.minecraft.world.item.ItemStack> armadura(net.minecraft.world.entity.LivingEntity e) {
       java.util.List<net.minecraft.world.item.ItemStack> l = new java.util.ArrayList<>();

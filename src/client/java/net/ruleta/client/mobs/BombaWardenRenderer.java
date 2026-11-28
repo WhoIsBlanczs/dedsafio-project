@@ -19,7 +19,7 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
-public class BombaWardenRenderer extends EntityRenderer<BombaWarden, net.ruleta.compat.Compat.EstadoEntidad> {
+public class BombaWardenRenderer extends EntityRenderer<BombaWarden, net.ruleta.client.compat.EstadoEntidad> {
    private static final Identifier WARDEN = Identifier.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden.png");
    private static final Identifier BRILLO = Identifier.fromNamespaceAndPath("minecraft", "textures/entity/warden/warden_bioluminescent_layer.png");
    private static final float TEX = 128.0F;
@@ -34,17 +34,17 @@ public class BombaWardenRenderer extends EntityRenderer<BombaWarden, net.ruleta.
       return frustum.isVisible(e.getBoundingBox().inflate(1.0, 0.8, 1.0));
    }
 
-   public net.ruleta.compat.Compat.EstadoEntidad createRenderState() {
-      return new net.ruleta.compat.Compat.EstadoEntidad();
+   public net.ruleta.client.compat.EstadoEntidad createRenderState() {
+      return new net.ruleta.client.compat.EstadoEntidad();
    }
 
-   public void extractRenderState(BombaWarden entidad$, net.ruleta.compat.Compat.EstadoEntidad estado$, float pt$) {
+   public void extractRenderState(BombaWarden entidad$, net.ruleta.client.compat.EstadoEntidad estado$, float pt$) {
       super.extractRenderState(entidad$, estado$, pt$);
       estado$.entidad = entidad$;
       estado$.pt = pt$;
    }
 
-   public void submit(net.ruleta.compat.Compat.EstadoEntidad estado$, PoseStack ps, net.minecraft.client.renderer.SubmitNodeCollector colector$, net.minecraft.client.renderer.state.level.CameraRenderState camara$) {
+   public void submit(net.ruleta.client.compat.EstadoEntidad estado$, PoseStack ps, net.minecraft.client.renderer.SubmitNodeCollector colector$, net.minecraft.client.renderer.state.level.CameraRenderState camara$) {
       BombaWarden e = (BombaWarden)estado$.entidad;
       float pt = estado$.pt;
       float yaw = e.getYRot();
