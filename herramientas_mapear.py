@@ -13,8 +13,23 @@ for f in ['out/client-1.21.1.txt','out/server-1.21.1.txt']:
             l=line.strip(); left,o=l.split(' -> ')
             left=re.sub(r'^\d+:\d+:','',left)
             typ,rest=left.split(' ',1)
-            if '(' in rest: name=rest[:rest.index('(')]; mem[(cur,o,'m')]=name
+            if '(' in rest:
+                name=rest[:rest.index('(')]; args=rest[rest.index('(')+1:-1]
+                mem[(cur,o,'m',typ,args)]=name
             else: mem[(cur,o,'f')]=rest
+n2o={v.replace('/','.'):k for k,v in cls_o2n.items()}
+prim={'int':'I','boolean':'Z','byte':'B','char':'C','short':'S','long':'J','float':'F','double':'D','void':'V'}
+def d(t):
+    a=''
+    while t.endswith('[]'): a+='['; t=t[:-2]
+    if t in prim: return a+prim[t]
+    return a+'L'+n2o.get(t,t).replace('.','/')+';'
+mdesc={}
+for k,v in mem.items():
+    if k[2]=='m':
+        c,o,_,typ,args=k
+        desc='('+''.join(d(x) for x in args.split(',') if x)+')'+d(typ)
+        mdesc[(c,o,desc)]=v
 out=[]
 ns=None; cc=None
 for line in open('out/intermediary-1.21.1.tiny'):
@@ -27,6 +42,6 @@ for line in open('out/intermediary-1.21.1.tiny'):
     elif len(p)>1 and p[1] in ('m','f'):
         kind=p[1]; o=p[3]; i=p[4]
         if i in toks:
-            n=mem.get((cc,o,kind))
+            n=mem.get((cc,o,'f')) if kind=='f' else mdesc.get((cc,o,p[2]))
             if n: out.append(f'{kind.upper()}\t{i}\t{n}')
 for l in sorted(set(out)): print(l)
