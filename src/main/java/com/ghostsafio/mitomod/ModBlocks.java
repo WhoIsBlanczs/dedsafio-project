@@ -26,7 +26,8 @@ public class ModBlocks {
    public static final Item GRASA = (Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id("grasa")), new Item(new net.minecraft.world.item.Item.Properties()));
 
    private static Block register(String id, Properties properties) {
-      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, com.ghostsafio.mitomod.compat.Ids.bloque(Ghostsafio.id(id)), new Block(properties));
+      properties.setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BLOCK, Ghostsafio.id(id)));
+      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, Ghostsafio.id(id), new Block(properties));
       Item item = (Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id(id)), new BlockItem(block, new net.minecraft.world.item.Item.Properties()));
       ITEMS.add(item);
       return block;

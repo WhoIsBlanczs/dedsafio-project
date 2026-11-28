@@ -43,21 +43,23 @@ import net.minecraft.world.level.levelgen.Heightmap.Types;
 public class ModDino {
    public static final ResourceKey<Level> DINO = ResourceKey.create(Registries.DIMENSION, Ghostsafio.id("jurasico"));
    private static final List<Item> ITEMS = new ArrayList<>();
-   public static final Block TIERRA = register("tierra_jurasica", new Block(Properties.ofFullCopy(Blocks.DIRT)));
-   public static final Block CESPED = register("cesped_jurasico", new Block(Properties.ofFullCopy(Blocks.DIRT).sound(SoundType.GRASS)));
-   public static final Block PIEDRA_RUINAS = register("piedra_ruinas", new Block(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
-   public static final Block PILAR_RUINAS = register("pilar_ruinas", new RotatedPillarBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
-   public static final Block MENA_AMBAR = register("mena_ambar", new Block(Properties.of().strength(1.5F, 3.0F).sound(SoundType.STONE).lightLevel(s -> 9)));
-   public static final Block PORTAL = register("portal_dino", new DinoPortalBlock(Properties.of().noCollision().strength(2.0F), true));
-   public static final Block SALIDA = register("salida_dino", new DinoPortalBlock(Properties.of().noCollision().strength(2.0F), false));
-   public static final Block CUERDA = register("cuerda", new RopeBlock(Properties.of().noCollision().noOcclusion().strength(0.5F).sound(SoundType.GRASS)));
-   public static final Block CICA = register("cica", new ModDino.JurassicPlant(Properties.ofFullCopy(Blocks.FERN)));
-   public static final Block HELECHO_ROCA = register("helecho_roca", new ModDino.JurassicPlant(Properties.ofFullCopy(Blocks.FERN)));
+   public static final Block TIERRA = register("tierra_jurasica", () -> new Block(Properties.ofFullCopy(Blocks.DIRT)));
+   public static final Block CESPED = register("cesped_jurasico", () -> new Block(Properties.ofFullCopy(Blocks.DIRT).sound(SoundType.GRASS)));
+   public static final Block PIEDRA_RUINAS = register("piedra_ruinas", () -> new Block(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+   public static final Block PILAR_RUINAS = register("pilar_ruinas", () -> new RotatedPillarBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+   public static final Block MENA_AMBAR = register("mena_ambar", () -> new Block(Properties.of().strength(1.5F, 3.0F).sound(SoundType.STONE).lightLevel(s -> 9)));
+   public static final Block PORTAL = register("portal_dino", () -> new DinoPortalBlock(Properties.of().noCollision().strength(2.0F), true));
+   public static final Block SALIDA = register("salida_dino", () -> new DinoPortalBlock(Properties.of().noCollision().strength(2.0F), false));
+   public static final Block CUERDA = register("cuerda", () -> new RopeBlock(Properties.of().noCollision().noOcclusion().strength(0.5F).sound(SoundType.GRASS)));
+   public static final Block CICA = register("cica", () -> new ModDino.JurassicPlant(Properties.ofFullCopy(Blocks.FERN)));
+   public static final Block HELECHO_ROCA = register("helecho_roca", () -> new ModDino.JurassicPlant(Properties.ofFullCopy(Blocks.FERN)));
    public static final Item AMBAR = (Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id("ambar")), new Item(new net.minecraft.world.item.Item.Properties()));
    private static final int FLAGS = 2;
 
-   private static Block register(String id, Block block) {
-      Registry.register(BuiltInRegistries.BLOCK, com.ghostsafio.mitomod.compat.Ids.bloque(Ghostsafio.id(id)), block);
+   private static Block register(String id, java.util.function.Supplier<Block> fabrica) {
+      com.ghostsafio.mitomod.compat.Ids.bloque(Ghostsafio.id(id));
+      Block block = fabrica.get();
+      Registry.register(BuiltInRegistries.BLOCK, Ghostsafio.id(id), block);
       ITEMS.add((Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id(id)), new BlockItem(block, new net.minecraft.world.item.Item.Properties())));
       return block;
    }

@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
-@Mixin(Minecraft.class)
+@Mixin(net.minecraft.client.gui.Gui.class)
 public abstract class LoadingScreenMixin {
    @Inject(method = "setScreen", at = @At("HEAD"), cancellable = true, require = 0)
    private void ghostsafio$noLoadingScreen(Screen screen, CallbackInfo ci) {

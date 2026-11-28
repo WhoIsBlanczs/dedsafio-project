@@ -5,7 +5,6 @@
   "client": [
     "ExampleClientMixin",
     "GameRendererMixin",
-    "ClientLevelMixin",
     "FogRendererMixin",
     "CameraMixin",
     "LoadingScreenMixin"

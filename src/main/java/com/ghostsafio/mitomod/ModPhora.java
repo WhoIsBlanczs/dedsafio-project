@@ -54,7 +54,7 @@ public class ModPhora {
          p = p.lightLevel(state -> light);
       }
 
-      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, com.ghostsafio.mitomod.compat.Ids.bloque(Ghostsafio.id(id)), new Block(p));
+      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, Ghostsafio.id(id), new Block(p.setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BLOCK, Ghostsafio.id(id)))));
       Item item = (Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id(id)), new BlockItem(block, new net.minecraft.world.item.Item.Properties()));
       BLOCKS.add(block);
       ITEMS.add(item);
@@ -63,7 +63,7 @@ public class ModPhora {
 
    private static Block registerImpulsor(String id) {
       Properties p = Properties.of().mapColor(MapColor.COLOR_ORANGE).strength(3.0F, 40.0F).sound(SoundType.DEEPSLATE_TILES).lightLevel(state -> 7);
-      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, com.ghostsafio.mitomod.compat.Ids.bloque(Ghostsafio.id(id)), new ModPhora.ImpulsorBlock(p));
+      Block block = (Block)Registry.register(BuiltInRegistries.BLOCK, Ghostsafio.id(id), new ModPhora.ImpulsorBlock(p.setId(net.minecraft.resources.ResourceKey.create(net.minecraft.core.registries.Registries.BLOCK, Ghostsafio.id(id)))));
       Item item = (Item)Registry.register(BuiltInRegistries.ITEM, com.ghostsafio.mitomod.compat.Ids.item(Ghostsafio.id(id)), new BlockItem(block, new net.minecraft.world.item.Item.Properties()));
       BLOCKS.add(block);
       ITEMS.add(item);
