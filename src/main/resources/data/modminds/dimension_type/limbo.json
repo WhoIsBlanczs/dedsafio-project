@@ -8,7 +8,9 @@
       "destroy_on_use": true
     },
     "minecraft:gameplay/respawn_anchor_works": false,
-    "minecraft:gameplay/can_start_raid": false
+    "minecraft:gameplay/can_start_raid": false,
+    "minecraft:visual/fog_color": "#9966ff",
+    "minecraft:visual/cloud_color": "#00ffffff"
   },
   "coordinate_scale": 1,
   "has_ceiling": false,

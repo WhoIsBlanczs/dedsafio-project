@@ -32,23 +32,24 @@ jobs:
         if: always()
         shell: bash {0}
         run: |
-          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri libglx-mesa0 libegl-mesa0 mesa-vulkan-drivers libvulkan1 imagemagick x11-utils > /dev/null 2>&1
+          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri libglx-mesa0 libegl-mesa0 mesa-vulkan-drivers libvulkan1 imagemagick x11-utils xdotool > /dev/null 2>&1
           mkdir -p run/saves && rm -rf run/saves/prueba && cp -r run/world run/saves/prueba && rm -f run/saves/prueba/session.lock
           mkdir -p run/saves/prueba/datapacks && cp -r .github/prueba/datapacks/prueba run/saves/prueba/datapacks/
-          printf 'onboardAccessibility:false\nnarrator:0\ntutorialStep:none\nskipMultiplayerWarning:true\nguiScale:2\nrenderDistance:6\npauseOnLostFocus:false\njoinedFirstServer:true\n' > run/options.txt
+          printf 'onboardAccessibility:false\nnarrator:0\ntutorialStep:none\nskipMultiplayerWarning:true\nguiScale:2\nrenderDistance:6\npauseOnLostFocus:false\nhideGui:true\njoinedFirstServer:true\n' > run/options.txt
           Xvfb :99 -screen 0 1280x720x24 +extension GLX +render -noreset > /dev/null 2>&1 & export DISPLAY=:99; sleep 3
           glxinfo -B 2>&1 | grep -E 'OpenGL (core profile )?version|renderer' | head -3
           export LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.6 MESA_GLSL_VERSION_OVERRIDE=460
           mkdir -p capturas
+          foto(){ W=$(xdotool search --name 'Minecraft' 2>/dev/null | tail -1); [ -n "$W" ] && { xdotool windowactivate $W 2>/dev/null; xdotool key --window $W F2; }; sleep 3; f=$(ls -t run/screenshots/*.png 2>/dev/null | head -1); [ -n "$f" ] && cp "$f" capturas/$1.png || import -window root capturas/$1.png; }
           (timeout 1100 ./gradlew runClient --console=plain --args="--quickPlaySingleplayer prueba" > client.log 2>&1) &
           for i in $(seq 1 330); do
             sleep 3
-            for k in 1 2 3 4 5 6; do if grep -q "VISTA$k" client.log && [ ! -f capturas/v$k.png ]; then sleep 15; import -window root capturas/v$k.png; fi; done
+            for k in 1 2 3 4 5 6; do if grep -q "VISTA$k" client.log && [ ! -f capturas/v$k.png ]; then sleep 15; foto v$k; fi; done
             [ -f capturas/v6.png ] && break
-            [ $((i % 30)) -eq 0 ] && import -window root capturas/t$i.png
-            grep -qE 'Stopping!|---- Minecraft Crash Report' client.log && { import -window root capturas/final.png; break; }
+            [ $((i % 30)) -eq 0 ] && foto t$i
+            grep -qE 'Stopping!|---- Minecraft Crash Report' client.log && { foto final; break; }
           done
-          import -window root capturas/final.png; pkill -f KnotClient; pkill -f gradle; sleep 5
+          foto final; pkill -f KnotClient; pkill -f gradle; sleep 5
           sed -E 's/^\[[0-9:]+\] //' client.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.|sun\.)' | grep -E '\s+at |ERROR|WARN|Exception|Caused|Failed|modminds|VISTA|MOBS_LISTOS|Missing|Unable|Couldn|OpenGL|Backend' | grep -vE 'FabricLoader/Mixin' | head -500
       - name: subir capturas
         if: always()

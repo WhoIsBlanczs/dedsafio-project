@@ -172,13 +172,13 @@ public class IntrusoEntity extends Monster implements GeoEntity {
 
    public void addAdditionalSaveData(net.minecraft.world.level.storage.ValueOutput compound) {
       super.addAdditionalSaveData(compound);
-      compound.putString("Texture", this.getTexture());
+      compound.putString("ModmindsTexture", this.getTexture());
    }
 
    public void readAdditionalSaveData(net.minecraft.world.level.storage.ValueInput compound) {
       super.readAdditionalSaveData(compound);
-      if (compound.child("Texture").isPresent()) {
-         this.setTexture(compound.getStringOr("Texture", ""));
+      if (compound.child("ModmindsTexture").isPresent()) {
+         this.setTexture(compound.getStringOr("ModmindsTexture", ""));
       }
    }
 

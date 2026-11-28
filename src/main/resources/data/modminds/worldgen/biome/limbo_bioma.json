@@ -1,6 +1,6 @@
 {
   "attributes": {
-    "minecraft:visual/fog_color": "#cc99ff",
+    "minecraft:visual/fog_color": "#9966ff",
     "minecraft:visual/sky_color": "#cc99ff",
     "minecraft:visual/water_fog_color": "#9c73b0",
     "minecraft:gameplay/natural_mob_spawns": {

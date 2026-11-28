@@ -10,7 +10,9 @@
       }
     },
     "minecraft:gameplay/respawn_anchor_works": false,
-    "minecraft:gameplay/can_start_raid": false
+    "minecraft:gameplay/can_start_raid": false,
+    "minecraft:visual/fog_color": "#000000",
+    "minecraft:visual/cloud_color": "#00ffffff"
   },
   "coordinate_scale": 1,
   "has_ceiling": false,
