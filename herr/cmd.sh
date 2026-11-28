@@ -1,2 +1,3 @@
-G=$(ls geckolib-*.jar); mkdir -p /tmp/g && cd /tmp/g && unzip -q -o $OLDPWD/$G
-for c in $(grep -rl 'SpecialModelRenderers\|ID_MAPPER\|special' --include=*.class com | head -10); do echo "== $c"; strings -n 3 $c | grep -E '^[a-z_:/]+$' | head -12 | tr '\n' ' '; echo; done
+for j in *.jar; do if unzip -l $j 2>/dev/null | grep -q 'worldgen/noise_settings/overworld.json'; then echo "JAR $j"; unzip -p $j data/minecraft/worldgen/noise_settings/overworld.json | python3 -c "
+import json,sys;d=json.load(sys.stdin);print(list(d.keys()));print(json.dumps(d.get('aquifers'))[:3000]);print(json.dumps(d.get('ore_veins'))[:800] if 'ore_veins' in d else 'no ore_veins');print(list(d['noise_router'].keys()))"; unzip -p $j data/minecraft/worldgen/noise_settings/caves.json | python3 -c "
+import json,sys;d=json.load(sys.stdin);print('CAVES',list(d.keys()));print(json.dumps(d.get('aquifers'))[:1500])"; break; fi; done
