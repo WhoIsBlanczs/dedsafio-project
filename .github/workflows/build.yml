@@ -26,5 +26,40 @@ jobs:
         shell: bash {0}
         run: |
           mkdir -p run && echo eula=true > run/eula.txt && printf 'online-mode=false\nspawn-protection=0\n' > run/server.properties
-          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 3; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1200 ./gradlew runServer --console=plain > server.log 2>&1
-          grep -vE '^\s+at |DEBUG' server.log | grep -E 'ERROR|WARN|Exception|Caused|Couldn|Failed|nexo|Done|Unknown|Missing|No key|Not a|Invalid|template-mod' | grep -vE 'FabricLoader/Mixin|Environment:' | head -400
+          ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; grep -qE 'can.t proceed with server load|Crash report|Stopping server' run/logs/latest.log 2>/dev/null && exit 0; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 2; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1500 ./gradlew runServer --console=plain > server.log 2>&1
+          sed -E 's/^\[[0-9:]+\] //' server.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.)' | grep -E '\s+at |System chat|Server thread/|ERROR|WARN|Exception|Caused|Couldn|Failed|nexo|Done|Unknown|Missing|No key|Not a|Invalid' | grep -vE 'FabricLoader/Mixin|Environment:' | head -500
+      - name: prueba en cliente
+        if: always()
+        shell: bash {0}
+        run: |
+          sudo apt-get update -qq > /dev/null; sudo apt-get install -y -qq xvfb mesa-utils libgl1-mesa-dri libglx-mesa0 libegl-mesa0 mesa-vulkan-drivers libvulkan1 imagemagick x11-utils > /dev/null 2>&1
+          mkdir -p run/saves && rm -rf run/saves/prueba && cp -r run/world run/saves/prueba && rm -f run/saves/prueba/session.lock
+          mkdir -p run/saves/prueba/datapacks && cp -r .github/prueba/datapacks/prueba run/saves/prueba/datapacks/
+          printf 'onboardAccessibility:false\nnarrator:0\ntutorialStep:none\nskipMultiplayerWarning:true\nguiScale:2\nrenderDistance:6\npauseOnLostFocus:false\njoinedFirstServer:true\n' > run/options.txt
+          Xvfb :99 -screen 0 1280x720x24 +extension GLX +render -noreset > /dev/null 2>&1 & export DISPLAY=:99; sleep 3
+          glxinfo -B 2>&1 | grep -E 'OpenGL (core profile )?version|renderer' | head -3
+          export LIBGL_ALWAYS_SOFTWARE=1 MESA_GL_VERSION_OVERRIDE=4.6 MESA_GLSL_VERSION_OVERRIDE=460
+          mkdir -p capturas
+          (timeout 1100 ./gradlew runClient --console=plain --args="--quickPlaySingleplayer prueba" > client.log 2>&1) &
+          for i in $(seq 1 330); do
+            sleep 3
+            for k in 1 2 3 4 5 6; do if grep -q "VISTA$k" client.log && [ ! -f capturas/v$k.png ]; then sleep 15; import -window root capturas/v$k.png; fi; done
+            [ -f capturas/v6.png ] && break
+            [ $((i % 30)) -eq 0 ] && import -window root capturas/t$i.png
+            grep -qE 'Stopping!|---- Minecraft Crash Report' client.log && { import -window root capturas/final.png; break; }
+          done
+          import -window root capturas/final.png; pkill -f KnotClient; pkill -f gradle; sleep 5
+          sed -E 's/^\[[0-9:]+\] //' client.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.|sun\.)' | grep -E '\s+at |ERROR|WARN|Exception|Caused|Failed|nexo|VISTA|MOBS_LISTOS|Missing|Unable|Couldn|OpenGL|Backend' | grep -vE 'FabricLoader/Mixin' | head -500
+      - name: subir capturas
+        if: always()
+        shell: bash {0}
+        run: |
+          mkdir -p cap && cp capturas/*.png cap/ 2>/dev/null; grep -vE 'soldado_reviil' client.log | tail -c 3000000 > cap/client.log 2>/dev/null; cp server.log cap/ 2>/dev/null
+          cd cap && git init -q && git checkout -q -b capturas-nexo && git add . && git -c user.name=ci -c user.email=ci@example.com commit -qm capturas && git push -q -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} capturas-nexo
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: capturas
+          path: |
+            capturas/
+            client.log
