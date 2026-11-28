@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "up": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "north": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "east": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "south": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "west": "modminds:block/bloque_de_coral_rosado_luminoso",
+    "particle": "modminds:block/bloque_de_coral_rosado_luminoso"
+  },
+  "render_type": "solid"
+}

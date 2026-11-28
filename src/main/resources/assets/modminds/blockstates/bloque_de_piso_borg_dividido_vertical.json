@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/bloque_de_piso_borg_dividido_vertical"
+    },
+    "facing=east": {
+      "model": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+      "y": 270
+    }
+  }
+}

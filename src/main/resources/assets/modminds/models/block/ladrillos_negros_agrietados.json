@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillos_nergros_agrietados",
+    "up": "modminds:block/ladrillos_nergros_agrietados",
+    "north": "modminds:block/ladrillos_nergros_agrietados",
+    "east": "modminds:block/ladrillos_nergros_agrietados",
+    "south": "modminds:block/ladrillos_nergros_agrietados",
+    "west": "modminds:block/ladrillos_nergros_agrietados",
+    "particle": "modminds:block/ladrillos_nergros_agrietados"
+  },
+  "render_type": "solid"
+}

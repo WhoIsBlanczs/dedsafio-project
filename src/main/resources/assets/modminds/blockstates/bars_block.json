@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "modminds:block/bars_block"
+    }
+  }
+}

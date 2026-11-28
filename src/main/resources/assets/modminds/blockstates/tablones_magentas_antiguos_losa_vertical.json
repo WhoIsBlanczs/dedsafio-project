@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/tablones_magentas_antiguos_losa_vertical"
+    },
+    "facing=east": {
+      "model": "modminds:block/tablones_magentas_antiguos_losa_vertical",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/tablones_magentas_antiguos_losa_vertical",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/tablones_magentas_antiguos_losa_vertical",
+      "y": 270
+    }
+  }
+}

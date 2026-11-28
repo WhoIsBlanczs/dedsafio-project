@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losas_de_bloque_pulido"
+    },
+    "type=top": {
+      "model": "modminds:block/losas_de_bloque_pulido_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losas_de_bloque_pulido_full"
+    }
+  }
+}

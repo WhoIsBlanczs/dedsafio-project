@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_del_limbo_luminoso",
+    "up": "modminds:block/bloque_del_limbo_luminoso",
+    "north": "modminds:block/bloque_del_limbo_luminoso",
+    "east": "modminds:block/bloque_del_limbo_luminoso",
+    "south": "modminds:block/bloque_del_limbo_luminoso",
+    "west": "modminds:block/bloque_del_limbo_luminoso",
+    "particle": "modminds:block/bloque_del_limbo_luminoso"
+  },
+  "render_type": "solid"
+}

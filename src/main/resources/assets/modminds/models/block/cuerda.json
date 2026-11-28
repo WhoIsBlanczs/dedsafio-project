@@ -1,0 +1,10 @@
+{
+  "parent": "modminds:custom/cuerda",
+  "textures": {
+    "all": "modminds:block/cuerda",
+    "particle": "modminds:block/cuerda",
+    "1": "modminds:block/cuerda",
+    "missing": "modminds:block/cuerda"
+  },
+  "render_type": "solid"
+}

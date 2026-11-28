@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/cinta_de_seguridad",
+  "textures": {
+    "all": "modminds:block/cinta_de_seguridad",
+    "particle": "modminds:block/cinta_de_seguridad",
+    "0": "modminds:block/cinta_de_seguridad"
+  },
+  "render_type": "solid"
+}

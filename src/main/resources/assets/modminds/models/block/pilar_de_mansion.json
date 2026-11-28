@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/pilar_de_mansion",
+    "up": "modminds:block/pilar_de_mansion",
+    "north": "modminds:block/pilar_de_mansion",
+    "east": "modminds:block/pilar_de_mansion",
+    "south": "modminds:block/pilar_de_mansion",
+    "west": "modminds:block/pilar_de_mansion",
+    "particle": "modminds:block/pilar_de_mansion"
+  },
+  "render_type": "solid"
+}

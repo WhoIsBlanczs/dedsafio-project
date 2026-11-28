@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_rojo_de_ring",
+    "up": "modminds:block/bloque_rojo_de_ring",
+    "north": "modminds:block/bloque_rojo_de_ring",
+    "east": "modminds:block/bloque_rojo_de_ring",
+    "south": "modminds:block/bloque_rojo_de_ring",
+    "west": "modminds:block/bloque_rojo_de_ring",
+    "particle": "modminds:block/bloque_rojo_de_ring"
+  },
+  "render_type": "solid"
+}

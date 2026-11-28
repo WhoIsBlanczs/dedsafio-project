@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/cristal_de_templo_negro",
+    "bottom": "modminds:block/cristal_de_templo_negro",
+    "top": "modminds:block/cristal_de_templo_negro",
+    "side": "modminds:block/cristal_de_templo_negro"
+  },
+  "render_type": "solid"
+}

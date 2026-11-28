@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/escalera_de_madera_carmesi_pulida"
+    },
+    "type=top": {
+      "model": "modminds:block/escalera_de_madera_carmesi_pulida_top"
+    },
+    "type=double": {
+      "model": "modminds:block/escalera_de_madera_carmesi_pulida_full"
+    }
+  }
+}

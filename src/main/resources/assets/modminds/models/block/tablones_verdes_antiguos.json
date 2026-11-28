@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/tablones_verdes_antiguos",
+    "up": "modminds:block/tablones_verdes_antiguos",
+    "north": "modminds:block/tablones_verdes_antiguos",
+    "east": "modminds:block/tablones_verdes_antiguos",
+    "south": "modminds:block/tablones_verdes_antiguos",
+    "west": "modminds:block/tablones_verdes_antiguos",
+    "particle": "modminds:block/tablones_verdes_antiguos"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/aquastone_top",
+    "up": "modminds:block/aquastone_top",
+    "north": "modminds:block/aquastone",
+    "east": "modminds:block/aquastone",
+    "south": "modminds:block/aquastone",
+    "west": "modminds:block/aquastone",
+    "particle": "modminds:block/aquastone_top"
+  },
+  "render_type": "solid"
+}

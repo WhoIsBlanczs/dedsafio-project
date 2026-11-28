@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "modminds:blocks/tres_tablas_de_madera",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modminds:tres_tablas_de_madera"
+        }
+      ]
+    }
+  ]
+}

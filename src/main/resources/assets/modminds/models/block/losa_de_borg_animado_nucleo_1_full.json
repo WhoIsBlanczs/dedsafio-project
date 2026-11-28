@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/bloqueboganimadonucleo",
+    "bottom": "modminds:block/bloqueboganimadonucleo",
+    "top": "modminds:block/bloqueboganimadonucleo",
+    "side": "modminds:block/bloqueboganimadonucleo"
+  },
+  "render_type": "solid"
+}

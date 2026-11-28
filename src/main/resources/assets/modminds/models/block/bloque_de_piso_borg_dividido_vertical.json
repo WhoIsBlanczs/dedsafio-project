@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "up": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "north": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "east": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "south": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "west": "modminds:block/bloque_de_piso_borg_dividido_vertical",
+    "particle": "modminds:block/bloque_de_piso_borg_dividido_vertical"
+  },
+  "render_type": "solid"
+}

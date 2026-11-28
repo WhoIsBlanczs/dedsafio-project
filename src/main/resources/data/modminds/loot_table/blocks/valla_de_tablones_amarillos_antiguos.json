@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "modminds:blocks/valla_de_tablones_amarillos_antiguos",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modminds:valla_de_tablones_amarillos_antiguos"
+        }
+      ]
+    }
+  ]
+}

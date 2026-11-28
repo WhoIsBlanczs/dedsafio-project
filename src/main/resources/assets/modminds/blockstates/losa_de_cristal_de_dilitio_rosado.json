@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_rosado"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_rosado_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_rosado_full"
+    }
+  }
+}

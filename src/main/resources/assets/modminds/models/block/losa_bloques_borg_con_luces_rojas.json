@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/lucesrojav2",
+    "bottom": "modminds:block/lucesrojav2",
+    "top": "modminds:block/lucesrojav2",
+    "side": "modminds:block/lucesrojav2"
+  },
+  "render_type": "solid"
+}

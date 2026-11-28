@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_bloque_borg_paneles_magentas"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_bloque_borg_paneles_magentas_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_bloque_borg_paneles_magentas_full"
+    }
+  }
+}

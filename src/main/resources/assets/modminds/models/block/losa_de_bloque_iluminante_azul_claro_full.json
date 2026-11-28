@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/bloqueiluminantecian",
+    "bottom": "modminds:block/bloqueiluminantecian",
+    "top": "modminds:block/bloqueiluminantecian",
+    "side": "modminds:block/bloqueiluminantecian"
+  },
+  "render_type": "solid"
+}

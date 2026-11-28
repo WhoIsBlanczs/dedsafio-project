@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_ladrillos_de_magma"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_ladrillos_de_magma_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_ladrillos_de_magma_full"
+    }
+  }
+}

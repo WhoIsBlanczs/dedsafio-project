@@ -1,0 +1,8 @@
+{
+  "parent": "modminds:custom/dedita_azul",
+  "textures": {
+    "1": "modminds:block/dedita_azul",
+    "missing": "modminds:block/dedita_azul",
+    "particle": "modminds:item/dedita_azul"
+  }
+}

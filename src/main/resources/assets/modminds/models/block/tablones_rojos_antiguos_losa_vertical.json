@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/tablones_rojos_antiguos_losa_vertical",
+  "textures": {
+    "all": "modminds:block/tablones_rojos_antiguos_losa_vertical",
+    "particle": "modminds:block/tablones_rojos_antiguos_losa_vertical",
+    "0": "modminds:block/tablones_rojos_antiguos_losa_vertical"
+  },
+  "render_type": "solid"
+}

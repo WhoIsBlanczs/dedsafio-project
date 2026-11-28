@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/texturademierda",
+    "up": "modminds:block/texturademierda",
+    "north": "modminds:block/texturademierda",
+    "east": "modminds:block/texturademierda",
+    "south": "modminds:block/texturademierda",
+    "west": "modminds:block/texturademierda",
+    "particle": "modminds:block/texturademierda"
+  },
+  "render_type": "solid"
+}

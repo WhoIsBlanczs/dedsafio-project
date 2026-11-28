@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/pilar_borg_con_luz_vetical_magenta",
+    "bottom": "modminds:block/pilar_borg_con_luz_vetical_magenta",
+    "top": "modminds:block/pilar_borg_con_luz_vetical_magenta",
+    "side": "modminds:block/pilar_borg_con_luz_vetical_magenta"
+  },
+  "render_type": "solid"
+}

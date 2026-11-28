@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_side_tall",
+  "textures": {
+    "wall": "modminds:block/bloque_negro_de_ring",
+    "particle": "modminds:block/bloque_negro_de_ring"
+  },
+  "render_type": "solid"
+}

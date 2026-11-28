@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luz_vertical_purpura",
+    "up": "modminds:block/bloque_de_luz_vertical_purpura",
+    "north": "modminds:block/bloque_de_luz_vertical_purpura",
+    "east": "modminds:block/bloque_de_luz_vertical_purpura",
+    "south": "modminds:block/bloque_de_luz_vertical_purpura",
+    "west": "modminds:block/bloque_de_luz_vertical_purpura",
+    "particle": "modminds:block/bloque_de_luz_vertical_purpura"
+  },
+  "render_type": "solid"
+}

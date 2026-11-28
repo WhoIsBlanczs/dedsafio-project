@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/ladrillos_de_fortaleza_cincelados",
+  "textures": {
+    "all": "modminds:block/ladrillos_de_fortaleza_cincelados",
+    "particle": "modminds:block/ladrillos_de_fortaleza_cincelados",
+    "0": "modminds:block/ladrillos_de_fortaleza_cincelados"
+  },
+  "render_type": "solid"
+}

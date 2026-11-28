@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/cristal_de_dilitio_magenta",
+    "up": "modminds:block/cristal_de_dilitio_magenta",
+    "north": "modminds:block/cristal_de_dilitio_magenta",
+    "east": "modminds:block/cristal_de_dilitio_magenta",
+    "south": "modminds:block/cristal_de_dilitio_magenta",
+    "west": "modminds:block/cristal_de_dilitio_magenta",
+    "particle": "modminds:block/cristal_de_dilitio_magenta"
+  },
+  "render_type": "solid"
+}

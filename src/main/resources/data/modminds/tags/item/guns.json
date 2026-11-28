@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "modminds:arma_corta_espacial",
+    "modminds:rifle_de_pulso_borg_2",
+    "modminds:cerbatana_de_goblin",
+    "modminds:perforador_del_vacio",
+    "modminds:atomizador_de_astros"
+  ]
+}

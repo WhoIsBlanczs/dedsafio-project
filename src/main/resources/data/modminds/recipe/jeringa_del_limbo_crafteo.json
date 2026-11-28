@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba",
+    " c "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:gema_de_almas"
+    },
+    "b": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "c": {
+      "item": "modminds:hueso_de_la_grim_reaper"
+    }
+  },
+  "result": {
+    "id": "modminds:jeringa_del_limbo",
+    "count": 1
+  }
+}

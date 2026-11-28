@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueruletamorado",
+    "up": "modminds:block/bloqueruletamorado",
+    "north": "modminds:block/bloqueruletamorado",
+    "east": "modminds:block/bloqueruletamorado",
+    "south": "modminds:block/bloqueruletamorado",
+    "west": "modminds:block/bloqueruletamorado",
+    "particle": "modminds:block/bloqueruletamorado"
+  },
+  "render_type": "solid"
+}

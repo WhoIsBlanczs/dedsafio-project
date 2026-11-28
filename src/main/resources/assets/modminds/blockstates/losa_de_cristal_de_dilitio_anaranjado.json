@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_anaranjado"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_anaranjado_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_anaranjado_full"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/ladrillos_de_fortaleza",
+    "bottom": "modminds:block/ladrillos_de_fortaleza",
+    "top": "modminds:block/ladrillos_de_fortaleza",
+    "side": "modminds:block/ladrillos_de_fortaleza"
+  },
+  "render_type": "solid"
+}

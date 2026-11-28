@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloquegulagfinal",
+    "up": "modminds:block/bloquegulagfinal",
+    "north": "modminds:block/bloquegulagfinal",
+    "east": "modminds:block/bloquegulagfinal",
+    "south": "modminds:block/bloquegulagfinal",
+    "west": "modminds:block/bloquegulagfinal",
+    "particle": "modminds:block/bloquegulagfinal"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_luz_vertical_azul"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_luz_vertical_azul_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_luz_vertical_azul_full"
+    }
+  }
+}

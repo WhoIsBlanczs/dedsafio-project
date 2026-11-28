@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " aa",
+    "aab",
+    "bbb"
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:lamina_reforzada_de_acero_negro_aureo"
+    },
+    "b": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "id": "modminds:lingote_de_acero_negro_aureo",
+    "count": 1
+  }
+}

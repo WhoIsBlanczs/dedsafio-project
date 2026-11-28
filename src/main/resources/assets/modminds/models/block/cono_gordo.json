@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/conogordo",
+  "textures": {
+    "all": "modminds:block/texturecono",
+    "particle": "modminds:block/texturecono",
+    "0": "modminds:block/texturecono"
+  },
+  "render_type": "solid"
+}

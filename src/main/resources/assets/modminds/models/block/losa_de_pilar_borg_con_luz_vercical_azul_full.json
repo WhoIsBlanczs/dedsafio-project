@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/pilar_borg_con_luz_vetical_azul",
+    "bottom": "modminds:block/pilar_borg_con_luz_vetical_azul",
+    "top": "modminds:block/pilar_borg_con_luz_vetical_azul",
+    "side": "modminds:block/pilar_borg_con_luz_vetical_azul"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/bloqueiluminanteamarillo",
+    "bottom": "modminds:block/bloqueiluminanteamarillo",
+    "top": "modminds:block/bloqueiluminanteamarillo",
+    "side": "modminds:block/bloqueiluminanteamarillo"
+  },
+  "render_type": "solid"
+}

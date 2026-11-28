@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillos_de_adobe_cincelada",
+    "up": "modminds:block/ladrillos_de_adobe_cincelada",
+    "north": "modminds:block/ladrillos_de_adobe_cincelada",
+    "east": "modminds:block/ladrillos_de_adobe_cincelada",
+    "south": "modminds:block/ladrillos_de_adobe_cincelada",
+    "west": "modminds:block/ladrillos_de_adobe_cincelada",
+    "particle": "modminds:block/ladrillos_de_adobe_cincelada"
+  },
+  "render_type": "solid"
+}

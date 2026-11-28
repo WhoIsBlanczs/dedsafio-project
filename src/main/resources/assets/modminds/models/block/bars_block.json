@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/bars_block",
+  "textures": {
+    "all": "modminds:block/bars_block",
+    "particle": "modminds:block/bars_block",
+    "0": "modminds:block/bars_block"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:sculk",
+    "minecraft:deepslate",
+    "modminds:piedra_rocosa_del_limbo"
+  ]
+}

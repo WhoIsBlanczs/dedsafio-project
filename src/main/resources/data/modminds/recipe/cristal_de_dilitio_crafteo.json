@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:gema_de_dilitio"
+    }
+  },
+  "result": {
+    "id": "modminds:cristal_de_dilitio",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "modminds:blocks/losa_de_madera_carmesi_pulida",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modminds:losa_de_madera_carmesi_pulida"
+        }
+      ]
+    }
+  ]
+}

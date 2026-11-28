@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "bottom": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "top": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "side": "modminds:block/bloque_de_luces_horizontales_rosadas"
+  },
+  "render_type": "solid"
+}

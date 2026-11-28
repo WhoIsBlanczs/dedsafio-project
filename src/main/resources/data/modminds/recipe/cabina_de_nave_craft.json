@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ab ",
+    "bcd",
+    "efe"
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:bloque_de_hierro_reforzado"
+    },
+    "b": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "c": {
+      "item": "modminds:motor_de_dilitio"
+    },
+    "d": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "e": {
+      "item": "modminds:placa_de_wildfire"
+    },
+    "f": {
+      "item": "modminds:bloque_de_nereida"
+    }
+  },
+  "result": {
+    "id": "modminds:cabina_de_nave",
+    "count": 1
+  }
+}

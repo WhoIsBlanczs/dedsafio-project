@@ -1,0 +1,49 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2,
+				"visible_bounds_offset": [0, 0, 0]
+			},
+			"bones": [
+				{
+					"name": "cerbatana",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "derecha",
+					"parent": "cerbatana",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-2, 0, -2], "size": [4, 12, 4], "uv": [-4, -2], "mirror": true}
+					]
+				},
+				{
+					"name": "izquierda",
+					"parent": "cerbatana",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-2, 0, -2], "size": [4, 12, 4], "uv": [-4, -2]}
+					]
+				},
+				{
+					"name": "bone",
+					"parent": "cerbatana",
+					"pivot": [0, 2.75918, -1.9971],
+					"cubes": [
+						{"origin": [-1, 2.08526, -5.88721], "size": [0, 2, 2], "pivot": [-1, 2.08526, -4.88721], "rotation": [0, 0, -30], "uv": [12, 17]},
+						{"origin": [-1, 0.08526, -6.88721], "size": [2, 2, 15], "uv": [0, 0]},
+						{"origin": [1, 2.08526, -1.88721], "size": [0, 3, 2], "pivot": [1, 2.08526, -0.88721], "rotation": [0, 0, 30], "uv": [0, 17]},
+						{"origin": [-1, 2.08526, -1.88721], "size": [0, 3, 2], "pivot": [-1, 2.08526, -0.88721], "rotation": [0, 0, -30], "uv": [4, 17]},
+						{"origin": [1, 2.08526, -5.88721], "size": [0, 2, 2], "pivot": [1, 2.08526, -4.88721], "rotation": [0, 0, 30], "uv": [8, 17]}
+					]
+				}
+			]
+		}
+	]
+}

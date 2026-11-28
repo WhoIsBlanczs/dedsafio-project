@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/pilar_de_warped",
+    "up": "modminds:block/pilar_de_warped",
+    "north": "modminds:block/pilar_de_warped",
+    "east": "modminds:block/pilar_de_warped",
+    "south": "modminds:block/pilar_de_warped",
+    "west": "modminds:block/pilar_de_warped",
+    "particle": "modminds:block/pilar_de_warped"
+  },
+  "render_type": "solid"
+}

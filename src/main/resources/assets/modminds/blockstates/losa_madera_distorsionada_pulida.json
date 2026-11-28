@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_madera_distorsionada_pulida"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_madera_distorsionada_pulida_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_madera_distorsionada_pulida_full"
+    }
+  }
+}

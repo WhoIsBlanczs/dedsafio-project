@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillodefortalezacincelado",
+    "up": "modminds:block/ladrillodefortalezacincelado",
+    "north": "modminds:block/ladrillodefortalezacincelado",
+    "east": "modminds:block/ladrillodefortalezacincelado",
+    "south": "modminds:block/ladrillodefortalezacincelado",
+    "west": "modminds:block/ladrillodefortalezacincelado",
+    "particle": "modminds:block/ladrillodefortalezacincelado"
+  },
+  "render_type": "solid"
+}

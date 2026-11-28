@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/seat",
+  "textures": {
+    "all": "modminds:block/seat",
+    "particle": "modminds:block/seat",
+    "0": "modminds:block/seat"
+  },
+  "render_type": "solid"
+}

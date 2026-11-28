@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "bottom": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "top": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "side": "modminds:block/bloque_de_cora_naranja_luminoso"
+  },
+  "render_type": "solid"
+}

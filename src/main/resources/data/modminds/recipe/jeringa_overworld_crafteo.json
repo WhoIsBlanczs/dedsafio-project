@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba",
+    " c "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:diamond_block"
+    },
+    "b": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "c": {
+      "item": "minecraft:music_disc_5"
+    }
+  },
+  "result": {
+    "id": "modminds:jeringa_overworld",
+    "count": 1
+  }
+}

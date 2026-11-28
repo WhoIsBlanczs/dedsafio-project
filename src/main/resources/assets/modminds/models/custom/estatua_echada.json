@@ -1,0 +1,668 @@
+{
+  "credit": "Made with Blockbench",
+  "texture_size": [
+    64,
+    64
+  ],
+  "elements": [
+    {
+      "name": "Head",
+      "from": [
+        4,
+        -2,
+        16
+      ],
+      "to": [
+        12,
+        6,
+        24
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          -26,
+          20
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            4,
+            4
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            2,
+            2,
+            4
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            6,
+            2,
+            8,
+            4
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            4,
+            2,
+            6,
+            4
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4,
+            2,
+            2,
+            0
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            6,
+            0,
+            4,
+            2
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "Body",
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        4,
+        16
+      ],
+      "rotation": {
+        "angle": 0,
+        "axis": "y",
+        "origin": [
+          8,
+          2,
+          -8
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            7,
+            5,
+            8
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            7,
+            3,
+            8
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            8,
+            7,
+            10,
+            8
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            5,
+            7,
+            8,
+            8
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            5,
+            7,
+            3,
+            4
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            7,
+            4,
+            5,
+            7
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "Left Arm",
+      "from": [
+        2,
+        -0.001,
+        3.2
+      ],
+      "to": [
+        6,
+        3.999,
+        15.2
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          4,
+          1.9,
+          13.2
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            15,
+            8,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            4,
+            15,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            11,
+            15,
+            12,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            15,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            8,
+            15,
+            7,
+            12
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            9,
+            12,
+            8,
+            15
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "Left Arm",
+      "from": [
+        10,
+        -0.001,
+        3.2
+      ],
+      "to": [
+        14,
+        3.999,
+        15.2
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          12,
+          1.9,
+          13.2
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            15,
+            8,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            4,
+            15,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            11,
+            15,
+            12,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            15,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            8,
+            15,
+            7,
+            12
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            9,
+            12,
+            8,
+            15
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "Right Leg",
+      "from": [
+        12.3,
+        -0.001,
+        -7.1
+      ],
+      "to": [
+        16.3,
+        3.999,
+        4.9
+      ],
+      "rotation": {
+        "angle": -22.5,
+        "axis": "y",
+        "origin": [
+          12.4,
+          2,
+          -7.1
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            15,
+            8,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            4,
+            15,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            11,
+            15,
+            12,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            15,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            8,
+            15,
+            7,
+            12
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            9,
+            12,
+            8,
+            15
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "Left Leg",
+      "from": [
+        -0.3,
+        -0.0001,
+        -7.1
+      ],
+      "to": [
+        3.7,
+        3.9999,
+        4.9
+      ],
+      "rotation": {
+        "angle": 22.5,
+        "axis": "y",
+        "origin": [
+          3.6,
+          2,
+          -7.1
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            15,
+            8,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            4,
+            15,
+            7,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            11,
+            15,
+            12,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            15,
+            11,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            8,
+            15,
+            7,
+            12
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            9,
+            12,
+            8,
+            15
+          ],
+          "texture": "#0"
+        }
+      }
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "thirdperson_lefthand": {
+      "translation": [
+        0,
+        2.5,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        -102.95,
+        -4.57,
+        170.92
+      ],
+      "translation": [
+        0.75,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        -102.95,
+        -4.57,
+        170.92
+      ],
+      "translation": [
+        0.75,
+        0,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "ground": {
+      "translation": [
+        0,
+        1.5,
+        0
+      ],
+      "scale": [
+        0.25,
+        0.25,
+        0.25
+      ]
+    },
+    "gui": {
+      "rotation": [
+        -140,
+        -26.75,
+        -180
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        10.5,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        0,
+        -90,
+        0
+      ],
+      "translation": [
+        0,
+        0,
+        1
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "Head",
+      "origin": [
+        8,
+        24,
+        8
+      ],
+      "color": 0,
+      "children": [
+        0
+      ]
+    },
+    {
+      "name": "Body",
+      "origin": [
+        8,
+        24,
+        8
+      ],
+      "color": 0,
+      "children": [
+        1
+      ]
+    },
+    {
+      "name": "RightArm",
+      "origin": [
+        13,
+        22,
+        8
+      ],
+      "color": 0,
+      "children": []
+    },
+    {
+      "name": "LeftArm",
+      "origin": [
+        3,
+        22,
+        8
+      ],
+      "color": 0,
+      "children": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "origin": [
+        9.9,
+        12,
+        8
+      ],
+      "color": 0,
+      "children": [
+        4
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "origin": [
+        6.1,
+        12,
+        8
+      ],
+      "color": 0,
+      "children": [
+        5
+      ]
+    }
+  ]
+}

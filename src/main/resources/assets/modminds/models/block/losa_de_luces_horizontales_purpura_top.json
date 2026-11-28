@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "bottom": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "top": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "side": "modminds:block/bloque_de_luces_horizontales_purpuras"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "modminds:block/limbo_portal_ew"
+    },
+    "axis=x": {
+      "model": "modminds:block/limbo_portal_ns"
+    }
+  }
+}

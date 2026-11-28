@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/dilitio_piscina",
+  "textures": {
+    "all": "modminds:block/dilitio_piscina",
+    "particle": "modminds:block/dilitio_piscina",
+    "0": "modminds:block/dilitio_piscina"
+  },
+  "render_type": "solid"
+}

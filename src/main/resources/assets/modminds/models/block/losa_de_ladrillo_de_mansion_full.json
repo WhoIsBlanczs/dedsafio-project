@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/ladrillos_de_mansion",
+    "bottom": "modminds:block/ladrillos_de_mansion",
+    "top": "modminds:block/ladrillos_de_mansion",
+    "side": "modminds:block/ladrillos_de_mansion"
+  },
+  "render_type": "solid"
+}

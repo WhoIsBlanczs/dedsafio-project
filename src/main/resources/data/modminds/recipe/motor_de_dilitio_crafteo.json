@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "cac",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:gema_de_nereida"
+    },
+    "b": {
+      "item": "modminds:placa_de_wildfire"
+    },
+    "c": {
+      "item": "modminds:cristal_de_dilitio"
+    }
+  },
+  "result": {
+    "id": "modminds:motor_de_dilitio",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/madera_carmesi_pulido",
+    "bottom": "modminds:block/madera_carmesi_pulido",
+    "top": "modminds:block/madera_carmesi_pulido",
+    "side": "modminds:block/madera_carmesi_pulido"
+  },
+  "render_type": "solid"
+}

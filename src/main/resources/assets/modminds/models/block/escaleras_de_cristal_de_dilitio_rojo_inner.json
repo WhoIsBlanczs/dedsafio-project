@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/cristal_de_dilitio_rojo",
+    "bottom": "modminds:block/cristal_de_dilitio_rojo",
+    "top": "modminds:block/cristal_de_dilitio_rojo",
+    "side": "modminds:block/cristal_de_dilitio_rojo"
+  },
+  "render_type": "solid"
+}

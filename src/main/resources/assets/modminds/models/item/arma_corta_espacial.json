@@ -1,0 +1,6 @@
+{
+  "parent": "modminds:displaysettings/armaborgcorta",
+  "textures": {
+    "layer0": "modminds:item/arma_coreta_borg"
+  }
+}

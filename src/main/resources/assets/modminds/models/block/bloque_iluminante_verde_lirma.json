@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueiluminanteverdelima",
+    "up": "modminds:block/bloqueiluminanteverdelima",
+    "north": "modminds:block/bloqueiluminanteverdelima",
+    "east": "modminds:block/bloqueiluminanteverdelima",
+    "south": "modminds:block/bloqueiluminanteverdelima",
+    "west": "modminds:block/bloqueiluminanteverdelima",
+    "particle": "modminds:block/bloqueiluminanteverdelima"
+  },
+  "render_type": "solid"
+}

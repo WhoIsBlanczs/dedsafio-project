@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/tablones_antiguos",
+    "up": "modminds:block/tablones_antiguos",
+    "north": "modminds:block/tablones_antiguos",
+    "east": "modminds:block/tablones_antiguos",
+    "south": "modminds:block/tablones_antiguos",
+    "west": "modminds:block/tablones_antiguos",
+    "particle": "modminds:block/tablones_antiguos"
+  },
+  "render_type": "solid"
+}

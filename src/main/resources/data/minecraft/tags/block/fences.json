@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "modminds:valla_de_tablones_marrones_antiguos",
+    "modminds:valla_de_tablones_magentas_antiguos",
+    "modminds:valla_de_tablones_rojos_antiguos",
+    "modminds:valla_de_tablones_verdes_antiguos",
+    "modminds:valla_de_tablones_amarillos_antiguos",
+    "modminds:valla_de_tablones_antiguos"
+  ]
+}

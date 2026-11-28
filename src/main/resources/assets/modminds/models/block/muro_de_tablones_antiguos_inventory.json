@@ -1,0 +1,8 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "modminds:block/tablones_antiguos",
+    "particle": "modminds:block/tablones_antiguos"
+  },
+  "render_type": "solid"
+}

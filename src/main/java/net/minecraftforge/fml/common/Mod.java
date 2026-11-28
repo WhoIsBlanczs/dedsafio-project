@@ -1,0 +1,30 @@
+package net.minecraftforge.fml.common;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import net.minecraftforge.api.distmarker.Dist;
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
+public @interface Mod {
+   String value();
+
+   @Retention(RetentionPolicy.RUNTIME)
+   @Target({ElementType.TYPE})
+   public @interface EventBusSubscriber {
+      String modid() default "";
+
+      Mod.EventBusSubscriber.Bus bus() default Mod.EventBusSubscriber.Bus.FORGE;
+
+      Dist[] value() default {};
+
+      boolean registerBus() default true;
+
+      public static enum Bus {
+         FORGE,
+         MOD;
+      }
+   }
+}

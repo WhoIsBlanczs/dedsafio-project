@@ -1,0 +1,10 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "particle": "modminds:block/adobe_pulido",
+    "bottom": "modminds:block/adobe_pulido",
+    "top": "modminds:block/adobe_pulido",
+    "side": "modminds:block/adobe_pulido"
+  },
+  "render_type": "solid"
+}

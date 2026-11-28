@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/pilar_borg",
+    "up": "modminds:block/pilar_borg",
+    "north": "modminds:block/pilar_borg",
+    "east": "modminds:block/pilar_borg",
+    "south": "modminds:block/pilar_borg",
+    "west": "modminds:block/pilar_borg",
+    "particle": "modminds:block/pilar_borg"
+  },
+  "render_type": "solid"
+}

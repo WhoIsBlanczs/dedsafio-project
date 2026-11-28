@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/ladrillos_de_adobe_antiguos",
+    "bottom": "modminds:block/ladrillos_de_adobe_antiguos",
+    "top": "modminds:block/ladrillos_de_adobe_antiguos",
+    "side": "modminds:block/ladrillos_de_adobe_antiguos"
+  },
+  "render_type": "solid"
+}

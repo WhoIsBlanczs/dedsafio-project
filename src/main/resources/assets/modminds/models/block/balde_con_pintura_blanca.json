@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/balde_con_pintura_blanca",
+  "textures": {
+    "all": "modminds:block/balde_con_pintura_blanca",
+    "particle": "modminds:block/balde_con_pintura_blanca",
+    "2": "modminds:block/balde_con_pintura_blanca"
+  },
+  "render_type": "solid"
+}

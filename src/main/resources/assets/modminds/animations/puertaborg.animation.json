@@ -1,0 +1,22 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle_without_chip": {
+			"loop": true
+		},
+		"idle_with_chip": {
+			"loop": true,
+			"bones": {
+				"chip": {
+					"position": {
+						"vector": [0, 1.5, -0.5]
+					},
+					"scale": {
+						"vector": [0.675, 0.745, 1]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

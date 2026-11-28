@@ -1,0 +1,7 @@
+{
+  "parent": "modminds:custom/llave_chip_roja",
+  "textures": {
+    "0": "modminds:block/chiproja",
+    "particle": "modminds:item/llave_verde_chip"
+  }
+}

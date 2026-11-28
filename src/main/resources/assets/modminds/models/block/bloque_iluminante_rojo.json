@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueiluminanterojo",
+    "up": "modminds:block/bloqueiluminanterojo",
+    "north": "modminds:block/bloqueiluminanterojo",
+    "east": "modminds:block/bloqueiluminanterojo",
+    "south": "modminds:block/bloqueiluminanterojo",
+    "west": "modminds:block/bloqueiluminanterojo",
+    "particle": "modminds:block/bloqueiluminanterojo"
+  },
+  "render_type": "solid"
+}

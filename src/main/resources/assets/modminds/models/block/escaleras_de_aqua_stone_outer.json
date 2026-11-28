@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/aquastone_top",
+    "bottom": "modminds:block/aquastone_top",
+    "top": "modminds:block/aquastone_top",
+    "side": "modminds:block/aquastone"
+  },
+  "render_type": "solid"
+}

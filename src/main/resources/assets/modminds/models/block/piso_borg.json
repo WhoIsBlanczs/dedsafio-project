@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/piso_borg",
+    "up": "modminds:block/piso_borg",
+    "north": "modminds:block/piso_borg",
+    "east": "modminds:block/piso_borg",
+    "south": "modminds:block/piso_borg",
+    "west": "modminds:block/piso_borg",
+    "particle": "modminds:block/piso_borg"
+  },
+  "render_type": "solid"
+}

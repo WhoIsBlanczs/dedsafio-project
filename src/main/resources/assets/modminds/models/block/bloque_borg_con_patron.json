@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueborgconpatron",
+    "up": "modminds:block/bloqueborgconpatron",
+    "north": "modminds:block/bloqueborgconpatron",
+    "east": "modminds:block/bloqueborgconpatron",
+    "south": "modminds:block/bloqueborgconpatron",
+    "west": "modminds:block/bloqueborgconpatron",
+    "particle": "modminds:block/bloqueborgconpatron"
+  },
+  "render_type": "solid"
+}

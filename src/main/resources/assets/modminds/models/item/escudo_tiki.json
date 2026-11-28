@@ -1,0 +1,15 @@
+{
+  "parent": "modminds:custom/tiki_shield",
+  "textures": {
+    "0": "modminds:block/tiki_shield",
+    "particle": "minecraft:item/archer_pottery_sherd"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blocking": 1
+      },
+      "model": "modminds:item/escudo_tiki_0"
+    }
+  ]
+}

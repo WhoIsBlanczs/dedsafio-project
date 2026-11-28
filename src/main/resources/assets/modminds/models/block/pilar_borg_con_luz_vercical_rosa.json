@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "up": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "north": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "east": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "south": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "west": "modminds:block/pilar_borg_con_luz_vetical_rosado",
+    "particle": "modminds:block/pilar_borg_con_luz_vetical_rosado"
+  },
+  "render_type": "solid"
+}

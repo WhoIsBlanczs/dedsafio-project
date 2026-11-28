@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_pilar_borg_con_luz_vercical_rosa"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_pilar_borg_con_luz_vercical_rosa_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_pilar_borg_con_luz_vercical_rosa_full"
+    }
+  }
+}

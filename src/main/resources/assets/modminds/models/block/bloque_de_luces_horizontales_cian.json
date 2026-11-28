@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "modminds:block/bloque_de_luces_horizontales_cian",
+    "particle": "modminds:block/bloque_de_luces_horizontales_cian"
+  },
+  "render_type": "solid"
+}

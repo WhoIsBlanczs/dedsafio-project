@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aba",
+    "cd "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:lingote_de_hierro_reforzado"
+    },
+    "b": {
+      "item": "modminds:vara_de_dilitio"
+    },
+    "c": {
+      "item": "minecraft:diamond"
+    },
+    "d": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "id": "modminds:propulsor_de_dilitio_izquierda",
+    "count": 1
+  }
+}

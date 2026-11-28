@@ -1,0 +1,521 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"basic_idle.loop": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": ["query.pitch", "query.body_yaw-180+query.yaw", 0]
+					},
+					"position": {
+						"vector": [0, "math.cos(query.anim_time * 80) * 1", 0]
+					}
+				},
+				"waist_spaceship": {
+					"rotation": {
+						"vector": ["(math.sin(query.right_hand_swing * 50) * 5)", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "(math.sin(query.right_hand_swing * 50) * 2)"]
+					}
+				},
+				"fire_spaceship": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time * 8000) * 0.8"]
+					},
+					"scale": {
+						"vector": [0.99, 0.99, 0.99]
+					}
+				},
+				"waist": {
+					"position": {
+						"vector": [0, -3, 4]
+					}
+				},
+				"body": {
+					"position": {
+						"vector": [0, -2, 0]
+					}
+				},
+				"body_upper": {
+					"rotation": {
+						"vector": [10, 0, 0]
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"vector": [-79.84892, 9.84655, 1.75378]
+					}
+				},
+				"left_hand": {
+					"rotation": {
+						"vector": [-30.02363, 2.16489, -1.2506]
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"vector": [-79.84892, -9.84655, -1.75378]
+					}
+				},
+				"right_hand": {
+					"rotation": {
+						"vector": [-30.02363, -2.16489, 1.2506]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": ["query.pitch", "query.yaw", 0]
+					}
+				},
+				"head_scale": {
+					"rotation": {
+						"vector": [-12.5, 0, 0]
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"vector": [-92.56062, 12.48791, -0.55404]
+					}
+				},
+				"right_foot": {
+					"rotation": {
+						"vector": [-5.02686, -1.60667, 1.91561]
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"vector": [-87.43938, -12.48791, -0.55404]
+					}
+				},
+				"left_foot": {
+					"rotation": {
+						"vector": [-2.52717, 1.68868, -1.84373]
+					}
+				},
+				"s3": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 80) * 15", 0, 0]
+					}
+				},
+				"s31": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 80) * 15", 0, 0]
+					}
+				},
+				"s32": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 80) * 15", 0, 0]
+					}
+				},
+				"s34": {
+					"rotation": {
+						"vector": ["math.sin(query.anim_time * 80) * 15", 0, 0]
+					}
+				},
+				"weapon01": {
+					"rotation": {
+						"vector": ["(math.sin(query.right_hand_swing * 400) * 10)", 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, "(math.sin(query.right_hand_swing * 400) * 3)"]
+					}
+				}
+			}
+		},
+		"basic_pose.standing": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				}
+			}
+		},
+		"extended_pose.standing.still": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				},
+				"fire_spaceship": {
+					"position": {
+						"vector": [0, 0, 2]
+					},
+					"scale": {
+						"vector": [1, 1, 0.6]
+					}
+				}
+			}
+		},
+		"extended_pose.standing.moving": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				},
+				"fire_spaceship": {
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
+		},
+		"extended_pose.standing.sprint": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				},
+				"fire_spaceship": {
+					"scale": {
+						"vector": [1, 1, 1.6]
+					}
+				}
+			}
+		},
+		"emote.open": {
+			"loop": true,
+			"bones": {
+				"glass_spaceship": {
+					"rotation": {
+						"vector": [-75, 0, 0]
+					}
+				}
+			}
+		},
+		"emote.shot": {
+			"animation_length": 0.5,
+			"bones": {
+				"glass_spaceship": {
+					"rotation": {
+						"vector": [-75, 0, 0]
+					}
+				},
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [-10, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [0, 1.44867, 3.30172]
+						},
+						"0.125": {
+							"vector": [0, 1.30636, 4.29154]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"fire_spaceship": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time * 8000) * 0.8"]
+					},
+					"scale": {
+						"vector": [0.99, 0.99, 0.99]
+					}
+				},
+				"s3": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [67.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s31": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [62.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s32": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [-45, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s34": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [-42.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"weapon01": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [-22.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [0, 0, 4]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"emote.shoot": {
+			"animation_length": 0.5,
+			"bones": {
+				"glass_spaceship": {
+					"rotation": {
+						"vector": [-75, 0, 0]
+					}
+				},
+				"root": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [-10, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [0, 1.44867, 3.30172]
+						},
+						"0.125": {
+							"vector": [0, 1.30636, 4.29154]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"fire_spaceship": {
+					"position": {
+						"vector": [0, 0, "math.sin(query.anim_time * 8000) * 0.8"]
+					},
+					"scale": {
+						"vector": [0.99, 0.99, 0.99]
+					}
+				},
+				"s3": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [67.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s31": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [62.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s32": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [-45, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"s34": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.125": {
+							"vector": [-42.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"weapon01": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [-22.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.0417": {
+							"vector": [0, 0, 4]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"emote.off": {
+			"loop": true,
+			"bones": {
+				"glass_spaceship": {
+					"rotation": {
+						"vector": [-75, 0, 0]
+					}
+				},
+				"fire_spaceship": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"emote.attack": {
+			"animation_length": 0.5,
+			"bones": {
+				"glass_spaceship": {
+					"rotation": [-75, 0, 0]
+				},
+				"root": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0417": [5, 0, 0],
+						"0.5": [0, 0, 0]
+					},
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.0417": [0, 1.44867, 3.30172],
+						"0.125": [0, 1.30636, 4.29154],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"fire_spaceship": {
+					"position": [0, 0, "math.sin(query.anim_time * 8000) * 0.8"],
+					"scale": 0.99
+				},
+				"s3": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.125": [67.5, 0, 0],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"s31": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.125": [62.5, 0, 0],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"s32": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.125": [-45, 0, 0],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"s34": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.125": [-42.5, 0, 0],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"arm1": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, 45, 0],
+						"0.125": [-2.5, -30, 0],
+						"0.5": [0, 0, 0]
+					}
+				},
+				"arm2": {
+					"rotation": {
+						"0.0": [0, 0, 0],
+						"0.0833": [0, -45, 0],
+						"0.125": [0, 30, 0],
+						"0.5": [0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

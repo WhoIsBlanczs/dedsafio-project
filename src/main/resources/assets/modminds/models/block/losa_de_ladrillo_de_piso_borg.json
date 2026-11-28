@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/ladrillo_de_piso_borg",
+    "bottom": "modminds:block/ladrillo_de_piso_borg",
+    "top": "modminds:block/ladrillo_de_piso_borg",
+    "side": "modminds:block/ladrillo_de_piso_borg"
+  },
+  "render_type": "solid"
+}

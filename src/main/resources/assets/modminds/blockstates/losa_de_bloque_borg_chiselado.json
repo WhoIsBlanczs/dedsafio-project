@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_bloque_borg_chiselado"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_bloque_borg_chiselado_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_bloque_borg_chiselado_full"
+    }
+  }
+}

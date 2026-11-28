@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_piso_borg"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_piso_borg_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_piso_borg_full"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/ladrillos_de_fortaleza",
+  "textures": {
+    "all": "modminds:block/ladrillos_de_fortaleza",
+    "particle": "modminds:block/ladrillos_de_fortaleza",
+    "0": "modminds:block/ladrillosdefortalezamodelo"
+  },
+  "render_type": "solid"
+}

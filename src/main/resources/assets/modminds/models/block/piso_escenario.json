@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/piso_escenario",
+  "textures": {
+    "all": "modminds:block/piso_escenario",
+    "particle": "modminds:block/piso_escenario",
+    "0": "modminds:block/piso_escenario"
+  },
+  "render_type": "solid"
+}

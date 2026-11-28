@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/cristal_de_dilitio_morado",
+    "bottom": "modminds:block/cristal_de_dilitio_morado",
+    "top": "modminds:block/cristal_de_dilitio_morado",
+    "side": "modminds:block/cristal_de_dilitio_morado"
+  },
+  "render_type": "solid"
+}

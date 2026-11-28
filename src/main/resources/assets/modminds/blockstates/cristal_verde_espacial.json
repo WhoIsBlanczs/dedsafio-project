@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/cristal_verde_espacial"
+    },
+    "facing=east": {
+      "model": "modminds:block/cristal_verde_espacial",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/cristal_verde_espacial",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/cristal_verde_espacial",
+      "y": 270
+    }
+  }
+}

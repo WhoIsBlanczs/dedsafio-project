@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "up": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "north": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "east": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "south": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "west": "modminds:block/piedra_pulida_de_suelo_extrano",
+    "particle": "modminds:block/piedra_pulida_de_suelo_extrano"
+  },
+  "render_type": "solid"
+}

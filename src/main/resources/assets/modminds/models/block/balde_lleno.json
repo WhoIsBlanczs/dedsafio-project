@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/balde_lleno",
+  "textures": {
+    "all": "modminds:block/balde_lleno",
+    "particle": "modminds:block/balde_lleno",
+    "7": "modminds:block/balde_lleno"
+  },
+  "render_type": "solid"
+}

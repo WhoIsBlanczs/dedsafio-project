@@ -1,0 +1,7 @@
+{
+  "parent": "modminds:custom/ala_derecha_frontal_de_nave",
+  "textures": {
+    "0": "modminds:block/8",
+    "particle": "minecraft:item/empty_slot_quartz"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/cristal_de_dilitio_verde",
+    "bottom": "modminds:block/cristal_de_dilitio_verde",
+    "top": "modminds:block/cristal_de_dilitio_verde",
+    "side": "modminds:block/cristal_de_dilitio_verde"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,48 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "modminds:block/valla_de_tablones_magentas_antiguos_post"
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": {
+        "model": "modminds:block/valla_de_tablones_magentas_antiguos",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": {
+        "model": "modminds:block/valla_de_tablones_magentas_antiguos",
+        "y": 180,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": {
+        "model": "modminds:block/valla_de_tablones_magentas_antiguos",
+        "y": 270,
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": {
+        "model": "modminds:block/valla_de_tablones_magentas_antiguos",
+        "y": 90,
+        "uvlock": true
+      }
+    }
+  ]
+}

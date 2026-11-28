@@ -1,0 +1,27 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"0.0": {
+							"post": ["math.sin(query.anim_time * 25) * 1", 0, "math.sin(query.anim_time * 50) * 1"],
+							"lerp_mode": "catmullrom"
+						}
+					},
+					"position": {
+						"0.0": {
+							"post": [0, "math.sin(query.anim_time * 50) * 1", 0],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				}
+			}
+		},
+		"idlequiet": {
+			"loop": true
+		}
+	}
+}

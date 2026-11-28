@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/ladrillos_de_magma",
+    "bottom": "modminds:block/ladrillos_de_magma",
+    "top": "modminds:block/ladrillos_de_magma",
+    "side": "modminds:block/ladrillos_de_magma"
+  },
+  "render_type": "solid"
+}

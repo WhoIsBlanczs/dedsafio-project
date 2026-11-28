@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_post",
+  "textures": {
+    "wall": "modminds:block/bloqueiluminanteamarillo",
+    "particle": "modminds:block/bloqueiluminanteamarillo"
+  },
+  "render_type": "solid"
+}

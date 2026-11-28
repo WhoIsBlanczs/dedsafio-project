@@ -1,0 +1,7 @@
+{
+  "parent": "modminds:custom/tiki_shield_blocking",
+  "textures": {
+    "0": "modminds:block/tiki_shield",
+    "particle": "minecraft:item/archer_pottery_sherd"
+  }
+}

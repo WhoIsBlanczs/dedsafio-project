@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillos_de_adobe_antiguos",
+    "up": "modminds:block/ladrillos_de_adobe_antiguos",
+    "north": "modminds:block/ladrillos_de_adobe_antiguos",
+    "east": "modminds:block/ladrillos_de_adobe_antiguos",
+    "south": "modminds:block/ladrillos_de_adobe_antiguos",
+    "west": "modminds:block/ladrillos_de_adobe_antiguos",
+    "particle": "modminds:block/ladrillos_de_adobe_antiguos"
+  },
+  "render_type": "solid"
+}

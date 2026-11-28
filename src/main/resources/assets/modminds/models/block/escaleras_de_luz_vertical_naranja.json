@@ -1,0 +1,10 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luz_vertical_naranja",
+    "bottom": "modminds:block/bloque_de_luz_vertical_naranja",
+    "top": "modminds:block/bloque_de_luz_vertical_naranja",
+    "side": "modminds:block/bloque_de_luz_vertical_naranja"
+  },
+  "render_type": "solid"
+}

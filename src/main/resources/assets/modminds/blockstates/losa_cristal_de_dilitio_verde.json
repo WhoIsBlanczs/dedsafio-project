@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_cristal_de_dilitio_verde"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_cristal_de_dilitio_verde_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_cristal_de_dilitio_verde_full"
+    }
+  }
+}

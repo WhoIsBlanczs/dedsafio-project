@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/bloqueiluminantemagenta",
+    "bottom": "modminds:block/bloqueiluminantemagenta",
+    "top": "modminds:block/bloqueiluminantemagenta",
+    "side": "modminds:block/bloqueiluminantemagenta"
+  },
+  "render_type": "solid"
+}

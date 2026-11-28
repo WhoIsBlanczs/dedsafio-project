@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueborgpanelesmagentas",
+    "up": "modminds:block/bloqueborgpanelesmagentas",
+    "north": "modminds:block/bloqueborgpanelesmagentas",
+    "east": "modminds:block/bloqueborgpanelesmagentas",
+    "south": "modminds:block/bloqueborgpanelesmagentas",
+    "west": "modminds:block/bloqueborgpanelesmagentas",
+    "particle": "modminds:block/bloqueborgpanelesmagentas"
+  },
+  "render_type": "solid"
+}

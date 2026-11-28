@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " aa",
+    "aaa",
+    "a  "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:lingote_de_hierro_reforzado"
+    }
+  },
+  "result": {
+    "id": "modminds:ala_derecha_de_nave",
+    "count": 1
+  }
+}

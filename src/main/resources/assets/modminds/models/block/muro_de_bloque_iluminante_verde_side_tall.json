@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_side_tall",
+  "textures": {
+    "wall": "modminds:block/bloqueiluminanteverde",
+    "particle": "modminds:block/bloqueiluminanteverde"
+  },
+  "render_type": "solid"
+}

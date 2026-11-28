@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_tablones_rosas_antiguos"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_tablones_rosas_antiguos_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_tablones_rosas_antiguos_full"
+    }
+  }
+}

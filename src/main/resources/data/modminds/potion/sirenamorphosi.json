@@ -1,0 +1,12 @@
+{
+  "effects": [
+    {
+      "id": "modminds:sirenomorphosis",
+      "duration": 19200,
+      "amplifier": 0,
+      "ambient": false,
+      "show_particles": true,
+      "show_icon": true
+    }
+  ]
+}

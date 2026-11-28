@@ -1,0 +1,77 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"bones": {
+				"helice": {
+					"rotation": {
+						"vector": [0, 45, 0]
+					}
+				},
+				"fuego": {
+					"position": {
+						"vector": [0, 0, -8]
+					}
+				}
+			}
+		},
+		"standing": {
+			"animation_length": 60,
+			"bones": {
+				"helice": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 45, 0]
+						},
+						"60.0": {
+							"vector": [0, 50000, 0]
+						}
+					}
+				},
+				"fuego": {
+					"position": {
+						"vector": [0, "-0.5 +math.sin(query.anim_time * 200) * 0.5", "-1 +math.sin(query.anim_time * 200) * 1"]
+					}
+				},
+				"ALL": {
+					"rotation": {
+						"vector": ["-2+math.sin(query.anim_time * 50) * 2", "-2+math.sin(query.anim_time * 50) * 2", 0]
+					},
+					"position": {
+						"vector": ["-1 +math.sin(query.anim_time * 50) * 1", 0, 0]
+					}
+				}
+			}
+		},
+		"fly": {
+			"animation_length": 60,
+			"bones": {
+				"helice": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 45, 0]
+						},
+						"60.0": {
+							"vector": [0, 75000, 0]
+						}
+					}
+				},
+				"fuego": {
+					"position": {
+						"vector": [0, "-0.5 +math.sin(query.anim_time * 500) * 0.5", "-1 +math.sin(query.anim_time * 500) * 1"]
+					}
+				},
+				"ALL": {
+					"rotation": {
+						"vector": ["-2+math.sin(query.anim_time * 100) * 2", "-2+math.sin(query.anim_time * 100) * 2", 0]
+					},
+					"position": {
+						"vector": ["-1 +math.sin(query.anim_time * 50) * 1", 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

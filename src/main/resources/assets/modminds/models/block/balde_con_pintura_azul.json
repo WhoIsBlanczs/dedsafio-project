@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/balde_con_pintura_azul",
+  "textures": {
+    "all": "modminds:block/balde_con_pintura_azul",
+    "particle": "modminds:block/balde_con_pintura_azul",
+    "2": "modminds:block/balde_con_pintura_azul"
+  },
+  "render_type": "solid"
+}

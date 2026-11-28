@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "up": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "north": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "east": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "south": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "west": "modminds:block/bloque_de_luces_horizontales_rosadas",
+    "particle": "modminds:block/bloque_de_luces_horizontales_rosadas"
+  },
+  "render_type": "solid"
+}

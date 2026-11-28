@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_post",
+  "textures": {
+    "wall": "modminds:block/bloque_borg",
+    "particle": "modminds:block/bloque_borg"
+  },
+  "render_type": "solid"
+}

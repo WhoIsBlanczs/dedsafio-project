@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/bluestone_top",
+    "bottom": "modminds:block/bluestone_top",
+    "top": "modminds:block/bluestone_top",
+    "side": "modminds:block/bluestone"
+  },
+  "render_type": "solid"
+}

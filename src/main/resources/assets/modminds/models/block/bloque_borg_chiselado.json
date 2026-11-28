@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_borg_chiselado",
+    "up": "modminds:block/bloque_borg_chiselado",
+    "north": "modminds:block/bloque_borg_chiselado",
+    "east": "modminds:block/bloque_borg_chiselado",
+    "south": "modminds:block/bloque_borg_chiselado",
+    "west": "modminds:block/bloque_borg_chiselado",
+    "particle": "modminds:block/bloque_borg_chiselado"
+  },
+  "render_type": "solid"
+}

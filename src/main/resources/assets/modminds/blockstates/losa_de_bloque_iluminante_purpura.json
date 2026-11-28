@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_bloque_iluminante_purpura"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_bloque_iluminante_purpura_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_bloque_iluminante_purpura_full"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/bloqueborgpanelesmagentas",
+    "bottom": "modminds:block/bloqueborgpanelesmagentas",
+    "top": "modminds:block/bloqueborgpanelesmagentas",
+    "side": "modminds:block/bloqueborgpanelesmagentas"
+  },
+  "render_type": "solid"
+}

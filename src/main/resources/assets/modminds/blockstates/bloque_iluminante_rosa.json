@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/bloque_iluminante_rosa"
+    },
+    "facing=east": {
+      "model": "modminds:block/bloque_iluminante_rosa",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/bloque_iluminante_rosa",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/bloque_iluminante_rosa",
+      "y": 270
+    }
+  }
+}

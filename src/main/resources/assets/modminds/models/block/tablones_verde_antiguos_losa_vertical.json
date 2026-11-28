@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/tablones_verdes_antiguos_losa_vertical",
+  "textures": {
+    "all": "modminds:block/tablones_verde_antiguos",
+    "particle": "modminds:block/tablones_verde_antiguos",
+    "0": "modminds:block/tablones_verde_antiguos"
+  },
+  "render_type": "solid"
+}

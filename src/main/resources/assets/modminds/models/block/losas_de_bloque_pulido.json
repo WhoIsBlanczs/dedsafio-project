@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/bloque_pulido",
+    "bottom": "modminds:block/bloque_pulido",
+    "top": "modminds:block/bloque_pulido",
+    "side": "modminds:block/bloque_pulido"
+  },
+  "render_type": "solid"
+}

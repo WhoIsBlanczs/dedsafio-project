@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/heno_de_tiki_losa_vertical"
+    },
+    "facing=east": {
+      "model": "modminds:block/heno_de_tiki_losa_vertical",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/heno_de_tiki_losa_vertical",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/heno_de_tiki_losa_vertical",
+      "y": 270
+    }
+  }
+}

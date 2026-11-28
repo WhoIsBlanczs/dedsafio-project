@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/piso_restaurante",
+    "up": "modminds:block/piso_restaurante",
+    "north": "modminds:block/piso_restaurante",
+    "east": "modminds:block/piso_restaurante",
+    "south": "modminds:block/piso_restaurante",
+    "west": "modminds:block/piso_restaurante",
+    "particle": "modminds:block/piso_restaurante"
+  },
+  "render_type": "solid"
+}

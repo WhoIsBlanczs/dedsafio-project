@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:pepita_de_acero_negro_aurero"
+    }
+  },
+  "result": {
+    "id": "modminds:lamina_reforzada_de_acero_negro_aureo",
+    "count": 1
+  }
+}

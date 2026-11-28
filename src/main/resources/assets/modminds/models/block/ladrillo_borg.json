@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillo_borg",
+    "up": "modminds:block/ladrillo_borg",
+    "north": "modminds:block/ladrillo_borg",
+    "east": "modminds:block/ladrillo_borg",
+    "south": "modminds:block/ladrillo_borg",
+    "west": "modminds:block/ladrillo_borg",
+    "particle": "modminds:block/ladrillo_borg"
+  },
+  "render_type": "solid"
+}

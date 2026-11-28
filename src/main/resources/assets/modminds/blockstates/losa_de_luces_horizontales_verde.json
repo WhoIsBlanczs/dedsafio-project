@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_luces_horizontales_verde"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_luces_horizontales_verde_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_luces_horizontales_verde_full"
+    }
+  }
+}

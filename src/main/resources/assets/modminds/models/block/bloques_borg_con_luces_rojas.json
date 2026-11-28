@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/lucesrojav2",
+    "up": "modminds:block/lucesrojav2",
+    "north": "modminds:block/lucesrojav2",
+    "east": "modminds:block/lucesrojav2",
+    "south": "modminds:block/lucesrojav2",
+    "west": "modminds:block/lucesrojav2",
+    "particle": "modminds:block/lucesrojav2"
+  },
+  "render_type": "solid"
+}

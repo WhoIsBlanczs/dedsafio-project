@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/bloqueiluminanteverde",
+    "bottom": "modminds:block/bloqueiluminanteverde",
+    "top": "modminds:block/bloqueiluminanteverde",
+    "side": "modminds:block/bloqueiluminanteverde"
+  },
+  "render_type": "solid"
+}

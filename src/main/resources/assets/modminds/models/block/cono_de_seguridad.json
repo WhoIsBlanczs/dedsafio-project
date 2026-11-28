@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/cono_de_seguridad",
+  "textures": {
+    "all": "modminds:block/conodeseguridad",
+    "particle": "modminds:block/conodeseguridad",
+    "0": "modminds:block/conodeseguridad"
+  },
+  "render_type": "solid"
+}

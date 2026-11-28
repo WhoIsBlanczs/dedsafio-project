@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_borg_cincelado",
+    "up": "modminds:block/bloque_borg_cincelado",
+    "north": "modminds:block/bloque_borg_cincelado",
+    "east": "modminds:block/bloque_borg_cincelado",
+    "south": "modminds:block/bloque_borg_cincelado",
+    "west": "modminds:block/bloque_borg_cincelado",
+    "particle": "modminds:block/bloque_borg_cincelado"
+  },
+  "render_type": "solid"
+}

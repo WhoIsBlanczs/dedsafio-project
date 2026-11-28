@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/crimson_tallado",
+    "up": "modminds:block/crimson_tallado",
+    "north": "modminds:block/crimson_tallado",
+    "east": "modminds:block/crimson_tallado",
+    "south": "modminds:block/crimson_tallado",
+    "west": "modminds:block/crimson_tallado",
+    "particle": "modminds:block/crimson_tallado"
+  },
+  "render_type": "solid"
+}

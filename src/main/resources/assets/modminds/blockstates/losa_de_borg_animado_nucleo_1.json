@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_borg_animado_nucleo_1"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_borg_animado_nucleo_1_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_borg_animado_nucleo_1_full"
+    }
+  }
+}

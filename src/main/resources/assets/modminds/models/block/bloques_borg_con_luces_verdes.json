@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/lucesverdesv2",
+    "up": "modminds:block/lucesverdesv2",
+    "north": "modminds:block/lucesverdesv2",
+    "east": "modminds:block/lucesverdesv2",
+    "south": "modminds:block/lucesverdesv2",
+    "west": "modminds:block/lucesverdesv2",
+    "particle": "modminds:block/lucesverdesv2"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_cristal_de_templo_negro"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_cristal_de_templo_negro_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_cristal_de_templo_negro_full"
+    }
+  }
+}

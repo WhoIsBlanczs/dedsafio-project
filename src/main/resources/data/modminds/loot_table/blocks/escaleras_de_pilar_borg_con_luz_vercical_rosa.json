@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "modminds:blocks/escaleras_de_pilar_borg_con_luz_vercical_rosa",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "modminds:escaleras_de_pilar_borg_con_luz_vercical_rosa"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luz_vertical_naranja",
+    "up": "modminds:block/bloque_de_luz_vertical_naranja",
+    "north": "modminds:block/bloque_de_luz_vertical_naranja",
+    "east": "modminds:block/bloque_de_luz_vertical_naranja",
+    "south": "modminds:block/bloque_de_luz_vertical_naranja",
+    "west": "modminds:block/bloque_de_luz_vertical_naranja",
+    "particle": "modminds:block/bloque_de_luz_vertical_naranja"
+  },
+  "render_type": "solid"
+}

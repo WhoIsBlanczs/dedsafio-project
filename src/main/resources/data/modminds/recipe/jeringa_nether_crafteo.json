@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba",
+    " c "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:placa_de_wildfire"
+    },
+    "b": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "c": {
+      "item": "modminds:lamina_reforzada_de_acero_negro_aureo"
+    }
+  },
+  "result": {
+    "id": "modminds:jeringa_nether",
+    "count": 1
+  }
+}

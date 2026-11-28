@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/cristal_de_templo_negro",
+    "up": "modminds:block/cristal_de_templo_negro",
+    "north": "modminds:block/cristal_de_templo_negro",
+    "east": "modminds:block/cristal_de_templo_negro",
+    "south": "modminds:block/cristal_de_templo_negro",
+    "west": "modminds:block/cristal_de_templo_negro",
+    "particle": "modminds:block/cristal_de_templo_negro"
+  },
+  "render_type": "solid"
+}

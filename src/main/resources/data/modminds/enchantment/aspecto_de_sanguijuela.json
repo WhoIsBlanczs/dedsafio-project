@@ -1,0 +1,22 @@
+{
+  "description": {
+    "translate": "enchantment.modminds.aspecto_de_sanguijuela"
+  },
+  "supported_items": "#minecraft:swords",
+  "weight": 10,
+  "max_level": 2,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 10
+  },
+  "max_cost": {
+    "base": 11,
+    "per_level_above_first": 10
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand",
+    "offhand"
+  ],
+  "effects": {}
+}

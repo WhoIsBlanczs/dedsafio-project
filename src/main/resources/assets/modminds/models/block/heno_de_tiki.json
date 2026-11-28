@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/heno_de_tiki",
+    "up": "modminds:block/heno_de_tiki",
+    "north": "modminds:block/heno_de_tiki",
+    "east": "modminds:block/heno_de_tiki",
+    "south": "modminds:block/heno_de_tiki",
+    "west": "modminds:block/heno_de_tiki",
+    "particle": "modminds:block/heno_de_tiki"
+  },
+  "render_type": "cutout"
+}

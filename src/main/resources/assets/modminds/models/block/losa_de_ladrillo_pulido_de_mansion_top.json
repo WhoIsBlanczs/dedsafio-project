@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/ladrillo_pulido_de_mansion",
+    "bottom": "modminds:block/ladrillo_pulido_de_mansion",
+    "top": "modminds:block/ladrillo_pulido_de_mansion",
+    "side": "modminds:block/ladrillo_pulido_de_mansion"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_post",
+  "textures": {
+    "wall": "modminds:block/bloque_pulido",
+    "particle": "modminds:block/bloque_pulido"
+  },
+  "render_type": "solid"
+}

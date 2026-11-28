@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/pala_acostada",
+  "textures": {
+    "all": "modminds:block/pala_acostada",
+    "particle": "modminds:block/pala_acostada",
+    "2": "modminds:block/pala_acostada"
+  },
+  "render_type": "solid"
+}

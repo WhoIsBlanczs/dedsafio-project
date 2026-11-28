@@ -1,0 +1,6 @@
+{
+  "parent": "modminds:displaysettings/armaborgcorta",
+  "textures": {
+    "layer0": "modminds:item/perforador_del_vacio"
+  }
+}

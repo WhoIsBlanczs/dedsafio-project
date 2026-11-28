@@ -1,0 +1,7 @@
+{
+  "parent": "modminds:custom/dedita_naranja",
+  "textures": {
+    "0": "modminds:block/dedita_naranja",
+    "particle": "modminds:item/dedita_azul"
+  }
+}

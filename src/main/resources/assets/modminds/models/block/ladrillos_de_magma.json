@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillos_de_magma",
+    "up": "modminds:block/ladrillos_de_magma",
+    "north": "modminds:block/ladrillos_de_magma",
+    "east": "modminds:block/ladrillos_de_magma",
+    "south": "modminds:block/ladrillos_de_magma",
+    "west": "modminds:block/ladrillos_de_magma",
+    "particle": "modminds:block/ladrillos_de_magma"
+  },
+  "render_type": "solid"
+}

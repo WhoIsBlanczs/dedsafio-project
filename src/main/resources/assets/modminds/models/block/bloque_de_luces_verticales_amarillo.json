@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "up": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "north": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "east": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "south": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "west": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "particle": "modminds:block/bloque_de_luces_verticales_amarillo"
+  },
+  "render_type": "solid"
+}

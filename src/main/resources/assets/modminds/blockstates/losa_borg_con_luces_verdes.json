@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_borg_con_luces_verdes"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_borg_con_luces_verdes_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_borg_con_luces_verdes_full"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/bloque_del_limbo_luminoso",
+    "bottom": "modminds:block/bloque_del_limbo_luminoso",
+    "top": "modminds:block/bloque_del_limbo_luminoso",
+    "side": "modminds:block/bloque_del_limbo_luminoso"
+  },
+  "render_type": "solid"
+}

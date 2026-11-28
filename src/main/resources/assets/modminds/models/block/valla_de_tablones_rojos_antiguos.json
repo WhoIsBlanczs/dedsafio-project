@@ -1,0 +1,8 @@
+{
+  "parent": "block/fence_side",
+  "textures": {
+    "texture": "modminds:block/tablones_rojos_antiguos",
+    "particle": "modminds:block/tablones_rojos_antiguos"
+  },
+  "render_type": "solid"
+}

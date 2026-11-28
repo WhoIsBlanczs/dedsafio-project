@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/tablas_de_madera",
+  "textures": {
+    "all": "modminds:block/tablas_de_madera",
+    "particle": "modminds:block/tablas_de_madera",
+    "4": "modminds:block/tablas_de_madera"
+  },
+  "render_type": "solid"
+}

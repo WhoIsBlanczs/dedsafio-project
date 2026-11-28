@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "bottom": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "top": "modminds:block/bloque_de_luces_verticales_amarillo",
+    "side": "modminds:block/bloque_de_luces_verticales_amarillo"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_ladrillo_borg"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_ladrillo_borg_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_ladrillo_borg_full"
+    }
+  }
+}

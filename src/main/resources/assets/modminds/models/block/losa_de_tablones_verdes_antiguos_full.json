@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/tablones_verdes_antiguos",
+    "bottom": "modminds:block/tablones_verdes_antiguos",
+    "top": "modminds:block/tablones_verdes_antiguos",
+    "side": "modminds:block/tablones_verdes_antiguos"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "abc",
+    "def",
+    " g "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "b": {
+      "item": "minecraft:golden_apple"
+    },
+    "c": {
+      "item": "minecraft:fermented_spider_eye"
+    },
+    "d": {
+      "item": "minecraft:slime_ball"
+    },
+    "e": {
+      "item": "minecraft:echo_shard"
+    },
+    "f": {
+      "item": "minecraft:nether_wart"
+    },
+    "g": {
+      "item": "modminds:pildora_azul_vacia"
+    }
+  },
+  "result": {
+    "id": "modminds:pildora_del_experimento_110",
+    "count": 1
+  }
+}

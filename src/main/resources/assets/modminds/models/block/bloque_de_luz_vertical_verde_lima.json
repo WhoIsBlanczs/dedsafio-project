@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "up": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "north": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "east": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "south": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "west": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "particle": "modminds:block/bloque_de_luz_vertical_verde_lima"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "modminds:block/bloque_borg_chiselado",
+    "particle": "modminds:block/bloque_borg_chiselado"
+  },
+  "render_type": "solid"
+}

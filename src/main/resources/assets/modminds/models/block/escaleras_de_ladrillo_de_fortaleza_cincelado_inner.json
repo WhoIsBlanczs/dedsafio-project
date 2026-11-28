@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/ladrillodefortalezacincelado",
+    "bottom": "modminds:block/ladrillodefortalezacincelado",
+    "top": "modminds:block/ladrillodefortalezacincelado",
+    "side": "modminds:block/ladrillodefortalezacincelado"
+  },
+  "render_type": "solid"
+}

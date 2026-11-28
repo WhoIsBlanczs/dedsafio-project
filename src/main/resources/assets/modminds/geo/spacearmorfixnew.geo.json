@@ -1,0 +1,96 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "Head",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-5, 23, -5], "size": [10, 10, 10], "uv": [3, 1]}
+					]
+				},
+				{
+					"name": "Body",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "inflate": 0.25, "uv": [0, 21]},
+						{"origin": [-7, 13, -3.7], "size": [14, 14, 11], "inflate": -5, "pivot": [0, 23.75, 0], "rotation": [0, 180, 0], "uv": [14, 39]}
+					]
+				},
+				{
+					"name": "RightArm",
+					"pivot": [-5, 22, 0],
+					"cubes": [
+						{"origin": [-8, 12, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [24, 21]}
+					]
+				},
+				{
+					"name": "LeftArm",
+					"pivot": [5, 22, 0],
+					"cubes": [
+						{"origin": [4, 12, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [0, 37]}
+					]
+				},
+				{
+					"name": "RightLeg",
+					"pivot": [-1.9, 12, 0],
+					"cubes": [
+						{"origin": [-3.9, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [16, 37]}
+					]
+				},
+				{
+					"name": "LeftLeg",
+					"pivot": [1.9, 12, 0],
+					"cubes": [
+						{"origin": [-0.1, 0, -2], "size": [4, 12, 4], "inflate": 0.25, "uv": [16, 37], "mirror": true}
+					]
+				},
+				{
+					"name": "BootRight",
+					"pivot": [-2, 11.5, 0],
+					"cubes": [
+						{
+							"origin": [-4.35, -0.4, -2.5],
+							"size": [5, 8, 5],
+							"uv": {
+								"north": {"uv": [49, 5], "uv_size": [4, 7]},
+								"east": {"uv": [45, 5], "uv_size": [4, 7]},
+								"south": {"uv": [57, 5], "uv_size": [4, 7]},
+								"west": {"uv": [53, 5], "uv_size": [4, 7]},
+								"up": {"uv": [49, 1], "uv_size": [4, 4]},
+								"down": {"uv": [53, 5], "uv_size": [4, -4]}
+							}
+						}
+					]
+				},
+				{
+					"name": "BootLeft",
+					"pivot": [2, 11.5, 0],
+					"cubes": [
+						{
+							"origin": [-0.65, -0.4, -2.5],
+							"size": [5, 8, 5],
+							"uv": {
+								"north": {"uv": [53, 5], "uv_size": [-4, 7]},
+								"east": {"uv": [57, 5], "uv_size": [-4, 7]},
+								"south": {"uv": [61, 5], "uv_size": [-4, 7]},
+								"west": {"uv": [49, 5], "uv_size": [-4, 7]},
+								"up": {"uv": [53, 1], "uv_size": [-4, 4]},
+								"down": {"uv": [57, 5], "uv_size": [-4, -4]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

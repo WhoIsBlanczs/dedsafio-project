@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_nereida",
+    "up": "modminds:block/bloque_de_nereida",
+    "north": "modminds:block/bloque_de_nereida",
+    "east": "modminds:block/bloque_de_nereida",
+    "south": "modminds:block/bloque_de_nereida",
+    "west": "modminds:block/bloque_de_nereida",
+    "particle": "modminds:block/bloque_de_nereida"
+  },
+  "render_type": "solid"
+}

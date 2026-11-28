@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/ladrillo_pulido_de_mansion",
+    "up": "modminds:block/ladrillo_pulido_de_mansion",
+    "north": "modminds:block/ladrillo_pulido_de_mansion",
+    "east": "modminds:block/ladrillo_pulido_de_mansion",
+    "south": "modminds:block/ladrillo_pulido_de_mansion",
+    "west": "modminds:block/ladrillo_pulido_de_mansion",
+    "particle": "modminds:block/ladrillo_pulido_de_mansion"
+  },
+  "render_type": "solid"
+}

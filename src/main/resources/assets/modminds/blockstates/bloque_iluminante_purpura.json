@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/bloque_iluminante_purpura"
+    },
+    "facing=east": {
+      "model": "modminds:block/bloque_iluminante_purpura",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/bloque_iluminante_purpura",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/bloque_iluminante_purpura",
+      "y": 270
+    }
+  }
+}

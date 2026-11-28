@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/piso_escenario"
+    },
+    "facing=east": {
+      "model": "modminds:block/piso_escenario",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/piso_escenario",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/piso_escenario",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_borg_variante_10",
+    "up": "modminds:block/bloque_borg_variante_10",
+    "north": "modminds:block/bloque_borg_variante_10",
+    "east": "modminds:block/bloque_borg_variante_10",
+    "south": "modminds:block/bloque_borg_variante_10",
+    "west": "modminds:block/bloque_borg_variante_10",
+    "particle": "modminds:block/bloque_borg_variante_10"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/tuberiaborg",
+    "up": "modminds:block/tuberiaborg",
+    "north": "modminds:block/tuberiaborg",
+    "east": "modminds:block/tuberiaborg",
+    "south": "modminds:block/tuberiaborg",
+    "west": "modminds:block/tuberiaborg",
+    "particle": "modminds:block/tuberiaborg"
+  },
+  "render_type": "solid"
+}

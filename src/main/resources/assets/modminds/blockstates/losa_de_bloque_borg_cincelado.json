@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_bloque_borg_cincelado"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_bloque_borg_cincelado_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_bloque_borg_cincelado_full"
+    }
+  }
+}

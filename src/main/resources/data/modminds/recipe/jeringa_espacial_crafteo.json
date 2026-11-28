@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba",
+    " c "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:gema_de_dilitio"
+    },
+    "b": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "c": {
+      "item": "modminds:puerta_borg_chip_roja"
+    }
+  },
+  "result": {
+    "id": "modminds:jeringa_espacial",
+    "count": 1
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/muro_de_ladrillos_de_fortaleza_cincelado"
+    },
+    "facing=east": {
+      "model": "modminds:block/muro_de_ladrillos_de_fortaleza_cincelado",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/muro_de_ladrillos_de_fortaleza_cincelado",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/muro_de_ladrillos_de_fortaleza_cincelado",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/carmesi_pulido",
+    "up": "modminds:block/carmesi_pulido",
+    "north": "modminds:block/carmesi_pulido",
+    "east": "modminds:block/carmesi_pulido",
+    "south": "modminds:block/carmesi_pulido",
+    "west": "modminds:block/carmesi_pulido",
+    "particle": "modminds:block/carmesi_pulido"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/ladrillos_nergros_agrietados",
+    "bottom": "modminds:block/ladrillos_nergros_agrietados",
+    "top": "modminds:block/ladrillos_nergros_agrietados",
+    "side": "modminds:block/ladrillos_nergros_agrietados"
+  },
+  "render_type": "solid"
+}

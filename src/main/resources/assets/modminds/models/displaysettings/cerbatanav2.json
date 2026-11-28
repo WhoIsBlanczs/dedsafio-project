@@ -1,0 +1,65 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "builtin/entity",
+  "texture_size": [
+    64,
+    64
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [
+        0.81,
+        0.81,
+        1
+      ]
+    },
+    "firstperson_righthand": {
+      "rotation": [
+        5,
+        0,
+        0
+      ],
+      "translation": [
+        -9,
+        3.75,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "rotation": [
+        5,
+        0,
+        0
+      ],
+      "translation": [
+        -9,
+        3.75,
+        0
+      ]
+    },
+    "gui": {
+      "rotation": [
+        -90,
+        45,
+        59
+      ]
+    },
+    "head": {
+      "translation": [
+        0,
+        -5.25,
+        -14
+      ]
+    },
+    "fixed": {
+      "rotation": [
+        -90,
+        45,
+        59
+      ]
+    }
+  },
+  "textures": {
+    "particle": "modminds:item/cerbatanav2texture"
+  }
+}

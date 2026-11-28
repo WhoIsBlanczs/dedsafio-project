@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/acero_de_limbo",
+    "up": "modminds:block/acero_de_limbo",
+    "north": "modminds:block/acero_de_limbo",
+    "east": "modminds:block/acero_de_limbo",
+    "south": "modminds:block/acero_de_limbo",
+    "west": "modminds:block/acero_de_limbo",
+    "particle": "modminds:block/acero_de_limbo"
+  },
+  "render_type": "solid"
+}

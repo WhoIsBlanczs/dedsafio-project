@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_cian"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_cian_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_cristal_de_dilitio_cian_full"
+    }
+  }
+}

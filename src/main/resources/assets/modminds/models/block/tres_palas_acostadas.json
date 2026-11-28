@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/tres_palas_acostadas",
+  "textures": {
+    "all": "modminds:block/tres_palas_acostadas",
+    "particle": "modminds:block/tres_palas_acostadas",
+    "2": "modminds:block/tres_palas_acostadas"
+  },
+  "render_type": "solid"
+}

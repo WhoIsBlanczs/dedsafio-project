@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "up": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "north": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "east": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "south": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "west": "modminds:block/bloque_de_luces_horizontales_purpuras",
+    "particle": "modminds:block/bloque_de_luces_horizontales_purpuras"
+  },
+  "render_type": "solid"
+}

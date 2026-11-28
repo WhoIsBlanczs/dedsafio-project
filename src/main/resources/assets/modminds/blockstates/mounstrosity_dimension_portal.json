@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=z": {
+      "model": "modminds:block/mounstrosity_dimension_portal_ew"
+    },
+    "axis=x": {
+      "model": "modminds:block/mounstrosity_dimension_portal_ns"
+    }
+  }
+}

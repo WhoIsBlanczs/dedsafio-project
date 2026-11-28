@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/cristal_verde_espacio",
+  "textures": {
+    "all": "modminds:block/verde",
+    "particle": "modminds:block/verde",
+    "0": "modminds:block/verde"
+  },
+  "render_type": "translucent"
+}

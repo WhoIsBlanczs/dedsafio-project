@@ -1,0 +1,83 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"sprint": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					},
+					"position": {
+						"vector": [0, "math.cos(query.anim_time * 80) * 1", 0]
+					}
+				},
+				"fire": {
+					"position": {
+						"vector": [0, 0, "3+math.sin(query.anim_time * 3800) * 1"]
+					},
+					"scale": {
+						"vector": [0.99, 0.99, 0.99]
+					}
+				},
+				"head_scale": {
+					"rotation": {
+						"vector": [-12.5, 0, 0]
+					}
+				}
+			}
+		},
+		"idle": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				},
+				"fire": {
+					"position": {
+						"vector": [0, 0, -4.5]
+					},
+					"scale": {
+						"vector": [1, 1, 1]
+					}
+				}
+			}
+		},
+		"walk": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"rotation": {
+						"vector": [0, 0, "math.sin(query.anim_time * 80) * 1"]
+					}
+				},
+				"fire": {
+					"position": {
+						"vector": [0, 0, -2]
+					},
+					"scale": {
+						"vector": [1, 1, 1.25]
+					}
+				}
+			}
+		},
+		"uncomplete": {
+			"loop": true,
+			"bones": {
+				"root": {
+					"position": {
+						"vector": [0, -2, 0]
+					}
+				},
+				"fire": {
+					"scale": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

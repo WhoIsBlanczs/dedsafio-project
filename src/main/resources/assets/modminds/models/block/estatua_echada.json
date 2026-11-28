@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/estatua_echada",
+  "textures": {
+    "all": "modminds:block/estatua_stone",
+    "particle": "modminds:block/estatua_stone",
+    "0": "modminds:block/estatua_stone"
+  },
+  "render_type": "solid"
+}

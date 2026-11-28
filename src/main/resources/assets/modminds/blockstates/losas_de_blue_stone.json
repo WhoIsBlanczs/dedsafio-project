@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losas_de_blue_stone"
+    },
+    "type=top": {
+      "model": "modminds:block/losas_de_blue_stone_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losas_de_blue_stone_full"
+    }
+  }
+}

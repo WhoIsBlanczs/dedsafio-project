@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab",
+  "textures": {
+    "particle": "modminds:block/cristal_de_dilitio_magenta",
+    "bottom": "modminds:block/cristal_de_dilitio_magenta",
+    "top": "modminds:block/cristal_de_dilitio_magenta",
+    "side": "modminds:block/cristal_de_dilitio_magenta"
+  },
+  "render_type": "solid"
+}

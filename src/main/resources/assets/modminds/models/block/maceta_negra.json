@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/maceta",
+  "textures": {
+    "all": "modminds:block/maceta",
+    "particle": "modminds:block/maceta",
+    "2": "modminds:block/maceta"
+  },
+  "render_type": "solid"
+}

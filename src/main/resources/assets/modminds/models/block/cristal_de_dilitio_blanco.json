@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/cristal_de_dilitio_blanco",
+    "up": "modminds:block/cristal_de_dilitio_blanco",
+    "north": "modminds:block/cristal_de_dilitio_blanco",
+    "east": "modminds:block/cristal_de_dilitio_blanco",
+    "south": "modminds:block/cristal_de_dilitio_blanco",
+    "west": "modminds:block/cristal_de_dilitio_blanco",
+    "particle": "modminds:block/cristal_de_dilitio_blanco"
+  },
+  "render_type": "solid"
+}

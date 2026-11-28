@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/bloqueiluminanteazulclaro",
+    "bottom": "modminds:block/bloqueiluminanteazulclaro",
+    "top": "modminds:block/bloqueiluminanteazulclaro",
+    "side": "modminds:block/bloqueiluminanteazulclaro"
+  },
+  "render_type": "solid"
+}

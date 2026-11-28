@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/piedra_rosada_del_limbo",
+    "up": "modminds:block/piedra_rosada_del_limbo",
+    "north": "modminds:block/piedra_rosada_del_limbo",
+    "east": "modminds:block/piedra_rosada_del_limbo",
+    "south": "modminds:block/piedra_rosada_del_limbo",
+    "west": "modminds:block/piedra_rosada_del_limbo",
+    "particle": "modminds:block/piedra_rosada_del_limbo"
+  },
+  "render_type": "solid"
+}

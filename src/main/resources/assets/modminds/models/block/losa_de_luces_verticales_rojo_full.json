@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luces_verticales_rojo",
+    "bottom": "modminds:block/bloque_de_luces_verticales_rojo",
+    "top": "modminds:block/bloque_de_luces_verticales_rojo",
+    "side": "modminds:block/bloque_de_luces_verticales_rojo"
+  },
+  "render_type": "solid"
+}

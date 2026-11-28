@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_rejillas_rotas",
+    "up": "modminds:block/bloque_de_rejillas_rotas",
+    "north": "modminds:block/bloque_de_rejillas_rotas",
+    "east": "modminds:block/bloque_de_rejillas_rotas",
+    "south": "modminds:block/bloque_de_rejillas_rotas",
+    "west": "modminds:block/bloque_de_rejillas_rotas",
+    "particle": "modminds:block/bloque_de_rejillas_rotas"
+  },
+  "render_type": "solid"
+}

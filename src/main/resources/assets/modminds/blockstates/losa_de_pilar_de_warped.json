@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_pilar_de_warped"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_pilar_de_warped_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_pilar_de_warped_full"
+    }
+  }
+}

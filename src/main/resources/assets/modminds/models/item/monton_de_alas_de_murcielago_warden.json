@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "modminds:item/monton_de_alas_de_murcielago_warden"
+  }
+}

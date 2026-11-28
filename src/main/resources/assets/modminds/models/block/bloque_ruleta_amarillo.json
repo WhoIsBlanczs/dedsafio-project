@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueruletaamarilla",
+    "up": "modminds:block/bloqueruletaamarilla",
+    "north": "modminds:block/bloqueruletaamarilla",
+    "east": "modminds:block/bloqueruletaamarilla",
+    "south": "modminds:block/bloqueruletaamarilla",
+    "west": "modminds:block/bloqueruletaamarilla",
+    "particle": "modminds:block/bloqueruletaamarilla"
+  },
+  "render_type": "solid"
+}

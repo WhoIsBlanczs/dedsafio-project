@@ -1,0 +1,8 @@
+{
+  "parent": "block/template_wall_post",
+  "textures": {
+    "wall": "modminds:block/bloqueiluminanterosa",
+    "particle": "modminds:block/bloqueiluminanterosa"
+  },
+  "render_type": "solid"
+}

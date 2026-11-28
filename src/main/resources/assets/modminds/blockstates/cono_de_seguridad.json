@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "modminds:block/cono_de_seguridad"
+    },
+    "facing=east": {
+      "model": "modminds:block/cono_de_seguridad",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "modminds:block/cono_de_seguridad",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "modminds:block/cono_de_seguridad",
+      "y": 270
+    }
+  }
+}

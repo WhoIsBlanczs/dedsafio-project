@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_islas_de_espacio",
+    "up": "modminds:block/bloque_de_islas_de_espacio",
+    "north": "modminds:block/bloque_de_islas_de_espacio",
+    "east": "modminds:block/bloque_de_islas_de_espacio",
+    "south": "modminds:block/bloque_de_islas_de_espacio",
+    "west": "modminds:block/bloque_de_islas_de_espacio",
+    "particle": "modminds:block/bloque_de_islas_de_espacio"
+  },
+  "render_type": "solid"
+}

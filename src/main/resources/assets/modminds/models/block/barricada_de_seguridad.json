@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/barricada_de_seguridad",
+  "textures": {
+    "all": "modminds:block/barricadadeseguridad",
+    "particle": "modminds:block/barricadadeseguridad",
+    "0": "modminds:block/barricadadeseguridad"
+  },
+  "render_type": "solid"
+}

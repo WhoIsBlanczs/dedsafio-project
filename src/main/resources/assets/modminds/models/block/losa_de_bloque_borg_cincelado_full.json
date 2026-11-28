@@ -1,0 +1,10 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "particle": "modminds:block/bloque_borg_cincelado",
+    "bottom": "modminds:block/bloque_borg_cincelado",
+    "top": "modminds:block/bloque_borg_cincelado",
+    "side": "modminds:block/bloque_borg_cincelado"
+  },
+  "render_type": "solid"
+}

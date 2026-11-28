@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/papel_de_bano",
+  "textures": {
+    "all": "modminds:block/papel_de_bano",
+    "particle": "modminds:block/papel_de_bano",
+    "5": "modminds:block/papel_de_bano"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,10 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "particle": "modminds:block/cristal_de_dilitio_azul",
+    "bottom": "modminds:block/cristal_de_dilitio_azul",
+    "top": "modminds:block/cristal_de_dilitio_azul",
+    "side": "modminds:block/cristal_de_dilitio_azul"
+  },
+  "render_type": "solid"
+}

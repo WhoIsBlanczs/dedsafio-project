@@ -1,0 +1,8 @@
+{
+  "parent": "block/fence_inventory",
+  "textures": {
+    "texture": "modminds:block/tablones_magentas_antiguos",
+    "particle": "modminds:block/tablones_magentas_antiguos"
+  },
+  "render_type": "solid"
+}

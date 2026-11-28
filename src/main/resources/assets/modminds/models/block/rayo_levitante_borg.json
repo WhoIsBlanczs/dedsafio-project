@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/rayo_levitante",
+  "textures": {
+    "all": "modminds:block/rayo",
+    "particle": "modminds:block/rayo",
+    "0": "modminds:block/rayo"
+  },
+  "render_type": "cutout_mipped"
+}

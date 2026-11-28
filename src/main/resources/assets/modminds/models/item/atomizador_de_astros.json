@@ -1,0 +1,6 @@
+{
+  "parent": "modminds:displaysettings/armaborgverde",
+  "textures": {
+    "layer0": "modminds:item/atomizador_de_astros"
+  }
+}

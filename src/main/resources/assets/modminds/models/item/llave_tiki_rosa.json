@@ -1,0 +1,7 @@
+{
+  "parent": "modminds:custom/tiki_key2",
+  "textures": {
+    "0": "modminds:block/pink_key",
+    "particle": "minecraft:item/empty_slot_axe"
+  }
+}

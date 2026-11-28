@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_piso_borg_dividido_vertical"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_piso_borg_dividido_vertical_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_piso_borg_dividido_vertical_full"
+    }
+  }
+}

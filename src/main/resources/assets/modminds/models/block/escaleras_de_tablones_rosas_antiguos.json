@@ -1,0 +1,10 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "particle": "modminds:block/tablones_antiguos_rosas",
+    "bottom": "modminds:block/tablones_antiguos_rosas",
+    "top": "modminds:block/tablones_antiguos_rosas",
+    "side": "modminds:block/tablones_antiguos_rosas"
+  },
+  "render_type": "solid"
+}

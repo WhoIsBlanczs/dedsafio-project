@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/balde",
+  "textures": {
+    "all": "modminds:block/balde",
+    "particle": "modminds:block/balde",
+    "6": "modminds:block/balde"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_crital_de_dilitio_blanco"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_crital_de_dilitio_blanco_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_crital_de_dilitio_blanco_full"
+    }
+  }
+}

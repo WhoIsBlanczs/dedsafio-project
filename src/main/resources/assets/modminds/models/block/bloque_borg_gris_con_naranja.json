@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueborggrisconnaranja",
+    "up": "modminds:block/bloqueborggrisconnaranja",
+    "north": "modminds:block/bloqueborggrisconnaranja",
+    "east": "modminds:block/bloqueborggrisconnaranja",
+    "south": "modminds:block/bloqueborggrisconnaranja",
+    "west": "modminds:block/bloqueborggrisconnaranja",
+    "particle": "modminds:block/bloqueborggrisconnaranja"
+  },
+  "render_type": "solid"
+}

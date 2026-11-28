@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    "aba",
+    " c "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:gema_de_nereida"
+    },
+    "b": {
+      "item": "modminds:cristal_reforzado"
+    },
+    "c": {
+      "item": "modminds:bloque_de_coral_purpura_luminoso"
+    }
+  },
+  "result": {
+    "id": "modminds:jeringa_nereida",
+    "count": 1
+  }
+}

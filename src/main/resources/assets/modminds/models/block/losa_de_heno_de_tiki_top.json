@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/heno_de_tiki",
+    "bottom": "modminds:block/heno_de_tiki",
+    "top": "modminds:block/heno_de_tiki",
+    "side": "modminds:block/heno_de_tiki"
+  },
+  "render_type": "cutout"
+}

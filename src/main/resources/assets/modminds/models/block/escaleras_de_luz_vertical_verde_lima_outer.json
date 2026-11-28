@@ -1,0 +1,10 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "particle": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "bottom": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "top": "modminds:block/bloque_de_luz_vertical_verde_lima",
+    "side": "modminds:block/bloque_de_luz_vertical_verde_lima"
+  },
+  "render_type": "solid"
+}

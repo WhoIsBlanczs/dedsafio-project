@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/pilar_borg_con_luz_vetical_cian",
+    "bottom": "modminds:block/pilar_borg_con_luz_vetical_cian",
+    "top": "modminds:block/pilar_borg_con_luz_vetical_cian",
+    "side": "modminds:block/pilar_borg_con_luz_vetical_cian"
+  },
+  "render_type": "solid"
+}

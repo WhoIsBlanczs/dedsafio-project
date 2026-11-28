@@ -1,0 +1,10 @@
+{
+  "parent": "block/slab_top",
+  "textures": {
+    "particle": "modminds:block/bloque_borg_chiselado",
+    "bottom": "modminds:block/bloque_borg_chiselado",
+    "top": "modminds:block/bloque_borg_chiselado",
+    "side": "modminds:block/bloque_borg_chiselado"
+  },
+  "render_type": "solid"
+}

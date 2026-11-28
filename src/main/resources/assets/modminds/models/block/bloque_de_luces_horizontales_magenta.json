@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "up": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "north": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "east": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "south": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "west": "modminds:block/bloque_de_luces_horizontales_magenta",
+    "particle": "modminds:block/bloque_de_luces_horizontales_magenta"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "modminds:displaysettings/cerbatanav2",
+  "textures": {
+    "layer0": "modminds:item/cerbatanav2texture"
+  }
+}

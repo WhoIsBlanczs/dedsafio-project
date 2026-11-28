@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/heno_de_tiki_losa_vertical",
+  "textures": {
+    "all": "modminds:block/heno_de_tiki_losa_vertical",
+    "particle": "modminds:block/heno_de_tiki_losa_vertical",
+    "0": "modminds:block/heno_de_tiki_losa_vertical"
+  },
+  "render_type": "cutout"
+}

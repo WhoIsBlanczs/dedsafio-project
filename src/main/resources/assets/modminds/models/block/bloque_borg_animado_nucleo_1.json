@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueboganimadonucleo",
+    "up": "modminds:block/bloqueboganimadonucleo",
+    "north": "modminds:block/bloqueboganimadonucleo",
+    "east": "modminds:block/bloqueboganimadonucleo",
+    "south": "modminds:block/bloqueboganimadonucleo",
+    "west": "modminds:block/bloqueboganimadonucleo",
+    "particle": "modminds:block/bloqueboganimadonucleo"
+  },
+  "render_type": "solid"
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/cristal_de_dilitio_anaranjado",
+    "up": "modminds:block/cristal_de_dilitio_anaranjado",
+    "north": "modminds:block/cristal_de_dilitio_anaranjado",
+    "east": "modminds:block/cristal_de_dilitio_anaranjado",
+    "south": "modminds:block/cristal_de_dilitio_anaranjado",
+    "west": "modminds:block/cristal_de_dilitio_anaranjado",
+    "particle": "modminds:block/cristal_de_dilitio_anaranjado"
+  },
+  "render_type": "solid"
+}

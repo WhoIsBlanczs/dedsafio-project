@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueruletanaranja",
+    "up": "modminds:block/bloqueruletanaranja",
+    "north": "modminds:block/bloqueruletanaranja",
+    "east": "modminds:block/bloqueruletanaranja",
+    "south": "modminds:block/bloqueruletanaranja",
+    "west": "modminds:block/bloqueruletanaranja",
+    "particle": "modminds:block/bloqueruletanaranja"
+  },
+  "render_type": "solid"
+}

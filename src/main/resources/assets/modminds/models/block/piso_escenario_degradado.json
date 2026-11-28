@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/piso_escenario_degradado",
+  "textures": {
+    "all": "modminds:block/piso_escenario_degradado",
+    "particle": "modminds:block/piso_escenario_degradado",
+    "0": "modminds:block/piso_escenario_degradado"
+  },
+  "render_type": "solid"
+}

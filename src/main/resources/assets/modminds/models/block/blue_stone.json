@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bluestone_top",
+    "up": "modminds:block/bluestone_top",
+    "north": "modminds:block/bluestone",
+    "east": "modminds:block/bluestone",
+    "south": "modminds:block/bluestone",
+    "west": "modminds:block/bluestone",
+    "particle": "modminds:block/bluestone_top"
+  },
+  "render_type": "solid"
+}

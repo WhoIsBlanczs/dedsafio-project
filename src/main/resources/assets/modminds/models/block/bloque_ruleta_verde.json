@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueruletaverde",
+    "up": "modminds:block/bloqueruletaverde",
+    "north": "modminds:block/bloqueruletaverde",
+    "east": "modminds:block/bloqueruletaverde",
+    "south": "modminds:block/bloqueruletaverde",
+    "west": "modminds:block/bloqueruletaverde",
+    "particle": "modminds:block/bloqueruletaverde"
+  },
+  "render_type": "solid"
+}

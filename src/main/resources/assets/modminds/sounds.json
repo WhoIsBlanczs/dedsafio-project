@@ -1,0 +1,235 @@
+{
+   "arma_corta" : {
+      "sounds" : [
+         {
+            "name" : "modminds:armacorta",
+            "stream" : false
+         }
+      ],
+      "subtitle" : "subtitles.arma_corta"
+   },
+   "bloqueador" : {
+      "sounds" : [
+         {
+            "name" : "modminds:sonido_bloqueador",
+            "stream" : false
+         }
+      ]
+   },
+   "entradoallimbo" : {
+      "sounds" : [
+         {
+            "name" : "modminds:limbo_scream",
+            "stream" : false
+         }
+      ]
+   },
+   "finish" : {
+      "sounds" : [
+         {
+            "name" : "modminds:finish",
+            "stream" : false
+         }
+      ]
+   },
+   "ghosthit" : {
+      "sounds" : [
+         {
+            "name" : "modminds:ghosthit",
+            "stream" : false
+         }
+      ]
+   },
+   "hammer_1" : {
+      "sounds" : [
+         {
+            "name" : "modminds:hammer_1",
+            "stream" : false
+         }
+      ]
+   },
+   "hammer_2" : {
+      "sounds" : [
+         {
+            "name" : "modminds:hammer_2",
+            "stream" : false
+         }
+      ]
+   },
+   "hammer_3" : {
+      "sounds" : [
+         {
+            "name" : "modminds:hammer_3",
+            "stream" : false
+         }
+      ]
+   },
+   "navedisparo" : {
+      "sounds" : [
+         {
+            "name" : "modminds:disparo_de_las_naves",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_1" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_1",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_2" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_2",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_3" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_3",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_4" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_4",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_5" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_5",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_6" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_6",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_7" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_7",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_8" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_8",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_line_9" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_line_9",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_1" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_1",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_2" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_2",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_3" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_3",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_4" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_4",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_5" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_5",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_6" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_6",
+            "stream" : false
+         }
+      ]
+   },
+   "reviil_burla_7" : {
+      "sounds" : [
+         {
+            "name" : "modminds:reviil_burla_7",
+            "stream" : false
+         }
+      ]
+   },
+   "tiki_line_1" : {
+      "sounds" : [
+         {
+            "name" : "modminds:tiki_line_1",
+            "stream" : false
+         }
+      ]
+   },
+   "tiki_line_2" : {
+      "sounds" : [
+         {
+            "name" : "modminds:tiki_line_2",
+            "stream" : false
+         }
+      ]
+   },
+   "aplauso" : {
+      "sounds" : [
+         {
+            "name" : "modminds:aplauso",
+            "stream" : false
+         }
+      ]
+   },
+   "zumbido" : {
+      "sounds" : [
+         {
+            "name" : "modminds:zumbido",
+            "stream" : false
+         }
+      ]
+   }
+}

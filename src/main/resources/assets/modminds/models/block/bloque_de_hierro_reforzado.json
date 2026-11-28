@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_hierro_reforzado",
+    "up": "modminds:block/bloque_de_hierro_reforzado",
+    "north": "modminds:block/bloque_de_hierro_reforzado",
+    "east": "modminds:block/bloque_de_hierro_reforzado",
+    "south": "modminds:block/bloque_de_hierro_reforzado",
+    "west": "modminds:block/bloque_de_hierro_reforzado",
+    "particle": "modminds:block/bloque_de_hierro_reforzado"
+  },
+  "render_type": "solid"
+}

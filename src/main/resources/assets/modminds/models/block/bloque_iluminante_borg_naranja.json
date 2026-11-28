@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueiluminanteborg",
+    "up": "modminds:block/bloqueiluminanteborg",
+    "north": "modminds:block/bloqueiluminanteborg",
+    "east": "modminds:block/bloqueiluminanteborg",
+    "south": "modminds:block/bloqueiluminanteborg",
+    "west": "modminds:block/bloqueiluminanteborg",
+    "particle": "modminds:block/bloqueiluminanteborg"
+  },
+  "render_type": "solid"
+}

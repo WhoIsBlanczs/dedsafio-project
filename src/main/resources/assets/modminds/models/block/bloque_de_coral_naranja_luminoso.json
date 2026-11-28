@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "up": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "north": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "east": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "south": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "west": "modminds:block/bloque_de_cora_naranja_luminoso",
+    "particle": "modminds:block/bloque_de_cora_naranja_luminoso"
+  },
+  "render_type": "solid"
+}

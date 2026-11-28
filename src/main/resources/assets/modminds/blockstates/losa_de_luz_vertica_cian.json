@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_luz_vertica_cian"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_luz_vertica_cian_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_luz_vertica_cian_full"
+    }
+  }
+}

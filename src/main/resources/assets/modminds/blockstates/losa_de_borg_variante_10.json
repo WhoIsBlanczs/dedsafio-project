@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_borg_variante_10"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_borg_variante_10_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_borg_variante_10_full"
+    }
+  }
+}

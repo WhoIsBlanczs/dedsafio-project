@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "modminds:block/bloqueiluminanteamarillo",
+    "up": "modminds:block/bloqueiluminanteamarillo",
+    "north": "modminds:block/bloqueiluminanteamarillo",
+    "east": "modminds:block/bloqueiluminanteamarillo",
+    "south": "modminds:block/bloqueiluminanteamarillo",
+    "west": "modminds:block/bloqueiluminanteamarillo",
+    "particle": "modminds:block/bloqueiluminanteamarillo"
+  },
+  "render_type": "solid"
+}

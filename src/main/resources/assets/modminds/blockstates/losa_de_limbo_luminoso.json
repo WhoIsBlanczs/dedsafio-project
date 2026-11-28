@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "modminds:block/losa_de_limbo_luminoso"
+    },
+    "type=top": {
+      "model": "modminds:block/losa_de_limbo_luminoso_top"
+    },
+    "type=double": {
+      "model": "modminds:block/losa_de_limbo_luminoso_full"
+    }
+  }
+}

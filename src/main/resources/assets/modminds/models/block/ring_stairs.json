@@ -1,0 +1,9 @@
+{
+  "parent": "modminds:custom/stairs",
+  "textures": {
+    "all": "modminds:block/stairs",
+    "particle": "modminds:block/stairs",
+    "0": "modminds:block/stairs"
+  },
+  "render_type": "solid"
+}

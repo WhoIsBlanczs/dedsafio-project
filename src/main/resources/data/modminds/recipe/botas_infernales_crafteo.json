@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "a a",
+    "bcb",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "modminds:cuerno_de_infernal_bull"
+    },
+    "b": {
+      "item": "modminds:lingote_de_acero_negro_aureo"
+    },
+    "c": {
+      "item": "minecraft:netherite_boots"
+    }
+  },
+  "result": {
+    "id": "modminds:armadura_infernal_boots",
+    "count": 1
+  }
+}
