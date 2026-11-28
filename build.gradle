@@ -17,7 +17,16 @@ loom {
 	}
 }
 
+sourceSets {
+	// Clases vacías con el mismo nombre que las de CasinoHS, solo para compilar los mixins (no van en el .jar).
+	stubs {
+		java.srcDir 'src/stubs/java'
+	}
+}
+
 dependencies {
+	compileOnly sourceSets.stubs.output
+	clientCompileOnly sourceSets.stubs.output
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"

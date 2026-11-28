@@ -65,7 +65,10 @@ public final class ClienteEstado {
 					BUNKERS.add(e.getAsJsonObject());
 				}
 			}
-			case "casino" -> casino = json.getAsJsonObject();
+			case "casino" -> {
+				casino = json.getAsJsonObject();
+				ClienteCasino.aplicar(casino);
+			}
 			case "pedestal" -> pedestal = json.getAsJsonObject();
 			case "anuncio" -> HudAnuncio.mostrar(json.getAsJsonObject());
 			case "detener" -> HudAnuncio.detener();
@@ -81,6 +84,7 @@ public final class ClienteEstado {
 		BUNKERS.clear();
 		casino = Servidor.casinoPorDefecto();
 		pedestal = Servidor.pedestalPorDefecto();
+		ClienteCasino.aplicar(casino);
 		admin = false;
 		conectado = false;
 		hombrosafio = false;
@@ -109,7 +113,10 @@ public final class ClienteEstado {
 				}
 			}
 			case "desactivar_cambio" -> CAMBIOS.remove(json.get("nombre").getAsString());
-			case "guardar_casino" -> casino = json;
+			case "guardar_casino" -> {
+				casino = json;
+				ClienteCasino.aplicar(json);
+			}
 			case "guardar_pedestal" -> pedestal = json;
 			case "detener" -> HudAnuncio.detener();
 			case "lanzar" -> {

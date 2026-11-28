@@ -1,0 +1,12 @@
+{
+	"required": false,
+	"minVersion": "0.8",
+	"package": "net.ruleta.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"SlotMachineRendererAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 0
+	}
+}

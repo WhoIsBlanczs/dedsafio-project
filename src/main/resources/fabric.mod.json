@@ -3,7 +3,7 @@
 	"id": "ruleta",
 	"version": "${version}",
 	"name": "Ruleta - Menú G (26.3)",
-	"description": "Recreación para Minecraft 26.3 del menú de la tecla G del DEDsafío 4 Ruleta Fan Project: ruleta, ajustes, cambios activos, bunkers y panel (casino y Nutria Pedestal). De fan para fans, sin fines de lucro.",
+	"description": "Recreación para Minecraft 26.3 del menú de la tecla G del DEDsafío 4 Ruleta Fan Project, conectada con Hombrosafío y CasinoHS: ruleta, Momentos Revil, cambios de dificultad, casino y pedestal de intercambio. De fan para fans, sin fines de lucro.",
 	"authors": [
 		"DarkPlayer y colaboradores (obra original)",
 		"Adaptación 26.3"
@@ -26,5 +26,16 @@
 	},
 	"custom": {
 		"credits": "Basado en DEDsafío 4 Ruleta Fan Project (CC BY-NC-SA 4.0) de DarkPlayer y colaboradores. Serie DEDsafío 4: Eufonia Studios."
+	},
+	"mixins": [
+		"ruleta.mixins.json",
+		{
+			"config": "ruleta.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"suggests": {
+		"hombrosafio": "*",
+		"casinohs": "*"
 	}
 }

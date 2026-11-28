@@ -50,7 +50,7 @@ public class PantallaTarjetas extends PantallaBase {
 	}
 
 	private static boolean activo(Datos.Entrada e) {
-		return ClienteEstado.CAMBIOS.contains(e.titulo());
+		return ClienteEstado.CAMBIOS.contains(e.id());
 	}
 
 	@Override

@@ -86,10 +86,12 @@ public final class Servidor {
 			}
 		}
 
-		JsonObject c = leer("ruleta_tragamonedas.json");
-		casino = c != null ? c : casinoPorDefecto();
-		JsonObject p = leer("ruleta_pedestal.json");
-		pedestal = p != null ? p : pedestalPorDefecto();
+		JsonObject c = leer("ruleta_casino.json");
+		casino = c != null && c.has("premios") ? c : casinoPorDefecto();
+		JsonObject p = leer("ruleta_pedestal_intercambio.json");
+		pedestal = p != null && p.has("comercios") ? p : pedestalPorDefecto();
+		CasinoDatos.aplicar(casino);
+		PedestalDatos.aplicar(p != null && p.has("comercios") ? p : null);
 	}
 
 	public static void guardarTodo() {
@@ -106,8 +108,8 @@ public final class Servidor {
 		est.add("baneos", ban);
 		escribir("ruleta_estado.json", est);
 
-		escribir("ruleta_tragamonedas.json", casino);
-		escribir("ruleta_pedestal.json", pedestal);
+		escribir("ruleta_casino.json", casino);
+		escribir("ruleta_pedestal_intercambio.json", pedestal);
 	}
 
 	private static JsonObject leer(String nombre) {
@@ -136,71 +138,12 @@ public final class Servidor {
 
 	// ---------------------------------------------------------------- valores por defecto
 
-	private static JsonObject entradaRodillo(String item, String nombre, int frecuencia) {
-		JsonObject o = new JsonObject();
-		o.addProperty("item", item);
-		o.addProperty("nombre", nombre);
-		o.addProperty("frecuencia", frecuencia);
-		return o;
-	}
-
 	public static JsonObject casinoPorDefecto() {
-		JsonObject o = new JsonObject();
-		JsonArray rod = new JsonArray();
-		rod.add(entradaRodillo("minecraft:iron_ingot", "Iron Ingot", 30));
-		rod.add(entradaRodillo("minecraft:gold_ingot", "Gold Ingot", 24));
-		rod.add(entradaRodillo("minecraft:emerald", "Emerald", 16));
-		rod.add(entradaRodillo("minecraft:diamond", "Diamond", 10));
-		rod.add(entradaRodillo("ruletafanproject:dedita_casino", "Dedita Naranja", 8));
-		o.add("rodillos", rod);
-
-		JsonArray pre = new JsonArray();
-		String[][] premios = {
-				{"minecraft:iron_ingot", "Iron Ingot", "minecraft:iron_ingot", "Iron Ingot", "8"},
-				{"minecraft:gold_ingot", "Gold Ingot", "minecraft:gold_ingot", "Gold Ingot", "8"},
-				{"minecraft:emerald", "Emerald", "minecraft:emerald", "Emerald", "8"},
-				{"minecraft:diamond", "Diamond", "minecraft:diamond", "Diamond", "4"},
-				{"ruletafanproject:dedita_casino", "Dedita Naranja", "ruletafanproject:dedita_casino", "Dedita Naranja", "3"}
-		};
-
-		for (String[] p : premios) {
-			JsonObject e = new JsonObject();
-			e.addProperty("simbolo", p[0]);
-			e.addProperty("simbolo_nombre", p[1]);
-			e.addProperty("item", p[2]);
-			e.addProperty("nombre", p[3]);
-			e.addProperty("cantidad", Integer.parseInt(p[4]));
-			pre.add(e);
-		}
-
-		o.add("premios", pre);
-
-		JsonObject cobro = new JsonObject();
-		cobro.addProperty("item", "ruletafanproject:dedita_casino");
-		cobro.addProperty("nombre", "Dedita Naranja");
-		cobro.addProperty("cantidad", 1);
-		o.add("cobro", cobro);
-		return o;
-	}
-
-	private static JsonObject comercio(String das, String dasNombre, int dasN, String recibes, String recibesNombre, int recibesN) {
-		JsonObject o = new JsonObject();
-		o.addProperty("das", das);
-		o.addProperty("das_nombre", dasNombre);
-		o.addProperty("das_n", dasN);
-		o.addProperty("recibes", recibes);
-		o.addProperty("recibes_nombre", recibesNombre);
-		o.addProperty("recibes_n", recibesN);
-		return o;
+		return CasinoDatos.jsonPorDefecto();
 	}
 
 	public static JsonObject pedestalPorDefecto() {
-		JsonObject o = new JsonObject();
-		JsonArray arr = new JsonArray();
-		arr.add(comercio("ruletafanproject:dedita_azul", "Dedita Azul", 2, "ruletafanproject:dedita_casino", "Dedita Naranja", 1));
-		arr.add(comercio("ruletafanproject:dedita_azul", "Dedita Azul", 2, "ruletafanproject:dilitio", "Dilitio", 1));
-		o.add("comercios", arr);
-		return o;
+		return PedestalDatos.porDefecto();
 	}
 
 	// ---------------------------------------------------------------- envío
@@ -227,10 +170,28 @@ public final class Servidor {
 		return o;
 	}
 
+	/** Cambios de dificultad activos: los de Hombrosafío si está, si no los guardados aquí. */
+	private static List<String> listaCambios() {
+		List<String> hs = PuenteHombrosafio.cambiosActivos();
+		return hs != null ? hs : CAMBIOS;
+	}
+
 	private static JsonArray jsonCambios() {
 		JsonArray a = new JsonArray();
-		CAMBIOS.forEach(a::add);
+		listaCambios().forEach(a::add);
 		return a;
+	}
+
+	private static String ultimosCambios = "";
+
+	/** Si los cambios activos cambiaron (por ejemplo con /ruleta amarillo), los manda a todos. */
+	private static void revisarCambios() {
+		String ahora = jsonCambios().toString();
+
+		if (!ahora.equals(ultimosCambios)) {
+			ultimosCambios = ahora;
+			enviarATodos("cambios", jsonCambios());
+		}
 	}
 
 	public static boolean esAdmin(ServerPlayer p) {
@@ -314,21 +275,30 @@ public final class Servidor {
 				enviarATodos("ajustes", jsonAjustes());
 			}
 			case "desactivar_cambio" -> {
-				CAMBIOS.remove(json.get("nombre").getAsString());
+				String id = json.get("nombre").getAsString();
+
+				if (!PuenteHombrosafio.desactivarCambio(server, id)) {
+					CAMBIOS.remove(id);
+				}
+
 				guardarTodo();
 				enviarATodos("cambios", jsonCambios());
 			}
 			case "guardar_casino" -> {
-				casino = json;
+				casino = CasinoDatos.aJson(CasinoDatos.leer(json), CasinoDatos.ficha(json));
+				CasinoDatos.aplicar(casino);
 				guardarTodo();
 				enviarATodos("casino", casino);
-				p.sendSystemMessage(Component.literal("Casino guardado en config/ruleta_tragamonedas.json").withStyle(ChatFormatting.GREEN));
+				p.sendSystemMessage(Component.literal(net.fabricmc.loader.api.FabricLoader.getInstance().isModLoaded("casinohs") ? "Casino guardado: la tragamonedas ya usa estos premios." : "Casino guardado (CasinoHS no está instalado).").withStyle(ChatFormatting.GREEN));
 			}
 			case "guardar_pedestal" -> {
 				pedestal = json;
+				PedestalDatos.aplicar(json);
 				guardarTodo();
 				enviarATodos("pedestal", pedestal);
-				p.sendSystemMessage(Component.literal("Nutria Pedestal guardado en config/ruleta_pedestal.json").withStyle(ChatFormatting.GREEN));
+				p.sendSystemMessage(Component.literal(PuenteHombrosafio.disponible()
+						? "Pedestal de intercambio guardado: el Pedestal de canje ya usa estos comercios."
+						: "Pedestal de intercambio guardado (Hombrosafío no está instalado).").withStyle(ChatFormatting.GREEN));
 			}
 			case "detener" -> {
 				PENDIENTES.clear();
@@ -374,6 +344,11 @@ public final class Servidor {
 		return t.length() > 240 ? t.substring(0, 239) + "…" : t;
 	}
 
+	/** Opciones de la ruleta roja (mensaje, animación, cielo); si no vienen, van encendidas. */
+	private static boolean opcion(JsonObject json, String clave) {
+		return !json.has(clave) || json.get(clave).getAsBoolean();
+	}
+
 	private static void lanzar(ServerPlayer quien, JsonObject json) {
 		String para = json.has("para") ? json.get("para").getAsString() : "";
 		List<ServerPlayer> destino = new ArrayList<>();
@@ -400,8 +375,7 @@ public final class Servidor {
 				return;
 			}
 
-			boolean sinCielo = tipo.equals("reviil")
-					&& (!json.has("reviil") || !json.get("reviil").getAsBoolean() || "mensaje".equals(json.has("modo") ? json.get("modo").getAsString() : "mensaje"));
+			boolean sinCielo = tipo.equals("reviil") && !opcion(json, "ver_cielo");
 
 			if (!PuenteHombrosafio.girar(server, Math.max(0, COLORES.indexOf(tipo)), textoRuleta(json), sinCielo)) {
 				aviso(quien, "La ruleta de Hombrosafío no pudo girar. Mira la consola del servidor.");
@@ -421,21 +395,34 @@ public final class Servidor {
 
 	/** Lo que pasa cuando la ruleta se detiene (o enseguida si no gira). */
 	private static void terminarTirada(ServerPlayer quien, JsonObject json, List<ServerPlayer> destino) {
-		for (ServerPlayer p : destino) {
-			if (!p.hasDisconnected()) {
-				enviar(p, "anuncio", json);
+		String tipo = json.get("tipo").getAsString();
+
+		if (tipo.equals("reviil") && !opcion(json, "ver_animacion")) {
+			PuenteHombrosafio.pararAnimacion(server);
+		}
+
+		if (!tipo.equals("reviil") || opcion(json, "ver_mensaje")) {
+			for (ServerPlayer p : destino) {
+				if (!p.hasDisconnected()) {
+					enviar(p, "anuncio", json);
+				}
 			}
 		}
 
-		String tipo = json.get("tipo").getAsString();
 		String para = json.has("para") ? json.get("para").getAsString() : "";
 
 		if (tipo.equals("cambio") && json.has("cambios")) {
 			for (JsonElement e : json.getAsJsonArray("cambios")) {
 				String n = e.getAsString();
 
-				if (!CAMBIOS.contains(n)) {
-					CAMBIOS.add(n);
+				if (!PuenteHombrosafio.activarCambio(server, n)) {
+					if (PuenteHombrosafio.disponible() && quien != null && !quien.hasDisconnected()) {
+						aviso(quien, "Hombrosafío no pudo activar el cambio «" + Datos.tituloCambio(n) + "».");
+					}
+
+					if (!CAMBIOS.contains(n)) {
+						CAMBIOS.add(n);
+					}
 				}
 			}
 
@@ -480,6 +467,10 @@ public final class Servidor {
 	public static void tick(MinecraftServer s) {
 		server = s;
 		tick++;
+
+		if (tick % 40 == 0) {
+			revisarCambios();
+		}
 
 		if (!TIRADAS.isEmpty()) {
 			Tirada t = TIRADAS.get(0);
