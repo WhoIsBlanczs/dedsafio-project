@@ -25,7 +25,7 @@ Las versiones de Loom, Loader y Fabric API son las del `fabric-example-mod` ofic
 - **Panel**: Casino, Dulce azar y Pedestal de intercambio. Se guardan en `config/ruleta_casino.json` y `config/ruleta_pedestal_intercambio.json`.
 - La interfaz se dibuja en un lienzo de 1280×720 que se escala a la ventana, así que se ve igual con cualquier escala de interfaz.
 
-En un servidor dedicado, solo los administradores (nivel de permisos 2 o más) pueden cambiar ajustes y lanzar casillas. En un mundo propio o abierto en LAN, puede cualquiera.
+Solo los **operadores** (nivel de permisos 2 o más) pueden abrir la ruleta: a los demás la G no les hace nada. En un mundo propio, el anfitrión tiene que tener los trucos activados (o abrirlo en LAN con trucos). Si a alguien le dan o le quitan el op, cambia al momento. El mod tiene que estar también en el servidor.
 
 ## Con Hombrosafío
 

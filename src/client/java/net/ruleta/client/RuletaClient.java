@@ -29,7 +29,8 @@ public final class RuletaClient implements ClientModInitializer {
 
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			while (TECLA.consumeClick()) {
-				if (client.player != null) {
+				// Solo los operadores ven la ruleta; a los demás la G no les hace nada.
+				if (client.player != null && ClienteEstado.admin) {
 					client.gui.setScreen(new PantallaRuleta());
 				}
 			}

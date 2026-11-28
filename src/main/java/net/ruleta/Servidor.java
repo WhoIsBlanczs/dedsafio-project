@@ -195,8 +195,32 @@ public final class Servidor {
 	}
 
 	public static boolean esAdmin(ServerPlayer p) {
-		// En un mundo propio (no servidor dedicado) el anfitrión siempre puede usar el menú.
-		return p.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER) || (server != null && !server.isDedicatedServer());
+		// Solo operadores (nivel 2 o más). En un mundo propio, el anfitrión con trucos activados.
+		return p.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER);
+	}
+
+	private static final Map<java.util.UUID, Boolean> OPERADORES = new java.util.HashMap<>();
+
+	private static void mandarPermiso(ServerPlayer p) {
+		boolean admin = esAdmin(p);
+		OPERADORES.put(p.getUUID(), admin);
+		JsonObject perm = new JsonObject();
+		perm.addProperty("admin", admin);
+		perm.addProperty("hombrosafio", PuenteHombrosafio.disponible());
+		enviar(p, "permiso", perm);
+	}
+
+	/** Si a alguien le dieron o le quitaron el op, se lo avisa a su cliente al momento. */
+	private static void revisarOperadores() {
+		for (ServerPlayer p : server.getPlayerList().getPlayers()) {
+			Boolean antes = OPERADORES.get(p.getUUID());
+
+			if (antes == null || antes != esAdmin(p)) {
+				mandarPermiso(p);
+			}
+		}
+
+		OPERADORES.keySet().removeIf(id -> server.getPlayerList().getPlayer(id) == null);
 	}
 
 	public static void alEntrar(ServerPlayer p) {
@@ -212,10 +236,7 @@ public final class Servidor {
 			BANEOS.remove(p.getPlainTextName().toLowerCase());
 		}
 
-		JsonObject perm = new JsonObject();
-		perm.addProperty("admin", esAdmin(p));
-		perm.addProperty("hombrosafio", PuenteHombrosafio.disponible());
-		enviar(p, "permiso", perm);
+		mandarPermiso(p);
 		enviar(p, "ajustes", jsonAjustes());
 		enviar(p, "cambios", jsonCambios());
 		enviar(p, "bunkers", new JsonArray());
@@ -240,7 +261,8 @@ public final class Servidor {
 		}
 
 		if (!esAdmin(p)) {
-			aviso(p, "Necesitas permisos de administrador para usar la ruleta.");
+			// Quien no es operador no puede usar la ruleta; se le recuerda al cliente que no es admin.
+			mandarPermiso(p);
 			return;
 		}
 
@@ -470,6 +492,10 @@ public final class Servidor {
 
 		if (tick % 40 == 0) {
 			revisarCambios();
+		}
+
+		if (tick % 10 == 0) {
+			revisarOperadores();
 		}
 
 		if (!TIRADAS.isEmpty()) {

@@ -262,6 +262,12 @@ public abstract class PantallaBase extends Screen {
 
 	@Override
 	public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float delta) {
+		// Si le quitan el op con el menú abierto, se cierra.
+		if (!net.ruleta.client.ClienteEstado.admin) {
+			this.minecraft.gui.setScreen(null);
+			return;
+		}
+
 		long ahora = System.nanoTime();
 		dt = Math.min(0.1f, (ahora - ultimoNs) / 1.0e9f);
 		ultimoNs = ahora;
