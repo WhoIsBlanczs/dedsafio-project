@@ -1,4 +1,5 @@
-J=$(ls *.jar | grep -v -E 'lwjgl|natives|msal4j|azure|jna|text2speech|icu4j|oshi|jtracy|-sources|netty-(transport|codec|handler|resolver)')
-java ../../herr/Strip.java /tmp/stubs.jar $J 2>&1 | tail -3
-ls -la /tmp/stubs.jar
-base64 -w 2000 /tmp/stubs.jar
+J=$(ls minecraft-clientOnly-*.jar); unzip -Z1 $J | grep -E 'spawn_egg|template_' | grep -vE 'textures/item/[a-z_]+_spawn_egg.png' | head -20
+unzip -Z1 $J | grep -c 'textures/item/.*_spawn_egg.png'
+unzip -p $J assets/minecraft/items/zombie_spawn_egg.json; echo
+unzip -p $J assets/minecraft/models/item/zombie_spawn_egg.json; echo
+unzip -p $J assets/minecraft/items/bow.json; echo
