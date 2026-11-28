@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "watonstudio:item/spawn_egg_plantilla",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 5592405
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 65280
+      }
+    ]
+  }
+}

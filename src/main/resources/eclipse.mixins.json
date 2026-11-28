@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.watonstudio.creepermetalico.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "LightmapTextureManagerMixin",
+    "BackgroundRendererMixin",
+    "EclipseNightVisionMixin",
+    "LinternaHeldAnimationMixin",
+    "BlockRenderViewLightMixin",
+    "LightmapExtractorMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

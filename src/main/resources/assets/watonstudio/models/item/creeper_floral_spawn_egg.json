@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "creeper_metalico:item/creeper_floral_spawn_egg"
+  }
+}

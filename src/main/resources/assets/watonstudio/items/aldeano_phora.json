@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "watonstudio:item/aldeano_phora",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "watonstudio:item/pelo_eburia"
+                 },
+    "parent":  "minecraft:item/generated"
+}

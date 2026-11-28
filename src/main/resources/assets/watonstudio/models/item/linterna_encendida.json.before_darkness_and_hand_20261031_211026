@@ -1,0 +1,413 @@
+{
+    "parent":  "minecraft:block/block",
+    "gui_light":  "front",
+    "textures":  {
+                     "particle":  "watonstudio:item/linterna_cuerpo",
+                     "body":  "watonstudio:item/linterna_cuerpo",
+                     "grip":  "watonstudio:item/linterna_goma",
+                     "metal":  "watonstudio:item/linterna_metal",
+                     "lens":  "watonstudio:item/linterna_lente_encendida",
+                     "button":  "watonstudio:item/linterna_boton"
+                 },
+    "elements":  [
+                     {
+                         "from":  [
+                                      4,
+                                      4,
+                                      1
+                                  ],
+                         "to":  [
+                                    12,
+                                    12,
+                                    13
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#body"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#body"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#body"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#body"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#body"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#body"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      5,
+                                      5,
+                                      3
+                                  ],
+                         "to":  [
+                                    11,
+                                    11,
+                                    9
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#grip"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#grip"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#grip"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#grip"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#grip"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#grip"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      3,
+                                      5,
+                                      4
+                                  ],
+                         "to":  [
+                                    4,
+                                    11,
+                                    12
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#metal"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#metal"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      12,
+                                      5,
+                                      4
+                                  ],
+                         "to":  [
+                                    13,
+                                    11,
+                                    12
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#metal"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#metal"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      3,
+                                      3,
+                                      11
+                                  ],
+                         "to":  [
+                                    13,
+                                    13,
+                                    15
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#body"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#body"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#body"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#body"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#body"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#body"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      2,
+                                      2,
+                                      14
+                                  ],
+                         "to":  [
+                                    14,
+                                    14,
+                                    16
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#metal"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#metal"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      4,
+                                      4,
+                                      15.7
+                                  ],
+                         "to":  [
+                                    12,
+                                    12,
+                                    16
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#lens"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#metal"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#metal"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      7,
+                                      12,
+                                      5
+                                  ],
+                         "to":  [
+                                    9,
+                                    13,
+                                    8
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#button"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#button"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#button"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#button"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#button"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#button"
+                                                }
+                                   }
+                     },
+                     {
+                         "from":  [
+                                      4,
+                                      4,
+                                      0
+                                  ],
+                         "to":  [
+                                    12,
+                                    12,
+                                    1.5
+                                ],
+                         "faces":  {
+                                       "north":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "south":  {
+                                                     "texture":  "#metal"
+                                                 },
+                                       "east":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "west":  {
+                                                    "texture":  "#metal"
+                                                },
+                                       "up":  {
+                                                  "texture":  "#metal"
+                                              },
+                                       "down":  {
+                                                    "texture":  "#metal"
+                                                }
+                                   }
+                     }
+                 ],
+    "display":  {
+                    "thirdperson_righthand":  {
+                                                  "rotation":  [
+                                                                   75,
+                                                                   135,
+                                                                   0
+                                                               ],
+                                                  "translation":  [
+                                                                      0,
+                                                                      2.5,
+                                                                      -1
+                                                                  ],
+                                                  "scale":  [
+                                                                0.45,
+                                                                0.45,
+                                                                0.45
+                                                            ]
+                                              },
+                    "thirdperson_lefthand":  {
+                                                 "rotation":  [
+                                                                  75,
+                                                                  225,
+                                                                  0
+                                                              ],
+                                                 "translation":  [
+                                                                     0,
+                                                                     2.5,
+                                                                     -1
+                                                                 ],
+                                                 "scale":  [
+                                                               0.45,
+                                                               0.45,
+                                                               0.45
+                                                           ]
+                                             },
+                    "firstperson_righthand":  {
+                                                  "rotation":  [
+                                                                   0,
+                                                                   135,
+                                                                   0
+                                                               ],
+                                                  "translation":  [
+                                                                      1.2,
+                                                                      3,
+                                                                      1
+                                                                  ],
+                                                  "scale":  [
+                                                                0.465,
+                                                                0.465,
+                                                                0.465
+                                                            ]
+                                              },
+                    "firstperson_lefthand":  {
+                                                 "rotation":  [
+                                                                  0,
+                                                                  225,
+                                                                  0
+                                                              ],
+                                                 "translation":  [
+                                                                     1.2,
+                                                                     3,
+                                                                     1
+                                                                 ],
+                                                 "scale":  [
+                                                               0.465,
+                                                               0.465,
+                                                               0.465
+                                                           ]
+                                             },
+                    "gui":  {
+                                "rotation":  [
+                                                 25,
+                                                 225,
+                                                 0
+                                             ],
+                                "translation":  [
+                                                    0,
+                                                    0,
+                                                    0
+                                                ],
+                                "scale":  [
+                                              0.7,
+                                              0.7,
+                                              0.7
+                                          ]
+                            },
+                    "ground":  {
+                                   "translation":  [
+                                                       0,
+                                                       2,
+                                                       0
+                                                   ],
+                                   "scale":  [
+                                                 0.45,
+                                                 0.45,
+                                                 0.45
+                                             ]
+                               },
+                    "fixed":  {
+                                  "rotation":  [
+                                                   0,
+                                                   0,
+                                                   0
+                                               ],
+                                  "scale":  [
+                                                0.6,
+                                                0.6,
+                                                0.6
+                                            ]
+                              }
+                }
+}

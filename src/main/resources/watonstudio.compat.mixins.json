@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.watonstudio.creepermetalico.compat.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ItemPropertiesMixin",
+    "BlockPropertiesMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

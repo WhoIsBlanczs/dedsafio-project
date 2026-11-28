@@ -1,0 +1,6 @@
+﻿{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "creeper_metalico:item/espada_hoja_qumara"
+  }
+}

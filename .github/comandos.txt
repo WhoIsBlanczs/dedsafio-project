@@ -1,0 +1,17 @@
+say prueba
+forceload add 0 0
+summon watonstudio:aldeano_phora 0 100 0
+summon watonstudio:creeper_floral 0 100 0
+summon watonstudio:creeper_nuclear 0 100 0
+summon watonstudio:creeper_resorte 0 100 0
+summon watonstudio:fogata 0 100 0
+summon watonstudio:nautilus_oseo 0 100 0
+give @a watonstudio:linterna
+give @a watonstudio:aldeano_phora
+give @a watonstudio:totem_eon
+give @a watonstudio:espada_hoja_qumara
+eclipse on
+eclipse off
+reload
+kill @e[type=!player]
+say fin

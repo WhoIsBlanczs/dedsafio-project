@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "watonstudio",
+  "version": "${version}",
+  "name": "WatonStudio",
+  "description": "Creeper metÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¡lico, creeper resorte, Creeper Floral, sonidos y sistema QTE de WatonStudio.",
+  "authors": [
+    "WatonStudio"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.watonstudio.creepermetalico.CreeperMetalicoMod",
+      "com.watonstudio.creepermetalico.CreeperQteMod",
+      "com.watonstudio.creepermetalico.FloralCreeperRegistration",
+      "com.watonstudio.creepermetalico.FogataMod",
+      "com.watonstudio.creepermetalico.EclipseMod",
+      "com.watonstudio.creepermetalico.LinternaServerLight"
+    ],
+    "client": [
+      "com.watonstudio.creepermetalico.CreeperMetalicoClient",
+      "com.watonstudio.creepermetalico.CreeperQteClient",
+      "com.watonstudio.creepermetalico.client.FogataClient",
+      "com.watonstudio.creepermetalico.client.EclipseClient"
+    ]
+  },
+  "mixins": [
+    "watonstudio.mixins.json",
+    {
+      "config": "watonstudio.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "eclipse.mixins.json",
+      "environment": "client"
+    },
+    "watonstudio.compat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "geckolib": ">=5.5"
+  }
+}

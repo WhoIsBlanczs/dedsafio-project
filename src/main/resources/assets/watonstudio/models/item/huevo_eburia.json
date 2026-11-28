@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "watonstudio:item/huevo_eburia"
+                 },
+    "parent":  "minecraft:item/generated"
+}

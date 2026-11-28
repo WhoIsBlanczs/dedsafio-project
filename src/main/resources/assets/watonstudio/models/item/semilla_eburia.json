@@ -1,0 +1,6 @@
+﻿{
+    "textures":  {
+                     "layer0":  "watonstudio:item/semilla_eburia"
+                 },
+    "parent":  "minecraft:item/generated"
+}
