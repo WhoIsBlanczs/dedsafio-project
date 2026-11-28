@@ -6,11 +6,11 @@
         "type": "minecraft:all_of",
         "terms": [
           {
-            "block": "ruletafanproject:puerta_candado",
-            "properties": {
+            "type": "minecraft:match_block",
+            "blocks": "ruletafanproject:puerta_candado",
+            "state": {
               "half": "lower"
-            },
-            "type": "minecraft:block_state_property"
+            }
           },
           {
             "type": "minecraft:survives_explosion"

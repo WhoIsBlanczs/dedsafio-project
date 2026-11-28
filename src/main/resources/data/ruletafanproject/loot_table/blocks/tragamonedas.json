@@ -8,11 +8,11 @@
           "type": "minecraft:item",
           "name": "ruletafanproject:tragamonedas",
           "condition": {
-            "block": "ruletafanproject:tragamonedas",
-            "properties": {
+            "type": "minecraft:match_block",
+            "blocks": "ruletafanproject:tragamonedas",
+            "state": {
               "part": "lower"
-            },
-            "type": "minecraft:block_state_property"
+            }
           }
         }
       ],
