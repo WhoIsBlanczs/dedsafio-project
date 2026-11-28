@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "ruletafanproject",
+  "version": "${version}",
+  "name": "Ruleta (catálogo)",
+  "description": "DEDsafio 4 Ruleta Fan Project, de fan para fans sin fines de lucro. Port a 26.3 solo del catálogo: mobs, entidades, ítems y bloques (sin el menú de la ruleta ni las misiones).",
+  "authors": ["DarkPlayer y colaboradores"],
+  "contact": {},
+  "license": "CC-BY-NC-SA-4.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["net.ruleta.RuletaInicio"],
+    "client": ["net.ruleta.client.RuletaClient"]
+  },
+  "mixins": ["ruletafanproject.mixins.json", "ruletafanproject.compat.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "custom": {
+    "credits": "Serie DEDsafio 4: Eufonia Studios. Mod original: DEDsafio 4 Ruleta Fan Project (c) 2026 DarkPlayer y colaboradores, CC BY-NC-SA 4.0. Este port conserva la misma licencia."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "ruletafanproject:item/estatua_nutria",
+    "model": {
+      "type": "ruletafanproject:estatua_nutria"
+    }
+  }
+}

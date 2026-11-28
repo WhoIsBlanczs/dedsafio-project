@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ruletafanproject:tragamonedas",
+          "condition": {
+            "block": "ruletafanproject:tragamonedas",
+            "properties": {
+              "part": "lower"
+            },
+            "type": "minecraft:block_state_property"
+          }
+        }
+      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      }
+    }
+  ]
+}

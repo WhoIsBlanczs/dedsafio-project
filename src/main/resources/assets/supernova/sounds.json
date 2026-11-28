@@ -1,0 +1,6 @@
+{
+  "idle_hum": { "subtitle": "subtitles.supernova.idle", "sounds": [ { "name": "supernova:idle_hum", "stream": true } ] },
+  "colapso": { "subtitle": "subtitles.supernova.colapso", "sounds": [ { "name": "supernova:colapso", "stream": true } ] },
+  "wave": { "subtitle": "subtitles.supernova.wave", "sounds": [ { "name": "supernova:wave", "stream": true } ] },
+  "music": { "subtitle": "subtitles.supernova.blast", "sounds": [ { "name": "supernova:music", "stream": true } ] }
+}

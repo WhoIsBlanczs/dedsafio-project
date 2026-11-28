@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "net.ruleta.compat.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": ["ItemPropertiesMixin", "BlockPropertiesMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

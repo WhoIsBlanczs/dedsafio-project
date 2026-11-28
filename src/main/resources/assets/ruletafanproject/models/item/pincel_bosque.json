@@ -1,0 +1,6 @@
+{
+ "parent": "minecraft:item/handheld",
+ "textures": {
+  "layer0": "ruletafanproject:item/pincel_bosque"
+ }
+}

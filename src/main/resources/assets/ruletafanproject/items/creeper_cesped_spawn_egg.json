@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ruletafanproject:item/spawn_egg_plantilla",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 4160042
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 1784340
+      }
+    ]
+  }
+}

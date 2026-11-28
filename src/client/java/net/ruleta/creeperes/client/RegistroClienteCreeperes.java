@@ -1,0 +1,18 @@
+package net.ruleta.creeperes.client;
+
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.minecraft.resources.Identifier;
+import net.ruleta.creeperes.Creeperes;
+import net.ruleta.creeperrojo.client.CreeperRojoRenderer;
+
+public final class RegistroClienteCreeperes {
+   private static final Identifier TEXTURA_CESPED = Identifier.fromNamespaceAndPath("ruletafanproject", "textures/entity/creeper_cesped.png");
+   private static final float ESCALA_CESPED = 0.5F;
+
+   private RegistroClienteCreeperes() {
+   }
+
+   public static void registrar() {
+      EntityRendererRegistry.register(Creeperes.CESPED.get(), contexto -> new CreeperRojoRenderer<>(contexto, TEXTURA_CESPED, 0.5F));
+   }
+}

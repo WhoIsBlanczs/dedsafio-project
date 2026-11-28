@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "ruletafanproject:ladrillo_bunker",
+    "ruletafanproject:escalera_bunker",
+    "ruletafanproject:piso_bunker",
+    "ruletafanproject:peligro_bunker",
+    "ruletafanproject:puerta_bunker",
+    "ruletafanproject:puerta_grande",
+    "ruletafanproject:puerta_candado"
+  ]
+}

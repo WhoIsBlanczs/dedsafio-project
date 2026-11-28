@@ -1,0 +1,22 @@
+say prueba
+forceload add 0 0
+summon ruletafanproject:agujero_negro 0 100 0
+summon ruletafanproject:bogged 0 100 0
+summon ruletafanproject:bomba_warden 0 100 0
+summon ruletafanproject:burbuja 0 100 0
+summon ruletafanproject:creeper_cesped 0 100 0
+summon ruletafanproject:creeper_rojo 0 100 0
+summon ruletafanproject:herobrine 0 100 0
+summon ruletafanproject:meteorito 0 100 0
+summon ruletafanproject:misil 0 100 0
+summon nuclearcreeper:nuclear_creeper 0 100 0
+summon supernova:supernova 0 100 0
+setblock 2 100 2 ruletafanproject:tragamonedas
+setblock 4 100 2 ruletafanproject:estatua_nutria
+setblock 6 100 2 ruletafanproject:cajero
+setblock 8 100 2 ruletafanproject:puerta_bunker
+setblock 10 100 2 ruletafanproject:ladrillo_bunker
+give @a ruletafanproject:linterna
+reload
+kill @e[type=!player]
+say fin

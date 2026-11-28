@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "net.ruleta.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ChestBlockMixin",
+    "DoorBlockMixin",
+    "HopperBlockEntityMixin",
+    "LivingEntityMixin",
+    "PersistentEntitySectionManagerMixin",
+    "MobMixin",
+    "ExplosionMixin",
+    "PistonBaseBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
