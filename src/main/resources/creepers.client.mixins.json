@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.novastudio.dedsafio4.mixin.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "InvertControlsMixin",
+    "InvertMouseMixin",
+    "GameRendererInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

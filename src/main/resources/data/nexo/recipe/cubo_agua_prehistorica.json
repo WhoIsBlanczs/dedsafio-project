@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:water_bucket",
+    "nexo:ambar"
+  ],
+  "result": {
+    "id": "nexo:cubo_agua_prehistorica",
+    "count": 1
+  }
+}

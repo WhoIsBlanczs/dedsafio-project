@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.novastudio.dedsafio4.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "DinoPoopMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

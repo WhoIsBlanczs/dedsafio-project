@@ -1,0 +1,1 @@
+{"parent": "minecraft:block/cube_bottom_top", "textures": {"top": "nexo:block/cesped_prehistorico_top", "side": "nexo:block/cesped_prehistorico_side", "bottom": "nexo:block/tierra_prehistorica", "particle": "nexo:block/tierra_prehistorica"}}

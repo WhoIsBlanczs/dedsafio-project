@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:simple_block",
+  "to_place": {
+    "type": "minecraft:weighted",
+    "entries": [
+      {
+        "weight": 5,
+        "data": "nexo:helecho_prehistorico"
+      },
+      {
+        "weight": 3,
+        "data": "minecraft:fern"
+      },
+      {
+        "weight": 2,
+        "data": "minecraft:short_grass"
+      }
+    ]
+  }
+}

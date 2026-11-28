@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "id": "template-mod",
+  "version": "${version}",
+  "name": "Template Mod",
+  "description": "Criaturas e items de Nexo. Port a Minecraft 26.3.",
+  "authors": [
+    "Me!"
+  ],
+  "license": "CC0-1.0",
+  "icon": "assets/template-mod/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.novastudio.dedsafio4.DinosMod",
+      "com.novastudio.dedsafio4.CreepersMod",
+      "com.novastudio.dedsafio4.GlebanoidesMod",
+      "com.novastudio.dedsafio4.ItemsMod",
+      "com.novastudio.dedsafio4.BagsMod",
+      "com.novastudio.dedsafio4.TotemsPlus",
+      "com.novastudio.dedsafio4.HeartsMod",
+      "com.novastudio.dedsafio4.GhostsMod",
+      "com.novastudio.dedsafio4.PlantsMod",
+      "com.novastudio.dedsafio4.PrehistoricMod",
+      "com.novastudio.dedsafio4.ExtrasMod"
+    ],
+    "client": [
+      "com.novastudio.dedsafio4.DinosClientMod",
+      "com.novastudio.dedsafio4.CreepersClientMod",
+      "com.novastudio.dedsafio4.GlebanoidesClientMod",
+      "com.novastudio.dedsafio4.ItemsClientMod",
+      "com.novastudio.dedsafio4.GhostsClientMod",
+      "com.novastudio.dedsafio4.PlantsClientMod",
+      "com.novastudio.dedsafio4.PrehistoricClientMod"
+    ]
+  },
+  "mixins": [
+    "dinos.mixins.json",
+    "creepers.mixins.json",
+    {
+      "config": "creepers.client.mixins.json",
+      "environment": "client"
+    },
+    "nexo.compat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "geckolib": ">=5.5"
+  }
+}

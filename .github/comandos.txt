@@ -1,0 +1,6 @@
+execute in nexo:prehistorico run forceload add 0 0 1 1
+execute in nexo:prehistorico run place feature nexo:araucaria 0 100 0
+summon nexo:t_rex 0 -60 0
+summon nexo:raptor 0 -60 0
+summon nexo:creeper_dorado 0 -60 0
+summon nexo:fantasma_rojo 0 -60 0

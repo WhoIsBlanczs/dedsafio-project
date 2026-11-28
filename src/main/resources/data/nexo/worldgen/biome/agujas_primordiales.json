@@ -1,0 +1,138 @@
+{
+  "attributes": {
+    "minecraft:visual/fog_color": "#eacb5a",
+    "minecraft:visual/sky_color": "#eacb5a",
+    "minecraft:visual/water_fog_color": "#1a9a8e",
+    "minecraft:visual/ambient_particles": {
+      "argument": [
+        {
+          "particle": {
+            "type": "minecraft:dust",
+            "color": [
+              1.0,
+              0.72,
+              0.22
+            ],
+            "scale": 1.0
+          },
+          "probability": 0.004
+        }
+      ],
+      "modifier": "append"
+    },
+    "minecraft:audio/ambient_sounds": {
+      "mood": {
+        "sound": "minecraft:ambient.cave",
+        "tick_delay": 6000,
+        "block_search_extent": 8,
+        "offset": 2.0
+      }
+    },
+    "minecraft:audio/background_music": {
+      "default": {
+        "sound": "minecraft:music.overworld.lush_caves",
+        "min_delay": 12000,
+        "max_delay": 24000
+      }
+    },
+    "minecraft:gameplay/natural_mob_spawns": {
+      "argument": {
+        "spawn_costs": {
+          "nexo:raptor": {
+            "energy_budget": 1.0,
+            "charge": 0.7
+          },
+          "nexo:pterodactilo": {
+            "energy_budget": 1.0,
+            "charge": 0.7
+          },
+          "nexo:t_rex": {
+            "energy_budget": 1.0,
+            "charge": 0.7
+          }
+        },
+        "spawns_by_category": {
+          "monster": [
+            {
+              "type": "nexo:pterodactilo",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 12
+            },
+            {
+              "type": "nexo:raptor",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 6
+            },
+            {
+              "type": "nexo:t_rex",
+              "count": 1,
+              "weight": 2
+            }
+          ],
+          "creature": [
+            {
+              "type": "nexo:sauropodo_morado",
+              "count": {
+                "type": "minecraft:uniform",
+                "min_inclusive": 1,
+                "max_inclusive": 2
+              },
+              "weight": 3
+            }
+          ]
+        }
+      },
+      "modifier": "overlay"
+    }
+  },
+  "carvers": [],
+  "downfall": 0.8,
+  "effects": {
+    "water_color": "#3ed6c5",
+    "grass_color": "#a6c048",
+    "foliage_color": "#52902e"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "nexo:vetas_tierra",
+      "nexo:vetas_tierra_gruesa",
+      "nexo:vetas_calcita",
+      "nexo:vetas_toba",
+      "nexo:mena_carbon",
+      "nexo:mena_hierro",
+      "nexo:mena_bioxita",
+      "nexo:mena_ambar"
+    ],
+    [],
+    [],
+    [
+      "nexo:columnas_de_cristal",
+      "nexo:araucarias",
+      "nexo:cicadas",
+      "nexo:arboles_en_agujas",
+      "nexo:helechos",
+      "nexo:hierba_alta",
+      "nexo:flores_rojas",
+      "nexo:racimos_de_ambar",
+      "nexo:racimos_en_pilares",
+      "nexo:lianas"
+    ],
+    []
+  ],
+  "has_precipitation": false,
+  "temperature": 0.95
+}

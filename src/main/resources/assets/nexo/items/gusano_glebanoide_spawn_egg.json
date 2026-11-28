@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "nexo:item/spawn_egg_plantilla",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 7032381
+      },
+      {
+        "type": "minecraft:constant",
+        "value": 13214330
+      }
+    ]
+  }
+}
