@@ -1,5 +1,7 @@
 say prueba
 forceload add 0 0
+setblock 0 99 0 stone
+forceload add 0 0
 time set day
 summon modminds:casino 0 100 0
 summon modminds:tortuga_netherita 0 100 0
