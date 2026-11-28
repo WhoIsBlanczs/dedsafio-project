@@ -31,7 +31,7 @@ public class PantallaCambiosActivos extends PantallaBase {
 		int py = (LIENZO_H - h) / 2;
 		Tema.panel(g, px, py, w, h, 40, a);
 		g.text(this.font, Tema.negrita("Cambios activos"), px + 17, py + 11, Tema.alfa(Tema.BLANCO, a), false);
-		g.text(this.font, "Elige uno y pulsa Desactivar para quitarlo", px + 17, py + 24, Tema.alfa(Tema.TEXTO, a), false);
+		g.text(this.font, ClienteEstado.hombrosafio ? "Los de Hombrosafío (los mismos que en la M) · elige uno y pulsa Desactivar" : "Elige uno y pulsa Desactivar para quitarlo", px + 17, py + 24, Tema.alfa(Tema.TEXTO, a), false);
 		botonCerrar(g, px + w - 22, py + 15, a);
 
 		List<String> cambios = new ArrayList<>(ClienteEstado.CAMBIOS);
@@ -61,7 +61,16 @@ public class PantallaCambiosActivos extends PantallaBase {
 			int borde = sel ? 0xFF5D78BF : Tema.mezclar(Tema.TARJETA_BORDE, Tema.TARJETA_BORDE_HOVER, hh);
 			Tema.caja(g, px + 17, y, w - 34, 26, Tema.alfa(fondo, a), Tema.alfa(borde, a));
 			Tema.rect(g, px + 27, y + 11, 4, 4, Tema.alfa(0xFFEEA632, a));
-			g.text(this.font, sel ? Tema.negrita(n) : Component.literal(n), px + 38, y + 9, Tema.alfa(sel ? Tema.BLANCO : Tema.TEXTO, a), false);
+			String nombre = net.ruleta.Datos.tituloCambio(n);
+			g.text(this.font, sel ? Tema.negrita(nombre) : Component.literal(nombre), px + 38, y + 9, Tema.alfa(sel ? Tema.BLANCO : Tema.TEXTO, a), false);
+
+			if (hv) {
+				net.ruleta.Datos.Entrada en = net.ruleta.Datos.porId(n);
+
+				if (en != null) {
+					tooltip(en.texto());
+				}
+			}
 
 			if (y + 26 > listaY && y < listaY + listaH) {
 				zona(px + 17, Math.max(y, listaY), w - 34, Math.min(y + 26, listaY + listaH) - Math.max(y, listaY), () -> elegido = n);

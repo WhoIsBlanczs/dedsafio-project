@@ -13,7 +13,7 @@ import net.ruleta.Servidor;
 import net.ruleta.client.ui.PantallaBase;
 import net.ruleta.client.ui.Tema;
 
-/** "Nutria Pedestal": comercios «das esto y recibes esto». */
+/** "Pedestal de intercambio": los comercios del Pedestal de canje de Hombrosafío («das esto y recibes esto»). */
 public class PantallaPedestal extends PantallaBase {
 	private static final int W = 778;
 	private static final int H = 468;
@@ -23,7 +23,7 @@ public class PantallaPedestal extends PantallaBase {
 	private boolean shift;
 
 	public PantallaPedestal(Screen anterior) {
-		super(Component.literal("Nutria Pedestal"), anterior);
+		super(Component.literal("Pedestal de intercambio"), anterior);
 		this.datos = ClienteEstado.pedestal.deepCopy();
 
 		if (!datos.has("comercios")) {
@@ -48,24 +48,24 @@ public class PantallaPedestal extends PantallaBase {
 		int px = (LIENZO_W - W) / 2;
 		int py = (LIENZO_H - H) / 2;
 		Tema.panel(g, px, py, W, H, 39, a);
-		g.text(this.font, Tema.negrita("Nutria Pedestal"), px + 17, py + 11, Tema.alfa(Tema.BLANCO, a), false);
-		g.text(this.font, "Se guarda en el servidor: config/ruleta_pedestal.json", px + 17, py + 24, Tema.alfa(Tema.TEXTO, a), false);
+		g.text(this.font, Tema.negrita("Pedestal de intercambio"), px + 17, py + 11, Tema.alfa(Tema.BLANCO, a), false);
+		g.text(this.font, ClienteEstado.hombrosafio ? "Los comercios del Pedestal de canje de Hombrosafío · al guardar cambian en el pedestal" : "Hombrosafío no está en el servidor: se guarda pero no hay pedestal que lo use", px + 17, py + 24, Tema.alfa(Tema.TEXTO, a), false);
 		botonCerrar(g, px + W - 22, py + 15, a);
 
 		boton(g, "nuevo", px + 14, py + 48, 169, 23, Tema.negrita("+ Nuevo comercio"), Estilo.AZUL, null, () -> {
 			JsonObject o = new JsonObject();
-			o.addProperty("das", "minecraft:emerald");
-			o.addProperty("das_nombre", "Emerald");
+			o.addProperty("das", "hombrosafio:casino_token_blue");
+			o.addProperty("das_nombre", "Ficha azul");
 			o.addProperty("das_n", 1);
-			o.addProperty("recibes", "minecraft:diamond");
-			o.addProperty("recibes_nombre", "Diamond");
+			o.addProperty("recibes", "hombrosafio:casino_token");
+			o.addProperty("recibes_nombre", "Ficha naranja");
 			o.addProperty("recibes_n", 1);
 			comercios().add(o);
 		}, a);
 
 		int y0 = py + 81;
 
-		for (String l : Tema.lineas(this.font, "Cada comercio es «das esto y recibes esto». Clic en un cuadro de item para cambiarlo; con − y + cambias la cantidad (Mayús = de 10 en 10). El jugador ve estos comercios al hacer clic derecho en el pedestal.", W - 32, 2)) {
+		for (String l : Tema.lineas(this.font, "Cada comercio es «das esto y recibes esto». Clic en un cuadro de item para cambiarlo; con − y + cambias la cantidad (Mayús = de 10 en 10). Los jugadores ven estos comercios al usar el Pedestal de canje.", W - 32, 2)) {
 			g.text(this.font, l, px + 13, y0, Tema.alfa(Tema.TEXTO, a), false);
 			y0 += 11;
 		}

@@ -32,7 +32,7 @@ public class PantallaPanel extends PantallaBase {
 				() -> abrir(new PantallaCasino(this)), a);
 		boton(g, "dulce", px + 203, by, bw, bh, Tema.negrita("Dulce azar"), Estilo.AZUL, "Dimensión DEDsafío: ir, volver, olas y escena",
 				() -> abrir(new PantallaDulceAzar(this)), a);
-		boton(g, "pedestal", px + 387, by, bw, bh, Tema.negrita("Nutria Pedestal"), Estilo.AZUL, null,
+		boton(g, "pedestal", px + 387, by, bw, bh, Tema.negrita("Pedestal de intercambio"), Estilo.AZUL, "Los comercios del Pedestal de canje de Hombrosafío",
 				() -> abrir(new PantallaPedestal(this)), a);
 
 		g.text(this.font, "Más opciones próximamente...", px + 18, py + 268, Tema.alfa(Tema.GRIS, a), false);

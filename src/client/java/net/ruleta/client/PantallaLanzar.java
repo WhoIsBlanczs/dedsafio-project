@@ -1,6 +1,8 @@
 package net.ruleta.client;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -37,7 +39,9 @@ public class PantallaLanzar extends PantallaBase {
 	private String castigo = "ninguno";
 	private String castigado = "";
 	private boolean reviil;
-	private String modo = "mensaje";
+	private boolean verMensaje = true;
+	private boolean verAnimacion = true;
+	private boolean verCielo = true;
 	private final PantallaTarjetas.Estado tarjeta = new PantallaTarjetas.Estado();
 	private Map<String, PantallaMomentos.Eleccion> momentos = new LinkedHashMap<>();
 
@@ -268,9 +272,21 @@ public class PantallaLanzar extends PantallaBase {
 		switch (casilla) {
 			case NUTRIA -> sb.append(nutria ? " con Momento Nutria" : "");
 			case REVIIL -> {
-				if (tituloGuardado.isBlank()) {
-					sb.append(" con ").append(modo.equals("cielo") ? "cielo" : modo.equals("animacion") ? "animación" : "mensaje");
+				List<String> partes = new ArrayList<>();
+
+				if (verMensaje) {
+					partes.add("mensaje");
 				}
+
+				if (verAnimacion) {
+					partes.add("animación");
+				}
+
+				if (verCielo) {
+					partes.add("cielo");
+				}
+
+				sb.append(partes.isEmpty() ? " sin nada" : " con " + String.join(", ", partes));
 			}
 			default -> {
 			}
@@ -381,18 +397,18 @@ public class PantallaLanzar extends PantallaBase {
 				opcion(g, "reviil", rx, py + 189, RW, 20, "REVIIL: " + (reviil ? "ENCENDIDO" : "APAGADO"), reviil,
 						() -> reviil = !reviil, a);
 				int sw = (RW - 12) / 3;
-				String[][] modos = {{"mensaje", "MENSAJE"}, {"animacion", "ANIMACIÓN"}, {"cielo", "CIELO"}};
+				int w3 = RW - 2 * (sw + 6);
+				opcion(g, "vermensaje", rx, py + 217, sw, 20, "MENSAJE", verMensaje, () -> verMensaje = !verMensaje, a);
+				opcion(g, "veranimacion", rx + sw + 6, py + 217, sw, 20, "ANIMACIÓN", verAnimacion, () -> verAnimacion = !verAnimacion, a);
+				opcion(g, "vercielo", rx + 2 * (sw + 6), py + 217, w3, 20, "CIELO", verCielo, () -> verCielo = !verCielo, a);
 
-				for (int i = 0; i < 3; i++) {
-					String id = modos[i][0];
-					boolean sel = modo.equals(id);
-					boton(g, "modo" + i, rx + i * (sw + 6), py + 217, i == 2 ? RW - 2 * (sw + 6) : sw, 20, Tema.titulo(modos[i][1], 0xFFFFFF),
-							sel ? Estilo.SELECCIONADO : Estilo.OSCURO,
-							switch (id) {
-								case "mensaje" -> "Solo el mensaje: sin el cielo rojo de Revil";
-								case "animacion" -> "El mensaje y el cielo rojo de Revil con la grieta";
-								default -> "El cielo rojo de Revil con la grieta";
-							}, () -> modo = id, a);
+				if (encima(rx, py + 217, RW, 20)) {
+					int cual = (ratonX - rx) / (sw + 6);
+					tooltip(switch (Math.min(2, Math.max(0, cual))) {
+						case 0 -> "Mensaje: el aviso grande de este menú cuando para la ruleta";
+						case 1 -> "Animación: la animación de Revil de Hombrosafío (pantalla roja y sonido)";
+						default -> "Cielo: el cielo rojo de Revil con la grieta";
+					});
 				}
 
 				if (!ClienteEstado.hombrosafio && !momentos.isEmpty()) {
@@ -503,7 +519,9 @@ public class PantallaLanzar extends PantallaBase {
 			case NUTRIA -> o.addProperty("nutria", nutria);
 			case REVIIL -> {
 				o.addProperty("reviil", reviil);
-				o.addProperty("modo", modo);
+				o.addProperty("ver_mensaje", verMensaje);
+				o.addProperty("ver_animacion", verAnimacion);
+				o.addProperty("ver_cielo", verCielo);
 				JsonArray arr = new JsonArray();
 				StringBuilder nombres = new StringBuilder();
 
@@ -534,7 +552,7 @@ public class PantallaLanzar extends PantallaBase {
 				Datos.Entrada e = Datos.porId(tarjeta.elegido);
 
 				if (e != null) {
-					arr.add(e.titulo());
+					arr.add(casilla == Casilla.CAMBIO ? e.id() : e.titulo());
 				}
 
 				o.add(casilla == Casilla.CAMBIO ? "cambios" : "mobs", arr);

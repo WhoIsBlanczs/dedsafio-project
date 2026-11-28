@@ -27,6 +27,13 @@ public final class PuenteHombrosafio {
 	private static Method configureVote;
 	private static Method refugeReady;
 	private static Field skySuppressed;
+	private static Class<?> cambio;
+	private static Method cambioActivar;
+	private static Method cambioDesactivar;
+	private static Method cambioActivo;
+	private static Field cambioId;
+	private static java.lang.reflect.Constructor<?> animacion;
+	private static Object animacionTipo;
 	private static String error = "";
 
 	private PuenteHombrosafio() {
@@ -68,6 +75,26 @@ public final class PuenteHombrosafio {
 		} catch (ReflectiveOperationException | RuntimeException e) {
 			error = "Esta versión de Hombrosafío no es compatible (" + e + ")";
 			RuletaMod.LOGGER.warn("[ruleta] No se pudo conectar con Hombrosafío: {}", e.toString());
+			return;
+		}
+
+		// Cambios de dificultad y animación de Revil: si fallan, lo demás sigue funcionando.
+		try {
+			cambio = Class.forName("ar.hombrosafio.RouletteDifficultyChange");
+			Class<?> cambios = Class.forName("ar.hombrosafio.RouletteDifficultyChanges");
+			cambioActivar = abrir(cambios.getDeclaredMethod("activate", MinecraftServer.class, cambio));
+			cambioDesactivar = abrir(cambios.getDeclaredMethod("deactivate", MinecraftServer.class, cambio));
+			cambioActivo = abrir(cambios.getDeclaredMethod("isActive", cambio));
+			cambioId = cambio.getField("id");
+			Class<?> revil = Class.forName("ar.hombrosafio.RevilMomentPayload");
+			animacion = revil.getDeclaredConstructor(boolean.class);
+			animacion.setAccessible(true);
+			Field tipo = revil.getField("TYPE");
+			animacionTipo = tipo.get(null);
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			cambio = null;
+			animacion = null;
+			RuletaMod.LOGGER.warn("[ruleta] Cambios de dificultad o animación de Hombrosafío no disponibles: {}", e.toString());
 		}
 	}
 
@@ -178,6 +205,96 @@ public final class PuenteHombrosafio {
 		} catch (ReflectiveOperationException | RuntimeException ex) {
 			RuletaMod.LOGGER.warn("[ruleta] Falló el Momento Revil {}: {}", m.id(), ex.toString());
 			return "error: " + ex.getClass().getSimpleName();
+		}
+	}
+
+	private static Object cambioPorId(String id) throws ReflectiveOperationException {
+		for (Object c : cambio.getEnumConstants()) {
+			if (cambioId.get(c).equals(id)) {
+				return c;
+			}
+		}
+
+		return null;
+	}
+
+	/** Activa un cambio de dificultad de Hombrosafío (sale en los cambios activos de la M). */
+	public static boolean activarCambio(MinecraftServer server, String id) {
+		if (!disponible() || cambio == null) {
+			return false;
+		}
+
+		try {
+			Object c = cambioPorId(id);
+
+			if (c == null) {
+				return false;
+			}
+
+			cambioActivar.invoke(null, server, c);
+			return (boolean) cambioActivo.invoke(null, c);
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			RuletaMod.LOGGER.warn("[ruleta] Falló el cambio {}: {}", id, e.toString());
+			return false;
+		}
+	}
+
+	public static boolean desactivarCambio(MinecraftServer server, String id) {
+		if (!disponible() || cambio == null) {
+			return false;
+		}
+
+		try {
+			Object c = cambioPorId(id);
+			return c != null && (boolean) cambioDesactivar.invoke(null, server, c);
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			RuletaMod.LOGGER.warn("[ruleta] No se pudo quitar el cambio {}: {}", id, e.toString());
+			return false;
+		}
+	}
+
+	/** Ids de los cambios de dificultad activos en Hombrosafío, o null si no está. */
+	public static java.util.List<String> cambiosActivos() {
+		if (!disponible() || cambio == null) {
+			return null;
+		}
+
+		java.util.List<String> r = new java.util.ArrayList<>();
+
+		try {
+			for (Object c : cambio.getEnumConstants()) {
+				String id = (String) cambioId.get(c);
+
+				if (!id.equals("texto") && (boolean) cambioActivo.invoke(null, c)) {
+					r.add(id);
+				}
+			}
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			return null;
+		}
+
+		return r;
+	}
+
+	/** Corta la animación de Revil (el GIF y la pantalla roja) en todos los jugadores. */
+	@SuppressWarnings("unchecked")
+	public static void pararAnimacion(MinecraftServer server) {
+		if (!disponible() || animacion == null) {
+			return;
+		}
+
+		try {
+			Object payload = animacion.newInstance(false);
+
+			for (var p : server.getPlayerList().getPlayers()) {
+				if (net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.canSend(p,
+						(net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type<?>) animacionTipo)) {
+					net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.send(p,
+							(net.minecraft.network.protocol.common.custom.CustomPacketPayload) payload);
+				}
+			}
+		} catch (ReflectiveOperationException | RuntimeException e) {
+			RuletaMod.LOGGER.warn("[ruleta] No se pudo parar la animación de Revil: {}", e.toString());
 		}
 	}
 

@@ -22,7 +22,7 @@ Las versiones de Loom, Loader y Fabric API son las del `fabric-example-mod` ofic
 - **Ajustes**: las 12 categorías y los 112 ajustes con sus textos y valores por defecto. Tiene buscador, deslizadores, botones − / + (Mayús = de 10 en 10), interruptores, el punto azul y Restablecer sección/todo. Se guardan en `config/ruleta_ajustes.json` y se sincronizan con todos.
 - **Cambios activos**: la lista con el botón Desactivar.
 - **Bunkers**: la pantalla vacía tal cual el original.
-- **Panel**: Casino (rodillos con frecuencias y porcentajes, premios y cobro), Dulce azar y Nutria Pedestal (comercios «das / recibes»). Se guardan en `config/ruleta_tragamonedas.json` y `config/ruleta_pedestal.json`.
+- **Panel**: Casino, Dulce azar y Pedestal de intercambio. Se guardan en `config/ruleta_casino.json` y `config/ruleta_pedestal_intercambio.json`.
 - La interfaz se dibuja en un lienzo de 1280×720 que se escala a la ventana, así que se ve igual con cualquier escala de interfaz.
 
 En un servidor dedicado, solo los administradores (nivel de permisos 2 o más) pueden cambiar ajustes y lanzar casillas. En un mundo propio o abierto en LAN, puede cualquiera.
@@ -32,6 +32,14 @@ En un servidor dedicado, solo los administradores (nivel de permisos 2 o más) p
 Si el servidor también tiene **Hombrosafío** (Micosafio v5), al pulsar LANZAR gira la **ruleta de Hombrosafío** en el color de la casilla, con sus sonidos. Cuando se para, sale el aviso de este menú.
 
 En la casilla roja, «Momentos Reviil» muestra los **14 Momentos Revil de Hombrosafío** (refugio, intercambio de posiciones, los dos gases tóxicos, dimensión jurásica, bombas nucleares, lluvia ácida, bioma, votación, creepers eléctricos, Gleba, Limbo, agua del Limbo y montaña). Se pueden elegir varios. Los que necesitan datos piden el plazo, el bioma o las muertes. Con «REVIIL: ENCENDIDO», al parar la ruleta se activan de verdad en Hombrosafío. «MENSAJE» no pone el cielo rojo; «ANIMACIÓN» y «CIELO» sí.
+
+En la ruleta roja, MENSAJE, ANIMACIÓN y CIELO se encienden y apagan por separado: el aviso de este menú, la animación de Revil de Hombrosafío y el cielo rojo.
+
+**Cambios de dificultad**: son los 31 de Hombrosafío. Al parar la ruleta se activan en Hombrosafío, así que salen en los cambios activos de la M. «Cambios activos» del menú muestra esos mismos y «Desactivar» los quita en Hombrosafío.
+
+**Pedestal de intercambio**: edita los comercios del Pedestal de canje de Hombrosafío. Muestra los que trae (4 fichas azules → 1 ficha naranja y 1 Dilitio → 1 ficha azul) y al guardar el pedestal usa los nuevos.
+
+**Casino**: edita los premios de la tragamonedas de **CasinoHS**. Muestra sus 21 premios con el peso, la cantidad, el jackpot y los libros encantados, y la ficha con la que se juega. Al guardar, la máquina entrega y muestra los nuevos. Máximo 21 premios.
 
 «Detener ruleta» cancela la ruleta de Hombrosafío y termina sus Momentos Revil y su cielo.
 
