@@ -1,1 +1,6 @@
-net.minecraft.world.entity.projectile.arrow.AbstractArrow
+net.minecraft.world.item.Item
+net.minecraft.world.item.Item$Properties
+net.minecraft.world.level.block.Block
+net.minecraft.world.level.block.state.BlockBehaviour
+net.minecraft.world.level.block.state.BlockBehaviour$Properties
+net.minecraft.world.entity.EntityType$Builder
