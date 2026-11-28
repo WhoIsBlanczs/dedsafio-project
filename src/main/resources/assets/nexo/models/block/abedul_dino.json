@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"nexo:item/abedul_dino_item"}}
+{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"nexo:block/abedul_dino_item"}}

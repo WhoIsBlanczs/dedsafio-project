@@ -1,1 +1,1 @@
-{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"nexo:item/roble_quiu_dino_item"}}
+{"parent":"minecraft:block/cross","render_type":"minecraft:cutout","textures":{"cross":"nexo:block/roble_quiu_dino_item"}}
