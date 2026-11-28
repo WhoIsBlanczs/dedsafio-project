@@ -11,11 +11,11 @@
           "modifier": [
             {
               "condition": {
-                "block": "modminds:losa_de_tablones_amarillos_antiguos",
-                "properties": {
+                "type": "minecraft:match_block",
+                "blocks": "modminds:losa_de_tablones_amarillos_antiguos",
+                "state": {
                   "type": "double"
-                },
-                "type": "minecraft:block_state_property"
+                }
               },
               "count": 2.0,
               "type": "minecraft:set_count"

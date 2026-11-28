@@ -5,8 +5,7 @@
       "rolls": 1.0,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "minecraft:air",
+          "type": "minecraft:empty",
           "weight": 100,
           "condition": {
             "predicate": {
@@ -22,11 +21,6 @@
               }
             },
             "type": "minecraft:match_tool"
-          },
-          "modifier": {
-            "count": 1,
-            "add": false,
-            "type": "minecraft:set_count"
           }
         }
       ]

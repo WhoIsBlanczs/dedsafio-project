@@ -11,11 +11,11 @@
           "modifier": [
             {
               "condition": {
-                "block": "modminds:losas_de_bloque_pulido",
-                "properties": {
+                "type": "minecraft:match_block",
+                "blocks": "modminds:losas_de_bloque_pulido",
+                "state": {
                   "type": "double"
-                },
-                "type": "minecraft:block_state_property"
+                }
               },
               "count": 2.0,
               "type": "minecraft:set_count"
