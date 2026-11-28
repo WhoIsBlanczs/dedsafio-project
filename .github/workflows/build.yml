@@ -23,4 +23,4 @@ jobs:
           done
           ls; wc -l /tmp/firmas.txt
           gzip -9 /tmp/firmas.txt; ls -la /tmp/firmas.txt.gz
-          echo "=====B64====="; base64 -w 0 /tmp/firmas.txt.gz; echo; echo "=====FIN====="
+          echo "=====B64====="; base64 -w 2000 /tmp/firmas.txt.gz; echo; echo "=====FIN====="
