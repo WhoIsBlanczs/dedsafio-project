@@ -2,6 +2,6 @@
   "parent": "modminds:custom/cabina_de_nave",
   "textures": {
     "0": "modminds:block/8",
-    "particle": "minecraft:item/empty_slot_quartz"
+    "particle": "modminds:block/8"
   }
 }

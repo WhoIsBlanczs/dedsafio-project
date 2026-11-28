@@ -2,6 +2,6 @@
   "parent": "modminds:custom/tiki_key3",
   "textures": {
     "0": "modminds:block/red_key",
-    "particle": "minecraft:item/empty_slot_axe"
+    "particle": "modminds:block/red_key"
   }
 }

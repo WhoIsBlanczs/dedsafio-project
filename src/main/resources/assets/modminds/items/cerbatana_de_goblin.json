@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "modminds:item/cerbatana_de_goblin"
+    "type": "minecraft:special",
+    "base": "modminds:item/cerbatana_de_goblin",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }

@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p run && echo eula=true > run/eula.txt && printf 'online-mode=false\nspawn-protection=0\n' > run/server.properties
           ( for i in $(seq 1 200); do grep -q 'Done (' run/logs/latest.log 2>/dev/null && break; grep -qE 'can.t proceed with server load|Crash report|Stopping server' run/logs/latest.log 2>/dev/null && exit 0; sleep 3; done; sleep 5; while read -r l; do echo "$l"; sleep 2; done < .github/comandos.txt; sleep 30; echo stop ) | timeout 1500 ./gradlew runServer --console=plain > server.log 2>&1
-          grep -vE 'DEBUG' server.log | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.)' | grep -E '\s+at |System chat|Server thread/|ERROR|WARN|Exception|Caused|Couldn|Failed|modminds|Done|Unknown|Missing|No key|Not a|Invalid' | grep -vE 'FabricLoader/Mixin|Environment:' | head -500
+          sed -E 's/^\[[0-9:]+\] //' server.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.)' | grep -E '\s+at |System chat|Server thread/|ERROR|WARN|Exception|Caused|Couldn|Failed|modminds|Done|Unknown|Missing|No key|Not a|Invalid' | grep -vE 'FabricLoader/Mixin|Environment:' | head -500
       - name: prueba en cliente
         if: always()
         shell: bash {0}
@@ -49,7 +49,13 @@ jobs:
             grep -qE 'Stopping!|---- Minecraft Crash Report' client.log && { import -window root capturas/final.png; break; }
           done
           import -window root capturas/final.png; pkill -f KnotClient; pkill -f gradle; sleep 5
-          grep -vE 'DEBUG' client.log | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.|sun\.)' | grep -E '\s+at |ERROR|WARN|Exception|Caused|Failed|modminds|VISTA|MOBS_LISTOS|Missing|Unable|Couldn|OpenGL|Backend' | grep -vE 'FabricLoader/Mixin' | head -500
+          sed -E 's/^\[[0-9:]+\] //' client.log | grep -vE 'DEBUG' | awk '!visto[$0]++' | grep -vE '^\s+at (java|jdk|net\.minecraft|com\.mojang|net\.fabricmc|org\.|sun\.)' | grep -E '\s+at |ERROR|WARN|Exception|Caused|Failed|modminds|VISTA|MOBS_LISTOS|Missing|Unable|Couldn|OpenGL|Backend' | grep -vE 'FabricLoader/Mixin' | head -500
+      - name: subir capturas
+        if: always()
+        shell: bash {0}
+        run: |
+          mkdir -p cap && cp capturas/*.png cap/ 2>/dev/null; grep -vE 'soldado_reviil' client.log | tail -c 3000000 > cap/client.log 2>/dev/null; cp server.log cap/ 2>/dev/null
+          cd cap && git init -q && git checkout -q -b capturas-sarex && git add . && git -c user.name=ci -c user.email=ci@example.com commit -qm capturas && git push -q -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }} capturas-sarex
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "modminds:item/perforador_del_vacio"
+    "type": "minecraft:special",
+    "base": "modminds:item/perforador_del_vacio",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }

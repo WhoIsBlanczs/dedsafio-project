@@ -1,6 +1,9 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "modminds:item/rifle_de_pulso_borg_2"
+    "type": "minecraft:special",
+    "base": "modminds:item/rifle_de_pulso_borg_2",
+    "model": {
+      "type": "geckolib:geckolib"
+    }
   }
 }
