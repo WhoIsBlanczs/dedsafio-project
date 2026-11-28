@@ -1,5 +1,10 @@
 J=$(ls *.jar | tr "\n" ":")
-javap -c -p -cp $J net.minecraft.world.entity.LivingEntity | sed -n '/public void knockback(double, double, double, net.minecraft.world.damagesource.DamageSource, float);/,/^$/p' | head -60
-javap -cp $J net.minecraft.world.InteractionHand
-javap -cp $J net.minecraft.server.level.ServerPlayer | grep -i sound
-javap -cp $J net.minecraft.world.entity.player.Player | grep -i sound
+for c in net.minecraft.client.renderer.GameRenderer net.minecraft.client.renderer.ScreenEffectRenderer net.minecraft.client.Minecraft; do javap -p -cp $J $c | grep -iE 'activation'; done
+javap -cp $J net.minecraft.client.renderer.texture.DynamicTexture | grep 'DynamicTexture('
+javap -cp $J net.minecraft.client.gui.components.ChatComponent | grep -E 'addMessage|addClientSystemMessage'
+javap -cp $J net.minecraft.client.gui.Gui | grep -iE 'chat'
+javap -cp $J net.minecraft.client.renderer.entity.player.AvatarRenderer | grep -iE 'renderHand|Arm'
+javap -cp $J net.minecraft.client.renderer.ItemInHandRenderer 2>&1 | head -3
+javap -p -cp $J net.minecraft.client.renderer.item.ItemInHandRenderer 2>&1 | grep -iE 'renderArmWith|renderItem|renderPlayerArm|applyItemArm|class' | head
+javap -cp $J net.minecraft.client.renderer.LightmapRenderStateExtractor 2>&1 | head -12
+javap -p -cp $J net.minecraft.client.renderer.Lightmap 2>&1 | head -20
