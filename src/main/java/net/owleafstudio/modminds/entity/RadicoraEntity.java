@@ -147,7 +147,7 @@ public class RadicoraEntity extends Monster implements GeoEntity {
    private PlayState movementPredicate(AnimationTest<?> event) {
       if (this.animationprocedure.equals("empty")) {
          if (!event.isMoving() && (event.isMoving() ? 1.0F : 0.0F) > -0.15F && (event.isMoving() ? 1.0F : 0.0F) < 0.15F) {
-            return this.isInWaterOrBubble()
+            return this.isInWater()
                ? event.setAndContinue(RawAnimation.begin().thenLoop("idle_water"))
                : event.setAndContinue(RawAnimation.begin().thenLoop("idle"));
          } else {

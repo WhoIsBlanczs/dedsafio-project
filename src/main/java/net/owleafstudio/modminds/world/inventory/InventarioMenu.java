@@ -303,7 +303,7 @@ public class InventarioMenu extends AbstractContainerMenu implements Supplier<Ma
       if (!this.bound && playerIn instanceof ServerPlayer serverPlayer) {
          if (serverPlayer.isAlive() && !serverPlayer.hasDisconnected()) {
             for (int i = 0; i < this.internal.getSlots(); i++) {
-               playerIn.getInventory().placeItemBackInInventory(this.internal.extractItem(i, this.internal.getStackInSlot(i).getCount(), false));
+               playerIn.getInventory().placeItemBackInInventory(this.internal.extractItem(i, this.internal.getStackInSlot(i).getCount(), false), net.minecraft.util.Prediction.SERVER_ONLY);
             }
          } else {
             for (int j = 0; j < this.internal.getSlots(); j++) {

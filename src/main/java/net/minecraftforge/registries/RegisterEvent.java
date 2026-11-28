@@ -31,14 +31,14 @@ public class RegisterEvent extends Event {
             try {
                Object t = Registry.register(registry, id, value);
             } catch (Throwable var6) {
-               LOGGER.warn("Could not register {} into {}: {}", new Object[]{id, key.location(), var6.toString()});
+               LOGGER.warn("Could not register {} into {}: {}", new Object[]{id, key.identifier(), var6.toString()});
             }
          }
       });
    }
 
    public static <T> Optional<Holder.Reference<T>> holderOf(Registry<T> registry, T value) {
-      return registry.getResourceKey(value).flatMap(registry::getHolder);
+      return registry.getResourceKey(value).flatMap(registry::get);
    }
 
    @FunctionalInterface

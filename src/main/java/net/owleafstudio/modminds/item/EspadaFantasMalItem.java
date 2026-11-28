@@ -33,7 +33,7 @@ public class EspadaFantasMalItem extends Item {
          }
 
          public Ingredient getRepairIngredient() {
-            return Ingredient.of(new ItemStack[]{new ItemStack((ItemLike)ModmindsModItems.LINGOTE_DE_HIERRO_REFORZADO.get())});
+            return Ingredient.of((ItemLike)ModmindsModItems.LINGOTE_DE_HIERRO_REFORZADO.get());
          }
       }, new Item.Properties());
    }

@@ -33,7 +33,7 @@ public class LechePocionRecetaBrewingRecipe implements IBrewingRecipe {
 
    @Override
    public boolean isIngredient(ItemStack ingredient) {
-      return Ingredient.of(new ItemStack[]{new ItemStack(Items.MILK_BUCKET)}).test(ingredient);
+      return Ingredient.of(Items.MILK_BUCKET).test(ingredient);
    }
 
    @Override

@@ -20,12 +20,12 @@ public class SirenamorphosisArrojableRecetaBrewingRecipe implements IBrewingReci
 
    @Override
    public boolean isInput(ItemStack input) {
-      return Ingredient.of(new ItemStack[]{new ItemStack(Items.POTION)}).test(input);
+      return Ingredient.of(Items.POTION).test(input);
    }
 
    @Override
    public boolean isIngredient(ItemStack ingredient) {
-      return Ingredient.of(new ItemStack[]{new ItemStack(Items.GUNPOWDER)}).test(ingredient);
+      return Ingredient.of(Items.GUNPOWDER).test(ingredient);
    }
 
    @Override

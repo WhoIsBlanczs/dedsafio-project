@@ -215,7 +215,7 @@ public class IntrusoEntity extends Monster implements GeoEntity {
 
    private PlayState movementPredicate(AnimationTest<?> event) {
       if (this.animationprocedure.equals("empty")) {
-         return this.isInWaterOrBubble() ? event.setAndContinue(RawAnimation.begin().thenLoop("swin")) : event.setAndContinue(RawAnimation.begin().thenLoop("idle"));
+         return this.isInWater() ? event.setAndContinue(RawAnimation.begin().thenLoop("swin")) : event.setAndContinue(RawAnimation.begin().thenLoop("idle"));
       } else {
          return PlayState.STOP;
       }

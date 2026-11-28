@@ -35,7 +35,7 @@ public final class ForgeRegistries {
    }
 
    static <T> Registry<T> resolve(ResourceKey<? extends Registry<T>> key) {
-      Registry<?> vanilla = (Registry<?>)BuiltInRegistries.REGISTRY.getValue(key.location());
+      Registry<?> vanilla = (Registry<?>)BuiltInRegistries.REGISTRY.getValue(key.identifier());
       return (Registry<T>)(vanilla == null ? null : vanilla);
    }
 

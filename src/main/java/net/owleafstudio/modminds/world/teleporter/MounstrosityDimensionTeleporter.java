@@ -55,7 +55,7 @@ public class MounstrosityDimensionTeleporter implements ITeleporter {
       event.register(ForgeRegistries.Keys.POI_TYPES, registerHelper -> {
          PoiType poiType = new PoiType(ImmutableSet.copyOf(ModmindsModBlocks.MOUNSTROSITY_DIMENSION_PORTAL.get().getStateDefinition().getPossibleStates()), 0, 1);
          registerHelper.register("mounstrosity_dimension_portal", poiType);
-         poi = (Holder<PoiType>)ForgeRegistries.POI_TYPES.getHolder(poiType).get();
+         poi = (Holder<PoiType>)ForgeRegistries.POI_TYPES.get(poiType).get();
       });
    }
 
@@ -81,7 +81,7 @@ public class MounstrosityDimensionTeleporter implements ITeleporter {
       return optional.map(
          p_192975_ -> {
             BlockPos blockpos = p_192975_.getPos();
-            this.level.getChunkSource().addTicketWithRadius(CUSTOM_PORTAL, new ChunkPos(blockpos), 3);
+            this.level.getChunkSource().addTicketWithRadius(CUSTOM_PORTAL, net.minecraft.world.level.ChunkPos.containing(blockpos), 3);
             BlockState blockstate = this.level.getBlockState(blockpos);
             return BlockUtil.getLargestRectangleAround(
                blockpos,
@@ -239,7 +239,7 @@ public class MounstrosityDimensionTeleporter implements ITeleporter {
          Entity entityNew = entity.getType().create(server, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
          if (entityNew != null) {
             entityNew.restoreFrom(entity);
-            entityNew.moveTo(portalinfo.pos.x, portalinfo.pos.y, portalinfo.pos.z, portalinfo.yRot, entityNew.getXRot());
+            entityNew.snapTo(portalinfo.pos.x, portalinfo.pos.y, portalinfo.pos.z, portalinfo.yRot, entityNew.getXRot());
             entityNew.setDeltaMovement(portalinfo.speed);
             server.addDuringTeleport(entityNew);
          }

@@ -157,7 +157,7 @@ public class SapitoEntity extends PathfinderMob implements GeoEntity {
          return PlayState.STOP;
       } else if ((event.isMoving() || !((event.isMoving() ? 1.0F : 0.0F) > -0.15F) || !((event.isMoving() ? 1.0F : 0.0F) < 0.15F)) && !this.isAggressive()) {
          return event.setAndContinue(RawAnimation.begin().thenLoop("walk"));
-      } else if (this.isInWaterOrBubble()) {
+      } else if (this.isInWater()) {
          return event.setAndContinue(RawAnimation.begin().thenLoop("swimming"));
       } else {
          return this.isAggressive() && event.isMoving()

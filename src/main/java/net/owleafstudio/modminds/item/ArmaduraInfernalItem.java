@@ -31,7 +31,7 @@ public abstract class ArmaduraInfernalItem extends ArmorItem {
          Map.of(net.minecraft.world.item.equipment.ArmorType.HELMET, 4, net.minecraft.world.item.equipment.ArmorType.CHESTPLATE, 6, net.minecraft.world.item.equipment.ArmorType.LEGGINGS, 7, net.minecraft.world.item.equipment.ArmorType.BOOTS, 4),
          15,
          SoundEvents.ARMOR_EQUIP_GENERIC,
-         () -> Ingredient.of(new ItemStack[]{new ItemStack((ItemLike)ModmindsModItems.LINGOTE_DE_ACERO_NEGRO_AUREO.get())}),
+         () -> Ingredient.of((ItemLike)ModmindsModItems.LINGOTE_DE_ACERO_NEGRO_AUREO.get()),
          List.of(),
          3.0F,
          0.1F

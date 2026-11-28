@@ -226,7 +226,7 @@ public class TresCorazonesMenu extends AbstractContainerMenu implements Supplier
          if (serverPlayer.isAlive() && !serverPlayer.hasDisconnected()) {
             for (int i = 0; i < this.internal.getSlots(); i++) {
                if (i != 0) {
-                  playerIn.getInventory().placeItemBackInInventory(this.internal.extractItem(i, this.internal.getStackInSlot(i).getCount(), false));
+                  playerIn.getInventory().placeItemBackInInventory(this.internal.extractItem(i, this.internal.getStackInSlot(i).getCount(), false), net.minecraft.util.Prediction.SERVER_ONLY);
                }
             }
          } else {

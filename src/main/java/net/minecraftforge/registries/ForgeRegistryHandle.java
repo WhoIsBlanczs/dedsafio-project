@@ -31,7 +31,7 @@ public class ForgeRegistryHandle<T> {
    }
 
    public Optional<Holder.Reference<T>> getHolder(Identifier name) {
-      return this.vanilla.getHolder(name);
+      return this.vanilla.get(name);
    }
 
    public Optional<Holder.Reference<T>> getHolder(T value) {
@@ -39,7 +39,7 @@ public class ForgeRegistryHandle<T> {
    }
 
    public Holder.Reference<T> getHolderOrThrow(T value) {
-      return this.getHolder(value).orElseThrow(() -> new IllegalStateException("Value is not registered: " + value));
+      return this.get(value).orElseThrow(() -> new IllegalStateException("Value is not registered: " + value));
    }
 
    public Identifier getKey(T value) {

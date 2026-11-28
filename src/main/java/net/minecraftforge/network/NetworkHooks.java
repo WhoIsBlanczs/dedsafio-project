@@ -2,7 +2,7 @@ package net.minecraftforge.network;
 
 import io.netty.buffer.Unpooled;
 import java.util.function.Consumer;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -36,7 +36,7 @@ public final class NetworkHooks {
       return new FriendlyByteBuf(Unpooled.wrappedBuffer(data == null ? new byte[0] : data));
    }
 
-   public record ExtraDataMenuProvider(MenuProvider delegate, byte[] data) implements ExtendedScreenHandlerFactory<byte[]> {
+   public record ExtraDataMenuProvider(MenuProvider delegate, byte[] data) implements ExtendedMenuProvider<byte[]> {
       public byte[] getScreenOpeningData(ServerPlayer player) {
          return this.data;
       }

@@ -63,7 +63,7 @@ public class ModmindsMod implements ModInitializer {
       SubscriberBootstrap.registerAll(ForgeEventBus.MOD, ForgeEventBus.FORGE);
       ForgeEventBus.MOD.post(new FMLCommonSetupEvent());
       ForgeEventBus.MOD.post(new EntityAttributeCreationEvent());
-      ForgeEventBus.MOD.post(new RegisterEvent(ForgeRegistries.POI_TYPES.vanilla().key().location()));
+      ForgeEventBus.MOD.post(new RegisterEvent(ForgeRegistries.POI_TYPES.vanilla().key().identifier()));
       NetworkCompat.installCommon();
       GameEventPumps.installServer();
       WorkQueue.setBooting(false);

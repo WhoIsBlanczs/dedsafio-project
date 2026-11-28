@@ -28,7 +28,7 @@ public class ZombieInventarioJugadorProcedure {
                || player.hasEffect(CompatAccess.effect(ModmindsModMobEffects.ZOMBIFICACION.get()))
          )) {
          Zombie zombie = new Zombie(level);
-         zombie.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
+         zombie.snapTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), player.getXRot());
          zombie.setCustomName(player.getName());
          zombie.setCustomNameVisible(true);
 

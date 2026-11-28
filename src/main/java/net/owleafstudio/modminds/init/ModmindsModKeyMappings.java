@@ -24,7 +24,7 @@ import net.owleafstudio.modminds.network.RifleDePulsoBorgRecarharMessage;
    value = {Dist.CLIENT}
 )
 public class ModmindsModKeyMappings {
-   public static final KeyMapping ESPACIO_GORGONA = new KeyMapping("key.modminds.espacio_gorgona", 32, "key.categories.misc") {
+   public static final KeyMapping ESPACIO_GORGONA = new KeyMapping("key.modminds.espacio_gorgona", 32, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -42,7 +42,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping BOMBA_NEGRA_ESPACIO = new KeyMapping("key.modminds.bomba_negra_espacio", 32, "key.categories.misc") {
+   public static final KeyMapping BOMBA_NEGRA_ESPACIO = new KeyMapping("key.modminds.bomba_negra_espacio", 32, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -60,7 +60,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping RIFLE_DE_PULSO_BORG_RECARHAR = new KeyMapping("key.modminds.rifle_de_pulso_borg_recarhar", 82, "key.categories.misc") {
+   public static final KeyMapping RIFLE_DE_PULSO_BORG_RECARHAR = new KeyMapping("key.modminds.rifle_de_pulso_borg_recarhar", 82, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -73,7 +73,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping RECARGAR_CERBATANA = new KeyMapping("key.modminds.recargar_cerbatana", 82, "key.categories.misc") {
+   public static final KeyMapping RECARGAR_CERBATANA = new KeyMapping("key.modminds.recargar_cerbatana", 82, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -116,7 +116,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping RECARGA_ARMA_CORTA_ESPACIAL = new KeyMapping("key.modminds.recarga_arma_corta_espacial", 82, "key.categories.misc") {
+   public static final KeyMapping RECARGA_ARMA_CORTA_ESPACIAL = new KeyMapping("key.modminds.recarga_arma_corta_espacial", 82, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -129,7 +129,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping ESPACIO_SAPO = new KeyMapping("key.modminds.espacio_sapo", 32, "key.categories.misc") {
+   public static final KeyMapping ESPACIO_SAPO = new KeyMapping("key.modminds.espacio_sapo", 32, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -147,7 +147,7 @@ public class ModmindsModKeyMappings {
          this.isDownOld = isDown;
       }
    };
-   public static final KeyMapping ESPACIO_HYDRA = new KeyMapping("key.modminds.espacio_hydra", 32, "key.categories.misc") {
+   public static final KeyMapping ESPACIO_HYDRA = new KeyMapping("key.modminds.espacio_hydra", 32, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {
@@ -169,7 +169,7 @@ public class ModmindsModKeyMappings {
    private static long BOMBA_NEGRA_ESPACIO_LASTPRESS = 0L;
    private static long ESPACIO_SAPO_LASTPRESS = 0L;
    private static long ESPACIO_HYDRA_LASTPRESS = 0L;
-   public static final KeyMapping ESPACIO_REVIIL = new KeyMapping("key.modminds.espacio_reviil", 32, "key.categories.misc") {
+   public static final KeyMapping ESPACIO_REVIIL = new KeyMapping("key.modminds.espacio_reviil", 32, KeyMapping.Category.MISC) {
       private boolean isDownOld = false;
 
       public void setDown(boolean isDown) {

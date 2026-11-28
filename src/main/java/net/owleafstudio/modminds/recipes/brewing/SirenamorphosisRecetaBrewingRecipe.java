@@ -35,7 +35,7 @@ public class SirenamorphosisRecetaBrewingRecipe implements IBrewingRecipe {
 
    @Override
    public boolean isIngredient(ItemStack ingredient) {
-      return Ingredient.of(new ItemStack[]{new ItemStack((ItemLike)ModmindsModItems.RABANAGUA.get())}).test(ingredient);
+      return Ingredient.of((ItemLike)ModmindsModItems.RABANAGUA.get()).test(ingredient);
    }
 
    @Override

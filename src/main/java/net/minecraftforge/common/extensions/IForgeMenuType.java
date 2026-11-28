@@ -1,6 +1,6 @@
 package net.minecraftforge.common.extensions;
 
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
+import net.fabricmc.fabric.api.menu.v1.ExtendedMenuType;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,7 +10,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 public interface IForgeMenuType {
    static <T extends AbstractContainerMenu> MenuType<T> create(IForgeMenuType.IContainerFactory<T> factory) {
-      return new ExtendedScreenHandlerType(
+      return new ExtendedMenuType(
          (windowId, inventory, data) -> factory.create(windowId, inventory, NetworkHooks.asBuffer(data)), ByteBufCodecs.BYTE_ARRAY
       );
    }

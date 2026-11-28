@@ -27,15 +27,15 @@ public class DeferredRegister<T> {
    }
 
    public static <T> DeferredRegister<T> create(ForgeRegistryHandle<T> handle, String namespace) {
-      return registerInstance(new DeferredRegister<>(handle.vanilla(), namespace, handle.vanilla().key().location()));
+      return registerInstance(new DeferredRegister<>(handle.vanilla(), namespace, handle.vanilla().key().identifier()));
    }
 
    public static <T> DeferredRegister<T> create(ResourceKey<? extends Registry<T>> key, String namespace) {
-      return registerInstance(new DeferredRegister<>(ForgeRegistries.resolve(key), namespace, key.location()));
+      return registerInstance(new DeferredRegister<>(ForgeRegistries.resolve(key), namespace, key.identifier()));
    }
 
    public static <T> DeferredRegister<T> create(Registry<T> registry, String namespace) {
-      return registerInstance(new DeferredRegister<>(registry, namespace, registry.key().location()));
+      return registerInstance(new DeferredRegister<>(registry, namespace, registry.key().identifier()));
    }
 
    private static <T> DeferredRegister<T> registerInstance(DeferredRegister<T> instance) {
