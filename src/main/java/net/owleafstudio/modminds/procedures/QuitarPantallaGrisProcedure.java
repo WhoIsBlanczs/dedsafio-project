@@ -10,7 +10,7 @@ import net.owleafstudio.modminds.init.ModmindsModMobEffects;
 
 public class QuitarPantallaGrisProcedure {
    public static void execute(LevelAccessor world) {
-      for (Entity entityiterator : new ArrayList(world.players())) {
+      for (Entity entityiterator : new ArrayList<>(world.players())) {
          if (entityiterator instanceof LivingEntity _entity) {
             _entity.removeEffect(CompatAccess.effect(ModmindsModMobEffects.PANTALLA_GRIS_EFECTO.get()));
          }

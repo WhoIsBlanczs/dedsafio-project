@@ -29,7 +29,7 @@ public class AtomizadorDeAstrosRecargaProcedure {
                _player.getInventory().clearOrCountMatchingItems(p -> p.getItem() == balasAEliminar.getItem(), balasARecargar, _player.inventoryMenu.getCraftSlots());
                int nuevaDurabilidad = armaEnMano.getDamageValue() - balasARecargar;
                armaEnMano.setDamageValue(Math.max(0, nuevaDurabilidad));
-               _player.getCooldowns().addCooldown(armaEnMano.getItem(), 40);
+               _player.getCooldowns().addCooldown(armaEnMano, 40);
             }
          }
       }

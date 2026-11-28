@@ -24,8 +24,8 @@ public class PildoraZombificacionMobEffect extends MobEffect {
       return true;
    }
 
-   public void onMobRemoved(LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
-      super.onMobRemoved(entity, amplifier, reason);
+   public void onMobRemoved(net.minecraft.server.level.ServerLevel nivel$, LivingEntity entity, int amplifier, Entity.RemovalReason reason) {
+      super.onMobRemoved(nivel$, entity, amplifier, reason);
       ZombificacionAlFinalizarElEfectoProcedure.execute(entity.level(), entity);
    }
 

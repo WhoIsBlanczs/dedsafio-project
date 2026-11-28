@@ -236,7 +236,7 @@ public class LimboTeleporter implements ITeleporter {
          CriteriaTriggers.CHANGED_DIMENSION.trigger(player, currentWorld.dimension(), server.dimension());
          return entity;
       } else {
-         Entity entityNew = entity.getType().create(server);
+         Entity entityNew = entity.getType().create(server, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
          if (entityNew != null) {
             entityNew.restoreFrom(entity);
             entityNew.moveTo(portalinfo.pos.x, portalinfo.pos.y, portalinfo.pos.z, portalinfo.yRot, entityNew.getXRot());

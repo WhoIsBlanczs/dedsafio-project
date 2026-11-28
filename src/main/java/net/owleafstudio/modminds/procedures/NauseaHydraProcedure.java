@@ -9,7 +9,7 @@ import net.minecraft.world.level.LevelAccessor;
 
 public class NauseaHydraProcedure {
    public static void execute(LevelAccessor world) {
-      for (Entity entityiterator : new ArrayList(world.players())) {
+      for (Entity entityiterator : new ArrayList<>(world.players())) {
          if (entityiterator instanceof LivingEntity _entity && !_entity.level().isClientSide()) {
             _entity.addEffect(new MobEffectInstance(MobEffects.NAUSEA, Integer.MAX_VALUE, 4, false, false));
          }

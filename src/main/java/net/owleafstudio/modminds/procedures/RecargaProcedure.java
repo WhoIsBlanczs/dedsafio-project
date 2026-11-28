@@ -29,7 +29,7 @@ public class RecargaProcedure {
                _player.getInventory().clearOrCountMatchingItems(p -> p.getItem() == dardosAEliminar.getItem(), dardosARecargar, _player.inventoryMenu.getCraftSlots());
                int nuevaDurabilidad = armaEnMano.getDamageValue() - dardosARecargar;
                armaEnMano.setDamageValue(Math.max(0, nuevaDurabilidad));
-               _player.getCooldowns().addCooldown(armaEnMano.getItem(), 38);
+               _player.getCooldowns().addCooldown(armaEnMano, 38);
             }
          }
       }

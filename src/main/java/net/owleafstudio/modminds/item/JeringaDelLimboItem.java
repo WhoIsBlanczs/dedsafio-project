@@ -20,13 +20,13 @@ public class JeringaDelLimboItem extends Item {
       return 0.0F;
    }
 
-   public void onCraftedBy(ItemStack itemstack, Level world, Player entity) {
-      super.onCraftedBy(itemstack, world, entity);
+   public void onCraftedBy(ItemStack itemstack, Player entity) {
+      super.onCraftedBy(itemstack, entity);
       JeringaDelLimboAlSerCreadoProcedure.execute(world, itemstack);
    }
 
-   public void inventoryTick(ItemStack itemstack, Level world, Entity entity, int slot, boolean selected) {
-      super.inventoryTick(itemstack, world, entity, slot, selected);
+   public void inventoryTick(ItemStack itemstack, net.minecraft.server.level.ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot ranura$) {
+      super.inventoryTick(itemstack, world, entity, ranura$);
       JeringaDelLimboAlEstarEnElInventarioProcedure.execute(entity);
    }
 }

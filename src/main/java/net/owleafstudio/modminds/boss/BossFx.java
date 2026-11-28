@@ -305,7 +305,7 @@ public final class BossFx {
    public static void groundCrack(ServerLevel world, Vec3 at, double length, int ticks) {
       double angle = world.getRandom().nextDouble() * Math.PI * 2.0;
       int seed = world.getRandom().nextInt(997);
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setCrack(length, angle, seed, 657417, ticks);
@@ -356,7 +356,7 @@ public final class BossFx {
    }
 
    public static void warningBeam(ServerLevel world, Entity anchor, Vec3 at, double angle, double length, double width, int leadTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setBeam(length, width, angle, 15864338, leadTicks);
@@ -375,7 +375,7 @@ public final class BossFx {
       for (int i = 0; i < circles; i++) {
          double angle = (Math.PI * 2) * i / circles;
          Vec3 at = groundAt(world, centre.x + Math.cos(angle) * ringRadius, centre.z + Math.sin(angle) * ringRadius);
-         ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+         ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
          if (zone == null) {
             return spots;
          }
@@ -395,7 +395,7 @@ public final class BossFx {
    }
 
    public static void rayCircle(ServerLevel world, Vec3 at, double radius, double boltHeight, int leadTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setRayCircle(radius, 11824127, leadTicks, boltHeight, -1);
@@ -404,7 +404,7 @@ public final class BossFx {
    }
 
    public static void blackHole(ServerLevel world, Vec3 at, double radius, double depth, int lifeTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setBlackHole(radius, depth, world.getRandom().nextInt(997), 8010728, lifeTicks);
@@ -414,7 +414,7 @@ public final class BossFx {
 
    public static List<Vec3> blockColumns(ServerLevel world, Vec3 at, double radius, int count, double height, int riseTicks, int lifeTicks) {
       List<Vec3> spots = new ArrayList<>();
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       int cantidad = zone == null ? 0 : ZonaPeligroEntity.columnCount(count);
       int seed = world.getRandom().nextInt(997);
       if (zone != null) {
@@ -552,7 +552,7 @@ public final class BossFx {
    }
 
    public static void blockAvalanche(ServerLevel world, Vec3 at, double length, double width, double height, double angle, int lifeTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setAvalanche(length, width, height, angle, world.getRandom().nextInt(997), 14205066, lifeTicks);
@@ -561,7 +561,7 @@ public final class BossFx {
    }
 
    public static void redField(ServerLevel world, Vec3 at, double radius, double angle, int lifeTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setField(radius, angle, 0.24, world.getRandom().nextInt(997), 15864338, lifeTicks);
@@ -570,7 +570,7 @@ public final class BossFx {
    }
 
    public static void clawFurrow(ServerLevel world, Entity anchor, Vec3 at, double length, double width, double angle, int travelTicks, int lifeTicks) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setFurrow(length, width, angle, world.getRandom().nextInt(997), 15864338, lifeTicks, travelTicks);
@@ -591,7 +591,7 @@ public final class BossFx {
    }
 
    private static void paint(ServerLevel world, Vec3 at, double radius, int ticks, int rgb, double wave, double depth, @Nullable Entity anchor) {
-      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world);
+      ZonaPeligroEntity zone = (ZonaPeligroEntity)ModmindsModEntities.ZONA_PELIGRO.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (zone != null) {
          zone.setPos(at.x, at.y, at.z);
          zone.setShape(radius, rgb, Math.max(2, ticks), wave, depth);

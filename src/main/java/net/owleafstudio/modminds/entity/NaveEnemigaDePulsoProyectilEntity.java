@@ -73,7 +73,7 @@ public class NaveEnemigaDePulsoProyectilEntity extends AbstractArrow implements 
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

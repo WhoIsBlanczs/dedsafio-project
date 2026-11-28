@@ -60,7 +60,7 @@ public class NaveEnemigaAzulClaroProyectilEntity extends AbstractArrow implement
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

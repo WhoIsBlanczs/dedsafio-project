@@ -80,7 +80,7 @@ public class ReviilInvocarSoldadosProcedure {
    }
 
    private static void erupt(ServerLevel world, Vec3 at, LivingEntity target, boolean first) {
-      SoldadoReviilEntity soldado = (SoldadoReviilEntity)ModmindsModEntities.SOLDADO_REVIIL.get().create(world);
+      SoldadoReviilEntity soldado = (SoldadoReviilEntity)ModmindsModEntities.SOLDADO_REVIIL.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (soldado != null) {
          soldado.setPos(at.x, at.y + 0.05, at.z);
          soldado.riseTicks = 24;

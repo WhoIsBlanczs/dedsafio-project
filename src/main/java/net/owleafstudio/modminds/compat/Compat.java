@@ -95,6 +95,14 @@ public final class Compat {
       public float pt;
    }
 
+   public static java.util.List<net.minecraft.world.item.ItemStack> armadura(net.minecraft.world.entity.LivingEntity e) {
+      java.util.List<net.minecraft.world.item.ItemStack> l = new java.util.ArrayList<>();
+      for (net.minecraft.world.entity.EquipmentSlot s : new net.minecraft.world.entity.EquipmentSlot[]{net.minecraft.world.entity.EquipmentSlot.FEET, net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.CHEST, net.minecraft.world.entity.EquipmentSlot.HEAD}) {
+         l.add(e.getItemBySlot(s));
+      }
+      return l;
+   }
+
    public static boolean teleport(Entity e, ServerLevel l, double x, double y, double z, float yaw, float pitch) {
       return e.teleportTo(l, x, y, z, Set.of(), yaw, pitch, true);
    }

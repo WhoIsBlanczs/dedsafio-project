@@ -18,7 +18,7 @@ public class AnvilDoradoItem extends Item {
    public InteractionResult use(Level level, Player player, InteractionHand hand) {
       ItemStack itemStack = player.getItemInHand(hand);
 
-      for (ItemStack armorPiece : player.getArmorSlots()) {
+      for (ItemStack armorPiece : player.getArmorSlots$()) {
          if (armorPiece.isDamaged()) {
             int currentDamage = armorPiece.getDamageValue();
             int maxDamage = armorPiece.getMaxDamage();

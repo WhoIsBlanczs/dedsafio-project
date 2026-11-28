@@ -74,7 +74,7 @@ public class BalaDeDilitioProyectilEntity extends AbstractArrow implements ItemS
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

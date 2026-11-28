@@ -56,7 +56,7 @@ public class TikiGuardianGuardianesProcedure {
 
    private static void erupt(ServerLevel world, TikiGuardianEntity tiki, double angle, LivingEntity target, boolean first) {
       Vec3 at = surface(world, tiki.getX() + Math.cos(angle) * 7.0, tiki.getZ() + Math.sin(angle) * 7.0);
-      TorretaTikiEntity turret = (TorretaTikiEntity)ModmindsModEntities.TORRETA_TIKI.get().create(world);
+      TorretaTikiEntity turret = (TorretaTikiEntity)ModmindsModEntities.TORRETA_TIKI.get().create(world, net.minecraft.world.entity.EntitySpawnReason.TRIGGERED);
       if (turret != null) {
          turret.setPos(at.x, at.y + 0.1, at.z);
          turret.setYRot((float)Math.toDegrees(Math.atan2(-Math.cos(angle), Math.sin(angle))));

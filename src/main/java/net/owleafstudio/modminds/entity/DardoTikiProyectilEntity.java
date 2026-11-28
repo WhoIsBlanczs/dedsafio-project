@@ -74,7 +74,7 @@ public class DardoTikiProyectilEntity extends AbstractArrow implements ItemSuppl
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

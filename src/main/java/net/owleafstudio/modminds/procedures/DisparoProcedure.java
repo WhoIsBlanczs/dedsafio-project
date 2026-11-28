@@ -46,7 +46,7 @@ public class DisparoProcedure {
             (
                   entity instanceof Player _plrCldRem1
                      ? _plrCldRem1.getCooldowns()
-                           .getCooldownPercent((entity instanceof LivingEntity _livEntx ? _livEntx.getMainHandItem() : ItemStack.EMPTY).getItem(), 0.0F)
+                           .getCooldownPercent((entity instanceof LivingEntity _livEntx ? _livEntx.getMainHandItem() : ItemStack.EMPTY), 0.0F)
                         * 100.0F
                      : 0.0F
                )

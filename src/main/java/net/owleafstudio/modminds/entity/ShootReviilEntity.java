@@ -68,7 +68,7 @@ public class ShootReviilEntity extends AbstractArrow implements ItemSupplier {
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

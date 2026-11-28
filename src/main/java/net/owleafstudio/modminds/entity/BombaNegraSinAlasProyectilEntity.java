@@ -73,7 +73,7 @@ public class BombaNegraSinAlasProyectilEntity extends AbstractArrow implements I
 
    public void tick() {
       super.tick();
-      if (this.inGround) {
+      if (this.isInGround()) {
          this.discard();
       }
    }

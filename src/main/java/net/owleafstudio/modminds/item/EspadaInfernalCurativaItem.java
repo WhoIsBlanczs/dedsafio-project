@@ -44,8 +44,10 @@ public class EspadaInfernalCurativaItem extends Item {
       }
    }
 
-   public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
+   public void inventoryTick(ItemStack stack, net.minecraft.server.level.ServerLevel world, Entity entity, net.minecraft.world.entity.EquipmentSlot ranura$) {
       if (!this.hasDefaultEnchantments(stack)) {
+      int slot = ranura$ == null ? -1 : ranura$.getIndex();
+      boolean selected = ranura$ == net.minecraft.world.entity.EquipmentSlot.MAINHAND;
          this.addDefaultEnchantments(stack);
       }
    }

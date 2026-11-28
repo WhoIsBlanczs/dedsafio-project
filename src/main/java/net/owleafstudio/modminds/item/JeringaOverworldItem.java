@@ -18,8 +18,8 @@ public class JeringaOverworldItem extends Item {
       return 0.0F;
    }
 
-   public void onCraftedBy(ItemStack itemstack, Level world, Player entity) {
-      super.onCraftedBy(itemstack, world, entity);
+   public void onCraftedBy(ItemStack itemstack, Player entity) {
+      super.onCraftedBy(itemstack, entity);
       JeringaOverworldAlSerCreadoProcedure.execute(world, itemstack);
    }
 }
