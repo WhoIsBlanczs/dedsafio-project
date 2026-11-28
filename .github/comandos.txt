@@ -1,0 +1,21 @@
+say prueba
+forceload add 0 0
+give @a hexagonsafio2:ala_derecha_nave
+give @a hexagonsafio2:ala_izquierda_nave
+give @a hexagonsafio2:ambar_fosil
+give @a hexagonsafio2:bioxita
+give @a hexagonsafio2:cabina_nave
+give @a hexagonsafio2:corazon
+give @a hexagonsafio2:corazon_amarillo
+give @a hexagonsafio2:corazon_limbo
+give @a hexagonsafio2:dilitio
+give @a hexagonsafio2:frasco_dilitio
+give @a hexagonsafio2:fuselaje_nave
+give @a hexagonsafio2:motor_mejorado_nave
+give @a hexagonsafio2:motor_nave
+give @a hexagonsafio2:plataforma_nave
+setblock 2 100 2 hexagonsafio2:plataforma_nave
+recipe give @a *
+reload
+kill @e[type=!player]
+say fin

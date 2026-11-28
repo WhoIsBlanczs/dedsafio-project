@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NAI",
+    "AI ",
+    "I  "
+  ],
+  "key": {
+    "N": "minecraft:netherite_ingot",
+    "A": "hexagonsafio2:ambar_fosil",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "hexagonsafio2:ala_izquierda_nave",
+    "count": 1
+  }
+}

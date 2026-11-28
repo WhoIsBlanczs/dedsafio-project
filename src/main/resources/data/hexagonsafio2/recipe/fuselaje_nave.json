@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "NNN",
+    "BBB"
+  ],
+  "key": {
+    "B": "minecraft:iron_block",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "hexagonsafio2:fuselaje_nave",
+    "count": 1
+  }
+}

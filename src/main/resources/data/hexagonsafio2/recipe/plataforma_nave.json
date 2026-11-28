@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "INI",
+    "III"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "hexagonsafio2:plataforma_nave",
+    "count": 1
+  }
+}

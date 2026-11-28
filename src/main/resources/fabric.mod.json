@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "hexagonsafio2",
+  "version": "${version}",
+  "name": "Hexagonsafio2",
+  "description": "Hexagonsafio 2 portado a Minecraft 26.3. Original de Nutria, licencia CC0-1.0. Necesita Hexagonsafio (ghostsafio).",
+  "authors": [
+    "Nutria"
+  ],
+  "license": "CC0-1.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.hexagonsafio2.NaveCraft"
+    ],
+    "client": [
+      "com.hexagonsafio2.NaveCraftClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*",
+    "ghostsafio": "*"
+  },
+  "mixins": [
+    "hexagonsafio2.compat.mixins.json"
+  ]
+}

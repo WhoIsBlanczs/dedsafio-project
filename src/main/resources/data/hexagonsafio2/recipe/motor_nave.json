@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "CCC",
+    "NNN"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "C": "hexagonsafio2:frasco_dilitio",
+    "N": "minecraft:netherite_ingot"
+  },
+  "result": {
+    "id": "hexagonsafio2:motor_nave",
+    "count": 1
+  }
+}

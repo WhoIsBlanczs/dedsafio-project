@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "EEE",
+    "MMM",
+    "EEE"
+  ],
+  "key": {
+    "E": "minecraft:emerald",
+    "M": "hexagonsafio2:motor_nave"
+  },
+  "result": {
+    "id": "hexagonsafio2:motor_mejorado_nave",
+    "count": 1
+  }
+}

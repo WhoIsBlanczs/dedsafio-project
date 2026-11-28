@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BLB",
+    "LSL",
+    "BLB"
+  ],
+  "key": {
+    "B": "hexagonsafio2:bioxita",
+    "L": "hexagonsafio2:dilitio",
+    "S": "minecraft:netherite_scrap"
+  },
+  "result": {
+    "id": "hexagonsafio2:frasco_dilitio",
+    "count": 1
+  }
+}
